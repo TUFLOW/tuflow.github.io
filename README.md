@@ -8,4 +8,4 @@ If you have a `bookdown` manual that you want to upload, please refer to the pri
 
 ## Structure
 
-The structure of the project is described in the https://github.com/TUFLOW/docs_copy project, but in short: `<product>/<module>/<document type>/<version>`.
+The structure of the project is described in the https://github.com/TUFLOW/docs_copy project, but in short: `<product>/<module, add-on, or other level 2 component>/<document type>/<version>`.
