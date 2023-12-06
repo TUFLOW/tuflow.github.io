@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 2 2D Domain Construction | TUFLOW Classic/HPC New Release Notes</title>
+  <meta name="description" content="TUFLOW Release Notes" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 2 2D Domain Construction | TUFLOW Classic/HPC New Release Notes" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/TUFLOW.jpg" />
+  <meta property="og:description" content="TUFLOW Release Notes" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 2 2D Domain Construction | TUFLOW Classic/HPC New Release Notes" />
+  
+  <meta name="twitter:description" content="TUFLOW Release Notes" />
+  <meta name="twitter:image" content="/images/TUFLOW.jpg" />
+
+<meta name="author" content="" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="Overview-1.html"/>
+<link rel="next" href="OneDSolv-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://www.tuflow.com"><img src="images/TUFLOW_RN.png" style="width:246px;height:68px;"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#document-updates-and-important-notices"><i class="fa fa-check"></i>Document Updates and Important Notices</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#licensing"><i class="fa fa-check"></i>Licensing</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="Overview-1.html"><a href="Overview-1.html"><i class="fa fa-check"></i><b>1</b> Overview</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Overview-1.html"><a href="Overview-1.html#Release-2"><i class="fa fa-check"></i><b>1.1</b> 2023-03 Release</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html"><i class="fa fa-check"></i><b>2</b> 2D Domain Construction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#QTUpdates-2"><i class="fa fa-check"></i><b>2.1</b> Quadtree Updates (HPC Only)</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SuppMultGPU-3"><i class="fa fa-check"></i><b>2.1.1</b> Support for Multiple GPU</a></li>
+<li class="chapter" data-level="2.1.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SuppMultGIS-3"><i class="fa fa-check"></i><b>2.1.2</b> Support for Multiple Nesting GIS Layers</a></li>
+<li class="chapter" data-level="2.1.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SuppTriggerZShp-3"><i class="fa fa-check"></i><b>2.1.3</b> Support “Trigger 1D” for Variable Z Shape</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SGSChanges-2"><i class="fa fa-check"></i><b>2.2</b> Sub-Grid Sampling (SGS) Changes</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SGSDefaults-3"><i class="fa fa-check"></i><b>2.2.1</b> SGS Default Changes</a></li>
+<li class="chapter" data-level="2.2.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SGSApproach-3"><i class="fa fa-check"></i><b>2.2.2</b> SGS Approach</a></li>
+<li class="chapter" data-level="2.2.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SGSSampFreq-3"><i class="fa fa-check"></i><b>2.2.3</b> Setting SGS Sampling Frequency</a></li>
+<li class="chapter" data-level="2.2.4" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SGSMaterials-3"><i class="fa fa-check"></i><b>2.2.4</b> SGS Materials</a></li>
+<li class="chapter" data-level="2.2.5" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#HResInterp-3"><i class="fa fa-check"></i><b>2.2.5</b> High Resolution Interpolation Approach</a></li>
+<li class="chapter" data-level="2.2.6" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#HRThinBLines-3"><i class="fa fa-check"></i><b>2.2.6</b> High Resolution Thin Breaklines</a></li>
+<li class="chapter" data-level="2.2.7" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#ParProcSGSInit-3"><i class="fa fa-check"></i><b>2.2.7</b> Parallel Processing for SGS initialisation</a></li>
+<li class="chapter" data-level="2.2.8" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#XFMethodC-3"><i class="fa fa-check"></i><b>2.2.8</b> XF Files for SGS Method C</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#InfilSubSurfFlows-3"><i class="fa fa-check"></i><b>2.3</b> Infiltration and Sub-Surface Flows</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#InfilSubSurfFlowsOverview-3"><i class="fa fa-check"></i><b>2.3.1</b> Overview</a></li>
+<li class="chapter" data-level="2.3.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SSFlowsSoilsFile-3"><i class="fa fa-check"></i><b>2.3.2</b> Soils File</a></li>
+<li class="chapter" data-level="2.3.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SSFlowsTGC-3"><i class="fa fa-check"></i><b>2.3.3</b> TGC Commands</a></li>
+<li class="chapter" data-level="2.3.4" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SSFBoundaries-3"><i class="fa fa-check"></i><b>2.3.4</b> Boundaries</a></li>
+<li class="chapter" data-level="2.3.5" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#GWMapOutputs-3"><i class="fa fa-check"></i><b>2.3.5</b> Groundwater Map Outputs</a></li>
+<li class="chapter" data-level="2.3.6" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#GWPlotOutputs-3"><i class="fa fa-check"></i><b>2.3.6</b> Groundwater Plot Outputs</a></li>
+<li class="chapter" data-level="2.3.7" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#InterflowAD-3"><i class="fa fa-check"></i><b>2.3.7</b> Interflow and Advection Dispersion</a></li>
+<li class="chapter" data-level="2.3.8" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#GWBlend-3"><i class="fa fa-check"></i><b>2.3.8</b> Groundwater Blend Threshold</a></li>
+<li class="chapter" data-level="2.3.9" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#InitMoisGA-3"><i class="fa fa-check"></i><b>2.3.9</b> Initial Moisture and Green-Ampt Infiltration</a></li>
+<li class="chapter" data-level="2.3.10" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#Improvetsoilf-3"><i class="fa fa-check"></i><b>2.3.10</b> Improvements in Reading Soil File (.tsoilf)</a></li>
+<li class="chapter" data-level="2.3.11" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#BugFixInfilAD-3"><i class="fa fa-check"></i><b>2.3.11</b> Bug Fix for Infiltration and Advection Dispersion</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#id_2DBridgeLayer-2"><i class="fa fa-check"></i><b>2.4</b> Modelling Bridge Structure in 2D</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#CFDStudy-3"><i class="fa fa-check"></i><b>2.4.1</b> CFD Benchmarking Study</a></li>
+<li class="chapter" data-level="2.4.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#Layer2dbg-3"><i class="fa fa-check"></i><b>2.4.2</b> New Input Layer for Modelling Bridge Structure in 2D</a></li>
+<li class="chapter" data-level="2.4.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#Layer2dbgFLC-3"><i class="fa fa-check"></i><b>2.4.3</b> Automatic Generation of Superstructure FLC</a></li>
+<li class="chapter" data-level="2.4.4" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#id_2dpoQS-3"><i class="fa fa-check"></i><b>2.4.4</b> Grouped Structure Output</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#AdvectionDispersion-2"><i class="fa fa-check"></i><b>2.5</b> Advection Dispersion</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#ADMultipleConsituents-3"><i class="fa fa-check"></i><b>2.5.1</b> HPC Support for Multiple Constituents Per Simulation</a></li>
+<li class="chapter" data-level="2.5.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#ADSettleDecay-3"><i class="fa fa-check"></i><b>2.5.2</b> HPC Support for Constituent Settling and Decay</a></li>
+<li class="chapter" data-level="2.5.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#InterflowADCommands-3"><i class="fa fa-check"></i><b>2.5.3</b> Layered Interflow - Advection Dispersion TGC Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#NNMixing-2"><i class="fa fa-check"></i><b>2.6</b> Non-Newtonian Mixing</a></li>
+<li class="chapter" data-level="2.7" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#MinEnhanceBugFixAA-2"><i class="fa fa-check"></i><b>2.7</b> Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#QDTMemoryEfficient-3"><i class="fa fa-check"></i><b>2.7.1</b> Fix to Memory Efficient Quadtree Meshing Algorithm</a></li>
+<li class="chapter" data-level="2.7.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DuplicateMatIDs-3"><i class="fa fa-check"></i><b>2.7.2</b> Duplicate Material IDs</a></li>
+<li class="chapter" data-level="2.7.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DuplicateSoilIDs-3"><i class="fa fa-check"></i><b>2.7.3</b> Duplicate Soil IDs</a></li>
+<li class="chapter" data-level="2.7.4" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#NNCheck-3"><i class="fa fa-check"></i><b>2.7.4</b> Check Added for Valid Non-Newtonian Coefficients</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#MinEnhanceBugFixAB-2"><i class="fa fa-check"></i><b>2.8</b> 2023-03-AB Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#HRBrklineOutputZone-3"><i class="fa fa-check"></i><b>2.8.1</b> Bug Fix to HR Breakline Adjustment with Output Zone</a></li>
+<li class="chapter" data-level="2.8.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#MultiReadSoilLayer-3"><i class="fa fa-check"></i><b>2.8.2</b> Read GIS / GRID Soil Layer Accepts Multiple Layer Numbers</a></li>
+<li class="chapter" data-level="2.8.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#GWDGWLBackCompat-3"><i class="fa fa-check"></i><b>2.8.3</b> Un-Deprecated GWD and GWL Commands</a></li>
+<li class="chapter" data-level="2.8.4" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#GPCGWQPOUnits-3"><i class="fa fa-check"></i><b>2.8.4</b> Bug Fix HPC GWQ PO Units</a></li>
+<li class="chapter" data-level="2.8.5" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#GWOutputsFix-3"><i class="fa fa-check"></i><b>2.8.5</b> Bug Fix for Ground Water Outputs</a></li>
+<li class="chapter" data-level="2.8.6" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#CLAInfilOutputsFix-3"><i class="fa fa-check"></i><b>2.8.6</b> Bug Fix for Infiltration Outputs in Classic</a></li>
+<li class="chapter" data-level="2.8.7" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#HPCBrklineMemory-3"><i class="fa fa-check"></i><b>2.8.7</b> Bug Fix for HPC Breakline Memory Release</a></li>
+<li class="chapter" data-level="2.8.8" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#Warning2508Infiltration-3"><i class="fa fa-check"></i><b>2.8.8</b> Infiltration When No Soil Capacity and Infinite Depth Soil</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAC-2"><i class="fa fa-check"></i><b>2.9</b> 2023-03-AC Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAC1-3"><i class="fa fa-check"></i><b>2.9.1</b> Bug Fix to Default SGS Elevation</a></li>
+<li class="chapter" data-level="2.9.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAC2-3"><i class="fa fa-check"></i><b>2.9.2</b> Bug Fix to Quadtree Clip Region</a></li>
+<li class="chapter" data-level="2.9.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAC3-3"><i class="fa fa-check"></i><b>2.9.3</b> Bug Fix to Read TIN Command in HPC Model</a></li>
+<li class="chapter" data-level="2.9.4" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAC4-3"><i class="fa fa-check"></i><b>2.9.4</b> Bug Fix Quadtree 2d_zsh Snapped to Code</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAD-2"><i class="fa fa-check"></i><b>2.10</b> 2023-03-AD Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="2.10.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAD1-3"><i class="fa fa-check"></i><b>2.10.1</b> Bug Fix HPC Initial Tracer Concentration</a></li>
+<li class="chapter" data-level="2.10.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAD2-3"><i class="fa fa-check"></i><b>2.10.2</b> Bug Fix for Auto Generated Bridge FLC with ‘Bridge_width’</a></li>
+<li class="chapter" data-level="2.10.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAD3-3"><i class="fa fa-check"></i><b>2.10.3</b> Bug Fix for Longitudinal Profile Output (LP) in Quadtree Models</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html"><i class="fa fa-check"></i><b>3</b> 1D Solver - ESTRY</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#ArchBg-2"><i class="fa fa-check"></i><b>3.1</b> Arch Bridge</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#ArchBgEditor-3"><i class="fa fa-check"></i><b>3.1.1</b> Arch Bridge Editor</a></li>
+<li class="chapter" data-level="3.1.2" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MultiArchBridgesFix-3"><i class="fa fa-check"></i><b>3.1.2</b> Bug Fix with Modelling Multiple Arch Bridges</a></li>
+<li class="chapter" data-level="3.1.3" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#ArchBridgesErrorXXXX-3"><i class="fa fa-check"></i><b>3.1.3</b> Arch Bridge Error Message Number Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#VirtualPipeLag-2"><i class="fa fa-check"></i><b>3.2</b> Ability to Model Time Lag in Virtual Pipes</a></li>
+<li class="chapter" data-level="3.3" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#AdversedSlopeCulvert-2"><i class="fa fa-check"></i><b>3.3</b> Enhancement to Adverse Slope Culvert</a></li>
+<li class="chapter" data-level="3.4" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#StructureFlowLevel-2"><i class="fa fa-check"></i><b>3.4</b> Improvement to Structure Flow Level Options</a></li>
+<li class="chapter" data-level="3.5" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFix-2"><i class="fa fa-check"></i><b>3.5</b> Minor Enhancements and Bug Fixes for 2023-03-AA</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#ZeroManningsn-3"><i class="fa fa-check"></i><b>3.5.1</b> Unused Manning’s n Value Set to Zero in nwk_C Check File and .eof</a></li>
+<li class="chapter" data-level="3.5.2" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#WriteCheckFilesFix-3"><i class="fa fa-check"></i><b>3.5.2</b> Fixes to Write Check Files [Exclude | Include | None | ALL] == [OFF]</a></li>
+<li class="chapter" data-level="3.5.3" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#PitAWidthQType-3"><i class="fa fa-check"></i><b>3.5.3</b> Pit_A Check File Incorrectly Reporting Width</a></li>
+<li class="chapter" data-level="3.5.4" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#PitAIncreaseAttributeLength-3"><i class="fa fa-check"></i><b>3.5.4</b> Pit_A Check File Increased Type Attribute Length</a></li>
+<li class="chapter" data-level="3.5.5" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MultipleBBridgeFormLoss-3"><i class="fa fa-check"></i><b>3.5.5</b> Incorrect ‘B’ Type Bridge Form Loss Reported in the .eof</a></li>
+<li class="chapter" data-level="3.5.6" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#ReportPumpInverts-3"><i class="fa fa-check"></i><b>3.5.6</b> Pump Inverts Reported in the .eof</a></li>
+<li class="chapter" data-level="3.5.7" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#Error1438-3"><i class="fa fa-check"></i><b>3.5.7</b> 1D Pump Point Objects Now Produce ERROR 1438</a></li>
+<li class="chapter" data-level="3.5.8" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#PumpCurveError-3"><i class="fa fa-check"></i><b>3.5.8</b> Pump Curves No Longer Trigger ERROR 1092 and ERROR 1093</a></li>
+<li class="chapter" data-level="3.5.9" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#Error2056-3"><i class="fa fa-check"></i><b>3.5.9</b> ERROR 2056 Incorrectly Triggering</a></li>
+<li class="chapter" data-level="3.5.10" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#Warning2039-3"><i class="fa fa-check"></i><b>3.5.10</b> WARNING 2039 Counts All Ignored SX Pit Connections</a></li>
+<li class="chapter" data-level="3.5.11" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#id_1DOpStructure2DWL-3"><i class="fa fa-check"></i><b>3.5.11</b> 1D Operable Structures Linked to 2D Water Level (H2D) Updating on Map Update Interval</a></li>
+<li class="chapter" data-level="3.5.12" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#id_1DOpStructure2dPO-3"><i class="fa fa-check"></i><b>3.5.12</b> Linking 1D Operable Structures to 2D PO Points not Functional as Described</a></li>
+<li class="chapter" data-level="3.5.13" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#PFChannelInvert-3"><i class="fa fa-check"></i><b>3.5.13</b> Bug Fix to Invert Levels used in PF Channel Flow Calculation</a></li>
+<li class="chapter" data-level="3.5.14" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#Error1261-3"><i class="fa fa-check"></i><b>3.5.14</b> ERROR 1261 Incorrectly Triggering for 1D PF/DF Channels</a></li>
+<li class="chapter" data-level="3.5.15" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#PFDFChannelCheck-3"><i class="fa fa-check"></i><b>3.5.15</b> Enhancement and Bug Fix for PF/DF Channel Check Files</a></li>
+<li class="chapter" data-level="3.5.16" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#id_1DDFChannel-3"><i class="fa fa-check"></i><b>3.5.16</b> Setting Initial State of 1D DF Channel</a></li>
+<li class="chapter" data-level="3.5.17" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#Warning1434-3"><i class="fa fa-check"></i><b>3.5.17</b> WARNING Message for Using Zero Pump Capacity</a></li>
+<li class="chapter" data-level="3.5.18" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MaxOperationalControls-3"><i class="fa fa-check"></i><b>3.5.18</b> Enhancement Reducing Memory Usage for Operational Channels</a></li>
+<li class="chapter" data-level="3.5.19" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#Error2073-3"><i class="fa fa-check"></i><b>3.5.19</b> WARNING/ERROR Message for Using Wrong GIS Type in 1d_nwk</a></li>
+<li class="chapter" data-level="3.5.20" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#Error1442-3"><i class="fa fa-check"></i><b>3.5.20</b> ERROR Message for Using Bridge Flow == Method A in Structure Routines == 2013 (Default)</a></li>
+<li class="chapter" data-level="3.5.21" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#BFError1025-3"><i class="fa fa-check"></i><b>3.5.21</b> Bug Fix for ERROR 1025</a></li>
+<li class="chapter" data-level="3.5.22" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#BFWarning2073-3"><i class="fa fa-check"></i><b>3.5.22</b> Bug Fix for WARNING 2073</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAB-2"><i class="fa fa-check"></i><b>3.6</b> 2023-03-AB Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#OpChannelMemoryAllocation-3"><i class="fa fa-check"></i><b>3.6.1</b> Operational Channel Memory Allocation Error</a></li>
+<li class="chapter" data-level="3.6.2" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#OpChannelAndOrStatements-3"><i class="fa fa-check"></i><b>3.6.2</b> Operational Channels Handle Multiple AND or OR Statements on Same Line</a></li>
+<li class="chapter" data-level="3.6.3" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#VirtualPipeOuputFix-3"><i class="fa fa-check"></i><b>3.6.3</b> Bug Fix for Virtual Pipe Model Not Writing Output</a></li>
+<li class="chapter" data-level="3.6.4" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#WLLFix-3"><i class="fa fa-check"></i><b>3.6.4</b> Bug Fix for WLL Should Not Be Here</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAC-2"><i class="fa fa-check"></i><b>3.7</b> 2023-03-AC Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAC1-3"><i class="fa fa-check"></i><b>3.7.1</b> Bug Fix to VPO Connected to 1D Channel</a></li>
+<li class="chapter" data-level="3.7.2" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAC2-3"><i class="fa fa-check"></i><b>3.7.2</b> Bug Fix to Water Level Lines (WLL) when Virtual Pipes are Used</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAD-2"><i class="fa fa-check"></i><b>3.8</b> 2023-03-AD Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAD1-3"><i class="fa fa-check"></i><b>3.8.1</b> Bug Fix to Water Level Lines (WLL) when Snapped to Nodes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="SWMM-TUFLOW-1.html"><a href="SWMM-TUFLOW-1.html"><i class="fa fa-check"></i><b>4</b> 1D Solver - SWMM</a>
+<ul>
+<li class="chapter" data-level="4.2" data-path="SWMM-TUFLOW-1.html"><a href="SWMM-TUFLOW-1.html#SWMM-TUFLOWCommands-2"><i class="fa fa-check"></i><b>4.2</b> SWMM-TUFLOW Commands</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="SWMM-TUFLOW-1.html"><a href="SWMM-TUFLOW-1.html#TCFCommands-3"><i class="fa fa-check"></i><b>4.2.1</b> TUFLOW Control File Commands (TCF)</a></li>
+<li class="chapter" data-level="4.2.2" data-path="SWMM-TUFLOW-1.html"><a href="SWMM-TUFLOW-1.html#TSCFCommands-3"><i class="fa fa-check"></i><b>4.2.2</b> TUFLOW SWMM Control File Commands (TSCF)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="SWMM-TUFLOW-1.html"><a href="SWMM-TUFLOW-1.html#SWMM-Input-Files-2"><i class="fa fa-check"></i><b>4.3</b> SWMM Input Files</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html"><i class="fa fa-check"></i><b>5</b> 2D Solvers - Classic/HPC</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverOverview-2"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#HPCWeirFlow-2"><i class="fa fa-check"></i><b>5.2</b> 2D HPC Weir Flow Approach</a></li>
+<li class="chapter" data-level="5.3" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#HPCGaugeObjects-2"><i class="fa fa-check"></i><b>5.3</b> Support for Record Gauge Data in HPC</a></li>
+<li class="chapter" data-level="5.4" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#QDTAutoIWL-2"><i class="fa fa-check"></i><b>5.4</b> Support for Automatic Initial Water Level in Quadtree</a></li>
+<li class="chapter" data-level="5.5" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#HPCLongProfiles-2"><i class="fa fa-check"></i><b>5.5</b> Support for Long Profiles in HPC</a></li>
+<li class="chapter" data-level="5.6" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#IncreaseMaxCPUThreads-2"><i class="fa fa-check"></i><b>5.6</b> Increase in Maximum CPU Threads</a></li>
+<li class="chapter" data-level="5.7" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverMinorEnhanceBugFix-2"><i class="fa fa-check"></i><b>5.7</b> Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#LimitManningsnWu-3"><i class="fa fa-check"></i><b>5.7.1</b> Limiting Manning’s n for Wu Turbulence Calculation</a></li>
+<li class="chapter" data-level="5.7.2" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#QDTClipLayersTINs-3"><i class="fa fa-check"></i><b>5.7.2</b> TIN Clip Layers in Quadtree</a></li>
+<li class="chapter" data-level="5.7.3" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#InvalidClipObject-3"><i class="fa fa-check"></i><b>5.7.3</b> Change to Treatment of non-Polygon Objects in Geometry Trim Layers</a></li>
+<li class="chapter" data-level="5.7.4" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#Warning3522-3"><i class="fa fa-check"></i><b>5.7.4</b> WARNING 3522 Message Text Updated</a></li>
+<li class="chapter" data-level="5.7.5" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#QDTThickBreakline-3"><i class="fa fa-check"></i><b>5.7.5</b> New Thick Breakline Face Selection for Quadtree Model</a></li>
+<li class="chapter" data-level="5.7.6" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#SGSMethodCZptsPolygons-3"><i class="fa fa-check"></i><b>5.7.6</b> Support Read GIS Zpts Polygon Shape in SGS Method C</a></li>
+<li class="chapter" data-level="5.7.7" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#SGSMethodCZptsADD-3"><i class="fa fa-check"></i><b>5.7.7</b> Support Read GRID Zpts ADD Option for SGS Method C</a></li>
+<li class="chapter" data-level="5.7.8" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#Error3517-3"><i class="fa fa-check"></i><b>5.7.8</b> Read RowCol Zpts and Read GIS Zpts With Point Layer Now Produce ERROR 3517 in SGS or Quadtree Models</a></li>
+<li class="chapter" data-level="5.7.9" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#Error2586-3"><i class="fa fa-check"></i><b>5.7.9</b> Error for TGC Command Read Grid IWL used in .tcf</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverMinorEnhanceBugFixAB-2"><i class="fa fa-check"></i><b>5.8</b> 2023-03-AB Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix1-3"><i class="fa fa-check"></i><b>5.8.1</b> Running Simulations at the Exact Same Time Causes XF File “End Of File” Error</a></li>
+<li class="chapter" data-level="5.8.2" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix2-3"><i class="fa fa-check"></i><b>5.8.2</b> Bug Fix for “Should Not Be Here [tE” with HPC and Restart Files</a></li>
+<li class="chapter" data-level="5.8.3" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix3-3"><i class="fa fa-check"></i><b>5.8.3</b> Bug Fix for “Should not Be Here [tE” at End of Simulation</a></li>
+<li class="chapter" data-level="5.8.4" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix4-3"><i class="fa fa-check"></i><b>5.8.4</b> Bug Fix for Forward Slash in Check File Path</a></li>
+<li class="chapter" data-level="5.8.5" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix5-3"><i class="fa fa-check"></i><b>5.8.5</b> Bug Fix for Stability Issue with Thick Breaklines</a></li>
+<li class="chapter" data-level="5.8.6" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix6-3"><i class="fa fa-check"></i><b>5.8.6</b> Bug Fix for Small HPC models on CPU with a Large Number of Threads</a></li>
+<li class="chapter" data-level="5.8.7" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix7-3"><i class="fa fa-check"></i><b>5.8.7</b> Bug Fix with SGS Calculation</a></li>
+<li class="chapter" data-level="5.8.8" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix8-3"><i class="fa fa-check"></i><b>5.8.8</b> Bug Fix with Fixed Form Loss Coefficients in Quadtree</a></li>
+<li class="chapter" data-level="5.8.9" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix9-3"><i class="fa fa-check"></i><b>5.8.9</b> Update to CHECK 3505 SGS TIN for Quadtree Model</a></li>
+<li class="chapter" data-level="5.8.10" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix10-3"><i class="fa fa-check"></i><b>5.8.10</b> Bug Fix 2d_lfcsh Layers in Quadtree Snapped to Code</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverMinorEnhanceBugFixAD-2"><i class="fa fa-check"></i><b>5.9</b> 2023-03-AD Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix1-3"><i class="fa fa-check"></i><b>5.9.1</b> Bug Fix - HPC Crashing During Initialisation with Exactly 256 Unique Material IDs</a></li>
+<li class="chapter" data-level="5.9.2" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix2-3"><i class="fa fa-check"></i><b>5.9.2</b> Bug Fix with Process All Grids Command</a></li>
+<li class="chapter" data-level="5.9.3" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix3-3"><i class="fa fa-check"></i><b>5.9.3</b> Bug Fix with Memory Allocation for Reading Grids with SGS</a></li>
+<li class="chapter" data-level="5.9.4" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix4-3"><i class="fa fa-check"></i><b>5.9.4</b> Bug Fix for Cell Width Factor in Quadtree</a></li>
+<li class="chapter" data-level="5.9.5" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix5-3"><i class="fa fa-check"></i><b>5.9.5</b> Extra Information in XF Filenames</a></li>
+<li class="chapter" data-level="5.9.6" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix6-3"><i class="fa fa-check"></i><b>5.9.6</b> Bug Fix for Wide Layered Flow Constriction Lines</a></li>
+<li class="chapter" data-level="5.9.7" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix7-3"><i class="fa fa-check"></i><b>5.9.7</b> Enhancement for HPC and Quadtree Restart Files</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="BndLnks-1.html"><a href="BndLnks-1.html"><i class="fa fa-check"></i><b>6</b> Boundaries and Links</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="BndLnks-1.html"><a href="BndLnks-1.html#DSSFormat-2"><i class="fa fa-check"></i><b>6.1</b> Support for DSS File Format</a></li>
+<li class="chapter" data-level="6.2" data-path="BndLnks-1.html"><a href="BndLnks-1.html#SXMomentum-2"><i class="fa fa-check"></i><b>6.2</b> SX Momentum</a></li>
+<li class="chapter" data-level="6.3" data-path="BndLnks-1.html"><a href="BndLnks-1.html#id_1DSX-StructureLoss-2"><i class="fa fa-check"></i><b>6.3</b> Structure Loss Adjustment for SX Connected 1D Structures</a></li>
+<li class="chapter" data-level="6.4" data-path="BndLnks-1.html"><a href="BndLnks-1.html#QDT-Bound-Inertia-2"><i class="fa fa-check"></i><b>6.4</b> Quadtree Parallel Inertia on HT / HX Boundaries</a></li>
+<li class="chapter" data-level="6.5" data-path="BndLnks-1.html"><a href="BndLnks-1.html#HPCSplineInterpolation-2"><i class="fa fa-check"></i><b>6.5</b> HPC Support for Boundary Spline Interpolation</a></li>
+<li class="chapter" data-level="6.6" data-path="BndLnks-1.html"><a href="BndLnks-1.html#HPCBoundaryApproach-2"><i class="fa fa-check"></i><b>6.6</b> Default HPC Boundary Approach</a></li>
+<li class="chapter" data-level="6.7" data-path="BndLnks-1.html"><a href="BndLnks-1.html#QTPointBoundarySupport-2"><i class="fa fa-check"></i><b>6.7</b> QT 2d_bc Point Boundaries No Longer Supported in Classic/HPC</a></li>
+<li class="chapter" data-level="6.8" data-path="BndLnks-1.html"><a href="BndLnks-1.html#HQPointBoundarySupport-2"><i class="fa fa-check"></i><b>6.8</b> HQ 2d_bc Point Boundaries No Longer Supported in Classic/HPC/Quadtree</a></li>
+<li class="chapter" data-level="6.9" data-path="BndLnks-1.html"><a href="BndLnks-1.html#BoundaryMinorEnhanceBugFix-2"><i class="fa fa-check"></i><b>6.9</b> Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="6.9.1" data-path="BndLnks-1.html"><a href="BndLnks-1.html#Error0628-3"><i class="fa fa-check"></i><b>6.9.1</b> Should Not Be Here When Reading TS1 File</a></li>
+<li class="chapter" data-level="6.9.2" data-path="BndLnks-1.html"><a href="BndLnks-1.html#DuplicateSABoundary-3"><i class="fa fa-check"></i><b>6.9.2</b> Duplicate SA Boundary Names</a></li>
+<li class="chapter" data-level="6.9.3" data-path="BndLnks-1.html"><a href="BndLnks-1.html#CSVMultipleBlocks-3"><i class="fa fa-check"></i><b>6.9.3</b> CSV Inputs Containing Multiple Blocks</a></li>
+<li class="chapter" data-level="6.9.4" data-path="BndLnks-1.html"><a href="BndLnks-1.html#QDTBCZeroFlow-3"><i class="fa fa-check"></i><b>6.9.4</b> BC Zero Flow End Fixed in Quadtree</a></li>
+<li class="chapter" data-level="6.9.5" data-path="BndLnks-1.html"><a href="BndLnks-1.html#Check0249-3"><i class="fa fa-check"></i><b>6.9.5</b> BC Zero Flow CHECK Message</a></li>
+<li class="chapter" data-level="6.9.6" data-path="BndLnks-1.html"><a href="BndLnks-1.html#AutoWLInterpolated-3"><i class="fa fa-check"></i><b>6.9.6</b> Automatic Initial Water Level When Interpolated</a></li>
+<li class="chapter" data-level="6.9.7" data-path="BndLnks-1.html"><a href="BndLnks-1.html#QDTSXRegionZFlag-3"><i class="fa fa-check"></i><b>6.9.7</b> SX Region with Z Flag in Quadtree Model</a></li>
+<li class="chapter" data-level="6.9.8" data-path="BndLnks-1.html"><a href="BndLnks-1.html#QDTSXCellSelection-3"><i class="fa fa-check"></i><b>6.9.8</b> Small SX Region Selects At Least One Cell in Quadtree Model</a></li>
+<li class="chapter" data-level="6.9.9" data-path="BndLnks-1.html"><a href="BndLnks-1.html#SARFAttributeCheck-3"><i class="fa fa-check"></i><b>6.9.9</b> Check for Correct Attribute for SA RF Boundaries</a></li>
+<li class="chapter" data-level="6.9.10" data-path="BndLnks-1.html"><a href="BndLnks-1.html#Error0651-3"><i class="fa fa-check"></i><b>6.9.10</b> Bug Fix for XF files when Time Column has Zero Rows of Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.10" data-path="BndLnks-1.html"><a href="BndLnks-1.html#BoundaryMinorEnhanceBugFixAB-2"><i class="fa fa-check"></i><b>6.10</b> 2023-03-AB Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="6.10.1" data-path="BndLnks-1.html"><a href="BndLnks-1.html#QDTHQTotal-3"><i class="fa fa-check"></i><b>6.10.1</b> Quadtree HQ Total Boundary - Should Not Be Here</a></li>
+<li class="chapter" data-level="6.10.2" data-path="BndLnks-1.html"><a href="BndLnks-1.html#id_2DSANullObject-3"><i class="fa fa-check"></i><b>6.10.2</b> Better Handling of Null Objects in 2d_sa Layer</a></li>
+</ul></li>
+<li class="chapter" data-level="6.11" data-path="BndLnks-1.html"><a href="BndLnks-1.html#BoundaryMinorEnhanceBugFixAC-2"><i class="fa fa-check"></i><b>6.11</b> 2023-03-AC Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="6.11.1" data-path="BndLnks-1.html"><a href="BndLnks-1.html#NetCDF_RF_gt_1000-3"><i class="fa fa-check"></i><b>6.11.1</b> Fixes Issue with NetCDF Rainfall with Times Greater Than 1,000 Hours</a></li>
+<li class="chapter" data-level="6.11.2" data-path="BndLnks-1.html"><a href="BndLnks-1.html#TRFCF_gt_1000-3"><i class="fa fa-check"></i><b>6.11.2</b> Fixes Issue with Rainfall Control File with Greater than 1,000 Output Times</a></li>
+</ul></li>
+<li class="chapter" data-level="6.12" data-path="BndLnks-1.html"><a href="BndLnks-1.html#BoundaryMinorEnhanceBugFixAD-2"><i class="fa fa-check"></i><b>6.12</b> 2023-03-AD Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="6.12.1" data-path="BndLnks-1.html"><a href="BndLnks-1.html#BoundaryADFix1-3"><i class="fa fa-check"></i><b>6.12.1</b> Bug Fix for 2D HQ Boundaries Selecting Only One Cell</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="GISFormats-1.html"><a href="GISFormats-1.html"><i class="fa fa-check"></i><b>7</b> GIS Formats</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GPKG-Format-2"><i class="fa fa-check"></i><b>7.1</b> GeoPackage Format</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GPKG-Projection-3"><i class="fa fa-check"></i><b>7.1.1</b> GeoPackage Projection</a></li>
+<li class="chapter" data-level="7.1.2" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GPKG-Vector-3"><i class="fa fa-check"></i><b>7.1.2</b> GeoPackage Vector</a></li>
+<li class="chapter" data-level="7.1.3" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GPKG-Conv-Check-3"><i class="fa fa-check"></i><b>7.1.3</b> GeoPackage Conversion Check</a></li>
+<li class="chapter" data-level="7.1.4" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GPKG-Raster-3"><i class="fa fa-check"></i><b>7.1.4</b> GeoPackage Raster</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GeoTIFF-Format-2"><i class="fa fa-check"></i><b>7.2</b> GeoTIFF Format</a></li>
+<li class="chapter" data-level="7.3" data-path="GISFormats-1.html"><a href="GISFormats-1.html#NetCDF-Grids-2"><i class="fa fa-check"></i><b>7.3</b> NetCDF Grid</a></li>
+<li class="chapter" data-level="7.4" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsMinorEnhanceBugFixAB-2"><i class="fa fa-check"></i><b>7.4</b> 2023-03-AB Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix1-3"><i class="fa fa-check"></i><b>7.4.1</b> Spatial Database Command Now Works in Quadtree Control File</a></li>
+<li class="chapter" data-level="7.4.2" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix2-3"><i class="fa fa-check"></i><b>7.4.2</b> Read GRID Location Now Works for New Raster Formats</a></li>
+<li class="chapter" data-level="7.4.3" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix3-3"><i class="fa fa-check"></i><b>7.4.3</b> Compression Now Allows for Size Increase</a></li>
+<li class="chapter" data-level="7.4.4" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix4-3"><i class="fa fa-check"></i><b>7.4.4</b> Increase Primary Key Column Name Length</a></li>
+<li class="chapter" data-level="7.4.5" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix5-3"><i class="fa fa-check"></i><b>7.4.5</b> Retry Loop for Locked GPKG Databases</a></li>
+<li class="chapter" data-level="7.4.6" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix6-3"><i class="fa fa-check"></i><b>7.4.6</b> GPKG XF File Naming</a></li>
+<li class="chapter" data-level="7.4.7" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix7-3"><i class="fa fa-check"></i><b>7.4.7</b> Bug Fix “Reached maximum concurrent SQLite statements”</a></li>
+<li class="chapter" data-level="7.4.8" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix8-3"><i class="fa fa-check"></i><b>7.4.8</b> Bug Fix “ERROR 0636 – Issue stepping through SQLite query”</a></li>
+<li class="chapter" data-level="7.4.9" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix9-3"><i class="fa fa-check"></i><b>7.4.9</b> GPKG Multi-Part Polygons</a></li>
+<li class="chapter" data-level="7.4.10" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix10-3"><i class="fa fa-check"></i><b>7.4.10</b> ERROR 0305 Triggering When There is No GPKG Projection</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsMinorEnhanceBugFixAC-2"><i class="fa fa-check"></i><b>7.5</b> 2023-03-AC Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsACFix1-3"><i class="fa fa-check"></i><b>7.5.1</b> GPKG XF File Creation Causing “ERROR 0645”</a></li>
+<li class="chapter" data-level="7.5.2" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsACFix2-3"><i class="fa fa-check"></i><b>7.5.2</b> Bug Fix For GPKG When “fid” Was Not the Same as “rowid”</a></li>
+<li class="chapter" data-level="7.5.3" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsACFix3-3"><i class="fa fa-check"></i><b>7.5.3</b> Exit TUFLOW if an ERROR Occurs Reading GPKG</a></li>
+<li class="chapter" data-level="7.5.4" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsACFix4-5"><i class="fa fa-check"></i><b>7.5.4</b> Bug Fix GPKG Reading 1d_pit</a></li>
+<li class="chapter" data-level="7.5.5" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsACFix4-3"><i class="fa fa-check"></i><b>7.5.5</b> GeoTIFF Now Supports “SPARSE_OK=TRUE” GDAL Creation Option</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsMinorEnhanceBugFixAD-2"><i class="fa fa-check"></i><b>7.6</b> 2023-03-AD Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix1-3"><i class="fa fa-check"></i><b>7.6.1</b> Bug Fix - Crash While Reading GeoTIFF Inputs</a></li>
+<li class="chapter" data-level="7.6.2" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix2-3"><i class="fa fa-check"></i><b>7.6.2</b> Raster Cell Shape Check</a></li>
+<li class="chapter" data-level="7.6.3" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix3-3"><i class="fa fa-check"></i><b>7.6.3</b> GeoTIFF Coordinate Reference System Check</a></li>
+<li class="chapter" data-level="7.6.4" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix4-3"><i class="fa fa-check"></i><b>7.6.4</b> GPKG Projection Accepts String Input</a></li>
+<li class="chapter" data-level="7.6.5" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix5-3"><i class="fa fa-check"></i><b>7.6.5</b> Bug Fix - Spatial Database == [path/to/gpkg] When Used in a Read File Within The TCF</a></li>
+<li class="chapter" data-level="7.6.6" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix6-3"><i class="fa fa-check"></i><b>7.6.6</b> Bug Fix - Spatial Database == OFF when Used in a Read File</a></li>
+<li class="chapter" data-level="7.6.7" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix7-3"><i class="fa fa-check"></i><b>7.6.7</b> GPKG Fully Implemented in Package Model Functionality</a></li>
+<li class="chapter" data-level="7.6.8" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix8-3"><i class="fa fa-check"></i><b>7.6.8</b> GPKG Reading - Change in Default Journal Mode</a></li>
+<li class="chapter" data-level="7.6.9" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix9-3"><i class="fa fa-check"></i><b>7.6.9</b> Support for User SQL When GPKG Databases are Opened</a></li>
+<li class="chapter" data-level="7.6.10" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix10-3"><i class="fa fa-check"></i><b>7.6.10</b> GPKG Improved Error Messaging if Polygon/Polyline Vertex Count Exceeds TUFLOW Limit</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="OutChecks-1.html"><a href="OutChecks-1.html"><i class="fa fa-check"></i><b>8</b> Outputs and Check Files</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#RecGauge-2"><i class="fa fa-check"></i><b>8.1</b> Additional Options for Record Gauge Data Outputs</a></li>
+<li class="chapter" data-level="8.2" data-path="OutChecks-1.html"><a href="OutChecks-1.html#TMaxHOff-2"><i class="fa fa-check"></i><b>8.2</b> Time of Max Water Level Switch</a></li>
+<li class="chapter" data-level="8.3" data-path="OutChecks-1.html"><a href="OutChecks-1.html#TMaxVOff-2"><i class="fa fa-check"></i><b>8.3</b> Time of Max Velocity Off by Default</a></li>
+<li class="chapter" data-level="8.4" data-path="OutChecks-1.html"><a href="OutChecks-1.html#FileAccess-2"><i class="fa fa-check"></i><b>8.4</b> File Access Timeout</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#FileAccessFix1-3"><i class="fa fa-check"></i><b>8.4.1</b> Bug Fix for Final SGS elevation XF File Access</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="OutChecks-1.html"><a href="OutChecks-1.html#GrdCheck-2"><i class="fa fa-check"></i><b>8.5</b> Additional Check Grid Formats</a></li>
+<li class="chapter" data-level="8.6" data-path="OutChecks-1.html"><a href="OutChecks-1.html#HRFormat-2"><i class="fa fa-check"></i><b>8.6</b> High Resolution Map Output Includes Additional File Formats</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#NetCDFGrd-3"><i class="fa fa-check"></i><b>8.6.1</b> Viewing HRNC in TUFLOW Viewer</a></li>
+<li class="chapter" data-level="8.6.2" data-path="OutChecks-1.html"><a href="OutChecks-1.html#HR1DWLL-3"><i class="fa fa-check"></i><b>8.6.2</b> High Resolution Map Output Includes 1D WLL Elevations</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="OutChecks-1.html"><a href="OutChecks-1.html#NewMapOutputs-2"><i class="fa fa-check"></i><b>8.7</b> New Map Output Data Types</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#HPCControlNumbers-3"><i class="fa fa-check"></i><b>8.7.1</b> HPC Control Numbers</a></li>
+<li class="chapter" data-level="8.7.2" data-path="OutChecks-1.html"><a href="OutChecks-1.html#new-hazard-output-auckland-council-hazard-nz"><i class="fa fa-check"></i><b>8.7.2</b> New Hazard Output – Auckland Council Hazard NZ</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="OutChecks-1.html"><a href="OutChecks-1.html#SimLogTimes-2"><i class="fa fa-check"></i><b>8.8</b> Changes to Simulation Computational and Clock Times</a></li>
+<li class="chapter" data-level="8.9" data-path="OutChecks-1.html"><a href="OutChecks-1.html#GLOAddedToHPC-2"><i class="fa fa-check"></i><b>8.9</b> Support Added for 2d_glo in HPC and Quadtree</a></li>
+<li class="chapter" data-level="8.10" data-path="OutChecks-1.html"><a href="OutChecks-1.html#MinEnhancBugFix-2"><i class="fa fa-check"></i><b>8.10</b> Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="8.10.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#POValidGmtry-3"><i class="fa fa-check"></i><b>8.10.1</b> Checks for Valid Geometries for Plot Outputs</a></li>
+<li class="chapter" data-level="8.10.2" data-path="OutChecks-1.html"><a href="OutChecks-1.html#HPCdtIntrvl-3"><i class="fa fa-check"></i><b>8.10.2</b> HPC dt.csv Interval Can Now Be Set</a></li>
+<li class="chapter" data-level="8.10.3" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OZIntervals-3"><i class="fa fa-check"></i><b>8.10.3</b> Bug Fix for Map Output Zones Using Different Map Output Intervals</a></li>
+<li class="chapter" data-level="8.10.4" data-path="OutChecks-1.html"><a href="OutChecks-1.html#SGSReporting-3"><i class="fa fa-check"></i><b>8.10.4</b> SGS Sample Distance Reporting in TLF</a></li>
+<li class="chapter" data-level="8.10.5" data-path="OutChecks-1.html"><a href="OutChecks-1.html#Warning2550-3"><i class="fa fa-check"></i><b>8.10.5</b> Limit Number of WARNING 2550 Messages</a></li>
+<li class="chapter" data-level="8.10.6" data-path="OutChecks-1.html"><a href="OutChecks-1.html#WRFEmpty-3"><i class="fa fa-check"></i><b>8.10.6</b> 2D_WRF Empty File</a></li>
+<li class="chapter" data-level="8.10.7" data-path="OutChecks-1.html"><a href="OutChecks-1.html#HROZ-3"><i class="fa fa-check"></i><b>8.10.7</b> High Resolution Grid Outputs Not Created with Map Output Zones</a></li>
+<li class="chapter" data-level="8.10.8" data-path="OutChecks-1.html"><a href="OutChecks-1.html#TOCutHazard-3"><i class="fa fa-check"></i><b>8.10.8</b> Time Output Cutoff <Hazard> Logging Fix</a></li>
+<li class="chapter" data-level="8.10.9" data-path="OutChecks-1.html"><a href="OutChecks-1.html#MassErrAstrks-3"><i class="fa fa-check"></i><b>8.10.9</b> Mass Error Reporting During Simulation Showing Asterisks</a></li>
+<li class="chapter" data-level="8.10.10" data-path="OutChecks-1.html"><a href="OutChecks-1.html#QGSSnapping-3"><i class="fa fa-check"></i><b>8.10.10</b> Snapping Settings Added to .qgs File</a></li>
+<li class="chapter" data-level="8.10.11" data-path="OutChecks-1.html"><a href="OutChecks-1.html#DupChecks-3"><i class="fa fa-check"></i><b>8.10.11</b> Duplicate Messages in the messages_P GIS File</a></li>
+<li class="chapter" data-level="8.10.12" data-path="OutChecks-1.html"><a href="OutChecks-1.html#QPCzshzpt-3"><i class="fa fa-check"></i><b>8.10.12</b> Quadtree zsh_zpt_check Points in Non-Refined Areas</a></li>
+<li class="chapter" data-level="8.10.13" data-path="OutChecks-1.html"><a href="OutChecks-1.html#SGSCellAvgD-3"><i class="fa fa-check"></i><b>8.10.13</b> Bug Fix for SGS Model Outputs When Cell Averaged Depth Option is Used</a></li>
+<li class="chapter" data-level="8.10.14" data-path="OutChecks-1.html"><a href="OutChecks-1.html#ViscosZero-3"><i class="fa fa-check"></i><b>8.10.14</b> Fixes an Issue with Viscosity Output Written as Zero</a></li>
+<li class="chapter" data-level="8.10.15" data-path="OutChecks-1.html"><a href="OutChecks-1.html#NuNcNd-3"><i class="fa fa-check"></i><b>8.10.15</b> HPC Control Number Map Output</a></li>
+<li class="chapter" data-level="8.10.16" data-path="OutChecks-1.html"><a href="OutChecks-1.html#SGSzshzpt-3"><i class="fa fa-check"></i><b>8.10.16</b> _zsh_zpt Check File for SGS Models</a></li>
+<li class="chapter" data-level="8.10.17" data-path="OutChecks-1.html"><a href="OutChecks-1.html#RecGauge-3"><i class="fa fa-check"></i><b>8.10.17</b> Extra Checks on File Format Specific Map Output Commands</a></li>
+<li class="chapter" data-level="8.10.18" data-path="OutChecks-1.html"><a href="OutChecks-1.html#DataTypeSpace-3"><i class="fa fa-check"></i><b>8.10.18</b> Changes to Processing of Map Output Data Types Command</a></li>
+<li class="chapter" data-level="8.10.19" data-path="OutChecks-1.html"><a href="OutChecks-1.html#LFCSHMethod-3"><i class="fa fa-check"></i><b>8.10.19</b> Layered Flow Constriction Check File Now Includes Method</a></li>
+<li class="chapter" data-level="8.10.20" data-path="OutChecks-1.html"><a href="OutChecks-1.html#HPCErrorTLF-3"><i class="fa fa-check"></i><b>8.10.20</b> HPC Error Codes Are Now Reported in .tlf and Message Layers</a></li>
+</ul></li>
+<li class="chapter" data-level="8.11" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksMinEnhancBugFixAB-2"><i class="fa fa-check"></i><b>8.11</b> 2023-03-AB Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="8.11.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix1-3"><i class="fa fa-check"></i><b>8.11.1</b> Fix for Quadtree High Resolution Outputs and WLL</a></li>
+<li class="chapter" data-level="8.11.2" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix2-3"><i class="fa fa-check"></i><b>8.11.2</b> Reduced Log File when Processing Quadtree Polygons</a></li>
+<li class="chapter" data-level="8.11.3" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix3-3"><i class="fa fa-check"></i><b>8.11.3</b> Bug Fix for Integer (Hazard) Grid Outputs</a></li>
+<li class="chapter" data-level="8.11.4" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix4-3"><i class="fa fa-check"></i><b>8.11.4</b> Consistent Reporting Location Dry Output</a></li>
+<li class="chapter" data-level="8.11.5" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix5-3"><i class="fa fa-check"></i><b>8.11.5</b> Bug Fix MIF PLOT output</a></li>
+<li class="chapter" data-level="8.11.6" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix6-3"><i class="fa fa-check"></i><b>8.11.6</b> Scientific Notation for PO Outputs</a></li>
+<li class="chapter" data-level="8.11.7" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix7-3"><i class="fa fa-check"></i><b>8.11.7</b> Scientific Notation for ASC Outputs</a></li>
+<li class="chapter" data-level="8.11.8" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix8-3"><i class="fa fa-check"></i><b>8.11.8</b> Bug Fix Geometry Type Groundwater Flow Output in TPC</a></li>
+<li class="chapter" data-level="8.11.9" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix9-3"><i class="fa fa-check"></i><b>8.11.9</b> Bug Fix Groundwater Vector Grid Outputs</a></li>
+<li class="chapter" data-level="8.11.10" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix10-3"><i class="fa fa-check"></i><b>8.11.10</b> Bug Fix Velocity GIS Map Output</a></li>
+<li class="chapter" data-level="8.11.11" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix11-3"><i class="fa fa-check"></i><b>8.11.11</b> Extra Precision in Quadtree uvpt Check File for Form Loss</a></li>
+<li class="chapter" data-level="8.11.12" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix12-3"><i class="fa fa-check"></i><b>8.11.12</b> TMO Output Changes for HPC Model with SGS</a></li>
+<li class="chapter" data-level="8.11.13" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix13-3"><i class="fa fa-check"></i><b>8.11.13</b> Duplicated HR Output Message in Log File</a></li>
+<li class="chapter" data-level="8.11.14" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix14-3"><i class="fa fa-check"></i><b>8.11.14</b> Updated Links to TUFLOW Wiki</a></li>
+<li class="chapter" data-level="8.11.15" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix15-3"><i class="fa fa-check"></i><b>8.11.15</b> Warning 3551 now Check 3551</a></li>
+<li class="chapter" data-level="8.11.16" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix16-3"><i class="fa fa-check"></i><b>8.11.16</b> Check 0008 now ERROR 0008</a></li>
+<li class="chapter" data-level="8.11.17" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix17-3"><i class="fa fa-check"></i><b>8.11.17</b> Check 2099 now Reported to Log and Console</a></li>
+<li class="chapter" data-level="8.11.18" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix18-3"><i class="fa fa-check"></i><b>8.11.18</b> Bug Fix for Warning 4020</a></li>
+<li class="chapter" data-level="8.11.19" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix19-3"><i class="fa fa-check"></i><b>8.11.19</b> Buffered File Write for .2dm</a></li>
+</ul></li>
+<li class="chapter" data-level="8.12" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksMinEnhancBugFixAC-2"><i class="fa fa-check"></i><b>8.12</b> 2023-03-AC Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="8.12.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksACFix1-3"><i class="fa fa-check"></i><b>8.12.1</b> Fix to TMax Output in Output Zone</a></li>
+<li class="chapter" data-level="8.12.2" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksACFix2-3"><i class="fa fa-check"></i><b>8.12.2</b> Enhancement to Plot Output Memory Allocation</a></li>
+<li class="chapter" data-level="8.12.3" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksACFix3-3"><i class="fa fa-check"></i><b>8.12.3</b> Bug Fix to SGS High-Res Output below Sea Surface Level</a></li>
+<li class="chapter" data-level="8.12.4" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksACFix4-3"><i class="fa fa-check"></i><b>8.12.4</b> Quadtree PO Header Rows Swapped</a></li>
+</ul></li>
+<li class="chapter" data-level="8.13" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksMinEnhancBugFixAD-2"><i class="fa fa-check"></i><b>8.13</b> 2023-03-AD Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="8.13.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix1-3"><i class="fa fa-check"></i><b>8.13.1</b> Bug Fix for PO Online and GPKG</a></li>
+<li class="chapter" data-level="8.13.2" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix2-3"><i class="fa fa-check"></i><b>8.13.2</b> Bug Fix and Enhancement for NetCDF Grid Projections</a></li>
+<li class="chapter" data-level="8.13.3" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix3-3"><i class="fa fa-check"></i><b>8.13.3</b> Bug Fix for Reporting Location RLL_Qmx.csv and RLR_Volmx.csv Outputs</a></li>
+<li class="chapter" data-level="8.13.4" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix4-3"><i class="fa fa-check"></i><b>8.13.4</b> Removes -99999 From Reporting Location Flow Time Series Output</a></li>
+<li class="chapter" data-level="8.13.5" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix5-3"><i class="fa fa-check"></i><b>8.13.5</b> Error Produced for Duplicate PO Labels for Same Output Type</a></li>
+<li class="chapter" data-level="8.13.6" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix6-3"><i class="fa fa-check"></i><b>8.13.6</b> Plot Output Type ‘Vv’ No Longer Triggers ‘V_’ Output</a></li>
+<li class="chapter" data-level="8.13.7" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix7-3"><i class="fa fa-check"></i><b>8.13.7</b> New Plot Output Types Supported in HPC and Quadtree</a></li>
+<li class="chapter" data-level="8.13.8" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix8-3"><i class="fa fa-check"></i><b>8.13.8</b> Plot Output WARNING 2476 No Longer Triggered Erroneously</a></li>
+<li class="chapter" data-level="8.13.9" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix9-3"><i class="fa fa-check"></i><b>8.13.9</b> Bug Fix For Sink-Source (SS) Plot Output Type in Quadtree</a></li>
+<li class="chapter" data-level="8.13.10" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix10-3"><i class="fa fa-check"></i><b>8.13.10</b> Bug Fix for “GRID” Output Format Not Outputting for GeoTIFFs</a></li>
+<li class="chapter" data-level="8.13.11" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix11-3"><i class="fa fa-check"></i><b>8.13.11</b> Bug Fix for “WRR” Output Crashing With “Should not be here”</a></li>
+<li class="chapter" data-level="8.13.12" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix12-3"><i class="fa fa-check"></i><b>8.13.12</b> Bug Fix for High Resolution Grid Outputs with Energy Type</a></li>
+<li class="chapter" data-level="8.13.13" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix13-3"><i class="fa fa-check"></i><b>8.13.13</b> Loading Results in TUFLOW Viewer While TUFLOW is Running</a></li>
+<li class="chapter" data-level="8.13.14" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix14-3"><i class="fa fa-check"></i><b>8.13.14</b> Spurious Column Removed from PO.csv in Quadtree</a></li>
+<li class="chapter" data-level="8.13.15" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix15-3"><i class="fa fa-check"></i><b>8.13.15</b> Bug Fix for Initial Water Level Polygon Missing From QGIS Workspace</a></li>
+<li class="chapter" data-level="8.13.16" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix16-3"><i class="fa fa-check"></i><b>8.13.16</b> Bug Fix for 2d_bc_tables_check.csv from Quadtree Containing Garbled Text</a></li>
+<li class="chapter" data-level="8.13.17" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix17-3"><i class="fa fa-check"></i><b>8.13.17</b> Re-label SA Boundary Time Column in the 2d_bc_tables_check.csv in Quadtree</a></li>
+<li class="chapter" data-level="8.13.18" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix18-3"><i class="fa fa-check"></i><b>8.13.18</b> ERROR 0710 Now has Wiki Link</a></li>
+<li class="chapter" data-level="8.13.19" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix19-3"><i class="fa fa-check"></i><b>8.13.19</b> Plot Output Sink/Source Type in HPC Now Correctly Reports Net Flow</a></li>
+<li class="chapter" data-level="8.13.20" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix20-3"><i class="fa fa-check"></i><b>8.13.20</b> Bug Fix for Water Level Output with Breakline</a></li>
+<li class="chapter" data-level="8.13.21" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix21-3"><i class="fa fa-check"></i><b>8.13.21</b> Bug Fix for Maximum High Res Output</a></li>
+<li class="chapter" data-level="8.13.22" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix22-3"><i class="fa fa-check"></i><b>8.13.22</b> Bug Fix for Reporting Location with Restart File</a></li>
+<li class="chapter" data-level="8.13.23" data-path="OutChecks-1.html"><a href="OutChecks-1.html#ADUpdates3-5"><i class="fa fa-check"></i><b>8.13.23</b> Bug Fix PO Points With Invalid “Q” Output Crash</a></li>
+<li class="chapter" data-level="8.13.24" data-path="OutChecks-1.html"><a href="OutChecks-1.html#ADUpdates3-4"><i class="fa fa-check"></i><b>8.13.24</b> Bug Fix NetCDF Raster Time Issues</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html"><i class="fa fa-check"></i><b>9</b> Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#id_2023-03-AA-Updates-2"><i class="fa fa-check"></i><b>9.1</b> 2023-03-AA Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#GeoRefMessages-3"><i class="fa fa-check"></i><b>9.1.1</b> Geo-Referenced Messages</a></li>
+<li class="chapter" data-level="9.1.2" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#AAUpdates1-3"><i class="fa fa-check"></i><b>9.1.2</b> Error Message When No Start or End Time is Specified</a></li>
+<li class="chapter" data-level="9.1.3" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#AAUpdates2-3"><i class="fa fa-check"></i><b>9.1.3</b> Warning When 1D_IWL is Used in TCF or TGC</a></li>
+<li class="chapter" data-level="9.1.4" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#AAUpdates3-3"><i class="fa fa-check"></i><b>9.1.4</b> Fixes Issue with Return Characters in GIS Attributes</a></li>
+<li class="chapter" data-level="9.1.5" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#AAUpdates4-3"><i class="fa fa-check"></i><b>9.1.5</b> Package Model Functionality Copies Matrix Blockage Files</a></li>
+<li class="chapter" data-level="9.1.6" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#AAUpdates5-3"><i class="fa fa-check"></i><b>9.1.6</b> TCF now Closed at End of Model Initialisation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#id_2023-03-AB-Updates-2"><i class="fa fa-check"></i><b>9.2</b> 2023-03-AB Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#ABUpdates1-3"><i class="fa fa-check"></i><b>9.2.1</b> Ability to Set Hardware via Command Line Argument</a></li>
+<li class="chapter" data-level="9.2.2" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#ABUpdates2-3"><i class="fa fa-check"></i><b>9.2.2</b> Bug Fix for External 1D Engines</a></li>
+<li class="chapter" data-level="9.2.3" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#ABUpdates3-3"><i class="fa fa-check"></i><b>9.2.3</b> File Path Length Errors</a></li>
+<li class="chapter" data-level="9.2.4" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#ABUpdates4-3"><i class="fa fa-check"></i><b>9.2.4</b> Enhancement to Processing of Tabs</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#id_2023-03-AD-Updates-2"><i class="fa fa-check"></i><b>9.3</b> 2023-03-AD Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#ADUpdates1-3"><i class="fa fa-check"></i><b>9.3.1</b> TUFLOW HPC Crashing While Writing Outputs Mid-Simulation with Reporting Locations</a></li>
+<li class="chapter" data-level="9.3.2" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#ADUpdates2-3"><i class="fa fa-check"></i><b>9.3.2</b> Bug Fix Using Local Coordinate Reference System with Shape Files</a></li>
+<li class="chapter" data-level="9.3.3" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#ADUpdates3-3"><i class="fa fa-check"></i><b>9.3.3</b> Bug Fix Writing ERROR 2551</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="LicenceAndInstall-1.html"><a href="LicenceAndInstall-1.html"><i class="fa fa-check"></i><b>10</b> Licencing and Installing</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="LicenceAndInstall-1.html"><a href="LicenceAndInstall-1.html#Licence1-2"><i class="fa fa-check"></i><b>10.1</b> Support for Flood Modeller Cloud Licences</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="BackwardCompat-1.html"><a href="BackwardCompat-1.html"><i class="fa fa-check"></i><b>11</b> Backward Compatibility</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="BackwardCompat-1.html"><a href="BackwardCompat-1.html#BckCompat-2"><i class="fa fa-check"></i><b>11.1</b> Backward Compatibility to the 2020-10 Release</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="SWMM-Input-Detailed-1.html"><a href="SWMM-Input-Detailed-1.html"><i class="fa fa-check"></i><b>A</b> SWMM Input Files Descriptions</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://www.tuflow.com"><img src="images/WQFooter.jpg" style="width:246px;height:10px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(0,85,129);">TUFLOW Classic/HPC New Release Notes</h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="TwoDDomConstr-1" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Section 2</span> 2D Domain Construction<a href="TwoDDomConstr-1.html#TwoDDomConstr-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="QTUpdates-2" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Quadtree Updates (HPC Only)<a href="TwoDDomConstr-1.html#QTUpdates-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The Quadtree mesh refinement functionality, added in the 2020-01 Release, allows the user to vary the resolution of a model using the HPC 2D Solver. The following enhancements have been included in the 2023-03 Release.
+<span class="math inline">\(\newcommand{\blockindent}{\hspace{0.5cm}}\)</span></p>
+<div id="SuppMultGPU-3" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Support for Multiple GPU<a href="TwoDDomConstr-1.html#SuppMultGPU-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Multiple GPUs are supported for the 2023-03 Release when using a quadtree mesh. For the 2020 Releases, only a single GPU per simulation could be utilised when using quadtree refinement. The functionality for multiple GPUs with Quadtree is the same as for a standard (single resolution) HPC model.</p>
+<p>Device IDs can be specified in either the .tcf using the “<tcmd>GPU Device ID</tcmd> <teq>==</teq>” command, or via the command line with -pu arguments. Device weightings can be specified with the “<tcmd>HPC Device Split</tcmd> <teq>==</teq>” .tcf command (refer to Section 8.4 in the <a href="https://downloads.tuflow.com/TUFLOW/Releases/2020-10/TUFLOW Release Notes.2020-10-AF.pdf" target="_blank">2020 Release Notes</a>).</p>
+<p>As per standard HPC (without Quadtree) if peer-to-peer GPU access is available between GPU cards, via either an NVLink or via a compatible PCIe configuration, then this is utilised by default. This can be disabled with the command:</p>
+<p><tcmd>GPU Peer to Peer Access</tcmd> <teq> == </teq> <tblk>DISABLED | {ENABLED IF AVAILABLE}</tblk></p>
+<p>Note: With newer generations of GPUs increasing the CUDA cores and memory, multiple GPUs simulations will realistically be only confined to very large models.</p>
+</div>
+<div id="SuppMultGIS-3" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Support for Multiple Nesting GIS Layers<a href="TwoDDomConstr-1.html#SuppMultGIS-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The 2023-03 Release supports multiple 2d_qnl (nesting polygon) layers (i.e. multiple “<tcmd>Read GIS Nesting </tcmd><teq>==</teq>” commands in a single .qcf). Previously, TUFLOW would produce <a href="https://wiki.tuflow.com/TUFLOW_Message_2846" target="_blank">ERROR 2846</a> if more than one GIS nesting command was specified.</p>
+<p>The order that the GIS layers are specified does not matter; TUFLOW will read in all GIS layers before processing the mesh. The exception to this is for level one nesting polygons where TUFLOW will adopt the last level one polygon that is found. Previously if more than one level one nesting polygon was found, <a href="https://wiki.tuflow.com/TUFLOW_Message_2825" target="_blank">ERROR 2825</a> was produced. This has been changed to <a href="https://wiki.tuflow.com/TUFLOW_Message_2825" target="_blank">WARNING 2825</a> and TUFLOW will override the previous level one polygon.</p>
+</div>
+<div id="SuppTriggerZShp-3" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Support “Trigger 1D” for Variable Z Shape<a href="TwoDDomConstr-1.html#SuppTriggerZShp-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The 2023-03 Release supports a “Trigger 1D” option for 2d_vzsh (variable Z shapes) to commence elevation updates based on the water level at a 1D node. The “Trigger 1D PF” can be used to trigger the elevation updates based on the progress of a 1D PF (Pipe Failure) channel.</p>
+</div>
+</div>
+<div id="SGSChanges-2" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Sub-Grid Sampling (SGS) Changes<a href="TwoDDomConstr-1.html#SGSChanges-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Sub-Grid Sampling (SGS) stores and uses curves representing the sub 2D cell terrain data of the DEMs, TINs and Z shapes used to construct the model instead of each 2D cell and each 2D face having one elevation. This functionality was first introduced in the 2020-01 Release, the following changes to SGS functionality have been included in the 2023-03 Release.</p>
+<div id="SGSDefaults-3" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> SGS Default Changes<a href="TwoDDomConstr-1.html#SGSDefaults-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There have been several changes to the SGS defaults (if SGS is enabled with the .tcf command “<tcmd>SGS</tcmd><teq> == </teq><tblk>On</tblk>”) since the 2020-10 Release. These changes are listed in Table <a href="TwoDDomConstr-1.html#tab:tab-SGSDefaults">2.1</a> and Table <a href="TwoDDomConstr-1.html#tab:tab-HRDefaults">2.2</a>, discussed in the referenced sections.</p>
+<table>
+<caption>
+<span id="tab:tab-SGSDefaults">Table 2.1: </span><strong>Changes in SGS Defaults</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Command
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+2020 Default
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+2023 Default
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Section
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 30%; vertical-align:top;">
+<tcmd>SGS Approach </tcmd><teq>== </teq>
+</td>
+<td style="text-align:left;width: 15%; ">
+<tblk>Method B</tblk>
+</td>
+<td style="text-align:left;width: 15%; ">
+<tblk>Method C</tblk>
+</td>
+<td style="text-align:left;width: 15%; ">
+<a href="TwoDDomConstr-1.html#SGSApproach-3">Section 2.2.2</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 30%; vertical-align:top;">
+<tcmd>SGS Depth Output </tcmd><teq>== </teq>
+</td>
+<td style="text-align:left;width: 15%; ">
+<tblk>Exact</tblk>
+</td>
+<td style="text-align:left;width: 15%; ">
+<tblk>Cell Average</tblk>
+</td>
+<td style="text-align:left;width: 15%; ">
+Section 7.5.3 of the <a href="https://downloads.tuflow.com/TUFLOW/Releases/2020-10/TUFLOW%20Release%20Notes.2020-10-AF.pdf" target="_blank">2020 Release Notes</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 30%; vertical-align:top;">
+<tcmd>SGS Map Extent <span class="math inline">\(\langle\)</span>Full or Trim<span class="math inline">\(\rangle\)</span> </tcmd><teq>== </teq>
+</td>
+<td style="text-align:left;width: 15%; ">
+<tcmd>SGS Map Extent Full</tcmd> <teq>== </teq> <tblk>h</tblk>
+</td>
+<td style="text-align:left;width: 15%; ">
+<tcmd>SGS Map Extent Trim</tcmd> <teq>== </teq> <tblk>ALL</tblk>
+</td>
+<td style="text-align:left;width: 15%; ">
+Section 7.5.4 of the <a href="https://downloads.tuflow.com/TUFLOW/Releases/2020-10/TUFLOW%20Release%20Notes.2020-10-AF.pdf" target="_blank">2020 Release Notes</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 30%; vertical-align:top;">
+<tcmd>SGS Material </tcmd><teq>== </teq>
+</td>
+<td style="text-align:left;width: 15%; ">
+<tblk>ON</tblk>
+</td>
+<td style="text-align:left;width: 15%; ">
+<tblk>OFF</tblk>
+</td>
+<td style="text-align:left;width: 15%; ">
+<a href="TwoDDomConstr-1.html#SGSMaterials-3">Section 2.2.4</a>
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>
+<span id="tab:tab-HRDefaults">Table 2.2: </span><strong>Changes in HR Output Defaults</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Command
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+2020 Default
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+2023 Default
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Section
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 30%; vertical-align:top;">
+<tcmd>HR Interpolation Approach </tcmd><teq>== </teq>
+</td>
+<td style="text-align:left;width: 15%; ">
+<tblk>Method A</tblk>
+</td>
+<td style="text-align:left;width: 15%; ">
+<tblk>Method C</tblk>
+</td>
+<td style="text-align:left;width: 15%; ">
+<a href="TwoDDomConstr-1.html#HResInterp-3">Section 2.2.5</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 30%; vertical-align:top;">
+<tcmd>HR Thin Z Line Output Adjustment </tcmd><teq>== </teq>
+</td>
+<td style="text-align:left;width: 15%; ">
+<tblk>OFF</tblk>
+</td>
+<td style="text-align:left;width: 15%; ">
+<tblk>ON CELL SIDES</tblk>
+</td>
+<td style="text-align:left;width: 15%; ">
+<a href="TwoDDomConstr-1.html#HRThinBLines-3">Section 2.2.6</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="SGSApproach-3" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> SGS Approach<a href="TwoDDomConstr-1.html#SGSApproach-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For the 2023-03 Release “<tcmd>SGS Approach </tcmd><teq>==</teq> <tblk>Method C</tblk>” is the default setting if SGS is enabled (<tcmd>SGS</tcmd> <teq>==</teq> <tblk>ON</tblk>). Method C was introduced as beta functionality in the 2020-10-AB Build. The previous default “<tcmd>SGS Approach </tcmd><teq>==</teq> <tblk>Method B</tblk>” processed elevations into elevation-volume curves (for cells) and elevation-flow area/width curves (cell faces) after reading each elevation dataset. The sampled SGS elevations were discarded after processing the dataset for memory efficiency. Method C retains the SGS elevations in memory throughout the pre-processing stage and performs the generation of the curves only at the end of the pre-processing of all elevation data.</p>
+<p>Whilst this can potentially use more memory (CPU RAM) the approach has considerable benefits in terms of preserving sub-grid elevation data at cells/faces partially affected by terrain data layers and allows TUFLOW to produce high-resolution mapping at the SGS sampling resolution.</p>
+<p>See Section 3.7.2 in the <a href ="https://downloads.tuflow.com/TUFLOW/Releases/2020-10/TUFLOW Release Notes.2020-10-AF.pdf" target="_blank">2020 Release Notes</a> for details on the SGS Approach Method C.</p>
+</div>
+<div id="SGSSampFreq-3" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Setting SGS Sampling Frequency<a href="TwoDDomConstr-1.html#SGSSampFreq-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For the 2023-03 Release, when using the SGS Approach Method C (which is the default for Release 2023-03 – refer Section <a href="TwoDDomConstr-1.html#SGSDefaults-3">2.2.1</a>), there are now several ways of setting the SGS sampling frequency. For the 2020-10 Release when using SGS Method C, the SGS Sample Frequency had to be set using the .tcf command “<tcmd>SGS Sample Frequency </tcmd><teq>== </teq> <span class="math inline">\(\langle\)</span><tblk>number of sample locations per face</tblk><span class="math inline">\(\rangle\)</span>”. For the 2023-03 Release, in addition to this command, it is also possible to alternatively set a sampling target distance using the new .tcf command:</p>
+<p><tcmd>SGS Sample Target Distance </tcmd><teq>== </teq><span class="math inline">\(\langle\)</span><tblk>distance in metres or feet</tblk><span class="math inline">\(\rangle\)</span></p>
+<p>TUFLOW requires an odd number of sample locations across a cell face to ensure the mid-point is a sample point. The sampling frequency is calculated as the TUFLOW cell size divided by the target distance then rounded as per Equation <a href="TwoDDomConstr-1.html#eq:equ-sgs-smp-freq">(2.1)</a>.</p>
+<p><span class="math display" id="eq:equ-sgs-smp-freq">\[\begin{equation}
+\text{Sample Frequency} = \frac{\text{TUFLOW Cell Size}}{\text{Target Distance}} + 1
+\tag{2.1}
+\end{equation}\]</span></p>
+<p>For example, for a 10m TUFLOW model with a target distance of 1m, the sampling frequency is 11. Even numbers are rounded up to the next highest odd number. The sampling frequency adopted is reported in the .tlf.</p>
+<p>If neither “<tcmd>SGS Sample Frequency </tcmd><teq>==</teq>” or “<tcmd>SGS Sample Target Distance </tcmd><teq>==</teq>” is set, a scan of the Geometry Control File (.tgc) is performed to find the minimum raster grid resolution used in “<tcmd>Read Grid Zpt </tcmd><teq>==</teq>” commands, and this is used as the sampling target distance to compute the sampling frequency.
+If there are no gridded elevation datasets, a default sampling frequency of 11 is used. In summary, there are four ways for the SGS Sample Frequency to be defined; in decreasing order of priority they are:</p>
+<ol style="list-style-type: decimal">
+<li>“<tcmd>SGS Sample Frequency </tcmd><teq>==</teq>” command.</li>
+<li>“<tcmd>SGS Sample Target Distance </tcmd><teq>==</teq>” command.</li>
+<li>Target distance automatically based on the minimum grid elevation resolution in the .tgc.</li>
+<li>Default Sampling Frequency of 11 per face / 121 per cell.</li>
+</ol>
+<p>Note: the sampling frequency is capped at 31 by default to avoid long pre-processing times and high memory usage. In general, a sampling frequency smaller than 31 is sufficient for most natural water ways or artificial structures, and users may not benefit from applying a super fine sample distance against the model cell size. However, if required, this upper limit can be increased by using the following tcf command:</p>
+<p><tcmd>SGS Max Sample Frequency </tcmd><teq>==</teq> <span class="math inline">\(\langle\)</span>maximum frequency<span class="math inline">\(\rangle\)</span></p>
+<p>Note, a hard limit of 127 per face (16,129 samples per cell) still applies.</p>
+</div>
+<div id="SGSMaterials-3" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> SGS Materials<a href="TwoDDomConstr-1.html#SGSMaterials-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For the 2023-03 Release the sub-grid sampling of materials (land-use) has been disabled. This functionality was included in the 2020-10 Release as beta functionality, see Section 3.7.3 of the <a href="https://downloads.tuflow.com/TUFLOW/Releases/2020-10/TUFLOW Release Notes.2020-10-AF.pdf" target="_blank">2020 Release Notes</a>. Feedback and further testing indicates that additional development is required. Some significant issues have been identified including the large dynamic range in face depths over which the look-up table must be computed, the transition between sheet flow and channel flow, and the inclusion of the effects of eddy viscosity or sub-grid turbulence on the parallel flow analysis. The latter issue in particular needs further research to provide consistency between different cell sizes.</p>
+<p>This feature is planned to be reinstated for an update to the 2023-03 Release once further research and benchmarking is completed.</p>
+</div>
+<div id="HResInterp-3" class="section level3 hasAnchor" number="2.2.5">
+<h3><span class="header-section-number">2.2.5</span> High Resolution Interpolation Approach<a href="TwoDDomConstr-1.html#HResInterp-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For SGS Method C, the high resolution (HR) raster map output can be output at finer resolution than the 2D model size. It is important to note that this is interpolating cell centre / corners data across the cell. For the 2023-03 Release enhancements have been made to the interpolation approach.</p>
+<p><strong>Note:</strong> High resolution raster outputs are only available for depth (d) and water level (h) output data types.</p>
+<p>For the 2020-10 Release this was beta functionality, see Section 3.7.4 of the <a href="https://downloads.tuflow.com/TUFLOW/Releases/2020-10/TUFLOW Release Notes.2020-10-AF.pdf" target="_blank">2020 Release Notes</a>, and the only approach available is described below as “Method A”.</p>
+<p>For models with traditional hydrology inflows, “Method A” generally produced effective HR maps. However, for models with very shallow flows (such as direct rainfall models), this could produce HR outputs with interpolation artefacts, as illustrated in Figure <a href="TwoDDomConstr-1.html#fig:fig-LinCornerInterpSS">2.1</a>.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-LinCornerInterpSS"></span>
+<img src="images/LinearCornerInterp.png" alt="**Linear Corner Interpolation for High Resolution Water Level at Steep Slope**" width="30%" />
+<p class="caption">
+Figure 2.1: <strong>Linear Corner Interpolation for High Resolution Water Level at Steep Slope</strong>
+</p>
+</div>
+</center>
+<p>“<tcmd>HR Interpolation Approach</tcmd><teq>==</teq> <tblk>Method B</tblk>” improves this by introducing sheet flow checks when interpolating. “<tcmd>HR Interpolation Approach </tcmd><teq>==</teq> <tblk>Method C</tblk>” uses the sheet flow checks and applies a weighting based on the number of wet SGS sampled locations in the cell.</p>
+<p>Some example HR outputs for a model with direct rainfall and a very coarse 2D cell size are presented in Figure <a href="TwoDDomConstr-1.html#fig:fig-HRIntApprA">2.2</a> to Figure <a href="TwoDDomConstr-1.html#fig:fig-HRIntApprC">2.4</a>.</p>
+<p>“<tcmd>HR Interpolation Approach </tcmd><teq>==</teq> <tblk>Method C</tblk>” is the default for the 2023-03 Release.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HRIntApprA"></span>
+<img src="images/HRIA_A.png" alt="**HR Interpolation Approach == Method A**" width="50%" />
+<p class="caption">
+Figure 2.2: <strong>HR Interpolation Approach == Method A</strong>
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HRIntApprB"></span>
+<img src="images/HRIA_B.png" alt="**HR Interpolation Approach == Method B**" width="50%" />
+<p class="caption">
+Figure 2.3: <strong>HR Interpolation Approach == Method B</strong>
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HRIntApprC"></span>
+<img src="images/HRIA_C.png" alt="**HR Interpolation Approach == Method C (new default)**" width="50%" />
+<p class="caption">
+Figure 2.4: <strong>HR Interpolation Approach == Method C (new default)</strong>
+</p>
+</div>
+</center>
+</div>
+<div id="HRThinBLines-3" class="section level3 hasAnchor" number="2.2.6">
+<h3><span class="header-section-number">2.2.6</span> High Resolution Thin Breaklines<a href="TwoDDomConstr-1.html#HRThinBLines-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When applying thin breaklines only the cell side and cell corner elevations are modified. For models with thin breaklines and HR outputs, the presence of breaklines can be used to affect the HR interpolation. A new .tcf command has been introduced to control this:</p>
+<p><tcmd>HR Thin Z Line Output Adjustment </tcmd><teq>==</teq> <tblk>OFF | {ON CELL SIDES} | ON ALIGNMENT </tblk></p>
+<p>The three options provided are:</p>
+<ul>
+<li>OFF – Thin breaklines do not affect the HR raster interpolation</li>
+<li>ON CELL SIDES – This prevents interpolation across cell sides that have thin breaklines.</li>
+<li>ON ALIGNMENT – The location of the breakline within the TUFLOW cell resolution is stored and stops interpolation occurring over this topographic barrier.</li>
+</ul>
+<p>“<tcmd>HR Thin Z Line Output Adjustment </tcmd><teq>==</teq> <tblk>ON CELL SIDES</tblk>” is the default for the 2023-03 Release as this is consistent with the computational location which the topographic barrier is applied. Example outputs from a model with a thin breakline are shown in Figure <a href="TwoDDomConstr-1.html#fig:fig-HRTZLOAOFF">2.5</a> to Figure <a href="TwoDDomConstr-1.html#fig:fig-HRTZLOAONA">2.7</a> for all three options.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HRTZLOAOFF"></span>
+<img src="images/HRTZLOAOFF.png" alt="**HR Thin Z Line Output Adjustment == OFF**" width="60%" />
+<p class="caption">
+Figure 2.5: <strong>HR Thin Z Line Output Adjustment == OFF</strong>
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HRTZLOAONC"></span>
+<img src="images/HRTZLOAONC.png" alt="**HR Thin Z Line Output Adjustment == ON CELL SIDES (new default)**" width="60%" />
+<p class="caption">
+Figure 2.6: <strong>HR Thin Z Line Output Adjustment == ON CELL SIDES (new default)</strong>
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HRTZLOAONA"></span>
+<img src="images/HRTZLOAONA.png" alt="**HR Thin Z Line Output Adjustment == ON ALIGNMENT**" width="60%" />
+<p class="caption">
+Figure 2.7: <strong>HR Thin Z Line Output Adjustment == ON ALIGNMENT</strong>
+</p>
+</div>
+</center>
+</div>
+<div id="ParProcSGSInit-3" class="section level3 hasAnchor" number="2.2.7">
+<h3><span class="header-section-number">2.2.7</span> Parallel Processing for SGS initialisation<a href="TwoDDomConstr-1.html#ParProcSGSInit-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As noted in Section <a href="TwoDDomConstr-1.html#SGSApproach-3">2.2.2</a>, SGS Method C (the default if “<tcmd>SGS </tcmd><teq>== </teq><tblk>On</tblk>”) retains the SGS elevations in memory throughout the pre-processing stage and performs the generation of the curves only once at the end of the pre-processing. This is a computationally intense exercise, particularly for large models with small SGS sample distances. To speed up model initialisation, this has been configured to utilise multiple CPU cores.</p>
+<p>By default, all CPU threads will be used for final SGS elevation pre-processing unless the number of threads (<tblk>-nt[thread count]</tblk>) command line argument has been specified. For example, to run on 8 threads the command line argument “<tblk>-nt8</tblk>” would be used. There is no check for thread licensing used for pre-processing. If the number of threads specified in the command line argument exceeds the number of threads available all threads are used.</p>
+<p>See also computational and clock time updates in Section <a href="OutChecks-1.html#SimLogTimes-2">8.8</a>.</p>
+</div>
+<div id="XFMethodC-3" class="section level3 hasAnchor" number="2.2.8">
+<h3><span class="header-section-number">2.2.8</span> XF Files for SGS Method C<a href="TwoDDomConstr-1.html#XFMethodC-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In addition to the parallelisation of the final SGS elevation pre-processing (described in Section <a href="TwoDDomConstr-1.html#ParProcSGSInit-3">2.2.7</a>), XF files are now supported for SGS Method C. At the end of the .tgc reading, after all elevation datasets have been processed, an XF file is written if the “<tcmd>XF Files </tcmd><teq>==</teq>” command is set to <tblk>on</tblk> (default).</p>
+<p>The XF file is written to an “xf” folder which sits in the same location as the .tgc. To avoid re-processing when changes are made to .tgc data other than elevation (e.g. active cells, materials, soils, etc.), the XF file is not written with the same filename as the .tgc. Instead, the .xf will be prefixed by “hpc” or “qdt” for HPC and Quadtree simulations respectively and includes the nesting level, cell size. Any text set with the .tcf command “<tcmd>XF Files Include in Filename </tcmd><teq>==</teq>” is included.</p>
+<p>When reading the pre-processed SGS XF file, a check is done on the final SGS elevations, if these are consistent then the XF file is used.</p>
+<div class="newboxAD">
+<p>A fix was made to the XF file access check in the 2023-03-AD Build, see Section <a href="OutChecks-1.html#FileAccessFix1-3">8.4.1</a>.</p>
+</div>
+</div>
+</div>
+<div id="InfilSubSurfFlows-3" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Infiltration and Sub-Surface Flows<a href="TwoDDomConstr-1.html#InfilSubSurfFlows-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="InfilSubSurfFlowsOverview-3" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Overview<a href="TwoDDomConstr-1.html#InfilSubSurfFlowsOverview-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The 2023-03 Release permits horizontal flow of the water within the cumulative infiltration layer. Up to 10 vertical layers are supported, each with horizontal advection and vertical filtration from above. Movement of water within the ground in the real world is complex. The functionality introduced in the 2023-03 Release is not intended to replace detailed groundwater modelling, but provides a functional mechanism by which:</p>
+<ul>
+<li>Catchment response for 2D direct rainfall (“rain on grid”) models can be better calibrated to available river flow data.</li>
+<li>Long-term catchment models can be constructed that offer some prediction of stream flows long after rainfall events.</li>
+<li>The accuracy of real-time flood forecasts can be improved by taking into account the drying and draining of catchments that has occurred since the last rainfall event.</li>
+<li>Sub-surface seepage can cause inundation, such as seepage under a levee bank through a porous layer (e.g., old gravel river course), resulting in flooding on the protected side of the levee.</li>
+</ul>
+<p>The basic concept is that of dividing the ground into vertical layers, each with a defined thickness (alternatively a z elevation for the bottom of the layer), soil type, and cumulative infiltration. The cumulative infiltration, combined with the porosity defined by the soil type, allows a theoretical “ground water elevation” (also known as a “water table”) to be computed within the layer as shown in Figure <a href="TwoDDomConstr-1.html#fig:fig-ConceptInterflow">2.8</a>.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-ConceptInterflow"></span>
+<img src="images/ConceptInterflow.png" alt="**Interflow Concept**" width="40%" />
+<p class="caption">
+Figure 2.8: <strong>Interflow Concept</strong>
+</p>
+</div>
+</center>
+<p>The vertical (or “convective”) flow of water from the surface water layer into the first (or top) ground water layer (also referred to as the interflow layer) is governed by the soil type infiltration model. The soil types in the top most layer must be one of those defined in Section 6.10 of the <a href="https://downloads.tuflow.com/_archive/TUFLOW/Releases/2018-03/TUFLOW%20Manual.2018-03.pdf">2018 TUFLOW Manual</a>. For layers below the first layer the vertical flow of water, <span class="math inline">\(Q^{z}\)</span>, is computed using a “convective” hydraulic conductivity (effectively the same concept as continuing loss):</p>
+<p><span class="math display" id="eq:equ-conv-hydraulic-conduc">\[\begin{equation}
+Q^{z} = - kdxdy
+\tag{2.2}
+\end{equation}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(k\)</span> is the convective hydraulic conductivity</li>
+<li><span class="math inline">\(dxdy\)</span> is the cell area</li>
+</ul>
+<p>This has required the addition of a new soil type “CO” for layers below the interflow layer.</p>
+<p>The horizontal advection of water from one cell to the next, <span class="math inline">\(Q^{h}\)</span>, is computed using the horizontal hydraulic conductivity of the soil and the horizontal gradient of a variable called the “ground water pressure level”:</p>
+<p><span class="math display" id="eq:equ-GW-pressure-level">\[\begin{equation}
+Q^{h} = - k_{h}hp\frac{de}{dx}dy
+\tag{2.3}
+\end{equation}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(k_{h}\)</span> is the horizontal hydraulic conductivity of the soil (average of the left and right cells used)</li>
+<li><span class="math inline">\(h\)</span> is the physical depth of water in the upstream cell (i.e. the ground water elevation less the layer bottom elevation)</li>
+<li><span class="math inline">\(p\)</span> is the soil porosity</li>
+<li><span class="math inline">\(\frac{de}{dx}\)</span> is the gradient of the “ground water pressure level”</li>
+<li><span class="math inline">\(dy\)</span> the width of the face.</li>
+</ul>
+<p>For cells that are “unsaturated” the “ground water pressure level” is exactly the ground water elevation within that layer. For cells that are fully saturated, the ground water pressure level is that of the cell in the next layer above (or the water surface elevation if the next layer above is the surface layer). For cells that are “nearly saturated” the ground water pressure level is transitioned between these two options. The threshold at which the transition begins is called the “ground water blending threshold” (refer Section <a href="TwoDDomConstr-1.html#GWBlend-3">2.3.8</a>), <span class="math inline">\(\phi\)</span>.</p>
+<p><span class="math display" id="eq:equ-XX-1">\[\begin{equation}
+\xi = \frac{\frac{h}{dz} - \phi}{(1 - \phi)}
+\tag{2.4}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:equ-XX-2">\[\begin{equation}
+e_{i} = (1 - \xi)\left( z_{i} + h_{i} \right) + \xi e_{i - 1}
+\tag{2.5}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:equ-XX-3">\[\begin{equation}
+e_{0} = {WSE}_{surface}
+\tag{2.6}
+\end{equation}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(h\)</span> is the depth of ground water in the cell</li>
+<li><span class="math inline">\(dz\)</span> the vertical thickness of the layer</li>
+<li><span class="math inline">\(z_{i}\)</span> the layer bottom elevation</li>
+<li><span class="math inline">\(e_{i}\)</span> the resulting ground water pressure level for the layer</li>
+</ul>
+<p>The layer ordering is such that the surface water layer is “0”, the interflow layer is “1”, and any additional ground water layers range from 2 to N, from top to bottom.</p>
+<p>If the sum of flows into a layer cell causes it to exceed its soil capacity, the excess is push upwards to the next layer. If this happens for the top-most interflow layer, the excess is pushed into the surface
+water layer as a “return flow”. This is to be expected in the creek beds but may also happen at the bottom of steep hills where the slope transitions from steep to shallow.</p>
+<p>Although the above theory appears complex, the implementation within a TUFLOW model is straight forward. The essential steps are:</p>
+<ol style="list-style-type: decimal">
+<li>Read a soils (.tsoilf) data file from within the .tcf</li>
+<li>Define layer thicknesses and soil types in the .tgc</li>
+<li>Specify locations of groundwater boundaries</li>
+<li>Add any additional output data types int the .tcf</li>
+</ol>
+<p>These steps are explained in more detail in the following sections.</p>
+</div>
+<div id="SSFlowsSoilsFile-3" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Soils File<a href="TwoDDomConstr-1.html#SSFlowsSoilsFile-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The soils file (.tsoilf) may now include a new column of data for the horizontal hydraulic conductivity of the soils. If omitted, or if all soils used in the model have zero horizontal hydraulic conductivity, then horizontal advection of water will not be considered in the model. Additionally, a new soil type “CO” is required for any layers below the first (i.e. top or interflow) layer. The data columns for CO soils are detailed in Table <a href="TwoDDomConstr-1.html#tab:tab-tsoilfParameters">2.3</a>.</p>
+<p>Reading the .tsoilf file is the same as in previous Releases with the .tcf command “<tcmd>Read Soils File</tcmd> <teq>==</teq>”.</p>
+<table>
+<caption>
+<span id="tab:tab-tsoilfParameters">Table 2.3: </span><strong>.tsoilf Parameters</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Column No
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+No Infiltration
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Green-Ampt
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Green-Ampt
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Horton
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Initial / Continuing Loss
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Convective
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Soil ID
+</td>
+<td style="text-align:left;">
+Soil ID
+</td>
+<td style="text-align:left;">
+Soil ID
+</td>
+<td style="text-align:left;">
+Soil ID
+</td>
+<td style="text-align:left;">
+Soil ID
+</td>
+<td style="text-align:left;">
+Soil ID
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+NONE
+</td>
+<td style="text-align:left;">
+GA
+</td>
+<td style="text-align:left;">
+GA
+</td>
+<td style="text-align:left;">
+HO
+</td>
+<td style="text-align:left;">
+ILCL
+</td>
+<td style="text-align:left;">
+CO
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+USDA Soil Type (see Table 6-14)
+</td>
+<td style="text-align:left;">
+Suction (mm or inches)
+</td>
+<td style="text-align:left;">
+Initial Loss (mm or inches)
+</td>
+<td style="text-align:left;">
+Initial Loss (mm or inches)
+</td>
+<td style="text-align:left;">
+Hydraulic Conductivity (mm/h or in/h)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Initial Moisture (Fraction)
+</td>
+<td style="text-align:left;">
+Hydraulic Conductivity (mm/h or in/h)
+</td>
+<td style="text-align:left;">
+Initial Loss Rate (f0) (mm/h or in/h)
+</td>
+<td style="text-align:left;">
+Continuing Loss (mm/h or in/h)
+</td>
+<td style="text-align:left;">
+Porosity (Fraction)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Max Ponding Depth (m or ft)
+</td>
+<td style="text-align:left;">
+Porosity (Fraction)
+</td>
+<td style="text-align:left;">
+Final Loss Rate (fc) (mm/h or in/h)
+</td>
+<td style="text-align:left;">
+Porosity (Fraction)
+</td>
+<td style="text-align:left;">
+Initial Moisture (Fraction)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Horizontal Hydraulic Conductivity (mm/h or in/h)
+</td>
+<td style="text-align:left;">
+Initial Moisture (Fraction)
+</td>
+<td style="text-align:left;">
+Exponential Decay Rate (k) (h-1 )
+</td>
+<td style="text-align:left;">
+Initial Moisture (Fraction)
+</td>
+<td style="text-align:left;">
+Horizontal Hydraulic Conductivity (mm/h or in/h)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Max Ponding Depth (m or ft)
+</td>
+<td style="text-align:left;">
+Porosity (Fraction)
+</td>
+<td style="text-align:left;">
+Horizontal Hydraulic Conductivity (mm/h or in/h)
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Horizontal Hydraulic Conductivity (mm/h or in/h)
+</td>
+<td style="text-align:left;">
+Initial Moisture (Fraction)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Horizontal Hydraulic Conductivity (mm/h or in/h)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="SSFlowsTGC-3" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> TGC Commands<a href="TwoDDomConstr-1.html#SSFlowsTGC-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Setting Soil Type</strong></p>
+<p>Setting the soil type for an interflow layer activates the given layer. For example, setting the soil type for interflow layers 1 and 2 will activate 2 vertical interflow layers:</p>
+<p><tcmd>Set Soil Layer 1</tcmd> <teq>==</teq> <tblk>1</tblk> <tgrn>! soil ID of infiltration layer e.g. GA type</tgrn></p>
+<p><tcmd>Set Soil Layer 2</tcmd> <teq>==</teq> <tblk>5</tblk> <tgrn>! soil ID of a convective layer e.g. CO type</tgrn></p>
+<p>Multiple layers can be set simultaneously (the below will activate 3 interflow layers):</p>
+<p><tcmd>Set Soil Layer 1</tcmd> <teq>==</teq> <tblk>1</tblk></p>
+<p><tcmd>Set Soil Layer 2,3</tcmd> <teq>==</teq> <tblk>5</tblk> <tgrn>! sets both layers 2 and 3 to Soil ID 5</tgrn></p>
+<p>This method also works for read GIS and GRID commands:</p>
+<p><tcmd>Read GIS Soil Layer 1</tcmd> <teq>==</teq> <tblk>/path/to/file</tblk></p>
+<p><tcmd>Read GRID Soil Layer 2</tcmd> <teq>==</teq> <tblk>/path/to/file</tblk></p>
+<p>A maximum of 10 vertical layers is permitted and a soil ID should be assigned for each active layer. For example, if interflow layer 2 is active, then soil IDs for layer 1 should be assigned. Note, if the layer number is not specified, it is assumed to be layer 1.</p>
+<p><strong>Setting Vertical Layer Depths</strong></p>
+<p>The depth (thickness) of each vertical interflow layer can be set using the following commands:</p>
+<p><tcmd>[Set | Read GIS | Read GRID] Soil Thickness Layer N</tcmd> <teq>==</teq> <tblk>[value | /path/to/file]</tblk></p>
+<p><tcmd>[Set | Read GIS | Read GRID] Soil Base Elevation Layer N</tcmd> <teq>==</teq> <tblk>[value | /path/to/file]</tblk></p>
+<p>If the soil layer thickness or base elevation is not set for a given layer, it is assumed to be infinite. The soil thickness sets the layer depth from the layer above and soil base elevation sets the absolute elevation of the bottom of the layer. If both methods are specified for a given grid cell, the highest of the two will be adopted. The input units should be in metres or feet.</p>
+<p><strong>Setting Initial Conditions</strong></p>
+<p>The initial water level in the interflow layers can also be set via the .tgc using the following commands:</p>
+<p><tcmd>[Set | Read GIS | Read GRID] IGW Depth Layer N</tcmd> <teq>==</teq> <tblk>[value | /path/to/file]</tblk></p>
+<p><tcmd>[Set | Read GIS | Read GRID] IGW Level Layer N</tcmd> <teq>==</teq> <tblk>[value | /path/to/file]</tblk></p>
+<p>“IGW Depth” is assumed to be the depth of water in the soil (water content divided by porosity). “IGW Level” is assumed to be the level of the water table in each layer. If both methods are specified for a given grid cell, the highest initial condition will be adopted. The input units should be in meters or feet. Note, the initial conditions do not automatically cascade into layers below (i.e. setting the initial water level in the top layer will not automatically set the layers below to be 100% saturated).</p>
+<p>Setting the initial conditions in the .tgc for any given grid cell will override the “Initial Moisture” parameter set in the .tsoilf. The difference between the methods is that the .tsoilf sets the initial moisture by soil type, whereas setting the initial conditions in the .tgc allows spatial distribution. If no initial conditions are set in the .tgc for a given grid cell, the initial conditions will be determined by the “Initial Moisture” defined in the .tsoilf.</p>
+<div id="SSFlowsTGCACFix1-4" class="section level4 hasAnchor newboxAC" number="2.3.3.1">
+<h4><span class="header-section-number">2.3.3.1</span> Bug Fix for Soil Inputs with XF OFF<a href="TwoDDomConstr-1.html#SSFlowsTGCACFix1-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Build 2023-03-AC fixes a bug when reading a soil layer input and using “XF OFF” (e.g. <tcmd>Read GRID Soil XF OFF </tcmd> <teq>==</teq> <tblk> soil.tif</tblk>). For previous 2023-03 releases, this would cause “<a href="https://wiki.tuflow.com/TUFLOW_Message_2579">ERROR 2579</a> - Unrecognised command after …” due to additional syntax checking that TUFLOW was undertaking for the new soil commands.</p>
+</div>
+</div>
+<div id="SSFBoundaries-3" class="section level3 hasAnchor" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> Boundaries<a href="TwoDDomConstr-1.html#SSFBoundaries-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>At the edge of the active model, two boundary conditions are currently supported:</p>
+<ul>
+<li>Sealed boundary, no inflow or outflow; and</li>
+<li>Groundwater level vs time.</li>
+</ul>
+<p>To specify a groundwater level vs time boundary, a new “GT” type boundary line can be digitised in the 2d_bc file format. This is read into the boundary control file (.tbc) with the “<tcmd>Read GIS BC</tcmd> <teq>==</teq>” command.</p>
+<p>The same groundwater level boundary applies to all vertical layers. If the specified groundwater level is below the elevation at the bottom of the layer, it is dry. If the specified groundwater level is above the elevation at the top of the layer, it is fully saturated.</p>
+</div>
+<div id="GWMapOutputs-3" class="section level3 hasAnchor" number="2.3.5">
+<h3><span class="header-section-number">2.3.5</span> Groundwater Map Outputs<a href="TwoDDomConstr-1.html#GWMapOutputs-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The previous soil layer output data types have been kept, but note that:</p>
+<ul>
+<li><p>IR (infiltration rate) will only be reported for the first (top) layer. Reported in mm/hr or in/hr.</p></li>
+<li><p>CI (cumulative infiltration) map output is restricted to models for which the value is indeed cumulative. Specifically, this means only models that have:</p>
+<ul>
+<li>A single vertical soil layer</li>
+<li>No horizontal movement of ground water</li>
+<li>No drying of the soil layer through negative rainfall (<tcmd>Soil Negative Rainfall Approach</tcmd><teq> == </teq><tblk>None</tblk>). This is the default approach.</li>
+</ul>
+<p>For these models the CI output is the “current” water content of the layer (in terms on mm/in of pure liquid), as no water is leaving the soil layer this also represents the cumulative infiltration value. Reported in mm or inches. However, when any of the three options (multiple vertical layers, horizontal movement or negative rainfall) can reduce the groundwater moisture the water content in the layer is no longer a “cumulative value” so output is not available.</p></li>
+<li><p>dGW (depth to groundwater) will be reported for all layers. It is the distance from the ground surface to the ground water level of the layer in question. Reported in m or ft.</p></li>
+</ul>
+<p>The new output variables are:</p>
+<ul>
+<li><p>GWd (groundwater depth), depth of water for each layer (is cumulative infiltration divided by porosity). Reported in m or ft.</p></li>
+<li><p>GWh (groundwater level), elevation of ground water surface (water table) for each layer. Reported in m or ft.</p>
+<div class="newboxAB">
+<p>In Build 2023-03-AB, ground water level (GWh) output will now report -99999 on a layer with undefined bed level.</p>
+</div></li>
+<li><p>GWm (groundwater moisture), dimensionless number in range 0 - 1 representing “fraction full” for each layer.</p></li>
+<li><p>GWq (groundwater unit flow), vector data for the unit flows within each layer. Reported in m<sup>2</sup>/hr or ft<sup>2</sup>/hr.</p>
+<div class="newboxAB">
+<p>Build 2023-03-AB has changed groundwater unit flow units to m<sup>2</sup>/s or ft<sup>2</sup>/s.</p>
+</div></li>
+<li><p>GWv (groundwater velocity), vector data for the velocity within each layer. Reported in m/hr or ft/hr.</p>
+<div class="newboxAB">
+<p>Build 2023-03-AB has changed groundwater velocity units to m/s or ft/s.</p>
+</div></li>
+</ul>
+</div>
+<div id="GWPlotOutputs-3" class="section level3 hasAnchor" number="2.3.6">
+<h3><span class="header-section-number">2.3.6</span> Groundwater Plot Outputs<a href="TwoDDomConstr-1.html#GWPlotOutputs-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>New plot output types have been added to record results from the interflow layers. The following types have been added:</p>
+<p>PO point:</p>
+<ul>
+<li><p>GWd (groundwater depth), depth of water for each layer (is cumulative infiltration divided by porosity), reported in m or ft.</p></li>
+<li><p>GWh (groundwater level), elevation of ground water surface (water table) for each layer, reported in m or ft.</p></li>
+<li><p>GWm (groundwater moisture), dimensionless number in range 0 - 1 representing “fraction full” for each layer.</p></li>
+<li><p>GWq (groundwater unit flow), unit flow magnitude within each layer, reported in m<sup>2</sup>/hr or ft<sup>2</sup>/hr.</p>
+<div class="newboxAB">
+<p>Build 2023-03-AB has changed groundwater unit flow units to m<sup>2</sup>/s or ft<sup>2</sup>/s.</p>
+</div></li>
+<li><p>GWqu (groundwater unit flow u-component), unit flow u-component within each layer, reported in in m<sup>2</sup>/hr or ft<sup>2</sup>/hr.</p>
+<div class="newboxAB">
+<p>Build 2023-03-AB has changed groundwater unit flow units to m<sup>2</sup>/s or ft<sup>2</sup>/s.</p>
+</div></li>
+<li><p>GWqv (groundwater unit flow v-component), unit flow v-component within each layer, reported in in m<sup>2</sup>/hr or ft<sup>2</sup>/hr.</p>
+<div class="newboxAB">
+<p>Build 2023-03-AB has changed groundwater unit flow units to m<sup>2</sup>/s or ft<sup>2</sup>/s.</p>
+</div></li>
+<li><p>GWqa (groundwater unit flow angle), angle of unit flow vector within each layer. Reported in degrees clockwise from north (i.e. a compass
+bearing).</p></li>
+<li><p>CI (cumulative infiltration) represents the current water content of each layer (mm or in of pure water). This value may increase or
+decrease depending on the flows into and out of the cell. It is no longer a “cumulative value”. Reported in mm or in.</p></li>
+</ul>
+<p>PO line:</p>
+<ul>
+<li>GWQ (groundwater flow), total flow passing through the given line within each layer. The positive flow convention is left to right looking downstream (same as the ‘Q_’ PO type). Reported in m<sup>3</sup>/s or ft<sup>3</sup>/s.</li>
+</ul>
+<p>PO region:</p>
+<ul>
+<li>GWVol (groundwater volume), total volume of water within the polygon for each layer. Reported in m<sup>3</sup> or ft<sup>3</sup>.</li>
+</ul>
+</div>
+<div id="InterflowAD-3" class="section level3 hasAnchor" number="2.3.7">
+<h3><span class="header-section-number">2.3.7</span> Interflow and Advection Dispersion<a href="TwoDDomConstr-1.html#InterflowAD-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Tracking of advection dispersion constituents when using interflow is supported when running HPC solver. Advection-dispersion is not yet supported in Quadtree. Refer to
+Section <a href="TwoDDomConstr-1.html#InterflowADCommands-3">2.5.3</a> for commands for setting initial concentrations for sub-surface layers. No dispersion is modelled in the sub-surface layers.</p>
+</div>
+<div id="GWBlend-3" class="section level3 hasAnchor" number="2.3.8">
+<h3><span class="header-section-number">2.3.8</span> Groundwater Blend Threshold<a href="TwoDDomConstr-1.html#GWBlend-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Described in Section <a href="TwoDDomConstr-1.html#InfilSubSurfFlowsOverview-3">2.3.1</a>, when a soil is nearly saturated, the level is transitioned from the level in the current layer to the layer above, as this avoids a sudden change in level as the soil reaches capacity. A “groundwater blend threshold” is used to control this, this threshold has a default value of 0.9, meaning that once a soil exceeds 90% of a soil capacity, the level starts to transition to the level in the layer above. This may be overridden with the .tcf command:</p>
+<p><tcmd>GW Blend Threshold</tcmd> <teq>==</teq> <tblk>&lt;float&gt; | {0.9}</tblk></p>
+<p>Note that its value must be in range 0 - 0.99.</p>
+</div>
+<div id="InitMoisGA-3" class="section level3 hasAnchor" number="2.3.9">
+<h3><span class="header-section-number">2.3.9</span> Initial Moisture and Green-Ampt Infiltration<a href="TwoDDomConstr-1.html#InitMoisGA-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The treatment of initial moisture with the 2023-03 Release is different to the 2020 Releases. For the 2020 Release, a soil capacity was calculated by subtracting the initial moisture fraction from the porosity. This was done to reduce the memory requirements by storing soil capacity instead of both porosity and initial moisture.</p>
+<p>For the interflow functionality, reducing porosity does not work as both porosity and initial moisture are required to allow a soil to drain correctly. For the 2023-03 Release, both soil initial moisture and porosity are stored. These approaches can produce different results when using the Green-Ampt method. If “<tcmd>Defaults</tcmd> <teq>==</teq> <tblk>Pre 2023</tblk>” is specified, then the previous approach is used. This is only valid if one vertical soil layer is specified.</p>
+</div>
+<div id="Improvetsoilf-3" class="section level3 hasAnchor newboxAB" number="2.3.10">
+<h3><span class="header-section-number">2.3.10</span> Improvements in Reading Soil File (.tsoilf)<a href="TwoDDomConstr-1.html#Improvetsoilf-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AB changes the way that the .tsoilf is read to better handle blank or non-numeric values in columns. Prior to the 2023-03-AB build, TUFLOW would stop reading a line from the .tsoilf at the first column which did not contain numeric values (including blank or text data). This could mean that data in subsequent columns was ignored. For the 2023-03-AB build, each column is processed independently. Extra soil information is now output to the log file.</p>
+</div>
+<div id="BugFixInfilAD-3" class="section level3 hasAnchor newboxAC" number="2.3.11">
+<h3><span class="header-section-number">2.3.11</span> Bug Fix for Infiltration and Advection Dispersion<a href="TwoDDomConstr-1.html#BugFixInfilAD-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AC fixes a bug which could occur when using both soil infiltration and Advection-Dispersion and only affected the HPC solver. This issue could occur if the model has bounced, and this could cause a negative tracer concentration to be generated. This negative concentration could then propagate into the soil layers. The 2023-03-AC build prevents this from occurring and minor differences in models with soil infiltration and Advection-Dispersion may occur. No backwards compatibility is provided.</p>
+</div>
+</div>
+<div id="id_2DBridgeLayer-2" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Modelling Bridge Structure in 2D<a href="TwoDDomConstr-1.html#id_2DBridgeLayer-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="CFDStudy-3" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> CFD Benchmarking Study<a href="TwoDDomConstr-1.html#CFDStudy-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A joint research study between the Queensland Department of Transport and Main Roads (DTMR) and TUFLOW regarding modelling bridge decks that are surcharged, under pressure flow or drowned out, as shown in Figure <a href="TwoDDomConstr-1.html#fig:fig-CFDModelBridge">2.9</a>, is in progress. This work has involved 2D CFD modelling of a common deck and rails bridge geometry, full scale measurements of a similar bridge under flood, and 3D CFD modelling of the same. Current results have been published <span class="citation">(<a href="#ref-BridgeDeckAfflux">Collecutt et al., 2022</a>)</span>, though a brief summary is presented here.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-CFDModelBridge"></span>
+<img src="images/CFDModelBridge.png" alt="**2D CFD modelling of deck and rail bridge**" width="50%" />
+<p class="caption">
+Figure 2.9: <strong>2D CFD modelling of deck and rail bridge</strong>
+</p>
+</div>
+</center>
+<p>Numerous 2D CFD models indicated that a generalised form for loss coefficient vs downstream water level above the soffit of the deck, TW, was possible, shown in Figure <a href="TwoDDomConstr-1.html#fig:fig-CFDModelBridgeLossCoeff">2.10</a> for the case where the under-deck height to bed, h<sub>b</sub>, was 4 times the deck thickness, T.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-CFDModelBridgeLossCoeff"></span>
+<img src="images/CFDModelBridgeLossCoeff.png" alt="**Generalised loss coefficient from 2D CFD modelling of bridge deck and rails**" width="50%" />
+<p class="caption">
+Figure 2.10: <strong>Generalised loss coefficient from 2D CFD modelling of bridge deck and rails</strong>
+</p>
+</div>
+</center>
+<p>A full-scale bridge was gauged and the afflux recorded during a significant overtopping event in February 2022. 3D CFD models of the same bridge and surrounds were run, with reasonable agreement as shown in Figure <a href="TwoDDomConstr-1.html#fig:fig-CFDModelBridgeAfflux">2.11</a>. Further, the shape of the results appears very similar to that of the generalised 2D results shown in Figure <a href="TwoDDomConstr-1.html#fig:fig-CFDModelBridgeLossCoeff">2.10</a>.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-CFDModelBridgeAfflux"></span>
+<img src="images/CFDModelBridgeAfflux.png" alt="**Full scale afflux measurements and 3D CFD model results for deck and rail bridge**" width="50%" />
+<p class="caption">
+Figure 2.11: <strong>Full scale afflux measurements and 3D CFD model results for deck and rail bridge</strong>
+</p>
+</div>
+</center>
+<p>A layered loss model was implemented in TUFLOW HPC as per Section <a href="TwoDDomConstr-1.html#Layer2dbg-3">2.4.2</a>, and a 2D HPC model of the bridge and surrounds was run. The results, shown in Figure <a href="TwoDDomConstr-1.html#fig:fig-CFDModelBridgeAfflux2dbg">2.12</a>, were in excellent agreement with the measured data.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-CFDModelBridgeAfflux2dbg"></span>
+<img src="images/CFDModelBridgeAfflux2dbg.png" alt="**TUFLOW HPC afflux results for deck and rail bridge using new 2d_bg layer**" width="50%" />
+<p class="caption">
+Figure 2.12: <strong>TUFLOW HPC afflux results for deck and rail bridge using new 2d_bg layer</strong>
+</p>
+</div>
+</center>
+</div>
+<div id="Layer2dbg-3" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> New Input Layer for Modelling Bridge Structure in 2D<a href="TwoDDomConstr-1.html#Layer2dbg-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The 2023-03 Release introduces the new BG Shape input layer (2d_bg) to set up bridge structures in 2D domain. The new input layer is read in using the .tgc command “<tcmd>Read GIS BG Shape</tcmd> <teq>==</teq>”. The new method is similar to the Method D layered flow constriction approach introduced in the 2020‑10 Release (Section 3.4.2 of the <a href="https://downloads.tuflow.com/TUFLOW/Releases/2020-10/TUFLOW%20Release%20Notes.2020-10-AF.pdf">2020 Release Notes</a>), with the GIS layer attributes tidied up for easier user input. The three layers are now called the “pier layer”, the “deck layer” and the “rail layer” for clarity. The new attributes are:</p>
+<ul>
+<li>ID = Unique bridge ID.</li>
+<li>Option = Reserved for future use.</li>
+<li>Pier_pBlockage = The percentage blockage of the pier Layer. For example, enter ‘5’ for a blockage of 5%.</li>
+<li>Pier_FLC = Pier layer form loss coefficient.</li>
+<li>Deck_Soffit = The elevation of the bridge soffit (m or ft).</li>
+<li>Deck_Depth = The thickness of the bridge deck (m or ft).</li>
+<li>Deck_Width = The bridge width in the predominant direction of flow
+(m or ft).</li>
+<li>Deck_pBlockage = The percentage blockage of the deck layer. Enter
+‘100’ for a solid bridge deck obstruction.</li>
+<li>Rail_Depth = The depth of the rail layer (m or ft).</li>
+<li>Rail_pBlockage: The percentage blockage of the rail layer.</li>
+<li>SuperS_FLC: The combined form loss coefficient for the deck and the rail layers. Two layers are treated as a single “super structure” layer in this new bridge method.</li>
+<li>SuperS_IPf: A factor to set the elevation of the inflection point (IP) at which the transition from pressure flow to drowned flow commences. The default value is 1.6.</li>
+</ul>
+<div class="newboxAD">
+<ul>
+<li>Cf: A calibration factor used to adjust the automatically generated FLC (default = 1.0). See Section <a href="TwoDDomConstr-1.html#Layer2dbgFLC-3">2.4.3</a>.</li>
+</ul>
+</div>
+<p>The 2d_bg layer adjusts the FLC value in the vertical as follows:
+<span class="math display" id="eq:equ-2dbg-FLC">\[\begin{equation}
+{FLC}_{total} = \left( {FLC}_{pier} + {FLC}_{SuperS}\frac{y_{SuperS}}{D_{IP}} \right)\frac{(y_{pier} + y_{SuperS})}{y_{total}}
+\tag{2.7}
+\end{equation}\]</span></p>
+<p>With:
+<span class="math display" id="eq:equ-2dbg-ySSmax">\[\begin{equation}
+y_{SuperS,max} = D_{IP}
+\tag{2.8}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:equ-2dbg-yPiermax">\[\begin{equation}
+y_{pier,max} = D_{peir}
+\tag{2.9}
+\end{equation}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(y_{SuperS}\)</span> = Depth of water above the bridge soffit in the super structure layer.</li>
+<li><span class="math inline">\(D_{IP}\)</span> = Depth to the inflection point from the bridge soffit.</li>
+<li><span class="math inline">\(y_{pier}\)</span> = Depth of water in the pier layer.</li>
+<li><span class="math inline">\(D_{peir}\)</span> = Depth to the pier layer, i.e. the vertical distance from the bed level to the bridge soffit.</li>
+<li><span class="math inline">\(y_{total}\)</span> = Total depth of water from the bed to the water surface level</li>
+</ul>
+<p>The vertical distribution of the form loss coefficient has the following characteristics:</p>
+<ul>
+<li>Water level below the deck layer: The same result as the 2d_lfcsh approaches, i.e. a constant form loss based on that specified for the pier layer (<span class="math inline">\({FLC}_{pier}\)</span>) is applied.</li>
+<li>Water level between the deck soffit and the inflection point: The FLC value is linearly increased from <span class="math inline">\({FLC}_{pier}\)</span> to <span class="math inline">\({FLC}_{pier}\)</span> + <span class="math inline">\({FLC}_{SuperS}\)</span> (the combined form loss coefficient for the superstructure layer). The observations from the CFD and the field measurement indicate the inflection point is located around 1.6 times the bridge deck depth (<span class="math inline">\(D_{Deck}\)</span>) above the bridge soffit. The “Inflection Depth” (<span class="math inline">\(D_{IP}\)</span>) is assumed as:</li>
+</ul>
+<p><span class="math display" id="eq:equ-Inflection-Depth">\[\begin{equation}
+D_{IP} = SuperS_{IPf}\left( D_{Deck}{Blockage}_{Deck} + D_{Rail}{Blockage}_{Rail} \right)
+\tag{2.10}
+\end{equation}\]</span></p>
+<ul>
+<li><p>Note that the effect of partial blockage at the rail layer is considered by adding the rail layer depth (<span class="math inline">\(D_{Rail}\)</span>) to the inflection depth proportionally based on the rail layer blockage (<span class="math inline">\({Blockage}_{Rail}\)</span>).</p></li>
+<li><p>Above the inflection point the FLC gradually reduces with increasing depth (in a similar manner to the 2D Layered Flow Constrictions PORTION and METHOD C approaches), shown in Figure <a href="TwoDDomConstr-1.html#fig:fig-2DGBVerticalDistributionFLC">2.13</a>. This is to simulate the transition to drowned flow and tendency to zero energy losses with increasing depth over the bridge deck.</p></li>
+</ul>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-2DGBVerticalDistributionFLC"></span>
+<img src="images/2DGBVerticalDistributionFLC.png" alt="**2D BG Shape Attributes and Vertical Distribution of Form Loss Coefficient**" width="75%" />
+<p class="caption">
+Figure 2.13: <strong>2D BG Shape Attributes and Vertical Distribution of Form Loss Coefficient</strong>
+</p>
+</div>
+</center>
+<div class="newboxAD">
+<p>In addition to the above method, build 2023-03-AD introduces three more methods to calculate the depth averaged FLC:</p>
+<p><tcmd>BG FLC Default Approach</tcmd> <teq> == </teq> <tblk>[ {LINEAR} | LINEAR-CONSTANT | PARABOLIC | INVERTED-PARABOLIC ]</tblk></p>
+<ul>
+<li><p>LINEAR: the default option introduced above. The depth averaged FLC value is linearly increased from the bottom of the bridge deck to the inflection point. After the inflection point it gradually reduces.</p></li>
+<li><p>LINEAR-CONSTANT: the depth averaged FLC is linearly increased from the bottom of the bridge deck to the top of the bridge deck. Between the top of the bridge deck and the inflection point, the FLC is kept constant. After the inflection point it gradually reduces.</p></li>
+<li><p>PARABOLIC: the depth averaged FLC is increased using a parabolic function from the bottom of the bridge deck to the inflection point. After the inflection point it gradually reduces.</p></li>
+<li><p>INVERTED-PARABOLIC: the depth averaged FLC is increased using an inverted parabolic function from the bottom of the bridge deck to the inflection point. After the inflection point it gradually reduces.</p></li>
+</ul>
+<p>The vertical profiles of the depth averaged FLC values applied by the four methods are illustrated in the Figure <a href="TwoDDomConstr-1.html#fig:fig-BGFLCApproach">2.14</a>.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:fig-BGFLCApproach"></span>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-51c1158c32c63d5ba176" style="width:50%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-51c1158c32c63d5ba176">{"x":{"visdat":{"c3e0d9d2186":["function () ","plotlyVisDat"]},"cur_data":"c3e0d9d2186","attrs":{"c3e0d9d2186":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"LINEAR","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.12500000000000003,0.15000000000000005,0.17499999999999996,0.19999999999999998,0.22500000000000001,0.25,0.27500000000000002,0.29999999999999993,0.32499999999999996,0.34999999999999998,0.375,0.40000000000000002,0.42499999999999993,0.44999999999999996,0.47500000000000009,0.50000000000000011,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(26,189,201)"},"type":"scatter","mode":"lines","inherit":true},"c3e0d9d2186.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"LINEAR-CONSTANT","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.14000000000000004,0.18000000000000008,0.21999999999999995,0.26000000000000001,0.30000000000000004,0.34000000000000008,0.38000000000000012,0.41999999999999993,0.45999999999999996,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(0,85,129)"},"type":"scatter","mode":"lines","inherit":true},"c3e0d9d2186.2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.1484375,0.19375000000000009,0.23593749999999991,0.27500000000000002,0.31093749999999998,0.34375,0.37343750000000009,0.40000000000000002,0.42343750000000002,0.44374999999999998,0.4609375,0.47499999999999998,0.48593750000000002,0.49375000000000002,0.49843749999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(79,86,80)"},"type":"scatter","mode":"lines","inherit":true},"c3e0d9d2186.3":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"INVERTED-PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.10156250000000001,0.10625000000000001,0.11406249999999998,0.125,0.13906250000000001,0.15625000000000003,0.17656250000000007,0.19999999999999996,0.22656249999999997,0.25624999999999998,0.2890625,0.32500000000000007,0.36406249999999996,0.40624999999999989,0.45156249999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(226,1,119)"},"type":"scatter","mode":"lines","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Depth Averaged FLC","range":[0,0.59999999999999998]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Depth","range":[0,5]},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":true,"displaylogo":false},"data":[{"name":"LINEAR","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.12500000000000003,0.15000000000000005,0.17499999999999996,0.19999999999999998,0.22500000000000001,0.25,0.27500000000000002,0.29999999999999993,0.32499999999999996,0.34999999999999998,0.375,0.40000000000000002,0.42499999999999993,0.44999999999999996,0.47500000000000009,0.50000000000000011,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(26,189,201)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"name":"LINEAR-CONSTANT","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.14000000000000004,0.18000000000000008,0.21999999999999995,0.26000000000000001,0.30000000000000004,0.34000000000000008,0.38000000000000012,0.41999999999999993,0.45999999999999996,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(0,85,129)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"name":"PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.1484375,0.19375000000000009,0.23593749999999991,0.27500000000000002,0.31093749999999998,0.34375,0.37343750000000009,0.40000000000000002,0.42343750000000002,0.44374999999999998,0.4609375,0.47499999999999998,0.48593750000000002,0.49375000000000002,0.49843749999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(79,86,80)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"name":"INVERTED-PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.10156250000000001,0.10625000000000001,0.11406249999999998,0.125,0.13906250000000001,0.15625000000000003,0.17656250000000007,0.19999999999999996,0.22656249999999997,0.25624999999999998,0.2890625,0.32500000000000007,0.36406249999999996,0.40624999999999989,0.45156249999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(226,1,119)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 2.14: <strong>Depth averaged FLC applied by 4 bridge FLC approaches</strong>
+</p>
+</div>
+</center>
+</div>
+<p>Other key features of the BG layer are:</p>
+<ul>
+<li>The BG layer does not apply geometry updates. This not only offers simplicity, but also is a desirable option considering that the size of TIN polygons used to modify the bridge bed elevations are often different from the size of polygon used to select BG cell faces.</li>
+<li>For a line layer a “Deck_Width” value of zero sets the layer as a thin line. It selects one row of faces in the direction of flow, and the FLC value is applied to the faces unchanged. A “Deck_Width” value larger than zero sets the layer as a thick line that selects a whole cell, i.e. two faces in the direction of flow. The FLC values at the faces are divided by two. The wide line feature is not supported by the BG layer. Note, BG polygon shapes are recommended if more than 3 rows of faces must be selected.</li>
+<li>For a polygon layer, the “Deck_Width” defines the bridge width in the predominant direction of flow. This value is used to distribute the total FLC value to the selected faces, i.e.:<br />
+<span class="math display" id="eq:equ-Polygon-FLC">\[\begin{equation}
+{FLC}_{face} = \frac{FLC} {Deck\_Width} * Cell\ Size
+\tag{2.11}
+\end{equation}\]</span></li>
+</ul>
+<ol>
+This means users no longer need to convert the FLC value to “form loss per metre”, which is required by the 2D Layered Flow Constrictions polygons.
+</ol>
+<ol>
+<div class="newboxAB">
+<p>Note: Build 2023-03-AB caps “Cell Size / Deck_Width” at 1. Previously, a face FLC larger than the original FLC was incorrectly applied when the model cell size is larger than the Deck_Width defined.</p>
+</div>
+</ol>
+<p>The point only layer (2d_bg_pts) is also supported. This layer can be used to spatially vary the bridge soffit, the deck depth, and the rail depth. The attributes for this layer include:</p>
+<ul>
+<li>Deck_Soffit = The elevation of the bridge soffit (m or ft).</li>
+<li>Deck_Depth = The thickness of the bridge deck (m or ft).</li>
+<li>Rail_Depth = The depth of the rail layer (m or ft).</li>
+<li>R1 ~ R3: Reserved for future use.</li>
+</ul>
+</div>
+<div id="Layer2dbgFLC-3" class="section level3 hasAnchor newboxAC" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> Automatic Generation of Superstructure FLC<a href="TwoDDomConstr-1.html#Layer2dbgFLC-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AC implemented a new feature to automatically generate the superstructure FLC value based on the CFD benchmarking study <span class="citation">(<a href="#ref-BridgeDeckAfflux">Collecutt et al., 2022</a>)</span>. This feature has been further developed in build 2023-03-AD.</p>
+<p><tcmd>Blank BG FLC Approach</tcmd> <teq> == </teq> <tblk>[ {NONE} | METHOD A | METHOD B ]</tblk></p>
+<ul>
+<li><p>NONE: the default approach, i.e. Superstructure FLC must be specified manually.</p></li>
+<li><p>METHOD A: The blank superstructure FLC values will be calculated based on the ratio of the depth of the pier layer (<span class="math inline">\(D_{Pier}\)</span> in the equations above) and the thickness of the super structure layer:</p></li>
+</ul>
+<p><span class="math display" id="eq:equ-SuperS-Thickness-A">\[\begin{equation}
+T_{SuperS}  = D_{Deck}{Blockage}_{Deck} + D_{Rail}{Blockage}_{Rail}
+\tag{2.12}
+\end{equation}\]</span></p>
+</div>
+<div class="newboxAD">
+<ol>
+Build 2023-03-AD fixed a bug where ‘SuperS_IPf’ was used in the calculation of <span class="math inline">\(T_{SuperS}\)</span>.
+</ol>
+</div>
+<div class="newboxAD">
+<ul>
+<li>METHOD B: The blank superstructure FLC values will be calculated based on the ratio of the depth of the pier layer (<span class="math inline">\(D_{Pier}\)</span>) and the thickness of the deck layer:</li>
+</ul>
+<p><span class="math display" id="eq:equ-SuperS-Thickness-B">\[\begin{equation}
+T_{SuperS} = D_{Deck}{Blockage}_{Deck}
+\tag{2.13}
+\end{equation}\]</span></p>
+<p>With Method A and B, the superstructure FLC value is linearly interpolated within the <span class="math inline">\(D_{Pier}\)</span>/<span class="math inline">\(T_{SuperS}\)</span> range of 1~10 and capped at 0.6 and 0.16 outside this range, as shown in the Figure <a href="TwoDDomConstr-1.html#fig:fig-CFDBridgeFLC">2.15</a>.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:fig-CFDBridgeFLC"></span>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-1a5430a846c19fd43b36" style="width:50%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-1a5430a846c19fd43b36">{"x":{"visdat":{"c3e03ea96e32":["function () ","plotlyVisDat"]},"cur_data":"c3e03ea96e32","attrs":{"c3e03ea96e32":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"Category 1","y":[0.59999999999999998,0.59999999999999998,0.41999999999999998,0.28000000000000003,0.20000000000000001,0.16,0.16],"x":[-10,1,2,4,6,10,20],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(26,189,201)"},"point":{"color":"rgb(26,189,201)"},"type":"scatter","markers":"true","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"D<sub>Pier<\/sub>/T<sub>SuperS<\/sub>","range":[0,12]},"yaxis":{"domain":[0,1],"automargin":true,"title":"FLC","range":[0,0.69999999999999996]},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":true,"displaylogo":false},"data":[{"name":"Category 1","y":[0.59999999999999998,0.59999999999999998,0.41999999999999998,0.28000000000000003,0.20000000000000001,0.16,0.16],"x":[-10,1,2,4,6,10,20],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(26,189,201)"},"point":{"color":"rgb(26,189,201)"},"type":"scatter","markers":"true","mode":"markers+lines","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 2.15: <strong>CFD benchmarking study of FLC vs <span class="math inline">\(D_{Pier}\)</span>/<span class="math inline">\(T_{SuperS}\)</span> ratio (<span class="math inline">\(h_{B}\)</span>/<span class="math inline">\(T\)</span> in the original paper)</strong>
+</p>
+</div>
+</center>
+</div>
+<div class="newboxAD">
+<p>Build 2023-03-AD introduces a calibration factor (the 2d_bg ‘Cf’ attribute) that is applied as a multiplier to the automatically generated superstructure FLC.</p>
+</div>
+<div id="id_2dpoQS-3" class="section level3 hasAnchor" number="2.4.4">
+<h3><span class="header-section-number">2.4.4</span> Grouped Structure Output<a href="TwoDDomConstr-1.html#id_2dpoQS-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The new 2d_bg layer can be used with 2D plot output structure group outputs (2d_po ‘QS’ type) in the same manner as the 2D Layered FC Shape input (2d_lfcsh).</p>
+</div>
+</div>
+<div id="AdvectionDispersion-2" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Advection Dispersion<a href="TwoDDomConstr-1.html#AdvectionDispersion-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="ADMultipleConsituents-3" class="section level3 hasAnchor" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> HPC Support for Multiple Constituents Per Simulation<a href="TwoDDomConstr-1.html#ADMultipleConsituents-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When using the HPC solver it is now possible to run up to 20 advection-dispersion constituents in a single simulation. This is the same limit as when running advection-dispersion with the Classic solver. Prior to the 2023-03 Release if running advection-dispersion with HPC only a single constituent could be modelled.</p>
+<p>Advection-dispersion is currently not supported in the Quadtree module.</p>
+</div>
+<div id="ADSettleDecay-3" class="section level3 hasAnchor" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> HPC Support for Constituent Settling and Decay<a href="TwoDDomConstr-1.html#ADSettleDecay-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For the 2023-03 Release the HPC solver supports the ability to model constituent settling and/or decay. This functionality is detailed in Section 4.6 of the <a href="https://downloads.tuflow.com/_archive/TUFLOW/Manuals/TUFLOW%20AD%20Manual%202010-10-AD.pdf">TUFLOW AD
+Manual</a>.</p>
+</div>
+<div id="InterflowADCommands-3" class="section level3 hasAnchor" number="2.5.3">
+<h3><span class="header-section-number">2.5.3</span> Layered Interflow - Advection Dispersion TGC Commands<a href="TwoDDomConstr-1.html#InterflowADCommands-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Initial concentrations can be set within the groundwater layers using the following .tgc commands (note, not done in the AD Control File):</p>
+<p><tcmd>[Set | Read GIS | Read GRID] IGW Conc Layer N1,N2,..N Tracer M1,M2,..M<tcmd> <teq>==</teq> <tblk>[value | /path/to/file]</tblk></tblk></p>
+<p>Where:</p>
+<ul>
+<li>N = The groundwater layer number (able to reference multiple in a single command)</li>
+<li>M = The tracer number (able to reference multiple in a single command) as ordered in the AD Global Database</li>
+</ul>
+<p>If a layer number is not referenced, it is assumed to apply to layer 1. Likewise, if a tracer number is not referenced it is assumed to apply to the first tracer. Note, the order that ‘Layer’ and ‘Tracer’ appear in the command does not matter (i.e. tracer numbers could be listed before layer numbers).</p>
+</div>
+</div>
+<div id="NNMixing-2" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Non-Newtonian Mixing<a href="TwoDDomConstr-1.html#NNMixing-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Non-Newtonian viscosity formulation was introduced, for a uniform fluid, in the 2020-01-AA Release. This has now been extended to consider mixing of the non-Newtonian fluid with water. To implement this, a passive tracer must be included in the model, requiring a license for the advection-dispersion (AD) module. The AD setup is the same as detailed in the <a href="https://downloads.tuflow.com/_archive/TUFLOW/Manuals/TUFLOW%20AD%20Manual%202010-10-AD.pdf">TUFLOW AD Manual</a>. More than one tracer field is permissible, but the non-Newtonian mixing module will assume that the first tracer represents the fraction of non-Newtonian fluid, in the range 0 to 1. Care must be taken to ensure that boundary data and initialisation commands strictly adhere to this range. Where the tracer value is 1, the properties of the fluid will be exactly the non-Newtonian properties as specified with Viscosity Coefficients command. For tracer values between 0 and 1, the non-Newtonian properties are transitioned using power-law equations for the three variables in the Hershel-Bulkley equation.</p>
+<p><span class="math display" id="eq:equ-NNMix-1">\[\begin{equation}
+\xi = a^{m}
+\tag{2.14}
+\end{equation}\]</span>
+<span class="math display" id="eq:equ-NNMix-2">\[\begin{equation}
+\rho&#39; = (1 - a)\rho_{w} + a\rho_{NN}
+\tag{2.15}
+\end{equation}\]</span>
+<span class="math display" id="eq:equ-NNMix-3">\[\begin{equation}
+K&#39; = (1 - a^{m})\nu_{w} + a^{m} K_{NN}
+\tag{2.16}
+\end{equation}\]</span>
+<span class="math display" id="eq:equ-NNMix-4">\[\begin{equation}
+n&#39; = (1 - a^{o})1.0 + a^{o} n_{NN}
+\tag{2.17}
+\end{equation}\]</span>
+<span class="math display" id="eq:equ-NNMix-5">\[\begin{equation}
+\tau_{0}&#39; = a^{p}\tau_{0,NN}
+\tag{2.18}
+\end{equation}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(a\)</span> = the tracer value (0~1)</li>
+<li><span class="math inline">\(m\)</span> = the non-Newtonian mixing exponent for the viscosity parameter</li>
+<li><span class="math inline">\(o\)</span> = the non-Newtonian mixing exponent for the power law parameter</li>
+<li><span class="math inline">\(p\)</span> = the non-Newtonian mixing exponent for the yield stress</li>
+<li><span class="math inline">\(\rho\)</span> = density of fluid (kg/m<sup>3</sup>)</li>
+<li><span class="math inline">\(\nu\)</span> = kinematic viscosity (m<sup>2</sup>/s)</li>
+<li><span class="math inline">\(K\)</span> = the Hershel-Bulkley viscosity parameter (Pa s<em><sup>n</sup></em>)</li>
+<li><span class="math inline">\(n\)</span> = the Hershel-Bulkley power law exponent</li>
+<li><span class="math inline">\(\tau_{0}\)</span> = the material yield stress (Pa)</li>
+</ul>
+<p>and subscripts <span class="math inline">\(w\)</span> denotes water, <span class="math inline">\(NN\)</span> denotes pure non-Newtonian fluid.</p>
+<div class="newboxAC">
+<p>In the 2023-03-AA and 2023-03-AB builds, only one non-Newtonian mixing exponent was allowed for. The 2023-03-AC build allows for three mixing exponents <em>m</em>, <em>o</em>, <em>p</em>, to be specified. Alternative, if only one mixing exponent is specified, that value is used for all three exponents.</p>
+</div>
+<p>The bed fraction and 2D viscosity are computed using the non-Newtonian method with the blended parameters The bed friction is then limited to be no less than that predicted from Manning’s equation, and the 2D viscosity is limited to be no less that that predicted from the Wu viscosity formulation with 3D and 2D coefficients of 7 and 0 respectively.</p>
+<p>To utilise non-Newtonian mixing in a model, the following is required:</p>
+<ol style="list-style-type: decimal">
+<li><p>Select the non-Newtonian viscosity formulation and specify the coefficients for pure non-Newtonian fluid:</p>
+<p><tcmd>Viscosity Formulation</tcmd> <teq>==</teq> <tblk>Non-Newtonian</tblk></p>
+<p><tcmd>Viscosity Coefficients</tcmd> <teq>==</teq> <tblk>k, n, muLow, muHigh, tau0</tblk></p></li>
+<li><p>Include a passive tracer as per standard AD setup (refer to the <a href="https://downloads.tuflow.com/_archive/TUFLOW/Manuals/TUFLOW%20AD%20Manual%202010-10-AD.pdf">TUFLOW AD Manual</a>), making sure boundary data and initialisation are scaled in range 0 to 1.</p></li>
+<li><p>Specify the mixing exponents, <em>m</em>, <em>o</em>, and <em>p</em> to be used:</p>
+<p><tcmd>Non-Newtonian Mixing Exponent</tcmd> <teq>==</teq> <tblk>&lt;float&gt; | {0} ! used for all three of <em>m</em>, <em>o</em>, <em>p</em> exponents</tblk></p>
+<p><tcmd>Non-Newtonian Mixing Exponent</tcmd> <teq>==</teq> <tblk>&lt;float&gt;, &lt;float&gt;, &lt;float&gt; | {0, 0, 0} ! <em>m</em>, <em>o</em>, <em>p</em> exponents</tblk></p></li>
+</ol>
+<p>Note that if the non-Newtonian mixing exponent is not specified it defaults to zero which turns the mixing formulation off, and all fluid in the model will be treated as non-Newtonian regardless of tracer value.</p>
+</div>
+<div id="MinEnhanceBugFixAA-2" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> Minor Enhancements and Bug Fixes<a href="TwoDDomConstr-1.html#MinEnhanceBugFixAA-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="QDTMemoryEfficient-3" class="section level3 hasAnchor" number="2.7.1">
+<h3><span class="header-section-number">2.7.1</span> Fix to Memory Efficient Quadtree Meshing Algorithm<a href="TwoDDomConstr-1.html#QDTMemoryEfficient-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The 2023-03 Release fixes a bug that could occur when using the .qcf command:</p>
+<p><tcmd>Quadtree Mesh Processing Method</tcmd> <teq>==</teq> <tblk>Memory Efficient</tblk></p>
+<p>Previously, when there were barely overlapping hidden domains (generated as part of the meshing algorithm) that only just overlapped by one or two cells in the top left corner, sometimes the order of the domains would cause cells to be deactivated incorrectly. This would cause holes in the final generated quadtree mesh.</p>
+</div>
+<div id="DuplicateMatIDs-3" class="section level3 hasAnchor" number="2.7.2">
+<h3><span class="header-section-number">2.7.2</span> Duplicate Material IDs<a href="TwoDDomConstr-1.html#DuplicateMatIDs-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When reading in materials files, in either .tmf or .csv, the 2023-03 Release handles duplicate material IDs differently. For the 2023-03 Release duplicate material IDs will now override previous values. This includes if the material ID is contained in the same material file or different material file. Overwriting duplicate data is more consistent with other processing in TUFLOW.</p>
+<p><a href="https://wiki.tuflow.com/TUFLOW_Message_2564">WARNING 2564</a> is issued each time a duplicate ID is encountered. Previously if a duplicate material ID was found, it would be discarded with <a href="https://wiki.tuflow.com/TUFLOW_Message_2481">WARNING 2481</a>.</p>
+</div>
+<div id="DuplicateSoilIDs-3" class="section level3 hasAnchor" number="2.7.3">
+<h3><span class="header-section-number">2.7.3</span> Duplicate Soil IDs<a href="TwoDDomConstr-1.html#DuplicateSoilIDs-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Similar to the duplicate material ID change above, when reading soils files (.tsoilf) duplicate soil IDs will now override previous values in the 2023-03 Release. This includes if the soil ID is contained in the same soil file or different soil file. Overwriting duplicate data is
+more consistent with other processing in TUFLOW.</p>
+<p><a href="https://wiki.tuflow.com/TUFLOW_Message_2500">WARNING 2500</a> is issued each time a duplicate ID is encountered.</p>
+</div>
+<div id="NNCheck-3" class="section level3 hasAnchor" number="2.7.4">
+<h3><span class="header-section-number">2.7.4</span> Check Added for Valid Non-Newtonian Coefficients<a href="TwoDDomConstr-1.html#NNCheck-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A check has been added if Non-Newtonian formulation has been specified without valid Non-Newtonian coefficients. For build 2023-03-AA onwards <a href="https://wiki.tuflow.com/TUFLOW_Message_2572" target="_blank">ERROR 2572</a> will be generated if no or invalid coefficients have been specified.</p>
+</div>
+</div>
+<div id="MinEnhanceBugFixAB-2" class="section level2 hasAnchor" number="2.8">
+<h2><span class="header-section-number">2.8</span> 2023-03-AB Minor Enhancements and Bug Fixes<a href="TwoDDomConstr-1.html#MinEnhanceBugFixAB-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="HRBrklineOutputZone-3" class="section level3 hasAnchor newboxAB" number="2.8.1">
+<h3><span class="header-section-number">2.8.1</span> Bug Fix to HR Breakline Adjustment with Output Zone<a href="TwoDDomConstr-1.html#HRBrklineOutputZone-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AB fixes a memory allocation issue when “<tcmd>HR Thin Z Line Output Adjustment</tcmd> <teq> == </teq> <tblk>ON ALIGNMENT</tblk>” are used in conjunction with Output Zones. Previously, this could cause the simulation to crash without error.</p>
+</div>
+<div id="MultiReadSoilLayer-3" class="section level3 hasAnchor newboxAB" number="2.8.2">
+<h3><span class="header-section-number">2.8.2</span> Read GIS / GRID Soil Layer Accepts Multiple Layer Numbers<a href="TwoDDomConstr-1.html#MultiReadSoilLayer-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AB accepts multiple layer numbers in the GIS / GRID command within the TGC, e.g:</p>
+<p><tcmd>Read GIS Soil Layer 1, 2</tcmd> <teq> == </teq> <tblk>gis\2d_soil_001.gpkg</tblk></p>
+</div>
+<div id="GWDGWLBackCompat-3" class="section level3 hasAnchor newboxAB" number="2.8.3">
+<h3><span class="header-section-number">2.8.3</span> Un-Deprecated GWD and GWL Commands<a href="TwoDDomConstr-1.html#GWDGWLBackCompat-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AB un-deprecates the GWD (groundwater depth) and GWL (groundwater level) commands in the TGC which were originally deprecated in favour of the newer “Soil Thickness” and “Soil Base Elevation” commands. However, to conserve backward compatibility, these commands have been un-deprecated when not using the interflow functionality.</p>
+</div>
+<div id="GPCGWQPOUnits-3" class="section level3 hasAnchor newboxAB" number="2.8.4">
+<h3><span class="header-section-number">2.8.4</span> Bug Fix HPC GWQ PO Units<a href="TwoDDomConstr-1.html#GPCGWQPOUnits-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AB fixes the units output from HPC for groundwater flow (line) which was reporting in mm<sup>3</sup>/s rather than m<sup>3</sup>/s. Quadtree was correctly reporting in m<sup>3</sup>/s.</p>
+</div>
+<div id="GWOutputsFix-3" class="section level3 hasAnchor newboxAB" number="2.8.5">
+<h3><span class="header-section-number">2.8.5</span> Bug Fix for Ground Water Outputs<a href="TwoDDomConstr-1.html#GWOutputsFix-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AB fixes an issue which would cause advection-dispersion outputs to be written for groundwater layers if advection-dispersion was being modelled without soils.</p>
+</div>
+<div id="CLAInfilOutputsFix-3" class="section level3 hasAnchor newboxAB" number="2.8.6">
+<h3><span class="header-section-number">2.8.6</span> Bug Fix for Infiltration Outputs in Classic<a href="TwoDDomConstr-1.html#CLAInfilOutputsFix-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AB fixes an issue where infiltration outputs (CI and IR) were being suppressed when running TUFLOW Classic. For the 2023-03-AA Build, <a href="https://wiki.tuflow.com/TUFLOW_Message_2587">WARNING 2587</a> was issued and these data types not output. This did not affect the infiltration computations.</p>
+</div>
+<div id="HPCBrklineMemory-3" class="section level3 hasAnchor newboxAB" number="2.8.7">
+<h3><span class="header-section-number">2.8.7</span> Bug Fix for HPC Breakline Memory Release<a href="TwoDDomConstr-1.html#HPCBrklineMemory-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AB correctly releases memory when running TUFLOW HPC at the end of the simulation. Previously when running multiple simulations through an external 1D engine, <a href="https://wiki.tuflow.com/TUFLOW_Message_3544">ERROR 3544</a> could be generated on the second simulation.</p>
+</div>
+<div id="Warning2508Infiltration-3" class="section level3 hasAnchor newboxAB" number="2.8.8">
+<h3><span class="header-section-number">2.8.8</span> Infiltration When No Soil Capacity and Infinite Depth Soil<a href="TwoDDomConstr-1.html#Warning2508Infiltration-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When a soil has an initial moisture fraction greater than the soil porosity (i.e. the soil capacity is zero) TUFLOW issues <a href="https://wiki.tuflow.com/TUFLOW_Message_2508">WARNING 2508</a>. For builds prior to 2023-03-AB, when no soil thickness or soil base elevation is specified (i.e. soil thickness is infinite) and the soil capacity is zero, infiltration occurs despite <a href="https://wiki.tuflow.com/TUFLOW_Message_2508">WARNING 2508</a> being generated. For build 2023-03-AB this has been fixed so that no infiltration occurs – consistent with the warning message.</p>
+</div>
+</div>
+<div id="DomainConstFixAC-2" class="section level2 hasAnchor" number="2.9">
+<h2><span class="header-section-number">2.9</span> 2023-03-AC Minor Enhancements and Bug Fixes<a href="TwoDDomConstr-1.html#DomainConstFixAC-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="DomainConstFixAC1-3" class="section level3 hasAnchor newboxAC" number="2.9.1">
+<h3><span class="header-section-number">2.9.1</span> Bug Fix to Default SGS Elevation<a href="TwoDDomConstr-1.html#DomainConstFixAC1-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AC fixes an issue that occurred, when using SGS, where the bed elevation defaulted to 0 m if the <tcmd>Set Zpts</tcmd> command was not used. This meant the error message “<a href="https://wiki.tuflow.com/TUFLOW_Message_2206">ERROR 2206</a> - ZH value not initialised (exceeds 99998 m)” was not triggered correctly. Build 2023-03-AC now sets the default elevation as 99999 m, consistent with non-SGS models.</p>
+<p>This could also cause the final SGS elevations to be re-processed after each model initialisation, in this case <a href="https://wiki.tuflow.com/TUFLOW_Message_3551">CHECK 3551</a> was issued.</p>
+</div>
+<div id="DomainConstFixAC2-3" class="section level3 hasAnchor newboxAC" number="2.9.2">
+<h3><span class="header-section-number">2.9.2</span> Bug Fix to Quadtree Clip Region<a href="TwoDDomConstr-1.html#DomainConstFixAC2-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AC fixes an issue where, if using multiple clip regions with the <tcmd>Read GRID Zpts</tcmd> command, they could be ignored. This issue could occur if some of the clip regions were located outside of the model domain, or the quadtree sub-domain(s), the entire clip region file was ignored.</p>
+<p>Build 2023-03-AC only skips those clip regions outside the model domain, and still applies the clip regions located inside the model domain.</p>
+</div>
+<div id="DomainConstFixAC3-3" class="section level3 hasAnchor newboxAC" number="2.9.3">
+<h3><span class="header-section-number">2.9.3</span> Bug Fix to Read TIN Command in HPC Model<a href="TwoDDomConstr-1.html#DomainConstFixAC3-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AC fixes an issue that <tcmd>TIN Angles</tcmd> command wasn’t read before the TINs were created in HPC models. This could cause inconsistency between the TINs created by Classic and HPC models.</p>
+</div>
+<div class="newboxAD">
+<p>Build 2023-03-AD extends this fix to HPC models with quadtree refinement.</p>
+</div>
+<div id="DomainConstFixAC4-3" class="section level3 hasAnchor newboxAC" number="2.9.4">
+<h3><span class="header-section-number">2.9.4</span> Bug Fix Quadtree 2d_zsh Snapped to Code<a href="TwoDDomConstr-1.html#DomainConstFixAC4-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AC fixes an issue that could cause TUFLOW to exit uncleanly. This was caused when a 2d_zsh (or similar e.g. 2d_lfcsh) was snapped along the 2d_code polygon. This bug only affected Quadtree models.</p>
+</div>
+</div>
+<div id="DomainConstFixAD-2" class="section level2 hasAnchor" number="2.10">
+<h2><span class="header-section-number">2.10</span> 2023-03-AD Minor Enhancements and Bug Fixes<a href="TwoDDomConstr-1.html#DomainConstFixAD-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="DomainConstFixAD1-3" class="section level3 hasAnchor newboxAD" number="2.10.1">
+<h3><span class="header-section-number">2.10.1</span> Bug Fix HPC Initial Tracer Concentration<a href="TwoDDomConstr-1.html#DomainConstFixAD1-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AD fixes a tracer concentration initialisation issue for the HPC Advection-Dispersion module. Previously, the inital tracer concentrations were all set as zero.</p>
+</div>
+<div id="DomainConstFixAD2-3" class="section level3 hasAnchor newboxAD" number="2.10.2">
+<h3><span class="header-section-number">2.10.2</span> Bug Fix for Auto Generated Bridge FLC with ‘Bridge_width’<a href="TwoDDomConstr-1.html#DomainConstFixAD2-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AD fixes an issue that 2d_bg ‘deck_width’ attribute was not correctly applied to distribute the automatically calculated FLC (Section <a href="TwoDDomConstr-1.html#Layer2dbgFLC-3">2.4.3</a>) to cell faces.</p>
+</div>
+<div id="DomainConstFixAD3-3" class="section level3 hasAnchor newboxAD" number="2.10.3">
+<h3><span class="header-section-number">2.10.3</span> Bug Fix for Longitudinal Profile Output (LP) in Quadtree Models<a href="TwoDDomConstr-1.html#DomainConstFixAD3-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Build 2023-03-AD fixes an issue where the Longitudinal Profile Output (<tcmd>Read GIS LP</tcmd>) could cause memory access violation in Quadtree models. A known issue caused by this memory access violation includes a change to inflow values from a QT boundary.</p>
+</div>
+<p><img src="images/WQFooter.jpg" width="100%" /></p>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="1" line-spacing="2">
+<div id="ref-BridgeDeckAfflux" class="csl-entry">
+Collecutt, G., Baeumer, U., Gao, S., &amp; Syme, W. (2022). Bridge Deck Afflux Modelling – Benchmarking of CFD and SWE Codes to Real-World Data. <em>Hydrology &amp; Water Resources Symposium</em>. <a href="https://tuflow.com/media/7554/2022-bridge-deck-afflux-modelling-benchmarking-of-cfd-and-swe-codes-to-real-world-data-collecutt-et-al-hwrs.pdf">https://tuflow.com/media/7554/2022-bridge-deck-afflux-modelling-benchmarking-of-cfd-and-swe-codes-to-real-world-data-collecutt-et-al-hwrs.pdf</a>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="Overview-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="OneDSolv-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": false,
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
