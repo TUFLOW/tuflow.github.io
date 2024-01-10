@@ -171,7 +171,7 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="https://www.tuflow.com"><img src="images/TUFLOW_RN.png" style="width:246px;height:68px;"></a></li>
+<li><a href="https://www.tuflow.com"><img src="images/TUFLOW_RN_v2.png" style="width:266px;height:60px;"></a></li>
 
 <li class="divider"></li>
 <li><a href="index.html#section" id="toc-section"></a></li>
@@ -319,6 +319,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="SWMM-TUFLOW-1.html"><a href="SWMM-TUFLOW-1.html"><i class="fa fa-check"></i><b>4</b> 1D Solver - SWMM</a>
 <ul>
+<li class="chapter" data-level="4.1" data-path="SWMM-TUFLOW-1.html"><a href="SWMM-TUFLOW-1.html#SWMM-Overview-2"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
 <li class="chapter" data-level="4.2" data-path="SWMM-TUFLOW-1.html"><a href="SWMM-TUFLOW-1.html#SWMM-TUFLOWCommands-2"><i class="fa fa-check"></i><b>4.2</b> SWMM-TUFLOW Commands</a>
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="SWMM-TUFLOW-1.html"><a href="SWMM-TUFLOW-1.html#TCFCommands-3"><i class="fa fa-check"></i><b>4.2.1</b> TUFLOW Control File Commands (TCF)</a></li>
@@ -557,6 +558,7 @@ div.csl-indent {
 <li class="chapter" data-level="8.13.22" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix22-3"><i class="fa fa-check"></i><b>8.13.22</b> Bug Fix for Reporting Location with Restart File</a></li>
 <li class="chapter" data-level="8.13.23" data-path="OutChecks-1.html"><a href="OutChecks-1.html#ADUpdates3-5"><i class="fa fa-check"></i><b>8.13.23</b> Bug Fix PO Points With Invalid “Q” Output Crash</a></li>
 <li class="chapter" data-level="8.13.24" data-path="OutChecks-1.html"><a href="OutChecks-1.html#ADUpdates3-4"><i class="fa fa-check"></i><b>8.13.24</b> Bug Fix NetCDF Raster Time Issues</a></li>
+<li class="chapter" data-level="8.13.25" data-path="OutChecks-1.html"><a href="OutChecks-1.html#ADUpdates4-4"><i class="fa fa-check"></i><b>8.13.25</b> Bug Fix Grid Ouputs For Map Output Zones</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html"><i class="fa fa-check"></i><b>9</b> Minor Enhancements and Bug Fixes</a>
@@ -619,8 +621,10 @@ div.csl-indent {
 <h1><span class="header-section-number">Section 4</span> 1D Solver - SWMM<a href="SWMM-TUFLOW-1.html#SWMM-TUFLOW-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div class="newboxAD">
 <p>This chapter of the release notes is written in USA English for the predominantly USA centered SWMM user base.</p>
+</div>
 <div id="SWMM-Overview-2" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Overview<a href="SWMM-TUFLOW-1.html#SWMM-Overview-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="newboxAD">
 <p>TUFLOW has supported 1D/2D dynamic coupling since its initial 2D solver development in 1989. Traditionally, 1D (1 Dimensional) linking and associated modeling has been applied using the ESTRY 1D solver. New in the 2023-03-AD Release, TUFLOW’s 1D linking and solver options have been expanded to support the EPA Storm Water Management Model (SWMM). As such, 1D pipe networks or 1D open channels can now be modeled using either the ESTRY, EPA SWMM, or a combination of the two 1D solvers.</p>
 <p>EPA SWMM is a widely used software program for simulating urban and non-urban watersheds’ hydrologic and hydraulic behavior. Developed in the early 1970s by the Environmental Protection Agency (EPA), the model has since undergone numerous updates and enhancements to become one of the most used 1D stormwater runoff and water quality analysis tools globally, particularly in North America.</p>
 <p>The primary uses of EPA SWMM include designing and evaluating stormwater management practices, planning, and assessing low-impact development techniques, and developing models for floodplain mapping and emergency response planning. The software allows users to simulate a wide range of storm events and analyze the impact of a range of factors, such as land use changes, climate variability, and water quality control measures, on the performance of stormwater management systems.</p>
@@ -703,7 +707,6 @@ div.csl-indent {
 <li>A mix between the SWMM input file format and a “swmm_inlet_usage” GIS layer. Table <a href="SWMM-TUFLOW-1.html#tab:tab-SWMMinletusage">4.1</a> lists the attributes associated with this GIS layer. In this form, the data entry requirement is reduced. SWMM “Inlet Usage” tables are not used, and streets are not required in the “conduits” table (the conduits table will still define the pipe network). Also, automatic inlet connections between the 1D network and 2D domain can be implemented via the “Conn1D_2D” attribute field (instead of manual specification of SX connection cells within a “2d_bc” GIS layer). The Streets and Inlet tables must be defined in the SWMM input (inp) file.</li>
 </ol>
 <p>Whether inlet usage is defined in SWMM or in a separate GIS layer, the inlet discharges are computed within TUFLOW using modified EPA SWMM 5.2 code before being passed to the SWMM engine for the 1D solution computations. This approach has been selected due to its ability to leverage TUFLOW 2D model results, such as velocities and water levels. If the pressure head in the 1D domain exceeds the 2D water level, the 1D domain will surcharge into the 2D domain.</p>
-</div>
 </div>
 </div>
 </div>
@@ -931,12 +934,14 @@ Float
 <h5><span class="header-section-number">4.1.2.6.2</span> SWMM Junction Options<a href="SWMM-TUFLOW-1.html#SWMMJunctionOptions-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>The junction settings for Ymax (maximum depth), Ysur (surge depth), and Apond (area of ponding) are critical to get accurate and stable results. These values relate to how SWMM handles water that overflows a node.</p>
 <p>In SWMM, ponding can be on or off but TUFLOW forces ponding to be on when running a TUFLOW-SWMM model. Junctions can pond if the ponding area (Apond) is greater than 0.0. SWMM tracks the volumes stored as ponded water and will reintroduce the water back into the network when there is capacity available. When ponding is on ysur (surge depth) is ignored (any water above Ymax ponds).</p>
-<p>If the ponding area (apond) is 0.0, water will not pond at a node, but the water can overflow (flood) if the water level in a node exceeds Ymax + Ysur (maximum depth + surcharge water depth). Flooded water is lost through “flooding” and no longer tracked within SWMM.</p>
-<p>If ponding is off at a node, there is no limit to how much flow may overflow from a node for a timestep. This can lead to unrealistic overflow discharges. However, this functionality is required for nodes receiving flows from subcatchments. If a subcatchment outflows to a 1D network, any flow unable to be conveyed by the 1D network must be fully discharged into the 2D domain for overland routing.</p>
+<p>If the ponding area (apond) is 0.0, water will not pond at a node, but the water can overflow (flood) if the water level in a node exceeds Ymax + Ysur (maximum depth + surcharge water depth). Flooded water is lost through “flooding” and no longer tracked within SWMM. If the node is connected to a 2D domain, the flow is immediately transferred into the connected 2D cells.</p>
+<p>If ponding is off at a node, there is no limit to how much flow may overflow from a node for a timestep. This can lead to unrealistic overflow discharges. However, this functionality may be preferred for subcatchment outlets so that the full discharge can immediately overflow into the 2D without being throttled by the inlet.</p>
 <p>If a node can pond (Apond &gt; 0) and is connected to the 2D domain using an inlet or HX connection, TUFLOW will compute the discharge that should be transferred between the 1D and 2D domain. If the water level in the 2D domain is higher than the 1D (potentially ponded) water level, then flow will be from the 2D domain into the 1D. The discharge rate will depend upon the difference in water levels and whether it is connected through an inlet or HX boundary. If the 1D node is ponded (above Ymax) and above the 2D water level, then water will flow from the 1D domain to the 2D domain. If the node has an inlet, the discharge will be computed using the area of the inlet with the orifice equation. The orifice coefficient used can be set using the “SWMM Inlet Surcharge Orifice Coefficient” command described in Section <a href="SWMM-TUFLOW-1.html#TSCFCommands-3">4.2.2</a>.</p>
-<p>Based on the above principles, the following are the recommended values of ysur and Apond for junctions depending on their usage. It is recommended that Ymax be set to 0.0 in all cases. These values can be set using the “Junctions - Set attributes” tool described in Section <a href="SWMM-TUFLOW-1.html#GISTools-4">4.1.3.1</a>.</p>
+<p>Recommendations based on the above:
+If ponding is used, a Ymax value of 0.0 is generally sufficient for all cases. Ymax will be set to the highest adjacent obvert. Ponding will occur at that elevation and discharges to/from the 2D will compare the ponded elevation with the 2D water levels. For nodes with inlets, allowing ponding is often preferable but using a Ymax set to the invert elevation with no ponding (Apond = 0.0) is also valid. This may be the preferred approach for subcatchment outlets to prevent overflow throttling by the inlet.</p>
+<p>These values can be set using the “Junctions - Set attributes” tool described in Section <a href="SWMM-TUFLOW-1.html#GISTools-4">4.1.3.1</a>.</p>
 <ul>
-<li>Junction nodes receiving subcatchment flows.
+<li>Junction nodes receiving subcatchment flows. Use ponding determined by other settings or force no ponding as below.
 <ul>
 <li>Ysur = 0.0</li>
 <li>Apond = 0.0</li>
@@ -1008,7 +1013,7 @@ be specified for use. Options and reporting tables can optionally be created to 
 <h3><span class="header-section-number">4.1.4</span> SWMM Outputs<a href="SWMM-TUFLOW-1.html#SWMMOutputs-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Model outputs are written by both SWMM and TUFLOW, which can be used to visualize model results. SWMM
 writes a report file (rpt) and an output file (out) in the TUFLOW results folder with the simulation prefix followed by “_swmm.” The report file can be viewed with a text editor and the output file can be viewed in EPA SWMM or 3<sup>rd</sup> party tools that support this format such as <a href="www.pyswmm.org">PySWMM</a>.</p>
-<p>TUFLOW-SWMM models also output a GeoPackage time-series output file. The file will be written with the other result files and ends with “_ts.gpkg.” This file can be read into the QGIS TUFLOW Viewer using the “Load Results - Time series” from the File menu of the QGIS viewer. When this file is loaded, point and polyline layers will be loaded representing the node and channel results. The layer symbology can be modified to represent model results for the current QGIS time. Animations can be created from these results (in combination with 2D results if desired). These layers can also be used to select channels or nodes to display time series results in the TUFLOW viewer and can be combined with ESTRY or PO outputs. More information about the QGIS TUFLOW Viewer can be found on the <a href="https://wiki.tuflow.com/TUFLOW_Viewer">TUFLOW Wiki</a>.</p>
+<p>TUFLOW-SWMM models also output a GeoPackage time-series output file. The file will be written with the other result files and ends with “_ts.gpkg.” This file can be read into the QGIS TUFLOW Viewer using the “Load Results - Time series” from the File menu of the QGIS viewer. When this file is loaded, point and polyline layers will be loaded representing the node and channel results. The layer symbology can be modified to represent model results for the current QGIS time. Profiles can be also be generated for the 1D network. Animations can be created from these results (in combination with 2D results if desired). These layers can also be used to select channels or nodes to display time series results in the TUFLOW viewer and can be combined with ESTRY or PO outputs. More information about the QGIS TUFLOW Viewer can be found on the <a href="https://wiki.tuflow.com/TUFLOW_Viewer">TUFLOW Wiki</a>.</p>
 </div>
 <div id="SWMMInclusionTUFLOW-3" class="section level3 hasAnchor" number="4.1.5">
 <h3><span class="header-section-number">4.1.5</span> SWMM Inclusion in TUFLOW<a href="SWMM-TUFLOW-1.html#SWMMInclusionTUFLOW-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1032,6 +1037,7 @@ it is recommended that users assign On-Grade or On-Sag to each of their inlets u
 </div>
 </div>
 </div>
+</div>
 <div id="SWMM-TUFLOWCommands-2" class="section level2 hasAnchor newboxAD" number="4.2">
 <h2><span class="header-section-number">4.2</span> SWMM-TUFLOW Commands<a href="SWMM-TUFLOW-1.html#SWMM-TUFLOWCommands-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This section is a reference for the commands available in a TUFLOW-SWMM model.</p>
@@ -1048,6 +1054,17 @@ Control File (TSCF). Commands for scenario and event management are not
 included but are supported, such as “If Scenario,” “If Event,” “Else,”
 or “End If.” Such commands are described in the TUFLOW
 manual.</p>
+<p><tcmd>Check INP Save Date</tcmd><teq> == </eq><tblk>[ {ERROR} | WARNING | OFF ]</tblk></p>
+<p>When working within TUFLOW inp files are often generated by the QGIS plugin from GeoPackage files. This command controls settings to alert the user if the GeoPackage has been updated but the inp has not.</p>
+<p>Checks that the save date of the .inp file is later than the save date of the associated .gpkg file. The two files must be located in the same folder. This command is very useful for detecting the possibility that one or more layers in TUFLOW-SWMM GeoPackage file has been modified but has not been exported prior to running the simulation.</p>
+<p>For the ERROR option (the default), the simulation terminates and an error message is given.
+For the WARNING option, a warning is written to the screen and log file, but the simulation proceeds without pausing. It remains the responsibility of the user to check for any warnings.
+The OFF option disables all checks and no warnings are given.</p>
+<p><tcmd>Inlet Surcharge Orifice Coefficient</tcmd><teq> == </teq><tblk> [0.16]</tblk></p>
+<p>Specifies the coefficient for the orifice equation that is used when an inlet overflows (pressure head is higher than 2D WSE).</p>
+<p><tcmd>Output Folder</tcmd><teq> == </teq><tblk> &lt;Folder&gt; </tblk></p>
+<p>Redirects the SWMM combined inp file and all SWMM output data to another folder. Typically used to write output to your local drive instead of filling up a network drive, or to keep results separate to the input data. A URL path can be used (e.g. \bmtserv), which is useful for running simulations on other computers, but having the output directed to your local drive or other location (your drive will need to be shared).
+The default location for 1D output is that specified using Output Folder in the .tcf file for 2D/1D models.</p>
 <p><tcmd>Read SWMM</tcmd><teq> == </teq><tblk>&lt;swmm_inp_filename&gt;</tblk></p>
 <p>This command adds the SWMM input file to the SWMM simulation. Multiple SWMM input files can be specified which will be combined into a single 1D SWMM simulation.</p>
 <p><tcmd>Read GIS SWMM Inlet Usage</tcmd><teq> == </teq><tblk>&lt;swmm_inlet_usage_filename&gt; </tblk></p>
@@ -1058,11 +1075,6 @@ of inlets (pits) that connect the 2D TUFLOW and 1D SWMM models.</p>
 for each 2D timestep. Increasing the number decreases the timestep used
 by SWMM potentially improving model stability but increasing run
 time.</p>
-<p><tcmd>Inlet Surcharge Orifice Coefficient</tcmd><teq> == </teq><tblk> [0.16]</tblk></p>
-<p>Specifies the coefficient for the orifice equation that is used when an inlet overflows (pressure head is higher than 2D WSE).</p>
-<p><tcmd>Output Folder</tcmd><teq> == </teq><tblk> &lt;Folder&gt; </tblk></p>
-<p>Redirects the SWMM combined inp file and all SWMM output data to another folder. Typically used to write output to your local drive instead of filling up a network drive, or to keep results separate to the input data. A URL path can be used (e.g. \bmtserv), which is useful for running simulations on other computers, but having the output directed to your local drive or other location (your drive will need to be shared).
-The default location for 1D output is that specified using Output Folder in the .tcf file for 2D/1D models.</p>
 </div>
 </div>
 <div id="SWMM-Input-Files-2" class="section level2 hasAnchor newboxAD" number="4.3">
