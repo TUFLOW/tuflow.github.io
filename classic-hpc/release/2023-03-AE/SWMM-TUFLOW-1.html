@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 4 1D Solver - SWMM | TUFLOW Classic/HPC New Release Notes</title>
+  <meta name="description" content="TUFLOW Release Notes" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 4 1D Solver - SWMM | TUFLOW Classic/HPC New Release Notes" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/TUFLOW.jpg" />
+  <meta property="og:description" content="TUFLOW Release Notes" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 4 1D Solver - SWMM | TUFLOW Classic/HPC New Release Notes" />
+  
+  <meta name="twitter:description" content="TUFLOW Release Notes" />
+  <meta name="twitter:image" content="/images/TUFLOW.jpg" />
+
+<meta name="author" content="Release Build 2023-03-AE" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="OneDSolv-1.html"/>
+<link rel="next" href="TwoDSolv-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://docs.tuflow.com/classic-hpc/release/2023-03-AE/"><img src="images/TUFLOW_RN_AE.png"  style="width:267px;height:62px;"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#document-updates-and-important-notices"><i class="fa fa-check"></i>Document Updates and Important Notices</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#licensing"><i class="fa fa-check"></i>Licensing</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="Overview-1.html"><a href="Overview-1.html"><i class="fa fa-check"></i><b>1</b> Overview</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Overview-1.html"><a href="Overview-1.html#Release-2"><i class="fa fa-check"></i><b>1.1</b> 2023-03 Release</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html"><i class="fa fa-check"></i><b>2</b> 2D Domain Construction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#QTUpdates-2"><i class="fa fa-check"></i><b>2.1</b> Quadtree Updates (HPC Only)</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SuppMultGPU-3"><i class="fa fa-check"></i><b>2.1.1</b> Support for Multiple GPU</a></li>
+<li class="chapter" data-level="2.1.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SuppMultGIS-3"><i class="fa fa-check"></i><b>2.1.2</b> Support for Multiple Nesting GIS Layers</a></li>
+<li class="chapter" data-level="2.1.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SuppTriggerZShp-3"><i class="fa fa-check"></i><b>2.1.3</b> Support “Trigger 1D” for Variable Z Shape</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SGSChanges-2"><i class="fa fa-check"></i><b>2.2</b> Sub-Grid Sampling (SGS) Changes</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SGSDefaults-3"><i class="fa fa-check"></i><b>2.2.1</b> SGS Default Changes</a></li>
+<li class="chapter" data-level="2.2.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SGSApproach-3"><i class="fa fa-check"></i><b>2.2.2</b> SGS Approach</a></li>
+<li class="chapter" data-level="2.2.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SGSSampFreq-3"><i class="fa fa-check"></i><b>2.2.3</b> Setting SGS Sampling Frequency</a></li>
+<li class="chapter" data-level="2.2.4" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SGSMaterials-3"><i class="fa fa-check"></i><b>2.2.4</b> SGS Materials</a></li>
+<li class="chapter" data-level="2.2.5" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#HResInterp-3"><i class="fa fa-check"></i><b>2.2.5</b> High Resolution Interpolation Approach</a></li>
+<li class="chapter" data-level="2.2.6" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#HRThinBLines-3"><i class="fa fa-check"></i><b>2.2.6</b> High Resolution Thin Breaklines</a></li>
+<li class="chapter" data-level="2.2.7" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#ParProcSGSInit-3"><i class="fa fa-check"></i><b>2.2.7</b> Parallel Processing for SGS initialisation</a></li>
+<li class="chapter" data-level="2.2.8" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#XFMethodC-3"><i class="fa fa-check"></i><b>2.2.8</b> XF Files for SGS Method C</a></li>
+<li class="chapter" data-level="2.2.9" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SGSParameterisation-3"><i class="fa fa-check"></i><b>2.2.9</b> Enhancement for SGS Parameterisation</a></li>
+<li class="chapter" data-level="2.2.10" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SGSWaterLevelBC-3"><i class="fa fa-check"></i><b>2.2.10</b> Enhancement of Water Level Interpolation at BC Cells with Steep Bed Slope</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#InfilSubSurfFlows-3"><i class="fa fa-check"></i><b>2.3</b> Infiltration and Sub-Surface Flows</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#InfilSubSurfFlowsOverview-3"><i class="fa fa-check"></i><b>2.3.1</b> Overview</a></li>
+<li class="chapter" data-level="2.3.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SSFlowsSoilsFile-3"><i class="fa fa-check"></i><b>2.3.2</b> Soils File</a></li>
+<li class="chapter" data-level="2.3.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SSFlowsTGC-3"><i class="fa fa-check"></i><b>2.3.3</b> TGC Commands</a></li>
+<li class="chapter" data-level="2.3.4" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#SSFBoundaries-3"><i class="fa fa-check"></i><b>2.3.4</b> Boundaries</a></li>
+<li class="chapter" data-level="2.3.5" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#GWMapOutputs-3"><i class="fa fa-check"></i><b>2.3.5</b> Groundwater Map Outputs</a></li>
+<li class="chapter" data-level="2.3.6" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#GWPlotOutputs-3"><i class="fa fa-check"></i><b>2.3.6</b> Groundwater Plot Outputs</a></li>
+<li class="chapter" data-level="2.3.7" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#InterflowAD-3"><i class="fa fa-check"></i><b>2.3.7</b> Groundwater and Advection Dispersion</a></li>
+<li class="chapter" data-level="2.3.8" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#GWBlend-3"><i class="fa fa-check"></i><b>2.3.8</b> Groundwater Blend Threshold</a></li>
+<li class="chapter" data-level="2.3.9" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#InitMoisGA-3"><i class="fa fa-check"></i><b>2.3.9</b> Initial Moisture and Green-Ampt Infiltration</a></li>
+<li class="chapter" data-level="2.3.10" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#Improvetsoilf-3"><i class="fa fa-check"></i><b>2.3.10</b> Improvements in Reading Soil File (.tsoilf)</a></li>
+<li class="chapter" data-level="2.3.11" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#BugFixInfilAD-3"><i class="fa fa-check"></i><b>2.3.11</b> Bug Fix for Infiltration and Advection Dispersion</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#id_2DBridgeLayer-2"><i class="fa fa-check"></i><b>2.4</b> Modelling Bridge Structure in 2D</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#CFDStudy-3"><i class="fa fa-check"></i><b>2.4.1</b> CFD Benchmarking Study</a></li>
+<li class="chapter" data-level="2.4.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#Layer2dbg-3"><i class="fa fa-check"></i><b>2.4.2</b> New Input Layer for Modelling Bridge Structure in 2D</a></li>
+<li class="chapter" data-level="2.4.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#Layer2dbgFLC-3"><i class="fa fa-check"></i><b>2.4.3</b> Automatic Generation of Superstructure FLC</a></li>
+<li class="chapter" data-level="2.4.4" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#id_2dpoQS-3"><i class="fa fa-check"></i><b>2.4.4</b> Grouped Structure Output</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#AdvectionDispersion-2"><i class="fa fa-check"></i><b>2.5</b> Advection Dispersion</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#ADMultipleConsituents-3"><i class="fa fa-check"></i><b>2.5.1</b> HPC Support for Multiple Constituents Per Simulation</a></li>
+<li class="chapter" data-level="2.5.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#ADSettleDecay-3"><i class="fa fa-check"></i><b>2.5.2</b> HPC Support for Constituent Settling and Decay</a></li>
+<li class="chapter" data-level="2.5.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#InterflowADCommands-3"><i class="fa fa-check"></i><b>2.5.3</b> Layered Interflow - Advection Dispersion TGC Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#NNMixing-2"><i class="fa fa-check"></i><b>2.6</b> Non-Newtonian Mixing</a></li>
+<li class="chapter" data-level="2.7" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#MinEnhanceBugFixAA-2"><i class="fa fa-check"></i><b>2.7</b> Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#QDTMemoryEfficient-3"><i class="fa fa-check"></i><b>2.7.1</b> Fix to Memory Efficient Quadtree Meshing Algorithm</a></li>
+<li class="chapter" data-level="2.7.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DuplicateMatIDs-3"><i class="fa fa-check"></i><b>2.7.2</b> Duplicate Material IDs</a></li>
+<li class="chapter" data-level="2.7.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DuplicateSoilIDs-3"><i class="fa fa-check"></i><b>2.7.3</b> Duplicate Soil IDs</a></li>
+<li class="chapter" data-level="2.7.4" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#NNCheck-3"><i class="fa fa-check"></i><b>2.7.4</b> Check Added for Valid Non-Newtonian Coefficients</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#MinEnhanceBugFixAB-2"><i class="fa fa-check"></i><b>2.8</b> 2023-03-AB Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#HRBrklineOutputZone-3"><i class="fa fa-check"></i><b>2.8.1</b> Bug Fix to HR Breakline Adjustment with Output Zone</a></li>
+<li class="chapter" data-level="2.8.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#MultiReadSoilLayer-3"><i class="fa fa-check"></i><b>2.8.2</b> Read GIS / GRID Soil Layer Accepts Multiple Layer Numbers</a></li>
+<li class="chapter" data-level="2.8.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#GWDGWLBackCompat-3"><i class="fa fa-check"></i><b>2.8.3</b> Un-Deprecated GWD and GWL Commands</a></li>
+<li class="chapter" data-level="2.8.4" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#GPCGWQPOUnits-3"><i class="fa fa-check"></i><b>2.8.4</b> Bug Fix HPC GWQ PO Units</a></li>
+<li class="chapter" data-level="2.8.5" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#GWOutputsFix-3"><i class="fa fa-check"></i><b>2.8.5</b> Bug Fix for Ground Water Outputs</a></li>
+<li class="chapter" data-level="2.8.6" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#CLAInfilOutputsFix-3"><i class="fa fa-check"></i><b>2.8.6</b> Bug Fix for Infiltration Outputs in Classic</a></li>
+<li class="chapter" data-level="2.8.7" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#HPCBrklineMemory-3"><i class="fa fa-check"></i><b>2.8.7</b> Bug Fix for HPC Breakline Memory Release</a></li>
+<li class="chapter" data-level="2.8.8" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#Warning2508Infiltration-3"><i class="fa fa-check"></i><b>2.8.8</b> Infiltration When No Soil Capacity and Infinite Depth Soil</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAC-2"><i class="fa fa-check"></i><b>2.9</b> 2023-03-AC Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAC1-3"><i class="fa fa-check"></i><b>2.9.1</b> Bug Fix to Default SGS Elevation</a></li>
+<li class="chapter" data-level="2.9.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAC2-3"><i class="fa fa-check"></i><b>2.9.2</b> Bug Fix to Quadtree Clip Region</a></li>
+<li class="chapter" data-level="2.9.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAC3-3"><i class="fa fa-check"></i><b>2.9.3</b> Bug Fix to Read TIN Command in HPC Model</a></li>
+<li class="chapter" data-level="2.9.4" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAC4-3"><i class="fa fa-check"></i><b>2.9.4</b> Bug Fix Quadtree 2d_zsh Snapped to Code</a></li>
+<li class="chapter" data-level="2.9.5" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAC5-3"><i class="fa fa-check"></i><b>2.9.5</b> Bug Fix for “Blockage Return Period” Command</a></li>
+<li class="chapter" data-level="2.9.6" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAC6-3"><i class="fa fa-check"></i><b>2.9.6</b> Bug Fix for Long Breaklines in Quadtree</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAD-2"><i class="fa fa-check"></i><b>2.10</b> 2023-03-AD Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="2.10.1" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAD1-3"><i class="fa fa-check"></i><b>2.10.1</b> Bug Fix HPC Initial Tracer Concentration</a></li>
+<li class="chapter" data-level="2.10.2" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAD2-3"><i class="fa fa-check"></i><b>2.10.2</b> Bug Fix for Auto Generated Bridge FLC with ‘Bridge_width’</a></li>
+<li class="chapter" data-level="2.10.3" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAD3-3"><i class="fa fa-check"></i><b>2.10.3</b> Bug Fix for Longitudinal Profile Output (LP) in Quadtree Models</a></li>
+<li class="chapter" data-level="2.10.4" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAD4-3"><i class="fa fa-check"></i><b>2.10.4</b> Bug Fix for Invalid 2d_code Values</a></li>
+<li class="chapter" data-level="2.10.5" data-path="TwoDDomConstr-1.html"><a href="TwoDDomConstr-1.html#DomainConstFixAD5-3"><i class="fa fa-check"></i><b>2.10.5</b> Bug Fix for Large SX/HX BC Connections in Quadtree</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html"><i class="fa fa-check"></i><b>3</b> 1D Solver - ESTRY</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#ArchBg-2"><i class="fa fa-check"></i><b>3.1</b> Arch Bridge</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#ArchBgEditor-3"><i class="fa fa-check"></i><b>3.1.1</b> Arch Bridge Editor</a></li>
+<li class="chapter" data-level="3.1.2" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MultiArchBridgesFix-3"><i class="fa fa-check"></i><b>3.1.2</b> Bug Fix with Modelling Multiple Arch Bridges</a></li>
+<li class="chapter" data-level="3.1.3" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#ArchBridgesErrorXXXX-3"><i class="fa fa-check"></i><b>3.1.3</b> Arch Bridge Error Message Number Assignment</a></li>
+<li class="chapter" data-level="3.1.4" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#ArchBridgesWarning1450-3"><i class="fa fa-check"></i><b>3.1.4</b> Arch Bridge Warning Message for Low Blockage</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#VirtualPipeLag-2"><i class="fa fa-check"></i><b>3.2</b> Ability to Model Time Lag in Virtual Pipes</a></li>
+<li class="chapter" data-level="3.3" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#AdversedSlopeCulvert-2"><i class="fa fa-check"></i><b>3.3</b> Enhancement to Adverse Slope Culvert</a></li>
+<li class="chapter" data-level="3.4" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#StructureFlowLevel-2"><i class="fa fa-check"></i><b>3.4</b> Improvement to Structure Flow Level Options</a></li>
+<li class="chapter" data-level="3.5" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#Auto1DHQ-2"><i class="fa fa-check"></i><b>3.5</b> Automatically Generated 1D HQ Boundaries</a></li>
+<li class="chapter" data-level="3.6" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#NewEstryOutput-2"><i class="fa fa-check"></i><b>3.6</b> New 1D (ESTRY) Output Variables</a></li>
+<li class="chapter" data-level="3.7" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFix-2"><i class="fa fa-check"></i><b>3.7</b> Minor Enhancements and Bug Fixes for 2023-03-AA</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#ZeroManningsn-3"><i class="fa fa-check"></i><b>3.7.1</b> Unused Manning’s n Value Set to Zero in nwk_C Check File and .eof</a></li>
+<li class="chapter" data-level="3.7.2" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#WriteCheckFilesFix-3"><i class="fa fa-check"></i><b>3.7.2</b> Fixes to Write Check Files [Exclude | Include | None | ALL] == [OFF]</a></li>
+<li class="chapter" data-level="3.7.3" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#PitAWidthQType-3"><i class="fa fa-check"></i><b>3.7.3</b> Pit_A Check File Incorrectly Reporting Width</a></li>
+<li class="chapter" data-level="3.7.4" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#PitAIncreaseAttributeLength-3"><i class="fa fa-check"></i><b>3.7.4</b> Pit_A Check File Increased Type Attribute Length</a></li>
+<li class="chapter" data-level="3.7.5" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MultipleBBridgeFormLoss-3"><i class="fa fa-check"></i><b>3.7.5</b> Incorrect ‘B’ Type Bridge Form Loss Reported in the .eof</a></li>
+<li class="chapter" data-level="3.7.6" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#ReportPumpInverts-3"><i class="fa fa-check"></i><b>3.7.6</b> Pump Inverts Reported in the .eof</a></li>
+<li class="chapter" data-level="3.7.7" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#Error1438-3"><i class="fa fa-check"></i><b>3.7.7</b> 1D Pump Point Objects Now Produce ERROR 1438</a></li>
+<li class="chapter" data-level="3.7.8" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#PumpCurveError-3"><i class="fa fa-check"></i><b>3.7.8</b> Pump Curves No Longer Trigger ERROR 1092 and ERROR 1093</a></li>
+<li class="chapter" data-level="3.7.9" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#Error2056-3"><i class="fa fa-check"></i><b>3.7.9</b> ERROR 2056 Incorrectly Triggering</a></li>
+<li class="chapter" data-level="3.7.10" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#Warning2039-3"><i class="fa fa-check"></i><b>3.7.10</b> WARNING 2039 Counts All Ignored SX Pit Connections</a></li>
+<li class="chapter" data-level="3.7.11" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#id_1DOpStructure2DWL-3"><i class="fa fa-check"></i><b>3.7.11</b> 1D Operable Structures Linked to 2D Water Level (H2D) Updating on Map Update Interval</a></li>
+<li class="chapter" data-level="3.7.12" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#id_1DOpStructure2dPO-3"><i class="fa fa-check"></i><b>3.7.12</b> Linking 1D Operable Structures to 2D PO Points not Functional as Described</a></li>
+<li class="chapter" data-level="3.7.13" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#PFChannelInvert-3"><i class="fa fa-check"></i><b>3.7.13</b> Bug Fix to Invert Levels used in PF Channel Flow Calculation</a></li>
+<li class="chapter" data-level="3.7.14" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#Error1261-3"><i class="fa fa-check"></i><b>3.7.14</b> ERROR 1261 Incorrectly Triggering for 1D PF/DF Channels</a></li>
+<li class="chapter" data-level="3.7.15" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#PFDFChannelCheck-3"><i class="fa fa-check"></i><b>3.7.15</b> Enhancement and Bug Fix for PF/DF Channel Check Files</a></li>
+<li class="chapter" data-level="3.7.16" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#id_1DDFChannel-3"><i class="fa fa-check"></i><b>3.7.16</b> Setting Initial State of 1D DF Channel</a></li>
+<li class="chapter" data-level="3.7.17" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#Warning1434-3"><i class="fa fa-check"></i><b>3.7.17</b> WARNING Message for Using Zero Pump Capacity</a></li>
+<li class="chapter" data-level="3.7.18" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MaxOperationalControls-3"><i class="fa fa-check"></i><b>3.7.18</b> Enhancement Reducing Memory Usage for Operational Channels</a></li>
+<li class="chapter" data-level="3.7.19" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#Error2073-3"><i class="fa fa-check"></i><b>3.7.19</b> WARNING/ERROR Message for Using Wrong GIS Type in 1d_nwk</a></li>
+<li class="chapter" data-level="3.7.20" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#Error1442-3"><i class="fa fa-check"></i><b>3.7.20</b> ERROR Message for Using Bridge Flow == Method A in Structure Routines == 2013 (Default)</a></li>
+<li class="chapter" data-level="3.7.21" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#BFError1025-3"><i class="fa fa-check"></i><b>3.7.21</b> Bug Fix for ERROR 1025</a></li>
+<li class="chapter" data-level="3.7.22" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#BFWarning2073-3"><i class="fa fa-check"></i><b>3.7.22</b> Bug Fix for WARNING 2073</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAB-2"><i class="fa fa-check"></i><b>3.8</b> 2023-03-AB Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#OpChannelMemoryAllocation-3"><i class="fa fa-check"></i><b>3.8.1</b> Operational Channel Memory Allocation Error</a></li>
+<li class="chapter" data-level="3.8.2" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#OpChannelAndOrStatements-3"><i class="fa fa-check"></i><b>3.8.2</b> Operational Channels Handle Multiple AND or OR Statements on Same Line</a></li>
+<li class="chapter" data-level="3.8.3" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#VirtualPipeOuputFix-3"><i class="fa fa-check"></i><b>3.8.3</b> Bug Fix for Virtual Pipe Model Not Writing Output</a></li>
+<li class="chapter" data-level="3.8.4" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#WLLFix-3"><i class="fa fa-check"></i><b>3.8.4</b> Bug Fix for WLL Should Not Be Here</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAC-2"><i class="fa fa-check"></i><b>3.9</b> 2023-03-AC Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAC1-3"><i class="fa fa-check"></i><b>3.9.1</b> Bug Fix to VPO Connected to 1D Channel</a></li>
+<li class="chapter" data-level="3.9.2" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAC2-3"><i class="fa fa-check"></i><b>3.9.2</b> Bug Fix to Water Level Lines (WLL) when Virtual Pipes are Used</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAD-2"><i class="fa fa-check"></i><b>3.10</b> 2023-03-AD Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="3.10.1" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAD1-3"><i class="fa fa-check"></i><b>3.10.1</b> Bug Fix to Water Level Lines (WLL) when Snapped to Nodes</a></li>
+<li class="chapter" data-level="3.10.2" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAD2-3"><i class="fa fa-check"></i><b>3.10.2</b> Bug Fix to Prevent Freeze When Channel is Connected to Same Node Upstream and Downstream</a></li>
+<li class="chapter" data-level="3.10.3" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAD3-3"><i class="fa fa-check"></i><b>3.10.3</b> Bug Fix to Models with 1D Node Names Alphanumerically After “ZZ000”</a></li>
+<li class="chapter" data-level="3.10.4" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAD4-3"><i class="fa fa-check"></i><b>3.10.4</b> Reduced Screen Output for 1D Initialisation</a></li>
+<li class="chapter" data-level="3.10.5" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAD5-3"><i class="fa fa-check"></i><b>3.10.5</b> Bug Fix for Pits with Large Search Distances Connecting to the Wrong 1D Node</a></li>
+<li class="chapter" data-level="3.10.6" data-path="OneDSolv-1.html"><a href="OneDSolv-1.html#MinorEnhanBugFixAD6-3"><i class="fa fa-check"></i><b>3.10.6</b> Eliminated Warning 1100 at Manhole Nodes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="SWMM-TUFLOW-1.html"><a href="SWMM-TUFLOW-1.html"><i class="fa fa-check"></i><b>4</b> 1D Solver - SWMM</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="SWMM-TUFLOW-1.html"><a href="SWMM-TUFLOW-1.html#SWMM-Overview-2"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="SWMM-TUFLOW-1.html"><a href="SWMM-TUFLOW-1.html#SWMM-TUFLOWCommands-2"><i class="fa fa-check"></i><b>4.2</b> SWMM-TUFLOW Commands</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="SWMM-TUFLOW-1.html"><a href="SWMM-TUFLOW-1.html#TCFCommands-3"><i class="fa fa-check"></i><b>4.2.1</b> TUFLOW Control File Commands (TCF)</a></li>
+<li class="chapter" data-level="4.2.2" data-path="SWMM-TUFLOW-1.html"><a href="SWMM-TUFLOW-1.html#TSCFCommands-3"><i class="fa fa-check"></i><b>4.2.2</b> TUFLOW SWMM Control File Commands (TSCF)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="SWMM-TUFLOW-1.html"><a href="SWMM-TUFLOW-1.html#SWMM-Input-Files-2"><i class="fa fa-check"></i><b>4.3</b> SWMM Input Files</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html"><i class="fa fa-check"></i><b>5</b> 2D Solvers - Classic/HPC</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverOverview-2"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#HPCWeirFlow-2"><i class="fa fa-check"></i><b>5.2</b> 2D HPC Weir Flow Approach</a></li>
+<li class="chapter" data-level="5.3" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#HPCGaugeObjects-2"><i class="fa fa-check"></i><b>5.3</b> Support for Record Gauge Data in HPC</a></li>
+<li class="chapter" data-level="5.4" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#QDTAutoIWL-2"><i class="fa fa-check"></i><b>5.4</b> Support for Automatic Initial Water Level in Quadtree</a></li>
+<li class="chapter" data-level="5.5" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#HPCLongProfiles-2"><i class="fa fa-check"></i><b>5.5</b> Support for Long Profiles in HPC</a></li>
+<li class="chapter" data-level="5.6" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#IncreaseMaxCPUThreads-2"><i class="fa fa-check"></i><b>5.6</b> Increase in Maximum CPU Threads</a></li>
+<li class="chapter" data-level="5.7" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverMinorEnhanceBugFix-2"><i class="fa fa-check"></i><b>5.7</b> Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#LimitManningsnWu-3"><i class="fa fa-check"></i><b>5.7.1</b> Limiting Manning’s n for Wu Turbulence Calculation</a></li>
+<li class="chapter" data-level="5.7.2" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#QDTClipLayersTINs-3"><i class="fa fa-check"></i><b>5.7.2</b> TIN Clip Layers in Quadtree</a></li>
+<li class="chapter" data-level="5.7.3" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#InvalidClipObject-3"><i class="fa fa-check"></i><b>5.7.3</b> Change to Treatment of non-Polygon Objects in Geometry Trim Layers</a></li>
+<li class="chapter" data-level="5.7.4" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#Warning3522-3"><i class="fa fa-check"></i><b>5.7.4</b> WARNING 3522 Message Text Updated</a></li>
+<li class="chapter" data-level="5.7.5" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#QDTThickBreakline-3"><i class="fa fa-check"></i><b>5.7.5</b> New Thick Breakline Face Selection for Quadtree Model</a></li>
+<li class="chapter" data-level="5.7.6" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#SGSMethodCZptsPolygons-3"><i class="fa fa-check"></i><b>5.7.6</b> Support Read GIS Zpts Polygon Shape in SGS Method C</a></li>
+<li class="chapter" data-level="5.7.7" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#SGSMethodCZptsADD-3"><i class="fa fa-check"></i><b>5.7.7</b> Support Read GRID Zpts ADD Option for SGS Method C</a></li>
+<li class="chapter" data-level="5.7.8" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#Error3517-3"><i class="fa fa-check"></i><b>5.7.8</b> Read RowCol Zpts and Read GIS Zpts With Point Layer Now Produce ERROR 3517 in SGS or Quadtree Models</a></li>
+<li class="chapter" data-level="5.7.9" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#Error2586-3"><i class="fa fa-check"></i><b>5.7.9</b> Error for TGC Command Read Grid IWL used in .tcf</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverMinorEnhanceBugFixAB-2"><i class="fa fa-check"></i><b>5.8</b> 2023-03-AB Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix1-3"><i class="fa fa-check"></i><b>5.8.1</b> Running Simulations at the Exact Same Time Causes XF File “End Of File” Error</a></li>
+<li class="chapter" data-level="5.8.2" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix2-3"><i class="fa fa-check"></i><b>5.8.2</b> Bug Fix for “Should Not Be Here [tE” with HPC and Restart Files</a></li>
+<li class="chapter" data-level="5.8.3" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix3-3"><i class="fa fa-check"></i><b>5.8.3</b> Bug Fix for “Should not Be Here [tE” at End of Simulation</a></li>
+<li class="chapter" data-level="5.8.4" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix4-3"><i class="fa fa-check"></i><b>5.8.4</b> Bug Fix for Forward Slash in Check File Path</a></li>
+<li class="chapter" data-level="5.8.5" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix5-3"><i class="fa fa-check"></i><b>5.8.5</b> Bug Fix for Stability Issue with Thick Breaklines</a></li>
+<li class="chapter" data-level="5.8.6" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix6-3"><i class="fa fa-check"></i><b>5.8.6</b> Bug Fix for Small HPC models on CPU with a Large Number of Threads</a></li>
+<li class="chapter" data-level="5.8.7" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix7-3"><i class="fa fa-check"></i><b>5.8.7</b> Bug Fix with SGS Calculation</a></li>
+<li class="chapter" data-level="5.8.8" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix8-3"><i class="fa fa-check"></i><b>5.8.8</b> Bug Fix with Fixed Form Loss Coefficients in Quadtree</a></li>
+<li class="chapter" data-level="5.8.9" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix9-3"><i class="fa fa-check"></i><b>5.8.9</b> Update to CHECK 3505 SGS TIN for Quadtree Model</a></li>
+<li class="chapter" data-level="5.8.10" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverABFix10-3"><i class="fa fa-check"></i><b>5.8.10</b> Bug Fix 2d_lfcsh Layers in Quadtree Snapped to Code</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverMinorEnhanceBugFixAD-2"><i class="fa fa-check"></i><b>5.9</b> 2023-03-AD Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix1-3"><i class="fa fa-check"></i><b>5.9.1</b> Bug Fix - HPC Crashing During Initialisation with Exactly 256 Unique Material IDs</a></li>
+<li class="chapter" data-level="5.9.2" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix2-3"><i class="fa fa-check"></i><b>5.9.2</b> Bug Fix with Process All Grids Command</a></li>
+<li class="chapter" data-level="5.9.3" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix3-3"><i class="fa fa-check"></i><b>5.9.3</b> Bug Fix with Memory Allocation for Reading Grids with SGS</a></li>
+<li class="chapter" data-level="5.9.4" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix4-3"><i class="fa fa-check"></i><b>5.9.4</b> Bug Fix for Cell Width Factor in HPC</a></li>
+<li class="chapter" data-level="5.9.5" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix5-3"><i class="fa fa-check"></i><b>5.9.5</b> Extra Information in XF Filenames</a></li>
+<li class="chapter" data-level="5.9.6" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix6-3"><i class="fa fa-check"></i><b>5.9.6</b> Bug Fix for Wide Lines</a></li>
+<li class="chapter" data-level="5.9.7" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix7-3"><i class="fa fa-check"></i><b>5.9.7</b> Enhancement for HPC and Quadtree Restart Files</a></li>
+<li class="chapter" data-level="5.9.8" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix8-3"><i class="fa fa-check"></i><b>5.9.8</b> Quadtree - Removes One Parent Polygon Requirement (Fast Method)</a></li>
+<li class="chapter" data-level="5.9.9" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix9-3"><i class="fa fa-check"></i><b>5.9.9</b> Bug Fix for No Time Series Output in run_stats.txt</a></li>
+<li class="chapter" data-level="5.9.10" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix10-3"><i class="fa fa-check"></i><b>5.9.10</b> Enhancement Automatic Recreation of Invalid XF Files</a></li>
+<li class="chapter" data-level="5.9.11" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix11-3"><i class="fa fa-check"></i><b>5.9.11</b> Changes to Reported Timestep Efficiency</a></li>
+<li class="chapter" data-level="5.9.12" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverADFix12-3"><i class="fa fa-check"></i><b>5.9.12</b> Fix to Initial Groundwater Map Output Results with “GT” Boundaries</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverMinorEnhanceBugFixAE-2"><i class="fa fa-check"></i><b>5.10</b> 2023-03-AE Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="5.10.1" data-path="TwoDSolv-1.html"><a href="TwoDSolv-1.html#id_2DSolverAEFix1-3"><i class="fa fa-check"></i><b>5.10.1</b> Bug Fix for HPC Running on Multiple GPU/CPU</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="BndLnks-1.html"><a href="BndLnks-1.html"><i class="fa fa-check"></i><b>6</b> Boundaries and Links</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="BndLnks-1.html"><a href="BndLnks-1.html#DSSFormat-2"><i class="fa fa-check"></i><b>6.1</b> Support for DSS File Format</a></li>
+<li class="chapter" data-level="6.2" data-path="BndLnks-1.html"><a href="BndLnks-1.html#SXMomentum-2"><i class="fa fa-check"></i><b>6.2</b> SX Momentum</a></li>
+<li class="chapter" data-level="6.3" data-path="BndLnks-1.html"><a href="BndLnks-1.html#id_1DSX-StructureLoss-2"><i class="fa fa-check"></i><b>6.3</b> Structure Loss Adjustment for SX Connected 1D Structures</a></li>
+<li class="chapter" data-level="6.4" data-path="BndLnks-1.html"><a href="BndLnks-1.html#QDT-Bound-Inertia-2"><i class="fa fa-check"></i><b>6.4</b> Quadtree Parallel Inertia on HT / HX Boundaries</a></li>
+<li class="chapter" data-level="6.5" data-path="BndLnks-1.html"><a href="BndLnks-1.html#HPCSplineInterpolation-2"><i class="fa fa-check"></i><b>6.5</b> HPC Support for Boundary Spline Interpolation</a></li>
+<li class="chapter" data-level="6.6" data-path="BndLnks-1.html"><a href="BndLnks-1.html#HPCBoundaryApproach-2"><i class="fa fa-check"></i><b>6.6</b> Default HPC Boundary Approach</a></li>
+<li class="chapter" data-level="6.7" data-path="BndLnks-1.html"><a href="BndLnks-1.html#QTPointBoundarySupport-2"><i class="fa fa-check"></i><b>6.7</b> QT 2d_bc Point Boundaries No Longer Supported in Classic/HPC</a></li>
+<li class="chapter" data-level="6.8" data-path="BndLnks-1.html"><a href="BndLnks-1.html#HQPointBoundarySupport-2"><i class="fa fa-check"></i><b>6.8</b> HQ 2d_bc Point Boundaries No Longer Supported in Classic/HPC/Quadtree</a></li>
+<li class="chapter" data-level="6.9" data-path="BndLnks-1.html"><a href="BndLnks-1.html#HPCHolland-2"><i class="fa fa-check"></i><b>6.9</b> Support for Holland Cyclone/Hurricane in HPC/Quadtree</a></li>
+<li class="chapter" data-level="6.10" data-path="BndLnks-1.html"><a href="BndLnks-1.html#BoundaryMinorEnhanceBugFix-2"><i class="fa fa-check"></i><b>6.10</b> Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="6.10.1" data-path="BndLnks-1.html"><a href="BndLnks-1.html#Error0628-3"><i class="fa fa-check"></i><b>6.10.1</b> Should Not Be Here When Reading TS1 File</a></li>
+<li class="chapter" data-level="6.10.2" data-path="BndLnks-1.html"><a href="BndLnks-1.html#DuplicateSABoundary-3"><i class="fa fa-check"></i><b>6.10.2</b> Duplicate SA Boundary Names</a></li>
+<li class="chapter" data-level="6.10.3" data-path="BndLnks-1.html"><a href="BndLnks-1.html#CSVMultipleBlocks-3"><i class="fa fa-check"></i><b>6.10.3</b> CSV Inputs Containing Multiple Blocks</a></li>
+<li class="chapter" data-level="6.10.4" data-path="BndLnks-1.html"><a href="BndLnks-1.html#QDTBCZeroFlow-3"><i class="fa fa-check"></i><b>6.10.4</b> BC Zero Flow End Fixed in Quadtree</a></li>
+<li class="chapter" data-level="6.10.5" data-path="BndLnks-1.html"><a href="BndLnks-1.html#Check0249-3"><i class="fa fa-check"></i><b>6.10.5</b> BC Zero Flow CHECK Message</a></li>
+<li class="chapter" data-level="6.10.6" data-path="BndLnks-1.html"><a href="BndLnks-1.html#AutoWLInterpolated-3"><i class="fa fa-check"></i><b>6.10.6</b> Automatic Initial Water Level When Interpolated</a></li>
+<li class="chapter" data-level="6.10.7" data-path="BndLnks-1.html"><a href="BndLnks-1.html#QDTSXRegionZFlag-3"><i class="fa fa-check"></i><b>6.10.7</b> SX Region with Z Flag in Quadtree Model</a></li>
+<li class="chapter" data-level="6.10.8" data-path="BndLnks-1.html"><a href="BndLnks-1.html#QDTSXCellSelection-3"><i class="fa fa-check"></i><b>6.10.8</b> Small SX Region Selects At Least One Cell in Quadtree Model</a></li>
+<li class="chapter" data-level="6.10.9" data-path="BndLnks-1.html"><a href="BndLnks-1.html#SARFAttributeCheck-3"><i class="fa fa-check"></i><b>6.10.9</b> Check for Correct Attribute for SA RF Boundaries</a></li>
+<li class="chapter" data-level="6.10.10" data-path="BndLnks-1.html"><a href="BndLnks-1.html#Error0651-3"><i class="fa fa-check"></i><b>6.10.10</b> Bug Fix for XF files when Time Column has Zero Rows of Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.11" data-path="BndLnks-1.html"><a href="BndLnks-1.html#BoundaryMinorEnhanceBugFixAB-2"><i class="fa fa-check"></i><b>6.11</b> 2023-03-AB Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="6.11.1" data-path="BndLnks-1.html"><a href="BndLnks-1.html#QDTHQTotal-3"><i class="fa fa-check"></i><b>6.11.1</b> Quadtree HQ Total Boundary - Should Not Be Here</a></li>
+<li class="chapter" data-level="6.11.2" data-path="BndLnks-1.html"><a href="BndLnks-1.html#id_2DSANullObject-3"><i class="fa fa-check"></i><b>6.11.2</b> Better Handling of Null Objects in 2d_sa Layer</a></li>
+</ul></li>
+<li class="chapter" data-level="6.12" data-path="BndLnks-1.html"><a href="BndLnks-1.html#BoundaryMinorEnhanceBugFixAC-2"><i class="fa fa-check"></i><b>6.12</b> 2023-03-AC Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="6.12.1" data-path="BndLnks-1.html"><a href="BndLnks-1.html#NetCDF_RF_gt_1000-3"><i class="fa fa-check"></i><b>6.12.1</b> Fixes Issue with NetCDF Rainfall with Times Greater Than 1,000 Hours</a></li>
+<li class="chapter" data-level="6.12.2" data-path="BndLnks-1.html"><a href="BndLnks-1.html#TRFCF_gt_1000-3"><i class="fa fa-check"></i><b>6.12.2</b> Fixes Issue with Rainfall Control File with Greater than 1,000 Output Times</a></li>
+</ul></li>
+<li class="chapter" data-level="6.13" data-path="BndLnks-1.html"><a href="BndLnks-1.html#BoundaryMinorEnhanceBugFixAD-2"><i class="fa fa-check"></i><b>6.13</b> 2023-03-AD Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="6.13.1" data-path="BndLnks-1.html"><a href="BndLnks-1.html#BoundaryADFix1-3"><i class="fa fa-check"></i><b>6.13.1</b> Bug Fix for 2D HQ Boundaries Selecting Only One Cell</a></li>
+<li class="chapter" data-level="6.13.2" data-path="BndLnks-1.html"><a href="BndLnks-1.html#BoundaryADFix2-3"><i class="fa fa-check"></i><b>6.13.2</b> Bug Fix for Quadtree Automatic SX Connections Where “Conn_No” is Set to -1</a></li>
+<li class="chapter" data-level="6.13.3" data-path="BndLnks-1.html"><a href="BndLnks-1.html#BoundaryADFix3-3"><i class="fa fa-check"></i><b>6.13.3</b> Bug Fix for SA Check Files</a></li>
+<li class="chapter" data-level="6.13.4" data-path="BndLnks-1.html"><a href="BndLnks-1.html#BoundaryADFix4-3"><i class="fa fa-check"></i><b>6.13.4</b> Bug Fix for Very Large Models with SX Connections</a></li>
+<li class="chapter" data-level="6.13.5" data-path="BndLnks-1.html"><a href="BndLnks-1.html#BoundaryADFix5-3"><i class="fa fa-check"></i><b>6.13.5</b> Bug Fix for Gridded Rainfall in HPC</a></li>
+<li class="chapter" data-level="6.13.6" data-path="BndLnks-1.html"><a href="BndLnks-1.html#BoundaryADFix6-3"><i class="fa fa-check"></i><b>6.13.6</b> Support for Global Wind Boundary in Quadtree</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="GISFormats-1.html"><a href="GISFormats-1.html"><i class="fa fa-check"></i><b>7</b> GIS Formats</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GPKG-Format-2"><i class="fa fa-check"></i><b>7.1</b> GeoPackage Format</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GPKG-Projection-3"><i class="fa fa-check"></i><b>7.1.1</b> GeoPackage Projection</a></li>
+<li class="chapter" data-level="7.1.2" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GPKG-Vector-3"><i class="fa fa-check"></i><b>7.1.2</b> GeoPackage Vector</a></li>
+<li class="chapter" data-level="7.1.3" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GPKG-Conv-Check-3"><i class="fa fa-check"></i><b>7.1.3</b> GeoPackage Conversion Check</a></li>
+<li class="chapter" data-level="7.1.4" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GPKG-Raster-3"><i class="fa fa-check"></i><b>7.1.4</b> GeoPackage Raster</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GeoTIFF-Format-2"><i class="fa fa-check"></i><b>7.2</b> GeoTIFF Format</a></li>
+<li class="chapter" data-level="7.3" data-path="GISFormats-1.html"><a href="GISFormats-1.html#NetCDF-Grids-2"><i class="fa fa-check"></i><b>7.3</b> NetCDF Grid</a></li>
+<li class="chapter" data-level="7.4" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsMinorEnhanceBugFixAB-2"><i class="fa fa-check"></i><b>7.4</b> 2023-03-AB Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix1-3"><i class="fa fa-check"></i><b>7.4.1</b> Spatial Database Command Now Works in Quadtree Control File</a></li>
+<li class="chapter" data-level="7.4.2" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix2-3"><i class="fa fa-check"></i><b>7.4.2</b> Read GRID Location Now Works for New Raster Formats</a></li>
+<li class="chapter" data-level="7.4.3" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix3-3"><i class="fa fa-check"></i><b>7.4.3</b> Compression Now Allows for Size Increase</a></li>
+<li class="chapter" data-level="7.4.4" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix4-3"><i class="fa fa-check"></i><b>7.4.4</b> Increase Primary Key Column Name Length</a></li>
+<li class="chapter" data-level="7.4.5" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix5-3"><i class="fa fa-check"></i><b>7.4.5</b> Retry Loop for Locked GPKG Databases</a></li>
+<li class="chapter" data-level="7.4.6" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix6-3"><i class="fa fa-check"></i><b>7.4.6</b> GPKG XF File Naming</a></li>
+<li class="chapter" data-level="7.4.7" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix7-3"><i class="fa fa-check"></i><b>7.4.7</b> Bug Fix “Reached maximum concurrent SQLite statements”</a></li>
+<li class="chapter" data-level="7.4.8" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix8-3"><i class="fa fa-check"></i><b>7.4.8</b> Bug Fix “ERROR 0636 – Issue stepping through SQLite query”</a></li>
+<li class="chapter" data-level="7.4.9" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix9-3"><i class="fa fa-check"></i><b>7.4.9</b> GPKG Multi-Part Polygons</a></li>
+<li class="chapter" data-level="7.4.10" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsABFix10-3"><i class="fa fa-check"></i><b>7.4.10</b> ERROR 0305 Triggering When There is No GPKG Projection</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsMinorEnhanceBugFixAC-2"><i class="fa fa-check"></i><b>7.5</b> 2023-03-AC Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsACFix1-3"><i class="fa fa-check"></i><b>7.5.1</b> GPKG XF File Creation Causing “ERROR 0645”</a></li>
+<li class="chapter" data-level="7.5.2" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsACFix2-3"><i class="fa fa-check"></i><b>7.5.2</b> Bug Fix For GPKG When “fid” Was Not the Same as “rowid”</a></li>
+<li class="chapter" data-level="7.5.3" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsACFix3-3"><i class="fa fa-check"></i><b>7.5.3</b> Exit TUFLOW if an ERROR Occurs Reading GPKG</a></li>
+<li class="chapter" data-level="7.5.4" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsACFix4-5"><i class="fa fa-check"></i><b>7.5.4</b> Bug Fix GPKG Reading 1d_pit</a></li>
+<li class="chapter" data-level="7.5.5" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsACFix4-3"><i class="fa fa-check"></i><b>7.5.5</b> GeoTIFF Now Supports “SPARSE_OK=TRUE” GDAL Creation Option</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsMinorEnhanceBugFixAD-2"><i class="fa fa-check"></i><b>7.6</b> 2023-03-AD Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix1-3"><i class="fa fa-check"></i><b>7.6.1</b> Bug Fix - Crash While Reading GeoTIFF Inputs</a></li>
+<li class="chapter" data-level="7.6.2" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix2-3"><i class="fa fa-check"></i><b>7.6.2</b> Raster Cell Shape Check</a></li>
+<li class="chapter" data-level="7.6.3" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix3-3"><i class="fa fa-check"></i><b>7.6.3</b> GeoTIFF Coordinate Reference System Check</a></li>
+<li class="chapter" data-level="7.6.4" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix4-3"><i class="fa fa-check"></i><b>7.6.4</b> GPKG Projection Accepts String Input</a></li>
+<li class="chapter" data-level="7.6.5" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix5-3"><i class="fa fa-check"></i><b>7.6.5</b> Bug Fix - Spatial Database == [path/to/gpkg] When Used in a Read File Within The TCF</a></li>
+<li class="chapter" data-level="7.6.6" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix6-3"><i class="fa fa-check"></i><b>7.6.6</b> Bug Fix - Spatial Database == OFF When Used in a Read File</a></li>
+<li class="chapter" data-level="7.6.7" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix7-3"><i class="fa fa-check"></i><b>7.6.7</b> GPKG Fully Implemented in Package Model Functionality</a></li>
+<li class="chapter" data-level="7.6.8" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix8-3"><i class="fa fa-check"></i><b>7.6.8</b> GPKG Reading - Change in Default Journal Mode</a></li>
+<li class="chapter" data-level="7.6.9" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix9-3"><i class="fa fa-check"></i><b>7.6.9</b> Support for User SQL When GPKG Databases are Opened</a></li>
+<li class="chapter" data-level="7.6.10" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix10-3"><i class="fa fa-check"></i><b>7.6.10</b> GPKG Improved Error Messaging if Polygon/Polyline Vertex Count Exceeds TUFLOW Limit</a></li>
+<li class="chapter" data-level="7.6.11" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix11-3"><i class="fa fa-check"></i><b>7.6.11</b> Bug Fix - GeoTIFF Grids Being Cutoff</a></li>
+<li class="chapter" data-level="7.6.12" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix12-3"><i class="fa fa-check"></i><b>7.6.12</b> Bug Fix - GPKG XF Files Not Updating</a></li>
+<li class="chapter" data-level="7.6.13" data-path="GISFormats-1.html"><a href="GISFormats-1.html#GISFormatsADFix14-3"><i class="fa fa-check"></i><b>7.6.13</b> Enhances Handling of Line Breaks in Attributes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="OutChecks-1.html"><a href="OutChecks-1.html"><i class="fa fa-check"></i><b>8</b> Outputs and Check Files</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#RecGauge-2"><i class="fa fa-check"></i><b>8.1</b> Additional Options for Record Gauge Data Outputs</a></li>
+<li class="chapter" data-level="8.2" data-path="OutChecks-1.html"><a href="OutChecks-1.html#TMaxHOff-2"><i class="fa fa-check"></i><b>8.2</b> Time of Max Water Level Switch</a></li>
+<li class="chapter" data-level="8.3" data-path="OutChecks-1.html"><a href="OutChecks-1.html#TMaxVOff-2"><i class="fa fa-check"></i><b>8.3</b> Time of Max Velocity Off by Default</a></li>
+<li class="chapter" data-level="8.4" data-path="OutChecks-1.html"><a href="OutChecks-1.html#FileAccess-2"><i class="fa fa-check"></i><b>8.4</b> File Access Timeout</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#FileAccessFix1-3"><i class="fa fa-check"></i><b>8.4.1</b> Bug Fix for Final SGS Elevation XF File Access</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="OutChecks-1.html"><a href="OutChecks-1.html#GrdCheck-2"><i class="fa fa-check"></i><b>8.5</b> Additional Check Grid Formats</a></li>
+<li class="chapter" data-level="8.6" data-path="OutChecks-1.html"><a href="OutChecks-1.html#HRFormat-2"><i class="fa fa-check"></i><b>8.6</b> High Resolution Map Output Includes Additional File Formats</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#NetCDFGrd-3"><i class="fa fa-check"></i><b>8.6.1</b> Viewing HRNC in TUFLOW Viewer</a></li>
+<li class="chapter" data-level="8.6.2" data-path="OutChecks-1.html"><a href="OutChecks-1.html#HR1DWLL-3"><i class="fa fa-check"></i><b>8.6.2</b> High Resolution Map Output Includes 1D WLL Elevations</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="OutChecks-1.html"><a href="OutChecks-1.html#NewMapOutputs-2"><i class="fa fa-check"></i><b>8.7</b> New Map Output Data Types</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#HPCControlNumbers-3"><i class="fa fa-check"></i><b>8.7.1</b> HPC Control Numbers</a></li>
+<li class="chapter" data-level="8.7.2" data-path="OutChecks-1.html"><a href="OutChecks-1.html#new-hazard-output-auckland-council-hazard-nz"><i class="fa fa-check"></i><b>8.7.2</b> New Hazard Output – Auckland Council Hazard NZ</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="OutChecks-1.html"><a href="OutChecks-1.html#SimLogTimes-2"><i class="fa fa-check"></i><b>8.8</b> Changes to Simulation Computational and Clock Times</a>
+<ul>
+<li class="chapter" data-level="8.8.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#SimLogFilesAB-3"><i class="fa fa-check"></i><b>8.8.1</b> Changes to Simulation Log Files for 2023-03-AB</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="OutChecks-1.html"><a href="OutChecks-1.html#GLOAddedToHPC-2"><i class="fa fa-check"></i><b>8.9</b> Support Added for 2d_glo in HPC and Quadtree</a></li>
+<li class="chapter" data-level="8.10" data-path="OutChecks-1.html"><a href="OutChecks-1.html#RemovePOLevelLines-2"><i class="fa fa-check"></i><b>8.10</b> Support For “H_” Po Lines Removed</a></li>
+<li class="chapter" data-level="8.11" data-path="OutChecks-1.html"><a href="OutChecks-1.html#MinEnhancBugFix-2"><i class="fa fa-check"></i><b>8.11</b> Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="8.11.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#POValidGmtry-3"><i class="fa fa-check"></i><b>8.11.1</b> Checks for Valid Geometries for Plot Outputs</a></li>
+<li class="chapter" data-level="8.11.2" data-path="OutChecks-1.html"><a href="OutChecks-1.html#HPCdtIntrvl-3"><i class="fa fa-check"></i><b>8.11.2</b> HPC dt.csv Interval Can Now Be Set</a></li>
+<li class="chapter" data-level="8.11.3" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OZIntervals-3"><i class="fa fa-check"></i><b>8.11.3</b> Bug Fix for Map Output Zones Using Different Map Output Intervals</a></li>
+<li class="chapter" data-level="8.11.4" data-path="OutChecks-1.html"><a href="OutChecks-1.html#SGSReporting-3"><i class="fa fa-check"></i><b>8.11.4</b> SGS Sample Distance Reporting in TLF</a></li>
+<li class="chapter" data-level="8.11.5" data-path="OutChecks-1.html"><a href="OutChecks-1.html#Warning2550-3"><i class="fa fa-check"></i><b>8.11.5</b> Limit Number of WARNING 2550 Messages</a></li>
+<li class="chapter" data-level="8.11.6" data-path="OutChecks-1.html"><a href="OutChecks-1.html#WRFEmpty-3"><i class="fa fa-check"></i><b>8.11.6</b> 2D_WRF Empty File</a></li>
+<li class="chapter" data-level="8.11.7" data-path="OutChecks-1.html"><a href="OutChecks-1.html#HROZ-3"><i class="fa fa-check"></i><b>8.11.7</b> High Resolution Grid Outputs Not Created with Map Output Zones</a></li>
+<li class="chapter" data-level="8.11.8" data-path="OutChecks-1.html"><a href="OutChecks-1.html#TOCutHazard-3"><i class="fa fa-check"></i><b>8.11.8</b> Time Output Cutoff <Hazard> Logging Fix</a></li>
+<li class="chapter" data-level="8.11.9" data-path="OutChecks-1.html"><a href="OutChecks-1.html#MassErrAstrks-3"><i class="fa fa-check"></i><b>8.11.9</b> Mass Error Reporting During Simulation Showing Asterisks</a></li>
+<li class="chapter" data-level="8.11.10" data-path="OutChecks-1.html"><a href="OutChecks-1.html#QGSSnapping-3"><i class="fa fa-check"></i><b>8.11.10</b> Snapping Settings Added to .qgs File</a></li>
+<li class="chapter" data-level="8.11.11" data-path="OutChecks-1.html"><a href="OutChecks-1.html#DupChecks-3"><i class="fa fa-check"></i><b>8.11.11</b> Duplicate Messages in the messages_P GIS File</a></li>
+<li class="chapter" data-level="8.11.12" data-path="OutChecks-1.html"><a href="OutChecks-1.html#QPCzshzpt-3"><i class="fa fa-check"></i><b>8.11.12</b> Quadtree zsh_zpt_check Points in Non-Refined Areas</a></li>
+<li class="chapter" data-level="8.11.13" data-path="OutChecks-1.html"><a href="OutChecks-1.html#SGSCellAvgD-3"><i class="fa fa-check"></i><b>8.11.13</b> Bug Fix for SGS Model Outputs When Cell Averaged Depth Option is Used</a></li>
+<li class="chapter" data-level="8.11.14" data-path="OutChecks-1.html"><a href="OutChecks-1.html#ViscosZero-3"><i class="fa fa-check"></i><b>8.11.14</b> Fixes an Issue with Viscosity Output Written as Zero</a></li>
+<li class="chapter" data-level="8.11.15" data-path="OutChecks-1.html"><a href="OutChecks-1.html#NuNcNd-3"><i class="fa fa-check"></i><b>8.11.15</b> HPC Control Number Map Output</a></li>
+<li class="chapter" data-level="8.11.16" data-path="OutChecks-1.html"><a href="OutChecks-1.html#SGSzshzpt-3"><i class="fa fa-check"></i><b>8.11.16</b> _zsh_zpt Check File for SGS Models</a></li>
+<li class="chapter" data-level="8.11.17" data-path="OutChecks-1.html"><a href="OutChecks-1.html#RecGauge-3"><i class="fa fa-check"></i><b>8.11.17</b> Extra Checks on File Format Specific Map Output Commands</a></li>
+<li class="chapter" data-level="8.11.18" data-path="OutChecks-1.html"><a href="OutChecks-1.html#DataTypeSpace-3"><i class="fa fa-check"></i><b>8.11.18</b> Changes to Processing of Map Output Data Types Command</a></li>
+<li class="chapter" data-level="8.11.19" data-path="OutChecks-1.html"><a href="OutChecks-1.html#LFCSHMethod-3"><i class="fa fa-check"></i><b>8.11.19</b> Layered Flow Constriction Check File Now Includes Method</a></li>
+<li class="chapter" data-level="8.11.20" data-path="OutChecks-1.html"><a href="OutChecks-1.html#HPCErrorTLF-3"><i class="fa fa-check"></i><b>8.11.20</b> HPC Error Codes Are Now Reported in .tlf and Message Layers</a></li>
+</ul></li>
+<li class="chapter" data-level="8.12" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksMinEnhancBugFixAB-2"><i class="fa fa-check"></i><b>8.12</b> 2023-03-AB Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="8.12.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix1-3"><i class="fa fa-check"></i><b>8.12.1</b> Fix for Quadtree High Resolution Outputs and WLL</a></li>
+<li class="chapter" data-level="8.12.2" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix2-3"><i class="fa fa-check"></i><b>8.12.2</b> Reduced Log File when Processing Quadtree Polygons</a></li>
+<li class="chapter" data-level="8.12.3" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix3-3"><i class="fa fa-check"></i><b>8.12.3</b> Bug Fix for Integer (Hazard) Grid Outputs</a></li>
+<li class="chapter" data-level="8.12.4" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix4-3"><i class="fa fa-check"></i><b>8.12.4</b> Consistent Reporting Location Dry Output</a></li>
+<li class="chapter" data-level="8.12.5" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix5-3"><i class="fa fa-check"></i><b>8.12.5</b> Bug Fix MIF PLOT output</a></li>
+<li class="chapter" data-level="8.12.6" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix6-3"><i class="fa fa-check"></i><b>8.12.6</b> Scientific Notation for PO Outputs</a></li>
+<li class="chapter" data-level="8.12.7" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix7-3"><i class="fa fa-check"></i><b>8.12.7</b> Scientific Notation for ASC Outputs</a></li>
+<li class="chapter" data-level="8.12.8" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix8-3"><i class="fa fa-check"></i><b>8.12.8</b> Bug Fix Geometry Type Groundwater Flow Output in TPC</a></li>
+<li class="chapter" data-level="8.12.9" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix9-3"><i class="fa fa-check"></i><b>8.12.9</b> Bug Fix Groundwater Vector Grid Outputs</a></li>
+<li class="chapter" data-level="8.12.10" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix10-3"><i class="fa fa-check"></i><b>8.12.10</b> Bug Fix Velocity GIS Map Output</a></li>
+<li class="chapter" data-level="8.12.11" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix11-3"><i class="fa fa-check"></i><b>8.12.11</b> Extra Precision in Quadtree uvpt Check File for Form Loss</a></li>
+<li class="chapter" data-level="8.12.12" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix12-3"><i class="fa fa-check"></i><b>8.12.12</b> TMO Output Changes for HPC Model with SGS</a></li>
+<li class="chapter" data-level="8.12.13" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix13-3"><i class="fa fa-check"></i><b>8.12.13</b> Duplicated HR Output Message in Log File</a></li>
+<li class="chapter" data-level="8.12.14" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix14-3"><i class="fa fa-check"></i><b>8.12.14</b> Updated Links to TUFLOW Wiki</a></li>
+<li class="chapter" data-level="8.12.15" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix15-3"><i class="fa fa-check"></i><b>8.12.15</b> Warning 3551 now Check 3551</a></li>
+<li class="chapter" data-level="8.12.16" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix16-3"><i class="fa fa-check"></i><b>8.12.16</b> Check 0008 now ERROR 0008</a></li>
+<li class="chapter" data-level="8.12.17" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix17-3"><i class="fa fa-check"></i><b>8.12.17</b> Check 2099 now Reported to Log and Console</a></li>
+<li class="chapter" data-level="8.12.18" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix18-3"><i class="fa fa-check"></i><b>8.12.18</b> Bug Fix for Warning 4020</a></li>
+<li class="chapter" data-level="8.12.19" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksABFix19-3"><i class="fa fa-check"></i><b>8.12.19</b> Buffered File Write for .2dm</a></li>
+</ul></li>
+<li class="chapter" data-level="8.13" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksMinEnhancBugFixAC-2"><i class="fa fa-check"></i><b>8.13</b> 2023-03-AC Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="8.13.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksACFix1-3"><i class="fa fa-check"></i><b>8.13.1</b> Fix to TMax Output in Output Zone</a></li>
+<li class="chapter" data-level="8.13.2" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksACFix2-3"><i class="fa fa-check"></i><b>8.13.2</b> Enhancement to Plot Output Memory Allocation</a></li>
+<li class="chapter" data-level="8.13.3" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksACFix3-3"><i class="fa fa-check"></i><b>8.13.3</b> Bug Fix to SGS High-Res Output below Sea Surface Level</a></li>
+<li class="chapter" data-level="8.13.4" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksACFix4-3"><i class="fa fa-check"></i><b>8.13.4</b> Quadtree PO Header Rows Swapped</a></li>
+</ul></li>
+<li class="chapter" data-level="8.14" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksMinEnhancBugFixAD-2"><i class="fa fa-check"></i><b>8.14</b> 2023-03-AD Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="8.14.1" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix1-3"><i class="fa fa-check"></i><b>8.14.1</b> Bug Fix for PO Online and GPKG</a></li>
+<li class="chapter" data-level="8.14.2" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix2-3"><i class="fa fa-check"></i><b>8.14.2</b> Bug Fix and Enhancement for NetCDF Grid Projections</a></li>
+<li class="chapter" data-level="8.14.3" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix3-3"><i class="fa fa-check"></i><b>8.14.3</b> Bug Fix for Reporting Location RLL_Qmx.csv and RLR_Volmx.csv Outputs</a></li>
+<li class="chapter" data-level="8.14.4" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix4-3"><i class="fa fa-check"></i><b>8.14.4</b> Removes -99999 From Reporting Location Flow Time Series Output</a></li>
+<li class="chapter" data-level="8.14.5" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix5-3"><i class="fa fa-check"></i><b>8.14.5</b> Error Produced for Duplicate PO Labels for Same Output Type</a></li>
+<li class="chapter" data-level="8.14.6" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix6-3"><i class="fa fa-check"></i><b>8.14.6</b> Plot Output Type ‘Vv’ No Longer Triggers ‘V_’ Output</a></li>
+<li class="chapter" data-level="8.14.7" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix7-3"><i class="fa fa-check"></i><b>8.14.7</b> New Plot Output Types Supported in HPC and Quadtree</a></li>
+<li class="chapter" data-level="8.14.8" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix8-3"><i class="fa fa-check"></i><b>8.14.8</b> Plot Output WARNING 2476 No Longer Triggered Erroneously</a></li>
+<li class="chapter" data-level="8.14.9" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix9-3"><i class="fa fa-check"></i><b>8.14.9</b> Bug Fix For Sink-Source (SS) Plot Output Type in Quadtree</a></li>
+<li class="chapter" data-level="8.14.10" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix10-3"><i class="fa fa-check"></i><b>8.14.10</b> Bug Fix for “GRID” Output Format Not Outputting for GeoTIFFs</a></li>
+<li class="chapter" data-level="8.14.11" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix11-3"><i class="fa fa-check"></i><b>8.14.11</b> Bug Fix for “WRR” Output Crashing With “Should not be here”</a></li>
+<li class="chapter" data-level="8.14.12" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix12-3"><i class="fa fa-check"></i><b>8.14.12</b> Bug Fix for High Resolution Grid Outputs with Energy Type</a></li>
+<li class="chapter" data-level="8.14.13" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix13-3"><i class="fa fa-check"></i><b>8.14.13</b> Loading Results in TUFLOW Viewer While TUFLOW is Running</a></li>
+<li class="chapter" data-level="8.14.14" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix14-3"><i class="fa fa-check"></i><b>8.14.14</b> Spurious Column Removed from PO.csv in Quadtree</a></li>
+<li class="chapter" data-level="8.14.15" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix15-3"><i class="fa fa-check"></i><b>8.14.15</b> Bug Fix for Initial Water Level Polygon Missing From QGIS Workspace</a></li>
+<li class="chapter" data-level="8.14.16" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix16-3"><i class="fa fa-check"></i><b>8.14.16</b> Bug Fix for 2d_bc_tables_check.csv from Quadtree Containing Garbled Text</a></li>
+<li class="chapter" data-level="8.14.17" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix17-3"><i class="fa fa-check"></i><b>8.14.17</b> Re-label SA Boundary Time Column in the 2d_bc_tables_check.csv in Quadtree</a></li>
+<li class="chapter" data-level="8.14.18" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix18-3"><i class="fa fa-check"></i><b>8.14.18</b> ERROR 0710 Now has Wiki Link</a></li>
+<li class="chapter" data-level="8.14.19" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix19-3"><i class="fa fa-check"></i><b>8.14.19</b> Plot Output Sink/Source Type in HPC Now Correctly Reports Net Flow</a></li>
+<li class="chapter" data-level="8.14.20" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix20-3"><i class="fa fa-check"></i><b>8.14.20</b> Bug Fix for Water Level Output with Thin Breakline</a></li>
+<li class="chapter" data-level="8.14.21" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix21-3"><i class="fa fa-check"></i><b>8.14.21</b> Bug Fix for Maximum High Resolution Output</a></li>
+<li class="chapter" data-level="8.14.22" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix22-3"><i class="fa fa-check"></i><b>8.14.22</b> Bug Fix for Reporting Location with Restart File</a></li>
+<li class="chapter" data-level="8.14.23" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix23-3"><i class="fa fa-check"></i><b>8.14.23</b> Bug Fix PO Points With Invalid “Q” Output Crash</a></li>
+<li class="chapter" data-level="8.14.24" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix24-3"><i class="fa fa-check"></i><b>8.14.24</b> Bug Fix NetCDF Raster Time Issues</a></li>
+<li class="chapter" data-level="8.14.25" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix25-3"><i class="fa fa-check"></i><b>8.14.25</b> Bug Fix Grid Ouputs For Map Output Zones</a></li>
+<li class="chapter" data-level="8.14.26" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix26-3"><i class="fa fa-check"></i><b>8.14.26</b> Bug Fix for Mass Balance Output Interval</a></li>
+<li class="chapter" data-level="8.14.27" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix27-3"><i class="fa fa-check"></i><b>8.14.27</b> Bug Fix for Bed Shear Stress Temporal Output</a></li>
+<li class="chapter" data-level="8.14.28" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix28-3"><i class="fa fa-check"></i><b>8.14.28</b> Second Option now Included in NetCDF Output Time Unit Command</a></li>
+<li class="chapter" data-level="8.14.29" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix29-3"><i class="fa fa-check"></i><b>8.14.29</b> Enhancement to Ignore Time Series Output Interval if not Used</a></li>
+<li class="chapter" data-level="8.14.30" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix30-3"><i class="fa fa-check"></i><b>8.14.30</b> Bug Fix for Quadtree Maximum Output</a></li>
+<li class="chapter" data-level="8.14.31" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix31-3"><i class="fa fa-check"></i><b>8.14.31</b> Bug Fix For Misaligned Columns in the TUFLOW Simulation Log</a></li>
+<li class="chapter" data-level="8.14.32" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix32-3"><i class="fa fa-check"></i><b>8.14.32</b> Bug Fix For TMO Outputs in Quadtree</a></li>
+<li class="chapter" data-level="8.14.33" data-path="OutChecks-1.html"><a href="OutChecks-1.html#OutputsChecksADFix33-3"><i class="fa fa-check"></i><b>8.14.33</b> Bug Fix For Maximum Energy Output in HPC</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html"><i class="fa fa-check"></i><b>9</b> Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#id_2023-03-AA-Updates-2"><i class="fa fa-check"></i><b>9.1</b> 2023-03-AA Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#GeoRefMessages-3"><i class="fa fa-check"></i><b>9.1.1</b> Geo-Referenced Messages</a></li>
+<li class="chapter" data-level="9.1.2" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#AAUpdates1-3"><i class="fa fa-check"></i><b>9.1.2</b> Error Message When No Start or End Time is Specified</a></li>
+<li class="chapter" data-level="9.1.3" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#AAUpdates2-3"><i class="fa fa-check"></i><b>9.1.3</b> Warning When 1D_IWL is Used in TCF or TGC</a></li>
+<li class="chapter" data-level="9.1.4" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#AAUpdates3-3"><i class="fa fa-check"></i><b>9.1.4</b> Fixes Issue with Return Characters in GIS Attributes</a></li>
+<li class="chapter" data-level="9.1.5" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#AAUpdates4-3"><i class="fa fa-check"></i><b>9.1.5</b> Package Model Functionality Copies Matrix Blockage Files</a></li>
+<li class="chapter" data-level="9.1.6" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#AAUpdates5-3"><i class="fa fa-check"></i><b>9.1.6</b> TCF now Closed at End of Model Initialisation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#id_2023-03-AB-Updates-2"><i class="fa fa-check"></i><b>9.2</b> 2023-03-AB Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#ABUpdates1-3"><i class="fa fa-check"></i><b>9.2.1</b> Ability to Set Hardware via Command Line Argument</a></li>
+<li class="chapter" data-level="9.2.2" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#ABUpdates2-3"><i class="fa fa-check"></i><b>9.2.2</b> Bug Fix for External 1D Engines</a></li>
+<li class="chapter" data-level="9.2.3" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#ABUpdates3-3"><i class="fa fa-check"></i><b>9.2.3</b> File Path Length Errors</a></li>
+<li class="chapter" data-level="9.2.4" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#ABUpdates4-3"><i class="fa fa-check"></i><b>9.2.4</b> Enhancement to Processing of Tabs</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#id_2023-03-AD-Updates-2"><i class="fa fa-check"></i><b>9.3</b> 2023-03-AD Minor Enhancements and Bug Fixes</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#ADUpdates1-3"><i class="fa fa-check"></i><b>9.3.1</b> TUFLOW HPC Crashing While Writing Outputs Mid-Simulation with Reporting Locations</a></li>
+<li class="chapter" data-level="9.3.2" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#ADUpdates2-3"><i class="fa fa-check"></i><b>9.3.2</b> Bug Fix Using Local Coordinate Reference System with Shape Files</a></li>
+<li class="chapter" data-level="9.3.3" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#ADUpdates3-3"><i class="fa fa-check"></i><b>9.3.3</b> Bug Fix Writing ERROR 2551</a></li>
+<li class="chapter" data-level="9.3.4" data-path="MinEnhancBugFix-1.html"><a href="MinEnhancBugFix-1.html#ADUpdates4-3"><i class="fa fa-check"></i><b>9.3.4</b> Speed Up of Package Model Routine</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="LicenceAndInstall-1.html"><a href="LicenceAndInstall-1.html"><i class="fa fa-check"></i><b>10</b> Licencing and Installing</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="LicenceAndInstall-1.html"><a href="LicenceAndInstall-1.html#Licence1-2"><i class="fa fa-check"></i><b>10.1</b> Support for Flood Modeller Cloud Licences</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="BackwardCompat-1.html"><a href="BackwardCompat-1.html"><i class="fa fa-check"></i><b>11</b> Backward Compatibility</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="BackwardCompat-1.html"><a href="BackwardCompat-1.html#BckCompat-2"><i class="fa fa-check"></i><b>11.1</b> Backward Compatibility to the 2020-10 Release</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="SWMM-Input-Detailed-1.html"><a href="SWMM-Input-Detailed-1.html"><i class="fa fa-check"></i><b>A</b> SWMM Input Files Descriptions</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://www.tuflow.com"><img src="images/WQFooter.jpg" style="width:246px;height:10px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(0,85,129);">TUFLOW Classic/HPC New Release Notes</h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="SWMM-TUFLOW-1" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Section 4</span> 1D Solver - SWMM<a href="SWMM-TUFLOW-1.html#SWMM-TUFLOW-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="newboxAD">
+<p>This chapter of the release notes is written in USA English for the predominantly USA centered SWMM user base.</p>
+</div>
+<div id="SWMM-Overview-2" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Overview<a href="SWMM-TUFLOW-1.html#SWMM-Overview-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="newboxAD">
+<p>TUFLOW has supported 1D/2D dynamic coupling since its initial 2D solver development in 1989. Traditionally, 1D (1 Dimensional) linking and associated modeling has been applied using the ESTRY 1D solver. New in the 2023-03-AD Release, TUFLOW’s 1D linking and solver options have been expanded to support the EPA Storm Water Management Model (SWMM). As such, 1D pipe networks or 1D open channels can now be modeled using either the ESTRY, EPA SWMM, or a combination of the two 1D solvers.</p>
+<p>EPA SWMM is a widely used software program for simulating urban and non-urban watersheds’ hydrologic and hydraulic behavior. Developed in the early 1970s by the Environmental Protection Agency (EPA), the model has since undergone numerous updates and enhancements to become one of the most used 1D stormwater runoff and water quality analysis tools globally, particularly in North America.</p>
+<p>The primary uses of EPA SWMM include designing and evaluating stormwater management practices, planning, and assessing low-impact development techniques, and developing models for floodplain mapping and emergency response planning. The software allows users to simulate a wide range of storm events and analyze the impact of a range of factors, such as land use changes, climate variability, and water quality control measures, on the performance of stormwater management systems.</p>
+<p>This document provides background and instructions for using and linking TUFLOW and SWMM together. Refer to the TUFLOW and SWMM user documentation and tutorials to learn how to set up the TUFLOW and SWMM domains. Information on getting started with TUFLOW can be found on the <a href="https://wiki.tuflow.com/New_User_Guide_Free_Demo_Version">TUFLOW Wiki</a>. Information about EPA SWMM can be found on <a href="https://www.epa.gov/water-research/storm-water-management-model-swmm">the EPA SWMM website</a>.</p>
+<div id="Capabilities-3" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Capabilities<a href="SWMM-TUFLOW-1.html#Capabilities-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Combined TUFLOW (2D) and SWMM (1D) models have a variety of applications and capabilities, including:</p>
+<ul>
+<li>SWMM 1D inflows from external boundary conditions, rainfall routed through subcatchments, or through 2D links</li>
+<li>Subcatchment routing including infiltration, groundwater levels, evaporation, and snow melt</li>
+<li>Low-impact developments (LIDs) for modeling green infrastructure</li>
+<li>1D/2D Links through direct connections (HX/SX) or through stormwater inlets (ESTRY pits)</li>
+<li>Inlets can be a variety of shapes and supports on-sag or on-grade connections</li>
+<li>Inlets can surcharge into the 2D domain if the 1D pressure head exceeds the 2D water level</li>
+<li>Scenario support through the ability to combine multiple SWMM project files (inp) is a powerful way to explore multiple setup options without duplicating information</li>
+<li>All TUFLOW functions including:
+<ul>
+<li>Quadtree grid refinement</li>
+<li>Subgrid sampling</li>
+<li>Rain on grid or source flows</li>
+<li>Infiltration</li>
+<li>Interflow (shallow groundwater)</li>
+</ul></li>
+</ul>
+<p>The TUFLOW QGIS plugin has been expanded to assist with setting up SWMM models, linking TUFLOW-SWMM models, and viewing SWMM outputs. It includes the following features:</p>
+<ul>
+<li>Creation of SWMM GeoPackage GIS files that include all the data needed for a SWMM model</li>
+<li>Conversion of SWMM input files (inp) to and from SWMM GeoPackage files</li>
+<li>Adding tables to SWMM GeoPackage files</li>
+<li>Semi-automatic creation of TUFLOW-SWMM linkage</li>
+<li>Setting of SWMM Junction parameters based on junction usage and location</li>
+<li>Setting SWMM conduit losses dependent on location in the network and whether connected to inlets</li>
+<li>Convert XPSWMM 1D/2D links to TUFLOW SWMM links</li>
+<li>Convert ESTRY layers to SWMM</li>
+<li>Supports 1D pipe and other integrity tools for SWMM GIS Layers</li>
+<li>GIS viewing of time-series results including
+<ul>
+<li>Plan view symbology based on results at the current time</li>
+<li>Time-series plots through the TUFLOW viewer</li>
+<li>Both options can be used for animations</li>
+</ul></li>
+</ul>
+<p>Currently, TUFLOW does not connect the AD (advection-diffusion) module or the interflow capability to the SWMM network. These are scheduled for a future release, however, if they or other features would be useful to you, please let us know via <a href="mailto:support@tuflow.com">support@tuflow.com.</a></p>
+</div>
+<div id="ModelSetup-3" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Model Setup<a href="SWMM-TUFLOW-1.html#ModelSetup-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="SwmmModel-4" class="section level4 hasAnchor" number="4.1.2.1">
+<h4><span class="header-section-number">4.1.2.1</span> SWMM Model<a href="SWMM-TUFLOW-1.html#SwmmModel-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The SWMM portion of the TUFLOW-SWMM model is read from one or more SWMM project files (inp). These files can be setup within the EPA SWMM GUI, using the GIS tools described in Section <a href="SWMM-TUFLOW-1.html#SWMMGISTools-3">4.1.3</a>, or other tools.</p>
+<p>The <a href="https://www.epa.gov/water-research/storm-water-management-model-swmm">EPA SWMM Website</a> provides documentation on model theory and setup.</p>
+<p>This manual does not attempt to duplicate all of the information available in other sources for SWMM models but does provide documentation on the GeoPackage format used in the TUFLOW QGIS plugin in Section <a href="SWMM-TUFLOW-1.html#SWMM-Input-Files-2">4.3</a>.</p>
+</div>
+<div id="Simulations-4" class="section level4 hasAnchor" number="4.1.2.2">
+<h4><span class="header-section-number">4.1.2.2</span> Simulations<a href="SWMM-TUFLOW-1.html#Simulations-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>When running a TUFLOW / SWMM model, TUFLOW controls the execution of the simulation. SWMM input commands are specified within a SWMM control file (*.tscf) documented in Section <a href="SWMM-TUFLOW-1.html#SWMM-TUFLOWCommands-2">4.2</a>. The SWMM control file is referenced in the TUFLOW Control File (*.tcf) using the “SWMM Control File” command documented in Section <a href="SWMM-TUFLOW-1.html#TCFCommands-3">4.2.1</a>.</p>
+<p>The SWMM Control File can reference multiple SWMM input files (inp) potentially varying by scenario. These input files are merged giving preferences to later files allowing for overriding existing features (eg. to upgrade a section of pipe network). After the input files are merged, the final SWMM model will be placed in the TUFLOW output folder and will be executed from there. The report and output files will also be placed in the TUFLOW output folder.</p>
+</div>
+<div id="id_1D2DDomainLinking-4" class="section level4 hasAnchor" number="4.1.2.3">
+<h4><span class="header-section-number">4.1.2.3</span> 1D/2D Domain Linking<a href="SWMM-TUFLOW-1.html#id_1D2DDomainLinking-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Connections between 1D and 2D models use SX and HX connections generally defined in 2d_bc layers but sometimes created in other ways. For HX connections, the 2D domain provides a discharge to the 1D domain and receives a water level. SX connections are the reverse. The 2D domain provides a water level and receives a discharge. Whether an HX or SX boundary is used depends on the configuration as described below.</p>
+<p>There are three categories of connections between 1D and 2D models;</p>
+<ol style="list-style-type: decimal">
+<li>Storm-drain inlets: These are connections that use storm drain inlet information to determine the discharge that should flow from the 2D overland flooding into the storm drain system. These connections use an SX connection. These connections require inlet definition in the SWMM inp file and an inlet usage layer as described in Section <a href="SWMM-TUFLOW-1.html#InletHandling-4">4.1.2.4</a>. The inlet usage layer has an automatic SX connection option or they can be connected using SX point, lines, or regions.</li>
+<li>Direct connections: This type of connection would be used for embankments through a culvert or similar where a storm drain inlet is not used. HX connections are used at junctions (upstream side) and SX connections are used at outfalls (downstream).</li>
+<li>Subcatchment outlets: Subcatchment runoff can be setup to flow into the 2D domain using a standalone junction that receives the flow connected to SX connections (points, lines, or regions).</li>
+</ol>
+</div>
+<div id="InletHandling-4" class="section level4 hasAnchor" number="4.1.2.4">
+<h4><span class="header-section-number">4.1.2.4</span> Inlet Handling<a href="SWMM-TUFLOW-1.html#InletHandling-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>1D inlet configurations, including geometry, are defined in SWMM project (inp) files. The locations of individual inlets and location-specific attributes may be defined in the SWMM project file or in a separate Geographical Information System (GIS) layer. In a pure SWMM model, inlets require the following tables (some are not required if inlet usage is defined separately):</p>
+<ul>
+<li><b>Streets:</b> SWMM uses the street cross-section information in this table to help compute storm drain inlet discharges, particularly for on-grade inlets.</li>
+<li><b>Conduits (Streets):</b> This table is used to define streets for overland runoff and the slope is used in the storm drain inlet discharges. This table is not used directly when running a TUFLOW-SWMM model because the overland flows are calculated within TUFLOW. However, some of the information is extracted.</li>
+<li><b>Inlets:</b> This table defines inlet configurations that describe how to determine inlet discharges. Inlets can be defined based on type and shape such as grates, curbs, combination thereof, or through curves that describe the relationship between depth and inlet discharge or approach flow and inlet discharge. This table defines these parameters. The same inlet configuration can be used in multiple places within the model.</li>
+<li><b>Inlet Usage:</b> This identifies the placement of inlets including the street conduit, inlet (configuration), the node receiving the flow, and local parameters including blockage, size of local gutter depressions, and on-grade, on-sag placement, or automatic placement.</li>
+</ul>
+<p>For a TUFLOW-SWMM model, inlets can be defined, either:</p>
+<ol style="list-style-type: decimal">
+<li>Completely using the SWMM input (inp) file format. In this form, all table items listed above (Streets, Conduits, Inlets, and Inlet Usage) are required. In addition, a “2d_bc” layer is required to connect the inlets to the 2D domain.</li>
+<li>A mix between the SWMM input file format and a “swmm_inlet_usage” GIS layer. Table <a href="SWMM-TUFLOW-1.html#tab:tab-SWMMinletusage">4.1</a> lists the attributes associated with this GIS layer. In this form, the data entry requirement is reduced. SWMM “Inlet Usage” tables are not used, and streets are not required in the “conduits” table (the conduits table will still define the pipe network). Also, automatic inlet connections between the 1D network and 2D domain can be implemented via the “Conn1D_2D” attribute field (instead of manual specification of SX connection cells within a “2d_bc” GIS layer). The Streets and Inlet tables must be defined in the SWMM input (inp) file.</li>
+</ol>
+<p>Whether inlet usage is defined in SWMM or in a separate GIS layer, the inlet discharges are computed within TUFLOW using modified EPA SWMM 5.2 code before being passed to the SWMM engine for the 1D solution computations. This approach has been selected due to its ability to leverage TUFLOW 2D model results, such as velocities and water levels. If the pressure head in the 1D domain exceeds the 2D water level, the 1D domain will surcharge into the 2D domain.</p>
+</div>
+</div>
+</div>
+<table>
+<caption>
+<span id="tab:tab-SWMMinletusage">Table 4.1: </span><strong>SWMM Inlet Usage (swmm_inlet_usage) Attribute Descriptions</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+No. 
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Default GIS Attribute Name
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;width: 5%; ">
+1
+</td>
+<td style="text-align:left;width: 10%; ">
+Inlet
+</td>
+<td style="text-align:left;width: 30%; ">
+The name of the inlet defined in the SWMM inp file “INLETS” section
+</td>
+<td style="text-align:left;width: 10%; ">
+Char (100)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+2
+</td>
+<td style="text-align:left;width: 10%; ">
+StreetXSEC
+</td>
+<td style="text-align:left;width: 30%; ">
+The name of the street cross-section that must be included in the SWMM SWMM inp file “Streets” section.
+</td>
+<td style="text-align:left;width: 10%; ">
+Char (100)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+3
+</td>
+<td style="text-align:left;width: 10%; ">
+Elevation
+</td>
+<td style="text-align:left;width: 30%; ">
+The elevation of the inlet. If a value of –99999 is entered, the elevation will be based on the 2D cell’s elevation.  
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+4
+</td>
+<td style="text-align:left;width: 10%; ">
+SlopePct_Long
+</td>
+<td style="text-align:left;width: 30%; ">
+The longitudinal slope of the street near the inlet.
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+5
+</td>
+<td style="text-align:left;width: 10%; ">
+Number
+</td>
+<td style="text-align:left;width: 30%; ">
+The number of inlets in series at the location (generally 1).
+</td>
+<td style="text-align:left;width: 10%; ">
+Integer
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+6
+</td>
+<td style="text-align:left;width: 10%; ">
+CloggedPct
+</td>
+<td style="text-align:left;width: 30%; ">
+The percentage that the inlet is blocked (defaults to 0.0).
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+7
+</td>
+<td style="text-align:left;width: 10%; ">
+Qmax
+</td>
+<td style="text-align:left;width: 30%; ">
+The maximum discharge through the inlet (default is 0 which does not enforce a maximum).
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+8
+</td>
+<td style="text-align:left;width: 10%; ">
+aLocal
+</td>
+<td style="text-align:left;width: 30%; ">
+The depth of a local depression at the inlet (default 0.0).
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+9
+</td>
+<td style="text-align:left;width: 10%; ">
+wLocal
+</td>
+<td style="text-align:left;width: 30%; ">
+The width of a local depression at the inlet (default 0.0).
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+10
+</td>
+<td style="text-align:left;width: 10%; ">
+Placement
+</td>
+<td style="text-align:left;width: 30%; ">
+Specifies whether the inlet should be treated as at a sag or on a grade. Options are ON_GRADE, ON_SAG, or AUTOMATIC. AUTOMATIC is the default and will switch between ON_GRADE and ON_SAG depending upon the flow conditions at the inlet.
+</td>
+<td style="text-align:left;width: 10%; ">
+Char(10)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+11
+</td>
+<td style="text-align:left;width: 10%; ">
+Conn1D_2D
+</td>
+<td style="text-align:left;width: 30%; ">
+<p>Used to specify a “SX” connection and any additional flags such as “SXZ” or “SXG” that automatically creates a 2D SX cell and connection at the 2D cell within which the SWMM node occurs. This negates the need to create SX objects in a 2d_bc layer.</p>
+<p>Flags:</p>
+<ul>
+<li>“L” – sets the ZU and ZV elevations to be the same as the ZC value only if they are lower. This can improve instabilities where the ZU and ZV values are significantly lower in elevation and can cause a sudden increase in transfer of water to//from the cell when the cell wets.</li>
+<li>“Z” – Adjust the ZC elevation at each cell at//along//within the 2D SX object to below the 1D node bed elevation where ZC is higher. The ZC elevation is set to the Cell Wet/Dry Depth below the 1D node bed. An error occurs if the minimum ZC elevation plus the Cell Wet//Dry Depth at//along a SX object is not below the connected 1D node bed. Also see SX ZC Check permits the user to define a maximum change in ZC elevation. It is not recommended to use the Z flag without first checking that the reason for the discrepancy in elevations between 1D and 2D domains is appropriate</li>
+</ul>
+By default, if more than one 2D cell is automatically connected, nodes are assumed to be connected using the Sag (S) approach. To override the default approach, specify “SXG” for an on-grade connection.
+</td>
+<td style="text-align:left;width: 10%; ">
+Char (10)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+12
+</td>
+<td style="text-align:left;width: 10%; ">
+Conn_Width
+</td>
+<td style="text-align:left;width: 30%; ">
+<p>If “SX” is specified for Conn1D_2D, this field controls the number of 2D cells connected as follows. Note this approach is slightly different than is used by TUFLOW-ESTRY models.</p>
+<ul>
+<li>A positive value indicates the flow width that should be used to compute the number of 2D cells to connect to. TUFLOW will choose the nearest cells that are collectively as wide or wider than the specified flow width.</li>
+<li>If negative, the number of cells selected is the absolute value of the number specified. For example, a value of –1 would connect the inlet to a single 2D cell.
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+<div class="newboxAD">
+<div id="ESTRYSWMMLinking-4" class="section level4 hasAnchor" number="4.1.2.5">
+<h4><span class="header-section-number">4.1.2.5</span> ESTRY/SWMM Linking<a href="SWMM-TUFLOW-1.html#ESTRYSWMMLinking-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>SWMM can be linked to TUFLOW 2D (HPC) as well as ESTRY 1D Networks. The approach is described in Section 8.3 of the <a href="https://downloads.tuflow.com/_archive/TUFLOW/Releases/2018-03/TUFLOW%20Manual.2018-03.pdf">2018 TUFLOW Manual</a> where SWMM is considered an “External 1D Domain.” For SWMM linking, X1DQ connections must be used at SWMM junctions and X1DH connections are used at SWMM outfalls.</p>
+</div>
+<div id="SWMMSettings-4" class="section level4 hasAnchor" number="4.1.2.6">
+<h4><span class="header-section-number">4.1.2.6</span> SWMM Settings<a href="SWMM-TUFLOW-1.html#SWMMSettings-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="SWMMOptionsTable-5" class="section level5 hasAnchor" number="4.1.2.6.1">
+<h5><span class="header-section-number">4.1.2.6.1</span> SWMM Options Table<a href="SWMM-TUFLOW-1.html#SWMMOptionsTable-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Some SWMM option settings are automatically set by TUFLOW:</p>
+<ul>
+<li><strong>END_DATE/END_TIME:</strong> Set based upon the SWMM START_DATE/START_TIME and the TUFLOW simulation duration.</li>
+<li><strong>FLOW_UNITS:</strong> the flow units are set to match the TUFLOW simulation, either to CFS for US Customary units or CMS for metric units.</li>
+<li><strong>FLOW_ROUTING:</strong> Flow routing is set to DYNWAVE.</li>
+<li><strong>ALLOW_PONDING:</strong> Allow ponding is set to YES. Ponding can be prevented by setting a high value for “YSur” or by setting the junction attribute Apond to 0.0. Only junctions with HX or SX boundaries should have Apond set to 0.0, which will create flooding in the 2D domain when the junction is surcharged.</li>
+<li><strong>END_DATE/END_TIME:</strong> These are set based on the TUFLOW end time and the SWMM start time (simulation duration + start date/time = specified end date/time).</li>
+<li><strong>VARIABLE_STEP:</strong> This is turned off (0). TUFLOW will control the timestep based on the HPC (Heavily Parallelised Compute) timestep and the SWMM Iterations command.</li>
+</ul>
+</div>
+<div id="SWMMJunctionOptions-5" class="section level5 hasAnchor" number="4.1.2.6.2">
+<h5><span class="header-section-number">4.1.2.6.2</span> SWMM Junction Options<a href="SWMM-TUFLOW-1.html#SWMMJunctionOptions-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The junction settings for Ymax (maximum depth), Ysur (surge depth), and Apond (area of ponding) are critical to get accurate and stable results. These values relate to how SWMM handles water that overflows a node.</p>
+<p>In SWMM, ponding can be on or off but TUFLOW forces ponding to be on when running a TUFLOW-SWMM model. Junctions can pond if the ponding area (Apond) is greater than 0.0. SWMM tracks the volumes stored as ponded water and will reintroduce the water back into the network when there is capacity available. When ponding is on ysur (surge depth) is ignored (any water above Ymax ponds).</p>
+<p>If the ponding area (apond) is 0.0, water will not pond at a node, but the water can overflow (flood) if the water level in a node exceeds Ymax + Ysur (maximum depth + surcharge water depth). Flooded water is lost through “flooding” and no longer tracked within SWMM. If the node is connected to a 2D domain, the flow is immediately transferred into the connected 2D cells.</p>
+<p>If ponding is off at a node, there is no limit to how much flow may overflow from a node for a timestep. This can lead to unrealistic overflow discharges. However, this functionality may be preferred for subcatchment outlets so that the full discharge can immediately overflow into the 2D without being throttled by the inlet.</p>
+<p>If a node can pond (Apond &gt; 0) and is connected to the 2D domain using an inlet or HX connection, TUFLOW will compute the discharge that should be transferred between the 1D and 2D domain. If the water level in the 2D domain is higher than the 1D (potentially ponded) water level, then flow will be from the 2D domain into the 1D. The discharge rate will depend upon the difference in water levels and whether it is connected through an inlet or HX boundary. If the 1D node is ponded (above Ymax) and above the 2D water level, then water will flow from the 1D domain to the 2D domain. If the node has an inlet, the discharge will be computed using the area of the inlet with the orifice equation. The orifice coefficient used can be set using the “SWMM Inlet Surcharge Orifice Coefficient” command described in Section <a href="SWMM-TUFLOW-1.html#TSCFCommands-3">4.2.2</a>.</p>
+<p>Recommendations based on the above:
+If ponding is used, a Ymax value of 0.0 is generally sufficient for all cases. Ymax will be set to the highest adjacent obvert. Ponding will occur at that elevation and discharges to/from the 2D will compare the ponded elevation with the 2D water levels. For nodes with inlets, allowing ponding is often preferable but using a Ymax set to the invert elevation with no ponding (Apond = 0.0) is also valid. This may be the preferred approach for subcatchment outlets to prevent overflow throttling by the inlet.</p>
+<p>These values can be set using the “Junctions - Set attributes” tool described in Section <a href="SWMM-TUFLOW-1.html#GISTools-4">4.1.3.1</a>.</p>
+<ul>
+<li>Junction nodes receiving subcatchment flows. Use ponding determined by other settings or force no ponding as below.
+<ul>
+<li>Ysur = 0.0</li>
+<li>Apond = 0.0</li>
+</ul></li>
+<li>Junction nodes connected to the 2D at an inlet.
+<ul>
+<li>Ysur = 0.0</li>
+<li>Apond = &lt; Approximate manhole area or larger to aid stability &gt;</li>
+</ul></li>
+<li>Junction nodes connected to 2D using HX boundaries.
+<ul>
+<li>Ysur = 0.0</li>
+<li>Apond = &lt; Approximate area of connected 2D cells &gt;</li>
+</ul></li>
+<li>Junction nodes not connected to 2D (need to prevent flooding which would be lost)
+<ul>
+<li>Option #1
+<ul>
+<li>Ysur = 0.0</li>
+<li>Apond = &lt; Positive number &gt;</li>
+</ul></li>
+<li>Option #2
+<ul>
+<li>Ysur = &lt; higher depth than anticipated (including pressure head )&gt;</li>
+<li>Apond = 0.0</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="SWMM_BCDB-5" class="section level4 hasAnchor" number="4.1.2.7">
+<h4><span class="header-section-number">4.1.2.7</span> Using TUFLOW BC Database in SWMM<a href="SWMM-TUFLOW-1.html#SWMM_BCDB-5" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>It is possible to use curves from the TUFLOW Boundary Condition Database for SWMM input curves using the command “Read BC <curve_type>” command. This is a powerful feature making it much easier to model a variety of boundary condition events or scenarios. The curve_type should be timeseries for time data such as rainfall or discharge through time or be one of the types supported in the “Curves” section of the SWMM inp file.</p>
+<p>The curve data will be added to the inp file TUFLOW writes to use for the simulation. The curve name must be specified (matching the BC Database identifier) where the curve is referenced such as in rainfall or inflow inputs.</p>
+</div>
+<div id="SWMMGISTools-3" class="section level3 hasAnchor" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> SWMM GIS Tools<a href="SWMM-TUFLOW-1.html#SWMMGISTools-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A suite of Python tools has been developed to support TUFLOW/SWMM modeling. These tools are available to run as processing scripts in QGIS, via the TUFLOW Plugin. For instructions how to install the Plugin, please refer to the <a href="https://wiki.tuflow.com/TUFLOW_QGIS_Plugin">TUFLOW Wiki</a>.</p>
+<p>These tools use a GeoPackage format for working with the data in GIS using a schema that has been developed to store the data held within an SWMM input file. The GeoPackage representation is mostly a simple conversion of the table oriented SWMM input file (inp). Some GeoPackage tables are modified versions of the SWMM input file. Some of the GeoPackage tables have spatial components (points, lines, and polygons) and others are tables of data with no geometry attributes.</p>
+<p>Generally, modified tables are a “wide” form of the tables to represent distinct categories of options without using the same column for
+multiple input parameters. For example, the “<a href="SWMM-TUFLOW-1.html#Xsections">XSECTIONS</a>” table has a variety of inputs depending upon whether the shape is from a list of
+shapes, a custom shape (a closed shape with a Height vs Width table), irregular shape (cross-section-based open channel), or a street
+cross-section. In the SWMM input file, attributes from multiple types use the same columns while the GeoPackage representation creates a
+column for each input field. There are separate columns for specified shapes and irregular culvert curves. Depending upon the option selected,
+many of the fields will not be used.</p>
+<p>To make things simpler, the subcatchment and subarea SWMM table columns are combined into the subcatchment table. The subarea columns use the
+prefix “subarea_” and are written to a separate table when exported to the SWMM inp file.</p>
+<div id="GISTools-4" class="section level4 hasAnchor" number="4.1.3.1">
+<h4><span class="header-section-number">4.1.3.1</span> GIS Tools<a href="SWMM-TUFLOW-1.html#GISTools-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The SWMM functionality currently in the TUFLOW QGIS plugin include processing tools accessed from the “Processing Toolbox Panel.” The 1D integrity tools work with SWMM networks in addition to ESTRY.</p>
+<p>The Geo-Processing tools include a description of the tool, inputs, and outputs when accessed in QGIS. The list of available Geo-Processing
+Algorithms includes:</p>
+<ul>
+<li><b>BC - Create channel endpoint 1D/2D connections:</b> This tool creates a “2d_bc” layer with 1D/2D connections specified for the upstream and downstream side of SWMM channels. This tool can operate on selected or all of the channels within an input layer. HX connections will be created at junctions and SX connections at outfalls. The connections should be reviewed and modified if necessary.</li>
+<li><b>Conduits - Assign losses:</b> This tool assign entrance and exit losses to SWMM junctions based on whether a junction receives subcatchment flows, whether it is connected to an inlet, and its location in the network. This tool can be used to edit layers “in-place.”</li>
+<li><b>Conduits - Assign node fields:</b> This tool will identify nodes snapped to the ends of conduits and fill in the appropriate “From node” and “To node” fields. This is required for SWMM to associate the conduits with the nodes. This tool can be used to edit layers “in-place.”</li>
+<li><b>Convert - ESTRY layers to SWMM:</b> This tool converts individual ESTRY input layers into SWMM format. Supported layers include 1D network layers
+(lines or points), 1D node layers, 1D pit layers, and 1D table link layers (cross-sections). The Pit inlet database/depth discharge database can
+be specified for use. Options and reporting tables can optionally be created to make a more complete SWMM input file.</li>
+<li><b>Convert - XPSWMM GIS inlet layers to SWMM:</b> This tool will convert GIS layers exported from XPSWMM with the required attributes to SWMM inlet data and a GeoPackage layer for inlet usage.</li>
+<li><b>GeoPackage - Add Sections:</b> This tool adds tables (spatial or otherwise) representing SWMM sections to an existing GeoPackage.</li>
+<li><b>GeoPackage - Create:</b> This tool creates a SWMM GeoPackage file with the selected SWMM sections.</li>
+<li><b>GeoPackage - Create from SWMM inp:</b> This tool converts a SWMM input file to a GeoPackage representation. Even if not necessary, this conversion is often useful because it provides a format supporting GIS objects for visualization and editing. For example, it provides a GIS object that 2d_bc HX and SX boundaries can be snapped to.</li>
+<li><b>GeoPackage - Write to SWMM inp:</b> This tool converts a GeoPackage to a SWMM input file. This step is required to use the model with TUFLOW because TUFLOW does not yet directly read the GeoPackage format.</li>
+<li><b>Integrity - Make node names unique:</b> SWMM requires unique names for nodes (junctions and outfalls). If multiple nodes are encountered with the same name, this tool will add an incremental number (node_2, node_3, node_4, etc.) to force unique names.</li>
+<li><b>Junctions - Downstream junctions to outfalls</b> This tool converts SWMM junctions at the downstream end of conduits to outfalls as required by SWMM. This can be especially helpful for models exported for XPSWMM or converted from GIS data which do not distinguish between junctions and outfalls.</li>
+<li><b>Junctions - Set attributes</b> This tool sets the SWMM junction attributes “Ymax” and “Ysur” based on whether they receive subcatchment flows, if they are connected to the 2D domain, and if the connection uses a stormwater drain inlet.</li>
+<li><b>Outfalls - Fix multiple connected links:</b> SWMM requires that outfalls be connected to a single 1D channel. This tool will create a small extension (rectangular open channel) to outlets connected to multiple channels, creates a new outlet at the new downstream location, and changes the previous outfall to a junction.</li>
+</ul>
+<p>The 1D integrity tools now work with SWMM networks. Refer to the documentation for the tools to understand their use: <a href="https://wiki.tuflow.com/1D_Integrity_Tool">1D Integrity Tools</a>. Add the “Links–Conduits” to the “1D Network Line Layers” and “Nodes–Junctions” and “Nodes–Outfalls” to the “1D Point Layers” sections of the panel. The other Links types are not yet currently supported. The “Auto Snap” option in the Snapping tool is not yet currently supported for SWMM networks.</p>
+</div>
+</div>
+<div id="SWMMOutputs-3" class="section level3 hasAnchor" number="4.1.4">
+<h3><span class="header-section-number">4.1.4</span> SWMM Outputs<a href="SWMM-TUFLOW-1.html#SWMMOutputs-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Model outputs are written by both SWMM and TUFLOW, which can be used to visualize model results. SWMM
+writes a report file (rpt) and an output file (out) in the TUFLOW results folder with the simulation prefix followed by “_swmm.” The report file can be viewed with a text editor and the output file can be viewed in EPA SWMM or 3<sup>rd</sup> party tools that support this format such as <a href="www.pyswmm.org">PySWMM</a>.</p>
+<p>TUFLOW-SWMM models also output a GeoPackage time-series output file. The file will be written with the other result files and ends with “_ts.gpkg.” This file can be read into the QGIS TUFLOW Viewer using the “Load Results - Time series” from the File menu of the QGIS viewer. When this file is loaded, point and polyline layers will be loaded representing the node and channel results. The layer symbology can be modified to represent model results for the current QGIS time. Profiles can be also be generated for the 1D network. Animations can be created from these results (in combination with 2D results if desired). These layers can also be used to select channels or nodes to display time series results in the TUFLOW viewer and can be combined with ESTRY or PO outputs. More information about the QGIS TUFLOW Viewer can be found on the <a href="https://wiki.tuflow.com/TUFLOW_Viewer">TUFLOW Wiki</a>.</p>
+</div>
+<div id="SWMMInclusionTUFLOW-3" class="section level3 hasAnchor" number="4.1.5">
+<h3><span class="header-section-number">4.1.5</span> SWMM Inclusion in TUFLOW<a href="SWMM-TUFLOW-1.html#SWMMInclusionTUFLOW-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="SWMMLibraryVersion-4" class="section level4 hasAnchor" number="4.1.5.1">
+<h4><span class="header-section-number">4.1.5.1</span> SWMM Library Version<a href="SWMM-TUFLOW-1.html#SWMMLibraryVersion-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>TUFLOW runs SWMM as a library passing data between SWMM and the 2D domains. The SWMM version used for the hydraulic calculations was created by Open Water Analytics <span class="citation">(<a href="#ref-mcdonnell_bryant_2021_5484299">McDonnell et al., 2021</a>)</span>, which is a modified version of the EPA SWMM code.</p>
+</div>
+<div id="SWMMCode-in-TUFLOW-4" class="section level4 hasAnchor" number="4.1.5.2">
+<h4><span class="header-section-number">4.1.5.2</span> Embedded SWMM Code in TUFLOW<a href="SWMM-TUFLOW-1.html#SWMMCode-in-TUFLOW-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>TUFLOW has modified EPA SWMM code (not from Open Water Analytics) primarily to embed compute pit (inlet) discharges to include additional TUFLOW functionality for linking 1D and 2D domains. The code was modified for easy inclusion and to allow the discharges to be calculated outside of the SWMM library based on 2D model results. Some minor changes were made to the embedded code that are described in this section.</p>
+<p>Changes were made to how inlets are handled to better correspond to how “rating curve” based pits are treated in ESTRY and provide better handling when the water level is above the inlet invert. Pit rating
+curves use a depth vs discharge relationship to determine the volume of flow that passes from the 2D domain into the 1D domain. If the pipe water level is above the inlet invert, but the 2D water level is higher
+the discharge will be based on the 2D water level minus the 1D water level in the pipe. If the 1D pipe water level is higher, a surcharging discharge is computed using the same curve based on the 1D pipe water
+level minus the 2D water level. This matches the ESTRY implementation and ensures a smooth transition between inflow and surcharging.</p>
+<p>The discharge for On-Grade inlets was modified to use a velocity passed from the 2D domain rather than calculating a velocity based on the street cross-section and slope at the inlet.</p>
+<p>The methodology for assigning On-Grade or On-Sag handling of pits (inlets) was modified in the embedded code. In SWMM pit (inlet) placement of “AUTOMATIC” determines whether a pit should be On-Sag or On-Grade based upon the topography of the street layout. However, in a combined TUFLOW and SWMM model streets may not be fully described because only the cross-section information at inlets is required because 2D flows are modeled in TUFLOW.</p>
+<p>When running SWMM inside of TUFLOW, whether to treat an automatic placement as On-Sag or On-Grade is
+determined dynamically based on the inflows to the connected 2D cells. The 2D model provides the approach discharge (along the street) and total discharge for the connected cells. If the approach discharge is over 85%
+of the total discharge, the pit is modeled as an On-Grade inlet. Otherwise, it is modeled as On-Sag. <strong>This approach is currently being tested and is subject to change. For production models
+it is recommended that users assign On-Grade or On-Sag to each of their inlets until the automatic approach has been established.</strong></p>
+</div>
+</div>
+</div>
+</div>
+<div id="SWMM-TUFLOWCommands-2" class="section level2 hasAnchor newboxAD" number="4.2">
+<h2><span class="header-section-number">4.2</span> SWMM-TUFLOW Commands<a href="SWMM-TUFLOW-1.html#SWMM-TUFLOWCommands-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section is a reference for the commands available in a TUFLOW-SWMM model.</p>
+<div id="TCFCommands-3" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> TUFLOW Control File Commands (TCF)<a href="SWMM-TUFLOW-1.html#TCFCommands-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><tcmd>SWMM Control File</tcmd><teq> == </teq><tblk>&lt;swmm_control_filename.tscf&gt;</tblk></p>
+<p>This command identifies the SWMM control file, which contains the
+relevant commands needed to manage the SWMM simulation.</p>
+</div>
+<div id="TSCFCommands-3" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> TUFLOW SWMM Control File Commands (TSCF)<a href="SWMM-TUFLOW-1.html#TSCFCommands-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This section describes SWMM related commands that are used in the TUFLOW SWMM
+Control File (TSCF). Commands for scenario and event management are not
+included but are supported, such as “If Scenario,” “If Event,” “Else,”
+or “End If.” Such commands are described in the TUFLOW
+manual.</p>
+<p><tcmd>Check INP Save Date</tcmd><teq> == </eq><tblk>[ {ERROR} | WARNING | OFF ]</tblk></p>
+<p>When working within TUFLOW inp files are often generated by the QGIS plugin from GeoPackage files. This command controls settings to alert the user if the GeoPackage has been updated but the inp has not.</p>
+<p>Checks that the save date of the .inp file is later than the save date of the associated .gpkg file. The two files must be located in the same folder. This command is very useful for detecting the possibility that one or more layers in TUFLOW-SWMM GeoPackage file has been modified but has not been exported prior to running the simulation.</p>
+<p>For the ERROR option (the default), the simulation terminates and an error message is given.
+For the WARNING option, a warning is written to the screen and log file, but the simulation proceeds without pausing. It remains the responsibility of the user to check for any warnings.
+The OFF option disables all checks and no warnings are given.</p>
+<p><tcmd>Inlet Surcharge Orifice Coefficient</tcmd><teq> == </teq><tblk> [0.16]</tblk></p>
+<p>Specifies the coefficient for the orifice equation that is used when an inlet overflows (pressure head is higher than 2D WSE).</p>
+<p><tcmd>Output Folder</tcmd><teq> == </teq><tblk> &lt;Folder&gt; </tblk></p>
+<p>Redirects the SWMM combined inp file and all SWMM output data to another folder. Typically used to write output to your local drive instead of filling up a network drive, or to keep results separate to the input data. A URL path can be used (e.g. \bmtserv), which is useful for running simulations on other computers, but having the output directed to your local drive or other location (your drive will need to be shared).
+The default location for 1D output is that specified using Output Folder in the .tcf file for 2D/1D models.</p>
+<p><tcmd>Read SWMM</tcmd><teq> == </teq><tblk>&lt;swmm_inp_filename&gt;</tblk></p>
+<p>This command adds the SWMM input file to the SWMM simulation. Multiple SWMM input files can be specified which will be combined into a single 1D SWMM simulation.</p>
+<p><tcmd>Read GIS SWMM Inlet Usage</tcmd><teq> == </teq><tblk>&lt;swmm_inlet_usage_filename&gt; </tblk></p>
+<p>This command reads a SWMM inlet usage filename to identify locations and attributes
+of inlets (pits) that connect the 2D TUFLOW and 1D SWMM models.</p>
+<p><tcmd>SWMM Iterations</tcmd><teq> == </teq><tblk> [1]</tblk></p>
+<p>Controls the number of iterations that are run
+for each 2D timestep. Increasing the number decreases the timestep used
+by SWMM potentially improving model stability but increasing run
+time.</p>
+</div>
+</div>
+<div id="SWMM-Input-Files-2" class="section level2 hasAnchor newboxAD" number="4.3">
+<h2><span class="header-section-number">4.3</span> SWMM Input Files<a href="SWMM-TUFLOW-1.html#SWMM-Input-Files-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js">
+<script src="js/jquery-2.1.2.min.js"></script>
+<script type="text/javascript">
+         $(document).ready(function() {
+             $("table").DataTable( {
+              "pageLength": -1
+             });
+         } );
+</script>
+<p>A summary of the available input layers is contained within Table <a href="SWMM-TUFLOW-1.html#tab:tab-SWMM-Input-Summary">4.2</a> and a detailed description provided for each in Appendix <a href="SWMM-Input-Detailed-1.html#SWMM-Input-Detailed-1">A</a>. This information has been taken from the SWMM 5 API Guide <span class="citation">(<a href="#ref-SWMM_EPI_Guide">EPA, 2023</a>)</span>, with modifications. If a GeoPackage is created from an inp file created by EPA SWMM, the following tables may be retained and exported to future inp files but do not affect model simulations and are not documented here:</p>
+<ul>
+<li>Backdrop</li>
+<li>Labels</li>
+<li>Symbols</li>
+<li>Tags</li>
+<li>Map</li>
+</ul>
+<p>Input layers are read into the SWMM Control File with the <tcmd>Read SWMM</tcmd><teq> == </teq> command.</p>
+<table>
+<caption>
+<span id="tab:tab-SWMM-Input-Summary">Table 4.2: </span><strong>SWMM Input layers</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Category
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Input
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Geometry
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Table
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+BC
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Inflows">Inflows</a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Specifies external hydrographs and pollutographs that enter the drainage system at specific nodes.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Point
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Inflows">A.1</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Curves
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Curves">Curves </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Describes a relationship between two variables in tabular format.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Curves">A.2</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Curves
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Timeseries">Timeseries </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Describes how a quantity varies over time.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Timeseries">A.3</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Groundwater
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Aquifers">Aquifers </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Supplies parameters for each unconfined groundwater aquifer in the study area. Aquifers consist of two
+zones – a lower saturated zone and an upper unsaturated zone with a moving boundary between the
+two.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Aquifers">A.4</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Groundwater
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Groundwater">Groundwater </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Supplies parameters that determine the rate of groundwater flow between the aquifer underneath a
+subcatchment and a node of the conveyance system.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Region
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Groundwater">A.5</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Groundwater
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="GWF">GWF </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Defines custom groundwater flow equations for specific subcatchments.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Region
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-GWF">A.6</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Hydrology
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Adjustments">Adjustments </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Specifies optional monthly adjustments to be made to temperature, evaporation rate, rainfall intensity
+and hydraulic conductivity in each time period of a simulation.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Adjustments">A.7</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Hydrology
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Evaporation">Evaporation </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Specifies how daily potential evaporation rates vary with time for the study area.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Evaporation">A.8</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Hydrology
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Hydrographs">Hydrographs </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Specifies the shapes of the triangular unit hydrographs that determine the amount of rainfall-dependent infiltration/inflow (RDII) entering the drainage system.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Hydrographs">A.9</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Hydrology
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Patterns">Patterns </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Specifies time patterns of dry weather flow or quality in the form of adjustment factors applied as multipliers to baseline values.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Patterns">A.10</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Hydrology
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Raingages">Raingages </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Identifies each rain gage that provides rainfall data for the study area.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Raingages">A.11</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Hydrology
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="RDII">RDII </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Specifies the parameters that describe rainfall-dependent infiltration/inflow (RDII) entering the drainage system at specific nodes.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Point
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-RDII">A.12</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Hydrology
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Snowpacks">Snowpacks </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Specifies parameters that govern how snowfall accumulates and melts on the plowable, impervious and pervious surfaces of subcatchments.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Snowpacks">A.13</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Hydrology
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Temperature">Temperature </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Specifies daily air temperatures, monthly wind speed, and various snowmelt parameters for the study area. Required only when snowmelt is being modeled or when evaporation rates are computed from daily temperatures or are read from an external climate file.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Temperature">A.14</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Inlets
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Inlet Usage">Inlet Usage </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Assigns inlet structures to specific street and open channel conduits.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Point
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Inlet-Usage">A.15</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Inlets
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Inlets">Inlets </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Defines inlet structure designs used to capture street and channel flow that are sent to below ground sewers.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Inlets">A.16</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+LID
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="LidControls">Lid_controls </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Defines scale-independent LID controls that can be deployed within subcatchments.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-LID-Controls">A.17</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+LID
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="LidUsage">Lid_usage </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Deploys LID controls within specific subcatchment areas.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Region
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-LID-Usage">A.18</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Links
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Conduits">Conduits </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Identifies each conduit link of the drainage system. Conduits are pipes or channels that convey water from one node to another.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Line
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Conduits">A.19</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Links
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Controls">Controls </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Determines how pumps and regulators will be adjusted based on simulation time or conditions at specific nodes and links.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Controls">A.20</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Links
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Losses">Losses </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Specifies minor head loss coefficients, flap gates, and seepage rates for conduits.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Line
+</td>
+<td style="text-align:left;width: 2cm; ">
+Contained within Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Conduits">A.19</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Links
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Orifices">Orifices </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Identifies each orifice link of the drainage system. An orifice link serves to limit the flow exiting a node
+and is often used to model flow diversions and storage node outlets.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Line
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Orifices">A.21</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Links
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Outlets">Outlets </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Identifies each outlet flow control device of the drainage system. These are devices used to model
+outflows from storage units or flow diversions that have a user-defined
+relationship between flow rate and
+water depth.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Line
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Outlets">A.22</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Links
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Pumps">Pumps </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Identifies each pump link of the drainage system.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Line
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Pumps">A.23</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Links
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Streets">Streets </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Describes the cross-section geometry of conduits that represent streets.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Streets">A.24</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Links
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Transects">Transects </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Describes the cross-section geometry of natural channels or conduits with irregular shapes following the HEC-2 data format.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Transects">A.25</a> and Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Transects-Coords">A.26</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Links
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Weirs">Weirs </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Identifies each weir link of the drainage system. Weirs are used to model flow diversions and storage
+node outlets.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Line
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Weirs">A.27</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Links
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Xsections">Xsections </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Provides cross-section
+geometric data for conduit and regulator links of the drainage system.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Line
+</td>
+<td style="text-align:left;width: 2cm; ">
+Contained within Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Conduits">A.19</a>, Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Orifices">A.21</a> and Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Weirs">A.27</a>.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Nodes
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Dividers">Dividers </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Identifies each flow divider node of the drainage system. Flow dividers are junctions with exactly two outflow conduits where the total outflow is divided between the two in a prescribed manner.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Point
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Dividers">A.28</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Nodes
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="DWF">DWF </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Specifies dry weather flow and its quality entering the drainage system at specific nodes.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-DWF">A.29</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Nodes
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Junctions">Junctions </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Identifies each junction node of the drainage system. Junctions are points in space where channels and pipes connect together. For sewer systems they can be either connection fittings or manholes.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Point
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Junctions">A.30</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Nodes
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Outfalls">Outfalls </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Identifies each outfall node (i.e., final downstream boundary) of the drainage system and the corresponding water stage elevation. Only one link can be incident on an outfall node.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Point
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Outfalls">A.31</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Nodes
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Storage">Storage </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Identifies each storage node of the drainage system. Storage nodes can have any shape as specified by a surface area versus water depth relation.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Point
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Storage">A.32</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Project
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Files">Files </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Identifies optional interface files used or saved by a run.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Files">A.33</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Project
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Options">Options </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Provides values for various analysis options.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Options">A.34</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Project
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Report">Report </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Describes the contents of the report file that SWMM produces.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Report">A.35</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Project
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Title">Title </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Attaches a descriptive title to the project being analyzed.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Title">A.36</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Hydrology
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Infiltration">Infiltration </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Supplies infiltration parameters for each subcatchment. Rainfall lost to infiltration only occurs over the
+pervious subarea
+of a subcatchment.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Region
+</td>
+<td style="text-align:left;width: 2cm; ">
+Contained within Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Subcatchments">A.37</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Hydrology
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Subareas">Subareas </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Supplies information about pervious and impervious areas for each subcatchment. Each subcatchment
+can consist of a pervious subarea,
+an impervious subarea
+with depression storage, and an impervious
+subarea
+without depression storage.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Region
+</td>
+<td style="text-align:left;width: 2cm; ">
+Contained within Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Subcatchments">A.37</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+Hydrology
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Subcatchments">Subcatchments </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Identifies each subcatchment within the study area. Subcatchments are land area units that generate
+runoff from rainfall.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Region
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Subcatchments">A.37</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+WQ
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Buildup">Buildup </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Specifies the rate that pollutants build up over different land uses between rain events.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Buildup">A.38</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+WQ
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Coverages">Coverages </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Specifies the percentage of a subcatchment’s area that is covered by each category of land use.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Region
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Coverages">A.39</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+WQ
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Landuses">Landuses </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Identifies the various categories of land uses within the drainage area. Each subcatchment area can be assigned a different mix of land uses. Each land use can be subjected to a different street sweeping schedule. Land uses are only used in conjunction with pollutant buildup and wash off.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Landuses">A.40</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+WQ
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Loadings">Loadings </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Specifies the pollutant buildup that exists on each subcatchment at the start of a simulation.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Region
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Loadings">A.41</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+WQ
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Pollutants">Pollutants </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Identifies the pollutants being analyzed.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Pollutants">A.42</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+WQ
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Treatment">Treatment </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Specifies the degree of treatment received by pollutants at specific nodes of the drainage system.
+</td>
+<td style="text-align:left;width: 2cm; ">
+Point
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Treatment">A.43</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; ">
+WQ
+</td>
+<td style="text-align:left;width: 2cm; ">
+<a id="Washoff">Washoff </a>
+</td>
+<td style="text-align:left;width: 7cm; ">
+Specifies the rate at which pollutants are washed off from different land uses during rain events.
+</td>
+<td style="text-align:left;width: 2cm; ">
+No Geometry
+</td>
+<td style="text-align:left;width: 2cm; ">
+Table <a href="SWMM-Input-Detailed-1.html#tab:tab-SWMM-Input-Washoff">A.44</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="images/WQFooter.jpg" width="100%" /></p>
+
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="1" line-spacing="2">
+<div id="ref-SWMM_EPI_Guide" class="csl-entry">
+EPA. (2023). <em>SWMM 5 API Guide</em>. <a href="https://epa.gov/system/files/other-files/2023-08/Swmm5.2.4-ApiGuide.zip">https://epa.gov/system/files/other-files/2023-08/Swmm5.2.4-ApiGuide.zip</a>
+</div>
+<div id="ref-mcdonnell_bryant_2021_5484299" class="csl-entry">
+McDonnell, B., Wu, J. X., Ratliff, K., Mullapudi, A., &amp; Tryby, M. (2021). <em>Open Water Analytics Stormwater Management Model</em> (Version 5.1.13). Zenodo. <a href="https://doi.org/10.5281/zenodo.5484299">https://doi.org/10.5281/zenodo.5484299</a>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="OneDSolv-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="TwoDSolv-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": false,
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
