@@ -195,7 +195,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCC-2"><i class="fa fa-check"></i><b>4.5</b> TUFLOW CATCH control file</a>
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCGlobal-3"><i class="fa fa-check"></i><b>4.5.1</b> Global commands</a></li>
-<li class="chapter" data-level="4.5.2" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCHPC-3"><i class="fa fa-check"></i><b>4.5.2</b> Catchment Hydraulic Model (TUFLOW HPC) commands</a></li>
+<li class="chapter" data-level="4.5.2" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCHPC-3"><i class="fa fa-check"></i><b>4.5.2</b> Catchment hydraulic model (TUFLOW HPC) commands</a></li>
 <li class="chapter" data-level="4.5.3" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SimSetSum-2"><i class="fa fa-check"></i><b>4.5.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SimSetSimClDO-2"><i class="fa fa-check"></i><b>4.6</b> Simulation Class: DO</a>
@@ -388,25 +388,26 @@ Figure 4.1: <strong>TUFLOW CATCH folder structure</strong>
 </blockquote>
 <p>An example block of these global commands that together configure a TUFLOW CATCH simulation (with clarifying section headers as comments) is:</p>
 <pre><code>!________________________________________________________
-! GLOBAL SETTINGS
+! GLOBAL COMMANDS
+
+! Hardware
 Hardware == GPU
+
+! GIS
 GIS Format == SHP
 SHP Projection == ..\..\TUFLOW\model\gis\projection.prj
 
-!________________________________________________________
-! SIMULATION SETTINGS 
+! Simulation settings
 Date Format == ISODATE
 Start Date == 01/01/2021 00:00:00
 End Date == 01/02/2021 00:00:00
 
-!________________________________________________________
-! OUTPUT FOLDERS
+! Output folders
 Output Directory == X:\Project\Output
 Write Check Files == ..\check
 Log Folder == ..\log
 
-!________________________________________________________
-! BOUNDARY CONDITION CONFIGURATION
+! Boundary condition configuration
 Catch Output Folder == ..\bc_dbase
 Catch Output Interval Nodestring == 900
 Catch Output Interval Lateral == 10800
@@ -414,9 +415,127 @@ CSV Write Frequency Day == 1
 </code></pre>
 </div>
 <div id="SCTCCHPC-3" class="section level3 hasAnchor" number="4.5.2">
-<h3><span class="header-section-number">4.5.2</span> Catchment Hydraulic Model (TUFLOW HPC) commands<a href="SimulationConstruction-1.html#SCTCCHPC-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>This block of the TUFLOW CATCH control file contains commands that construct a TUFLOW HPC simulation</p>
-<p>information that is applied equally to both TUFLOW HPC and TUFLOW FV. It does not need to be declared as a block (as all subsequent blocks do). These global commands are presented following, with command argument options also shown. All commands are mandatory.</p>
+<h3><span class="header-section-number">4.5.2</span> Catchment hydraulic model (TUFLOW HPC) commands<a href="SimulationConstruction-1.html#SCTCCHPC-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This block of the TUFLOW CATCH control file contains commands that construct a TUFLOW HPC simulation. These commands are almost entirely those that would be used in setting up a standalone TUFLOW HPC control file (*.tcf), with a small number of additional commands that relate to TUFLOW CATCH.</p>
+<p>The catchment hydraulic model definition must be declared as a block that encloses all TUFLOW CATCH and TUFLOW HPC commands. This is different to the global commands section at the top of the TUFLOW CATCH control file, which does not need this encompassing structure.
+Set the beginning of the block, with command arguments as either HPC or none, and the end of the block (with no command arguments):</p>
+<blockquote>
+<p><a href="#TCCHMS">Catchment Hydraulic Model ==</a></p>
+</blockquote>
+<p><span class="math inline">\(\blockindent\)</span> …catchment hydraulic model commands… <br>
+<span class="math inline">\(\blockindent\)</span> …catchment hydraulic model commands… <br>
+<span class="math inline">\(\blockindent\)</span> …catchment hydraulic model commands… <br></p>
+<blockquote>
+<p><a href="#TCCHME">End Catchment Hydraulic Model</a></p>
+</blockquote>
+<p>If the <a href="#TCCHMS">Catchment Hydraulic Model</a> command is set to none, then catchment simulation is not executed, and TUFLOW FV will read blank (interim) boundary condition files prepared by TUFLOW CATCH. This approach might be adopted for the initial stages of a TUFLOW FV model build, or dry period tidal / thermal stratification calibration of a receiving water, for example. The TUFLOW CATCH commands contained within this Catchment Hydraulic Model block are described following, and all are mandatory.</p>
+<p>Set the directory from which TUFLOW CATCH controls TUFLOW HPC. Unless there is a need to the contrary, this should be set as a relative path to the TUFLOWdirectory set up by the TUFLOW CATCH QGIS plugin, i.e. ..\..\TUFLOW\runs. Setting this to any other directory is not recommended:</p>
+<blockquote>
+<p><a href="#TCRunDir">Runs Directory ==</a></p>
+</blockquote>
+<p>Set the full or relative path to the location of the the TUFLOW HPC executable (including the name of the executable itself, with .exe extension) to be called by TUFLOW CATCH:</p>
+<blockquote>
+<p><a href="#TCHPCEXE">EXE ==</a></p>
+</blockquote>
+<p>Set the time format for output results. Given that the intention of TUFLOW CATCH is that it support addressing of longer term environmental investigations (i.e. not short term detailed ‘traditional’ flood studies), results written in hours format can be difficult to interpret in terms of seasonality, for example. As such, TUFLOW HPC can be instructed to write results in the date format adopted by TUFLOW FV. Doing so is strongly recommended, especially if TUFLOW FV is using the ISODATE format rather than hours:</p>
+<blockquote>
+<p><a href="#TCHPCEXE">Time Format ==</a> TUFLOWFV</p>
+</blockquote>
+<p>Set the relationship between hours and dates. TUFLOW HPC reads boundary condition files and executes its internal computations using an hours (rather than date) timestamp, although this is being upgraded in the mid term. In order to coordinate simulation with TUFLOW FV, and to output results in date format, TUFLOW CATCH requires specification of the date that corresponds to zero hours in TUFLOW HPC boundary (and other) files. This command specifies that date at which boundary and other files refer to zero hours. Note the date time format expected, and that seconds is not a required field:</p>
+<blockquote>
+<a href="#TCHPCEXE">Zero Date ==</a>
+<dd/mm/yyyy hh:mm>
+</blockquote>
+<p>Set TUFLOW HPC to write TUFLOW CATCH related map outputs (e.g. pollutant and other hydraulic xmdf outputs, see Section <font color="red">XXXX</font>). This catch command argument can be comma delimited with other outputs if required:</p>
+<blockquote>
+<p><a href="#TCHPCEXE">Output Map Data Types ==</a> catch</p>
+</blockquote>
+<p>Following the issuing of these specific TUFLOW CATCH commands, a TUFLOW HPC model can be constructed in the same manner as a standalone model. In this regard:</p>
+<ul>
+<li>All TUFLOW HPC commands are recognised by TUFLOW CATCH and can be issued unchanged from the usage described in TUFLOW HPC’s manual and/or relevant release notes</li>
+<li>TUFLOW HPC commands that reference other subsidiary control files (such as geometry control files, *.tgc etc.) need to use relative paths, and point to the locations with the TUFLOW directory created by the TUFLOW CATCH QGIS plugin, e.g.:</li>
+</ul>
+<blockquote>
+<p>BC Database == ..\..\TUFLOW\bc_dbase\bc_dbase_001.csv</p>
+</blockquote>
+<ul>
+<li>These subsidiary control files can then in turn use path references are per standalone TUFLOW HPC model construction (and point to locations within the same TUFLOW directory structure)</li>
+<li>Variables can be set within the TUFLOW CATCH Catchment Hydraulic Model block for reference in any other subsidiary TUFLOW HPC files as per normal, e.g.:</li>
+</ul>
+<blockquote>
+<p>Set Variable 2D_CELL_SIZE == 25</p>
+</blockquote>
+<ul>
+<li>Scenarios and events can be set within the TUFLOW CATCH Catchment Hydraulic Model block for reference in any other subsidiary TUFLOW HPC file IF statements as per normal, e.g.:</li>
+</ul>
+<blockquote>
+<p>Event == wet_year</p>
+</blockquote>
+<ul>
+<li>Some commands issued in the Global Commands section of the TUFLOW CATCH control file can be overwritten in the Catchment Hydraulic Model block to tailor the TUFLOW HPC simulation, including:</li>
+</ul>
+<blockquote>
+<p>GIS Format == GPKG <font color="green">! Use geopackage format for TUFLOW HPC but not TUFLOW FV </font><br>
+GPKG Projection == ..\..\TUFLOW\model\gis\Projection.gpkg <font color="green">! Use a projection geopackage within the TUFLOW folder structure </font></p>
+</blockquote>
+<p>Current limitations of the TUFLOW CATCH with regard to setting up TUFLOW HPC simulations include:</p>
+<ul>
+<li>Whilst events and scenarios can be manually defined and referenced (see above), dynamic assignment of same (using tilda notation in filenames etc.) is not yet supported. Each event or scenario will need a new TUFLOW CATCH control file</li>
+</ul>
+<p>An example block of these Catchment Hydraulic Model block commands that together configure a TUFLOW HPC simulation within TUFLOW CATCH (with clarifying section headers as comments) is:</p>
+<pre><code>!_________________________________________________________________
+! CATCHMENT HYDRAULICS
+Catchment Hydraulic Model == HPC
+
+    ! Base runs directory and executable
+    Runs Directory == ..\..\TUFLOW\runs
+    EXE == C:\EXE\TUFLOW_iSP_w64.exe
+    Time Format == TUFLOWFV
+    Zero Date == 01/01/2021 00:00
+
+    ! GIS
+    GIS Format == GPKG
+    GPKG Projection == ..\..\TUFLOW\model\gis\Projection.gpkg
+
+    ! Solver
+    HPC DP Check == OFF
+    Solution scheme == HPC
+    Timestep == 1                                    
+    Timestep Maximum == 20     
+    
+    ! SGS Settings
+    SGS == ON
+    SGS Sample Target Distance == 1.    
+    GRID Format == TIF
+    
+    ! Gridding
+    Set Variable 2D_CELL_SIZE == 10
+    
+    ! Boundaries
+    BC Database == ..\..\TUFLOW\bc_dbase\bc_dbase_001.csv
+  
+    ! Control files
+    Geometry Control File == ..\..\TUFLOW\model\Demo.tgc
+    BC Control File == ..\..\TUFLOW\model\Demo_001.tbc
+    Read Materials File == ..\..\TUFLOW\model\materials.tmf 
+    Read Soils File == ..\..\TUFLOW\model\Demo.tsoilf
+    Soil Negative Rainfall Approach == FACTOR
+    Set Variable HC == 10000
+    Soil Negative Rainfall Factor == 0.2
+    
+    ! Ouput map configuration 
+    Map Output Format == XMDF TIF 
+    Map Output Data Types == catch 
+    Map Output Interval == 300    
+    TIF Map Output Interval == 0       
+    TIF Map Output Data Types == h d dt   
+    Grid Output Cell Size == &lt;&lt;2D_CELL_SIZE&gt;&gt;
+
+    SGS Map Extent Trim == All
+    SGS Depth Output == Cell Average
+    Map Cutoff Depth == 0.01
+
+End Catchment Hydraulic Model</code></pre>
 </div>
 <div id="SimSetSum-2" class="section level3 hasAnchor" number="4.5.3">
 <h3><span class="header-section-number">4.5.3</span> Summary<a href="SimulationConstruction-1.html#SimSetSum-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
