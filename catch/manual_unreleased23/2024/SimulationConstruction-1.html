@@ -30,7 +30,7 @@
   
   <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
 <link rel="prev" href="ProcessDescriptions-1.html"/>
-<link rel="next" href="AppCommands.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -196,19 +196,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCGlobal-3"><i class="fa fa-check"></i><b>4.5.1</b> Global commands</a></li>
 <li class="chapter" data-level="4.5.2" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCHPC-3"><i class="fa fa-check"></i><b>4.5.2</b> Catchment hydraulic model (TUFLOW HPC) commands</a></li>
-<li class="chapter" data-level="4.5.3" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SimSetSum-2"><i class="fa fa-check"></i><b>4.5.3</b> Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="4.6" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SimSetSimClDO-2"><i class="fa fa-check"></i><b>4.6</b> Simulation Class: DO</a>
-<ul>
-<li class="chapter" data-level="4.6.1" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#PrereqDO-3"><i class="fa fa-check"></i><b>4.6.1</b> Prerequisites</a></li>
-<li class="chapter" data-level="4.6.2" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SimCtrlsDO-3"><i class="fa fa-check"></i><b>4.6.2</b> Part 1: Simulation specification</a></li>
-<li class="chapter" data-level="4.6.3" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#ConModSttngsDO-3"><i class="fa fa-check"></i><b>4.6.3</b> Part 2: Constituent model specification</a></li>
-<li class="chapter" data-level="4.6.4" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#MatSpecsDO-3"><i class="fa fa-check"></i><b>4.6.4</b> Part 3: Material specification</a></li>
-<li class="chapter" data-level="4.6.5" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#ConOrdDO-3"><i class="fa fa-check"></i><b>4.6.5</b> Constituent ordering</a></li>
-<li class="chapter" data-level="4.6.6" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#ExampleDO"><i class="fa fa-check"></i><b>4.6.6</b> Example</a></li>
+<li class="chapter" data-level="4.5.3" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCPollExp-3"><i class="fa fa-check"></i><b>4.5.3</b> Pollutant export model commands</a></li>
+<li class="chapter" data-level="4.5.4" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCFV-3"><i class="fa fa-check"></i><b>4.5.4</b> Receiving model (TUFLOW FV) commands</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="AppCommands.html"><a href="AppCommands.html"><i class="fa fa-check"></i><b>5</b> Commands</a></li>
 <li class="divider"></li>
 <li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
 
@@ -537,228 +528,14 @@ Catchment Hydraulic Model == HPC
 
 End Catchment Hydraulic Model</code></pre>
 </div>
-<div id="SimSetSum-2" class="section level3 hasAnchor" number="4.5.3">
-<h3><span class="header-section-number">4.5.3</span> Summary<a href="SimulationConstruction-1.html#SimSetSum-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In order to set up and execute a water quality simulation using the WQ Module, the following steps are required:</p>
-<ul>
-<li>Modify the TUFLOW FV control file:
-<ul>
-<li>Add at least the following commands to TUFLOW FV control file (*.fvc):
-<ul>
-<li><a href="AppCommands.html#FVActivateWQM">water quality model ==</a> TUFLOW</li>
-<li><a href="AppCommands.html#FVWQMCtrlFl">water quality control file ==</a> &lt;<em>water quality control file name</em>&gt;.fvwq</li>
-</ul></li>
-<li>Optionally add a folder path command to the TUFLOW FV control file (*.fvc) with a trailing backslash:
-<ul>
-<li><a href="AppCommands.html#FVWQMCtrlDr">water quality model dir ==</a> &lt;<em>relative path to *.fvwq file</em>&gt;<span class="math inline">\(\backslash\)</span></li>
-</ul></li>
-<li>Add appropriate initial conditions for all water quality constituents, observing <a href="#OrderIC-5">ordering rules</a> where required</li>
-<li>Initially optionally add boundary conditions for all water quality constituents, observing <a href="#OrderBC-5">ordering rules</a> in <code>bc header ==</code> commands</li>
-</ul></li>
-<li>Create the water quality control file with the corresponding name and path</li>
-<li>Modify the water quality control file
-<ul>
-<li>Optionally add to the water quality control file:
-<ul>
-<li>Part 1: A simulation controls section</li>
-<li>Part 2: A constituent model setting section with one or more constituent model blocks with one or more parameter commands</li>
-<li>Part 3: A material block specifications section</li>
-</ul></li>
-</ul></li>
-</ul>
-<p>Once initially constructed, boundary conditions can be added (if not already in place), and progressive refinement and parameterisation of constituent models and benthic fluxes can be affected. Details of these commands and their options within each specific simulation class are provided in subsequent sections. Subsections are separated into the above water quality control file parts for ease and consistency of reference. All commands are optional.</p>
-
+<div id="SCTCCPollExp-3" class="section level3 hasAnchor" number="4.5.3">
+<h3><span class="header-section-number">4.5.3</span> Pollutant export model commands<a href="SimulationConstruction-1.html#SCTCCPollExp-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>TBC</p>
 </div>
-</div>
-<div id="SimSetSimClDO-2" class="section level2 hasAnchor" number="4.6">
-<h2><span class="header-section-number">4.6</span> Simulation Class: DO<a href="SimulationConstruction-1.html#SimSetSimClDO-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>If no simulation class is specified then a simulation will be automatically constructed using this DO class, and populated with library defaults for all parameters. Computed variables will be:</p>
-<ul>
-<li>Dissolved oxygen</li>
-<li>Pathogens (optional, potentially multiple)</li>
-</ul>
-<div id="PrereqDO-3" class="section level3 hasAnchor" number="4.6.1">
-<h3><span class="header-section-number">4.6.1</span> Prerequisites<a href="SimulationConstruction-1.html#PrereqDO-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The DO simulation class requires simulation of the following in TUFLOW FV:</p>
-<ul>
-<li>Hydrodynamics, in either two or three dimensions (including any internal one dimensional structures if present)</li>
-<li>Salinity</li>
-<li>Temperature</li>
-<li>Heat module on (i.e. meteorological forcing is required)</li>
-</ul>
-<p>Simulation of suspended sediment (via TUFLOW FV’s sediment transport module) is optional, unless attached pathogens are simulated.</p>
-</div>
-<div id="SimCtrlsDO-3" class="section level3 hasAnchor" number="4.6.2">
-<h3><span class="header-section-number">4.6.2</span> Part 1: Simulation specification<a href="SimulationConstruction-1.html#SimCtrlsDO-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The DO simulation class is set via</p>
-<blockquote>
-<p><a href="AppCommands.html#WQSimulationClass">simulation class ==</a> DO</p>
-</blockquote>
-<p>The other commands in this part are not specific to this simulation class. See section <a href="#SimCtrls-3"><strong>??</strong></a>.</p>
-</div>
-<div id="ConModSttngsDO-3" class="section level3 hasAnchor" number="4.6.3">
-<h3><span class="header-section-number">4.6.3</span> Part 2: Constituent model specification<a href="SimulationConstruction-1.html#ConModSttngsDO-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>As per Tables <a href="#tab:tab-ConClasses"><strong>??</strong></a> and <a href="#tab:tab-ConClassMods"><strong>??</strong></a>, oxygen is the only mandatory constituent model class available within the DO simulation class, and there is only one oxygen constituent model within that class, with code O2. Pathogens may be optionally simulated (in any simulation class).</p>
-<div id="ConModClssOxy-4" class="section level4 hasAnchor" number="4.6.3.1">
-<h4><span class="header-section-number">4.6.3.1</span> Model class: Oxygen<a href="SimulationConstruction-1.html#ConModClssOxy-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div id="ConModO2-5" class="section level5 hasAnchor" number="4.6.3.1.1">
-<h5><span class="header-section-number">4.6.3.1.1</span> Constituent model: O2<a href="SimulationConstruction-1.html#ConModO2-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>This constituent model is specified as:</p>
-<blockquote>
-<p><a href="AppCommands.html#WQOxyMod">oxygen model ==</a> O2</p>
-</blockquote>
-<p>Minimum and maximum concentrations are specified as:</p>
-<blockquote>
-<p><a href="AppCommands.html#WQOxyMinMax"><span class="math inline">\(\blockindent\)</span> oxygen min max ==</a> <a href="#WQParMinO2"><span class="math inline">\(\left[DO\right]_{min}^{O_2}\)</span></a>, <a href="#WQParMaxO2"><span class="math inline">\(\left[DO\right]_{max}^{O_2}\)</span></a></p>
-</blockquote>
-<p>Global benthic parameters (used in Equation <a href="#eq:equ-sed-do-flux">(<strong>??</strong>)</a>) are specified as:</p>
-<blockquote>
-<p><a href="AppCommands.html#WQOxyBenFlxPars"><span class="math inline">\(\blockindent\)</span> oxygen benthic ==</a> <a href="#WQParKsedO2"><span class="math inline">\(K_{sed-O_2}^{O_2}\)</span></a>, <a href="#WQParthetasedO2"><span class="math inline">\(\theta_{sed}^{O_2}\)</span></a></p>
-</blockquote>
-<p>The oxygen piston model to be used (in either Equation <a href="#eq:equ-atm-Pv1">(<strong>??</strong>)</a> or Equation <a href="#eq:equ-atm-Pv4">(<strong>??</strong>)</a>) is specified as:</p>
-<blockquote>
-<p><a href="AppCommands.html#WQOxyPistMod1"><span class="math inline">\(\blockindent\)</span> oxygen piston model ==</a> Wanninkhof92</p>
-</blockquote>
-<p>or</p>
-<blockquote>
-<p><a href="AppCommands.html#WQOxyPistMod4"><span class="math inline">\(\blockindent\)</span> oxygen piston model ==</a> Ho16</p>
-</blockquote>
-<p>The argument (either “Wanninkhof92” or “Ho16”) activates a different oxygen piston model (Equation <a href="#eq:equ-atm-Pv1">(<strong>??</strong>)</a> or Equation <a href="#eq:equ-atm-Pv4">(<strong>??</strong>)</a>, respectively).</p>
-<p>Although not strictly necessary, the use of “oxygen” to prefix these block commands is deliberate so as to maintain consistency of command style with other constituent model blocks that include more than one computed variable, such as nitrogen, phosphorus and organics. Nonetheless, if the “oxygen” prefix is omitted within this constituent model block, the WQ Module will still interpret the above commands correctly.</p>
-<p>This constituent model block must be terminated using the command:</p>
-<blockquote>
-<p><a href="AppCommands.html#WQOxyModEnd">end oxygen model</a></p>
-</blockquote>
-</div>
-</div>
-<div id="ConModClssPth-4" class="section level4 hasAnchor" number="4.6.3.2">
-<h4><span class="header-section-number">4.6.3.2</span> Model class: Pathogens (optional)<a href="SimulationConstruction-1.html#ConModClssPth-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>This model class is optional.</p>
-<div id="ConModFree-5" class="section level5 hasAnchor" number="4.6.3.2.1">
-<h5><span class="header-section-number">4.6.3.2.1</span> Constituent model: Free<a href="SimulationConstruction-1.html#ConModFree-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>This constituent model is specified as:</p>
-<blockquote>
-<p><a href="#WQPthMod">pathogen model ==</a> free, <em>pathname</em></p>
-</blockquote>
-<p><em>pathname</em> is any user specified pathogen group name that:</p>
-<ul>
-<li>Uses only alphanumeric characters</li>
-<li>Has no spaces</li>
-<li>Excludes the keyword ‘PATH’, and</li>
-<li>Is not the same as any other group name</li>
-</ul>
-<p>Minimum and maximum concentrations are specified as:</p>
-<blockquote>
-<p><a href="AppCommands.html#WQPthMinMax"><span class="math inline">\(\blockindent\)</span> alive min max ==</a> <a href="#WQParMinPth"><span class="math inline">\(\left[PTH_a\right]_{min}^{pth}\)</span></a>, <a href="#WQParMaxPth"><span class="math inline">\(\left[PTH_a\right]_{max}^{pth}\)</span></a></p>
-</blockquote>
-<p>Mortality parameters are specified as:</p>
-<blockquote>
-<p><a href="AppCommands.html#WQPthMort"><span class="math inline">\(\blockindent\)</span> mortality ==</a> <a href="#WQParkdPath"><span class="math inline">\(k_{d}^{pth}\)</span></a>, <a href="#WQParCSMPath"><span class="math inline">\(C_{SM}^{pth}\)</span></a>, <a href="#WQParalphaPath"><span class="math inline">\(\alpha\)</span></a>, <a href="#WQParbetaPath"><span class="math inline">\(\beta\)</span></a>, <a href="#WQParthetamorPath"><span class="math inline">\(\theta_{mor}^{pth}\)</span></a></p>
-</blockquote>
-<p><span class="math inline">\(\beta\)</span> is not currently used but must be retained as a placeholder in this command for future use.</p>
-<p>Light inactivation parameters are specified in three separate but related commands, with one command per light band (visible, UV-A and UV-B):</p>
-<blockquote>
-<p><a href="AppCommands.html#WQPthvisInvn"><span class="math inline">\(\blockindent\)</span> visible inactivation ==</a> <a href="#WQParkvisPath"><span class="math inline">\(k_{vis}\)</span></a>, <a href="#WQParcSvisPath"><span class="math inline">\(c_{S_{vis}}^{pth}\)</span></a>, <a href="#WQParKDOvisPath"><span class="math inline">\(K_{DO_{vis}}^{pth}\)</span></a></p>
-</blockquote>
-<blockquote>
-<p><a href="AppCommands.html#WQPthuvaInvn"><span class="math inline">\(\blockindent\)</span> uva inactivation ==</a> <a href="#WQParkuvaPath"><span class="math inline">\(k_{uva}\)</span></a>, <a href="#WQParcSuvaPath"><span class="math inline">\(c_{S_{uva}}^{pth}\)</span></a>, <a href="#WQParKDOuvaPath"><span class="math inline">\(K_{DO_{uva}}^{pth}\)</span></a></p>
-</blockquote>
-<blockquote>
-<p><a href="AppCommands.html#WQPthuvbInvn"><span class="math inline">\(\blockindent\)</span> uvb inactivation ==</a> <a href="#WQParkuvbPath"><span class="math inline">\(k_{uvb}\)</span></a>, <a href="#WQParcSuvbPath"><span class="math inline">\(c_{S_{uvb}}^{pth}\)</span></a>, <a href="#WQParKDOuvbPath"><span class="math inline">\(K_{DO_{uvb}}^{pth}\)</span></a></p>
-</blockquote>
-<p>Settling of non-attached pathogens is specified as follows, with a negative number being a downwards velocity:</p>
-<blockquote>
-<p><a href="AppCommands.html#WQPthSettleFree"><span class="math inline">\(\blockindent\)</span> settling ==</a> <a href="#WQParVPathAD"><span class="math inline">\(V_{settle}^{pth}\)</span></a></p>
-</blockquote>
-<p>This constituent model block must be terminated using the command:</p>
-<blockquote>
-<p><a href="#WQPathModEnd">end pathogen model</a></p>
-</blockquote>
-</div>
-<div id="ConModAtt-5" class="section level5 hasAnchor" number="4.6.3.2.2">
-<h5><span class="header-section-number">4.6.3.2.2</span> Constituent model: Attached<a href="SimulationConstruction-1.html#ConModAtt-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>This constituent model must be accompanied by simulation of at least one sediment fraction within the TUFLOW FV sediment transport (ST) module, and is specified as:</p>
-<blockquote>
-<p><a href="#WQPthMod">pathogen model ==</a> attached, <em>pathname</em></p>
-</blockquote>
-<p><em>pathname</em> is any user specified pathogen group name that:</p>
-<ul>
-<li>Uses only alphanumeric characters</li>
-<li>Has no spaces</li>
-<li>Excludes the keyword ‘PATH’, and</li>
-<li>Is not the same as any other group name</li>
-</ul>
-<p>The commands are the same as those specified within a free pathogen constituent model block (Section <a href="SimulationConstruction-1.html#ConModFree-5">4.6.3.2.1</a>), with the following modification or additions.</p>
-<p>Settling is specified for both free and attached pathogens:</p>
-<blockquote>
-<p><a href="AppCommands.html#WQPthSettleAtt"><span class="math inline">\(\blockindent\)</span> settling ==</a> <a href="#WQParVPathAD"><span class="math inline">\(V_{settle}^{pth}\)</span></a>, <a href="#WQParVPathT"><span class="math inline">\(V_{settle}^{pth_t}\)</span></a></p>
-</blockquote>
-<p>The target attached pathogen fraction is specified as:</p>
-<blockquote>
-<p><a href="#WQPthTargAttFrac"><span class="math inline">\(\blockindent\)</span> target attached fraction ==</a> <a href="#WQParfattPth"><span class="math inline">\(f_{att}^{pth}\)</span></a></p>
-</blockquote>
-<p>This constituent model block must be terminated using the command:</p>
-<blockquote>
-<p><a href="#WQPathModEnd">end pathogen model</a></p>
-</blockquote>
-</div>
-</div>
-</div>
-<div id="MatSpecsDO-3" class="section level3 hasAnchor" number="4.6.4">
-<h3><span class="header-section-number">4.6.4</span> Part 3: Material specification<a href="SimulationConstruction-1.html#MatSpecsDO-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Oxygen benthic flux (used in Equation <a href="#eq:equ-sed-do-flux">(<strong>??</strong>)</a>) is specified within both default and numbered material blocks as:</p>
-<blockquote>
-<p><a href="AppCommands.html#WQOxyBenFlx"><span class="math inline">\(\blockindent\)</span> oxygen flux ==</a> <a href="#WQParFsedO2"><span class="math inline">\(F_{sed}^{O_2}\)</span></a></p>
-</blockquote>
-</div>
-<div id="ConOrdDO-3" class="section level3 hasAnchor" number="4.6.5">
-<h3><span class="header-section-number">4.6.5</span> Constituent ordering<a href="SimulationConstruction-1.html#ConOrdDO-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Dissolved oxygen is the only mandatory constituent simulated by the WQ Module for this simulation class, and therefore oxygen concentration is specified as the first variable (shown in symbolic form below):</p>
-<blockquote>
-<p>initial wq concentration == <span class="math inline">\(\left[ DO \right]\)</span></p>
-</blockquote>
-<p>Similarly, in a <code>bc header ==</code> command within a bc block, oxygen is expected to be the first and only mandatory water quality variable after hydrodynamic boundary conditions.</p>
-<blockquote>
-<p><span class="math inline">\(\blockindent\)</span>bc header == time, water_elev, sal, temp, clay, sand, DO_mgL</p>
-</blockquote>
-<p>DO_mgL is the header used to designate oxygen in the related boundary condition file, noting that the DO_mgL column in the boundary condition file can appear in any column in the boundary condition file, and that it does not need to be the seventh column. The header text “DO_mgL” is just an example, and it can be any header desired, as long as it matches the correct column header in the boundary condition file.</p>
-<div id="ConOrdDOPath-4" class="section level4 hasAnchor" number="4.6.5.1">
-<h4><span class="header-section-number">4.6.5.1</span> Pathogens (optional)<a href="SimulationConstruction-1.html#ConOrdDOPath-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>If pathogens are simulated, then their headers are required at the end of any lists, regardless of the other hydrodynamic and water quality constituents simulated. This therefore applies to all simulation classes from DO to organics. Alive and dead pathogens are always required to be specified, in that order, and if attached pathogens are simulated then that attached pathogens header is listed between those of alive and dead. This pattern is repeated for each specified pathogen group, in the order in which pathogen groups are defined via pathogen constituent model blocks in the water quality control file. For example, where two pathogen groups are simulated (called ECOLI and CRYPTO, and defined in that order in the corresponding water quality control file), with ECOLI including attachment, the above bc header would be extended to the following:</p>
-<blockquote>
-<p><span class="math inline">\(\blockindent\)</span>bc header == time, water_elev, sal, temp, clay, sand, DO_mgL, ECOLI_alive, ECOLI_att, ECOLI_dead, CRYPTO_al, CRYPTO_de</p>
-</blockquote>
-</div>
-</div>
-<div id="ExampleDO" class="section level3 hasAnchor" number="4.6.6">
-<h3><span class="header-section-number">4.6.6</span> Example<a href="SimulationConstruction-1.html#ExampleDO" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Following is an example of all the available WQ Module <code>simulation class == DO</code> commands. A single material applied as zeros everywhere as the default, other than for materials 1 and 4 where the default flux is overwritten. One (optional) pathogen constituent model block has been included, but is not required.</p>
-<pre><code>simulation class == DO
-wq dt == 600
-wq units == mgl
-
-oxygen model == O2
-    oxygen benthic == 4.0, 1.05
-    oxygen min max == 0.0, 15.0
-end oxygen model
-
-!optional pathogen constituent model block:
-pathogen model == free, crypto 
-    alive min max == 0.0, 1e7
-    mortality == 0.08, 2e-12, 6.1, 1.0, 1.11 
-    visible inactivation == 0.082, 0.0067, 0.5 
-    uva inactivation == 0.5, 0.0067, 0.5 
-    uvb inactivation == 1.0, 0.0067, 0.5 
-    settling == -0.03
-end pathogen model
-
-material == default
-    oxygen flux == 0
-end material
-
-material == 1, 4
-    oxygen flux == -137.0
-end material</code></pre>
+<div id="SCTCCFV-3" class="section level3 hasAnchor" number="4.5.4">
+<h3><span class="header-section-number">4.5.4</span> Receiving model (TUFLOW FV) commands<a href="SimulationConstruction-1.html#SCTCCFV-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>TBC</p>
+<p><img src="images/WQFooter.jpg" width="100%" /></p>
 
 </div>
 </div>
@@ -768,8 +545,8 @@ end material</code></pre>
           </div>
         </div>
       </div>
-<a href="ProcessDescriptions-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="AppCommands.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ProcessDescriptions-1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
