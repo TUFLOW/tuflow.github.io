@@ -530,7 +530,89 @@ End Catchment Hydraulic Model</code></pre>
 </div>
 <div id="SCTCCPollExp-3" class="section level3 hasAnchor" number="4.5.3">
 <h3><span class="header-section-number">4.5.3</span> Pollutant export model commands<a href="SimulationConstruction-1.html#SCTCCPollExp-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This block of the TUFLOW CATCH control file contains commands that control pollutant export (and other constituent) simulation.</p>
+<p>The pollutant model definition must be declared as a block that encloses all commands. This is analogous to the declaration of a catchment hydraulic model.</p>
+<p>Set the beginning of the block, with command arguments as either mass accumulation release or none, and the end of the block (with no command arguments). The key phrase <em>mass accumulation release</em> activates all available pollutant export submodels. The keyword none turns off pollutant export simulation:</p>
+<blockquote>
+<p><a href="#TCCPEMS">Pollutant Export Model ==</a></p>
+</blockquote>
+<p><span class="math inline">\(\blockindent\)</span> …pollutant export model commands… <br>
+<span class="math inline">\(\blockindent\)</span> …pollutant export model commands… <br>
+<span class="math inline">\(\blockindent\)</span> …pollutant export model commands… <br></p>
+<blockquote>
+<p><a href="#TCCPEME">End Pollutant Export Model</a></p>
+</blockquote>
+<p>If pollutant export is simulated, then all pollutants (and constituents) declared in the receiving model (TUFLOW FV, and including all called modules such as Sediment Transport and Water Quality) must be accounted for with the correct name in the pollutant export block. Each must be assigned either:</p>
+<ul>
+<li>A constant value/concentration for application to receiving model boundary condition, or</li>
+<li>A timeseries value/concentration for application to receiving model boundary conditions, or</li>
+<li>A pollutant export model, with supporting parameters, for TUFLOW CATCH pollutant export simulation</li>
+</ul>
+<div id="SCTCCPollExpConst-4" class="section level4 hasAnchor" number="4.5.3.1">
+<h4><span class="header-section-number">4.5.3.1</span> Constant<a href="SimulationConstruction-1.html#SCTCCPollExpConst-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Constant value/concentrations can be assigned when dynamic simulation is not required, such as for salinity or dissolved oxygen, for example. This specification is applied globally.</p>
+<p>Set a constant value/concentration that is applied to downstream receiving model boundary condition files by TUFLOW CATCH. In doing so:</p>
+<ul>
+<li>The name needs to exactly match that configured by the receiving model, and</li>
+<li>The concentration needs to be in the same units produced by the receiving model</li>
+</ul>
+<blockquote>
+<p><a href="#TCPECons">Constant <name> ==</a> <concentration to be applied></p>
+</blockquote>
+</div>
+<div id="SCTCCPollExpTS-4" class="section level4 hasAnchor" number="4.5.3.2">
+<h4><span class="header-section-number">4.5.3.2</span> Timeseries<a href="SimulationConstruction-1.html#SCTCCPollExpTS-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Timeseries values/concentrations can be assigned for which dynamic simulation is not required, but which values/concentrations likely vary in time. This might include water temperature specification, for example. This specification is applied globally.</p>
+<p>Set a timeseries that is applied to downstream receiving model boundary condition files by TUFLOW CATCH. In doing so:</p>
+<ul>
+<li>The name needs to exactly match that of variable configured by the receiving model, and</li>
+<li>The concentration needs to be in the same units produced by the receiving model</li>
+</ul>
+<blockquote>
+<p><a href="#TCPETS">Time-series <name> ==</a> <bc name></p>
+</blockquote>
+<p>The <name> field refers to a name declared in the TUFLOW HPC boundary condition database. For example, ‘temperature’, with the corresponding database entry being (in a database simplified for this example):</p>
+<pre><code>Name,Source,Column 1,Column 2,Add Col 1,Mult Col 2,Add Col 2,Column 3,Column 4
+temperature,temperature_2021.csv,TUFLOW_Time,Airtemp,,,,,</code></pre>
+</div>
+<div id="SCTCCPollExpPE-4" class="section level4 hasAnchor" number="4.5.3.3">
+<h4><span class="header-section-number">4.5.3.3</span> Pollutant export<a href="SimulationConstruction-1.html#SCTCCPollExpPE-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Pollutant export models can be configured within TUFLOW CATCH to simulate the release of pollutants from the ground surface across the TUFLOW HPC model domain. This export is a core intention and capability of TUFLOW CATCH and can be configured as uniform or spatially varied across the TUFLOW HPC domain. Any nonuniform spatial definition uses the material numbers (and corresponding spatial distributions) already configured in the TUFLOW HPC model (i.e. the catchment hydraulic model block described above) and affects this through specification of material blocks in this part of the TUFLOW CATCH control file. These blocks are similar to those deployed by TUFLOW FV.</p>
+<p>Configure default (or spatially uniform) pollutant export:</p>
+<blockquote>
+<p><a href="#TCCPEAllMatS">Material ==</a> all</p>
+</blockquote>
+<p><span class="math inline">\(\blockindent\)</span> …commands… <br>
+<span class="math inline">\(\blockindent\)</span> …commands… <br>
+<span class="math inline">\(\blockindent\)</span> …commands… <br></p>
+<blockquote>
+<p><a href="#TCCPEAllMatE">End Material</a></p>
+</blockquote>
+<p>Once these uniform conditions have been set, progressive specifications of material by material pollutant behaviour can be set. These specifications overwrite previous settings on a spatial basis. This stamping-style approach is akin to the way in which digital elevation model inputs can be progressively updated within TUFLOW HPC and TUFLOW FV by specifying a suite of elevation data that overwite each other on a sptail basis. In the case of pollutant export properties, this stamping is affected by specifying subsequent material blocks that relate to individual or multiple materials. Up to ten comma separated materials can be specified in one material block:</p>
+<blockquote>
+<p><a href="#TCCPEStmpMatS">Material ==</a> MatID1, MatID2, MatID3…, MatID10</p>
+</blockquote>
+<p><span class="math inline">\(\blockindent\)</span> …commands… <br>
+<span class="math inline">\(\blockindent\)</span> …commands… <br>
+<span class="math inline">\(\blockindent\)</span> …commands… <br></p>
+<blockquote>
+<p><a href="#TCCPEStmpMatE">End Material</a></p>
+</blockquote>
+<p>Once all material specifications have been processed, TUFLOW CATCH will check that all pollutants have had all export properties specified for the entire TUFLOW HPC domain (i.e. every computational grid cell). This includes accounting for constant and timeseries specifications (which are global and do not need to be applied within material blocks). Using the ‘all’ command argument in the first material block specified and providing information for every pollutant required within that block (and then progressively spatially refining) ensures this will be true. Once the initial uniform material specification has been made, not every pollutant needs to be specified in every subsequent material block - only alterations to the uniform conditions need be made.</p>
+<p>Each line within a material block contains a suite of arguments. Although there are some common commands, these generally differ according to the pollutant export model specified, as follows.</p>
+<div id="SCTCCPollExpAW-5" class="section level5 hasAnchor" number="4.5.3.3.1">
+<h5><span class="header-section-number">4.5.3.3.1</span> Accumulation and washoff<a href="SimulationConstruction-1.html#SCTCCPollExpAW-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>TBC</p>
+</div>
+<div id="SCTCCPollExpSS-5" class="section level5 hasAnchor" number="4.5.3.3.2">
+<h5><span class="header-section-number">4.5.3.3.2</span> Shear Stress<a href="SimulationConstruction-1.html#SCTCCPollExpSS-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>TBC</p>
+<p>Once released, pollutants are transported in the surface using TUFLOW’s advection dispersion module. If soils have been included in the TUFLOW HPC simulation and infiltration of water occurs, then this water takes with it any previously released pollutants and continues to track these in the subsurface as it does water. Similarly, if TUFLOW HPC predicts that water travelling in soil layers intersects the ground surface, then any included pollutants are returned to the surface and advected and dispersed. If a particular pollutant is not required to infiltrate from the surface to subsurface, then this infiltration can be turned off (default is on):</p>
+<blockquote>
+<p><a href="#TCHPCEX">Infiltration <name> ==</a> off</p>
+</blockquote>
+</div>
+</div>
 </div>
 <div id="SCTCCFV-3" class="section level3 hasAnchor" number="4.5.4">
 <h3><span class="header-section-number">4.5.4</span> Receiving model (TUFLOW FV) commands<a href="SimulationConstruction-1.html#SCTCCFV-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
