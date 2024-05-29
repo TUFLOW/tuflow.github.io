@@ -368,14 +368,14 @@ Figure 4.1: <strong>TUFLOW CATCH folder structure</strong>
 </blockquote>
 <p>Set the timestep (in simulation time seconds) at which lines within a boundary condition file for TUFLOW FV (created from TUFLOW HPC predictions) are separated. TUFLOW CATCH offers the user the option to set this timestep differently for different types of TUFLOW FV boundaries: nodestrings (Q boundaries that deliver momentum to TUFLOW FV) and lateral inflows (QC boundaries that do not deliver momentum to TUFLOW FV). It would be typical that nodestring boundaries are written at a shorter timestep to lateral boundaries, but this is not mandated, and the user is able to decide how this timestep relates to simulation time and file size constraints:</p>
 <blockquote>
-<p><a href="#TCNSOutDt">Catch Output Interval Nodestring ==</a> <float in seconds></p>
+<p><a href="#TCNSOutDt">Catch Output Interval Nodestring ==</a> &lt;float in seconds&gt;</p>
 </blockquote>
 <blockquote>
-<p><a href="#TCLatOutDt">Catch Output Interval Lateral ==</a> <float in seconds></p>
+<p><a href="#TCLatOutDt">Catch Output Interval Lateral ==</a> &lt;float in seconds&gt;</p>
 </blockquote>
 <p>Set the frequency at which TUFLOW CATCH pauses to write out TUFLOW FV boundary condition files, in units of days (simulation time). Setting a value of 1 means that TUFLOW CATCH will hold all boundary information in memory for a day of simulation time, and then update TUFLOW FV boundary files with this held memory on a daily basis. For example, if outputs were set to be hourly via hourly via either of the above interval commands, then 24 lines would be added to each boundary file at time of writing:</p>
 <blockquote>
-<p><a href="#TCCSVwrite">CSV Write Frequency Day ==</a> <float in days></p>
+<p><a href="#TCCSVwrite">CSV Write Frequency Day ==</a> &lt;float in days&gt;</p>
 </blockquote>
 <p>An example block of these global commands that together configure a TUFLOW CATCH simulation (with clarifying section headers as comments) is:</p>
 <pre><code>!________________________________________________________
@@ -434,8 +434,7 @@ Set the beginning of the block, with command arguments as either HPC or none, an
 </blockquote>
 <p>Set the relationship between hours and dates. TUFLOW HPC reads boundary condition files and executes its internal computations using an hours (rather than date) timestamp, although this is being upgraded in the mid term. In order to coordinate simulation with TUFLOW FV, and to output results in date format, TUFLOW CATCH requires specification of the date that corresponds to zero hours in TUFLOW HPC boundary (and other) files. This command specifies that date at which boundary and other files refer to zero hours. Note the date time format expected, and that seconds is not a required field:</p>
 <blockquote>
-<a href="#TCHPCEXE">Zero Date ==</a>
-<dd/mm/yyyy hh:mm>
+<p><a href="#TCHPCEXE">Zero Date ==</a> &lt;dd/mm/yyyy hh:mm&gt;</p>
 </blockquote>
 <p>Set TUFLOW HPC to write TUFLOW CATCH related map outputs (e.g. pollutant and other hydraulic xmdf outputs, see Section <font color="red">XXXX</font>). This catch command argument can be comma delimited with other outputs if required:</p>
 <blockquote>
@@ -557,7 +556,7 @@ End Catchment Hydraulic Model</code></pre>
 <li>The concentration needs to be in the same units produced by the receiving model</li>
 </ul>
 <blockquote>
-<p><a href="#TCPECons">Constant <name> ==</a> <concentration to be applied></p>
+<p><a href="#TCPECons">Constant &lt;name&gt; ==</a> &lt;concentration to be applied&gt;</p>
 </blockquote>
 </div>
 <div id="SCTCCPollExpTS-4" class="section level4 hasAnchor" number="4.5.3.2">
@@ -569,11 +568,11 @@ End Catchment Hydraulic Model</code></pre>
 <li>The concentration needs to be in the same units produced by the receiving model</li>
 </ul>
 <blockquote>
-<p><a href="#TCPETS">Time-series <name> ==</a> <bc name></p>
+<p><a href="#TCPETS">Time-series &lt;name&gt; ==</a> &lt;bc name&gt;</p>
 </blockquote>
-<p>The <name> field refers to a name declared in the TUFLOW HPC boundary condition database. For example, ‘temperature’, with the corresponding database entry being (in a database simplified for this example):</p>
+<p>The &lt;bc name&gt; field refers to a name declared in the TUFLOW HPC boundary condition database. For example, ‘temperature_davg’, with the corresponding database entry being (in a database simplified for this example):</p>
 <pre><code>Name,Source,Column 1,Column 2,Add Col 1,Mult Col 2,Add Col 2,Column 3,Column 4
-temperature,temperature_2021.csv,TUFLOW_Time,Airtemp,,,,,</code></pre>
+temperature_davg,temperature_2021.csv,TUFLOW_Time,Airtemp,,,,,</code></pre>
 </div>
 <div id="SCTCCPollExpPE-4" class="section level4 hasAnchor" number="4.5.3.3">
 <h4><span class="header-section-number">4.5.3.3</span> Pollutant export<a href="SimulationConstruction-1.html#SCTCCPollExpPE-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -609,7 +608,7 @@ temperature,temperature_2021.csv,TUFLOW_Time,Airtemp,,,,,</code></pre>
 <p>TBC</p>
 <p>Once released, pollutants are transported in the surface using TUFLOW’s advection dispersion module. If soils have been included in the TUFLOW HPC simulation and infiltration of water occurs, then this water takes with it any previously released pollutants and continues to track these in the subsurface as it does water. Similarly, if TUFLOW HPC predicts that water travelling in soil layers intersects the ground surface, then any included pollutants are returned to the surface and advected and dispersed. If a particular pollutant is not required to infiltrate from the surface to subsurface, then this infiltration can be turned off (default is on):</p>
 <blockquote>
-<p><a href="#TCHPCEX">Infiltration <name> ==</a> off</p>
+<p><a href="#TCHPCEX">Infiltration &lt;name&gt; ==</a> off</p>
 </blockquote>
 </div>
 </div>
