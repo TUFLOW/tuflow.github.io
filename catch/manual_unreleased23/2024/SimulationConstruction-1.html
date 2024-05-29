@@ -430,15 +430,15 @@ Set the beginning of the block, with command arguments as either HPC or none, an
 </blockquote>
 <p>Set the time format for output results. Given that the intention of TUFLOW CATCH is that it support addressing of longer term environmental investigations (i.e. not short term detailed ‘traditional’ flood studies), results written in hours format can be difficult to interpret in terms of seasonality, for example. As such, TUFLOW HPC can be instructed to write results in the date format adopted by TUFLOW FV. Doing so is strongly recommended, especially if TUFLOW FV is using the ISODATE format rather than hours:</p>
 <blockquote>
-<p><a href="#TCHPCEXE">Time Format ==</a> TUFLOWFV</p>
+<p><a href="#TCHPCTF">Time Format ==</a> TUFLOWFV</p>
 </blockquote>
 <p>Set the relationship between hours and dates. TUFLOW HPC reads boundary condition files and executes its internal computations using an hours (rather than date) timestamp, although this is being upgraded in the mid term. In order to coordinate simulation with TUFLOW FV, and to output results in date format, TUFLOW CATCH requires specification of the date that corresponds to zero hours in TUFLOW HPC boundary (and other) files. This command specifies that date at which boundary and other files refer to zero hours. Note the date time format expected, and that seconds is not a required field:</p>
 <blockquote>
-<p><a href="#TCHPCEXE">Zero Date ==</a> &lt;dd/mm/yyyy hh:mm&gt;</p>
+<p><a href="#TCHPCZDate">Zero Date ==</a> &lt;dd/mm/yyyy hh:mm&gt;</p>
 </blockquote>
 <p>Set TUFLOW HPC to write TUFLOW CATCH related map outputs (e.g. pollutant and other hydraulic xmdf outputs, see Section <font color="red">XXXX</font>). This catch command argument can be comma delimited with other outputs if required:</p>
 <blockquote>
-<p><a href="#TCHPCEXE">Output Map Data Types ==</a> catch</p>
+<p><a href="#TCHPCMapOut">Output Map Data Types ==</a> catch</p>
 </blockquote>
 <p>Following the issuing of these specific TUFLOW CATCH commands, a TUFLOW HPC model can be constructed in the same manner as a standalone model. In this regard:</p>
 <ul>
@@ -598,19 +598,59 @@ temperature_davg,temperature_2021.csv,TUFLOW_Time,Airtemp,,,,,</code></pre>
 <p><a href="#TCCPEStmpMatE">End Material</a></p>
 </blockquote>
 <p>Once all material specifications have been processed, TUFLOW CATCH will check that all pollutants have had all export properties specified for the entire TUFLOW HPC domain (i.e. every computational grid cell). This includes accounting for constant and timeseries specifications (which are global and do not need to be applied within material blocks). Using the ‘all’ command argument in the first material block specified and providing information for every pollutant required within that block (and then progressively spatially refining) ensures this will be true. Once the initial uniform material specification has been made, not every pollutant needs to be specified in every subsequent material block - only alterations to the uniform conditions need be made.</p>
-<p>Each line within a material block contains a suite of arguments. Although there are some common commands, these generally differ according to the pollutant export model specified, as follows.</p>
+<p>Each line within a material block contains a suite of arguments (in the form command==argument, command==argument… etc.), the first of which is always a keyword flagging the model to be used. Although there are some commonalities in subsequent inline commands, these differ according to the pollutant export model specified, as follows. Different pollutant export models can be specified for different pollutants within the same material block if required.</p>
 <div id="SCTCCPollExpAW-5" class="section level5 hasAnchor" number="4.5.3.3.1">
 <h5><span class="header-section-number">4.5.3.3.1</span> Accumulation and washoff<a href="SimulationConstruction-1.html#SCTCCPollExpAW-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>TBC</p>
+<p>Set the model and parameters for the pollutant accumulation and washoff model (see Section <a href="ProcessDescriptions-1.html#ProcessDescriptionsAccWO-3">3.2.3</a>). All parameters are mandatory:</p>
+<blockquote>
+<p>&lt;name&gt;, method==rate, rate==&lt;float&gt;, limit==&lt;float&gt;, timeConstant==&lt;float&gt;, rainThreshold==&lt;float&gt;, depthThreshold==&lt;float&gt;</p>
+</blockquote>
+<p>The &lt;name&gt; field must correspond to a name designated by TUFLOW FV. The parameters are:</p>
+<ul>
+<li>method: keyword ‘rate’ that activates the accumulation washoff model</li>
+<li>rate: the areal rate at which the pollutant accumulates (kg/ha/year)</li>
+<li>limit: the maximum areal mass that can accumulate in the dry store (kg/ha)</li>
+<li>timeConstant: a time parameter controlling the pollutant dry store release rate, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-wo">(3.1)</a> (s)</li>
+<li>rainThreshold: the minimum rain rate required to activate release from the dry store (mm/hr)</li>
+<li>depthThreshold: the minimum water depth in a cell required to activate release from the dry store (m)</li>
+</ul>
+<p>An example for dissolved organic carbon might be:</p>
+<pre><code>WQ_DOC_MG_L, method==rate, rate==21.446, limit==21.446, timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020</code></pre>
 </div>
 <div id="SCTCCPollExpSS-5" class="section level5 hasAnchor" number="4.5.3.3.2">
 <h5><span class="header-section-number">4.5.3.3.2</span> Shear Stress<a href="SimulationConstruction-1.html#SCTCCPollExpSS-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>TBC</p>
-<p>Once released, pollutants are transported in the surface using TUFLOW’s advection dispersion module. If soils have been included in the TUFLOW HPC simulation and infiltration of water occurs, then this water takes with it any previously released pollutants and continues to track these in the subsurface as it does water. Similarly, if TUFLOW HPC predicts that water travelling in soil layers intersects the ground surface, then any included pollutants are returned to the surface and advected and dispersed. If a particular pollutant is not required to infiltrate from the surface to subsurface, then this infiltration can be turned off (default is on):</p>
+<p>Set the model and parameters for the shear stress model (see Section <a href="ProcessDescriptions-1.html#ProcessDescriptionsSS-3">3.2.4</a>). All parameters are mandatory:</p>
 <blockquote>
-<p><a href="#TCHPCEX">Infiltration &lt;name&gt; ==</a> off</p>
+<p>&lt;name&gt;, method==sed1, rate==&lt;not used&gt;, limit==&lt;float&gt;, depositionStress==&lt;float&gt;, erosionStress==&lt;float&gt;, depthThreshold==&lt;float&gt;, depositionVelocity==&lt;float&gt;, erosionRate==&lt;float&gt;</p>
 </blockquote>
+<p>The &lt;name&gt; field must correspond to a name designated by TUFLOW FV. The parameters are:</p>
+<ul>
+<li>method: keyword ‘sed1’ that activates the shear stress model</li>
+<li>rate: not used, but listed for consistency</li>
+<li>limit: the maximum erosion or deposition that can occur in a cell. Always a positive number (kg/ha)</li>
+<li>depositionStress: the maximum shear stress for which deposition can occur. Shear stresses below this limit will allow for deposition to occur, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-krone-dp">(3.3)</a> (N/m<span class="math inline">\(^2\)</span>)</li>
+<li>erosionStress: the minimum shear stress for which erosion can occur. Shear stresses above this limit will allow for erosion to occur, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-mehta-er">(3.2)</a> (N/m<span class="math inline">\(^2\)</span>)</li>
+<li>depthThreshold: the minimum water depth in a cell required to activate release from the dry store (m)</li>
+<li>depositionVelocity: the velocity at which pollutant in the wet store settles. Used to calculate the mass of pollutant transferred back from the wet to dry store in a model timestep, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-krone-dp">(3.3)</a> (m/s)</li>
+<li>erosionRate: The maximum rate of erosion of pollutant from the dry store, if erosion conditions are met, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-mehta-er">(3.2)</a> (N/m<span class="math inline">\(^2\)</span>)</li>
+</ul>
+<p>An example for suspended sediment might be:</p>
+<pre><code>SED_TSS, method==sed1, rate==0.0, limit==1000.0, depthThreshold==0.02, depositionstress==0.01, erosionstress==0.5, depositionvelocity==1.2e-05, erosionrate==0.0
+</code></pre>
+<p>An example for a complete material block might be:</p>
+<pre><code>Material == 1,4
+    SED_TSS, method==sed1, rate==0.0, limit==1000.0, depthThreshold==0.02, depositionstress==0.01, erosionstress==0.5, depositionvelocity==1.2e-05, erosionrate==0.0
+    WQ_DOC_MG_L, method==rate, rate==21.446, limit==21.446, timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
+End Material</code></pre>
 </div>
+</div>
+<div id="SCTCCPollExpPT-4" class="section level4 hasAnchor" number="4.5.3.4">
+<h4><span class="header-section-number">4.5.3.4</span> Pollutant transport<a href="SimulationConstruction-1.html#SCTCCPollExpPT-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Once released, pollutants are transported in the surface using TUFLOW’s advection dispersion module. Pollutants are treated as passive tracers and do not undergo non-conservative transformation, other than that allowed by the pollutant export models described above.</p>
+<p>If soils have been included in the TUFLOW HPC simulation and infiltration of water occurs, then this water takes with it any previously released pollutants and continues to track these in the subsurface as it does water. Similarly, if TUFLOW HPC predicts that water travelling in soil layers intersects the ground surface, then any included pollutants are returned to the surface wet store and advected and dispersed as normal. If a particular pollutant is not required to infiltrate from the surface to subsurface, then this infiltration can be turned off (default is on). This is intended to be set as off for particulate pollutants, although is user definable:</p>
+<blockquote>
+<p><a href="#TCHPCInfil">Infiltration &lt;name&gt; ==</a> off</p>
+</blockquote>
 </div>
 </div>
 <div id="SCTCCFV-3" class="section level3 hasAnchor" number="4.5.4">
