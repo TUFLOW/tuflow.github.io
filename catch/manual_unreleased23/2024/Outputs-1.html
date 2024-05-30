@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 2 Architecture | TUFLOW CATCH User Manual</title>
-  <meta name="description" content="Section 2 Architecture | TUFLOW CATCH User Manual" />
+  <title>Section 6 Outputs | TUFLOW CATCH User Manual</title>
+  <meta name="description" content="Section 6 Outputs | TUFLOW CATCH User Manual" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Section 2 Architecture | TUFLOW CATCH User Manual" />
+  <meta property="og:title" content="Section 6 Outputs | TUFLOW CATCH User Manual" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/1024in300px_Blue-01.svg" />
-  <meta property="og:description" content="Section 2 Architecture | TUFLOW CATCH User Manual" />
+  <meta property="og:description" content="Section 6 Outputs | TUFLOW CATCH User Manual" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 2 Architecture | TUFLOW CATCH User Manual" />
+  <meta name="twitter:title" content="Section 6 Outputs | TUFLOW CATCH User Manual" />
   
-  <meta name="twitter:description" content="Section 2 Architecture | TUFLOW CATCH User Manual" />
+  <meta name="twitter:description" content="Section 6 Outputs | TUFLOW CATCH User Manual" />
   <meta name="twitter:image" content="/images/1024in300px_Blue-01.svg" />
 
 <meta name="author" content="" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
-<link rel="prev" href="Overview-1.html"/>
-<link rel="next" href="ProcessDescriptions-1.html"/>
+<link rel="prev" href="SimulationExecution-1.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -235,65 +235,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="Architecture-1" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Section 2</span> Architecture<a href="Architecture-1.html#Architecture-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This section provides a description of TUFLOW CATCH’s core architecture. This description is intentionally introductory, and details required to set up and execute simulations that deploy TUFLOW CATCH are provided in Section <a href="SimulationConstruction-1.html#SimulationConstruction-1">4</a>. <span class="math inline">\(\newcommand{\blockindent}{\hspace{0.5cm}}\)</span></p>
-<div id="ArchitectureContext-2" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Context<a href="Architecture-1.html#ArchitectureContext-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>As our understanding of the natural environment advances, the questions asked of environmental numerical models are rapidly increasing in breadth and complexity. Setting up, calibrating and executing defensible environmental models to assist in addressing these questions has therefore become an increasingly challenging proposition. This is particularly relevant with regard to whole-of-catchment studies where the linkage between catchment management intervention and associated receiving water quality changes is of increasing interest (and complexity) within the environmental management space.</p>
-<p>The architecture and functionality of TUFLOW CATCH has therefore been deliberately designed to assist environmental modellers in overcoming some of these challenges, and in doing so improve the efficiency and effectiveness with which numerical modelling can support environmental management at the catchment scale. Importantly, TUFLOW CATCH’s architecture provides a mechanism by which users can seamlessly simulate hydrologic, hydraulic, pollutant export and transformative receiving water quality processes within one unified, automated and internally consistent framework. This deliberate design choice has been motivated by the observation that historically, catchment and receiving waterway simulations have often been undertaken using disparate modelling platforms not designed or intended to be linked, and that (more often then not) operate under materially different assumptions and levels of internal scientific rigour. One example of such an instance might be where predictions from a catchment model that uses average (spatially and temporally lumped) hydrology and pollutant export assumptions are used to provide inflow boundary conditions to a fully three dimensional receiving water quality model that operates on a highly spatial and temporally resolved domain and makes limited average assumptions. TUFLOW CATCH exploits the latest compute power advances and scientific rigour to overcome such problematic disconnects.</p>
-<p>In short, TUFLOW CATCH has been designed to provide access to state of the art environmental modelling science at the integrated catchment scale. The core architecture that provides this easy access is described below. The associated execution commands are provided in Section <a href="SimulationConstruction-1.html#SimulationConstruction-1">4</a>, and the details of the methods deployed in supplementary processes such as geolocation are described in Sections <a href="ProcessDescriptions-1.html#ProcessDescriptionsGeo-2">3.1</a> and <a href="ProcessDescriptions-1.html#ProcessDescriptionsPollExp-2">3.2</a>.</p>
-</div>
-<div id="CA-2" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Core Architecture<a href="Architecture-1.html#CA-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>TUFLOW CATCH provides three primary functions:</p>
-<ul>
-<li>Coordination of the execution of TUFLOW HPC and TUFLOW FV across a whole-of-catchment domain</li>
-<li>Automatic geolocation and writing of flow and concentration boundary conditions for TUFLOW FV (as the receiving water model), generated from TUFLOW HPC (as the catchment model) predictions</li>
-<li>Pollutant export and transport calculations within a catchment</li>
-</ul>
-<p>The first of these is its core architectural capability and so is described here in Section <a href="Architecture-1.html#ExCoord-3">2.2.1</a>. The latter two are technical componentry of this acrchitecture and so are detailed in Sections <a href="ProcessDescriptions-1.html#ProcessDescriptionsGeo-2">3.1</a> and <a href="ProcessDescriptions-1.html#ProcessDescriptionsPollExp-2">3.2</a>, respectively.</p>
-<div id="ExCoord-3" class="section level3 hasAnchor" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Execution Coordination<a href="Architecture-1.html#ExCoord-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>TUFLOW CATCH overarches both TUFLOW HPC and TUFLOW FV to coordinate their execution to affect integrated numerical simulation of water and pollutant flows (and transformations) across a catchment and its receiving waters. Whilst not undertaking the solution of equations itself, TUFLOW CATCH does coordinate these supporting TUFLOW products to do so in their respective domains, which are:</p>
-<ul>
-<li>TUFLOW HPC: 1D and 2D surface and subsurface catchment hydrology and hydraulics, with pollutant export and transport</li>
-<li>TUFLOW FV: 1D, 2D and 3D hydrodynamic, sediment transport, water quality and particle tracking (or module subsets thereof) receiving waterway modelling</li>
-</ul>
-<p>The order of execution of TUFLOW HPC and TUFLOW FV, coordinated automatically under TUFLOW CATCH is as follows:</p>
-<ol style="list-style-type: decimal">
-<li>Execute TUFLOW FV, run in test mode, with the intention of
-<ol style="list-style-type: lower-roman">
-<li>Reading the TUFLOW FV model mesh (either as built by the user, or as a dummy mesh constructed by TUFLOW CATCH if no user mesh is specified) and writing the associated mesh check file for subsequent use by TUFLOW HPC in its automatic geolocation processes</li>
-<li>Reading the TUFLOW FV sediment transport and/or water quality log files to determine the suite of constituents to be simulated in the receiving waterway, and therefore those that require specification and simulation as catchment based pollutants in TUFLOW HPC. If no pollutants are to be simulated (i.e. TUFLOW CATCH is intended only for use in terms of water simulation) then these files will be absent and their interrogation skipped accordingly</li>
-</ol></li>
-<li>Execute TUFLOW HPC, with the intention of
-<ol style="list-style-type: lower-roman">
-<li>Reading the TUFLOW FV mesh check files to determine the receiving water model domain location and extent</li>
-<li>Comparing this mesh with the TUFLOW HPC grid to then determine which TUFLOW HPC cells are to be designated as transfer cells where boundary conditions for TUFLOW FV are to be written (see Section <a href="ProcessDescriptions-1.html#ProcessDescriptionsGeo-2">3.1</a>) from TUFLOW HPC predictions</li>
-<li>Checking the pollutants specified in the pollutant export model for consistency with those set in the TUFLOW FV simulation (if any)</li>
-<li>Executing the TUFLOW HPC catchment based hydrologic, hydraulic and/or pollutant export modelling (if requested) over the period specified</li>
-<li>Writing TUFLOW FV boundary conditions at designated transfer cells</li>
-<li>Reporting catchment based simulation results such as dynamic pollutant concentrations in the surface and/or subsurface domains, dry store evolutions and/or ersoion/deposition zones (see Section <a href="ProcessDescriptions-1.html#ProcessDescriptionsPollExp-2">3.2</a>)</li>
-</ol></li>
-<li>Re-execute TUFLOW FV (optional, only if receiving waterway processes are to be investigated), with the intention of
-<ol style="list-style-type: lower-roman">
-<li>Executing 1D, 2D and 3D hydrodynamic, sediment transport, water quality and particle tracking (or subsets thereof) receiving waterway modelling, using the boundary conditions developed by TUFLOW HPC above</li>
-<li>Reporting receiving waterway simulation results such as pollutant concentrations and diagnostic mass fluxes</li>
-</ol></li>
-</ol>
-<p>The intention of the above execution coordination is that it provides a robust means to automatically unidirectionally link catchment and receiving waterway models to support integrated environmental assessment. It is noted that this architecture:</p>
-<ul>
-<li>Supports multiple users working on a project simultaneously by allowing (from the same TUFLOW CATCH control file):
-<ul>
-<li>Simulation of TUFLOW HPC without needing to execute TUFLOW FV (other than in test mode), and/or</li>
-<li>Simulation of TUFLOW FV without needing to execute TUFLOW HPC. In this instance inflow boundaries are assumed to be zero flow, which is useful for model build stages such as mesh construction, checking, speed testing and dry weather tidal / thermal stratification calibration</li>
-</ul></li>
-<li>Aligns with the use of versioning control platforms (such as GitHub or GitLab, for example), to support multi-user co-development. Such use under versioning platforms was intended as part of TUFLOW CATCH’s architectural development, and it means that the same TUFLOW CATCH control file can be used by multiple users to drive respective TUFLOW HPC and TUFLOW FV model builds - the model development process is then unified under one control file’s umbrella, and the need to build disparate TUFLOW HPC and TUFLOW FV models, and then somehow recast these into a TUFLOW CATCH control file framework, is avoided.</li>
-</ul>
+<div id="Outputs-1" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Section 6</span> Outputs<a href="Outputs-1.html#Outputs-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="OutputsContext-2" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Context<a href="Outputs-1.html#OutputsContext-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Previous sections have presented the architecture, available processes, construction and execution of a TUFLOW CATCH model. This section describes the result produced by TUFLOW CATCH.</p>
 <p><img src="images/WQFooter.jpg" width="100%" /></p>
 
-</div>
 </div>
 </div>
             </section>
@@ -301,8 +249,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="Overview-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ProcessDescriptions-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="SimulationExecution-1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

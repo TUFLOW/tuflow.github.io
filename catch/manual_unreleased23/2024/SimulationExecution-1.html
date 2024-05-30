@@ -30,7 +30,7 @@
   
   <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
 <link rel="prev" href="SimulationConstruction-1.html"/>
-
+<link rel="next" href="Outputs-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -209,6 +209,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.2" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionCPE-3"><i class="fa fa-check"></i><b>5.2.2</b> Pollutant export</a></li>
 <li class="chapter" data-level="5.2.3" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionCPE-3"><i class="fa fa-check"></i><b>5.2.3</b> Integrated</a></li>
 </ul></li>
+<li class="chapter" data-level="5.3" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionEx-2"><i class="fa fa-check"></i><b>5.3</b> Execution</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="Outputs-1.html"><a href="Outputs-1.html"><i class="fa fa-check"></i><b>6</b> Outputs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="Outputs-1.html"><a href="Outputs-1.html#OutputsContext-2"><i class="fa fa-check"></i><b>6.1</b> Context</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
@@ -345,7 +350,7 @@ End Receiving Model</code></pre>
 <pre><code>Catchment Hydraulic Model == HPC
     ...mandatory catchment hydraulic model TUFLOW CATCH commands... 
     Receiving polygon == \&lt;path to polygon or geopackage reference\&gt;
-    Pollutants == \&lt;name1,name2,name3...\&gt;
+    Pollutants == \&lt;name1,name2,name3...\&gt;, which should match inteneded TUFLOW FV pollutant suite exactly
     ...TUFLOW HPC commands...
 End Catchment Hydraulic Model</code></pre>
 <ul>
@@ -353,7 +358,8 @@ End Catchment Hydraulic Model</code></pre>
 </ul>
 <pre><code>Pollutant Export Model == mass accumulation release
     ...pollutant export model commands... 
-    ...must ensure all pollutants listed in the Pollutants == commands are specified... 
+    ...must ensure all pollutants listed in the Pollutants == commands are specified...
+    ...this is the same as the intended TUFLOW FV pollutant suite...
 End Pollutant Export Model</code></pre>
 <p>OR (without pollutant export)</p>
 <pre><code>Pollutant Export Model == none
@@ -390,9 +396,24 @@ End Pollutant Export Model</code></pre>
    ...TUFLOW FV commands...
 End Receiving Model</code></pre>
 <p>Most importantly, both modellers are able to independently build their respective components through the same TUFLOW CATCH control file, without building standalone *.tcf and/or *.fvc control files/models and needing to somehow transfer these the TUFLOW CATCH framework. Using common version control techniques (such as pull requests), a unified TUFLOW CATCH control file can be prepared at the completion of subsidiary works.</p>
+</div>
+</div>
+<div id="SimulationExecutionEx-2" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Execution<a href="SimulationExecution-1.html#SimulationExecutionEx-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In a similar manner to other TUFLOW products, TUFLOW CATCH is best executed from a batch file run within a command window. An example batch file (‘run_catch.bat’) is below. The ‘::’ character is a commented line ignored by the command window, and the commands are:</p>
+<ul>
+<li>set exe= : the full path the the TUFLOW CATCH executable</li>
+<li>%exe% Demo.tcc : Calls the defined TUFLOW CATCH executable to run with Demo.tcc as the input control file. The *.tcc can be in the same directory as the batch file (recommended) or can also use a relative path (not recommended).</li>
+</ul>
+<pre><code>:: Windows Batch File
+set exe=C:\temp\EXE\CATCH\TUFLOWCATCH.exe
+:: Execute
+%exe% Demo.tcc</code></pre>
+<p>To execute TUFLOW CATCH with the above ‘run_catch.bat’ set up, a command window should be opened in the same directory as the batch file, and the following typed at the prompt:</p>
+<pre><code>run_catch</code></pre>
+<p>TUFLOW CATCH will run, and results will be written to the specified output folder. See Section <a href="Outputs-1.html#Outputs-1">6</a>.</p>
 <p><img src="images/WQFooter.jpg" width="100%" /></p>
 
-</div>
 </div>
 </div>
             </section>
@@ -400,8 +421,8 @@ End Receiving Model</code></pre>
           </div>
         </div>
       </div>
-<a href="SimulationConstruction-1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="SimulationConstruction-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="Outputs-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
