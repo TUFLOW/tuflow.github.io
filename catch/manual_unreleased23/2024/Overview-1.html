@@ -200,6 +200,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.4" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCFV-3"><i class="fa fa-check"></i><b>4.5.4</b> Receiving model (TUFLOW FV) commands</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html"><i class="fa fa-check"></i><b>5</b> Simulation Execution</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionContext-2"><i class="fa fa-check"></i><b>5.1</b> Context</a></li>
+<li class="chapter" data-level="5.2" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionConfigs-2"><i class="fa fa-check"></i><b>5.2</b> Configurations</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionCHyd-3"><i class="fa fa-check"></i><b>5.2.1</b> Hydrology</a></li>
+<li class="chapter" data-level="5.2.2" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionCPE-3"><i class="fa fa-check"></i><b>5.2.2</b> Pollutant export</a></li>
+<li class="chapter" data-level="5.2.3" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionCPE-3"><i class="fa fa-check"></i><b>5.2.3</b> Integrated</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
 
@@ -280,16 +290,16 @@ Figure 1.2: <strong>Example of QGIS plugin combined results visualisation</stron
 <li>TUFLOW HPC: Simulate surface and subsurface hydrology, and write inflow boundary condition files for TUFLOW FV</li>
 <li>TUFLOW FV: Simulate only 2D or 3D barotropic hydrodynamics (i.e. without salinity, temperature or water density simulation)</li>
 </ul></li>
-<li><strong>Pollutant export</strong>. The next level of functionality offered by TUFLOW CATCH is the addition of pollutant export within the catchment simulation, without the explicit and subsequent simulation of the fate and transport fo these pollutants in a downstream waterway model. Use cases might include investigation of pollutant export properties of a catchment under differing rainfall conditions, or the variation of this export in response to the implementation of intervention measures or land use changes. In this instance, the computational engines would be configured as follows:
+<li><strong>Pollutant export</strong>. The next level of functionality offered by TUFLOW CATCH is the addition of pollutant export within the catchment simulation, without the explicit and subsequent simulation of the fate and transport fo these pollutants in a downstream receiving model. Use cases might include investigation of pollutant export properties of a catchment under differing rainfall conditions, or the variation of this export in response to the implementation of intervention measures or land use changes. In this instance, the computational engines would be configured as follows:
 <ul>
-<li>TUFLOW HPC: Simulate surface and subsurface hydrology, with pollutant accumulation, washoff and transport, and write summary files of total pollutant export at catchment outlet. Inflow boundary condition files for TUFLOW FV would also be written but remain unused</li>
+<li>TUFLOW HPC: Simulate surface and subsurface hydrology, with pollutant export and transport, and write summary files of total pollutant export at catchment outlet</li>
 <li>TUFLOW FV: No direct simulation<br />
 </li>
 </ul></li>
 <li><strong>Integrated</strong>. This level represents the full functionality offered by TUFLOW CATCH. It augments the <strong>Pollutant export</strong> configuration above by including the explicit 2D or 3D simulation of the fate and transport of all catchment derived flows and pollutants within the downstream waterway model. Use cases might include the investigation of the efficacy of catchment intervention works on downstream water quality over multiannual periods. In this instance, the computational engines would be configured as follows:
 <ul>
 <li>TUFLOW HPC: Simulate surface and subsurface hydrology, with pollutant accumulation, washoff and transport, and write summary files of total pollutant export at catchment outlet, as well as inflow boundary condition files for TUFLOW FV</li>
-<li>TUFLOW FV: Direct simulation of 2D or 3D baroclinic hydrodynamics, with sediment transport and water quality (and optionally particle tracking) as specified by the user</li>
+<li>TUFLOW FV: Direct simulation of 2D or 3D baroclinic hydrodynamics, with sediment transport and/or water quality (and optionally particle tracking) as specified by the user</li>
 </ul></li>
 </ol>
 <p>If only the simulation of surface and subsurface water flows are of interest with no linkage between TUFLOW HPC and TUFLOW FV (i.e. the <strong>Hydrology</strong> configuration above but with no linkage to TUFLOW FV), then TUFLOW HPC can be run in isolation without the need for TUFLOW CATCH. Simply setting up and running TUFLOW HPC with appropriate results outputs at bottom of catchment would suffice. If either linkage with TUFLOW FV or simulation of pollutant export is of interest, then TUFLOW CATCH is required.</p>

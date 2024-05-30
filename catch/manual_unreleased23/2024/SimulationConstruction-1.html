@@ -30,7 +30,7 @@
   
   <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
 <link rel="prev" href="ProcessDescriptions-1.html"/>
-
+<link rel="next" href="SimulationExecution-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -198,6 +198,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.2" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCHPC-3"><i class="fa fa-check"></i><b>4.5.2</b> Catchment hydraulic model (TUFLOW HPC) commands</a></li>
 <li class="chapter" data-level="4.5.3" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCPollExp-3"><i class="fa fa-check"></i><b>4.5.3</b> Pollutant export model commands</a></li>
 <li class="chapter" data-level="4.5.4" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCFV-3"><i class="fa fa-check"></i><b>4.5.4</b> Receiving model (TUFLOW FV) commands</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html"><i class="fa fa-check"></i><b>5</b> Simulation Execution</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionContext-2"><i class="fa fa-check"></i><b>5.1</b> Context</a></li>
+<li class="chapter" data-level="5.2" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionConfigs-2"><i class="fa fa-check"></i><b>5.2</b> Configurations</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionCHyd-3"><i class="fa fa-check"></i><b>5.2.1</b> Hydrology</a></li>
+<li class="chapter" data-level="5.2.2" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionCPE-3"><i class="fa fa-check"></i><b>5.2.2</b> Pollutant export</a></li>
+<li class="chapter" data-level="5.2.3" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionCPE-3"><i class="fa fa-check"></i><b>5.2.3</b> Integrated</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -440,7 +450,7 @@ Set the beginning of the block, with command arguments as either HPC or none, an
 <blockquote>
 <p><a href="#TCHPCMapOut">Output Map Data Types ==</a> catch</p>
 </blockquote>
-<p>If TUFLOW CATCH is to be deployed in the pollutant export configuration (i.e. with no immediate intention to deploy TUFLOW FV, see Section <a href="Overview-1.html#Configs-2">1.3</a>), then the following must be set:</p>
+<p><strong>Not mandatory</strong>. If TUFLOW CATCH is to be deployed in the pollutant export configuration (i.e. with no immediate intention to deploy TUFLOW FV, see Section <a href="Overview-1.html#Configs-2">1.3</a>), then the following must be set:</p>
 <ul>
 <li>The use of TUFLOW FV as a receiving model must be switched off. This is achieved by setting the receiving model block command as follows (see Section <a href="SimulationConstruction-1.html#SCTCCFV-3">4.5.4</a>):</li>
 </ul>
@@ -460,12 +470,12 @@ Set the beginning of the block, with command arguments as either HPC or none, an
 </blockquote>
 <p>AND</p>
 <ul>
-<li>A list of pollutant names that are to be simulated by TUFLOW CATCH and the pollutant export model. These do not need to be TUFLOW FV keywords, and can be completely user defined</li>
+<li>A list of pollutant names that are to be simulated by TUFLOW CATCH and the pollutant export model. These do not need to be TUFLOW FV keywords/names, and can be completely user defined</li>
 </ul>
 <blockquote>
 <p>Pollutants == &lt;name1,name2,name3…&gt;</p>
 </blockquote>
-<p>TUFLOW CATCH will error if the above are not all specified correctly. Once specified, TUFLOW CATCH will check to ensure that all pollutants have been specified across material blocks (see Section <a href="SimulationConstruction-1.html#SCTCCPollExpPE-4">4.5.3.3</a>).</p>
+<p>TUFLOW CATCH will error if the above are not all specified correctly. Once specified, TUFLOW CATCH will check to ensure that all pollutants have been specified (no more, no less) across material blocks (see Section <a href="SimulationConstruction-1.html#SCTCCPollExpPE-4">4.5.3.3</a>), and error if not.</p>
 <p>Following the issuing of these specific TUFLOW CATCH commands, a TUFLOW HPC model can be constructed in the same manner as a standalone model. In this regard:</p>
 <ul>
 <li>All TUFLOW HPC commands are recognised by TUFLOW CATCH and can be issued unchanged from the usage described in TUFLOW HPC’s manual and/or relevant release notes</li>
@@ -557,7 +567,7 @@ End Catchment Hydraulic Model</code></pre>
 <h3><span class="header-section-number">4.5.3</span> Pollutant export model commands<a href="SimulationConstruction-1.html#SCTCCPollExp-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This block of the TUFLOW CATCH control file contains commands that control pollutant export (and other constituent) simulation.</p>
 <p>The pollutant model definition must be declared as a block that encloses all commands. This is analogous to the declaration of a catchment hydraulic model.</p>
-<p>Set the beginning of the block, with command arguments as either mass accumulation release or none, and the end of the block (with no command arguments). The key phrase <em>mass accumulation release</em> activates all available pollutant export submodels. The keyword none turns off pollutant export simulation:</p>
+<p>Set the beginning of the block, with command arguments as either mass accumulation release or none, and the end of the block (with no command arguments). The key phrase <em>mass accumulation release</em> activates all available pollutant export submodels. The keyword none turns off pollutant export simulation and would be used with the Hydrology configuration (see Section <a href="Overview-1.html#Configs-2">1.3</a>) for example:</p>
 <blockquote>
 <p><a href="#TCCPEMS">Pollutant Export Model ==</a></p>
 </blockquote>
@@ -567,12 +577,13 @@ End Catchment Hydraulic Model</code></pre>
 <blockquote>
 <p><a href="#TCCPEME">End Pollutant Export Model</a></p>
 </blockquote>
-<p>If pollutant export is simulated, then all pollutants (and constituents) declared in the receiving model (TUFLOW FV, and including all called modules such as Sediment Transport and Water Quality) must be accounted for with the correct name in the pollutant export block. Each must be assigned either:</p>
+<p>If pollutant export is simulated, then all pollutants (and constituents) declared in the catchment hydraulic model (TUFLOW HPC) or receiving model (TUFLOW FV, and including all called modules such as Sediment Transport and Water Quality) must be accounted for with the correct name in the pollutant export block. Each must be assigned either:</p>
 <ul>
 <li>A constant value/concentration for application to receiving model boundary condition, or</li>
 <li>A timeseries value/concentration for application to receiving model boundary conditions, or</li>
 <li>A pollutant export model, with supporting parameters, for TUFLOW CATCH pollutant export simulation</li>
 </ul>
+<p>AS such, not all the Pollutant Export Model block TUFLOW CATCH commands are mandatory, but, in combination, need to ensure that all pollutants are specified across the entire TUFLOW HPC domain.</p>
 <div id="SCTCCPollExpConst-4" class="section level4 hasAnchor" number="4.5.3.1">
 <h4><span class="header-section-number">4.5.3.1</span> Constant<a href="SimulationConstruction-1.html#SCTCCPollExpConst-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Constant value/concentrations can be assigned when dynamic simulation is not required, such as for salinity or dissolved oxygen, for example. This specification is applied globally.</p>
@@ -771,8 +782,8 @@ End Catchment Pollutant Export Model
           </div>
         </div>
       </div>
-<a href="ProcessDescriptions-1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="ProcessDescriptions-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="SimulationExecution-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
