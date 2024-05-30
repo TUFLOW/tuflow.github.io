@@ -419,7 +419,7 @@ Set the beginning of the block, with command arguments as either HPC or none, an
 <blockquote>
 <p><a href="#TCCHME">End Catchment Hydraulic Model</a></p>
 </blockquote>
-<p>If the <a href="#TCCHMS">Catchment Hydraulic Model</a> command is set to none, then catchment simulation is not executed, and TUFLOW FV will read blank (interim) boundary condition files prepared by TUFLOW CATCH. This approach might be adopted for the initial stages of a TUFLOW FV model build, or dry period tidal / thermal stratification calibration of a receiving water, for example. The TUFLOW CATCH commands contained within this Catchment Hydraulic Model block are described following, and all are mandatory.</p>
+<p>If the <a href="#TCCHMS">Catchment Hydraulic Model</a> command is set to none, then catchment simulation is not executed, and TUFLOW FV will read blank (interim) boundary condition files prepared by TUFLOW CATCH. This approach might be adopted for the initial stages of a TUFLOW FV model build, or dry period tidal / thermal stratification calibration of a receiving water, for example. The TUFLOW CATCH commands contained within this Catchment Hydraulic Model block are described following, and all are mandatory unless noted otherwise.</p>
 <p>Set the directory from which TUFLOW CATCH controls TUFLOW HPC. Unless there is a need to the contrary, this should be set as a relative path to the TUFLOWdirectory set up by the TUFLOW CATCH QGIS plugin, i.e. ..\..\TUFLOW\runs. Setting this to any other directory is not recommended:</p>
 <blockquote>
 <p><a href="#TCRunDir">Runs Directory ==</a></p>
@@ -440,6 +440,32 @@ Set the beginning of the block, with command arguments as either HPC or none, an
 <blockquote>
 <p><a href="#TCHPCMapOut">Output Map Data Types ==</a> catch</p>
 </blockquote>
+<p>If TUFLOW CATCH is to be deployed in the pollutant export configuration (i.e., with no immediate intention to deploy TUFLOW FV, see Section @erf(Configs-2)), then the following must be set:</p>
+<ul>
+<li>The use of TUFLOW FV as a receiving model must be switched off. This is achieved by setting the receiving model block command as follows (see Section <a href="SimulationConstruction-1.html#SCTCCFV-3">4.5.4</a>:</li>
+</ul>
+<blockquote>
+<p>Receiving Model == none</p>
+</blockquote>
+<p>AND</p>
+<ul>
+<li>A single polygon (either as a standalone file or as part of a previously specified geopackage) that covers the downstream receiving waters must be specified within the Catchment Hydraulic Model block. This polygon does not need any specific attributes. The TUFLOW HPC cells within this polygon will be removed from the TUFLOW HPC simulation. TUFLOW CATCH will not write any TUFLOW FV boundary condition blocks, but will write:
+<ul>
+<li>A single flow and concentration timeseries file (that would have been read by a TUFLOW FV boundary condition block if TUFLOW FV was deployed)</li>
+<li>Summary timeseries files that describe total water and pollutant mass fluxes entering the defined polygon. These outputs can be useful for scenario to scenario comparisons, for example</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>Receiving polygon == &lt;path to polygon or geopackage reference&gt;</p>
+</blockquote>
+<p>AND</p>
+<ul>
+<li>A list of pollutant names that are to be simulated by TUFLOW CATCH and the pollutant export model. These do not need to be TUFLOW FV keywords, and can be completely user defined</li>
+</ul>
+<blockquote>
+<p>Pollutants == &lt;name1,name2,name3…&gt;</p>
+</blockquote>
+<p>TUFLOW CATCH will error if the above are not all specified correctly. Once specified, TUFLOW CATCH will check to ensure that all pollutants have been specified across material blocks (see Section <a href="SimulationConstruction-1.html#SCTCCPollExpPE-4">4.5.3.3</a>).</p>
 <p>Following the issuing of these specific TUFLOW CATCH commands, a TUFLOW HPC model can be constructed in the same manner as a standalone model. In this regard:</p>
 <ul>
 <li>All TUFLOW HPC commands are recognised by TUFLOW CATCH and can be issued unchanged from the usage described in TUFLOW HPC’s manual and/or relevant release notes</li>
@@ -628,18 +654,18 @@ temperature_davg,temperature_2021.csv,TUFLOW_Time,Airtemp,,,,,</code></pre>
 <li>method: keyword ‘sed1’ that activates the shear stress model</li>
 <li>rate: not used, but listed for consistency</li>
 <li>limit: the maximum erosion or deposition that can occur in a cell. Always a positive number (kg/ha)</li>
-<li>depositionStress: the maximum shear stress for which deposition can occur. Shear stresses below this limit will allow for deposition to occur, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-krone-dp">(3.3)</a> (N/m<span class="math inline">\(^2\)</span>)</li>
-<li>erosionStress: the minimum shear stress for which erosion can occur. Shear stresses above this limit will allow for erosion to occur, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-mehta-er">(3.2)</a> (N/m<span class="math inline">\(^2\)</span>)</li>
+<li>depositionStress: the maximum shear stress for which deposition can occur. Shear stresses below this limit will allow for deposition to occur, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-krone-dp">(3.3)</a>. Should always be less than the specified erosionStress (N/m<span class="math inline">\(^2\)</span>)</li>
+<li>erosionStress: the minimum shear stress for which erosion can occur. Shear stresses above this limit will allow for erosion to occur, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-mehta-er">(3.2)</a>. Should always be greater than the specified depositionStress (N/m<span class="math inline">\(^2\)</span>)</li>
 <li>depthThreshold: the minimum water depth in a cell required to activate release from the dry store (m)</li>
 <li>depositionVelocity: the velocity at which pollutant in the wet store settles. Used to calculate the mass of pollutant transferred back from the wet to dry store in a model timestep, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-krone-dp">(3.3)</a> (m/s)</li>
 <li>erosionRate: The maximum rate of erosion of pollutant from the dry store, if erosion conditions are met, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-mehta-er">(3.2)</a> (N/m<span class="math inline">\(^2\)</span>)</li>
 </ul>
 <p>An example for suspended sediment might be:</p>
-<pre><code>SED_TSS, method==sed1, rate==0.0, limit==1000.0, depthThreshold==0.02, depositionstress==0.01, erosionstress==0.5, depositionvelocity==1.2e-05, erosionrate==0.0
+<pre><code>SED_TSS, method==sed1, rate==0.0, limit==1000.0, depthThreshold==0.02, depositionstress==0.01, erosionstress==0.5, depositionvelocity==1.2e-05, erosionrate==0.002
 </code></pre>
 <p>An example for a complete material block might be:</p>
 <pre><code>Material == 1,4
-    SED_TSS, method==sed1, rate==0.0, limit==1000.0, depthThreshold==0.02, depositionstress==0.01, erosionstress==0.5, depositionvelocity==1.2e-05, erosionrate==0.0
+    SED_TSS, method==sed1, rate==0.0, limit==1000.0, depthThreshold==0.02, depositionstress==0.01, erosionstress==0.5, depositionvelocity==1.2e-05, erosionrate==0.001
     WQ_DOC_MG_L, method==rate, rate==21.446, limit==21.446, timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
 End Material</code></pre>
 </div>
@@ -647,10 +673,53 @@ End Material</code></pre>
 <div id="SCTCCPollExpPT-4" class="section level4 hasAnchor" number="4.5.3.4">
 <h4><span class="header-section-number">4.5.3.4</span> Pollutant transport<a href="SimulationConstruction-1.html#SCTCCPollExpPT-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Once released, pollutants are transported in the surface using TUFLOW’s advection dispersion module. Pollutants are treated as passive tracers and do not undergo non-conservative transformation, other than that allowed by the pollutant export models described above.</p>
-<p>If soils have been included in the TUFLOW HPC simulation and infiltration of water occurs, then this water takes with it any previously released pollutants and continues to track these in the subsurface as it does water. Similarly, if TUFLOW HPC predicts that water travelling in soil layers intersects the ground surface, then any included pollutants are returned to the surface wet store and advected and dispersed as normal. If a particular pollutant is not required to infiltrate from the surface to subsurface, then this infiltration can be turned off (default is on). This is intended to be set as off for particulate pollutants, although is user definable:</p>
+<p>If soils have been included in the TUFLOW HPC simulation and infiltration of water occurs, then this water takes with it any previously released pollutants and continues to advect these in the subsurface as it does water. Similarly, if TUFLOW HPC predicts that water travelling in soil layers intersects the ground surface, then any included pollutants are returned to the surface wet store and advected and dispersed as normal. If a particular pollutant is not required to infiltrate from the surface to subsurface, then this infiltration can be turned off (default is on). This is intended to be set as off for particulate pollutants, although is user definable:</p>
 <blockquote>
 <p><a href="#TCHPCInfil">Infiltration &lt;name&gt; ==</a> off</p>
 </blockquote>
+<p>An example block of these Pollutant Export Model block commands within TUFLOW CATCH (with clarifying section headers as comments) is:</p>
+<pre><code>! _________________________________________________________________
+! POLLUTANT EXPORT
+Catchment Pollutant Export Model == mass accumulation release
+
+    ! Constant concentrations
+    Constant Salinity == 0.0
+    Constant WQ_DISS_OXYGEN_MG_L == 8.0
+  
+    ! Timeseries
+    Time-series Temperature == temperature
+  
+    ! Prohibited infiltrations
+    Infiltration SED_TSS == Off
+    Infiltration WQ_POC_MG_L == Off
+    Infiltration WQ_PON_MG_L == Off
+    Infiltration WQ_POP_MG_L == Off
+    
+    Material == all  
+        SED_TSS,          method==sed1, rate==0.0,    limit==1000.0,    depthThreshold==0.02, depositionstress==0.01, erosionstress==0.5, depositionvelocity==1.2e-05, erosionrate==0.001
+        WQ_AMMONIUM_MG_L, method==rate, rate==0.273,  limit==0.273,  timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
+        WQ_NITRATE_MG_L,  method==rate, rate==0.662,  limit==0.662,  timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
+        WQ_FRP_MG_L,      method==rate, rate==0.010,  limit==0.010,  timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
+        WQ_DOC_MG_L,      method==rate, rate==21.446, limit==21.446, timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
+        WQ_DON_MG_L,      method==rate, rate==1.021,  limit==1.021,  timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
+        WQ_DOP_MG_L,      method==rate, rate==0.005,  limit==0.005,  timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
+        WQ_POC_MG_L,      method==rate, rate==12.154, limit==12.154, timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
+        WQ_PON_MG_L,      method==rate, rate==1.044,  limit==1.044,  timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
+        WQ_POP_MG_L,      method==rate, rate==0.061,  limit==0.061,  timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
+    End Material
+
+    Material == 2       
+        SED_TSS,          method==sed1, rate==0.0,    limit==2000.0,    depthThreshold==0.002, depositionstress==0.001, erosionstress==0.05, depositionvelocity==1.2e-05, erosionrate==0.1
+        WQ_AMMONIUM_MG_L, method==rate, rate==2.0,  limit==20.0,  timeConstant==30, rainThreshold==0.1,  depthThreshold==0.002
+        WQ_NITRATE_MG_L,  method==rate, rate==5.0,  limit==50.0,  timeConstant==60, rainThreshold==0.1,  depthThreshold==0.002
+    End Material
+
+    Material == 3,5      
+        WQ_DOP_MG_L,      method==rate, rate==0.5,  limit==0.5,  timeConstant==300, rainThreshold==10.0,  depthThreshold==0.120
+    End Material
+
+End Catchment Pollutant Export Model
+</code></pre>
 </div>
 </div>
 <div id="SCTCCFV-3" class="section level3 hasAnchor" number="4.5.4">
