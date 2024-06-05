@@ -218,7 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="Outputs-1.html"><a href="Outputs-1.html#OutputsHyd-3"><i class="fa fa-check"></i><b>6.2.1</b> Hydrology</a></li>
 <li class="chapter" data-level="6.2.2" data-path="Outputs-1.html"><a href="Outputs-1.html#OutputsPE-3"><i class="fa fa-check"></i><b>6.2.2</b> Pollutant export</a></li>
-<li class="chapter" data-level="6.2.3" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionCPE-3"><i class="fa fa-check"></i><b>6.2.3</b> Integrated</a></li>
+<li class="chapter" data-level="6.2.3" data-path="Outputs-1.html"><a href="Outputs-1.html#OutpitsInt-3"><i class="fa fa-check"></i><b>6.2.3</b> Integrated</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
@@ -332,10 +332,137 @@ m
 NA
 </td>
 <td style="text-align:left;width: 47%; ">
-The minimum cell water depth for which pollutant export is permitted for a given pollutant within a given material. Below this depth, no pollutant export occurs. Applies equally to all pollutant export models
+The minimum cell water depth for which pollutant export is permitted for a given pollutant within a given material. Below this depth, no pollutant export occurs. Applies equally to all pollutant export models. Evaluated on a cell by cell basis
 </td>
 <td style="text-align:left;width: 12%; ">
-<a href="AppCommands.html#TCdThresh">depthThreshold ==</a>
+<a href="AppCommands.html#TCdThresh">depthThreshold ==</a><br>
+<hr style="margin-top:1px;margin-bottom:1px;height:2px">
+<a href="ProcessDescriptions-1.html#ProcessDescriptionsWO-4">science</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 15%; vertical-align:top;">
+<a id="TCParLacc">Accumulation limit</a>
+</td>
+<td style="text-align:center;width: 4%; vertical-align:middle;">
+<span class="math inline">\(L_{acc}\)</span>
+</td>
+<td style="text-align:center;width: 12%; ">
+kg/m<span class="math inline">\(^2\)</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+(0, -)
+</td>
+<td style="text-align:center;width: 2%; ">
+NA
+</td>
+<td style="text-align:left;width: 47%; ">
+The maximum dry store areal mass of a given pollutant allowed to accumulate within a given material. Used with the Washoff1 pollutant export model. Above this value, no further mass is added to a cell’s dry store. Must be a positive number
+</td>
+<td style="text-align:left;width: 12%; ">
+<a href="AppCommands.html#TCLimit">limit ==</a><br>
+<hr style="margin-top:1px;margin-bottom:1px;height:2px">
+<a href="ProcessDescriptions-1.html#ProcessDescriptionsAcc-4">science</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 15%; vertical-align:top;">
+<a id="TCParLshr">Erosion limit</a>
+</td>
+<td style="text-align:center;width: 4%; vertical-align:middle;">
+<span class="math inline">\(L_{shr}\)</span>
+</td>
+<td style="text-align:center;width: 12%; ">
+????
+</td>
+<td style="text-align:center;width: 8%; ">
+(????, ????)
+</td>
+<td style="text-align:center;width: 2%; ">
+NA
+</td>
+<td style="text-align:left;width: 47%; ">
+????????
+</td>
+<td style="text-align:left;width: 12%; ">
+<a href="AppCommands.html#TCLimit">limit ==</a><br>
+<hr style="margin-top:1px;margin-bottom:1px;height:2px">
+<a href="ProcessDescriptions-1.html#ProcessDescriptionsEro-4">science</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 15%; vertical-align:top;">
+<a id="TCParAccR">Dry store accumulation rate</a>
+</td>
+<td style="text-align:center;width: 4%; vertical-align:middle;">
+<span class="math inline">\(R_a\)</span>
+</td>
+<td style="text-align:center;width: 12%; ">
+kg/m<span class="math inline">\(^2\)</span>/yr
+</td>
+<td style="text-align:center;width: 8%; ">
+(0, -)
+</td>
+<td style="text-align:center;width: 2%; ">
+NA
+</td>
+<td style="text-align:left;width: 47%; ">
+The rate at which a pollutant accumuates mass to its dry store. Used only in accumulation pollutant export models. Set to zero to suppress pollutant export or a large value to rapidly populate pollutant dry stores. This might be useful in setting initial conditions
+</td>
+<td style="text-align:left;width: 12%; ">
+<a href="AppCommands.html#TCAccR">rate ==</a><br>
+<hr style="margin-top:1px;margin-bottom:1px;height:2px">
+<a href="ProcessDescriptions-1.html#ProcessDescriptionsAcc-4">science</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 15%; vertical-align:top;">
+<a id="TCParTcon">Washoff time constant</a>
+</td>
+<td style="text-align:center;width: 4%; vertical-align:middle;">
+<span class="math inline">\(T_c\)</span>
+</td>
+<td style="text-align:center;width: 12%; ">
+s
+</td>
+<td style="text-align:center;width: 8%; ">
+(0, -)
+</td>
+<td style="text-align:center;width: 2%; ">
+NA
+</td>
+<td style="text-align:left;width: 47%; ">
+A time constant that controls the rate at which a pollutant is washed off (out of its dry store) when both minimum cell water depth and rainfall conditions are met. Used only in accumulation pollutant export models. Set to a large (small) number for slow (rapid) pollutant dry store release
+</td>
+<td style="text-align:left;width: 12%; ">
+<a href="AppCommands.html#TCTcon">timeConstant ==</a><br>
+<hr style="margin-top:1px;margin-bottom:1px;height:2px">
+<a href="ProcessDescriptions-1.html#ProcessDescriptionsWO-4">science</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 15%; vertical-align:top;">
+<a id="TCParRnThrshd">Rainrate threshold</a>
+</td>
+<td style="text-align:center;width: 4%; vertical-align:middle;">
+<span class="math inline">\(R_r\)</span>
+</td>
+<td style="text-align:center;width: 12%; ">
+mm/hr
+</td>
+<td style="text-align:center;width: 8%; ">
+(0, -)
+</td>
+<td style="text-align:center;width: 2%; ">
+NA
+</td>
+<td style="text-align:left;width: 47%; ">
+The minimum instantaneous cell rain rate above which pollutant is exported from its dry store. Used only in accumulation pollutant export models. Set to a large (small) number for reduced (enhanced) pollutant dry store release. Evaluated on a cell by cell basis
+</td>
+<td style="text-align:left;width: 12%; ">
+<a href="AppCommands.html#TCRnThrshd">rainThreshold ==</a><br>
+<hr style="margin-top:1px;margin-bottom:1px;height:2px">
+<a href="ProcessDescriptions-1.html#ProcessDescriptionsWO-4">science</a>
 </td>
 </tr>
 </tbody>
