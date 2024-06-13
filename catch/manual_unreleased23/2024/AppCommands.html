@@ -583,6 +583,195 @@ Used in the General commands section of a TUFLOW CATCH control file to set the t
 <span class="math inline">\(\text{ }\)</span>
 </td>
 </tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCCHMS"><bmtpink>Catchment Hydraulic Model ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#">HPC</a>,<a href="#">none</a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used to define the start of a catchment hydraulic model block in a TUFLOW CATCH control file. This block contains the commands that control catchment simulation of surface (and optionally subsurface) hydrology and hydraulics, and is essentially the contents of a TUFLOW HPC *.tcf control file. It does not include any pollutant export commands. Set the argument to none if only receiving water modelling is to be undertaken through the TUFLOW CATCH control file. TUFLOW CATCH will write a blank inflow boundary condition file for TUFLOW FV. This ‘none’ option might be useful for executing general setup and testing tasks, or tidal or other calibration tasks (under dry conditions) in the receiving model. This command must be matched with a subsequent End Catchment Hydraulic Model command. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCHPC-3">4.5.2</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCCHME"><bmtpink>End Catchment Hydraulic Model ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#"></a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used to define the end of a catchment hydraulic model block in a TUFLOW CATCH control file. This block contains the commands that control catchment simulation of surface (and optionally subsurface) hydrology and hydraulics, and is essentially the contents of a TUFLOW HPC *.tcf control file. It does not include any pollutant export commands. This command must be matched with a preceding Catchment Hydraulic Model command. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCHPC-3">4.5.2</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCRunDir"><bmtpink>Runs Directory ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#"></a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used in the Catchment Hydraulic Model block of a TUFLOW CATCH control file to set the path from which TUFLOW runs are to be automatically controlled by TUFLOW CATCH. This is the directory to which TUFLOW CATCH writes interim *.tcf and similar files, but the user does not need to interrogate or interact with these files - tyis command simply tells TUFLOW CATCH where the master TUFLOW control files are to be housed. It is not recommended that users interact with any files in this directory, although users wil create and modify content in all other directories under TUFLOW if TUFLOW HPC simulations are invoked. This interaction will occur through the TUFLOW CATCH *.tcc control file. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCHPC-3">4.5.2</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCHPCEXE"><bmtpink>EXE ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#"></a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used in the Catchment Hydraulic Model block of a TUFLOW CATCH control file to set the path to the TUFLOW executable. The full path, either relative or absolute, is required, including the name of the executable itself, with the .exe extention. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCHPC-3">4.5.2</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCHPCTF"><bmtpink>Time Format ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#">TUFLOWFV</a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used in the Catchment Hydraulic Model block of a TUFLOW CATCH control file to set the time format of output results. Setting to TUFLOWFV is strongly recommended, and use of hours should be avoided. Should be used in conjunction with Zero Date == so that TUFLOW HPC boundaries can be specified in hours (TUFLOW HPC cannot accept ISODATE format in its boundary files at time of writing). Simulation construction section <a href="SimulationConstruction-1.html#SCTCCHPC-3">4.5.2</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCHPCZDate"><bmtpink>Zero Date ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#">&lt;dd hh:mm&gt;</a><span class="math inline">\(\rangle\)</span>
+</dd>
+</bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used in the Catchment Hydraulic Model block of a TUFLOW CATCH control file to set the date in TUFLOWFV ISODATE format that corresponds to zero hours in TUFLOW HPC boundary condition files. Seconds is not required in the date specification. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCHPC-3">4.5.2</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCHPCMapOut"><bmtpink>Output Map Data Types ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span>[](#)<span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used in the Catchment Hydraulic Model block of a TUFLOW CATCH control file map output command to include all TUFLOW CATCH related outputs. The command argument catch is a keyword and should be added as an output to all hydrologic outputs such as velocity, depth and water surface elevation. XMDF is the recommended output container for these data sets. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCHPC-3">4.5.2</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCRS"><bmtpink>Receiving Model ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#">TUFLOWFV</a>,<a href="#">none</a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used to define the start of a receiving model block in a TUFLOW CATCH control file. This block contains the commands that control receiving simulation of hydrodynamics, advection dispersion, water quality and other optional processes, and is essentially the contents of a TUFLOW FV *.fvc control file. Set the argument to none if only catchment hydraulic water modelling is to be undertaken through the TUFLOW CATCH control file. TUFLOW CATCH will then not invoke TUFLOW FV. This ‘none’ option is required for the pollutant export configuration. This command must be matched with a subsequent End Receiving Model command. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCFV-3">4.5.4</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCRME"><bmtpink>End Receiving Model ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#"></a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used to define the end of a receiving model block in a TUFLOW CATCH control file. This block contains the commands that control receiving simulation of hydrodynamics and other processes, and is essentially the contents of a TUFLOW FV *.fvc control file. This command must be matched with a preceding Receiving Model command. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCFV-3">4.5.4</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCRecPoly"><bmtpink>Receiving Polygon ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#"></a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used in the Receiving Model block of a TUFLOW CATCH control file to set the path to a polygon that delineates the downstream receiving waterway extents of a TUFLOW CATCH simulation. This is only used in the TUFLOW CATCH pollutant export configuration. All TUFLOW HPC cells and boundary conditions within this polygon are excluded from the TUFLOW HPC simulation. TUFLOW CATCH writes flow and pollutant export summary and timeseries files that contain aggregated flows and loads entering the nominated polygon. These data can be used to compare across pollutant export scenarios, for example, without the need to build a TUFLOW FV model or mesh. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCHPC-3">4.5.2</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCPolls"><bmtpink>Pollutants ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#">&lt;name1&gt;</a><span class="math inline">\(\rangle\)</span> </name1></bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used in the Receiving Model block of a TUFLOW CATCH control file to set the names of pollutants to be simulated in the pollutant export model. Only used when TUFLOW CATCH is executed in pollutant export configuration. Any pollutant names can be used in this command, and they do not need to be those that are generated by TUFLOW FV. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCHPC-3">4.5.2</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCCPEMS"><bmtpink>Pollutant Export Model ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#">&lt;mass accumulation release&gt;</a>,<a href="#">none</a><span class="math inline">\(\rangle\)</span> </mass></bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used to define the start of a pollutant export model block in a TUFLOW CATCH control file. This block contains the commands that control pollutant export. Set the argument to none if only hydrology is being simulated, as per TUFLOW CATCH’s hydrology configuration. This command must be matched with a subsequent End Pollutant Export Model command. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCPollExp-3">4.5.3</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCCPEME"><bmtpink>End Pollutant Export Model ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#"></a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used to define the end of a pollutant export model block in a TUFLOW CATCH control file. This block contains the commands that control pollutant export. This command must be matched with a preceding Pollutant Export Model command. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCPollExp-3">4.5.3</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCPECons"><bmtpink>Constant &lt;name&gt; ==<br></name></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#"></a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used in the Pollutant Export Model block of a TUFLOW CATCH control file to set a named pollutant &lt;name&gt; concentration to a constant value. The command argument is the value to be set. This value is applied equally to all boundaries and summary files. An example might be the setting of salinity in catchment flows as zero g/L. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCPollExpConst-4">4.5.3.1</a>. </name>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCPETS"><bmtpink>Time-series &lt;name&gt; ==<br></name></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#"></a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used in the Pollutant Export Model block of a TUFLOW CATCH control file to apply a named pollutant &lt;name&gt; concentration to a timeseries. The command argument is the name of the timeseries as specified by the user in the TUFLOW HPC database file. TUFLOW CATCH will interpolate between the specified timeseries and required frequency of writing outputs as needed. An example might be setting water temperature to be a timeseries that reflects seasonality. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCPollExpTS-4">4.5.3.2</a>. </name>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCCPEMatS"><bmtpink>Material ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#">all</a>,<a href="#">&lt;num1&gt;</a><span class="math inline">\(\rangle\)</span> </num1></bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used in the Pollutant Export Model block of a TUFLOW CATCH control file to apply a material by material pollutant export properties. num1, num2 refer to material IDs in user specified 2d_mat GIS layers. Up to 10 comma seperated materials can be included in one material block command. Alternatively, the keyword all can be specified and this will instruct TUFLOW CATCH to apply the properties in that corresponding material block to all TUFLOW HPC cells. This is a useful way to set the most commonly occuring conditions for all pollutants across the domain, and acts as a default ccondition. Subsequent Material block declarations for subsets of the entire domain (e.g. for one or more materials) will progressively spatially overwrite this global declaration. This command must be followed by an End Material command to finalise the block. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCPollExpPE-4">4.5.3.3</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCCPEMatE"><bmtpink>End Material ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#"></a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used in the Pollutant Export Model block of a TUFLOW CATCH control file to end application of a material by material block pollutant export properties. This command must be accompanied by a preceding Material command. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCPollExpPE-4">4.5.3.3</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
 </tbody>
 </table>
 <!-- 
