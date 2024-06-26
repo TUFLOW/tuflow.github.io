@@ -208,21 +208,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html"><i class="fa fa-check"></i><b>5</b> Simulation Execution</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionContext-2"><i class="fa fa-check"></i><b>5.1</b> Context</a></li>
-<li class="chapter" data-level="5.2" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionConfigs-2"><i class="fa fa-check"></i><b>5.2</b> Configurations</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionCHyd-3"><i class="fa fa-check"></i><b>5.2.1</b> Hydrology</a></li>
-<li class="chapter" data-level="5.2.2" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionCPE-3"><i class="fa fa-check"></i><b>5.2.2</b> Pollutant export</a></li>
-<li class="chapter" data-level="5.2.3" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionCInt-3"><i class="fa fa-check"></i><b>5.2.3</b> Integrated</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionEx-2"><i class="fa fa-check"></i><b>5.3</b> Execution</a></li>
+<li class="chapter" data-level="5.2" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html#SimulationExecutionEx-2"><i class="fa fa-check"></i><b>5.2</b> Execution</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="Outputs-1.html"><a href="Outputs-1.html"><i class="fa fa-check"></i><b>6</b> Outputs</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="Outputs-1.html"><a href="Outputs-1.html#OutputsContext-2"><i class="fa fa-check"></i><b>6.1</b> Context</a></li>
-<li class="chapter" data-level="6.2" data-path="Outputs-1.html"><a href="Outputs-1.html#OutputsConfigs-2"><i class="fa fa-check"></i><b>6.2</b> Configurations</a>
+<li class="chapter" data-level="6.2" data-path="Outputs-1.html"><a href="Outputs-1.html#OutputsConfigs-2"><i class="fa fa-check"></i><b>6.2</b> Supported configurations</a>
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="Outputs-1.html"><a href="Outputs-1.html#OutputsHyd-3"><i class="fa fa-check"></i><b>6.2.1</b> Hydrology</a></li>
-<li class="chapter" data-level="6.2.2" data-path="Outputs-1.html"><a href="Outputs-1.html#OutputsPE-3"><i class="fa fa-check"></i><b>6.2.2</b> Pollutant export</a></li>
+<li class="chapter" data-level="6.2.2" data-path="Outputs-1.html"><a href="Outputs-1.html#OutputsPEx-3"><i class="fa fa-check"></i><b>6.2.2</b> Pollutant export</a></li>
 <li class="chapter" data-level="6.2.3" data-path="Outputs-1.html"><a href="Outputs-1.html#OutpitsInt-3"><i class="fa fa-check"></i><b>6.2.3</b> Integrated</a></li>
 </ul></li>
 </ul></li>
@@ -263,89 +257,260 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Previous sections have presented the architecture, available processes, construction and execution of a TUFLOW CATCH model. This section describes the results produced by TUFLOW CATCH under the three intended configurations described in Section <a href="Overview-1.html#Configs-2">1.3</a>. Hyperlinks are provided to more detailed descriptions of output fields in Appendix <font color="red">XXX</font>.</p>
 </div>
 <div id="OutputsConfigs-2" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Configurations<a href="Outputs-1.html#OutputsConfigs-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The three intended configurations (or uses cases) of TUFLOW CATCH are:</p>
+<h2><span class="header-section-number">6.2</span> Supported configurations<a href="Outputs-1.html#OutputsConfigs-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The three supported configurations of TUFLOW CATCH are:</p>
 <ul>
 <li>Hydrology</li>
 <li>Pollutant export</li>
 <li>Integrated</li>
 </ul>
-<p>The outputs of these with regard to TUFLOW CATCH commands and model blocks are described in the following sections. Only these configurations (and associated combinations of model blocks) are currently supported. Contact <a href="mailto:support@tuflow.com" class="email">support@tuflow.com</a> if additional combinations are of interest.</p>
+<p>The outputs of these are described in the following sections. In all cases, the TUFLOW CATCH control file is assumed to be named Model_001.tcc. It is strongly recommended that TUFLOW HPC and TUFLOW FV results that are to be used to create a TUFLOW CATCH *.json file for viewing in QGIS are output at the same timestep, referred to as &lt;common_dt&gt; below.</p>
 <div id="OutputsHyd-3" class="section level3 hasAnchor" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Hydrology<a href="Outputs-1.html#OutputsHyd-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The following outputs are produced in the execution of a hydrology simulation. Each is a 2D or 3D map output that varies in time:</p>
+<div id="OutputsHydO-4" class="section level4 hasAnchor" number="6.2.1.1">
+<h4><span class="header-section-number">6.2.1.1</span> Data types<a href="Outputs-1.html#OutputsHydO-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>It is recommended that the following data types be set, assuming salinity and temperature are included as constants/timeseries. If not, then catch (TUFLOW HPC) and , sal, temp (TUFLOW FV) can be omitted:</p>
+<p>TUFLOW HPC</p>
+<pre><code>  Map Output Format == XMDF 
+  Map Output Data Types == V d h catch 
+  Map Output Interval == &lt;common_dt&gt;</code></pre>
+<p>TUFLOW FV</p>
+<pre><code>  output == netcdf
+    output parameters == h,v,d,sal,temp
+    Output interval == &lt;common_dt&gt;
+    Suffix == HD
+  end output</code></pre>
+</div>
+<div id="OutputsHydF-4" class="section level4 hasAnchor" number="6.2.1.2">
+<h4><span class="header-section-number">6.2.1.2</span> Files<a href="Outputs-1.html#OutputsHydF-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The following output files are produced in the execution of a hydrology simulation with data types as above. Each is a 2D or 3D (TUFLOW FV) map output that varies in time:</p>
 <ul>
-<li>Catchment hydrology: <font color="red">XXX.xmdf</font>
+<li>TUFLOW HPC
 <ul>
-<li>Water depth</li>
-<li>Water velocity</li>
-<li>Water surface elevation</li>
-</ul></li>
-<li>Pollutant export
+<li>Model_001_catchment_hydrology.xmdf
 <ul>
-<li>None</li>
-</ul></li>
-<li>Receiving waters
-<ul>
-<li>2D or 3D hydrodynamics: <font color="red">XXX.nc</font>
-<ul>
-<li>Water surface elevation</li>
+<li>Bed Elevation</li>
+<li>Depth</li>
+<li>Vector Velocity</li>
 <li>Velocity</li>
+<li>Water Level</li>
+<li>Time of Peak h</li>
+</ul></li>
+</ul></li>
+<li>TUFLOW FV
+<ul>
+<li>Model_001_receiving_HD.nc
+<ul>
+<li>Bed Elevation</li>
+<li>salinity</li>
+<li>temperature</li>
+<li>velocity</li>
+<li>vector Velocity</li>
+<li>water depth</li>
+<li>water surface elevation</li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
-<div id="OutputsPE-3" class="section level3 hasAnchor" number="6.2.2">
-<h3><span class="header-section-number">6.2.2</span> Pollutant export<a href="Outputs-1.html#OutputsPE-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The following outputs are produced in the execution of a pollutant export simulation. Each is a 2D or 3D map output that varies in time:</p>
+<div id="OutputsHydV-4" class="section level4 hasAnchor" number="6.2.1.3">
+<h4><span class="header-section-number">6.2.1.3</span> Interrogation<a href="Outputs-1.html#OutputsHydV-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The above output files can be viewed either:</p>
 <ul>
-<li>Catchment hydrology: <font color="red">XXX.xmdf</font>
+<li>Individually via the TUFLOW Viewer (File -&gt; Load Results -&gt; Map Outputs), and interrogated using usual TUFLOW Viewer techniques, or</li>
+<li>Simulataneously via use of the Create TUFLOW Catch JSON function demonstrated in the eLearning material described in Section <a href="SimulationConstruction-1.html#SimulationConstructionInit-2">4.3</a></li>
+</ul>
+</div>
+</div>
+<div id="OutputsPEx-3" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Pollutant export<a href="Outputs-1.html#OutputsPEx-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In this example, it is assumed that two pollutants are simulated (in addition to temperature and salinity), as:</p>
 <ul>
-<li>Water depth</li>
-<li>Water velocity</li>
-<li>Water surface elevation</li>
+<li>PFAS, washoff1 pollutant export model</li>
+<li>Tailings, shear1 pollutant export model</li>
+</ul>
+<p>These models have been chosen because they produce different outputs.</p>
+<div id="OutputsPExO-4" class="section level4 hasAnchor" number="6.2.2.1">
+<h4><span class="header-section-number">6.2.2.1</span> Data types<a href="Outputs-1.html#OutputsPExO-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>It is recommended that the following data types be set:</p>
+<p>TUFLOW HPC</p>
+<pre><code>  Map Output Format == XMDF 
+  Map Output Data Types == V d h catch 
+  Map Output Interval == &lt;common_dt&gt;</code></pre>
+<p>TUFLOW FV is not activated.</p>
+</div>
+<div id="OutputsPExF-4" class="section level4 hasAnchor" number="6.2.2.2">
+<h4><span class="header-section-number">6.2.2.2</span> Files<a href="Outputs-1.html#OutputsPExF-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The following output files are produced in the execution of a hydrology simulation with data types as above. Each is a 2D map output that varies in time. Hyperlinks are provided to detailed descriptions in the appendices for representative pollutants:</p>
+<ul>
+<li>TUFLOW HPC
+<ul>
+<li>Model_001_catchment_hydrology.xmdf
+<ul>
+<li>Bed Elevation</li>
+<li>Conc PFAS</li>
+<li>Conc TAILINGS</li>
+<li>GW Layer 1 Conc PFAS</li>
+<li>GW Layer 1 Conc TAILINGS</li>
+<li>Net Mass TAILINGS</li>
+<li>Depth</li>
+<li>Vector Velocity</li>
+<li>Velocity</li>
+<li>Water Level</li>
+<li>Time of Peak h</li>
 </ul></li>
-<li>Pollutant export: <font color="red">XXX.xmdf</font>
-<ul>
-<li>Surface water concentration for each pollutant</li>
-<li>Subsurface water concentration for each pollutant (if soils simulated)</li>
-<li>Pollutant dry store for each pollutant</li>
-<li>Net erosion / deposition for each pollutant</li>
-</ul></li>
-<li>Receiving waters
-<ul>
-<li>None</li>
 </ul></li>
 </ul>
+</div>
+<div id="OutputsPExV-4" class="section level4 hasAnchor" number="6.2.2.3">
+<h4><span class="header-section-number">6.2.2.3</span> Interrogation<a href="Outputs-1.html#OutputsPExV-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The above output file can be viewed via the TUFLOW Viewer (File -&gt; Load Results -&gt; Map Outputs), and interrogated using usual TUFLOW Viewer techniques.</p>
+</div>
 </div>
 <div id="OutpitsInt-3" class="section level3 hasAnchor" number="6.2.3">
 <h3><span class="header-section-number">6.2.3</span> Integrated<a href="Outputs-1.html#OutpitsInt-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The following outputs are produced in the execution of an integrated simulation. Each is a 2D or 3D map output that varies in time:</p>
+<p>In this example, it is assumed that one sediment fraction and inorganic simulation class water quality are simulated (in addition to temperature and salinity), as:</p>
 <ul>
-<li>Catchment hydrology: <font color="red">XXX.xmdf</font>
+<li>oxygen, silicate, adsorbed phosphorus and phytoplankton as constants</li>
+<li>all other water quality pollutants, washoff1 pollutant export model</li>
+<li>fines, shear1 pollutant export model</li>
+</ul>
+<p>These models have been chosen because they produce different outputs.</p>
+<div id="OutputsIntO-4" class="section level4 hasAnchor" number="6.2.3.1">
+<h4><span class="header-section-number">6.2.3.1</span> Data types<a href="Outputs-1.html#OutputsIntO-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>It is recommended that the following data types be set:</p>
+<p>TUFLOW HPC</p>
+<pre><code>  Map Output Format == XMDF 
+  Map Output Data Types == V d h catch 
+  Map Output Interval == &lt;common_dt&gt;</code></pre>
+<p>TUFLOW FV</p>
+<pre><code>  output == netcdf
+    output parameters == h,v,d,sal,temp,sed_1
+    Output interval == &lt;common_dt&gt;
+    Suffix == HD
+  end output
+
+  output == netcdf
+    output parameters == wq_all
+    output interval == &lt;common_dt&gt;
+    suffix == WQ
+  end output
+</code></pre>
+</div>
+<div id="OutputsIntF-4" class="section level4 hasAnchor" number="6.2.3.2">
+<h4><span class="header-section-number">6.2.3.2</span> Files<a href="Outputs-1.html#OutputsIntF-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The following output files are produced in the execution of a hydrology simulation with data types as above. Each is a 2D or 3D (TUFLOW FV) map output that varies in time. Hyperlinks are provided to detailed descriptions in the appendices for representative pollutants:</p>
 <ul>
-<li>Water depth</li>
-<li>Water velocity</li>
-<li>Water surface elevation</li>
+<li>TUFLOW HPC
+<ul>
+<li>Model_001_catchment_hydrology.xmdf
+<ul>
+<li>Bed Elevation
+<ul>
+<li>Conc SED_FINES</li>
+<li>Conc WQ_AMMONIUM_MG_L</li>
+<li>Conc WQ_DOC_MG_L<br />
+</li>
+<li>Conc WQ_DON_MG_L<br />
+</li>
+<li>Conc WQ_DOP_MG_L<br />
+</li>
+<li>Conc WQ_FRP_MG_L<br />
+</li>
+<li>Conc WQ_NITRATE_MG_L</li>
+<li>Conc WQ_POC_MG_L<br />
+</li>
+<li>Conc WQ_PON_MG_L<br />
+</li>
+<li>Conc WQ_POP_MG_L<br />
+</li>
+<li>Dry Mass WQ_AMMONIUM_MG_L</li>
+<li>Dry Mass WQ_DOC_MG_L</li>
+<li>Dry Mass WQ_DON_MG_L</li>
+<li>Dry Mass WQ_DOP_MG_L</li>
+<li>Dry Mass WQ_FRP_MG_L</li>
+<li>Dry Mass WQ_NITRATE_MG_L</li>
+<li>Dry Mass WQ_POC_MG_L</li>
+<li>Dry Mass WQ_PON_MG_L</li>
+<li>Dry Mass WQ_POP_MG_L</li>
+<li>GW Layer 1 Conc SED_FINES</li>
+<li>GW Layer 1 Conc WQ_AMMONIUM_MG_L</li>
+<li>GW Layer 1 Conc WQ_DOC_MG_L<br />
+</li>
+<li>GW Layer 1 Conc WQ_DON_MG_L<br />
+</li>
+<li>GW Layer 1 Conc WQ_DOP_MG_L<br />
+</li>
+<li>GW Layer 1 Conc WQ_FRP_MG_L<br />
+</li>
+<li>GW Layer 1 Conc WQ_NITRATE_MG_L</li>
+<li>GW Layer 1 Conc WQ_POC_MG_L<br />
+</li>
+<li>GW Layer 1 Conc WQ_PON_MG_L<br />
+</li>
+<li>GW Layer 1 Conc WQ_POP_MG_L<br />
+</li>
+<li>Net Mass SED_FINES</li>
 </ul></li>
-<li>Pollutant export: <font color="red">XXX.xmdf</font>
-<ul>
-<li>Surface water concentration for each pollutant</li>
-<li>Subsurface water concentration for each pollutant (if soils simulated)</li>
-<li>Pollutant dry store for each pollutant</li>
-<li>Net erosion / deposition for each pollutant</li>
-</ul></li>
-<li>Receiving waters
-<ul>
-<li>2D or 3D hydrodynamics: <font color="red">XXX.nc</font>
-<ul>
-<li>Water surface elevation</li>
+<li>Depth</li>
+<li>Vector Velocity</li>
 <li>Velocity</li>
+<li>Water Level</li>
+<li>Time of Peak h</li>
+</ul></li>
+</ul></li>
+<li>TUFLOW FV
+<ul>
+<li>Model_001_receiving_HD.nc
+<ul>
+<li>Bed Elevation</li>
+<li>salinity</li>
+<li>sediment fraction 1 concentration</li>
+<li>temperature</li>
+<li>velocity</li>
+<li>vector Velocity</li>
+<li>water depth</li>
+<li>water surface elevation</li>
+</ul></li>
+<li>Model_001_receiving_WQ.nc
+<ul>
+<li>Bed Elevation
+<ul>
+<li>WQ_AMMONIUM_MG_L</li>
+<li>WQ_DISS_OXYGEN_MG_L</li>
+<li>WQ_DOC_MG_L<br />
+</li>
+<li>WQ_DON_MG_L<br />
+</li>
+<li>WQ_DOP_MG_L<br />
+</li>
+<li>WQ_FRP_ADS_MG_L<br />
+</li>
+<li>WQ_FRP_MG_L<br />
+</li>
+<li>WQ_NITRATE_MG_L</li>
+<li>WQ_PHYTO_FDIAT_CONC_MICG_L</li>
+<li>WQ_POC_MG_L<br />
+</li>
+<li>WQ_PON_MG_L<br />
+</li>
+<li>WQ_POP_MG_L<br />
+</li>
+<li>WQ_SILICATE_MG_L</li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
+</div>
+<div id="OutputsIntV-4" class="section level4 hasAnchor" number="6.2.3.3">
+<h4><span class="header-section-number">6.2.3.3</span> Interrogation<a href="Outputs-1.html#OutputsIntV-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The above output files can be viewed either:</p>
+<ul>
+<li>Individually via the TUFLOW Viewer (File -&gt; Load Results -&gt; Map Outputs), and interrogated using usual TUFLOW Viewer techniques, or</li>
+<li>Simulataneously via use of the Create TUFLOW Catch JSON function demonstrated in the eLearning material described in Section <a href="SimulationConstruction-1.html#SimulationConstructionInit-2">4.3</a></li>
+</ul>
 <p><img src="images/WQFooter.jpg" width="100%" /></p>
 
+</div>
 </div>
 </div>
 </div>
