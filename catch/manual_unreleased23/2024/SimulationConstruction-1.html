@@ -198,6 +198,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.2" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCHPC-3"><i class="fa fa-check"></i><b>4.5.2</b> Catchment hydraulic model (TUFLOW HPC) commands</a></li>
 <li class="chapter" data-level="4.5.3" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCPollExp-3"><i class="fa fa-check"></i><b>4.5.3</b> Pollutant export model commands</a></li>
 <li class="chapter" data-level="4.5.4" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCFV-3"><i class="fa fa-check"></i><b>4.5.4</b> Receiving model (TUFLOW FV) commands</a></li>
+<li class="chapter" data-level="4.5.5" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCSum-3"><i class="fa fa-check"></i><b>4.5.5</b> Configuration summary</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html"><i class="fa fa-check"></i><b>5</b> Simulation Execution</a>
@@ -260,20 +261,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="SCIntent-2" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Usage intent<a href="SimulationConstruction-1.html#SCIntent-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Depending on the chosen configuration, TUFLOW CATCH coordinates and executes TUFLOW HPC, and/or a pollutant export model and/or TUFLOW FV, all automatically and with no direct user input required to affect any of these linkages. This does not mean that TUFLOW CATCH cannot be run until all models (TUFLOW HPC, pollutant export and TUFLOW FV) are fully constructed, if the target configuration required all these models eventually. To the contrary, the intention is that for application to configurations other than pollutant export, the single TUFLOW CATCH control file is used as the common control file for all model construction from project inception, even where this construction is undertaken in parallel by multiple users.</p>
+<p>Depending on the chosen configuration, TUFLOW CATCH coordinates and executes TUFLOW HPC, and/or a pollutant export model and/or TUFLOW FV, all automatically and with no direct user input required to affect any of these linkages. This does not, however, mean that TUFLOW CATCH cannot be run until all models (TUFLOW HPC, pollutant export and TUFLOW FV) are fully constructed, even if the target configuration requires all these models eventually. To the contrary, the intention is that the single TUFLOW CATCH control file is used as the common control file for all model construction from project inception, even where this construction is undertaken in parallel by multiple users.</p>
 <p>The reason for this approach is that, for example, the TUFLOW HPC block of the TUFLOW CATCH control file is nothing other than a standard TUFLOW HPC *.tcf control file, with a small number of additional TUFLOW CATCH commands. This is intentional, and means that an experienced (or beginner who refers to the TUFLOW user manual) TUFLOW HPC modeller can follow normal model set up processes and procedures to construct the TUFLOW HPC component of TUFLOW CATCH model, unhindered, but via the TUFLOW CATCH control file arrangement. The same logic applies to users constructing the TUFLOW FV sections of a TUFLOW CATCH model - the TUFLOW HPC sections of the TUFLOW CATCH control file can be turned off and TUFLOW FV model construction commenced as usual through the *.tcc rather than *.fvc control file. Users in teams that adopt this approach may want to consider using versioning control software to manage concurrent multiple user contributions.</p>
-<p>It is understood that in some legacy cases, existing TUFLOW HPC or TUFLOW FV models (that were originally built outside TUFLOW CATCH) will need to be brought into a block of a TUFLOW CATCH control file. If this is the case, then the process is a matter of copying and pasting the original control files into the relevant TUFLOW CATCH control file block and populating the supporting folder structures with model data (see following sections). The key change that will be required on pasting into a *.tcc block will be to ensure file path references are correct (see following sections). This is only required from the *.tcc as it points to immediately called files, and no further.</p>
+<p>It is understood that in some legacy cases, existing TUFLOW HPC or TUFLOW FV models (that were originally built outside TUFLOW CATCH) will need to be brought into a block of a TUFLOW CATCH control file. If this is the case, then the process is a matter of copying and pasting the original control files into the relevant TUFLOW CATCH control file block and populating the supporting folder structures with model data (see following sections). The key change that will be required on pasting into a *.tcc block will be to ensure file path references are correct (see following sections). This is only required from the *.tcc as it points to immediately called files, and no further down the folder tree.</p>
 </div>
 <div id="SimulationConstructionInit-2" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Initialisation<a href="SimulationConstruction-1.html#SimulationConstructionInit-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>TUFLOW CATCH requires construction of a suite of folder substructures to support simulations. These should be all co-located at the same folder level underneath a single directory that sits within an overall project directory. These substructures correspond to each of the three products potentially used in a TUFLOW CATCH simulation, and should be named as follows (with ‘TUFLOW’ referring to TUFLOW HPC):</p>
 <ul>
-<li>TUFLOWCATCH</li>
 <li>TUFLOW</li>
+<li>TUFLOWCATCH</li>
 <li>TUFLOWFV</li>
 </ul>
-<p>Each of these substructures has its own subfolder arrangement, consistent with those suggested for each for standalone TUFLOW HPC and TUFLOW FV modelling studies. For consistency, the suggested TUFLOWCATCH subfolder arrangement is also similar.</p>
-<p>To assist with this set up, and indeed more broadly with the initialisation, execution and results interrogation of a TUFLOW CATCH simulation, a freely available TUFLOW CATCH QGIS plugin has been developed. TUFLOW eLearning resources (also free of charge) have been prepared to support deployment and use of this TUFLOW CATCH plugin, and as such the content of that resource is not repeated here. Users are however encouraged to access this resource before initialising their first TUFLOW CATCH simulation: using this plugin is seen as a core component of the set up of a TUFLOW CATCH simulation. Doing so manually is discouraged strongly. The eLearning materials can be accessed by:</p>
+<p>Each of these substructures has its own subfolder arrangement, consistent with those suggested for standalone TUFLOW HPC and TUFLOW FV modelling studies. For consistency, the suggested TUFLOWCATCH subfolder arrangement is also similar.</p>
+<p>To assist with this set up, and indeed more broadly with the initialisation, execution and results interrogation of a TUFLOW CATCH simulation, a freely available TUFLOW CATCH QGIS plugin has been developed. TUFLOW eLearning resources (also free of charge) have been prepared to support deployment and use of this TUFLOW CATCH plugin, and as such the content of that resource is not repeated here. Users are however encouraged to access this resource before initialising their first TUFLOW CATCH simulation: using this plugin is seen as a core component of the set up of a TUFLOW CATCH simulation. Doing so manually is discouraged. The eLearning materials can be accessed by:</p>
 <ul>
 <li>Registering for TUFLOW eLearning <a href = "https://elearning.tuflow.com/login/index.php">here</a> if not already registered</li>
 <li>Emailing <a href="mailto:support@tuflow.com" class="email">support@tuflow.com</a> noting the registered username and with a request access to the TUFLOW CATCH plugin eLearning course</li>
@@ -306,18 +307,19 @@ Figure 4.2: <strong>TUFLOW CATCH folder structure, expanded</strong>
 </p>
 </div>
 </center>
+<p>The three relevant executable suites (TUFLOW CATCH, TUFLOW HPC and TUFLOW FV) should be stored in separate subfolders, but within a general EXE folder for neatness, e.g. C:\EXE\TUFLOWCatch, C:\EXE\TUFLOW and C:\EXE\TUFLOWFV.</p>
 </div>
 <div id="SCGeneralWF-3" class="section level3 hasAnchor" number="4.4.2">
 <h3><span class="header-section-number">4.4.2</span> Intended workflow<a href="SimulationConstruction-1.html#SCGeneralWF-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The above folder structure supports the overall intended TUFLOW CATCH simulation workflow, such that:</p>
 <ul>
-<li>The TUFLOW CATCH folder (and control file, see below) is the single point of contact for execution of TUFLOW CATCH simulations, regardless of the combination of TUFLOW HPC or TUFLOW FV models being called</li>
-<li>All simulation results (again, regardless of what subsidiary TUFLOW products are called) are written to the TUFLOWCATCH/output subfolder: users should never need to navigate to TUFLOW HPC or TUFLOWFV folder structures to examine results from TUFLOW CATCH simulations</li>
+<li>The TUFLOWCATCH folder (and control file, see below) is the single point of contact for execution of TUFLOW CATCH simulations, regardless of the combination of TUFLOW HPC or TUFLOW FV models being called</li>
+<li>All simulation results (again, regardless of what subsidiary TUFLOW products are called) are written to the TUFLOWCATCH/output subfolder: users should never need to navigate to TUFLOW HPC or TUFLOWFV output/results folders to examine results from TUFLOW CATCH simulations</li>
 <li>Users do not need to (and should not) set up their own *.tcf (TUFLOW HPC) or *.fvc (TUFLOW FV) top level control files in the respective TUFLOW and TUFLOWFV runs directories: TUFLOW CATCH does this automatically based on information provided in the overarching TUFLOW CATCH control file<br />
 </li>
 <li>Calls to subsidiary first level control files and/or folders from the overarching TUFLOW CATCH control file for both TUFLOW HPC and TUFLOW FV (such as *.tgc, _dbase etc. (TUFLOW HPC) or *.fvsed etc. (TUFLOW FV)) need to be provided as relative paths to locations that sit within the respective TUFLOW or TUFLOWFV subfolder arrangements, from the TUFLOW CATCH runs directory</li>
 <li>All model data (e.g. grids, GIS, boundaries etc.) should be located within respective subfolder arrangements for TUFLOW and TUFLOW FV</li>
-<li>These first level control files (that sit within the TUFLOW or TUFLOWFV directory structures) then should be constructed to make the usual calls to all other files and data within respective their subfolder arrangements</li>
+<li>These first level control files (that sit within the TUFLOW or TUFLOWFV directory structures) then should be constructed to make the usual relative calls to all other files and data within respective their subfolder arrangements</li>
 <li>It is suggested that users exploit standard text editor capabilities of opening one text file (e.g. a *.tgc file) from from the currently open text file (i.e. the *.tcc) so as to not need to explicitly navigate between subfolder structures. This is most commonly achieved by right clicking on the relative path of the other file (e.g. *.tgc) as specified in the open text file (i.e. the *.tcc) and using the context menu to open the second file, as per Figure <a href="SimulationConstruction-1.html#fig:fig-rightclick">4.3</a> (where the relative path on line 48 was right clicked)</li>
 </ul>
 <br>
@@ -332,7 +334,7 @@ Figure 4.3: <strong>Opening one text file from the relative path in an already o
 <p>In short, it is intended that the:</p>
 <ul>
 <li>TUFLOW CATCH control file is the primary point of construction and execution contact</li>
-<li>TUFLOW and TUFLOWFV folder substructures contain input model data</li>
+<li>TUFLOW and TUFLOWFV folder substructures contain respective input model data such as GIS layers, DEMs etc</li>
 <li>TUFLOWCATCH folder substructure contains model outputs</li>
 </ul>
 <p>Subsequent sections describe the TUFLOW CATCH control file set up and model execution.</p>
@@ -340,51 +342,54 @@ Figure 4.3: <strong>Opening one text file from the relative path in an already o
 </div>
 <div id="SCTCC-2" class="section level2 hasAnchor" number="4.5">
 <h2><span class="header-section-number">4.5</span> TUFLOW CATCH control file<a href="SimulationConstruction-1.html#SCTCC-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A TUFLOW CATCH simulation is set up and executed by constructing a TUFLOW CATCH control file, extension *.tcc. This file should reside in the TUFLOWCATCH\runs directory set up with the TUFLOW CATCH QGIS plugin. The user is not required to (and should not) construct separate *.tcf or *.fvc control files. This TUFLOW CATCH control file has four separate but linked blocks:</p>
+<p>A TUFLOW CATCH simulation is set up and executed by constructing a TUFLOW CATCH control file, extension *.tcc. This file should reside in the TUFLOWCATCH\runs directory set up with the TUFLOW CATCH QGIS plugin. The user is not required to (and should not) construct separate *.tcf or *.fvc control files. This TUFLOW CATCH control file has four separate but related blocks:</p>
 <ol>
 <li>Global commands</li>
 <li>Catchment Hydraulic Model (TUFLOW HPC) commands</li>
 <li>Catchment Pollutant Export Model</li>
 <li>Receiving Model (TUFLOW FV) commands</li>
 </ol>
-<p>All blocks must be included in the above order, but can be optionally switched on and off with a single command (rather than extensive line commenting) to suit modelling needs. For example, a user working only on inital TUFLOW HPC model build and testing tasks can turn off the pollutant export and TUFLOW FV sections and continue building a TUFLOW HPC model as per normal, without the need to always execute all components of TUFLOW CATCH.</p>
+<p>All blocks must be included in the above order, but the latter three can be optionally switched on and off with a single command (rather than extensive line commenting) to suit modelling needs. For example, a user working only on initial TUFLOW HPC model build and testing tasks can turn off the pollutant export and TUFLOW FV blocks (by specifying these block models to be the keyword ‘none’) and continue building a TUFLOW HPC model as per normal, without the need to always execute all components of TUFLOW CATCH (See <a href="AppCommands.html#TCCHMS">Catchment Hydraulic Model ==</a>, <a href="AppCommands.html#TCCPEMS">Pollutant Export Model ==</a> or <a href="AppCommands.html#TCRS">Receiving Model ==</a>).</p>
 <p>Construction of each of the TUFLOW CATCH control file blocks is described in the following sections.</p>
 <div id="SCTCCGlobal-3" class="section level3 hasAnchor" number="4.5.1">
 <h3><span class="header-section-number">4.5.1</span> Global commands<a href="SimulationConstruction-1.html#SCTCCGlobal-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>This block of the TUFLOW CATCH control file contains information that is applied equally to both TUFLOW HPC and TUFLOW FV. It does not need to be declared as a block (as all subsequent blocks do). These global commands are presented following (as hyperlinks to Appendix <a href="AppCommands.html#AppCommands">A</a>), with command argument options also shown where appropriate. All commands are mandatory. Some commands can be overwritten if required within subsequent blocks (see Sections <a href="SimulationConstruction-1.html#SCTCCHPC-3">4.5.2</a> and <a href="SimulationConstruction-1.html#SCTCCFV-3">4.5.4</a>).</p>
+<p>This block of the TUFLOW CATCH control file contains information that is applied equally to both TUFLOW HPC and TUFLOW FV. It is not declared as a block (as all subsequent blocks are). These global commands are presented following (as hyperlinks to Appendix <a href="AppCommands.html#AppCommands">A</a>), with command argument options also shown where appropriate. All commands are mandatory. Some commands can be overwritten if required within subsequent blocks (see Sections <a href="SimulationConstruction-1.html#SCTCCHPC-3">4.5.2</a> and <a href="SimulationConstruction-1.html#SCTCCFV-3">4.5.4</a>).</p>
 <p>Set the hardware to be used, with command arguments as either CPU or GPU:</p>
 <blockquote>
-<p><a href="AppCommands.html#TCHardware">Hardware ==</a></p>
+<p><a href="introduction.html#TCHardware">Hardware ==</a></p>
 </blockquote>
-<p>Set the GIS format to be used, with command arguments as either SHP (preferred), GPKG or MI:</p>
+<p>Set the GIS format to be used, with command arguments as either SHP (preferred) or GPKG:</p>
 <blockquote>
-<p><a href="AppCommands.html#TCGISFmt">GIS Format ==</a></p>
+<p><a href="introduction.html#TCGISFmt">GIS Format ==</a></p>
 </blockquote>
-<p>If GPKG is specified and TUFLOW FV is intended to be included in the TUFLOW CATCH simulation then this will need to be overwritten in the receiving model block (see Section <a href="SimulationConstruction-1.html#SCTCCFV-3">4.5.4</a>) because TUFLOW FV does not yet support geopackage based simulation</p>
 <p>Set projection to be used, as a path to a shape file. This will have been prepared by the TUFLOW CATCH plugin:</p>
 <blockquote>
-<p><a href="AppCommands.html#TCSHPProj">SHP Projection ==</a></p>
+<p><a href="introduction.html#TCSHPProj">SHP Projection ==</a></p>
+</blockquote>
+<p>If GPKG is specified as the format and TUFLOW FV is intended to be included in the TUFLOW CATCH simulation then this will need to be overwritten in the receiving model block (see Section <a href="SimulationConstruction-1.html#SCTCCFV-3">4.5.4</a>) because TUFLOW FV does not yet support geopackage based simulation. Similarly, if GPKG is set, then the projection must also be set as follows</p>
+<blockquote>
+<p><a href="AppCommands.html#TCGPKGProj">GPKG Projection ==</a></p>
 </blockquote>
 <p>Set the date format, with command arguments as either ISODATE (dd/mm/yyy hh:mm:ss) or hours (a single float). It is strongly recommended that ISODATE be used for longer simulations, where interpreting hour output timestamps can be difficult:</p>
 <blockquote>
-<p><a href="AppCommands.html#TCTimeFmt">Date Format ==</a></p>
+<p><a href="introduction.html#TCTimeFmt">Date Format ==</a></p>
 </blockquote>
 <p>Set the start and end dates in the format declared above:</p>
 <blockquote>
-<p><a href="AppCommands.html#TCStrtDte">Start Date ==</a></p>
+<p><a href="introduction.html#TCStrtDte">Start Date ==</a></p>
 </blockquote>
 <blockquote>
-<p><a href="AppCommands.html#TCEndDte">End Date ==</a></p>
+<p><a href="introduction.html#TCEndDte">End Date ==</a></p>
 </blockquote>
-<p>Set the directory for simulation outputs (e.g. xmdf and netcdf results files). This can be set to any location as either a full path (e.g. X:), or as a path relative to the location of the TUFLOW CATCH control file (e.g. ..):</p>
+<p>Set the directory for simulation outputs (e.g. xmdf and netcdf results files). This can be set to any location as either a full path (e.g. X:\Project\Output), or as a path relative to the location of the TUFLOW CATCH control file (e.g. ..\output):</p>
 <blockquote>
 <p><a href="AppCommands.html#TCOutDir">Output Directory ==</a></p>
 </blockquote>
-<p>Set the directory for writing simulation check files (e.g. .shp files). This can be set to any location as either a full path (e.g. X:), or as a path relative to the location of the TUFLOW CATCH control file (e.g. ..):</p>
+<p>Set the directory for writing simulation check files (e.g. .shp files). This can be set to any location as either a full path (e.g. X:\Project\Check), or as a path relative to the location of the TUFLOW CATCH control file (e.g. ..\check):</p>
 <blockquote>
 <p><a href="AppCommands.html#TCChkDir">Write Check Files ==</a></p>
 </blockquote>
-<p>Set the directory for writing simulation log files. TUFLOW HPC and TUFLOW FV engine log files will be written to this location, as well as module log files (such as the water quality module of TUFLOW FV). This can be set to any location as either a full path (e.g. X:), or as a path relative to the location of the TUFLOW CATCH control file (e.g. ..):</p>
+<p>Set the directory for writing simulation log files. TUFLOW HPC and TUFLOW FV engine log files will be written to this location, as well as module log files (such as the water quality module of TUFLOW FV). This can be set to any location as either a full path (e.g. X:\Project\log), or as a path relative to the location of the TUFLOW CATCH control file (e.g. log - which is the folder created by the TUFLOW CATCH plugin by default):</p>
 <blockquote>
 <p><a href="AppCommands.html#TCLogDir">Log Folder ==</a></p>
 </blockquote>
@@ -418,14 +423,14 @@ Figure 4.3: <strong>Opening one text file from the relative path in an already o
 <blockquote>
 <p><a href="AppCommands.html#TCCatchDir">Catch Ouput Folder ==</a></p>
 </blockquote>
-<p>Set the timestep (in simulation time seconds) at which lines within a boundary condition file for TUFLOW FV (created from TUFLOW HPC predictions) are separated. TUFLOW CATCH offers the user the option to set this timestep differently for different types of TUFLOW FV boundaries: nodestrings (Q boundaries that deliver momentum to TUFLOW FV) and lateral inflows (QC boundaries that do not deliver momentum to TUFLOW FV). It would be typical that nodestring boundaries are written at a shorter timestep to lateral boundaries, but this is not mandated, and the user is able to decide how this timestep relates to simulation time and file size constraints:</p>
+<p>Set the timestep (in simulation time seconds) at which lines within a boundary condition file for TUFLOW FV (created from TUFLOW HPC predictions) are separated (required even if TUFLOW FV not used). TUFLOW CATCH offers the user the option to set this timestep differently for different types of TUFLOW FV boundaries: nodestrings (Q boundaries that deliver momentum to TUFLOW FV) and lateral inflows (QC boundaries that do not deliver momentum to TUFLOW FV). It would be typical that nodestring boundaries are written at a shorter timestep to lateral boundaries, but this is not mandated, and the user is able to decide how this timestep relates to simulation time and file size constraints:</p>
 <blockquote>
 <p><a href="AppCommands.html#TCNSOutDt">Catch Output Interval Nodestring ==</a><a href="AppParams.html#TCParNSOutDt"><span class="math inline">\(dT_{ns}\)</span></a></p>
 </blockquote>
 <blockquote>
 <p><a href="AppCommands.html#TCLatOutDt">Catch Output Interval Lateral ==</a><a href="AppParams.html#TCParLatOutDt"><span class="math inline">\(dT_{lat}\)</span></a></p>
 </blockquote>
-<p>Set the frequency at which TUFLOW CATCH pauses to write out TUFLOW FV boundary condition files, in units of days (simulation time). Setting a value of 1 means that TUFLOW CATCH will hold all boundary information in memory for a day of simulation time, and then update TUFLOW FV boundary files with this held memory on a daily basis. For example, if outputs were set to be hourly via hourly via either of the above interval commands, then 24 lines would be added to each boundary file at time of writing:</p>
+<p>Set the frequency at which TUFLOW CATCH pauses to write out TUFLOW FV boundary condition files, in units of days (simulation time, required even if TUFLOW FV not used). Setting a value of 1 means that TUFLOW CATCH will hold all boundary information in memory for a day of simulation time, and then update TUFLOW FV boundary files (and summed flow and mass timeseries with this held memory on a daily basis. For example, if outputs were set to be hourly via hourly via either of the above interval commands, then 24 lines would be added to each boundary file at time of writing:</p>
 <blockquote>
 <p><a href="AppCommands.html#TCCSVwrite">CSV Write Frequency Day ==</a><a href="AppParams.html#TCParCSVwrite"><span class="math inline">\(dT_{csv}\)</span></a></p>
 </blockquote>
@@ -459,12 +464,21 @@ CSV Write Frequency Day == 1
 </div>
 <div id="SCTCCHPC-3" class="section level3 hasAnchor" number="4.5.2">
 <h3><span class="header-section-number">4.5.2</span> Catchment hydraulic model (TUFLOW HPC) commands<a href="SimulationConstruction-1.html#SCTCCHPC-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>This block of the TUFLOW CATCH control file contains commands that construct a TUFLOW HPC simulation. These commands are almost entirely those that would be used in setting up a standalone TUFLOW HPC control file (*.tcf), with a small number of additional commands that relate to TUFLOW CATCH. A number of commands issued in the Global commands section of the *.tcc can be overwritten here if needed. These are:</p>
+<p>This block of the TUFLOW CATCH control file contains commands that construct a TUFLOW HPC simulation. These commands are almost entirely those that would be used in setting up a standalone TUFLOW HPC control file (*.tcf), with a small number of additional commands that relate to TUFLOW CATCH.</p>
+<p>A number of commands issued in the Global commands section of the *.tcc can be overwritten here if needed. These are:</p>
 <blockquote>
-<p><a href="AppCommands.html#TCHardware">Hardware ==</a> <br></p>
+<p><a href="introduction.html#TCHardware">Hardware ==</a> <br></p>
 </blockquote>
 <blockquote>
-<p><a href="AppCommands.html#TCGISFmt">GIS Format ==</a></p>
+<p><a href="introduction.html#TCGISFmt">GIS Format ==</a></p>
+</blockquote>
+<p>If GIS Format is overwritten, then a subsequent new projection file is most likely required to be specified</p>
+<blockquote>
+<p><a href="introduction.html#TCSHPProj">SHP Projection ==</a></p>
+</blockquote>
+<p>If GPKG is specified as the GIS format then the projection must also be set as follows</p>
+<blockquote>
+<p><a href="AppCommands.html#TCGPKGProj">GPKG Projection ==</a></p>
 </blockquote>
 <p>The catchment hydraulic model definition must be declared as a block that encloses all TUFLOW CATCH and TUFLOW HPC commands. This is different to the global commands section at the top of the TUFLOW CATCH control file, which does not need this encompassing structure.
 Set the beginning of the block, with command arguments as either HPC or none, and the end of the block (with no command arguments):</p>
@@ -477,8 +491,29 @@ Set the beginning of the block, with command arguments as either HPC or none, an
 <blockquote>
 <p><a href="AppCommands.html#TCCHME">End Catchment Hydraulic Model</a></p>
 </blockquote>
-<p>If the <a href="AppCommands.html#TCCHMS">Catchment Hydraulic Model</a> command is set to none, then catchment simulation is not executed, and TUFLOW FV will read blank (interim) boundary condition files prepared by TUFLOW CATCH. This approach might be adopted for the initial stages of a TUFLOW FV model build, or dry period tidal / thermal stratification calibration of a receiving water, for example. The TUFLOW CATCH commands contained within this Catchment Hydraulic Model block are described following, and all are mandatory unless noted otherwise.</p>
-<p>Set the directory from which TUFLOW CATCH controls TUFLOW HPC. Unless there is a need to the contrary, this should be set as a relative path to the TUFLOWdirectory set up by the TUFLOW CATCH QGIS plugin, i.e. ..\..\TUFLOW\runs. Setting this to any other directory is not recommended:</p>
+<p>If the <a href="AppCommands.html#TCCHMS">Catchment Hydraulic Model</a> command is set to none, then catchment simulation is not executed, and TUFLOW FV will either:</p>
+<ul>
+<li>Read blank (interim) boundary condition files prepared by TUFLOW CATCH. This approach might be adopted for the initial stages of a TUFLOW FV model build, or dry period tidal / thermal stratification calibration of a receiving water, for example, or</li>
+<li>Read a suite of TUFLOW FV boundary condition files previously created by TUFLOW HPC, under TUFLOW CATCH running in <strong>Hydrology</strong> or <strong>Integrated</strong> configurations</li>
+</ul>
+<p>The second approach above might be adopted when an initial <strong>Hydrology</strong> or <strong>Integrated</strong> simulation has been executed and a first pass corresponding suite of TUFLOW FV boundary condition files (that are not final, but at least sufficient for use in parallel preliminary TUFLOW FV calibration processes) has been produced. In this instance if:</p>
+<ul>
+<li>TUFLOW CATCH run Model_003.tcc (for example) produced initial TUFLOW FV boundary files</li>
+<li>The corresponding ..\TUFLOWCatch\bc_dbase\Model_003_catchment_hydraulic.fvcatchbc file could be copied as ..\TUFLOWCatch\bc_dbase\Model_004_catchment_hydraulic.fvcatchbc and</li>
+<li>Called automatically in Model_004.tcc by a TUFLOW CATCH simulation that has <a href="AppCommands.html#TCCHMS">Catchment Hydraulic Model ==</a> none</li>
+</ul>
+<p>This supports TUFLOW FV calibration tasks being executed, without relying on TUFLOW HPC. In order to avoid TUFLOW CATCH overwriting Model_003_catchment_hydraulic.fvcatchbc (which it would normally do if <a href="AppCommands.html#TCCHMS">Catchment Hydraulic Model ==</a> none), the following command is required in the Receiving Model block of Model_004.tcc (the default is OFF)</p>
+<blockquote>
+<p><a href="AppCommands.html#TCRMPCI">Preserve Catchment Inflows ==</a> ON</p>
+</blockquote>
+<p>This approach allows the TUFLOW HPC and TUFLOW modellers to progress independently for a time, gradually progressing their respectively calibrations without:</p>
+<ul>
+<li>Relying on each other to produce boundaries, and</li>
+<li>The need to continually rerun TUFLOW HPC to re-produce (identical) TUFLOW FV boundaries</li>
+</ul>
+<p>This style of collaborative modelling is at the heart of TUFLOW CATCH’s architectural design intent and is a key use case.</p>
+<p>The TUFLOW CATCH commands contained within this Catchment Hydraulic Model block are described following, and all are mandatory unless noted otherwise.</p>
+<p>Set the directory from which TUFLOW CATCH controls TUFLOW HPC. Unless there is a need to the contrary, this should be set as a relative path to the TUFLOW\runs directory set up by the TUFLOW CATCH QGIS plugin, i.e. ..\..\TUFLOW\runs. Setting this to any other directory is not recommended:</p>
 <blockquote>
 <p><a href="AppCommands.html#TCRunDir">Runs Directory ==</a></p>
 </blockquote>
@@ -486,11 +521,11 @@ Set the beginning of the block, with command arguments as either HPC or none, an
 <blockquote>
 <p><a href="AppCommands.html#TCHPCEXE">EXE ==</a></p>
 </blockquote>
-<p>Set the time format for output results. Given that the intention of TUFLOW CATCH is that it support addressing of longer term environmental investigations (i.e. not short term detailed ‘traditional’ flood studies), results written in hours format can be difficult to interpret in terms of seasonality, for example. As such, TUFLOW HPC can be instructed to write results in the date format adopted by TUFLOW FV. Doing so is strongly recommended, especially if TUFLOW FV is using the ISODATE format rather than hours:</p>
+<p>Set the time format for output results. Given that the intention of TUFLOW CATCH is that it support longer term environmental investigations (i.e. not short term detailed ‘traditional’ flood studies), results written in hours format can be difficult to interpret in terms of seasonality, for example. As such, TUFLOW HPC can be instructed to write results in the date format adopted by TUFLOW FV. Doing so is strongly recommended, especially if TUFLOW FV is using the ISODATE format rather than hours:</p>
 <blockquote>
 <p><a href="AppCommands.html#TCHPCTF">Time Format ==</a> TUFLOWFV</p>
 </blockquote>
-<p>Set the relationship between hours and dates. TUFLOW HPC reads boundary condition files and executes its internal computations using an hours (rather than date) timestamp, although this is being upgraded in the mid term. In order to coordinate simulation with TUFLOW FV, and to output results in date format, TUFLOW CATCH requires specification of the date that corresponds to zero hours in TUFLOW HPC boundary (and other) files. This command specifies that date at which boundary and other files refer to zero hours. Note the date time format expected, and that seconds is not a required field:</p>
+<p>Set the relationship between hours and dates. TUFLOW HPC reads boundary condition files and executes its internal computations using an hours (rather than date) timestamp, although this is being upgraded in the mid term. In order to coordinate simulation with TUFLOW FV, and to output results in date format, TUFLOW CATCH requires specification of the date that corresponds to zero hours in TUFLOW HPC boundary (and other) files. This command specifies that date at which boundary and other files refer to zero hours. Note the date time format expected, and that the seconds field is excluded:</p>
 <blockquote>
 <p><a href="AppCommands.html#TCHPCZDate">Zero Date ==</a> &lt;dd/mm/yyyy hh:mm&gt;</p>
 </blockquote>
@@ -507,9 +542,8 @@ Set the beginning of the block, with command arguments as either HPC or none, an
 </blockquote>
 <p>AND</p>
 <ul>
-<li>A single polygon (either as a standalone file or as part of a previously specified geopackage) that covers the downstream receiving waters must be specified within the Catchment Hydraulic Model block. This polygon does not need any specific attributes. The TUFLOW HPC cells within this polygon will be removed from the TUFLOW HPC simulation. TUFLOW CATCH will not write any TUFLOW FV boundary condition blocks, but will write:
+<li>A single polygon (either as a standalone file or as part of a previously specified geopackage) that covers the downstream receiving waters must be specified within the Catchment Hydraulic Model block. This polygon does not need any specific attributes, and can be imported from the empties created by the TUFLOW CATCH QGIS plugin, as an rp polygon type. The TUFLOW HPC cells within this polygon will be removed from the TUFLOW HPC simulation. TUFLOW CATCH will not write any TUFLOW FV boundary condition blocks, but will write:
 <ul>
-<li>A single flow and concentration timeseries file (that would have been read by a TUFLOW FV boundary condition block if TUFLOW FV was deployed)</li>
 <li>Summary timeseries files that describe total water and pollutant mass fluxes entering the defined polygon. These outputs can be useful for scenario to scenario comparisons, for example</li>
 </ul></li>
 </ul>
@@ -523,7 +557,8 @@ Set the beginning of the block, with command arguments as either HPC or none, an
 <blockquote>
 <p><a href="AppCommands.html#TCPolls">Pollutant ==</a> &lt;name1,name2,name3…&gt;</p>
 </blockquote>
-<p>TUFLOW CATCH will error if operating in the pollutant export configuration and either of the above commands are missing. Once specified, TUFLOW CATCH will check to ensure that all pollutants have been specified (no more, no less) across material blocks (see Section <a href="SimulationConstruction-1.html#SCTCCPollExpPE-4">4.5.3.3</a>), and error if not.</p>
+<p>TUFLOW CATCH will error if operating in the pollutant export configuration and either of the above commands are missing</p>
+<p>Once specified, TUFLOW CATCH will check to ensure that all pollutants have been specified (no more, no less) across material blocks (see Section <a href="SimulationConstruction-1.html#SCTCCPollExpPE-4">4.5.3.3</a>), and error if not.</p>
 <p>Following the issuing of these specific TUFLOW CATCH commands, a TUFLOW HPC model can be constructed in the same manner as a standalone model. In this regard:</p>
 <ul>
 <li>All TUFLOW HPC commands are recognised by TUFLOW CATCH and can be issued unchanged from the usage described in TUFLOW HPC’s manual and/or relevant release notes</li>
@@ -545,13 +580,6 @@ Set the beginning of the block, with command arguments as either HPC or none, an
 <blockquote>
 <p>Event == wet_year</p>
 </blockquote>
-<ul>
-<li>Some commands issued in the Global Commands section of the TUFLOW CATCH control file can be overwritten in the Catchment Hydraulic Model block to tailor the TUFLOW HPC simulation, including:</li>
-</ul>
-<blockquote>
-<p>GIS Format == GPKG <font color="green">! Use geopackage format for TUFLOW HPC but not TUFLOW FV </font><br>
-GPKG Projection == ..\..\TUFLOW\model\gis\Projection.gpkg <font color="green">! Use a projection geopackage within the TUFLOW folder structure </font></p>
-</blockquote>
 <p>Current limitations of the TUFLOW CATCH with regard to setting up TUFLOW HPC simulations include:</p>
 <ul>
 <li>Whilst events and scenarios can be manually defined and referenced (see above), dynamic assignment of same (using tilda notation in filenames etc.) is not yet supported. Each event or scenario will need a new TUFLOW CATCH control file</li>
@@ -570,6 +598,11 @@ Catchment Hydraulic Model == HPC
     ! GIS
     GIS Format == GPKG
     GPKG Projection == ..\..\TUFLOW\model\gis\Projection.gpkg
+    
+    ! If operating in Pollutant export configuration
+    ! Downstream polygon
+    Receiving polygon == ..\..\TUFLOW\model\gis\2d_rp_Demonstration_001_R.shp
+    Pollutant == salinity, temperature, Tailings, PFAS
 
     ! Solver
     HPC DP Check == OFF
@@ -599,7 +632,7 @@ Catchment Hydraulic Model == HPC
     
     ! Ouput map configuration 
     Map Output Format == XMDF TIF 
-    Map Output Data Types == catch 
+    Map Output Data Types == catch h d V 
     Map Output Interval == 300    
     TIF Map Output Interval == 0       
     TIF Map Output Data Types == h d dt   
@@ -615,7 +648,7 @@ End Catchment Hydraulic Model</code></pre>
 <h3><span class="header-section-number">4.5.3</span> Pollutant export model commands<a href="SimulationConstruction-1.html#SCTCCPollExp-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This block of the TUFLOW CATCH control file contains commands that control pollutant export (and other constituent) simulation.</p>
 <p>The pollutant model definition must be declared as a block that encloses all commands. This is analogous to the declaration of a catchment hydraulic model.</p>
-<p>Set the beginning of the block, with command arguments as either mass accumulation release or none, and the end of the block (with no command arguments). The key phrase <em>mass accumulation release</em> activates all available pollutant export submodels. The keyword none turns off pollutant export simulation and would be used with the Hydrology configuration (see Section <a href="Overview-1.html#Configs-2">1.3</a>) for example:</p>
+<p>Set the beginning of the block, with command arguments as either mass accumulation release or none, and the end of the block (with no command arguments). The key phrase <em>mass accumulation release</em> activates all available pollutant export submodels. The keyword none turns off pollutant export simulation and would be used with the <strong>Hydrology</strong> configuration (see Section <a href="Overview-1.html#Configs-2">1.3</a>) or if only TUFLOW FV calibration is being undertaken, for example:</p>
 <blockquote>
 <p><a href="AppCommands.html#TCCPEMS">Pollutant Export Model ==</a></p>
 </blockquote>
@@ -625,13 +658,13 @@ End Catchment Hydraulic Model</code></pre>
 <blockquote>
 <p><a href="AppCommands.html#TCCPEME">End Pollutant Export Model</a></p>
 </blockquote>
-<p>If pollutant export is simulated, then all pollutants (and constituents) declared in the catchment hydraulic model (TUFLOW HPC) or receiving model (TUFLOW FV, and including all called modules such as Sediment Transport and Water Quality) must be accounted for with the correct name in the pollutant export block. Each must be assigned either:</p>
+<p>If pollutant export is simulated, then all pollutants (and constituents) declared in the catchment hydraulic model (TUFLOW HPC via Pollutant ==) or receiving model (TUFLOW FV, and including all called modules such as Sediment Transport and Water Quality) must be accounted for with the correct name in the pollutant export block. Each must be assigned either:</p>
 <ul>
 <li>A constant value/concentration for application to receiving model boundary condition, or</li>
 <li>A timeseries value/concentration for application to receiving model boundary conditions, or</li>
-<li>A pollutant export model, with supporting parameters, for TUFLOW CATCH pollutant export simulation</li>
+<li>A pollutant export model, with supporting parameters, for TUFLOW CATCH pollutant export simulation for every material</li>
 </ul>
-<p>AS such, not all the Pollutant Export Model block TUFLOW CATCH commands are mandatory, but, in combination, need to ensure that all pollutants are specified across the entire TUFLOW HPC domain.</p>
+<p>As such, not all the Pollutant Export Model block TUFLOW CATCH commands are mandatory, but, in combination, need to ensure that all pollutants are specified across the entire TUFLOW HPC domain.</p>
 <div id="SCTCCPollExpConst-4" class="section level4 hasAnchor" number="4.5.3.1">
 <h4><span class="header-section-number">4.5.3.1</span> Constant<a href="SimulationConstruction-1.html#SCTCCPollExpConst-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Constant value/concentrations can be assigned when dynamic simulation is not required, such as for salinity or dissolved oxygen, for example. This specification is applied globally.</p>
@@ -683,12 +716,12 @@ temperature_davg,temperature_2021.csv,TUFLOW_Time,Airtemp,,,,,</code></pre>
 <p><a href="AppCommands.html#TCCPEMatE">End Material</a></p>
 </blockquote>
 <p>Once all material specifications have been processed, TUFLOW CATCH will check that all pollutants have had all export properties specified for the entire TUFLOW HPC domain (i.e. every computational grid cell). This includes accounting for constant and timeseries specifications (which are global and do not need to be applied within material blocks). Using the ‘all’ command argument in the first material block specified and providing information for every pollutant required within that block (and then progressively spatially refining) ensures this will be true. Once the initial uniform material specification has been made, not every pollutant needs to be specified in every subsequent material block - only alterations to the uniform conditions need be made.</p>
-<p>Each line within a material block contains a suite of arguments (in the form command==argument, command==argument… etc.), the first of which is always a keyword flagging the model to be used. Although there are some commonalities in subsequent inline commands, these differ according to the pollutant export model specified, as follows. Different pollutant export models can be specified for different pollutants within the same material block if required.</p>
+<p>Each line within a material block contains a suite of arguments (in the form command==argument, command==argument… etc.), the first of which is always a keyword flagging the model to be used. Although there are some commonalities in subsequent inline commands, these differ according to the pollutant export model specified, as follows. Different pollutant export models can be specified for different pollutants within the same material block if required. The same pollutant export model should be applied to a given pollutant across all materials, albeit with different parameters.</p>
 <div id="SCTCCPollExpAW-5" class="section level5 hasAnchor" number="4.5.3.3.1">
 <h5><span class="header-section-number">4.5.3.3.1</span> Accumulation and washoff<a href="SimulationConstruction-1.html#SCTCCPollExpAW-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Set the model and parameters for the pollutant accumulation and washoff model (see Section <a href="ProcessDescriptions-1.html#ProcessDescriptionsAccWO-3">3.2.3.1</a>). All parameters are mandatory:</p>
 <blockquote>
-<p>&lt;name&gt;, <a href="AppCommands.html#TCMethod">method==</a><a href="ProcessDescriptions-1.html#ProcessDescriptionsAccWO-3">washoff1</a>, <a href="AppCommands.html#TCAccR">rate==</a><a href="AppParams.html#TCParAccR"><span class="math inline">\(R_a\)</span></a>, <a href="AppCommands.html#TCLimit">limit==</a><a href="AppParams.html#TCParLacc"><span class="math inline">\(L_{acc}\)</span></a>, <a href="AppCommands.html#TCTcon">timeConstant==</a><a href="AppParams.html#TCParTcon"><span class="math inline">\(T_c\)</span></a>, <a href="AppCommands.html#TCRnThrshd">rainThreshold==</a><a href="AppParams.html#TCParRnThrshd"><span class="math inline">\(R_r\)</span></a>, <a href="AppCommands.html#TCdThresh">depthThreshold==</a><a href="AppParams.html#TCPardThresh"><span class="math inline">\(d\)</span></a>, <a href="AppCommands.html#TCDeposVel">depositionVelocity==</a><a href="AppParams.html#TCParDeposVel">w_s</a></p>
+<p>&lt;name&gt;, <a href="introduction.html#TCMethod">method==</a><a href="ProcessDescriptions-1.html#ProcessDescriptionsAccWO-3">washoff1</a>, <a href="introduction.html#TCAccR">rate==</a><a href="AppParams.html#TCParAccR"><span class="math inline">\(R_a\)</span></a>, <a href="introduction.html#TCLimit">limit==</a><a href="AppParams.html#TCParLacc"><span class="math inline">\(L_{acc}\)</span></a>, <a href="introduction.html#TCTcon">timeConstant==</a><a href="AppParams.html#TCParTcon"><span class="math inline">\(T_c\)</span></a>, <a href="introduction.html#TCRnThrshd">rainThreshold==</a><a href="AppParams.html#TCParRnThrshd"><span class="math inline">\(R_r\)</span></a>, <a href="introduction.html#TCdThresh">depthThreshold==</a><a href="AppParams.html#TCPardThresh"><span class="math inline">\(d\)</span></a>, <a href="introduction.html#TCDeposVel">depositionVelocity==</a><a href="AppParams.html#TCParDeposVel">w_s</a></p>
 </blockquote>
 <p>The &lt;name&gt; field must correspond to a name designated by TUFLOW FV. The parameters are:</p>
 <ul>
@@ -698,15 +731,16 @@ temperature_davg,temperature_2021.csv,TUFLOW_Time,Airtemp,,,,,</code></pre>
 <li>timeConstant: a time parameter controlling the pollutant dry store release rate, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-wo">(3.1)</a> (s)</li>
 <li>rainThreshold: the minimum rain rate required to activate release from the dry store (mm/hr)</li>
 <li>depthThreshold: the minimum water depth in a cell required to activate release from the dry store (m)</li>
+<li>depositionVelocity: the velocity at which pollutant in the wet store settles. Used to calculate the mass of pollutant transferred back from the wet to dry store in a model timestep, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-wo-sett">(3.2)</a> (m/day)</li>
 </ul>
 <p>An example for dissolved organic carbon might be:</p>
-<pre><code>WQ_DOC_MG_L, method==washoff1, rate==21.446, limit==21.446, timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020</code></pre>
+<pre><code>WQ_DOC_MG_L, method==washoff1, rate==21.446, limit==21.446, timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020, depositionVelocity==0.0</code></pre>
 </div>
 <div id="SCTCCPollExpSS-5" class="section level5 hasAnchor" number="4.5.3.3.2">
 <h5><span class="header-section-number">4.5.3.3.2</span> Shear Stress<a href="SimulationConstruction-1.html#SCTCCPollExpSS-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Set the model and parameters for the shear stress model (see Section <a href="ProcessDescriptions-1.html#ProcessDescriptionsSS-3">3.2.3.2</a>). All parameters are mandatory:</p>
 <blockquote>
-<p>&lt;name&gt;, <a href="AppCommands.html#TCMethod">method==</a><a href="ProcessDescriptions-1.html#ProcessDescriptionsSS-3">shear1</a>, rate==&lt;not used&gt;, <a href="AppCommands.html#TCLimit">limit==</a><a href="AppParams.html#TCParLshr"><span class="math inline">\(L_{shr}\)</span></a>, <a href="AppCommands.html#TCDeposThresh">depositionStress==</a><a href="AppParams.html#TCParDeposThresh"><span class="math inline">\(\tau_{cd}\)</span></a>, <a href="AppCommands.html#TCErosThresh">erosionStress==</a><a href="AppParams.html#TCParErosThresh"><span class="math inline">\(\tau_{ce}\)</span></a>, <a href="AppCommands.html#TCdThresh">depthThreshold==</a><a href="AppParams.html#TCPardThresh"><span class="math inline">\(d\)</span></a>, <a href="AppCommands.html#TCDeposVel">depositionVelocity==</a><a href="AppParams.html#TCParDeposVel">w_s</a>, <a href="AppCommands.html#TCEr">erosionRate==</a><a href="AppParams.html#TCParEr"><span class="math inline">\(E_r\)</span></a></p>
+<p>&lt;name&gt;, <a href="introduction.html#TCMethod">method==</a><a href="ProcessDescriptions-1.html#ProcessDescriptionsSS-3">shear1</a>, rate==&lt;not used&gt;, <a href="introduction.html#TCLimit">limit==</a><a href="AppParams.html#TCParLshr"><span class="math inline">\(L_{shr}\)</span></a>, <a href="introduction.html#TCDeposThresh">depositionStress==</a><a href="AppParams.html#TCParDeposThresh"><span class="math inline">\(\tau_{cd}\)</span></a>, <a href="introduction.html#TCErosThresh">erosionStress==</a><a href="AppParams.html#TCParErosThresh"><span class="math inline">\(\tau_{ce}\)</span></a>, <a href="introduction.html#TCdThresh">depthThreshold==</a><a href="AppParams.html#TCPardThresh"><span class="math inline">\(d\)</span></a>, <a href="introduction.html#TCDeposVel">depositionVelocity==</a><a href="AppParams.html#TCParDeposVel">w_s</a>, <a href="introduction.html#TCEr">erosionRate==</a><a href="AppParams.html#TCParEr"><span class="math inline">\(E_r\)</span></a></p>
 </blockquote>
 <p>The &lt;name&gt; field must correspond to a name designated by TUFLOW FV. The parameters are:</p>
 <ul>
@@ -716,7 +750,7 @@ temperature_davg,temperature_2021.csv,TUFLOW_Time,Airtemp,,,,,</code></pre>
 <li>depositionStress: the maximum shear stress for which deposition can occur. Shear stresses below this limit will allow for deposition to occur, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-krone-dp">(3.4)</a>. Should always be less than the specified erosionStress (N/m<span class="math inline">\(^2\)</span>)</li>
 <li>erosionStress: the minimum shear stress for which erosion can occur. Shear stresses above this limit will allow for erosion to occur, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-mehta-er">(3.3)</a>. Should always be greater than the specified depositionStress (N/m<span class="math inline">\(^2\)</span>)</li>
 <li>depthThreshold: the minimum water depth in a cell required to activate release from the dry store (m)</li>
-<li>depositionVelocity: the velocity at which pollutant in the wet store settles. Used to calculate the mass of pollutant transferred back from the wet to dry store in a model timestep, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-krone-dp">(3.4)</a> (m/s)</li>
+<li>depositionVelocity: the velocity at which pollutant in the wet store settles. Used to calculate the mass of pollutant transferred back from the wet to dry store in a model timestep, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-krone-dp">(3.4)</a> (m/day)</li>
 <li>erosionRate: The maximum rate of erosion of pollutant from the dry store, if erosion conditions are met, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-mehta-er">(3.3)</a> (N/m<span class="math inline">\(^2\)</span>)</li>
 </ul>
 <p>An example for suspended sediment might be:</p>
@@ -783,9 +817,16 @@ End Catchment Pollutant Export Model
 </div>
 <div id="SCTCCFV-3" class="section level3 hasAnchor" number="4.5.4">
 <h3><span class="header-section-number">4.5.4</span> Receiving model (TUFLOW FV) commands<a href="SimulationConstruction-1.html#SCTCCFV-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>This block of the TUFLOW CATCH control file contains commands that construct a TUFLOW FV simulation. These commands are almost entirely those that would be used in setting up a standalone TUFLOW FV control file (*.fvc), with a small number of additional commands that relate to TUFLOW CATCH. A small number of commands issued in the Global commands section of the *.tcc can be overwritten here if needed (for example if GPKG had been specified in the Global commands for the GIS format). These are:
-&gt;<a href="AppCommands.html#TCHardware">Hardware ==</a>
-&gt;<a href="AppCommands.html#TCGISFmt">GIS Format ==</a></p>
+<p>This block of the TUFLOW CATCH control file contains commands that construct a TUFLOW FV simulation. These commands are almost entirely those that would be used in setting up a standalone TUFLOW FV control file (*.fvc), with a small number of additional commands that relate to TUFLOW CATCH.</p>
+<p>A small number of commands issued in the Global commands section of the *.tcc can be overwritten here if needed (for example if GPKG had been specified in the Global commands for the GIS format). These are:</p>
+<blockquote>
+<p><a href="introduction.html#TCHardware">Hardware ==</a>
+<a href="introduction.html#TCGISFmt">GIS Format ==</a></p>
+</blockquote>
+<p>If GIS Format is overwritten (as SHP), then a subsequent new projection file is most likely required to be specified</p>
+<blockquote>
+<p><a href="introduction.html#TCSHPProj">SHP Projection ==</a></p>
+</blockquote>
 <p>The receiving model definition must be declared as a block that encloses all TUFLOW CATCH and TUFLOW FV commands.</p>
 <p>Set the beginning of the block, with command arguments as either TUFLOWFV or none, and the end of the block (with no command arguments):</p>
 <blockquote>
@@ -797,8 +838,8 @@ End Catchment Pollutant Export Model
 <blockquote>
 <p><a href="AppCommands.html#TCRME">End Receiving Model</a></p>
 </blockquote>
-<p>If the <a href="#TCRMS">Receiving Model</a> command is set to none, then receiving simulation is not executed. This approach might be adopted for the initial stages of a TUFLOW FV model build, for example. The TUFLOW CATCH commands contained within this Receiving Model block are described following, and all are mandatory.</p>
-<p>Set the directory from which TUFLOW CATCH controls TUFLOW FV. Unless there is a need to the contrary, this should be set as a relative path to the TUFLOWFVdirectory set up by the TUFLOW CATCH QGIS plugin, i.e. ..\..\TUFLOWFV\runs. Setting this to any other directory is not recommended:</p>
+<p>If the <a href="#TCRMS">Receiving Model</a> command is set to none, then receiving simulation is not executed. This approach might be adopted for the initial stages of a TUFLOW HPC model build, for example. The TUFLOW CATCH commands contained within this Receiving Model block are described following, and all are mandatory unless noted.</p>
+<p>Set the directory from which TUFLOW CATCH controls TUFLOW FV. Unless there is a need to the contrary, this should be set as a relative path to the TUFLOWFV\runs directory set up by the TUFLOW CATCH QGIS plugin, i.e. ..\..\TUFLOWFV\runs. Setting this to any other directory is not recommended:</p>
 <blockquote>
 <p><a href="#TCFVRunDir">Runs Directory ==</a></p>
 </blockquote>
@@ -809,6 +850,15 @@ End Catchment Pollutant Export Model
 <p>All TUFLOW FV boundary condition files generated by TUFLOW CATCH are QC type (cell inflow, ‘lateral’, and do not transfer momentum to TUFLOW FV) unless specified otherwise as nodestring (Q type, and do transfer momentum to TUFLOW FV) inflows. All such nodestring inflows need to be drawn as line type objects in a single GIS file and this file declared in the receiving model block as:</p>
 <blockquote>
 <p><a href="#TCFVnstring">Catchment BC Nodestring ==</a> &lt;path to GIS nodestring file&gt;</p>
+</blockquote>
+<p>If TUFLOW FV is being executed alone using previous inflow boundaries created by TUFLOW HPC, then the following command will ensure that those previous boundaries are not overwritten. The name of the .fvcatchbc file produced by a previous TUFLOW HPC simulation needs to be renamed to match the name of the subsequent TUFLOW CATCH simulation calling only TUFLOW FV. In this instance if:</p>
+<ul>
+<li>TUFLOW CATCH run Model_003.tcc (for example) produced initial TUFLOW FV boundary files</li>
+<li>The corresponding ..\TUFLOWCatch\bc_dbase\Model_003_catchment_hydraulic.fvcatchbc file could be copied as ..\TUFLOWCatch\bc_dbase\Model_004_catchment_hydraulic.fvcatchbc and</li>
+<li>Called automatically in Model_004.tcc by a TUFLOW CATCH simulation that has <a href="AppCommands.html#TCCHMS">Catchment Hydraulic Model ==</a> none</li>
+</ul>
+<blockquote>
+<p><a href="AppCommands.html#TCRMPCI">Preserve Catchment Inflows ==</a> ON</p>
 </blockquote>
 <p>Following the issuing of these specific TUFLOW CATCH commands, a TUFLOW FV model can be constructed in the same manner as a standalone model. In this regard:</p>
 <ul>
@@ -822,8 +872,391 @@ End Catchment Pollutant Export Model
 <li>These subsidiary control files can then in turn use path references are per standalone TUFLOW FV model construction (and point to locations within the same TUFLOWFV directory structure)</li>
 <li>Include command calls are supported, as relative references to the TUFLOWFV folder should be used</li>
 </ul>
+<p>An example block of these Receiving Model block commands within TUFLOW CATCH (with clarifying section headers as comments) is:</p>
+<pre><code>! _________________________________________________________________
+! RECEIVING HYDRODYNAMICS AND WQ
+
+! Start receiving model block
+Receiving Model == tuflowfv ! none
+    
+    ! Base runs directory (to write fvc to)
+    Runs Directory == ..\..\TUFLOWFV\runs
+    EXE == C:\EXE\TUFLOWFV\2023.1.1\TUFLOWFV.exe
+    Preserve catchment inflows == ON
+
+    
+    ! General parameters
+      Bottom Drag Model == Manning
+      Include Salinity == 1,1
+      Include Temperature == 1,1
+      Include Sediment == 1,0
+      Include Heat == 1
+      Spatial Order == 1,1
+    
+    ! Timestep commands
+        CFL == 0.95
+        Timestep Limits == 1.0,10.0
+        Display dt == 900
+    
+    ! Model parameters
+      Cell Wet/Dry Depths == 5.0e-03, 5.0e-02
+      Stability Limits == 20.0, 10.0
+      CFL == 0.95
+      Momentum mixing model == Smagorinsky
+      Global horizontal eddy viscosity == 0.2
+      Global horizontal eddy viscosity limits == 0.05, 99999.
+      Scalar mixing model == Smagorinsky
+      Global horizontal scalar diffusivity == 0.2
+      Global horizontal scalar diffusivity limits == 0.05, 99999.
+      Vertical mixing model == External
+      Turbulence update dt == 1800
+      Global vertical eddy viscosity limits == 1.0e-4, 1.0
+      Global vertical scalar diffusivity limits == 0., 1.0
+    
+    ! Water quality
+      Water quality model == tuflow
+      Water quality control file == .\Demonstration_005.fvwq
+      Water quality model directory == ..\..\TUFLOWFV\wqm\
+      Cell water quality depth == 0.04
+    
+    ! Sediment transport
+      Sediment control file == ..\..\TUFLOWFV\stm\Demonstration_005.fvsed
+    
+    ! 2D Geometry
+        Geometry 2D == ..\..\TUFLOWFV\model\geo\Demonstration_005.2dm
+      Read Grid Zpts == ..\..\TUFLOWFV\model\geo\DEM.asc
+      Read GIS Zline == ..\..\TUFLOWFV\model\gis\2d_zln_Demonstration_005_Outlet_R.shp
+    
+    ! 3D Geometry
+        Vertical Mesh Type == z
+      Layer Faces == ..\..\TUFLOWFV\model\geo\Demonstration_005_layers.csv
+      Sigma layers == 6
+      Min Bottom Layer Thickness == 0.05
+      Cell 3D Depth == 0.05
+    
+    ! Materials
+      Global Bottom Roughness == 0.03
+      Read GIS Mat == ..\..\TUFLOWFV\model\gis\2d_mat_Demonstration_005_R.shp
+      ! Main lake
+      material == 1
+        bottom roughness == 0.012 
+      end material
+      ! Inflows
+      material == 2
+        bottom roughness == 0.030 
+      end material
+      ! Exit
+      material == 3
+        bottom roughness == 0.012 
+      end material
+    
+    ! Initial conditions
+      Initial Water Level == 4.0
+      Initial Salinity == 0.0
+      Initial Temperature == 17.0
+      Initial Sediment concentration == 1.0
+      Initial wq concentration == 7.5,1.0,0.00005,0.00005,0.0031,0.0,0.1,0.0,0.056,0.0,0.0000031,0.0,5.0
+    
+      ! Large sewage plant
+      Read GIS SA == ..\..\TUFLOWFV\model\gis\2d_sa_Demonstration_005_R.shp
+      bc == QC_POLY, Sewage_large, ..\..\TUFLOWFV\bc_dbase\Demonstration_005_Sewage_large.csv
+        bc header == Date,Q,sal,temp,sed,DO,Si,Amm,Nit,FRP,FRP_ads,DOC,POC,DON,PON,DOP,POP,Phy
+        bc update dt == 3600.
+        vertical coordinate type == depth
+        vertical distribution file ==  ..\..\TUFLOWFV\bc_dbase\Demonstration_005_Sewage_vert.csv 
+      end bc
+        ! Small sewage plant
+      bc == QC_POLY, Sewage_small, ..\..\TUFLOWFV\bc_dbase\Demonstration_005_Sewage_small.csv
+        bc header == Date,Q,sal,temp,sed,DO,Si,Amm,Nit,FRP,FRP_ads,DOC,POC,DON,PON,DOP,POP,Phy
+        bc update dt == 3600.
+        vertical coordinate type == depth
+        vertical distribution file ==  ..\..\TUFLOWFV\bc_dbase\Demonstration_005_Sewage_vert.csv 
+      end bc
+        ! Offtake
+      bc == QC_POLY, Offtake, ..\..\TUFLOWFV\bc_dbase\Demonstration_005_Offtake.csv
+        bc header == Date,Q
+        bc update dt == 3600.
+        vertical coordinate type == height
+        vertical distribution file ==  ..\..\TUFLOWFV\bc_dbase\Demonstration_005_Offtake_vert.csv 
+        bc scale == -1.0
+      end bc
+      
+      ! Overflow weir
+      Read GIS nodestring == ..\..\TUFLOWFV\model\gis\2d_ns_Demonstration_005_Weir_L.shp
+        bc == QN, ovfl_weir, 0.001
+        end bc 
+     
+    ! Catchment nodestrings to be used for linkage
+        Catchment BC Nodestring == ..\..\TUFLOWFV\model\gis\2d_ns_Demonstration_005_Inflows_L.shp
+        
+    ! Meteorology
+      bc == W10, ..\..\TUFLOWFV\bc_dbase\met\Demonstration_005_Met_data.csv
+        bc header == Date, u10, v10
+        bc update dt == 3600.
+      end bc
+      bc == LW_RAD, ..\..\TUFLOWFV\bc_dbase\met\Demonstration_005_Met_data.csv
+        bc header == Date, lw
+        bc update dt == 3600.
+      end bc
+      bc == SW_RAD, ..\..\TUFLOWFV\bc_dbase\met\Demonstration_005_Met_data.csv
+        bc header == Date, sw
+        bc update dt == 3600.
+      end bc
+      bc == AIR_TEMP, ..\..\TUFLOWFV\bc_dbase\met\Demonstration_005_Met_data.csv
+        bc header == Date, at
+        bc update dt == 3600.
+      end bc
+      bc == REL_HUM, ..\..\TUFLOWFV\bc_dbase\met\Demonstration_005_Met_data.csv
+        bc header == Date, rh
+        bc update dt == 3600.
+      end bc
+      bc == PRECIP, ..\..\TUFLOWFV\bc_dbase\met\Demonstration_005_Met_data.csv
+        bc header == Date, precip
+        bc update dt == 3600.
+      end bc
+    
+    ! Outputs
+      output == netcdf
+        output parameters == h,v,d,sal,temp,sed_1
+        Output interval == 900.0
+        Suffix == HD
+      end output
+      
+      output == netcdf
+        output parameters == wq_all
+        output interval == 7200
+        suffix == WQ
+      end output
+
+    output == mass
+        output interval == 3600.
+    end output
+    
+    write restart dt == 24
+    restart overwrite == 1
+
+End Receiving Model</code></pre>
+</div>
+<div id="SCTCSum-3" class="section level3 hasAnchor" number="4.5.5">
+<h3><span class="header-section-number">4.5.5</span> Configuration summary<a href="SimulationConstruction-1.html#SCTCSum-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To summarise the above, the following presents the combinations of block level commands that will trigger the supported TUFLOW CATCH configurations. Only block level commands have been included, unless specific internal commands are relevant</p>
+<div id="SCTCSumSupCons-4" class="section level4 hasAnchor" number="4.5.5.1">
+<h4><span class="header-section-number">4.5.5.1</span> Supported configurations<a href="SimulationConstruction-1.html#SCTCSumSupCons-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="SCTCSumHyd-5" class="section level5 hasAnchor" number="4.5.5.1.1">
+<h5><span class="header-section-number">4.5.5.1.1</span> Hydrology<a href="SimulationConstruction-1.html#SCTCSumHyd-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>For simulation of water only:</p>
+<pre><code>!________________________________________________________
+! GLOBAL SETTINGS
+...
+
+!_________________________________________________________________
+! CATCHMENT HYDRAULICS
+Catchment Hydraulic Model == HPC
+  ...
+End Catchment Hydraulic Model
+
+! _________________________________________________________________
+! POLLUTANT EXPORT
+Catchment Pollutant Export Model == none
+  ...
+End Catchment Pollutant Export Model
+
+! _________________________________________________________________
+! RECEIVING MODEL
+Receiving Model == tuflowfv
+  ...
+End Receiving Model</code></pre>
+<p>If temperature and salinity (or either) are to be simulated:</p>
+<pre><code>!________________________________________________________
+! GLOBAL SETTINGS
+...
+
+!_________________________________________________________________
+! CATCHMENT HYDRAULICS
+Catchment Hydraulic Model == HPC
+  ...
+End Catchment Hydraulic Model
+
+! _________________________________________________________________
+! POLLUTANT EXPORT
+Catchment Pollutant Export Model == none
+
+  Constant salinity == 0.0
+  Time-series temperature == temperature
+
+End Catchment Pollutant Export Model
+
+! _________________________________________________________________
+! RECEIVING MODEL
+Receiving Model == tuflowfv
+  ...
+End Receiving Model</code></pre>
+</div>
+<div id="SCTCSumPE-5" class="section level5 hasAnchor" number="4.5.5.1.2">
+<h5><span class="header-section-number">4.5.5.1.2</span> Pollutant export<a href="SimulationConstruction-1.html#SCTCSumPE-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<pre><code>!________________________________________________________
+! GLOBAL SETTINGS
+...
+
+!_________________________________________________________________
+! CATCHMENT HYDRAULICS
+Catchment Hydraulic Model == HPC
+
+! Downstream polygon
+  Receiving polygon == ..\..\TUFLOW\model\gis\2d_rp_\&lt;name\&gt;_R.shp
+  Pollutant == \&lt;name&gt;,\&lt;name&gt;,\&lt;name&gt;...
+  ...
+End Catchment Hydraulic Model
+
+! _________________________________________________________________
+! POLLUTANT EXPORT
+Catchment Pollutant Export Model == mass accumulation release
+
+  \&lt;names must match pollutant == above\&gt;
+  ...
+End Catchment Pollutant Export Model
+
+! _________________________________________________________________
+! RECEIVING MODEL
+Receiving Model == none
+  ...
+End Receiving Model</code></pre>
+</div>
+<div id="SCTCSumInt-5" class="section level5 hasAnchor" number="4.5.5.1.3">
+<h5><span class="header-section-number">4.5.5.1.3</span> Integrated<a href="SimulationConstruction-1.html#SCTCSumInt-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<pre><code>!________________________________________________________
+! GLOBAL SETTINGS
+...
+
+!_________________________________________________________________
+! CATCHMENT HYDRAULICS
+Catchment Hydraulic Model == HPC
+  ...
+End Catchment Hydraulic Model
+
+! _________________________________________________________________
+! POLLUTANT EXPORT
+Catchment Pollutant Export Model == mass accumulation release
+  ...
+End Catchment Pollutant Export Model
+
+! _________________________________________________________________
+! RECEIVING MODEL
+Receiving Model == tuflowfv
+  ...
+End Receiving Model</code></pre>
+</div>
+</div>
+<div id="SCTCSumOthCons-4" class="section level4 hasAnchor" number="4.5.5.2">
+<h4><span class="header-section-number">4.5.5.2</span> Other configurations<a href="SimulationConstruction-1.html#SCTCSumOthCons-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="SCTCSumHPC-5" class="section level5 hasAnchor" number="4.5.5.2.1">
+<h5><span class="header-section-number">4.5.5.2.1</span> TUFLOW HPC calibration only<a href="SimulationConstruction-1.html#SCTCSumHPC-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<pre><code>!________________________________________________________
+! GLOBAL SETTINGS
+...
+
+!_________________________________________________________________
+! CATCHMENT HYDRAULICS
+Catchment Hydraulic Model == HPC
+  \&lt;may require a 2d_bc at downstream outlet to release water from domain\&gt;
+  ...
+End Catchment Hydraulic Model
+
+! _________________________________________________________________
+! POLLUTANT EXPORT
+Catchment Pollutant Export Model == none
+  ...
+End Catchment Pollutant Export Model
+
+! _________________________________________________________________
+! RECEIVING MODEL
+Receiving Model == none
+  ...
+End Receiving Model</code></pre>
+<p>Alternatively, a TUFLOW CATCH simulation in <strong>Pollutant export</strong> configuration could be set up, with only a constant and zero salinity set. Because this constant is not simulated in the TUFLOW HPC domain, doing so will not adversely affect TUFLOW HPC run times. It will, however, allow for specification of a receiving polygon to let water out of the TUFLOW HPC domain at a location well downstream of calibration comparison gauges.</p>
+<pre><code>!________________________________________________________
+! GLOBAL SETTINGS
+...
+
+!_________________________________________________________________
+! CATCHMENT HYDRAULICS
+Catchment Hydraulic Model == HPC
+  
+  ! Downstream polygon
+  Receiving polygon == ..\..\TUFLOW\model\gis\2d_rp_\&lt;name\&gt;_R.shp
+  Pollutant == salinity
+  ...
+End Catchment Hydraulic Model
+
+! _________________________________________________________________
+! POLLUTANT EXPORT
+Catchment Pollutant Export Model == mass accumulation release
+
+  constant salinity == 0.0
+
+End Catchment Pollutant Export Model
+
+! _________________________________________________________________
+! RECEIVING MODEL
+Receiving Model == none
+  ...
+End Receiving Model</code></pre>
+</div>
+<div id="SCTCSumFV-5" class="section level5 hasAnchor" number="4.5.5.2.2">
+<h5><span class="header-section-number">4.5.5.2.2</span> TUFLOW FV calibration only<a href="SimulationConstruction-1.html#SCTCSumFV-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<pre><code>!________________________________________________________
+! GLOBAL SETTINGS
+...
+
+!_________________________________________________________________
+! CATCHMENT HYDRAULICS
+Catchment Hydraulic Model == none
+  ...
+End Catchment Hydraulic Model
+
+! _________________________________________________________________
+! POLLUTANT EXPORT
+Catchment Pollutant Export Model == none
+  ...
+End Catchment Pollutant Export Model
+
+! _________________________________________________________________
+! RECEIVING MODEL
+Receiving Model == tuflow fv
+  ...
+End Receiving Model</code></pre>
+<p>The above will assign blank inflows to TUFLOW from the TUFLOW HPC domain. If TUFLOW FV is to use previously created inflow boundaries from TUFLOW HPC (via TUFLOW CATCH) then the following should be used, after copying the previously created .fvcatchbc file, for example:</p>
+<ul>
+<li>TUFLOW CATCH run Model_003.tcc (for example) produced initial TUFLOW FV boundary files</li>
+<li>The corresponding ..\TUFLOWCatch\bc_dbase\Model_003_catchment_hydraulic.fvcatchbc file could be copied as ..\TUFLOWCatch\bc_dbase\Model_004_catchment_hydraulic.fvcatchbc and</li>
+<li>Called automatically in Model_004.tcc</li>
+</ul>
+<pre><code>!________________________________________________________
+! GLOBAL SETTINGS
+...
+
+!_________________________________________________________________
+! CATCHMENT HYDRAULICS
+Catchment Hydraulic Model == none
+  ...
+End Catchment Hydraulic Model
+
+! _________________________________________________________________
+! POLLUTANT EXPORT
+Catchment Pollutant Export Model == none
+  ...
+End Catchment Pollutant Export Model
+
+! _________________________________________________________________
+! RECEIVING MODEL
+Receiving Model == tuflow fv
+  Preserve catchment inflows == ON
+  ...
+End Receiving Model</code></pre>
 <p><img src="images/WQFooter.jpg" width="100%" /></p>
 
+</div>
+</div>
 </div>
 </div>
 </div>

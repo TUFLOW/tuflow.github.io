@@ -198,6 +198,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.2" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCHPC-3"><i class="fa fa-check"></i><b>4.5.2</b> Catchment hydraulic model (TUFLOW HPC) commands</a></li>
 <li class="chapter" data-level="4.5.3" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCPollExp-3"><i class="fa fa-check"></i><b>4.5.3</b> Pollutant export model commands</a></li>
 <li class="chapter" data-level="4.5.4" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCFV-3"><i class="fa fa-check"></i><b>4.5.4</b> Receiving model (TUFLOW FV) commands</a></li>
+<li class="chapter" data-level="4.5.5" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCSum-3"><i class="fa fa-check"></i><b>4.5.5</b> Configuration summary</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html"><i class="fa fa-check"></i><b>5</b> Simulation Execution</a>
@@ -255,12 +256,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Section 1</span> Overview<a href="Overview-1.html#Overview-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="OverviewContext-2" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Context<a href="Overview-1.html#OverviewContext-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>TUFLOW CATCH enables the seamless bottom-up simulation of whole-of-catchment hydrologic, hydraulic, pollutant export and receiving waterway processes. It supports 1D, 2D and 3D simulation of these processes from top of catchment to receiving waterway outlet via solution of the relevant equations of motion and transport, without recourse to lumped spatial or temporal assumptions. It draws on the power of GPU acceleration to explicitly simulate catchment water flow and pollutant processes in the surface and subsurface, and automatically reconfigures these predictions to drive downstream multidimensional receiving waterway hydrodynamic, sediment transport, water quality and other environmental models. This modern framework, that draws on advanced compute capability, allows environmental modellers to holistically manage and understand catchments of interest and their receiving waters in an efficient, integrated and rigourous manner, without the need for manual model linking or reliance on top-down average assumption modelling techniques. TUFLOW CATCH’s design is flexible so as to support tailoring of its setup to meet individual application demands and complexity, and allows for execution of multiannual studies such as (but not limited to):</p>
+<p>TUFLOW CATCH enables the seamless bottom-up simulation of whole-of-catchment hydrologic, hydraulic, pollutant export and receiving waterway processes. It supports 1D, 2D and 3D simulation of these processes from top of catchment to receiving waterway outlet via solution of the relevant equations of motion and transport, without recourse to lumped spatial or temporal assumptions. It draws on the power of GPU acceleration to explicitly simulate catchment water flow and pollutant processes in the surface and subsurface domains, and automatically reconfigures these predictions to drive downstream multidimensional receiving waterway hydrodynamic, sediment transport, water quality and other environmental models. This modern framework, that draws on advanced compute capability, allows environmental practitioners to holistically manage and understand catchments of interest and their receiving waters in an efficient, integrated and rigorous manner, without the need for manual model linking or reliance on top-down average assumption modelling techniques. TUFLOW CATCH’s design is flexible so as to support tailoring of its configuration to meet individual application demands, and as such allows for execution of multiannual studies such as (but not limited to):</p>
 <ul>
-<li>Assessment of the efficacy of proposed catchment management interventions (such as installation of constructed wetlands) on downstream receiving riverine or estuarine health</li>
+<li>Seamless assessment of the impact of land use or other catchment based changes on the hydrodynamics of downstream receiving waterways (i.e. without the need to simulate pollutant export, see Section <a href="Overview-1.html#Configs-2">1.3</a>, bullet point 1)</li>
+<li>Assessment of the impact of land use or other changes on catchment hydrology and/or pollutant export (i.e. without the need to directly include receiving waterway numerical simulation, see Section <a href="Overview-1.html#Configs-2">1.3</a>, bullet point 2)</li>
+<li>Assessment of the efficacy of proposed catchment changes on downstream receiving riverine or estuarine health (i.e. fully integrated catchment and receiving waterway simulation of water flow and pollutant dynamics, see Section <a href="Overview-1.html#Configs-2">1.3</a>, bullet point 3)</li>
 <li>Assessment of the interaction of catchment inflows with water supply offtakes or other sensitive receptors</li>
-<li>Quantitative Microbial Risk Assessments</li>
-<li>Sediment and other pollutant export catchment dynamics investigations
+<li>Sediment and other pollutant export catchment dynamics investigations</li>
+<li>Various combinations of the above
 <span class="math inline">\(\newcommand{\blockindent}{\hspace{0.5cm}}\)</span></li>
 </ul>
 </div>
@@ -273,7 +276,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>TUFLOW HPC: Fixed grid simulation of 1D and 2D surface and subsurface catchment hydrology, hydraulics, pollutant export and transport</li>
 <li>TUFLOW FV: Flexible mesh simulation of 1D, 2D and 3D receiving waterway hydrodynamic, advection dispersion, heat, sediment transport, water quality and particle tracking</li>
 </ul>
-Conceptually, TUFLOW CATCH links and coordinates TUFLOW HPC and TUFLOW FV as Figure <a href="Overview-1.html#fig:fig-concept">1.1</a>. TUFLOW HPC coverage is represented by the fixed grid iconography, and TUFLOW FV is shown as contained within the enclosing think brown boundary line. This intention is that this figure convey the ability of TUFLOW CATCH to use advanced numerical techniques (free of lumping assumptions) to seamlessly simulate 1D, 2D and 3D water and pollutant dynamics from top of catchment to receiving waterway outlet.</li>
+Conceptually, TUFLOW CATCH links and coordinates TUFLOW HPC and TUFLOW FV as Figure <a href="Overview-1.html#fig:fig-concept">1.1</a>. TUFLOW HPC coverage is represented by the fixed grid iconography, and TUFLOW FV is shown as contained within the enclosing thick brown boundary line. This intention is that this figure convey the ability of TUFLOW CATCH (in its most advanced configuration) to use advanced numerical techniques (free of top-down lumping assumptions) to seamlessly simulate 1D, 2D and 3D water and pollutant dynamics from top of catchment to receiving waterway outlet. TUFLOW CATCH can also be configured to simulate other (less advanced but still important and relevant) combinations of environmental flows and pollutant transport processes (see Section <a href="Overview-1.html#Configs-2">1.3</a>).</li>
 </ul>
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-concept"></span>
@@ -284,11 +287,11 @@ Figure 1.1: <strong>Conceptual arrangement of TUFLOW CATCH engines</strong>
 </div>
 </center>
 <ul>
-<li><strong>Pollutant export</strong>. TUFLOW CATCH adds pollutant export functionality to TUFLOW HPC. Pollutants are able to be liberated on a cell by cell basis and under a range of user-selectable algorithms (accumulation-washoff or shear stress based, for example), and then routed as surface and subsurface flows and concentrations, via solution of the equations of motion and transport (rather than using lumped top-down average assumptions)</li>
-<li><strong>Automatic linkage</strong> TUFLOW CATCH automatically links the bottom of catchment TUFLOW HPC predictions (for both flow and pollutant concentrations) to the upstream of TUFLOW FV’s model domain to present a single integrated modelling platform to the user, with no need for manual handling or other post/pre processing. To affect this, TUFLOW CATCH automatically
+<li><strong>Pollutant export</strong>. TUFLOW CATCH adds pollutant export functionality to TUFLOW HPC. Pollutants are able to be liberated on a cell by cell basis and under a range of user-selectable algorithms (accumulation-washoff or shear stress based, for example), and then routed as surface and/or subsurface flows and concentrations, via solution of the equations of motion and transport, rather than using lumped top-down average assumptions</li>
+<li><strong>Automatic linkage</strong> When required, TUFLOW CATCH automatically links the bottom of catchment TUFLOW HPC predictions (for both flow and pollutant concentrations) to the upstream of TUFLOW FV’s model domain to present a single integrated modelling platform to the user, with no need for manual handling or other post/pre processing. To affect this, TUFLOW CATCH automatically
 <ul>
-<li>Determines the spatial locations where surface and subsurface waters drain to the user defined TUFLOW FV mesh (or other GIS polygon) and designates these as inflow locations to TUFLOW FV (or simply exit points from TUFLOW HPC), and then</li>
-<li>Writes the TUFLOW HPC predictions as fully formatted TUFLOW FV inflow boundary conditions files and blocks, either as nodestrings or elements</li>
+<li>Determines the spatial locations where surface and subsurface waters drain to the user defined TUFLOW FV mesh (or GIS polygon if TUFLOW FV simulation is not selected) and designates these as inflow locations to TUFLOW FV (or simply a single exit point if a polygon is specified), and then</li>
+<li>Writes the TUFLOW HPC predictions as fully formatted TUFLOW FV inflow boundary conditions files and blocks, either as nodestrings or elements. If a downstream polygon is specified then timeseries of summed outlet flows and masses are reported</li>
 </ul></li>
 <li><strong>Command syntax</strong>. TUFLOW CATCH uses familiar TUFLOW style <code>command == argument(s)</code> syntax that has a long established pedigree within all other TUFLOW products</li>
 <li><strong>Flexibility of constituents</strong>. TUFLOW CATCH, when combining TUFLOW HPC and TUFLOW FV in full can simulate any constituents that are initialised in TUFLOW FV, across all its modules, including sediment transport and water quality. TUFLOW CATCH can also run TUFLOW HPC in pollutant generation mode only (without activating TUFLOW FV, i.e. the ‘pollutant export’ configuration, see Section <a href="Overview-1.html#Configs-2">1.3</a>), and in this instance, users can specify any pollutants they wish to simulate (e.g. ‘PFAS’ or ‘DDT’ etc.) - these do not need to be simulated by TUFLOW FV or its modules</li>
@@ -306,22 +309,22 @@ Figure 1.2: <strong>Example of using the QGIS TUFLOW CATCH plugin to view combin
 </div>
 <div id="Configs-2" class="section level2 hasAnchor" number="1.3">
 <h2><span class="header-section-number">1.3</span> Configurations<a href="Overview-1.html#Configs-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Given its construction philosophy, TUFLOW CATCH could be set up and executed in a range of different configurations. At the time of writing however, TUFLOW supports three primary TUFLOW CATCH configurations (which will be added to in future) as follows:</p>
+<p>Given its construction philosophy, TUFLOW CATCH can be set up and executed in three supported configurations:</p>
 <ol>
-<li><strong>Hydrology</strong>. The most basic configuration of TUFLOW CATCH is to simulate only water movement through surface (and optionally subsurface) catchment flows, and to automatically route these into a downstream receiving hydrodynamic (only) waterway model. Use cases might include investigation of velocity fields in receiving waterways under a range of separate or continuous catchment inflow regimes, or modification of these fields in response to changes in catchment conditions, such as urbanisation. In this instance, the computational engines would be configured as follows:
+<li><strong>Hydrology</strong>. The most basic configuration of TUFLOW CATCH is to simulate water movement (without generated pollutants) through surface (and optionally subsurface) catchment flows, and to automatically route these into a downstream receiving hydrodynamic (only) waterway model. At the point of routing, constant/timeseries salinity and temperature may be assigned to allow baroclinic TUFLOW FV receiving water modelling. Use cases might include investigation of velocity fields in receiving waterways under a range of separate or continuous catchment inflow regimes, or modification of these fields in response to changes in catchment conditions, such as urbanisation. In this instance, the computational engines would be configured as follows:
 <ul>
-<li>TUFLOW HPC: Simulate surface (and optionally subsurface) hydrology, and write inflow boundary condition files for TUFLOW FV. These would only contain water flows, without associated pollutant concentrations</li>
-<li>TUFLOW FV: Simulate only 2D or 3D barotropic hydrodynamics (i.e. without salinity, temperature or water density simulation)</li>
+<li>TUFLOW HPC: Simulate surface (and optionally subsurface) hydrology, and optionally constant or timeseries temperature and salinity. In addition to map outputs, write inflow boundary condition files for TUFLOW FV. These only contain water flows with optionally temperature and salinity, without associated generated pollutant concentrations</li>
+<li>TUFLOW FV: Simulate and report 2D or 3D hydrodynamics, optionally including temperature and salinity</li>
 </ul></li>
-<li><strong>Pollutant export</strong>. The next level of functionality offered by TUFLOW CATCH is the addition of pollutant export within the catchment simulation, without the explicit and subsequent simulation of the fate and transport fo these pollutants in a downstream receiving model. Use cases might include investigation of pollutant export properties of a catchment under differing rainfall conditions, or the variation of this export in response to the implementation of intervention measures or land use changes. In this instance, the computational engines would be configured as follows:
+<li><strong>Pollutant export</strong>. The next level of functionality offered by TUFLOW CATCH is the addition of pollutant export within the catchment simulation, without the explicit and subsequent simulation of the fate and transport of these pollutants in a downstream receiving model. Use cases might include investigation of pollutant export properties of a catchment under differing rainfall conditions, or the variation of this export in response to the implementation of intervention measures or land use changes. In this instance, the computational engines would be configured as follows:
 <ul>
-<li>TUFLOW HPC: Simulate surface (and optionally subsurface) hydrology, with pollutant export and transport, and write summary files of total pollutant export at catchment outlet. This outlet is defined by a user specified GIS polygon rather than a TUFLOW FV mesh</li>
+<li>TUFLOW HPC: Simulate surface (and optionally subsurface) hydrology, with pollutant export and transport. In addition to map outputs, write summary timeseries of total flows and pollutant export at a user defined catchment outlet. This outlet is defined by a user specified GIS polygon rather than a TUFLOW FV mesh</li>
 <li>TUFLOW FV: No simulation<br />
 </li>
 </ul></li>
 <li><strong>Integrated</strong>. This level represents the full functionality offered by TUFLOW CATCH. It augments the <strong>Pollutant export</strong> configuration above by including the explicit 2D or 3D simulation of the fate and transport of all catchment derived flows and pollutants within the downstream waterway model. Use cases might include the investigation of the efficacy of catchment intervention works on downstream water quality over multiannual periods. In this instance, the computational engines would be configured as follows:
 <ul>
-<li>TUFLOW HPC: Simulate surface (and optionally subsurface) hydrology, with pollutant export and transport, and write summary files of total pollutant export at catchment outlet, as well as fully formatted inflow and concentration boundary condition files for TUFLOW FV</li>
+<li>TUFLOW HPC: Simulate surface (and optionally subsurface) hydrology, with pollutant export and transport. In addition to map outputs, write summary timeseries of total flow and pollutant export at catchment outlet, as well as fully formatted inflow and concentration boundary condition files for TUFLOW FV</li>
 <li>TUFLOW FV: Direct simulation of 2D or 3D baroclinic hydrodynamics, with sediment transport and/or water quality (and optionally other TUFLOW FV modules such as particle tracking)</li>
 </ul></li>
 </ol>
@@ -338,14 +341,14 @@ Figure 1.2: <strong>Example of using the QGIS TUFLOW CATCH plugin to view combin
 </div>
 <div id="Support-2" class="section level2 hasAnchor" number="1.5">
 <h2><span class="header-section-number">1.5</span> Support<a href="Overview-1.html#Support-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>BMT sells, distributes and supports TUFLOW CATCH. Contact <a href="mailto:support@tuflow.com" class="email">support@tuflow.com</a> or <a href="mailto:sales@tuflow.com" class="email">sales@tuflow.com</a> for support and sales inquiries.</p>
+<p>BMT sells, distributes and supports TUFLOW CATCH. Contact <a href="mailto:support@tuflow.com" class="email">support@tuflow.com</a> and <a href="mailto:sales@tuflow.com" class="email">sales@tuflow.com</a> for support and sales inquiries, respectively.</p>
 <p>Several supporting appendices have also been included in this manual. These contain content to assist users in applying TUFLOW CATCH. These Appendices are interlinked and hyperlinked with content from the body of the manual where appropriate, and are:</p>
 <ul>
 <li>Appendix <a href="AppCommands.html#AppCommands">A</a> Interactive listing of all commands, and their syntax, arguments, descriptions and cross references</li>
 <li>Appendix <a href="AppParams.html#AppParams">B</a> Interactive listing of all parameters, and their symbols, units, ranges and links to underlying science descriptions</li>
-<li>Appendix <a href="AppDemoModel.html#AppDemoModel">C</a> A purpose built small TUFLOW CATCH demonstration model for free download and use</li>
+<li>Appendix <a href="AppDemoModel.html#AppDemoModel">C</a> A purpose built suite of small TUFLOW CATCH demonstration models for free download and use</li>
 </ul>
-<p>The user is directed to the respective manuals noted in Section <a href="Overview-1.html#Science-2">1.4</a> above for TUFLOW HPC and TUFLOW FV commands other than those specific to TUFLOW CATCH.</p>
+<p>The user is directed to the respective manuals noted in Section <a href="Overview-1.html#Science-2">1.4</a> above for TUFLOW HPC and TUFLOW FV commands other than those specific to TUFLOW CATCH. All TUFLOW CATCH commands are described in this manual.</p>
 <p><img src="images/WQFooter.jpg" width="100%" /></p>
 
 </div>

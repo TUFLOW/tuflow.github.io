@@ -198,6 +198,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.2" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCHPC-3"><i class="fa fa-check"></i><b>4.5.2</b> Catchment hydraulic model (TUFLOW HPC) commands</a></li>
 <li class="chapter" data-level="4.5.3" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCPollExp-3"><i class="fa fa-check"></i><b>4.5.3</b> Pollutant export model commands</a></li>
 <li class="chapter" data-level="4.5.4" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCCFV-3"><i class="fa fa-check"></i><b>4.5.4</b> Receiving model (TUFLOW FV) commands</a></li>
+<li class="chapter" data-level="4.5.5" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html#SCTCSum-3"><i class="fa fa-check"></i><b>4.5.5</b> Configuration summary</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="SimulationExecution-1.html"><a href="SimulationExecution-1.html"><i class="fa fa-check"></i><b>5</b> Simulation Execution</a>
@@ -453,10 +454,10 @@ Used in the General commands section of a TUFLOW CATCH control file to set the s
 </tr>
 <tr>
 <td style="text-align:left;width: 35%; vertical-align:top;">
-<a id="TCGISFmt"><bmtpink>GIS Format ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#">SHP</a>,<a href="#">GPKG</a>,<a href="#">MI</a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+<a id="TCGISFmt"><bmtpink>GIS Format ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#">SHP</a>,<a href="#">GPKG</a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
 </td>
 <td style="text-align:left;">
-Used in the General commands section of a TUFLOW CATCH control file to set the GIS format of the simulation. This command can be overwritten in the catchment hydraulic model or receiving model blocks if needed. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCGlobal-3">4.5.1</a>.
+Used in the General, Catchment Hydraulic Model or Receiving Model commands section of a TUFLOW CATCH control file to set the GIS format of the simulation. This command can be overwritten in the catchment hydraulic model or receiving model blocks if needed. TUFLOW FV does not support GPKG format. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCGlobal-3">4.5.1</a>.
 </td>
 <td style="text-align:left;">
 <span class="math inline">\(\text{ }\)</span>
@@ -467,7 +468,7 @@ Used in the General commands section of a TUFLOW CATCH control file to set the G
 <a id="TCSHPProj"><bmtpink>SHP Projection ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#"></a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
 </td>
 <td style="text-align:left;">
-Used in the General commands section of a TUFLOW CATCH control file to set the path to the SHP file containing the TUFLOW CATCH model projection. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCGlobal-3">4.5.1</a>.
+Used in the General, Catchment Hydraulic Model or Receiving Model commands section of a TUFLOW CATCH control file to set the path to the SHP file containing the TUFLOW CATCH model projection. Can be set globally and then overwritten as needed within Catchment Hydraulic Model or Receiving Model blocks. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCGlobal-3">4.5.1</a>.
 </td>
 <td style="text-align:left;">
 <span class="math inline">\(\text{ }\)</span>
@@ -767,6 +768,28 @@ Used in the Pollutant Export Model block of a TUFLOW CATCH control file to apply
 </td>
 <td style="text-align:left;">
 Used in the Pollutant Export Model block of a TUFLOW CATCH control file to end application of a material by material block pollutant export properties. This command must be accompanied by a preceding Material command. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCPollExpPE-4">4.5.3.3</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCGPKGProj"><bmtpink>GPKG Projection ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#"></a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used in the General or Catchment Hydraulic Model commands section of a TUFLOW CATCH control file to set the path to the GPKG file containing the TUFLOW CATCH model projection. Only used if GIS Format is set to GPKG. TUFLOW FV does not support GPKG format. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCGlobal-3">4.5.1</a>.
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\text{ }\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 35%; vertical-align:top;">
+<a id="TCRMPCI"><bmtpink>Preserve Catchment Inflows ==<br></bmtpink></a> <bmtgreen><span class="math inline">\(\langle\)</span><a href="#">ON</a>,<a href="#">OFF</a><span class="math inline">\(\rangle\)</span> </bmtgreen><br>
+</td>
+<td style="text-align:left;">
+Used in the Receiving Model block of a TUFLOW CATCH control file to prevent TUFLOW CATCH from overwriting a previously created (non-blank) TUFLOW FV boundary condition file. Used when preliminary TUFLOW FV boundary condition inflows have been generated by TUFLOW CATCH to support initial TUFLOW FV calibration. Avoids the need to continually rerun TUFLOW HPC within TUFLOW CATCH when undertaking only a TUFLOW FV calbration. Simulation construction section <a href="SimulationConstruction-1.html#SCTCCHPC-3">4.5.2</a>.
 </td>
 <td style="text-align:left;">
 <span class="math inline">\(\text{ }\)</span>
