@@ -556,7 +556,7 @@ end bc</code></pre></li>
 </ul></li>
 <li>Name:
 <ul>
-<li>&lt;GIS name&gt;.csv</li>
+<li>“&lt;GIS name&gt;.csv”, e.g. “SW_Inflow.csv”, where “SW_Inflow” is the user defined name given to the nodestring in GIS</li>
 </ul></li>
 <li>Units:
 <ul>
@@ -568,8 +568,33 @@ end bc</code></pre></li>
 </ul></li>
 <li>Uses
 <ul>
-<li>Can be directly imported into common plotting packages to show cumulative total flow and pollutant mass export at the outlet of the TUFLOW HPC model domain (or, equally, entry to the TUFLOW FV domain if used)</li>
-<li>Provides an accessible means of high level scenario comparisons, for example where cumulative total catchment flows and pollutants loads are to be compared between different catchment land use options, management interventions or rainfall sequences</li>
+<li>Called by Model_001_catchment_hydraulic.fvcatchbc to link TUFLOW HPC and TUFLOW FV under TUFLOW CATCH. Users should not edit this file in any way, including opening and saving it in Excel, which can cause the date format to change and become unreadable.</li>
+</ul></li>
+</ul>
+</div>
+<div id="AppOutputsOtherLat" class="section level4 hasAnchor" number="9.5.3.3">
+<h4><span class="header-section-number">C.5.3.3</span> Lateral boundary data<a href="AppOutputs.html#AppOutputsOtherLat" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>If TUFLOW CATCH has been executed in the <strong>Hydrology</strong> or <strong>Integrated</strong> configuration then individual lateral data files are produced for each transfer cell boundary:</p>
+<ul>
+<li>Content:
+<ul>
+<li>Timeseries of flow and associated pollutant concentrations entering a cell</li>
+</ul></li>
+<li>Name:
+<ul>
+<li>“cell_&lt;TUFLOW mesh cell ID&gt;.csv”, e.g. “cell37.csv”, where 37 is the 2D cell ID in the TUFLOW FV mesh</li>
+</ul></li>
+<li>Units:
+<ul>
+<li>Time: ISODATE format</li>
+<li>Flow: m<span class="math inline">\(^3\)</span>/s</li>
+<li>Salinity: g/L if used</li>
+<li>Temperature: <span class="math inline">\(^o\)</span>C if used</li>
+<li>All pollutants: mg/L or <span class="math inline">\(\mu\)</span>g/L as appropriate for each sediment fraction or water quality pollutant</li>
+</ul></li>
+<li>Uses
+<ul>
+<li>Called by Model_001_catchment_hydraulic.fvcatchbc to link TUFLOW HPC and TUFLOW FV under TUFLOW CATCH. Users should not edit this file in any way, including opening and saving it in Excel, which can cause the date format to change and become unreadable.</li>
 </ul></li>
 </ul>
 <p><img src="images/WQFooter.jpg" width="100%" /></p>
