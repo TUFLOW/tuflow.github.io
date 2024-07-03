@@ -285,12 +285,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Each of these substructures has its own subfolder arrangement, consistent with those suggested for standalone TUFLOW HPC and TUFLOW FV modelling studies. For consistency, the suggested TUFLOWCATCH subfolder arrangement is also similar.</p>
 <p>To assist with this set up, and indeed more broadly with the initialisation, execution and results interrogation of a TUFLOW CATCH simulation, a freely available TUFLOW CATCH QGIS plugin has been developed. TUFLOW eLearning resources (also free of charge) have been prepared to support deployment and use of this TUFLOW CATCH plugin, and as such the content of that resource is not repeated here. Users are however encouraged to access this resource before initialising their first TUFLOW CATCH simulation: using this plugin is seen as a core component of the set up of a TUFLOW CATCH simulation. Doing so manually is discouraged. The eLearning materials can be accessed by:</p>
-<ul>
+<ol>
 <li>Registering for TUFLOW eLearning <a href = "https://elearning.tuflow.com/login/index.php">here</a> if not already registered</li>
 <li>Emailing <a href="mailto:support@tuflow.com" class="email">support@tuflow.com</a> noting the registered username and with a request access to the TUFLOW CATCH plugin eLearning course</li>
 <li>Following instructions subsequently provided to access the course</li>
 <li>Completing the course</li>
-</ul>
+</ol>
 <p>On completion of the course, users will be able to initialise a TUFLOW CATCH simulation in the desired geographical projection system, complete with automatically populated templates for all control files. The sections presented below assume that this QGIS initialisation process has occurred and describe the resulting general arrangements and subsequent construction of a TUFLOW CATCH simulation.</p>
 </div>
 <div id="SCGeneral-2" class="section level2 hasAnchor" number="4.4">
@@ -440,7 +440,7 @@ Figure 4.3: <strong>Opening one text file from the relative path in an already o
 <blockquote>
 <p><a href="AppCommands.html#TCLatOutDt">Catch Output Interval Lateral ==</a><a href="AppParams.html#TCParLatOutDt"><span class="math inline">\(dT_{lat}\)</span></a></p>
 </blockquote>
-<p>Set the frequency at which TUFLOW CATCH pauses to write out TUFLOW FV boundary condition files, in units of days (simulation time, required even if TUFLOW FV not used). Setting a value of 1 means that TUFLOW CATCH will hold all boundary information in memory for a day of simulation time, and then update TUFLOW FV boundary files (and summed flow and mass timeseries with this held memory on a daily basis. For example, if outputs were set to be hourly via hourly via either of the above interval commands, then 24 lines would be added to each boundary file at time of writing:</p>
+<p>Set the frequency at which TUFLOW CATCH pauses to write out TUFLOW FV boundary condition files, in units of days (simulation time, required even if TUFLOW FV not used). Setting a value of 1 means that TUFLOW CATCH will hold all boundary information in memory for a day of simulation time, and then update TUFLOW FV boundary files (and summed flow and mass timeseries) with this held memory on a daily basis. For example, if outputs were set to be hourly via either of the above interval commands, then 24 lines would be added to each boundary file at time of writing:</p>
 <blockquote>
 <p><a href="AppCommands.html#TCCSVwrite">CSV Write Frequency Day ==</a><a href="AppParams.html#TCParCSVwrite"><span class="math inline">\(dT_{csv}\)</span></a></p>
 </blockquote>
@@ -715,7 +715,7 @@ temperature_davg,temperature_2021.csv,TUFLOW_Time,Airtemp,,,,,</code></pre>
 <blockquote>
 <p><a href="AppCommands.html#TCCPEMatE">End Material</a></p>
 </blockquote>
-<p>Once these uniform conditions have been set, progressive specifications of material by material pollutant behaviour can be set. These specifications overwrite previous settings on a spatial basis. This stamping-style approach is akin to the way in which digital elevation model inputs can be progressively updated within TUFLOW HPC and TUFLOW FV by specifying a suite of elevation data that overwite each other on a sptail basis. In the case of pollutant export properties, this stamping is affected by specifying subsequent material blocks that relate to individual or multiple materials. Up to ten comma separated materials can be specified in one material block:</p>
+<p>Once these uniform conditions have been set, progressive specifications of material by material pollutant behaviour can be set. These specifications overwrite previous settings on a spatial basis. This stamping-style approach is akin to the way in which digital elevation model inputs can be progressively updated within TUFLOW HPC and TUFLOW FV by specifying a suite of elevation data that overwite each other on a spatiasl basis. In the case of pollutant export properties, this stamping is affected by specifying subsequent material blocks that relate to individual or multiple materials. Up to ten comma separated materials can be specified in one material block:</p>
 <blockquote>
 <p><a href="AppCommands.html#TCCPEMatS">Material ==</a> MatID1, MatID2, MatID3…, MatID10</p>
 </blockquote>
@@ -830,8 +830,10 @@ End Catchment Pollutant Export Model
 <p>This block of the TUFLOW CATCH control file contains commands that construct a TUFLOW FV simulation. These commands are almost entirely those that would be used in setting up a standalone TUFLOW FV control file (*.fvc), with a small number of additional commands that relate to TUFLOW CATCH.</p>
 <p>A small number of commands issued in the Global commands section of the *.tcc can be overwritten here if needed (for example if GPKG had been specified in the Global commands for the GIS format). These are:</p>
 <blockquote>
-<p><a href="introduction.html#TCHardware">Hardware ==</a>
-<a href="introduction.html#TCGISFmt">GIS Format ==</a></p>
+<p><a href="introduction.html#TCHardware">Hardware ==</a></p>
+</blockquote>
+<blockquote>
+<p><a href="introduction.html#TCGISFmt">GIS Format ==</a></p>
 </blockquote>
 <p>If GIS Format is overwritten (as SHP), then a subsequent new projection file is most likely required to be specified</p>
 <blockquote>
@@ -1092,7 +1094,7 @@ End Catchment Hydraulic Model
 ! POLLUTANT EXPORT
 Catchment Pollutant Export Model == none
 
-  Constant salinity == 0.0
+  Constant Salinity == 0.0
   Time-series temperature == temperature
 
 End Catchment Pollutant Export Model
@@ -1204,7 +1206,7 @@ End Catchment Hydraulic Model
 ! POLLUTANT EXPORT
 Catchment Pollutant Export Model == mass accumulation release
 
-  constant salinity == 0.0
+  Constant Salinity == 0.0
 
 End Catchment Pollutant Export Model
 
@@ -1262,7 +1264,7 @@ End Catchment Pollutant Export Model
 ! _________________________________________________________________
 ! RECEIVING MODEL
 Receiving Model == tuflow fv
-  Preserve catchment inflows == ON
+  Preserve Catchment Inflows == ON
   ...
 End Receiving Model</code></pre>
 <p><img src="images/WQFooter.jpg" width="100%" /></p>
