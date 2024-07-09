@@ -731,45 +731,45 @@ temperature_davg,temperature_2021.csv,TUFLOW_Time,Airtemp,,,,,</code></pre>
 <h5><span class="header-section-number">4.5.3.3.1</span> Accumulation and washoff<a href="SimulationConstruction-1.html#SCTCCPollExpAW-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Set the model and parameters for the pollutant accumulation and washoff model (see Section <a href="ProcessDescriptions-1.html#ProcessDescriptionsAccWO-3">3.2.3.1</a>). All parameters are mandatory:</p>
 <blockquote>
-<p>&lt;name&gt;, <a href="introduction.html#TCMethod">method==</a><a href="ProcessDescriptions-1.html#ProcessDescriptionsAccWO-3">washoff1</a>, <a href="introduction.html#TCAccR">rate==</a><a href="AppParams.html#TCParAccR"><span class="math inline">\(R_a\)</span></a>, <a href="introduction.html#TCLimit">limit==</a><a href="AppParams.html#TCParLacc"><span class="math inline">\(L_{acc}\)</span></a>, <a href="introduction.html#TCTcon">timeConstant==</a><a href="AppParams.html#TCParTcon"><span class="math inline">\(T_c\)</span></a>, <a href="introduction.html#TCRnThrshd">rainThreshold==</a><a href="AppParams.html#TCParRnThrshd"><span class="math inline">\(R_r\)</span></a>, <a href="introduction.html#TCdThresh">depthThreshold==</a><a href="AppParams.html#TCPardThresh"><span class="math inline">\(d\)</span></a>, <a href="introduction.html#TCDeposVel">depositionVelocity==</a><a href="AppParams.html#TCParDeposVel">w_s</a></p>
+<p>&lt;name&gt;, <a href="introduction.html#TCMethod">Method==</a><a href="ProcessDescriptions-1.html#ProcessDescriptionsAccWO-3">Washoff1</a>, <a href="introduction.html#TCAccR">Rate==</a><a href="AppParams.html#TCParAccR"><span class="math inline">\(R_a\)</span></a>, <a href="introduction.html#TCLimit">Limit==</a><a href="AppParams.html#TCParLacc"><span class="math inline">\(L_{acc}\)</span></a>, <a href="introduction.html#TCTcon">Time Constant==</a><a href="AppParams.html#TCParTcon"><span class="math inline">\(T_c\)</span></a>, <a href="introduction.html#TCRnThrshd">Rain Threshold==</a><a href="AppParams.html#TCParRnThrshd"><span class="math inline">\(R_r\)</span></a>, <a href="introduction.html#TCdThresh">Depth Threshold==</a><a href="AppParams.html#TCPardThresh"><span class="math inline">\(d\)</span></a>, <a href="introduction.html#TCDeposVel">Deposition Velocity==</a><a href="AppParams.html#TCParDeposVel">w_s</a></p>
 </blockquote>
 <p>The &lt;name&gt; field must correspond to a name designated by TUFLOW FV. The parameters are:</p>
 <ul>
-<li>method: keyword ‘washoff1’ that activates the accumulation washoff model</li>
-<li>rate: the areal rate at which the pollutant accumulates (kg/ha/year)</li>
-<li>limit: the maximum areal mass that can accumulate in the dry store (kg/ha)</li>
-<li>timeConstant: a time parameter controlling the pollutant dry store release rate, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-wo">(3.1)</a> (s)</li>
-<li>rainThreshold: the minimum rain rate required to activate release from the dry store (mm/hr)</li>
-<li>depthThreshold: the minimum water depth in a cell required to activate release from the dry store (m)</li>
-<li>depositionVelocity: the velocity at which pollutant in the wet store settles. Used to calculate the mass of pollutant transferred back from the wet to dry store in a model timestep, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-wo-sett">(3.2)</a> (m/day)</li>
+<li>Method: keyword ‘Washoff1’ that activates the accumulation washoff model</li>
+<li>Rate: the areal rate at which the pollutant accumulates (kg/ha/year)</li>
+<li>Limit: the maximum areal mass that can accumulate in the dry store (kg/ha)</li>
+<li>Time Constant: a time parameter controlling the pollutant dry store release rate, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-wo">(3.1)</a> (s)</li>
+<li>Rain Threshold: the minimum rain rate required to activate release from the dry store (mm/hr)</li>
+<li>Depth Threshold: the minimum water depth in a cell required to activate release from the dry store (m)</li>
+<li>Deposition Velocity: the velocity at which pollutant in the wet store settles. Used to calculate the mass of pollutant transferred back from the wet to dry store in a model timestep, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-wo-sett">(3.2)</a> (m/day)</li>
 </ul>
 <p>An example for dissolved organic carbon might be:</p>
-<pre><code>WQ_DOC_MG_L, method==washoff1, rate==21.446, limit==21.446, timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020, depositionVelocity==0.0</code></pre>
+<pre><code>WQ_DOC_MG_L, Method==Washoff1, Rate==21.446, Limit==21.446, Time Constant==3600, Rain Threshold==1.0,  Depth Threshold==0.020, Deposition Velocity==0.0</code></pre>
 </div>
 <div id="SCTCCPollExpSS-5" class="section level5 hasAnchor" number="4.5.3.3.2">
 <h5><span class="header-section-number">4.5.3.3.2</span> Shear Stress<a href="SimulationConstruction-1.html#SCTCCPollExpSS-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Set the model and parameters for the shear stress model (see Section <a href="ProcessDescriptions-1.html#ProcessDescriptionsSS-3">3.2.3.2</a>). All parameters are mandatory:</p>
 <blockquote>
-<p>&lt;name&gt;, <a href="introduction.html#TCMethod">method==</a><a href="ProcessDescriptions-1.html#ProcessDescriptionsSS-3">shear1</a>, rate==&lt;not used&gt;, <a href="introduction.html#TCLimit">limit==</a><a href="AppParams.html#TCParLshr"><span class="math inline">\(L_{shr}\)</span></a>, <a href="introduction.html#TCDeposThresh">depositionStress==</a><a href="AppParams.html#TCParDeposThresh"><span class="math inline">\(\tau_{cd}\)</span></a>, <a href="introduction.html#TCErosThresh">erosionStress==</a><a href="AppParams.html#TCParErosThresh"><span class="math inline">\(\tau_{ce}\)</span></a>, <a href="introduction.html#TCdThresh">depthThreshold==</a><a href="AppParams.html#TCPardThresh"><span class="math inline">\(d\)</span></a>, <a href="introduction.html#TCDeposVel">depositionVelocity==</a><a href="AppParams.html#TCParDeposVel">w_s</a>, <a href="introduction.html#TCEr">erosionRate==</a><a href="AppParams.html#TCParEr"><span class="math inline">\(E_r\)</span></a></p>
+<p>&lt;name&gt;, <a href="introduction.html#TCMethod">Method==</a><a href="ProcessDescriptions-1.html#ProcessDescriptionsSS-3">Shear1</a>, Rate==&lt;not used&gt;, <a href="introduction.html#TCLimit">Limit==</a><a href="AppParams.html#TCParLshr"><span class="math inline">\(L_{shr}\)</span></a>, <a href="introduction.html#TCDeposThresh">Deposition Stress==</a><a href="AppParams.html#TCParDeposThresh"><span class="math inline">\(\tau_{cd}\)</span></a>, <a href="introduction.html#TCErosThresh">Erosion Stress==</a><a href="AppParams.html#TCParErosThresh"><span class="math inline">\(\tau_{ce}\)</span></a>, <a href="introduction.html#TCdThresh">Depth Threshold==</a><a href="AppParams.html#TCPardThresh"><span class="math inline">\(d\)</span></a>, <a href="introduction.html#TCDeposVel">Deposition Velocity==</a><a href="AppParams.html#TCParDeposVel">w_s</a>, <a href="introduction.html#TCEr">Erosion Rate==</a><a href="AppParams.html#TCParEr"><span class="math inline">\(E_r\)</span></a></p>
 </blockquote>
 <p>The &lt;name&gt; field must correspond to a name designated by TUFLOW FV. The parameters are:</p>
 <ul>
-<li>method: keyword ‘shear1’ that activates the shear stress model</li>
-<li>rate: not used, but listed for consistency</li>
-<li>limit: the maximum erosion or deposition that can occur in a cell. Always a positive number (kg/ha)</li>
-<li>depositionStress: the maximum shear stress for which deposition can occur. Shear stresses below this limit will allow for deposition to occur, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-krone-dp">(3.4)</a>. Should always be less than the specified erosionStress (N/m<span class="math inline">\(^2\)</span>)</li>
-<li>erosionStress: the minimum shear stress for which erosion can occur. Shear stresses above this limit will allow for erosion to occur, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-mehta-er">(3.3)</a>. Should always be greater than the specified depositionStress (N/m<span class="math inline">\(^2\)</span>)</li>
-<li>depthThreshold: the minimum water depth in a cell required to activate release from the dry store (m)</li>
-<li>depositionVelocity: the velocity at which pollutant in the wet store settles. Used to calculate the mass of pollutant transferred back from the wet to dry store in a model timestep, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-krone-dp">(3.4)</a> (m/day)</li>
-<li>erosionRate: The maximum rate of erosion of pollutant from the dry store, if erosion conditions are met, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-mehta-er">(3.3)</a> (N/m<span class="math inline">\(^2\)</span>)</li>
+<li>Method: keyword ‘Shear1’ that activates the shear stress model</li>
+<li>Rate: not used, but listed for consistency</li>
+<li>Limit: the maximum erosion or deposition that can occur in a cell. Always a positive number (kg/ha)</li>
+<li>Deposition Stress: the maximum shear stress for which deposition can occur. Shear stresses below this limit will allow for deposition to occur, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-krone-dp">(3.4)</a>. Should always be less than the specified erosionStress (N/m<span class="math inline">\(^2\)</span>)</li>
+<li>Erosion Stress: the minimum shear stress for which erosion can occur. Shear stresses above this limit will allow for erosion to occur, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-mehta-er">(3.3)</a>. Should always be greater than the specified depositionStress (N/m<span class="math inline">\(^2\)</span>)</li>
+<li>Depth Threshold: the minimum water depth in a cell required to activate release from the dry store (m)</li>
+<li>Deposition Velocity: the velocity at which pollutant in the wet store settles. Used to calculate the mass of pollutant transferred back from the wet to dry store in a model timestep, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-krone-dp">(3.4)</a> (m/day)</li>
+<li>Erosion Rate: The maximum rate of erosion of pollutant from the dry store, if erosion conditions are met, according to Equation <a href="ProcessDescriptions-1.html#eq:equ-mehta-er">(3.3)</a> (N/m<span class="math inline">\(^2\)</span>)</li>
 </ul>
 <p>An example for suspended sediment might be:</p>
-<pre><code>SED_TSS, method==shear1, rate==0.0, limit==1000.0, depthThreshold==0.02, depositionstress==0.01, erosionstress==0.5, depositionvelocity==1.2e-05, erosionrate==0.002
+<pre><code>SED_TSS, Method==Shear1, Rate==0.0, Limit==1000.0, Depth Threshold==0.02, Deposition Stress==0.01, Erosion Stress==0.5, Deposition Velocity==1.0, Erosion Rate==0.002
 </code></pre>
 <p>An example for a complete material block might be:</p>
 <pre><code>Material == 1,4
-    SED_TSS, method==shear1, rate==0.0, limit==1000.0, depthThreshold==0.02, depositionstress==0.01, erosionstress==0.5, depositionvelocity==1.2e-05, erosionrate==0.001
-    WQ_DOC_MG_L, method==washoff1, rate==21.446, limit==21.446, timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
+    SED_TSS, Method==Shear1, Rate==0.0, Limit==1000.0, Depth Threshold==0.02, Deposition Stress==0.01, Erosion Stress==0.5, Deposition Velocity==1.0, Erosion Rate==0.001
+    WQ_DOC_MG_L, Method==Washoff1, Rate==21.446, Limit==21.446, Time Constant==3600, Rain Threshold==1.0,  Depth Threshold==0.020, Deposition Velocity==0.0
 End Material</code></pre>
 </div>
 </div>
@@ -799,26 +799,26 @@ Catchment Pollutant Export Model == mass accumulation release
     Infiltration WQ_POP_MG_L == Off
     
     Material == all  
-        SED_TSS,          method==shear1, rate==0.0,    limit==1000.0,    depthThreshold==0.02, depositionstress==0.01, erosionstress==0.5, depositionvelocity==1.2e-05, erosionrate==0.001
-        WQ_AMMONIUM_MG_L, method==washoff1, rate==0.273,  limit==0.273,  timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
-        WQ_NITRATE_MG_L,  method==washoff1, rate==0.662,  limit==0.662,  timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
-        WQ_FRP_MG_L,      method==washoff1, rate==0.010,  limit==0.010,  timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
-        WQ_DOC_MG_L,      method==washoff1, rate==21.446, limit==21.446, timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
-        WQ_DON_MG_L,      method==washoff1, rate==1.021,  limit==1.021,  timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
-        WQ_DOP_MG_L,      method==washoff1, rate==0.005,  limit==0.005,  timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
-        WQ_POC_MG_L,      method==washoff1, rate==12.154, limit==12.154, timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
-        WQ_PON_MG_L,      method==washoff1, rate==1.044,  limit==1.044,  timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
-        WQ_POP_MG_L,      method==washoff1, rate==0.061,  limit==0.061,  timeConstant==3600, rainThreshold==1.0,  depthThreshold==0.020
+        SED_TSS,          Method==Shear1, Rate==0.0,    Limit==1000.0,    Depth Threshold==0.02, Deposition Stress==0.01, Erosion Stress==0.5, Deposition Velocity==1.2, Erosion Rate==0.001
+        WQ_AMMONIUM_MG_L, Method==Washoff1, Rate==0.273,  Limit==0.273,  Time Constant==3600, Rain Threshold==1.0,  Depth Threshold==0.020, Deposition Velocity==0.0
+        WQ_NITRATE_MG_L,  Method==Washoff1, Rate==0.662,  Limit==0.662,  Time Constant==3600, Rain Threshold==1.0,  Depth Threshold==0.020, Deposition Velocity==0.0
+        WQ_FRP_MG_L,      Method==Washoff1, Rate==0.010,  Limit==0.010,  Time Constant==3600, Rain Threshold==1.0,  Depth Threshold==0.020, Deposition Velocity==0.0
+        WQ_DOC_MG_L,      Method==Washoff1, Rate==21.446, Limit==21.446, Time Constant==3600, Rain Threshold==1.0,  Depth Threshold==0.020, Deposition Velocity==0.0
+        WQ_DON_MG_L,      Method==Washoff1, Rate==1.021,  Limit==1.021,  Time Constant==3600, Rain Threshold==1.0,  Depth Threshold==0.020, Deposition Velocity==0.0
+        WQ_DOP_MG_L,      Method==Washoff1, Rate==0.005,  Limit==0.005,  Time Constant==3600, Rain Threshold==1.0,  Depth Threshold==0.020, Deposition Velocity==0.0
+        WQ_POC_MG_L,      Method==Washoff1, Rate==12.154, Limit==12.154, Time Constant==3600, Rain Threshold==1.0,  Depth Threshold==0.020, Deposition Velocity==0.5
+        WQ_PON_MG_L,      Method==Washoff1, Rate==1.044,  Limit==1.044,  Time Constant==3600, Rain Threshold==1.0,  Depth Threshold==0.020, Deposition Velocity==0.5
+        WQ_POP_MG_L,      Method==Washoff1, Rate==0.061,  Limit==0.061,  Time Constant==3600, Rain Threshold==1.0,  Depth Threshold==0.020, Deposition Velocity==0.5
     End Material
 
     Material == 2       
-        SED_TSS,          method==shear1, rate==0.0,    limit==2000.0,    depthThreshold==0.002, depositionstress==0.001, erosionstress==0.05, depositionvelocity==1.2e-05, erosionrate==0.1
-        WQ_AMMONIUM_MG_L, method==washoff1, rate==2.0,  limit==20.0,  timeConstant==30, rainThreshold==0.1,  depthThreshold==0.002
-        WQ_NITRATE_MG_L,  method==washoff1, rate==5.0,  limit==50.0,  timeConstant==60, rainThreshold==0.1,  depthThreshold==0.002
+        SED_TSS,          Method==Shear1, Rate==0.0,    Limit==2000.0,    Depth Threshold==0.002, Deposition Stress==0.001, Erosion Stress==0.05, Deposition Velocity==1.5, Erosion Rate==0.1
+        WQ_AMMONIUM_MG_L, Method==Washoff1, Rate==2.0,  Limit==20.0,  Time Constant==30, Rain Threshold==0.1,  Depth Threshold==0.002, Deposition Velocity==0.0
+        WQ_NITRATE_MG_L,  Method==Washoff1, Rate==5.0,  Limit==50.0,  Time Constant==60, Rain Threshold==0.1,  Depth Threshold==0.002, Deposition Velocity==0.0
     End Material
 
     Material == 3,5      
-        WQ_DOP_MG_L,      method==washoff1, rate==0.5,  limit==0.5,  timeConstant==300, rainThreshold==10.0,  depthThreshold==0.120
+        WQ_DOP_MG_L,      Method==Washoff1, Rate==0.5,  Limit==0.5,  Time Constant==300, Rain Threshold==10.0,  Depth Threshold==0.120, Deposition Velocity==0.0
     End Material
 
 End Catchment Pollutant Export Model
