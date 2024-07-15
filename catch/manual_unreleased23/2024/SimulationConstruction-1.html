@@ -324,7 +324,7 @@ Figure 4.2: <strong>TUFLOW CATCH folder structure, expanded</strong>
 <p>The above folder structure supports the overall intended TUFLOW CATCH simulation workflow, such that:</p>
 <ul>
 <li>The TUFLOWCATCH folder (and control file, see below) is the single point of contact for execution of TUFLOW CATCH simulations, regardless of the combination of TUFLOW HPC or TUFLOW FV models being called</li>
-<li>All simulation results (again, regardless of what subsidiary TUFLOW products are called) are written to the TUFLOWCATCH/output subfolder: users should never need to navigate to TUFLOW HPC or TUFLOWFV output/results folders to examine results from TUFLOW CATCH simulations</li>
+<li>All simulation results (again, regardless of what subsidiary TUFLOW products are called) are written to the TUFLOWCATCH/results subfolder: users should never need to navigate to TUFLOW HPC or TUFLOWFV output/results folders to examine results from TUFLOW CATCH simulations</li>
 <li>Users do not need to (and should not) set up their own *.tcf (TUFLOW HPC) or *.fvc (TUFLOW FV) top level control files in the respective TUFLOW and TUFLOWFV runs directories: TUFLOW CATCH does this automatically based on information provided in the overarching TUFLOW CATCH control file<br />
 </li>
 <li>Calls to subsidiary first level control files and/or folders from the overarching TUFLOW CATCH control file for both TUFLOW HPC and TUFLOW FV (such as *.tgc, _dbase etc. (TUFLOW HPC) or *.fvsed etc. (TUFLOW FV)) need to be provided as relative paths to locations that sit within the respective TUFLOW or TUFLOWFV subfolder arrangements, from the TUFLOW CATCH runs directory</li>
@@ -345,7 +345,7 @@ Figure 4.3: <strong>Opening one text file from the relative path in an already o
 <ul>
 <li>TUFLOW CATCH control file is the primary point of construction and execution contact</li>
 <li>TUFLOW and TUFLOWFV folder substructures contain respective input model data such as GIS layers, DEMs etc</li>
-<li>TUFLOWCATCH folder substructure contains model outputs</li>
+<li>TUFLOWCATCH folder substructure contains model results</li>
 </ul>
 <p>Subsequent sections describe the TUFLOW CATCH control file set up and model execution.</p>
 </div>
@@ -380,18 +380,18 @@ Figure 4.3: <strong>Opening one text file from the relative path in an already o
 <blockquote>
 <p><a href="AppCommands.html#TCGPKGProj">GPKG Projection ==</a></p>
 </blockquote>
-<p>Set the date format, with command arguments as either ISODATE (dd/mm/yyy hh:mm:ss) or hours (a single float). It is strongly recommended that ISODATE be used for longer simulations, where interpreting hour output timestamps can be difficult:</p>
+<p>Set the time format, with command arguments as either ISODATE (dd/mm/yyy hh:mm:ss) or hours (a single float). It is strongly recommended that ISODATE be used for longer simulations, where interpreting hour output timestamps can be difficult:</p>
 <blockquote>
-<p><a href="introduction.html#TCTimeFmt">Date Format ==</a></p>
+<p><a href="introduction.html#TCTimeFmt">Time Format ==</a></p>
 </blockquote>
-<p>Set the start and end dates in the format declared above:</p>
+<p>Set the start and end times in the format declared above:</p>
 <blockquote>
-<p><a href="introduction.html#TCStrtDte">Start Date ==</a></p>
+<p><a href="introduction.html#TCStrtDte">Start Time ==</a></p>
 </blockquote>
 <blockquote>
-<p><a href="introduction.html#TCEndDte">End Date ==</a></p>
+<p><a href="introduction.html#TCEndDte">End Time ==</a></p>
 </blockquote>
-<p>Set the directory for simulation outputs (e.g. xmdf and netcdf results files). This can be set to any location as either a full path (e.g. X:\Project\Output), or as a path relative to the location of the TUFLOW CATCH control file (e.g. ..\output):</p>
+<p>Set the directory for simulation outputs (e.g. xmdf and netcdf results files). This can be set to any location as either a full path (e.g. X:\Project\Results), or as a path relative to the location of the TUFLOW CATCH control file (e.g. ..\results):</p>
 <blockquote>
 <p><a href="AppCommands.html#TCOutDir">Output Directory ==</a></p>
 </blockquote>
@@ -431,7 +431,7 @@ Figure 4.3: <strong>Opening one text file from the relative path in an already o
 </ul>
 <p>Set the directory for writing the TUFLOW FV boundary condition files prepared by TUFLOW CATCH from TUFLOW HPC simulation, including boundary condition blocks and underlying data (timeseries) files. This command is required even if TUFLOW FV is not used in a TUFLOW CATCH simulation, in which case template TUFLOW FV files will be written to this location. TUFLOW CATCH also writes TUFLOW HPC diagnostic information to this location (regardless of whether TUFLOW FV is simulated), including timeseries files of predicted catchment-wide summed cumulative volumes and/or masses. These files can be useful for providing system understanding, even when TUFLOW FV is not activated. This directory should be always set as the bc_dbase folder within the TUFLOW CATCH folder substructure (as generated by the TUFLOW CATCH QGIS plugin), as a path relative to the location of the TUFLOW CATCH control file (i.e. ..\bc_dbase):</p>
 <blockquote>
-<p><a href="AppCommands.html#TCCatchDir">Catch Ouput Folder ==</a></p>
+<p><a href="AppCommands.html#TCCatchDir">Catch Output Folder ==</a></p>
 </blockquote>
 <p>Set the timestep (in simulation time seconds) at which lines within a boundary condition file for TUFLOW FV (created from TUFLOW HPC predictions) are separated (required even if TUFLOW FV not used). TUFLOW CATCH offers the user the option to set this timestep differently for different types of TUFLOW FV boundaries: nodestrings (Q boundaries that deliver momentum to TUFLOW FV) and lateral inflows (QC boundaries that do not deliver momentum to TUFLOW FV). It would be typical that nodestring boundaries are written at a shorter timestep to lateral boundaries, but this is not mandated, and the user is able to decide how this timestep relates to simulation time and file size constraints:</p>
 <blockquote>
@@ -456,12 +456,12 @@ GIS Format == SHP
 SHP Projection == ..\..\TUFLOW\model\gis\projection.prj
 
 ! Simulation settings
-Date Format == ISODATE
-Start Date == 01/01/2021 00:00:00
-End Date == 01/02/2021 00:00:00
+Time Format == ISODATE
+Start Time == 01/01/2021 00:00:00
+End Time == 01/02/2021 00:00:00
 
 ! Output folders
-Output Directory == X:\Project\Output
+Output Directory == X:\Project\Results
 Write Check Files == ..\check
 Log Folder == ..\log
 
@@ -531,7 +531,7 @@ Set the beginning of the block, with command arguments as either HPC or none, an
 <blockquote>
 <p><a href="AppCommands.html#TCHPCEXE">EXE ==</a></p>
 </blockquote>
-<p>Set the time format for output results. Given that the intention of TUFLOW CATCH is that it support longer term environmental investigations (i.e. not short term detailed ‘traditional’ flood studies), results written in hours format can be difficult to interpret in terms of seasonality, for example. As such, TUFLOW HPC can be instructed to write results in the date format adopted by TUFLOW FV. Doing so is strongly recommended, especially if TUFLOW FV is using the ISODATE format rather than hours:</p>
+<p>Set the time format for output results. Given that the intention of TUFLOW CATCH is that it support longer term environmental investigations (i.e. not short term detailed ‘traditional’ flood studies), results written in hours format can be difficult to interpret in terms of seasonality, for example. As such, TUFLOW HPC can be instructed to write results in the time format adopted by TUFLOW FV. Doing so is strongly recommended, especially if TUFLOW FV is using the ISODATE format rather than hours:</p>
 <blockquote>
 <p><a href="AppCommands.html#TCHPCTF">Time Format ==</a> TUFLOWFV</p>
 </blockquote>
