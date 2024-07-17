@@ -346,7 +346,7 @@ Figure 4.2: <strong>TUFLOW CATCH folder structure, expanded</strong>
 </p>
 </div>
 </center>
-<p>The three relevant executable suites (TUFLOW CATCH, TUFLOW HPC and TUFLOW FV) should be stored in separate subfolders, but within a general EXE folder for neatness, e.g. C:\EXE\TUFLOWCatch, C:\EXE\TUFLOW and C:\EXE\TUFLOWFV.</p>
+<p>The three relevant executable suites (TUFLOW CATCH, TUFLOW HPC and TUFLOW FV) should be stored in separate subfolders, but within a general EXE folder for neatness, e.g. C:\EXE\TUFLOWCatch\2024.0.0\, C:\EXE\TUFLOW\2023-03-AF\ and C:\EXE\TUFLOWFV\2023.1.1\. The use of version names in the directory structure is important as the TUFLOW software suite allows multiple versions to coexist on the same computer, provided the executable (.exe extension) and libraries (.dll and .ptx extensions) for a specific version are contained within their own sub-folder. The user downloaded version may differ from the examples and the version sub-folder name/s should be amended to reflect the downloaded version/s.</p>
 </div>
 <div id="SCGeneralWF-3" class="section level3 hasAnchor" number="4.4.2">
 <h3><span class="header-section-number">4.4.2</span> Intended workflow<a href="SimulationConstruction-1.html#SCGeneralWF-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -356,7 +356,7 @@ Figure 4.2: <strong>TUFLOW CATCH folder structure, expanded</strong>
 <li>All simulation results (again, regardless of what subsidiary TUFLOW products are called) are written to the TUFLOWCATCH/results subfolder: users should never need to navigate to TUFLOW HPC or TUFLOWFV output/results folders to examine results from TUFLOW CATCH simulations</li>
 <li>Users do not need to (and should not) set up their own *.tcf (TUFLOW HPC) or *.fvc (TUFLOW FV) top level control files in the respective TUFLOW and TUFLOWFV runs directories: TUFLOW CATCH does this automatically based on information provided in the overarching TUFLOW CATCH control file<br />
 </li>
-<li>Calls to subsidiary first level control files and/or folders from the overarching TUFLOW CATCH control file for both TUFLOW HPC and TUFLOW FV (such as *.tgc, _dbase etc. (TUFLOW HPC) or *.fvsed etc. (TUFLOW FV)) need to be provided as relative paths to locations that sit within the respective TUFLOW or TUFLOWFV subfolder arrangements, from the TUFLOW CATCH runs directory</li>
+<li>Calls to subsidiary first level control files and/or folders from the overarching TUFLOW CATCH control file for both TUFLOW HPC and TUFLOW FV (such as *.tgc (file), bc_dbase (folder) etc. (TUFLOW HPC) or *.fvsed etc. (TUFLOW FV)) need to be provided as relative paths to locations that sit within the respective TUFLOW or TUFLOWFV subfolder arrangements, from the TUFLOW CATCH runs directory</li>
 <li>All model data (e.g. grids, GIS, boundaries etc.) should be located within respective subfolder arrangements for TUFLOW and TUFLOW FV</li>
 <li>These first level control files (that sit within the TUFLOW or TUFLOWFV directory structures) then should be constructed to make the usual relative calls to all other files and data within respective their subfolder arrangements</li>
 <li>It is suggested that users exploit standard text editor capabilities of opening one text file (e.g. a *.tgc file) from from the currently open text file (i.e. the *.tcc) so as to not need to explicitly navigate between subfolder structures. This is most commonly achieved by right clicking on the relative path of the other file (e.g. *.tgc) as specified in the open text file (i.e. the *.tcc) and using the context menu to open the second file, as per Figure <a href="SimulationConstruction-1.html#fig:fig-rightclick">4.3</a> (where the relative path on line 48 was right clicked)</li>
@@ -392,7 +392,7 @@ Figure 4.3: <strong>Opening one text file from the relative path in an already o
 <p>Construction of each of the TUFLOW CATCH control file blocks is described in the following sections.</p>
 <div id="SCTCCGlobal-3" class="section level3 hasAnchor" number="4.5.1">
 <h3><span class="header-section-number">4.5.1</span> Global commands<a href="SimulationConstruction-1.html#SCTCCGlobal-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>This block of the TUFLOW CATCH control file contains information that is applied equally to both TUFLOW HPC and TUFLOW FV. It is not declared as a block (as all subsequent blocks are). These global commands are presented following (as hyperlinks to Appendix <a href="AppCommands.html#AppCommands">A</a>), with command argument options also shown where appropriate. All commands are mandatory. Some commands can be overwritten if required within subsequent blocks (see Sections <a href="SimulationConstruction-1.html#SCTCCHPC-3">4.5.2</a> and <a href="SimulationConstruction-1.html#SCTCCFV-3">4.5.4</a>).</p>
+<p>This initial section of the TUFLOW CATCH control file contains information that is applied equally to both TUFLOW HPC and TUFLOW FV. It is not declared as a block. These global commands are presented following (as hyperlinks to Appendix <a href="AppCommands.html#AppCommands">A</a>), with command argument options also shown where appropriate. All commands are mandatory. Some commands can be overwritten if required within subsequent blocks (see Sections <a href="SimulationConstruction-1.html#SCTCCHPC-3">4.5.2</a> and <a href="SimulationConstruction-1.html#SCTCCFV-3">4.5.4</a>).</p>
 <p>Set the hardware to be used, with command arguments as either CPU or GPU:</p>
 <blockquote>
 <p><a href="introduction.html#TCHardware">Hardware ==</a></p>
@@ -424,11 +424,11 @@ Figure 4.3: <strong>Opening one text file from the relative path in an already o
 <blockquote>
 <p><a href="AppCommands.html#TCOutDir">Output Directory ==</a></p>
 </blockquote>
-<p>Set the directory for writing simulation check files (e.g. .shp files). This can be set to any location as either a full path (e.g. X:\Project\Check), or as a path relative to the location of the TUFLOW CATCH control file (e.g. ..\check):</p>
+<p>Set the directory for writing simulation check files (e.g. .shp files). This can be set to any location as either a full path (e.g. X:\Project\check), or as a path relative to the location of the TUFLOW CATCH control file (e.g. ..\check):</p>
 <blockquote>
 <p><a href="AppCommands.html#TCChkDir">Write Check Files ==</a></p>
 </blockquote>
-<p>Set the directory for writing simulation log files. TUFLOW HPC and TUFLOW FV engine log files will be written to this location, as well as module log files (such as the water quality module of TUFLOW FV). This can be set to any location as either a full path (e.g. X:\Project\log), or as a path relative to the location of the TUFLOW CATCH control file (e.g. log - which is the folder created by the TUFLOW CATCH plugin by default):</p>
+<p>Set the directory for writing simulation log files. TUFLOW HPC and TUFLOW FV engine log files will be written to this location, as well as module log files (such as the water quality module of TUFLOW FV). This can be set to any location as either a full path (e.g. X:\Project\runs\log), or as a path relative to the location of the TUFLOW CATCH control file (e.g. log - which is the folder created by the TUFLOW CATCH plugin by default):</p>
 <blockquote>
 <p><a href="AppCommands.html#TCLogDir">Log Folder ==</a></p>
 </blockquote>
@@ -460,14 +460,14 @@ Figure 4.3: <strong>Opening one text file from the relative path in an already o
 </ul>
 <p>Set the directory for writing the TUFLOW FV boundary condition files prepared by TUFLOW CATCH from TUFLOW HPC simulation, including boundary condition blocks and underlying data (timeseries) files. This command is required even if TUFLOW FV is not used in a TUFLOW CATCH simulation, in which case template TUFLOW FV files will be written to this location. TUFLOW CATCH also writes TUFLOW HPC diagnostic information to this location (regardless of whether TUFLOW FV is simulated), including timeseries files of predicted catchment-wide summed cumulative volumes and/or masses. These files can be useful for providing system understanding, even when TUFLOW FV is not activated. This directory should be always set as the bc_dbase folder within the TUFLOW CATCH folder substructure (as generated by the TUFLOW CATCH QGIS plugin), as a path relative to the location of the TUFLOW CATCH control file (i.e. ..\bc_dbase):</p>
 <blockquote>
-<p><a href="AppCommands.html#TCCatchDir">Catch Output Folder ==</a></p>
+<p><a href="AppCommands.html#TCCatchDir">Catch BC Output Folder ==</a></p>
 </blockquote>
 <p>Set the timestep (in simulation time seconds) at which lines within a boundary condition file for TUFLOW FV (created from TUFLOW HPC predictions) are separated (required even if TUFLOW FV not used). TUFLOW CATCH offers the user the option to set this timestep differently for different types of TUFLOW FV boundaries: nodestrings (Q boundaries that deliver momentum to TUFLOW FV) and lateral inflows (QC boundaries that do not deliver momentum to TUFLOW FV). It would be typical that nodestring boundaries are written at a shorter timestep to lateral boundaries, but this is not mandated, and the user is able to decide how this timestep relates to simulation time and file size constraints:</p>
 <blockquote>
-<p><a href="AppCommands.html#TCNSOutDt">Catch Output Interval Nodestring ==</a><a href="AppParams.html#TCParNSOutDt"><span class="math inline">\(dT_{ns}\)</span></a></p>
+<p><a href="AppCommands.html#TCNSOutDt">Catch BC Output Interval Nodestring ==</a><a href="AppParams.html#TCParNSOutDt"><span class="math inline">\(dT_{ns}\)</span></a></p>
 </blockquote>
 <blockquote>
-<p><a href="AppCommands.html#TCLatOutDt">Catch Output Interval Lateral ==</a><a href="AppParams.html#TCParLatOutDt"><span class="math inline">\(dT_{lat}\)</span></a></p>
+<p><a href="AppCommands.html#TCLatOutDt">Catch BC Output Interval Lateral ==</a><a href="AppParams.html#TCParLatOutDt"><span class="math inline">\(dT_{lat}\)</span></a></p>
 </blockquote>
 <p>Set the frequency at which TUFLOW CATCH pauses to write out TUFLOW FV boundary condition files, in units of days (simulation time, required even if TUFLOW FV not used). Setting a value of 1 means that TUFLOW CATCH will hold all boundary information in memory for a day of simulation time, and then update TUFLOW FV boundary files (and summed flow and mass timeseries) with this held memory on a daily basis. For example, if outputs were set to be hourly via either of the above interval commands, then 24 lines would be added to each boundary file at time of writing:</p>
 <blockquote>
@@ -495,9 +495,9 @@ Write Check Files == ..\check
 Log Folder == ..\log
 
 ! Boundary condition configuration
-Catch Output Folder == ..\bc_dbase
-Catch Output Interval Nodestring == 900
-Catch Output Interval Lateral == 10800
+Catch BC Output Folder == ..\bc_dbase
+Catch BC Output Interval Nodestring == 900
+Catch BC Output Interval Lateral == 10800
 CSV Write Frequency Day == 1
 </code></pre>
 </div>
