@@ -113,7 +113,7 @@
   },"16": {
     "doc": "Changelog for v3.11.1",
     "title": "Bug Fixes",
-    "content": "TUFLOW Viewer . | Fixes a bug that prevented NetCDF rasters from being loaded via Load Results - NetCDF Grid when the Python netCDF4 library wasn’t installed. | . Processing Tools . | SWMM Tools - Support date format following convention 01Jan2001. | SWMM Tools - Prevents using invalid geometry for the SWMM processing tools that support edit-in-place. | SWMM Tools - Minor changes to help text and labels. | Geopackage Write to SWMM Inp - Changed some of the convert GPKG to INP conversions to be case-insenstive. | SWMM Tools - Minor fix to junction to storage node tool that could sometimes fail when using GeoPackages. | SWMM “Create Channel Endpoint 1D/2D Connections” changed to use non-selected pipes for determining if pipe has neighbors when using selected conduits. | . Other . | TUFLOW Runner - Fix startup with the plugin issue related to launching the TUFLOW Runner on Linux (Note: Runner not available on Linux). | SWMM drag/drop Inp File - now correctly handles the situation when the filename is changed in the processing tool dialog. | Increment Layer and Database (in context menu) - Fixes bug that stopped dialog from initialising if QGIS is using Python 3.12. | ReFH2 to TUFLOW - Updated to work on Python 3.12 | . ",
+    "content": "TUFLOW Viewer . | Fixes a bug that prevented NetCDF rasters from being loaded via Load Results - NetCDF Grid when the Python netCDF4 library wasn’t installed. | Fixes a bug related to the upgrade to Python 3.12 that ocurred when trying to use the ‘play’ button to automatically cycle through timesteps | . Processing Tools . | SWMM Tools - Support date format following convention 01Jan2001. | SWMM Tools - Prevents using invalid geometry for the SWMM processing tools that support edit-in-place. | SWMM Tools - Minor changes to help text and labels. | Geopackage Write to SWMM Inp - Changed some of the convert GPKG to INP conversions to be case-insenstive. | SWMM Tools - Minor fix to junction to storage node tool that could sometimes fail when using GeoPackages. | SWMM “Create Channel Endpoint 1D/2D Connections” changed to use non-selected pipes for determining if pipe has neighbors when using selected conduits. | . Other . | TUFLOW Runner - Fix startup with the plugin issue related to launching the TUFLOW Runner on Linux (Note: Runner not available on Linux). | SWMM drag/drop Inp File - now correctly handles the situation when the filename is changed in the processing tool dialog. | Increment Layer and Database (in context menu) - Fixes bug that stopped dialog from initialising if QGIS is using Python 3.12. | ReFH2 to TUFLOW - Updated to work on Python 3.12 | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.11.1.html#bug-fixes",
     
     "relUrl": "/version/changelog-3.11.1.html#bug-fixes"
@@ -153,300 +153,328 @@
     
     "relUrl": "/version/changelog-3.11.html"
   },"22": {
+    "doc": "Changelog for v3.12",
+    "title": "Changelog for TUFLOW Plugin v3.12",
+    "content": ". | New Features and Enhancements . | TUFLOW Styling | SWMM Processing Tools | ARR to TUFLOW | Processing Toolbox | Import Empty | . | Bug Fixes . | TUFLOW Viewer | Other | . | . ",
+    "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.12.html#changelog-for-tuflow-plugin-v312",
+    
+    "relUrl": "/version/changelog-3.12.html#changelog-for-tuflow-plugin-v312"
+  },"23": {
+    "doc": "Changelog for v3.12",
+    "title": "New Features and Enhancements",
+    "content": "TUFLOW Styling . Support Geometry Specific QML Styling . Adds support for users to update the default TUFLOW styling by adding geometry specific QML files. The tool will first search for QML files that contain a geometry extension (_P, _L, _R) before falling back to finding a standard match. Example: . Input layer: 2d_po_001_L.shp . The tool will first search for a QML file with the name 2d_po_L.qml before searching for 2d_po.qml. For more information on customising styles, please see the following wiki page: wiki.tuflow.com/QGIS_TUFLOW_Styles . SWMM Processing Tools . BC - Convert Non-Outfall SX Connections to HX . New processing tool that converts SX connections to non-outfall nodes to HX connections as required by TUFLOW-SWMM. This tool is especially useful after converting a model from XPSWMM or similar that uses SX connections at these nodes. Convert - XPSWMM Model from XPX (beta) . This tool converts a model from XPSWMM to TUFLOW-SWMM using an xpx file and the TUFLOW tcf file from the XPSWMM simulation. The xpx file can be exported from the XPSWMM application or using the free XPSWMM Viewer. The TUFLOW tcf file is generated when the model is run (analyze from XPSWMM) and is in the “2D\\Data” folder unless custom folders were specified. The output of the tool is a TUFLOW-SWMM model with links to the SWMM inp file. The tool documentation includes more details on how to use the tool. Scenarios - Extract from GPKGs . This tool converts multiple standalone TUFLOW-SWMM GeoPackage files into a series of files represented by scenarios generating a common GPKG and one for each scenario. The scenario GPKG files only contain new or modified features from the common GPKG. This makes it easy to see what changes between scenarios and to modify common features without having to change every scenario. This tool also creates a text file with the commands to read the correct input files (inp) by scenario. Minor Change to the Tool Outfalls - Fix Multiply Connected Links . SWMM does not allow multiple links to connect to the same outfall node. This tool fixes such issues by moving the outfall node and creating a new conduit connecting the original node to the new outfall. Instead of creating a rectangular channel, this tool now uses a dummy channel instead. This eliminates any energy losses or attenutation that may occur when using a rectangular channel. ARR to TUFLOW . Adds New Methods For Estimating Initial Losses &lt; 60 min . New methods have been added for calculating/estimating initial losses for storm durations less than 60 minutes. This includes interpolating the pre-burst depth values to zero at 0 min (as opposed to the initial loss). Log-linear interpolation methods have been added for both the loss and pre-burst interpolation methods as well. The new methods are listed below, for more information please visit the ARR to TUFLOW TUFLOW Wiki page. | Log-interpolate to zero - will use a log-linear interpolation (duration will use a log scale) (assuming a loss value of 0 mm for 0 min) | Interpolate pre-burst - will linearly interpolate pre-burst depths (rather than losses) (assuming a depth of 0 mm for 0 min) | Log-Interpolate pre-burst - will use a log-linear interpolation on the pre-burst depths (duration will use a log scale) (assuming a depth of 0 mm for 0 min) | . Adds Option to Use Design Burst Temporal Pattern Number for Preburst . A new option “design burst” has been added for complete storm generation that will use the same temporal pattern number for the pre-burst that is being used for the design burst. For more information please visit the ARR to TUFLOW TUFLOW Wiki page. Handles Missing ARF Parameter Data . If the ARR datahub download is missing ARF parameter data, the tool will no longer error and will continue with the assumption that the ARF = 1.0. A warning will be added to the output log file. Processing Toolbox . Create TUFLOW Project Now Creates “Project Home” in Browser . The Create TUFLOW Project tool will now create the “Project Home” shortcut in the Browser panel. Convert TUFLOW Model GIS Format Supports “Explode Multi-Part Features” Option . The Convert TUFLOW Model GIS Format tool now supports a user setting to explode multi-part features into separate features. Prior to v3.12 this would be on by default with no option to change it. In v3.12 the default has been changed to off. Import Empty . Adds New Empty Tooltips . Adds tooltip for: . | 2d_cyc | 2d_ad_ic | 2d_ad_md | 2d_sa_po | 2d_strm | . ",
+    "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.12.html#new-features-and-enhancements",
+    
+    "relUrl": "/version/changelog-3.12.html#new-features-and-enhancements"
+  },"24": {
+    "doc": "Changelog for v3.12",
+    "title": "Bug Fixes",
+    "content": "TUFLOW Viewer . | Fixes a bug related to the upgrade to Python 3.12 that ocurred when switching between plot and narrow views | Load results from TLF will now ignore encoding errors | . Other . | Filter Message by Code - Fixes bug that could cause a python error | Arch Bridge Editor - Fixes bug that would not let user create a new 1d_xs with the message Error finding existing cross-section - please try selecting \"-None-\" | Arch Bridge Editor - Fixes bug when selecting ‘Overwrite’ or ‘Append’ output options that would error saying it could not edit the layer because it was “open” in the workspace. | pytuflow - Fixes issues if pytuflow is installed where it can become tanlged with the ‘tuflow’ plugin. | Increment Layer - Fixes bug that would not supersede GPKG layers unless ‘Preserve Database’ spatial database option was selected (only supersedes if there is only one layer in the database) | Increment Layer - Fixes bug when superseding layers that could sometimes fail due to QGIS holding a lock on them. Fixed for Shapefiles but not necessarily for GPKGs as a lock can sometimes persist until QGIS is closed. | ARR to TUFLOW - Fixes warning messages that could be reported after running the tool in an error dialog (only appeared for Python 3.12) | ARR to TUFLOW - The “Unique Catchment Identifier Field” will now automatically default to any field that is called either “name” or “id” (rather than the first field) | ARR to TUFLOW - Reprojects from easting/northing to long/lat EPSG:4326 rather than EPSG:4203 - can result in different data being extracted if site is bordering hydrological regions. | Increment Layer (context menu) - fixes a bug that could cause “OGR unrecognised driver ‘’” which could occur after loading the given layer using ‘Load from TCF’ | Increment Layer (on the toolbar) - fixes a bug that was incorrectly setting up the dialog for GPKG layers. | Import Empty - Fixes a bug if the text _empty appeared in the file path (other than in the actual file name) the tool would not correctly identify the available empty types | 1D Integrity Tool - Fixes GPKG inputs in “Channel ID” tool which could cause Python error | Convert TUFLOW Model GIS Format - Fixes a bug when using convertering TRD files and ‘force TUFLOW directory structure’. Previously file paths referenced in the TRD would be incorrectly referenced based on the TRD file location rather than the calling control file. | Convert TUFLOW Model GIS Format - Now considers _TUFLOW_Override.tcf files when converting models. | Convert TUFLOW Model GIS Format - Correctly interprets and converts MIF projection strings (e.g. MI Projection == CoordSys Earth Projection ... ) | Copy TUFLOW Command - Fixes bug where the ‘TUFLOW’ context menu was not available for MIF layers. | Apply Label to Current Layer - Fixes a bug where the auto labelling can produce a python error due to changes in API in QGIS versions later than 3.26 | . ",
+    "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.12.html#bug-fixes",
+    
+    "relUrl": "/version/changelog-3.12.html#bug-fixes"
+  },"25": {
+    "doc": "Changelog for v3.12",
+    "title": "Changelog for v3.12",
+    "content": " ",
+    "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.12.html",
+    
+    "relUrl": "/version/changelog-3.12.html"
+  },"26": {
     "doc": "Changelog for v3.2",
     "title": "Changelog for TUFLOW Plugin v3.2",
     "content": ". | New Features and Enhancements . | TUFLOW Viewer | 1D Integrity Tool | Import Empty | Auto Labelling | Insert TUFLOW Attributes | Load Layers From TCF | TUFLOW Layer Styling | . | Bug Fixes . | TUFLOW Viewer | Other | . | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.2.html#changelog-for-tuflow-plugin-v32",
     
     "relUrl": "/version/changelog-3.2.html#changelog-for-tuflow-plugin-v32"
-  },"23": {
+  },"27": {
     "doc": "Changelog for v3.2",
     "title": "New Features and Enhancements",
     "content": "TUFLOW Viewer . Support For Copy / Paste Styling . An option to copy and paste scalar and vector styling within TUFLOW Viewer using the context menu in the Result Types widget. Changing Icon Size . Icon size can now be changed in TUFLOW Viewer » Setting » Options. Icon size should also be corrected for Ultra HD monitors (if one Ultra HD monitor and one non-Ultra HD monitor are both connected, then there may still be issues). Hover Over Pipe Labelling . Hover over pipe labels has been added to the cross-section plotting tab when viewing 1D long profiles. 1D Long Plot Along Non-Primary Flow Paths . Long sections from 1D results now allow users to generate sections along non-primary flow paths by selecting an upstream and downstream section to go between. Previously TUFLOW Viewer relied on the information provided in the plot/csv/_1d_Chan.csv which only described connections along primary flow paths. Cross-Section Refresh Reloads CSV . If the cross-section CSV source file is missing, copying the CSV to correct location and refreshing the plot will now correctly reload from CSV. Plotting Icons Added To Tab Headers . Added icons to plotting tab headings. Changed long-profile icon for time series results to be the cross-section icon to match plotting tab. 1D Integrity Tool . Empty Geometry Tool . Added new tool: Empty Geometry (find and remove). For more information, please visit the following TUFLOW wiki page: 1D Integrity Tool - Empty Geometry . Duplicate / Missing IDs . Added new tool to find and fix duplicate IDs or empty IDs. For more information, please visit the following TUFLOW wiki page: 1D Integrity Tool - Channel ID . Pre-Tool Check . A check has been added before all the integrity tools that stops the tool from running if there are duplicate or empty IDs, or empty geometries, as this can cause errors or funny behaviour in most of the tools. Output Consistent Naming Convention . All tools now have a consistent naming convention for corrected output layers - ‘original_lyr_name_tmp’. Import Empty . Missing Tooltip Empty Types . Tooltips updated to include some missing empty types and updated to link to the 2018 Manual. Save Empty Directory . The ability to save the current empty directory to the project or globally is now available. Auto Labelling . PLOT_P and PLOT_L . Added _PLOT_L and _PLOT_P custom label rules. Insert TUFLOW Attributes . Save Empty Directory . The ability to save the current empty directory to the project or globally is now available. Load Layers From TCF . GPKG Now Supported . Now supports GPKG vector and raster format. GeoTIFF Now Supported . Now supports TIF raster format. TUFLOW Layer Styling . 2d_rf . Added 2d_rf style. 2d_sa Transparent . Updated 2d_sa style to have more transparency. ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.2.html#new-features-and-enhancements",
     
     "relUrl": "/version/changelog-3.2.html#new-features-and-enhancements"
-  },"24": {
+  },"28": {
     "doc": "Changelog for v3.2",
     "title": "Bug Fixes",
     "content": "TUFLOW Viewer . | Save default style fixed | Load scalar and vector datasets correctly for xmdf results outside of velocity and unit flow | Fixed bug in time series results that could load groundwater results incorrectly as surface results e.g. ‘groundwater level’ as ‘level’ | Fixed bug that could cause python error or unusual plotting behaviour if time series results was removed then re-added with updated/different output types | Fixed bug that user to have to deselect result in ‘Results’ list a couple of times to toggle it off after loading time series results only [similar to bug fixed in 3.1.10] | Fixed bug that would cause Python error when plotting ‘US Level’ or ‘DS Level’ when a point object from PLOT_P was also selected | Default font size is now correctly shown in options dialog after it is changed without having to restart TUFLOW Viewer | Fixed bug that could occur when loading from a project can cause Python error when time series results are in the project | Fixed bug that could cause water level results to not appear on cross-section | Fixed bug for viewing cross-section that would not correctly handle column names in the GIS layer | Time series long plot will now check for circular references in the 1D channel system. Previously this could cause QGIS to hang. | . Other . | Import Empty Tool - Fixed and issue where older versions of QGIS (older than 3.10.3) had stopped working due to the use of new modern methods. | Increment Layer Tool - Fixed and issue where older versions of QGIS (older than 3.10.3) had stopped working due to the use of new modern methods. | TUFLOW Styling - Fixed bug that would cause a Python error if no layer was selected | Load from TCF - Fixed bug that would cause Python error when a command had ‘==’ as a comment. | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.2.html#bug-fixes",
     
     "relUrl": "/version/changelog-3.2.html#bug-fixes"
-  },"25": {
+  },"29": {
     "doc": "Changelog for v3.2",
     "title": "Changelog for v3.2",
     "content": " ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.2.html",
     
     "relUrl": "/version/changelog-3.2.html"
-  },"26": {
+  },"30": {
     "doc": "Changelog for v3.3",
     "title": "Changelog for TUFLOW Plugin v3.3",
     "content": ". | New Features and Enhancements . | General | TUFLOW Viewer | Processing Toolbox | Apply GPKG Layer Names | TUFLOW Layer Styling | Import Check Files | Import Empty Files | Insert TUFLOW Attributes | Configure Project | About Dialog | Integrity Tool | . | Bug Fixes . | TUFLOW Viewer | Other | . | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.3.html#changelog-for-tuflow-plugin-v33",
     
     "relUrl": "/version/changelog-3.3.html#changelog-for-tuflow-plugin-v33"
-  },"27": {
+  },"31": {
     "doc": "Changelog for v3.3",
     "title": "New Features and Enhancements",
     "content": "General . GPKG compatibility added to relevant tools - Functionality added for the 2022 TUFLOW release. Significant updates have been made to the 1D integrity tool. TUFLOW Viewer . New ‘Load From TCF’ Approach . New approach when loading from TCF - all possible results listed to user rather than possible scenarios. The old method is still available via Settings » Defaults. Support For New Method For Setting Axis Limits in Animation Export Tool . Setting axis limits for cross-section plots have a new method where the limits are taken from the TUFLOW Viewer plot. Opening plot properties will no longer trigger axis limit calculation which could sometimes take a while. Hover Over Open Channel Labelling . Hover over labelling shows channel names in 1D results long plotting - similar to culvert hover over labelling. Speed Up Hover Over Labelling . Use blitting to make hover over labelling a lot quicker. Processing Toolbox . A TUFLOW toolbox has been added to the processing tool. Convert TUFLOW Model GIS Format . Added “Convert TUFLOW Model GIS Format” tool. Apply GPKG Layer Names . New Tool - renames GPKG layers in QGIS Layers Panel to match their name in the GPKG database. TUFLOW Layer Styling . GPKG Support . Now supports GPKG layers. Import Check Files . GPKG Support . Now supports GPKG layers. Import Empty Files . GPKG Support . Now supports GPKG layers. Insert TUFLOW Attributes . GPKG Support . Now supports GPKG layers. Configure Project . GPKG Support . Now supports GPKG layers. About Dialog . QGIS and Python version also listed. Integrity Tool . Additional ‘Magnitude’ Column in Output . Added additional ‘magnitude’ column to ‘output’ GIS layer that defines how far big the error is based on respective tool (bigger magnitude = bigger issue). Auto Styling for Output . Added auto symbology for the ‘output’ GIS layer that uses a graduated size based on the ‘magnitude’. This is automatically applied when the layer is generated and can also be applied via the TUFLOW layer styling tool. Option to Auto Replace Input With Output . After a given tool is run, if corrections were made and option will be given to automatically replace inputs with tool outputs after running. Udated GUI With Documentation Links . The GUI has been updated with links to documentation for the relevant tool. Output ‘tmp’ Layers Given Same Style as Input . Output, corrected layers automatically copy the style of input layers. Flow Trace Speed Up . Significantly improved the speed of the long plot generator in the flow trace tool - will be most noticeable on big datasets. Limit Flow Trace Between Channels . Can now limit flow trace and long plot to particular section of network by selecting 2+ channels to connect between. Long Plot - Hover Over Labelling Shows More Info . Hover over labelling now shows more information on the channel/pipe and any continuity flags. Long Plot - Copy / Export Data . Export/copy data options to the context menu. Long Plot - Hide Legend . Toggle legend on/off option available in the context menu. Long Plot - Toggle Different Continuity Flags . Toggle different continuity flags on/off option available in the context menu. Long Plot - Plot Window Link with Map Window . Current pipe at mouse position in the plotting window is highlighted red in QGIS map window. Long Plot - Zoom to Channel in Map Window . ‘Zoom to feature’ option added to the context menu (if a channel has been right-clicked) that will zoom the map window to the selected channel. Long Plot - Zoom to Path in Map Window . ‘Zoom to Selected Paths’ option added to the context menu that will zoom the map window to the selected paths in the ‘Paths’ widget. Long Plot - Better Label Conflict Management . Channel labelling have better conflict management so that there is little to no overlaps. ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.3.html#new-features-and-enhancements",
     
     "relUrl": "/version/changelog-3.3.html#new-features-and-enhancements"
-  },"28": {
+  },"32": {
     "doc": "Changelog for v3.3",
     "title": "Bug Fixes",
     "content": "TUFLOW Viewer . | Orevent scrambling of datasets in plot window due to bug in matplotlib 3.5.1 (packaged with QGIS 3.24.1) | Colour bar is now always displayed for curtain plot (if legend is on) - previously if there was no data (i.e. section was dry) the colour bar wasn’t shown. Mostly affects animations. | Fixed colour bar label which broke with an update to the matplotlib library | TUFLOW FV XMDF outputs now will correctly show maximums | Fixed bug that could cause Python error if PLOT layers were removed from workspace while TUFLOW Viewer was closed | Fixed bug with icon size setting introduced in v3.2 for QGIS versions &lt; 3.16 that would cause error when trying to load | Hover over labelling is broken in latest QGIS python/matplotlib version - now fixed | Fixed bug that could occur when loading from a qgz/qgs | . Other . | ReFH2 Tool - fixed bug that broke ReFH2 GUI from opening in previous release | Import Empty - TUFLOW empty type list will be properly updated after user uses ‘browse’ to select a directory | Insert TUFLOW attributes - TUFLOW empty type list will be properly updated after user uses ‘browse’ to select a directory | Configure Project - Displayed paths now show correct operating system slashes | TUFLOW utilities - Common functions - can now specify an output name without specifying an output directory | TUFLOW utilities - Common functions - output name in TUFLOW_to_GIS was not working | 1D Integrity Tool - No longer need a line layer to check for empty geometries in points or cross section layers | Load From TCF - Will now load layers from ‘Create TIN Zpts’ command | Auto Label - Fixed tooltip when mouse hovers over toolicon in plugin toolbar | SCS Tool - now unloads properly | TUFLOW Menu under Plugins - now unloads properly | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.3.html#bug-fixes",
     
     "relUrl": "/version/changelog-3.3.html#bug-fixes"
-  },"29": {
+  },"33": {
     "doc": "Changelog for v3.3",
     "title": "Changelog for v3.3",
     "content": " ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.3.html",
     
     "relUrl": "/version/changelog-3.3.html"
-  },"30": {
+  },"34": {
     "doc": "Changelog for v3.4",
     "title": "Changelog for TUFLOW Plugin v3.4",
     "content": ". | New Features and Enhancements . | TUFLOW Viewer | 1D Integrity Tool | TUFLOW Layer Styling | ARR to TUFLOW | TUFLOW Utilities | . | Bug Fixes . | TUFLOW Viewer | Other | . | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.4.html#changelog-for-tuflow-plugin-v34",
     
     "relUrl": "/version/changelog-3.4.html#changelog-for-tuflow-plugin-v34"
-  },"31": {
+  },"35": {
     "doc": "Changelog for v3.4",
     "title": "New Features and Enhancements",
     "content": "TUFLOW Viewer . Support for ‘_TS_P’ GIS Outputs . Support for “quick viewing” ‘_TS_P’ output GIS layers (just open them in QGIS while TUFLOW Viewer is open). Not full featured (no axis names, does not populate time slider, no secondary axis etc). Toggle Inactive Areas in Cross-Sections . User option added to view/hide inactive areas in 1D cross-sections. In-active areas are controlled by negative material/mannings n values in the cross-section. Cross-Section Source Leading With ‘/’ . Cross-section source reference with a leading ‘/’ (or ‘\\’) will now be interpreted the same as ‘./’. Although this not correct (e.g. “./csv/cross_section.csv” is different than “/csv/cross_section.csv” especially in Linux), this is how TUFLOW currently handles leading slashes. Support For Insets in Animation Export Tool . Animation export tool will now update temporal properties of all map windows in the print layout (i.e. support for insets). 1D Integrity Tool . Error Downgraded to Warning When Input Checking . Now produces a warning instead of an error if the input layer doesn’t look like a 1d_nwk type. TUFLOW Layer Styling . Stability Styling . A new styling button is located using dropdown arrow under ‘Style Current Layer’ button. This will automatically style the ‘_TS_P’ layer based on perceived stability. VZSH_ZPT_CHECK . Styling for vzsh_zpt_check. NWK_C Check ‘all else’ On By Default . NWK_C check styling now has purple “all else” style visible by default. ARR to TUFLOW . Assume Zero Values for NaN . If storm loss values are NaN from the datahub, the tool will now assume zero and produce an warning message in the output log file. Additional Columns Added to Material.csv . Added additional columns (“Storage Reduction Factor” and “Fraction Impervious”) to material.csv output. TUFLOW Utilities . Increased Dropdown Box Width . Increased width of timesteps dropdown box for “TUFLOW to GIS” common tools. ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.4.html#new-features-and-enhancements",
     
     "relUrl": "/version/changelog-3.4.html#new-features-and-enhancements"
-  },"32": {
+  },"36": {
     "doc": "Changelog for v3.4",
     "title": "Bug Fixes",
     "content": "TUFLOW Viewer . | Fixed bug that caused map to not update when clicking different result types after loading from a project | Fixed a bug that was converting all length units to metres for 2D/3D cross-section plotting - will now use map canvas units | Fixed a bug that would incorrectly show the maximum water level on 1D cross-sections | New method of loading result from TCF was sometimes incorrectly loading in results that weren’t selected by the user | . Other . | Import Empty - Fixed bug when choosing option to ‘Convert to GPKG’ that wouldn’t correctly create a GPKG layer with TUFLOW attributes or projection | Load Layers From TCF - fixed loading GPKG layers that would sometimes fail to load | Configure Project - Fixed ‘OK’ button that was disabled within the select CRS dialog | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.4.html#bug-fixes",
     
     "relUrl": "/version/changelog-3.4.html#bug-fixes"
-  },"33": {
+  },"37": {
     "doc": "Changelog for v3.4",
     "title": "Changelog for v3.4",
     "content": " ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.4.html",
     
     "relUrl": "/version/changelog-3.4.html"
-  },"34": {
+  },"38": {
     "doc": "Changelog for v3.5.1",
     "title": "Changelog for TUFLOW Plugin v3.5.1",
     "content": ". | Bug Fixes | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.5.1.html#changelog-for-tuflow-plugin-v351",
     
     "relUrl": "/version/changelog-3.5.1.html#changelog-for-tuflow-plugin-v351"
-  },"35": {
+  },"39": {
     "doc": "Changelog for v3.5.1",
     "title": "Bug Fixes",
     "content": ". | ARR to TUFLOW - removes remote debugging breakpoint added in 3.5 which was causing crash. | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.5.1.html#bug-fixes",
     
     "relUrl": "/version/changelog-3.5.1.html#bug-fixes"
-  },"36": {
+  },"40": {
     "doc": "Changelog for v3.5.1",
     "title": "Changelog for v3.5.1",
     "content": " ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.5.1.html",
     
     "relUrl": "/version/changelog-3.5.1.html"
-  },"37": {
+  },"41": {
     "doc": "Changelog for v3.5",
     "title": "Changelog for TUFLOW Plugin v3.5",
     "content": ". | New Features and Enhancements . | TUFLOW Viewer | ARR to TUFLOW | Load Layers From TCF | . | Bug Fixes . | TUFLOW Viewer | Other | . | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.5.html#changelog-for-tuflow-plugin-v35",
     
     "relUrl": "/version/changelog-3.5.html#changelog-for-tuflow-plugin-v35"
-  },"38": {
+  },"42": {
     "doc": "Changelog for v3.5",
     "title": "New Features and Enhancements",
     "content": "TUFLOW Viewer . Load Results From TCF - Appended Scenario / Event Names . Load results from TCF now finds results that have appended scenario/event names. Changed Mesh Format Order in Load Dialog . The mesh format (extension) order has been changed in the Load Results - Map Outputs dialog so that XMDF is now listed first. ARR to TUFLOW . Sets Initial Losses &gt; 72 hrs . Sets initial losses &gt; 72hrs to the 72 hr initial loss value. Load Layers From TCF . New Raster Options . The user now has the option to load rasters, not load rasters, or load them but don’t render them (start unchecked in the Layers Panel). ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.5.html#new-features-and-enhancements",
     
     "relUrl": "/version/changelog-3.5.html#new-features-and-enhancements"
-  },"39": {
+  },"43": {
     "doc": "Changelog for v3.5",
     "title": "Bug Fixes",
     "content": "TUFLOW Viewer . | Fixes animation export | . Other . | Import Empty - ensures the .prj file of the imported empty is the same as the empty - this was previously implemented but was recently broken in v3.4 | Configure Project - Was not correctly setting the empty directory in the Import Empty and Insert TUFLOW Attributes tool if the ‘Save to Project’ or ‘Save Globally’ was used in either tool. | ARR to TUFLOW - Fixes a bug when selecting ‘Use Event Independent Continuing Losses’ that would cause the variable setting TRD file to become scrambled. | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.5.html#bug-fixes",
     
     "relUrl": "/version/changelog-3.5.html#bug-fixes"
-  },"40": {
+  },"44": {
     "doc": "Changelog for v3.5",
     "title": "Changelog for v3.5",
     "content": " ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.5.html",
     
     "relUrl": "/version/changelog-3.5.html"
-  },"41": {
+  },"45": {
     "doc": "Changelog for v3.6",
     "title": "Changelog for TUFLOW Plugin v3.6",
     "content": ". | New Features and Enhancements . | TUFLOW Viewer | SCS to TUFLOW | Load Layers From TCF | Sort / Filter Open Layers | Convert TUFLOW Model GIS Format | Configure TUFLOW Project | TUFLOW Layer Styling | TUFLOW Utilities | . | Bug Fixes . | TUFLOW Viewer | Other | . | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.6.html#changelog-for-tuflow-plugin-v36",
     
     "relUrl": "/version/changelog-3.6.html#changelog-for-tuflow-plugin-v36"
-  },"42": {
+  },"46": {
     "doc": "Changelog for v3.6",
     "title": "New Features and Enhancements",
     "content": "TUFLOW Viewer . Curtain Plots Support Vertical Velocity . TUFLOW FV NetCDF curtain vectors will now have a vertical component if a ‘W’ output is found in the results. Support For Changing Result Order . Added option to shift order of open results via right-click context menu. This is useful for changing the order results appear in the plotting window. Remember Previous State for GUI Layout . An option to remember the previous state of the TUFLOW Viewer layout has been added. This remember whether the previous state was using the ‘Plot View’, ‘Narrow View’, and where the dock was located. Support For NetCDF Rasters . NetCDF rasters are now supported via Load Results - NetCDF Grid. Support For Flood Modeller Python Exported Results . Added support for CSV results exported from the Flood Modeller API Python library (Load Results - Time Series FM). Support For ZZN Flood Modeller Results . Adds support for the raw ZZN time series output from Flood Modeller (Load Results - Time Series FM). SCS to TUFLOW . New Approach to Use GIS Polygons . New approach added that uses GIS polygon(s) and their attribute data for method calculation. This has the benefit of allowing multiple calculations to take place and spatial distribution of parameters. For more information, please visit the following TUFLOW wiki page: QGIS SCS to TUFLOW - GIS Approach . Load Layers From TCF . Progress Bar . A progres bar has been added. This shows users where the tool is being slow at loading (usually large DEMs). Automatic TUFLOW Styling . Imported layers are automatically given TUFLOW styling. Grouping Options . An option has been added to give users the ability to choose whether to bring in layers ‘grouped’ or ‘ungrouped’ by control file. Sort / Filter Open Layers . Improved Sorting Algorithm . The sorting algorith has been altered slightly so that layers with the same name (w/o ‘_L’, ‘_P’, ‘_R’ suffix) will be sorted by geometry in order of points, line, polygon. The tool’s speed at sorting layers has also been improved. Convert TUFLOW Model GIS Format . Restrict Conversion by Scenario . Provides user with the option to restrict conversion by scenario name. Configure TUFLOW Project . New Icon . New icon and added to toolbar. TUFLOW Layer Styling . Adds Missing Styles . Added styling for 2d_qnl layers. TUFLOW Utilities . Auto Find 2dm . TUFLOW to GIS will automatically find the 2dm file if using a post-processed XMDF. ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.6.html#new-features-and-enhancements",
     
     "relUrl": "/version/changelog-3.6.html#new-features-and-enhancements"
-  },"43": {
+  },"47": {
     "doc": "Changelog for v3.6",
     "title": "Bug Fixes",
     "content": "TUFLOW Viewer . | Cross-section plot lines could become offset if start or end of line was outside the mesh | Fixes bug for long section plotting of Flood Modeller results that could sometimes produce a python error | Fixes bug in hiding inactive area on cross-section when M column header isn’t defined in GIS file | Fixes bug with cross-section plot that wouldn’t update plot when a result type was deselected | Fixes bug when loading results from TCF which could produce a python error when ~s~ flag was just before extension .tcf in the name | Fixes ‘load results from TCF’ when output path is an absolute path | Fix bug when loading TUFLOW release 2013 time series results which could produce a python error | New method for loading results from TCF backported to be compatible with Python versions earlier than 3.9 and QGIS versions earlier than 3.22 | . Other . | 1D Integrity Tool - Fixes a bug with the ouput symbol renderer in QGIS 3.26 | TUFLOW Utilities - Fixes bug with TUFLOW to GIS common tool using correct scalar/vector type and loading timesteps from a post-processed XMDF | TUFLOW Styling - Fixes a bug that would not render TUFLOW style for GPKG layers | Import Empty - Fixes a bug where open layers with the same name as the imported layer were removed from the workspace | ReFH2 to TUFLOW - Fixes bug that would cause GUI to hang if 2 different output types (within rainfall or hydrograph) was selected (e.g. Direct Runoff and Total Runoff) | ReFH2 to TUFLOW - Fixes python error that could occur if the selected GIS layer was removed | Load From TCF - Fixes bug in new routine that wasn’t finding all scenario names | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.6.html#bug-fixes",
     
     "relUrl": "/version/changelog-3.6.html#bug-fixes"
-  },"44": {
+  },"48": {
     "doc": "Changelog for v3.6",
     "title": "Changelog for v3.6",
     "content": " ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.6.html",
     
     "relUrl": "/version/changelog-3.6.html"
-  },"45": {
+  },"49": {
     "doc": "Changelog for v3.7",
     "title": "Changelog for TUFLOW Plugin v3.7",
     "content": ". | New Features and Enhancements . | TUFLOW Viewer | Arch Bridge Editor | ARR to TUFLOW | Import Empty | Reload Layer | Load Layers From TCF | Convert Model GIS Format | Toolbox | . | Bug Fixes . | TUFLOW Viewer | Other | . | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.7.html#changelog-for-tuflow-plugin-v37",
     
     "relUrl": "/version/changelog-3.7.html#changelog-for-tuflow-plugin-v37"
-  },"46": {
+  },"50": {
     "doc": "Changelog for v3.7",
     "title": "New Features and Enhancements",
     "content": "TUFLOW Viewer . Updating Mesh Styling Updates Both Temporal and Maximums . Changing rendering style of a result type will now also change the style of the maximum and minimum type of the same name (and visa versa). Previously this would not update both as QGIS treats these as separate datasets. Support For Reloading Mesh Layers . Support reloading of mesh layers (must use reload layer tool if results have changed otherwise QGIS crashes). This is only available in QGIS 3.28+. Increase Hover Over Labelling Speed . Increased hover over labelling speed. From testing 10,000 point dataset: previously each label took ~1.0s to calculate and render, now ~0.15s. Add Missing Plot Result Type Axis Labels and Uniots . Adds units and label to y-axis for RFR, RFC, RFML outputs. Cross-Section Results Can Use Water Level or Max Water Level . Adds ‘Water Level’ and ‘Max Water Level’ result types to cross-section (previous had to use time series ‘Level’ result type). Arch Bridge Editor . New tool - Arch Bridge Editor or ‘BArch’ types. For more information please visit the following TUFLOW wiki page: QGIS TUFLOW Arch Bridge Editor . ARR to TUFLOW . Point Temporal Patterns . The tool will now download the point temporal pattern CSV manually if no temporal patterns are found in the ARR_Web_Data.txt. CSV Output Includes Event ID . The processed rainfall CSV files now contain the temporal pattern event ID. This makes it easier to match the processed data to the raw temporal pattern data from the Datahub. Import Empty . GPKG Database Settings Saved . The GPKG ‘Spatial Database Options’ settings are now saved after the tool is run so that they are auto populated the next time the tool is used. Reload Layer . Reload Mesh Support . Updated to support mesh layers in QGIS 3.28+. Load Layers From TCF . Improved Progress Bar . The progress bar has been improved and made more robust. Support Any TUFLOW Control Selection . Adds support for any TUFLOW control file to import from. Convert Model GIS Format . Manually Assigning CRS . Adds ability to specify output CRS. The output CRS is assigned to all layers when converting formats, however no translation/warping is performed. Commands That Do Not Copy Anything Reported . Tool will now log commands that do not convert/copy any files (but should do). Create Empty Files . Adds option to create empty files for the converted model. The tool will try and locate an existing ‘empty’ folder or ‘gis’ folder to put the created empty folder, however the user can also specify a relative path (from the root directory i.e. ‘TUFLOW’ folder to place it). Custom Output GPKG Name . Adds option to specify the output GPKG database name when using a grouped profile. Toolbox . TMO to Points . Added ‘TMO to Points’ algorithm to the TUFLOW toolbox. This tool converts outputs from a .tmo output (Map Output Format == TMO) into a point vector layer. ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.7.html#new-features-and-enhancements",
     
     "relUrl": "/version/changelog-3.7.html#new-features-and-enhancements"
-  },"47": {
+  },"51": {
     "doc": "Changelog for v3.7",
     "title": "Bug Fixes",
     "content": "TUFLOW Viewer . | Fixes a bug that would cause python error and not display results when trying to plot TS_P.shp and TPC results at the same time | Fixes bug when saving project when a TS_P.shp was loaded that could cause a python error | fixes rendering map outputs in QGIS 3.28 which could become scrambled if min dt was present (a bug is still present in QGIS that no longer renders temporal min dt) | Fixes bug that would incorrectly carry over 1D result types to next loaded result dataset | Stops duplicate plots of the same 1D element - can happen if the PLOT layer is duplicated in the workspace | Fixes bug that would produce python error after closing mesh results from layers panel then trying to close 1D results | Fixes bug in Load from TCF when a scenario name contains dashes (-) | fixes bug in map output flow calculation which was producing a python error | Fixes python error that could occur after closing tuflow completely and re-opening with time series result when a PLOT feature is already selected | Unidirectional pipes now plotted correctly in long plot | Cell centre ‘bed elevation’ results in TUFLOW FV netCDF format will no longer check if face is active in plot window | Load from TCF now correctly finds output zone results | Fixes bug that would cause 1D long sections to not plot when 1D point objects were also selected | Fixes bug when viewing results on cross-sections with mif files that would not show water levels | Fixed bug in animation tool that could cause python error if the dataset was the first in the mesh layer (index = 0) | . Other . | 1D Integrity Tool - fixes python error that could occur when checking for non-compliant channel ids in QGIS 3.26 | 1D Integrity Tool - Fixes bug in Unique Channel ID tool that wasn’t correctly flagging non-compliant ids | Configure Project - Fixes bug that would not create empties if ‘Create Model Folder Structure’ was not also ticked | Increment Layer Tool - Handles empty geometry layers a little nicer | Import Empty - Fixes ‘Convert to GPKG’ option which wasn’t doing anything | Insert TUFLOW Attributes - Fixes insert ‘2d_mat’ when using GPKG | Style Current Layer - Fixes tooltip | Load From TCF - Fixes a bug that did not load layers from ECF if using “Estry Control File == AUTO” | TUFLOW Utilities - info tool will error gracefully if an error occurs with the utility | TUFLOW Utilities - Fixes browse dialogs hanging if previous file/folder path was on a drive that is no longer connected | TUFLOW Utilities - Fixed bug that would crash QGIS if the download button is clicked twice in a row | TUFLOW Utilities - Cache is now cleared for download links so latest is always downloaded | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.7.html#bug-fixes",
     
     "relUrl": "/version/changelog-3.7.html#bug-fixes"
-  },"48": {
+  },"52": {
     "doc": "Changelog for v3.7",
     "title": "Changelog for v3.7",
     "content": " ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.7.html",
     
     "relUrl": "/version/changelog-3.7.html"
-  },"49": {
+  },"53": {
     "doc": "Changelog for v3.8.1",
     "title": "Changelog for TUFLOW Plugin v3.8.1",
     "content": ". | Bug Fixes . | TUFLOW Viewer | Other | . | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.8.1.html#changelog-for-tuflow-plugin-v381",
     
     "relUrl": "/version/changelog-3.8.1.html#changelog-for-tuflow-plugin-v381"
-  },"50": {
+  },"54": {
     "doc": "Changelog for v3.8.1",
     "title": "Bug Fixes",
     "content": "TUFLOW Viewer . | A rogue import statement was causing the plugin to not load | Fixes bug that would not correctly update newly selected result in open result widget | Fixes bug when importing results from TCF when some input layers are using absolute path references that could cause a python error | No longer prompt user about saving default styles - could prompt (many times) when saving a project | . Other . | TUFLOW Toolbox - tmo_to_points wasn’t being loaded | Utilities - Fixes issue when running ‘info’ function and non-ascii characters are logged which may cause the tool to error | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.8.1.html#bug-fixes",
     
     "relUrl": "/version/changelog-3.8.1.html#bug-fixes"
-  },"51": {
+  },"55": {
     "doc": "Changelog for v3.8.1",
     "title": "Changelog for v3.8.1",
     "content": " ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.8.1.html",
     
     "relUrl": "/version/changelog-3.8.1.html"
-  },"52": {
+  },"56": {
     "doc": "Changelog for v3.8.2",
     "title": "Changelog for TUFLOW Plugin v3.8.2",
     "content": ". | New Features and Enhancements . | Load Layers From TCF | Import Empty | . | Bug Fixes . | TUFLOW Viewer | Other | . | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.8.2.html#changelog-for-tuflow-plugin-v382",
     
     "relUrl": "/version/changelog-3.8.2.html#changelog-for-tuflow-plugin-v382"
-  },"53": {
+  },"57": {
     "doc": "Changelog for v3.8.2",
     "title": "New Features and Enhancements",
     "content": "Load Layers From TCF . New Option to Load Layers Sorted by Control File . The tool now supports sorting layer by control rather than alphabetically. This allows users to see layer priority as it exists in TUFLOW. An option also exists to group raster layers separately to the vector layers. If Event Logic Captured . Layers that sit inside “If Event == ” logic blocks now are treated the same as scenario blocks. Visual Change - Keep Selection Highlighted Blue . Selection highlighting stays blue even when the widget hasn’t got the focus (previously the selection would become grey). This allows better visual representation when both scenario and event options are present. Import Empty . Adds Import to Kart Option . Option to import empty layers into Kart repository. Import empty checks for the existance of Kart and gives the option only if it is available. ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.8.2.html#new-features-and-enhancements",
     
     "relUrl": "/version/changelog-3.8.2.html#new-features-and-enhancements"
-  },"54": {
+  },"58": {
     "doc": "Changelog for v3.8.2",
     "title": "Bug Fixes",
     "content": "TUFLOW Viewer . | Fixes bug that could cause strange plotting behaviour when 1D/2D results were both loaded and the reference time was changed for the 2D results | Fixes an issue where TUFLOW Viewer was not always picking up 1d_xs layers from GPKG | Fixes bug that would sometimes not show all available groundwater PO outputs | Fixes bug that could cause python error when trying to close a result just after TUFLOW is started overrided the same result layer | . Other . | Load from TCF - Fixes bug that could cause a load error if the output folder was a Windows path variable | Load From TCF - MIF layers with 2 geometry types will now correctly load in line types which could sometimes not load in correctly | ReFH2 to TUFLOW - Fixes tool not initialising correctly when plugin is loaded which was causing ‘unexpected’ error when the tool was opened by user | Arch Bridge Editor - fixes bug that would not recognise GPKG input layers as 1d_nwk | 1D Integrity Tool - fixes python error that could occur if no points where included when running the snapping tool | 1D Integrity Tool - Fixes bug that could cause python error due to non-unique indexing internally | Increment Layer - Fixes a bug that would lead to strange autofilled increment names (or python errors) when the source layer name was using letters along side version number e.g. ‘002b’ | Configure Project - Updates to latest vector file creation functions in QGIS. Projection.shp causes error in QGIS 3.30 | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.8.2.html#bug-fixes",
     
     "relUrl": "/version/changelog-3.8.2.html#bug-fixes"
-  },"55": {
+  },"59": {
     "doc": "Changelog for v3.8.2",
     "title": "Changelog for v3.8.2",
     "content": " ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.8.2.html",
     
     "relUrl": "/version/changelog-3.8.2.html"
-  },"56": {
+  },"60": {
     "doc": "Changelog for v3.8",
     "title": "Changelog for TUFLOW Plugin v3.8",
     "content": ". | New Features and Enhancements . | General | TUFLOW Viewer | Load Layers from TCF | TUFLOW Layer Styling | TUFLOW Utilities | Increment Layer | Configure Project | . | Bug Fixes . | TUFLOW Viewer | Other | . | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.8.html#changelog-for-tuflow-plugin-v38",
     
     "relUrl": "/version/changelog-3.8.html#changelog-for-tuflow-plugin-v38"
-  },"57": {
+  },"61": {
     "doc": "Changelog for v3.8",
     "title": "New Features and Enhancements",
     "content": "General . Removes most sys.path.append calls so that the TUFLOW Plugin doesn’t get tangled with other plugins or Python packages. TUFLOW Viewer . Support for Saving Default Vector Styles for Streamlines and Flow Traces . Support added for saving/loading default styling for vectors using streamline and flow trace styling. TUFLOW FV NetCDF Output Renders Velocity Maximums . A workaround has been added for TUFLOW FV NetCDF results so that velocity maximums are rendered properly. Adds (xs) and (nwk) to Hydraulic Table Result Types . 1D hydraulic result types add “(xs)” or “(nwk)” at front of result types to indicate what part in the 1d_ta_tables_check.csv the property came from (either from the cross-section processing or from the channel network processing). Adds Axis Labels for 1D Hydraulic Tables . Axis labels have been added for 1D hydraulic table plotting. Adds Option to Flip Secondary Axis . The option to flip which axis has the secondary axis applied has been added to the plot context menu (i.e. the secondary axis can be either for the x-axis or y-axis). Animation Default Format Changed to MP4 . The default output file format for the animation tool has been changed from avi to mp4. Better Error Handling for FFMPEG Downloader . Better error handling and reporting has been implemented when TUFLOW Viewer tries to download ffmpeg.exe for animation creation. Adds Result Name to Filename for Cross-Section Batch Plot Exporter . The result name is added to the exported filename for batch export cross-section plot. This is the same (existing) behaviour when batch export time-series plots. Support For Changing the Reference Time for NetCDF Raster Results . Support has been added to change the reference time for NetCDF rasters. Results must be loaded via Load Results - NetCDF Grid. Open Result Widget Communicates with Layers Panel Visibility . The “Open Results” widget is now linked with the Layer Styling panel so that when results are deselected in TUFLOW Viewer the layer is simultaneously unchecked in the Layers Panel (and visa-versa). This has been implemented as there can be conflict between the QGIS F7 styling panel and TUFLOW Viewer (the QGIS panel is overriding TUFLOW Viewer) when results are deselected. Load Layers from TCF . Better Error Handling . Better error handling for issues occuring when trying to load layers from TCF into QGIS. TUFLOW Layer Styling . Adds Missing Layer Styling . Missing default TUFLOW layer styling has been added for bg_uvpt_check. TUFLOW Utilities . Adds Breakline Function to Common Functions . The ASC_to_ASC.exe utility breakline function is now available in the ‘Common Functions’ tab. Adds ASC_to_ASC Version Number . The ASC_to_ASC.exe version number is presented in the lower left of the dialog. This is important as the new GIS formats are only available in 2023 releases (or later) of the tool. The version is found when the TUFLOW Utilities dialog is initially loaded and is based on the asc_to_asc.exe path in the ‘Executables’ tab. Adds New Output Format Options to ASC_to_ASC Dialog . New formats added to the dialog for ASC_to_ASC.exe ‘Common Functions’. Increment Layer . Adds New GPKG Option to Save Superseded Version Out . A new option to save the superseded GPKG layer out into a new database. This prevents the necessity of creating a copy of a GPKG each time a layer is incremented. For more information, please visit the following TUFLOW wiki page: Increment Layer - Save Layer Into Superseded Folder . Configure Project . Dialog Will No Longer Close on Error . The dialog will no longer close if an error occurs while running the Configure TUFLOW Project tool. ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.8.html#new-features-and-enhancements",
     
     "relUrl": "/version/changelog-3.8.html#new-features-and-enhancements"
-  },"58": {
+  },"62": {
     "doc": "Changelog for v3.8",
     "title": "Bug Fixes",
     "content": "TUFLOW Viewer . | Load results from TCF - Handles encoding errors | Fixes 1D xs viewing when using a GPKG layer | No longer recognised 1d_bc as a 1d_tab type | Fixes Minimum dt display in QGIS 3.30 - now should correctly display as only one result type | Fixes bug that would not load 1D results correctly on project load | Fixes bug that could retain feature selection in layers that were removed or otherwise deselected | Fixes a bug with plotting 1D cross-sections that would cause them to be plotted even though the ‘XZ’ type was not selected | Fixes a bug with plotting 1D cross-sections that would stop them from being plotted after switching to a different plotting tab then coming back to the cross-section plotting tab | Fixes a bug that would not plot cross-section hydraulic tables if the 1d_xs and source CSV were in different folders | Fixes a bug that could cause switching between results to be really slow if multiple 1D results were loaded at the same time | NetCDF grids are now correctly saved / loaded in qgis project | Fixes ‘Move down’ option when there are only 2 results open | Fixes python error that could occur if selecting channel results when another open result only contains 2D PO results | Fixes grammatical error in batch export map tool successful message box | Fixes python error that could occur when batch exporting plots when data was of different lengths | . Other . | Load Layers From TCF - Encoding errors when reading TUFLOW control files are now ignored. | Correctly unloads a few tools so that plugin can be upgraded/removed properly | 1D Integrity Tool - Fixes X connectors not being properly handled when using flow trace tool | 1D Integrity Tool - Fixes spelling mistake in Continuity Tool description | Import Empty - Fixes bug that would cause ‘convert to database’ always to be checked when QGIS is first opened - now correctly remembers previous setting between sessions | Increment Layer Tool - Fixes bug that would update a layer’s name in layer panel but not the data source if an incremented layer had duplicates in the project | Increment Layer Tool - Fixes bug that would display “|layername=” for shp files after using ‘import from tcf’ tool | Convert TUFLOW Model GIS Format - Fixes bug that would not correctly convert TCF commands prefixed with ‘1D’ | Convert TUFLOW Model GIS Format - Fixes a bug that would cause the tool to not bring in all layers if a scenario name had a decimal point in the name (e.g. If Scenario == 2.5m) | Configure Project - Fixes bug that would not cancel tool after user cancel request | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.8.html#bug-fixes",
     
     "relUrl": "/version/changelog-3.8.html#bug-fixes"
-  },"59": {
+  },"63": {
     "doc": "Changelog for v3.8",
     "title": "Changelog for v3.8",
     "content": " ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.8.html",
     
     "relUrl": "/version/changelog-3.8.html"
-  },"60": {
+  },"64": {
     "doc": "Changelog for v3.9",
     "title": "Changelog for TUFLOW Plugin v3.9",
     "content": ". | New Features and Enhancements . | TUFLOW Viewer | ReFH2 to TUFLOW | TUFLOW Plugin Downloader | Import Empty | TUFLOW Context Menu - Layers Panel | TUFLOW Utilities | Load Layers From TCF | Apply GPKG Layer Names | TUFLOW Layer Styling | ARR to TUFLOW | Increment Layer | Processing Toolbox | . | Bug Fixes . | TUFLOW Viewer | Other | . | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.9.html#changelog-for-tuflow-plugin-v39",
     
     "relUrl": "/version/changelog-3.9.html#changelog-for-tuflow-plugin-v39"
-  },"61": {
+  },"65": {
     "doc": "Changelog for v3.9",
     "title": "New Features and Enhancements",
     "content": "TUFLOW Viewer . Support for 2d_bc_tables_check.csv . TUFLOW Viewer now supports loading and viewing the 2d_bc_tables_check.csv file. Once imported, the boundary feature can be selected from the input GIS layer (e.g. 2d_bc, 2d_sa) and plotted using the Time Series plot and selecting an appropriate result type. The boundary input type requires a unique ID to be able to link the check file with the feature (i.e. HQ boundaries do not work as these are automatically generated and do not use the ID attribute). Link to TUFLOW Wiki Documentation: TUFLOW Viewer - Import 2D BC Tables . User Defined Time Formatting in Animation Export . The animation export now supports user defined time formatting for the time label. The format follows the Python time formatting convention as described at the following link: https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes . Flood Modeller Result Shown on Cross-Sections With the Same Name . Flood modeller results can now be shown on cross-section even if they don’t intersect the created PLOT_P points if they have the same name as a result node. ReFH2 to TUFLOW . Support for FEH2022 Rainfall . The FEH2022 rainfall model is now supported in the RefH2 to TUFLOW tool. TUFLOW Plugin Downloader . Copy Path to Clipboard Button . Adds button to the finish dialog that will copy the download path to the clipboard (so that it can easily be pasted into the “Install from ZIP” plugin installation option). Import Empty . Missing Empty Types Added for Tooltips . Adds new/missing empty types to the empty tooltips (2d_bg, 1d_bg, 1d_lc). TUFLOW Context Menu - Layers Panel . Adds a “TUFLOW” context menu when a layer is right-clicked in the Layers Panel. The provided options are dependent on the selected layer (e.g. if it is a SHP or GPKG, or some layers get extra commands like the messages_P output). The tools below have been added to the context menu options. Increment Layer (Context Menu) . Adds a new increment layer tool to the layer context menu. Similar to the existing increment layer tool however the dialog will be different depending on the option selected in the context menu. By adding context to the dialog, the available options in the increment tool can be limited and the dialog will be far less complicated and busy. E.g. depending on the format, the options will be: . | SHP option - Increment File | GPKG option - Increment Layer and Database (create a new GPKG to increment layers into) | GPKG option - Increment Layer (increment layer inside the existing GPKG) | . And the resulting dialog will be dependent on the selected option. Filter Messages by ID . Adds Filter Message by ID to the TUFLOW context menu for messages_P layers. Copy TUFLOW Command . Adds ‘Copy TUFLOW Command’ tool to TUFLOW context menu. This tool will create a TUFLOW command based on the GIS layer name. From the layer name, the command and control file it belongs in will be inferred. The tool will do a search for the control file within the directory structure (based on the GIS file location), otherwise if the control file is not found, the standard location of the control file will be used. Multiple layers can be selected at once. If applicable, the command will be combined to a single line (e.g. for 2d_zsh) else separate commands will be created with line breaks. TUFLOW Utilities . GPKG Raster Support . GPKG rasters now available and supported in the relevant ‘Common Functions’ drop down boxes. Load Layers From TCF . Support for Old Auto Estry Command . Older style ‘ESTRY Control File AUTO’ syntax now supported (previously only ‘ESTRY Control File == AUTO’ worked). Apply GPKG Layer Names . Support for GPKG Rasters . GPKG rasters now supported. TUFLOW Layer Styling . Support ccA_L Result File . _ccA_L result file now has default styling. ARR to TUFLOW . Support for LIMB Data . Option add to process and use LIMB data will if available. Remove Longitude Limit . Removes longitude limit (&gt;153.2999). Previously this limit was in place as data was missing beyond this point. Increment Layer . User Check Before Overwriting Existing Layers . Adds user check when overwriting an existing layer in a GPKG. Processing Toolbox . Import Empty (Processing Toolbox) . A new version of the import empty tool has been added to the TUFLOW processing toolbox. This has been done as this is probably the correct location for the import empty tool and also allows a spring clean to remove legacy code and backward compatibility to old QGIS versions. Create Project (Processing Toolbox) . A new version of the Create TUFLOW Project tool has been added to the TUFLOW processing toolbox. This has been done as this is probably the correct location for this tool and also allows a spring clean to remote legacy code and backward compatibility to old QGIS versions. ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.9.html#new-features-and-enhancements",
     
     "relUrl": "/version/changelog-3.9.html#new-features-and-enhancements"
-  },"62": {
+  },"66": {
     "doc": "Changelog for v3.9",
     "title": "Bug Fixes",
     "content": "TUFLOW Viewer . | Time series results are now loaded correctly using ‘utf-8’ encoding which enables handling of special characters | Loading NetCDF Grids will now try and load all selected layers before reporting errors | Results with only maximums will now appear in relevant plot menus | Fixes loading netCDF raster as mesh | XS deactivation was only working when using the MAT approach | Loading mesh layers on when TUFLOW Viewer is opened was getting tangled if layers of different types (vector layers / mesh layers) had the same name | Fixes flood modeller result cross-sections not loading when X,Y coordinate did not contain a space between them in DAT file | Fixes animations with embedded plots not working in QGIS 3.30 | Fixes bug introduced in 3.8.2 that prevented NetCDF grid results from being loaded (produced python error about missing ‘events’ argument) | . Other . | TUFLOW Utilities - Fixes bug in asc_to_asc brkline tool where the vector layer was being passed into the utility instead of the raster layer | TUFLOW Utilities - Fixes bug where no ‘browse’ buttons were working | TUFLOW Utilities - Downloader was hanging indefinitely due to a python error on a separate thread in QGIS 3.32 (caused by new numpy version) | Configure Project - Fixes bug that would not correctly save empty file location for TUFLOW FV | TUFLOW Styling - Fixes default styling for sac_check_R | TUFLOW Styling - ISIS 1d_nwk layers are now given a single styling previously would cause python error because they are not guaranteed to have the standard 1d_nwk fields | Convert Model GIS Format - Fixes bug that cause new filepaths to be incorrect when convert filename that were only a number (e.g. 001.tgc) | Load from TCF - fixes bug that would not load layers if brackets were included in file path | Load from TCF - fixes issue that would cause a python error if there was a ‘|’ at the end of a GIS input command | . ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.9.html#bug-fixes",
     
     "relUrl": "/version/changelog-3.9.html#bug-fixes"
-  },"63": {
+  },"67": {
     "doc": "Changelog for v3.9",
     "title": "Changelog for v3.9",
     "content": " ",
     "url": "/qgis-tuflow-plugin/changelog/version/changelog-3.9.html",
     
     "relUrl": "/version/changelog-3.9.html"
-  },"64": {
+  },"68": {
     "doc": "Visual Changelogs",
     "title": "Visual Changelogs",
     "content": "Below you will find the Visual Changelogs for the QGIS TUFLOW Plugin since version 3.2. ",
