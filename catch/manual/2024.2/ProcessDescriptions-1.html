@@ -55,73 +55,19 @@
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{sectsty}
+\usepackage{fontspec}
+\setmainfont{Arial}
+\definecolor{BMTChapter}{rgb}{0.00, 0.33, 0.50}
+\definecolor{BMTSection}{rgb}{0.102, 0.741, 0.788}
+\chapterfont{\color{BMTChapter}}  % sets colour of chapters
+\sectionfont{\color{BMTSection}}  % sets colour of section headers
+\subsectionfont{\color{BMTSection}}  % sets colour of section headers
+\subsubsectionfont{\color{BMTSection}}  % sets colour of section headers
 
 
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
@@ -348,9 +294,9 @@ function setPlaySpeed() {
 } 
 </script>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-transfervid"></span>
-<img src="images/blank.png" alt="**Example of transferral of an inflow (from left to right) from TUFLOW HPC to TUFLOW FV**" width="1%" />
+<img src="images/blank.png" alt="**Example of transferral of an inflow (from left to right) from TUFLOW HPC to TUFLOW FV. Omitted in pdf version**" width="1%" />
 <p class="caption">
-Figure 3.3: <strong>Example of transferral of an inflow (from left to right) from TUFLOW HPC to TUFLOW FV</strong>
+Figure 3.3: <strong>Example of transferral of an inflow (from left to right) from TUFLOW HPC to TUFLOW FV. Omitted in pdf version</strong>
 </p>
 </div>
 </div>
@@ -369,36 +315,30 @@ Figure 3.3: <strong>Example of transferral of an inflow (from left to right) fro
 </ul></li>
 </ul>
 <p>Different pollutant export methods across the above options can be used within a single TUFLOW CATCH simulation for different pollutants. A given pollutant, however, should not have different material based pollutant export methods applied to it within a given simulation. Commands are provided in detail in Section <a href="SimulationConstruction-1.html#SimulationConstruction-1">4</a>, however an example of such a specification is provided following, with incomplete (…) parameter lists for brevity.</p>
-<blockquote>
-<p>Constant POLLUTANT_A == 8.0<br>
-Time-series POLLUTANT_B == temptre</p>
-</blockquote>
-<blockquote>
-<p>Material == ALL <br>
-<span class="math inline">\(\blockindent\)</span>POLLUTANT_C,<nbsp>Method==method1,param1==100.0…<br>
-<span class="math inline">\(\blockindent\)</span>POLLUTANT_D,<nbsp>Method==method2,param1==10.0…<br>
-<span class="math inline">\(\blockindent\)</span>POLLUTANT_E,<nbsp>Method==method1,param1==0.17…<br>
-<span class="math inline">\(\blockindent\)</span>POLLUTANT_F,<nbsp>Method==method2,param1==1.23…<br>
-<span class="math inline">\(\blockindent\)</span>…<br>
-End Material</p>
-</blockquote>
-<blockquote>
-<p>Material == 1,4 <br>
-<span class="math inline">\(\blockindent\)</span>POLLUTANT_C,<nbsp>Method==method1,param1==43.0…<br>
-<span class="math inline">\(\blockindent\)</span>POLLUTANT_E,<nbsp>Method==method1,param1==0.37…<br>
-<span class="math inline">\(\blockindent\)</span>…<br>
-End Material</p>
-</blockquote>
+<pre><code>Constant POLLUTANT_A == 8.0
+Time-series POLLUTANT_B == temptre
+
+Material == ALL
+  POLLUTANT_C,Method==method1,param1==100.0...
+  POLLUTANT_D,Method==method2,param1==10.0...
+  POLLUTANT_E,Method==method1,param1==0.17...
+  POLLUTANT_F,Method==method2,param1==1.23...
+  ...
+End Material
+
+Material == 1,4
+  POLLUTANT_C,Method==method1,param1==43.0...
+  POLLUTANT_E,Method==method1,param1==0.37...
+  ...
+End Material</code></pre>
 <p>Multiple constant and time-series pollutants can be specified (via individual command lines), and material blocks can be specified to apply to more than one material (the above example applies to ALL materials, then materials 1 and 4, for example). In a manner akin to specification of roughness in TUFLOW HPC, sequences of material blocks progressively spatially overwrite in the order presented. In the above example, materials 1 and 4 would therefore be interpreted as</p>
-<blockquote>
-<p>Material == 1,4 <br>
-<span class="math inline">\(\blockindent\)</span>POLLUTANT_C,<nbsp>Method==method1,param1==43.0…<br>
-<span class="math inline">\(\blockindent\)</span>POLLUTANT_D,<nbsp>Method==method2,param1==10.0…<br>
-<span class="math inline">\(\blockindent\)</span>POLLUTANT_E,<nbsp>Method==method1,param1==0.37…<br>
-<span class="math inline">\(\blockindent\)</span>POLLUTANT_F,<nbsp>Method==method2,param1==1.23…<br>
-<span class="math inline">\(\blockindent\)</span>…<br>
-End Material</p>
-</blockquote>
+<pre><code>Material == 1,4
+  POLLUTANT_C,Method==method1,param1==43.0...
+  POLLUTANT_D,Method==method2,param1==10.0...
+  POLLUTANT_E,Method==method1,param1==0.37...
+  POLLUTANT_F,Method==method2,param1==1.23...
+  ...
+End Material</code></pre>
 <p>Materials 2 and 3 would be as per the ALL specification above.</p>
 <p>Different computational pollutant export methods can be assigned to different pollutants within a single material block. The same computational pollutant export method should be assigned to the same pollutant across multiple material blocks, albeit with different parameterisations. For example, POLLUTANT_C should not have the Washoff1 method applied in material 3 and the Shear1 method applied in material 1.</p>
 <p>The above pollutant export models are described following.</p>
@@ -428,13 +368,13 @@ End Material</p>
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: #FFFFFF !important;background-color: #1ABDC9 !important;">
 Pollutant
 </th>
-<th style="text-align:center;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:center;font-weight: bold;color: #FFFFFF !important;background-color: #1ABDC9 !important;">
 Lower estimate (kg/ha/yr)
 </th>
-<th style="text-align:center;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:center;font-weight: bold;color: #FFFFFF !important;background-color: #1ABDC9 !important;">
 Upper estimate (kg/ha/yr)
 </th>
 </tr>
