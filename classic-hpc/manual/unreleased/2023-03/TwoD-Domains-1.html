@@ -780,6 +780,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="TwoD-Domains-1" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">Section 7</span> 2D Domains<a href="TwoD-Domains-1.html#TwoD-Domains-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><mark><strong>NOTE: This Chapter is currently under review.</strong> </mark></p>
 <div id="introduction-1" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Introduction<a href="TwoD-Domains-1.html#introduction-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This chapter of the Manual discusses features specifically related to 2D model domains. 1D domain features are discussed separately in Chapter <a href="OneD-Domains-1.html#OneD-Domains-1">5</a> and 1D/2D linking is discussed in Chapter <a href="DomainLinking-1.html#DomainLinking-1">10</a>.</p>
@@ -1529,8 +1530,7 @@ Useful for having TUFLOW create a TIN using polygons for TIN boundaries and poin
 <a href="TGCCommands-1.html#tgcReadGISZLine">Read GIS Z Line</a>
 </td>
 <td style="text-align:left;">
-<p>Reads 3D breaklines (defined as a line with elevation points) to modify the nearest Zpts to the height of the line. A powerful command for ensuring the crest height of ridges (levees, embankments, etc.) is correctly modelled. A number of options exist for this command. Also see <a href="TGCCommands-1.html#tgcAllowDanglingZLines">Allow Dangling Z Lines</a> and <a href="TGCCommands-1.html#tgcPauseWhenPolylineDoesNotFindZpt">Pause When Polyline Does Not Find Zpt</a>.</p>
-<a href="TGCCommands-1.html#tgcReadGISZShape">Read GIS Z Shape</a> offers greater functionality and maybe preferable in some instances.
+This is a legacy feature and it is recommended to use the Z Shape functionality (Section <a href="TwoD-Domains-1.html#zsh-4">7.3.5.2</a>) instead.
 </td>
 </tr>
 <tr>
@@ -2018,11 +2018,9 @@ Char(20)
 <div id="vzsh-4" class="section level4 hasAnchor" number="7.3.5.3">
 <h4><span class="header-section-number">7.3.5.3</span> Variable Z Shape Layer (2d_vzsh)<a href="TwoD-Domains-1.html#vzsh-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>TUFLOW 2D model topography can be varied over time to simulate breaching
-of embankments or even the filling of a river due to a landslide by
+of embankments, raising of flood defences during an event, or the filling of a river due to a landslide, by
 using <a href="TGCCommands-1.html#tgcReadGISVariableZShape">Read GIS Variable Z Shape</a>. The 2d_vzsh
-layer is used to define the final topographic shape at the end of the
-breach and/or fill period. The first four attributes are the same as for
-the 2d_zsh layer, plus there are some additional attributes to define
+layer is used to define the final topographic shape at the end of the topography change period. As summary of the GIS layer attributes is provided in Table <a href="TwoD-Domains-1.html#tab:tab-twoDVariable">7.6</a>. The first four attributes of 2d_vzsh are the same as the 2d_zsh layer. They are used to define the finished state of the variable geometry. Additional attributes have been added to allow the user to define
 how/when the breach commences and for how long. The breach/fill can be
 triggered using a number of methods:</p>
 <ul>
@@ -2034,21 +2032,16 @@ triggered using a number of methods:</p>
 <li>When the water level difference between two triggers exceeds a
 specified amount.</li>
 </ul>
-<p>Table <a href="TwoD-Domains-1.html#tab:tab-twoDVariable">7.6</a> presents the attributes of a 2d_vzsh layer and an example is discussed
-and illustrated in the next section.</p>
-<p>This feature should be used instead of the 2d_bc VG option (unless the
-rate of change of the erosion/fill is non-linear) as 2d_vzsh layers are
-simpler to define and manage.</p>
 <p>Variable Z Shapes can be restored once or repeatedly. Examples would be
 a breach of a flood defence wall or levee that is reinstated 6 hours
 later, or a sand bar of a creek entrance that repeatedly opens and
 closes. To use the restore feature, two additional attributes
 Restore_Interval and Restore_Period are required as described below in
-Table <a href="TwoD-Domains-1.html#tab:tab-twoDVariable">7.6</a>. For a single restoration event, only these two additional
-attributes are required. To restore repeatedly, “REPEAT” must be
+Table <a href="TwoD-Domains-1.html#tab:tab-twoDVariable">7.6</a>. For a single restoration event, only these two additional attributes are required. To restore repeatedly, “REPEAT” must be
 specified in the Shape Options in column 4. Repeated restoration is only
 possible for the water level and water level difference trigger methods,
 as a time trigger will not be able to be reached on a second occasion.</p>
+<p>Note, this variable geometry feature should be used instead of the 2d_bc VG option (unless the rate of change of the erosion/fill is non-linear) as 2d_vzsh layers are easier to define and manage.</p>
 <table>
 <caption>
 <span id="tab:tab-twoDVariable">Table 7.6: </span><strong>2D Variable Z-Shape (2d_vzsh) Attribute Descriptions</strong>
@@ -2176,11 +2169,12 @@ Trigger_Value
 <td style="text-align:left;">
 <p><b>Point:</b> Not used.</p>
 <p><b>Line or Polygon:</b> If Trigger_1 is blank, the simulation time in hours that the breach is to commence.</p>
-<p>If Trigger_1 is specified and Trigger_2 is left blank, the water level in metres at Trigger_1 that needs to be reached to trigger the failure.</p>
-<p>If both Trigger_1 and Trigger_2 are specified, the water level difference in metres between Trigger_1 and Trigger_2 that needs to be exceeded to trigger the failure. The water level difference is taken as the absolute of the difference between Trigger_1 and Trigger_2, so there is no need to specify a negative value.</p>
+<p>If Trigger_1 is specified and Trigger_2 is left blank, the water level at Trigger_1 that needs to be reached to trigger the failure.</p>
+<p>If both Trigger_1 and Trigger_2 are specified, the water level difference between Trigger_1 and Trigger_2 that needs to be exceeded to trigger the failure. The water level difference is taken as the absolute of the difference between Trigger_1 and Trigger_2, so there is no need to specify a negative value.</p>
 <p><b>Thin Line:</b></p>
 <p>If “DEPTH” is specified for Trigger_1, the depth in metres adjacent to the cell side that needs to be exceeded to trigger the failure at the cell side.</p>
-If “DEPTH DIFF” is specified for Trigger_1, the water level difference in metres across the cell side that needs to be exceeded to trigger the failure.
+<p>If “DEPTH DIFF” is specified for Trigger_1, the water level difference in metres across the cell side that needs to be exceeded to trigger the failure.</p>
+For all of the above options the length units are metres if modelling in SI units, or feet, is using <a href="TCFCommands-1.html#tcfUnits">Units</a> <teq>==</teq><tblk> US Customary</tblk>.
 </td>
 <td style="text-align:left;">
 Float
@@ -2240,14 +2234,13 @@ elevation of 41.0m. The Shape_Options attribute for the polygon was set
 to MIN (this means that the Zpt elevation can only be lowered (i.e.
 eroded), and the dashed lines have Shape_Options of TIN (to indicate
 that they are to be used for TIN generation, and not for Z lines). The
-vertices of the polygon that do not have a point snapped to them are
-assigned an elevation based on the existing Zpt values. The polygon
+vertices of the polygon that do not have a point snapped to them will be automatically assigned an elevation based on the existing Zpt values. The polygon
 vertices with the points snapped to them are assigned the elevation of
 the point (in this case, all at 41.0m). The elevation of the dashed
 lines will be constant at 41m as they are snapped to the 41m points.</p>
 <p>The only other object in the layer is the yellow pin point labelled A.
-This is a trigger point and its only attribute values are: TRIGGER for
-the Shape_Options attribute; and A for Trigger_1 attribute. This sets
+This is a trigger point. Its only attribute values are: TRIGGER for
+the Shape_Options attribute; and A for the Trigger_1 attribute. This sets
 the point as a trigger point and the “A” is the name of the trigger
 point. The magenta polygon also has attribute values of: A for Trigger_1
 (this indicates that the erosion trigger is based on the water level at
@@ -2260,7 +2253,7 @@ style="width:5.33627in;height:3.23684in" />
 </center>
 <p>The final eroded Zpt values are based on the TIN created by TUFLOW (the
 grey triangles in the image below). The central section will be
-horizontal at 41m sloping up either end to elevations based on the road
+horizontal at 41m, sloping up either end to elevations based on the road
 level. The <a href="https://wiki.tuflow.com/Check_Files_2d_vzsh">_vzsh_zpt_check</a> layer is useful to view the Zpts
 affected by the variable Z shape. This layer is also shown in the image
 below. The green triangles indicate that the Zpt level is to be eroded,
@@ -2275,7 +2268,7 @@ alt="ZSH Example 2" />
 above. Each image is in half hour intervals. The colour shading is of
 the elevations (specify ZH as a <a href="TCFCommands-1.html#tcfMapOutputDataTypes">Map Output Data
 Types</a> to view the changes in ground level over
-time). <!-- PAR the SMS high res haas been disabled, deleting this sentence -->.</p>
+time).</p>
 <center>
 <img src="images/image98.png" style="width:2.96in;height:2.07in" />
 <img src="images/image99.png" style="width:2.96in;height:2.07in" />
@@ -2311,8 +2304,8 @@ points as follows:
 <li>The dMax attribute is used to insert additional vertices between
 the line’s vertices. For example, if dMax is set to 10, then
 additional intermediate vertices are inserted at least every 10
-metres between the existing vertices where the distance between
-the existing vertices exceeds 10m. If the dMax attribute does
+metres (or feet if using <a href="TCFCommands-1.html#tcfUnits">Units</a> <teq>==</teq><tblk> US Customary</tblk>) between the existing vertices where the distance between
+the existing vertices exceeds this value. If the dMax attribute does
 not exist or is zero, half the 2D domain’s <a href="TGCCommands-1.html#tgcCellSize">Cell
 Size</a> is used as the dMax value.<br />
 </li>
@@ -2463,163 +2456,17 @@ style="width:6.29167in;height:3.96875in" /></center>
 </div>
 <div id="zln-4" class="section level4 hasAnchor" number="7.3.5.5">
 <h4><span class="header-section-number">7.3.5.5</span> 3D Breakline Layers (2d_zln)<a href="TwoD-Domains-1.html#zln-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<!--PAR this is legacy and 2d_zsh would be recommend, suggest we move to the end of section -->
 <p>This is a legacy feature and it is recommended to use the Z Shape functionality (Section <a href="TwoD-Domains-1.html#zsh-4">7.3.5.2</a>) instead. For details on this feature see <a href="TGCCommands-1.html#tgcReadGISZLine">Read GIS Z Line</a> in Appendix <a href="TGCCommands-1.html#TGCCommands-1">C</a>.</p>
-<!-- 2d_zln layers are used for adjusting the closest Zpt elevations to lines
-representing the crests or highpoint of levees, flood defences, roads,
-railways and other embankments that obstruct flow. The lines can be 3D
-in shape and height using elevation points. 2d_zln GIS layers use the
-same format as 2d_zpt layers as shown in Table \@ref(tab:tab-ReadGISZpts). They are referenced
-using the .tgc command [Read GIS Z Line](#tgcReadGISZLine).
-
-The [Read GIS Z Line](#tgcReadGISZLine) default is to model a “thin” line
-which modify the ZH, ZU and ZV Zpt elevations only. If the THICK option
-occurs, interpolated Z values are applied to whole cells (i.e. at the
-cell centres (ZC), all cell sides and cell corners). Other optional
-flags such as MAX, MIN, RIDGE or GULLY are also available.
-
-Users should also be aware of the [Read GIS Z HX
-Line](#tgcReadGISZHXLine) for assigning Zpt elevations along HX lines.
-
-The use of both the 2d_zpt and 2d_zln layers were previously the most
-powerful methods for easily manipulating the 2D geometry. They continue
-to be supported, however, users should familiarise themselves with the
-full range of capabilities available with the use of 2d_ztin (Section \@ref(ztin-4)),
-2d_zsh (Section \@ref(zsh-4)) and 2d_vzsh (Section \@ref(vzsh-4)) layers as described
-in the previous sections. 
--->
-<!--PAR added a note-->
-<!--Note that the elevations modified by any 2d_zln layers are output in the [_zln_zpt](https://wiki.tuflow.com/Check_Files_2d_zln_zpt) 
-check file, however, this does not include any lines with the Min/Gully option are
-not output to the check file.  2D z shape lines are recommended instead.-->
 </div>
 <div id="zpt-4" class="section level4 hasAnchor" number="7.3.5.6">
 <h4><span class="header-section-number">7.3.5.6</span> Zpt Layers (2d_zpt)<a href="TwoD-Domains-1.html#zpt-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>This is a legacy feature, to define base elevations it is recommended to use the <a href="TGCCommands-1.html#tgcReadGridZpts">Read Grid Zpts</a> functionality (Section <a href="TwoD-Domains-1.html#DEMGrids-3">7.3.5.1</a>) instead. For details on this legacy feature see <a href="TGCCommands-1.html#tgcReadRowColGrid">Read RowCol Zpts</a> in Appendix <a href="TGCCommands-1.html#TGCCommands-1">C</a>.</p>
-<!-- PAR to EFC: restructure this elevations chapter to mirror table
-
-<!-- EFC to PAR: how much of this can we remove?-->
-<!--PAR this is legacy i think we either move it to the bottom of this section and introduce it as legacy or remove entirely -->
-<!--This is a legacy feature and it is recommended to use the Z Shape functionality (Section \@ref(zsh-4)) instead. 
-
-2d_zpt layers can be used to modify Zpt elevations over an area. When the
-layer contains point objects, these are located at the ZC, ZU, ZV and ZH
-locations within a 2D cell, with each point being assigned an elevation.
-The layer is usually initially generated by TUFLOW using [Write GIS
-Zpts](#tgcWriteGISZpt), which creates the .mif/.mid or .shp/.dbf files.
-Elevations are then assigned to the fourth (Elevation) attribute from a
-DEM using 3D surface modelling software (for example, Point Inspection
-Analysis tool in Vertical Mapper or the Extract Values to Points feature
-in Spatial Analyst).
-
-Unlike nearly all other layers, TUFLOW only reads the .mid or .dbf file
-for the 2d_zpt layer. The .mid/.dbf file contains the attribute data in
-comma delimited format.  reads the
-attribute data and locates the elevation within the 2D domain using the
-n, m and Type attributes. The attributes of the 2d_zpt layer are listed
-in Table \@ref(tab:tab-ZpointAttribute).
-
-[Read RowCol Zpts](#tgcReadRowColGrid) can be used as many times as
-needed. In the .tgc file, a second instance of
-[Read RowCol Zpts](#tgcReadRowColGrid) can be used to read in the new
-elevation values to override the original ones.
-
-**The [Read RowCol Zpts](#tgcReadRowColGrid) command has two
-disadvantages; the GIS layer is cell size dependent and the point
-features are processed by TUFLOW based on their computational grid
-location (m,n), not the real-world coordinate location.** This means,
-the 2d_zpt layer may need to be updated if the model cell size, origin
-or extent are changed. For this reason, the preferred approach is to use
-[Read Grid Zpts](#tgcReadGridZpts) or [Read TIN
-Zpts](#tgcReadTINZpts) to define the base Zpt elevations. These features are discussed in Section \@ref(DEMGrids-3) and may be used to provide
-further definition to key features of the topography.
-
-2d_zpt layers may also be referenced using the .tgc command [Read GIS
-Zpts](#tgcReadGISZpt). In this case, the format of the 2d_zpt layer is
-different and as shown in Table 6‑6. Any Zpt (ZC, ZU, ZV and ZH) falling
-within/on an object is assigned the object’s value. The object may be a
-region (polygon), line or point noting that lines may also be digitised
-within a 2d_zln layer and referenced using the command
-[Read GIS Z Line](#tgcReadGISZLine) (see Section \@ref(zln-4)).
-
-The ADD option adds the value of the “Elevation” attribute of the object
-to the Zpts. Use a negative value to subtract. The MAX option will only
-raise a Zpt from its existing value, while the MIN option will only
-lower the Zpt value from its existing value.
-
-The Read GIS Zpts format is still supported; however, the Read GIS Z
-Shape offers all the functionality of the Read GIS Zpts and a lot more,
-it is therefore the preferred approach. The Read GIS Z Shape layer
-offers greater traceability in terms of check files and also allows min
-/ max option to be specified for each object rather than for the whole
-layer.
-
-<table>
-<caption>(\#tab:tab-ZpointAttribute)**2D Z-point (2d_zpt) Attribute Descriptions ([Read RowCol Zpts](#tgcReadRowColGrid) Command)**</caption>
- <thead>
-  <tr>
-   <th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;"> No. </th>
-   <th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;"> Default GIS Attribute Name </th>
-   <th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;"> Description </th>
-   <th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;"> Type </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> n </td>
-   <td style="text-align:left;"> 2D grid row in which the cell is located. </td>
-   <td style="text-align:left;"> Integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:left;"> m </td>
-   <td style="text-align:left;"> 2D grid column in which the cell is located. </td>
-   <td style="text-align:left;"> Integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> Type </td>
-   <td style="text-align:left;"> One of “C”, “U”, “V” or “H” to indicate whether the elevation is at the ZC, ZU, ZV or ZH location as shown in Figure \@ref(fig:fig-image56). </td>
-   <td style="text-align:left;"> Char(1) </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:left;"> Elevation </td>
-   <td style="text-align:left;"> Elevation of the point.  It is good practice to change the name of this attribute from “Elevation” to the name of the DEM for data traceability. </td>
-   <td style="text-align:left;"> Float </td>
-  </tr>
-</tbody>
-</table>
-
-<table>
-<caption>(\#tab:tab-ReadGISZpts)**2D Z-point (2d_zpt) Attribute Descriptions ([Read GIS Zpts](#tgcReadGISZpt) Command)**</caption>
- <thead>
-  <tr>
-   <th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;"> No. </th>
-   <th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;"> Default GIS Attribute Name </th>
-   <th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;"> Description </th>
-   <th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;"> Type </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> Elevation </td>
-   <td style="text-align:left;"> Elevation of the point or polygon in a 2d_zpt GIS layer, or a line within a 2d_zln GIS layer.  
-  
-When the ADD option is used, the value of the “Elevation” attribute is added to the value of the existing Zpts. </td>
-   <td style="text-align:left;"> Float </td>
-  </tr>
-</tbody>
-</table>
--->
+<p>Similarly, <a href="tgcReadGISZpt">Read GIS Zpts</a> is also a legacy command. It is recommended to use the Z Shape functionality (Section <a href="TwoD-Domains-1.html#zsh-4">7.3.5.2</a>) instead of it.</p>
 </div>
 <div id="using-multiple-layers-and-points-layers" class="section level4 hasAnchor" number="7.3.5.7">
 <h4><span class="header-section-number">7.3.5.7</span> Using Multiple Layers and Points Layers<a href="TwoD-Domains-1.html#using-multiple-layers-and-points-layers" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>GIS layers used for <a href="TGCCommands-1.html#tgcReadGISZShape">Read GIS Z Shape</a>, <a href="TGCCommands-1.html#tgcReadGISVariableZShape">Read GIS Variable Z
-Shape</a>, <a href="TGCCommands-1.html#tgcCreateTINZpts">Create TIN Zpts</a>, <a href="TGCCommands-1.html#tgcReadGISLayeredFCShape">Read GIS Layered FC Shape</a>, <a href="TGCCommands-1.html#tgcReadGISZLine">Read GIS Z Line</a> (legacy), <a href="TGCCommands-1.html#tgcReadGISZHXLine">Read GIS Z HX Line</a> (legacy) and <a href="TGCCommands-1.html#tgcReadGISFCShape">Read GIS FC Shape</a> (legacy) can be split into more than one layer to better manage the variety of data these
-commands sometimes require.</p>
+Shape</a>, <a href="TGCCommands-1.html#tgcCreateTINZpts">Create TIN Zpts</a>, <a href="TGCCommands-1.html#tgcReadGISLayeredFCShape">Read GIS Layered FC Shape</a>, <a href="TGCCommands-1.html#tgcReadGISZLine">Read GIS Z Line</a> (legacy), <a href="TGCCommands-1.html#tgcReadGISZHXLine">Read GIS Z HX Line</a> (legacy) and <a href="TGCCommands-1.html#tgcReadGISFCShape">Read GIS FC Shape</a> (legacy) can be split into more than one layer to better manage the variety of data these commands sometimes require.</p>
 <p>For example, one layer may contain the elevation points, another the TIN
 lines and polygons and another the 3D Z lines. This is useful in terms
 of managing the data, and especially when interrogating and/or viewing
@@ -2641,6 +2488,8 @@ in the same MapInfo file or can be separated if preferred.</p>
 is separated by a vertical bar (“|”). For example, to read a Z Shape
 layer which has both line and points, the command may be:</p>
 <p><tcmd><a href="TGCCommands-1.html#tgcReadGISZShape">Read GIS Z Shape</a></tcmd><teq> == </teq><tblk>gis\2d_zsh_M03_002_L.shp | gis\2d_zsh_M03_002_P.shp</tblk></p>
+<p>If using the GeoPackage format &amp;&amp; is also used to specify more than one layer from a common database in the same command line. An example is provided below. See Section <a href="ControlFiles-and-Inputs-1.html#GPKG-3">4.4.3</a> for further details.</p>
+<p><tcmd><a href="TGCCommands-1.html#tgcReadGISZShape">Read GIS Z Shape</a></tcmd><teq> ==</teq> <tblk>gis\2d_zsh_R.gpkg | gis\2d_zsh_002.gpkg &gt;&gt; 2d_zsh_L &amp;&amp; 2d_zsh_P</tblk></p>
 <div id="point-only-5" class="section level5 hasAnchor" number="7.3.5.7.1">
 <h5><span class="header-section-number">7.3.5.7.1</span> Point Only Layers<a href="TwoD-Domains-1.html#point-only-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>To minimise the number of attributes, some/all points may optionally be
@@ -2652,7 +2501,7 @@ interrogate.</p>
 <li>It has less attributes than the minimum required for the command.
 For most commands there is only one attribute for the points layer
 (i.e. Elevation or Z) as described in Table <a href="TwoD-Domains-1.html#tab:tab-twoDZAttribute">7.8</a>. The
-exceptions are for <a href="TGCCommands-1.html#tgcReadGISFCShape">Read GIS FC Shape</a>, which
+exception is for <a href="TGCCommands-1.html#tgcReadGISFCShape">Read GIS FC Shape</a>, which
 requires the first two attributes. This option requires that the
 points layer be defined within the command line syntax. For example:<br />
 <tcmd><a href="TGCCommands-1.html#tgcReadGISZShape">Read GIS Z Shape</a></tcmd><teq> == </teq><tblk>gis\2d_zsh_M03_002_L.shp | gis\2d_zsh_M03_002_P.shp</tblk><br />
@@ -2664,11 +2513,11 @@ with the line file 2d_zsh_M03_002.shp). This option is supported for
 backward compatibility; however, it’s recommended that this option
 not be used (it is preferable to enter the filename of the second
 layer so that it is clear as to which layers are being used).<br />
-<tcmd><a href="TGCCommands-1.html#tgcReadGISZShape">Read GIS Z Shape</a></tcmd><teq> == </teq><tblk>gis\2d_zsh_M03_002_L.shp</tblk></li>
+<tcmd><a href="TGCCommands-1.html#tgcReadGISZShape">Read GIS Z Shape</a></tcmd><teq> == </teq><tblk>gis\2d_zsh_M03_002.shp</tblk></li>
 </ol>
 <p>The data processing logic for points layers is outlined below:</p>
 <ol style="list-style-type: decimal">
-<li>The specified layer, 2d_zsh_M03_002_L.shp, is opened. This layer may
+<li>The specified layer, 2d_zsh_M03_002.shp, is opened. This layer may
 or may not contain elevation points. If any elevation points exist
 they are used.<br />
 </li>
@@ -2750,34 +2599,15 @@ Float
 <h3><span class="header-section-number">7.3.6</span> Land Use (Materials)<a href="TwoD-Domains-1.html#Materials-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="Bed-Resistance-4" class="section level4 hasAnchor" number="7.3.6.1">
 <h4><span class="header-section-number">7.3.6.1</span> Bed Resistance<a href="TwoD-Domains-1.html#Bed-Resistance-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<!--PAR to EFC: test is the VXD works in HPC-->
-<!--EFC: yes it appears to-->
-<p>The bed resistance values for 2D domains are created by using GIS layers polygons or rasters of different bed resistance zones. The default and recommended bed resistance formulation is Manning’s n. Manning’s n values can be varied with depth (as user specified curve or using the Log Law formula (see Section <a href="TwoD-Domains-1.html#mat-csv-5">7.3.6.3.1</a>)) or varied with velocity-depth product (VxD).
-<!-- PAR: alternate to the last sentence above which talks about depth varying, vxd varying and then depth varying again.  I tried grouping it together but somehow made the sentence longer, not sure if clearer or not:  Manning’s n values can be varied with depth (as user specified curve or using the Log Law formula (see Section \@ref(mat-csv-5)) or varied with velocity-depth product (VxD). --><!--done--></p>
+<p>The bed resistance values for 2D domains are created by using GIS layer polygons or rasters of different bed resistance zones. The default and recommended bed resistance formulation is Manning’s n. Manning’s n values can be varied with depth (as user specified curve or using the Log Law formula (see Section <a href="TwoD-Domains-1.html#mat-csv-5">7.3.6.3.1</a>)) or varied with velocity-depth product (VxD).</p>
 <p>For TUFLOW Classic, bed resistance can also be set to use either Manning’s M values (1/n) or Chezy coefficients using the <a href="TCFCommands-1.html#tcfBedResistanceValues">Bed Resistance Values</a> command in the .tcf file. As this is a TUFLOW Classic feature only, it is further discussed in Section <a href="TwoD-Domains-1.html#CLA-mat-3">7.5.3</a>.</p>
-<p>The recommended approach is to use materials to define how the bed roughness varies over the model. Each material is defined by a positive integer ID which represents a different roughness category. GIS layers of land-use or vegetation often make excellent material layers. Examples of different materials are River In-Bank, River Banks, Pasture, Roads, Buildings, Forest, Mangroves, etc. Each material is assigned a constant Manning’s n value, depth or VxD varying Manning’s n. The material layer can also be used to set rainfall losses (if using direct rainfall - see Section <a href="Boundaries-InitialConditions-1.html#Rainfall-3">8.5.3</a>), fraction impervious, storage area and land-use hazard categories (see Section <a href="TwoD-Domains-1.html#mat-csv-5">7.3.6.3.1</a>).</p>
-<!-- PAR to EFC: Only "Bed Resistance Cell Sides == Interrogate" is supported by HPC and QDT.  I think this can be removed from here and be legacy in the aqppendix.  Interrogate looks like it was set as the default in 2007. -->
-<!--EFC: removed below and made this command legacy in the TCF appendix-->
-<!--Material/roughness values are used by TUFLOW during conveyance calculations at the cell mid-sides (refer to Section \@ref(Solvers-2) and \@ref(Schematisation-3)). Three alternatives are offered to assign material/roughness values at cell- mid-sides (ZU and ZV):
-
-- The material/roughness value can be averaged from the neighbouring cell centre (ZC) n or M values. To use these options, see [Bed Resistance Cell Sides](#tcfBedResistanceCellSides).  
-- The bed resistance values can be assigned directly to the cell
-  mid-sides by interrogating the material polygons or raster grid. This
-  is the default option. It produces a higher resolution representation
-  of the bed roughness, and gives improved flow patterns and results,
-  especially in urban areas where large and sudden variations in bed
-  roughness occur due to the presence of roads (very slippery) and
-  buildings (major obstruction, i.e. very rough).-->
-<!-- PAR to EFC: suggested alternative to the above: -->
+<p>The recommended approach is to use materials to define how the bed roughness varies over the model. Each material is defined by a positive integer ID which represents a different roughness category. GIS layers of land-use or vegetation often make excellent material layers. Examples of different material categories are river in-bank, bank vegetation, pasture, maintained grass, roads, buildings, forest, mangroves, etc. Each material is assigned a constant Manning’s n value, depth or VxD varying Manning’s n. The material layer can also be used to set rainfall losses (if using direct rainfall - see Section <a href="Boundaries-InitialConditions-1.html#Rainfall-3">8.5.3</a>), fraction impervious, storage area and land-use hazard categories (see Section <a href="TwoD-Domains-1.html#mat-csv-5">7.3.6.3.1</a>).</p>
 <p>Material/roughness values are used by TUFLOW during conveyance calculations at the cell mid-sides (refer to Section <a href="TwoD-Domains-1.html#Solvers-2">7.2</a> and <a href="TwoD-Domains-1.html#Schematisation-3">7.2.3</a>). However, rainfall losses and fraction impervious are applied to the cell and not cell sides, therefore, materials ID values are sampled at both cell mid-sides and cell centres.</p>
-<!-- PAR to EFC: end alternative-->
 <p>The most common approach is to digitise one or more 2d_mat materials
-layers (see Table <a href="TwoD-Domains-1.html#tab:tab-twoDMaterials">7.9</a>) and assign Manning’s n values to the materials
-using <a href="TCFCommands-1.html#tcfReadMaterialsFile">Read Materials File</a>. This approach allows
-the easy adjustment of Manning’s n values, for example during model
+layers (see Table <a href="TwoD-Domains-1.html#tab:tab-twoDMaterials">7.9</a>) and assign Manning’s n values to the materials using <a href="TCFCommands-1.html#tcfReadMaterialsFile">Read Materials File</a>. This approach allows the easy adjustment of Manning’s n values, for example during model
 calibration or sensitivity testing.</p>
-<p>In creating the base 2d_mat layer, it is good practice to not digitise
-the most common or the most difficult to digitise material and use the
+<p>When creating the base 2d_mat layer, it is common practice to not digitise
+the most common or the most difficult to digitise material, and instead use the
 following data layering of commands in the .tgc file (see Section <a href="ControlFiles-and-Inputs-1.html#TGC-3">4.2.7</a>).</p>
 <ul>
 <li>Use <a href="TGCCommands-1.html#tgcSetMat">Set Mat</a> to set the most common material to all cells in a 2D domain.<br />
@@ -2789,7 +2619,7 @@ commands may be used as many times as required to further modify the
 materials in parts of a 2D domain. Each subsequent dataset will
 overwrite the preceding assigned material value, as described in Section <a href="TwoD-Domains-1.html#layering-3">7.3.3</a>.</p>
 <p>The default material value is zero. As a material value of zero is not allowed, every cell and cell-side must be assigned a material value using <a href="TGCCommands-1.html#tgcSetMat">Set Mat</a>, <a href="TGCCommands-1.html#tgcReadGISMat">Read GIS Mat</a> and/or <a href="TGCCommands-1.html#tgcReadGridMat">Read GRID Mat</a> in the .tgc file
-(it is good practice to always set a default materials value using the <a href="TGCCommands-1.html#tgcSetMat">Set Mat</a> as the first material command in the .tgc file). The assigned material ID values do not need to be contiguous but must be within the range 1 to 32,767. <!--PAR to EFC: yes remove comment about Change Zero Material Values to One. make sure to make this command legacy in the TCF appendix--><!--done--></p>
+(it is good practice to always set a default materials value using the <a href="TGCCommands-1.html#tgcSetMat">Set Mat</a> as the first material command in the .tgc file). The assigned material ID values do not need to be contiguous but must be within the range 1 to 32,767.</p>
 <table>
 <caption>
 <span id="tab:tab-twoDMaterials">Table 7.9: </span><strong>2D Materials (2d_mat) Attribute Descriptions</strong>
@@ -2872,6 +2702,7 @@ minor variation due to slope.</p>
 not fall below 0.02.</p>
 <p>Figure <a href="TwoD-Domains-1.html#fig:fig-image103">7.8</a> shows a comparison using the Log Law versus a constant Manning’s n value <span class="citation">(<a href="#ref-Boyte2014">Boyte, 2014</a>)</span>.
 The thesis investigated the use of the Law of the Wall for direct rainfall modelling using TUFLOW. The flow depths in this example range from 4 to 20cm and the roughness height, <span class="math inline">\(k_s\)</span>, was 3cm.</p>
+<p>The Log Law Depth Varying Bed Resistance is activated by entering special characters in the 2nd column of the Materials File. See Section <a href="TwoD-Domains-1.html#Materials-File-4">7.3.6.3</a> and Table <a href="TwoD-Domains-1.html#tab:tab-MaterialsFormat">7.10</a>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image102"></span>
 <img src="images/image102.jpeg" alt="Example of Log Law Variation of Manning’s n with Depth" width="60%" />
 <p class="caption">
@@ -4284,7 +4115,7 @@ Figure 7.18: 2D BG Shape Attributes and Vertical Distribution of Form Loss Coeff
 <center>
 <div class="figure"><span style="display:block;" id="fig:fig-BGFLCApproach"></span>
 <div class="plotly html-widget html-fill-item" id="htmlwidget-cb54af0b52590e32d6a9" style="width:80%;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-cb54af0b52590e32d6a9">{"x":{"visdat":{"15b8713c1f63":["function () ","plotlyVisDat"]},"cur_data":"15b8713c1f63","attrs":{"15b8713c1f63":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"LINEAR","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.12500000000000003,0.15000000000000005,0.17499999999999996,0.19999999999999998,0.22500000000000001,0.25,0.27500000000000002,0.29999999999999993,0.32499999999999996,0.34999999999999998,0.375,0.40000000000000002,0.42499999999999993,0.44999999999999996,0.47500000000000009,0.50000000000000011,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(26,189,201)"},"type":"scatter","mode":"lines","inherit":true},"15b8713c1f63.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"LINEAR-CONSTANT","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.14000000000000004,0.18000000000000008,0.21999999999999995,0.26000000000000001,0.30000000000000004,0.34000000000000008,0.38000000000000012,0.41999999999999993,0.45999999999999996,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(0,85,129)"},"type":"scatter","mode":"lines","inherit":true},"15b8713c1f63.2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.1484375,0.19375000000000009,0.23593749999999991,0.27500000000000002,0.31093749999999998,0.34375,0.37343750000000009,0.40000000000000002,0.42343750000000002,0.44374999999999998,0.4609375,0.47499999999999998,0.48593750000000002,0.49375000000000002,0.49843749999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(79,86,80)"},"type":"scatter","mode":"lines","inherit":true},"15b8713c1f63.3":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"INVERTED-PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.10156250000000001,0.10625000000000001,0.11406249999999998,0.125,0.13906250000000001,0.15625000000000003,0.17656250000000007,0.19999999999999996,0.22656249999999997,0.25624999999999998,0.2890625,0.32500000000000007,0.36406249999999996,0.40624999999999989,0.45156249999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(226,1,119)"},"type":"scatter","mode":"lines","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Depth Averaged FLC","range":[0,0.59999999999999998]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Depth","range":[0,5]},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":true,"displaylogo":false},"data":[{"name":"LINEAR","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.12500000000000003,0.15000000000000005,0.17499999999999996,0.19999999999999998,0.22500000000000001,0.25,0.27500000000000002,0.29999999999999993,0.32499999999999996,0.34999999999999998,0.375,0.40000000000000002,0.42499999999999993,0.44999999999999996,0.47500000000000009,0.50000000000000011,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(26,189,201)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"name":"LINEAR-CONSTANT","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.14000000000000004,0.18000000000000008,0.21999999999999995,0.26000000000000001,0.30000000000000004,0.34000000000000008,0.38000000000000012,0.41999999999999993,0.45999999999999996,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(0,85,129)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"name":"PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.1484375,0.19375000000000009,0.23593749999999991,0.27500000000000002,0.31093749999999998,0.34375,0.37343750000000009,0.40000000000000002,0.42343750000000002,0.44374999999999998,0.4609375,0.47499999999999998,0.48593750000000002,0.49375000000000002,0.49843749999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(79,86,80)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"name":"INVERTED-PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.10156250000000001,0.10625000000000001,0.11406249999999998,0.125,0.13906250000000001,0.15625000000000003,0.17656250000000007,0.19999999999999996,0.22656249999999997,0.25624999999999998,0.2890625,0.32500000000000007,0.36406249999999996,0.40624999999999989,0.45156249999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(226,1,119)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-cb54af0b52590e32d6a9">{"x":{"visdat":{"426c1cd6763":["function () ","plotlyVisDat"]},"cur_data":"426c1cd6763","attrs":{"426c1cd6763":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"LINEAR","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.12500000000000003,0.15000000000000005,0.17499999999999996,0.19999999999999998,0.22500000000000001,0.25,0.27500000000000002,0.29999999999999993,0.32499999999999996,0.34999999999999998,0.375,0.40000000000000002,0.42499999999999993,0.44999999999999996,0.47500000000000009,0.50000000000000011,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(26,189,201)"},"type":"scatter","mode":"lines","inherit":true},"426c1cd6763.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"LINEAR-CONSTANT","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.14000000000000004,0.18000000000000008,0.21999999999999995,0.26000000000000001,0.30000000000000004,0.34000000000000008,0.38000000000000012,0.41999999999999993,0.45999999999999996,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(0,85,129)"},"type":"scatter","mode":"lines","inherit":true},"426c1cd6763.2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.1484375,0.19375000000000009,0.23593749999999991,0.27500000000000002,0.31093749999999998,0.34375,0.37343750000000009,0.40000000000000002,0.42343750000000002,0.44374999999999998,0.4609375,0.47499999999999998,0.48593750000000002,0.49375000000000002,0.49843749999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(79,86,80)"},"type":"scatter","mode":"lines","inherit":true},"426c1cd6763.3":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"INVERTED-PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.10156250000000001,0.10625000000000001,0.11406249999999998,0.125,0.13906250000000001,0.15625000000000003,0.17656250000000007,0.19999999999999996,0.22656249999999997,0.25624999999999998,0.2890625,0.32500000000000007,0.36406249999999996,0.40624999999999989,0.45156249999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(226,1,119)"},"type":"scatter","mode":"lines","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Depth Averaged FLC","range":[0,0.59999999999999998]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Depth","range":[0,5]},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":true,"displaylogo":false},"data":[{"name":"LINEAR","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.12500000000000003,0.15000000000000005,0.17499999999999996,0.19999999999999998,0.22500000000000001,0.25,0.27500000000000002,0.29999999999999993,0.32499999999999996,0.34999999999999998,0.375,0.40000000000000002,0.42499999999999993,0.44999999999999996,0.47500000000000009,0.50000000000000011,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(26,189,201)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"name":"LINEAR-CONSTANT","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.14000000000000004,0.18000000000000008,0.21999999999999995,0.26000000000000001,0.30000000000000004,0.34000000000000008,0.38000000000000012,0.41999999999999993,0.45999999999999996,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(0,85,129)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"name":"PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.1484375,0.19375000000000009,0.23593749999999991,0.27500000000000002,0.31093749999999998,0.34375,0.37343750000000009,0.40000000000000002,0.42343750000000002,0.44374999999999998,0.4609375,0.47499999999999998,0.48593750000000002,0.49375000000000002,0.49843749999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(79,86,80)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"name":"INVERTED-PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.10156250000000001,0.10625000000000001,0.11406249999999998,0.125,0.13906250000000001,0.15625000000000003,0.17656250000000007,0.19999999999999996,0.22656249999999997,0.25624999999999998,0.2890625,0.32500000000000007,0.36406249999999996,0.40624999999999989,0.45156249999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(226,1,119)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 7.19: Depth Averaged FLC Applied Using Four Adjustment Approaches
 </p>
@@ -4631,7 +4462,7 @@ Float
 <center>
 <div class="figure"><span style="display:block;" id="fig:fig-CFDBridgeFLC"></span>
 <div class="plotly html-widget html-fill-item" id="htmlwidget-5777bedaf9170a515e49" style="width:50%;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-5777bedaf9170a515e49">{"x":{"visdat":{"15b85154258":["function () ","plotlyVisDat"]},"cur_data":"15b85154258","attrs":{"15b85154258":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"Category 1","y":[0.59999999999999998,0.59999999999999998,0.41999999999999998,0.28000000000000003,0.20000000000000001,0.16,0.16],"x":[-10,1,2,4,6,10,20],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(26,189,201)"},"point":{"color":"rgb(26,189,201)"},"type":"scatter","markers":"true","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"D<sub>Pier<\/sub>/T<sub>SuperS<\/sub>","range":[0,12]},"yaxis":{"domain":[0,1],"automargin":true,"title":"FLC","range":[0,0.69999999999999996]},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":true,"displaylogo":false},"data":[{"name":"Category 1","y":[0.59999999999999998,0.59999999999999998,0.41999999999999998,0.28000000000000003,0.20000000000000001,0.16,0.16],"x":[-10,1,2,4,6,10,20],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(26,189,201)"},"point":{"color":"rgb(26,189,201)"},"type":"scatter","markers":"true","mode":"markers+lines","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-5777bedaf9170a515e49">{"x":{"visdat":{"426c6d06804":["function () ","plotlyVisDat"]},"cur_data":"426c6d06804","attrs":{"426c6d06804":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"Category 1","y":[0.59999999999999998,0.59999999999999998,0.41999999999999998,0.28000000000000003,0.20000000000000001,0.16,0.16],"x":[-10,1,2,4,6,10,20],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(26,189,201)"},"point":{"color":"rgb(26,189,201)"},"type":"scatter","markers":"true","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"D<sub>Pier<\/sub>/T<sub>SuperS<\/sub>","range":[0,12]},"yaxis":{"domain":[0,1],"automargin":true,"title":"FLC","range":[0,0.69999999999999996]},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":true,"displaylogo":false},"data":[{"name":"Category 1","y":[0.59999999999999998,0.59999999999999998,0.41999999999999998,0.28000000000000003,0.20000000000000001,0.16,0.16],"x":[-10,1,2,4,6,10,20],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(26,189,201)"},"point":{"color":"rgb(26,189,201)"},"type":"scatter","markers":"true","mode":"markers+lines","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 7.20: <strong>CFD benchmarking study of FLC vs <span class="math inline">\(D_{Pier}\)</span>/<span class="math inline">\(T_{SuperS}\)</span> ratio (<span class="math inline">\(h_{B}\)</span>/<span class="math inline">\(T\)</span> in the original paper)</strong>
 </p>
@@ -6022,7 +5853,7 @@ partially wet.</li>
 </div>
 <div id="sgs-output-5" class="section level5 hasAnchor" number="7.4.3.2.2">
 <h5><span class="header-section-number">7.4.3.2.2</span> Map Outputs<a href="TwoD-Domains-1.html#sgs-output-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>The following .tcf commands can be used to control how map output values that use water depth are calculated for the mesh-based outputs (e.g. XMDF) if SGS is used. Note, these commands only affect depth dependent outputs (e.g. d, q, hazard outputs, BSS, SP). Outputs such as water surface level and velocity are not affected.</p>
+<p>The following .tcf commands can be used to control the value of depth (d) map output when SGS is used.</p>
 <p><tcmd><a href="TCFCommands-1.html#tcfSGSDepthOutput">SGS Depth Output</a></tcmd><teq> == </teq><tblk>EXACT | {CELL AVERAGE} | MEAN | MEDIAN | MINIMUM | PERCENTILE </tblk></p>
 <ul>
 <li>CELL AVERAGE (default): calculates the depth by dividing the cell volume by cell area.</li>
@@ -6033,8 +5864,12 @@ partially wet.</li>
 <li>PERCENTILE: the output depth is water level minus an elevation based on the specified set percentile. This requires a second argument, separated by vertical bar “|”, which is the percentile to use. For example, “<tcmd>SGS Depth Output</tcmd><teq> == </teq><tblk>Percentile | 25</tblk>” will use the 25th percentile of the SGS elevations sampled within the cell / around the cell corner.</li>
 </ul>
 <p>The elevations used for the SGS Depth Output are output in the <a href="https://wiki.tuflow.com/Check_Files_2d_zpt">_zpt_check</a> file as the “ZOut” attribute, see Section <a href="TwoD-Domains-1.html#SGS-check-5">7.4.3.2.1</a>.</p>
-<p>For the EXACT, MEAN, MEDIAN, MINIMUM, PERCENTILE approaches, the depth output is trimmed if the modelled water level is lower than the output elevations. Meanwhile, the water level output is not trimmed even if the output depth is below the output elevations, and this can produce different output extents for the water level and other outputs. This default trimming option can be changed using the <a href="TCFCommands-1.html#tcfSGSMapExtent">SGS Map Extent <Trim or Full></a> command.</p>
-<p>For the MEAN, MEDIAN, MINIMUM, PERCENTILE approaches, the corner output elevations depend on the distance of SGS sampling around the cell corners. The default distance is the 2D cell size, and it can be changed using the <a href="TCFCommands-1.html#tcfSGSZHSampleRatio">SGS ZH Sample Ratio</a> command.</p>
+<p>Note that the water level (h) output is not affected by this command.</p>
+<p>For the EXACT, MEAN, MEDIAN, MINIMUM, PERCENTILE approaches, the depth output is trimmed if the modelled water level is lower than the output elevations. Meanwhile, the water level output is not trimmed even if the output depth is below the output elevations, and this can produce different output extents for the water level and other outputs. For this reason, the CELL AVERAGE option is recommended for the consistency of the output extent. But if using the other options, the default trimming option can be changed using the <a href="TCFCommands-1.html#tcfSGSMapExtent">SGS Map Extent <Trim or Full></a> command.</p>
+<p>For the MEAN, MEDIAN, MINIMUM, PERCENTILE approaches, the corner output elevations depend on the size of the SGS sampling area around the cell corners. By default, cell corner elevations are sampled within a square that has the same size as the 2D cell, and this size be adjusted using the <a href="TCFCommands-1.html#tcfSGSZHSampleRatio">SGS ZH Sample Ratio</a> command.</p>
+<p>By default the CELL AVERAGE depth is used to calculate the depth/velocity based map outputs, such as unit flow (q), bed shear stress (BSS), stream power (SP) and hazards, regardless of the <a href="TCFCommands-1.html#tcfSGSDepthOutput">SGS Depth Output</a> setting. However, if desired, the depth used to calculate these map outputs can be changed using the following command:</p>
+<p><tcmd><a href="TCFCommands-1.html#tcfSGSVelocityBasedOutputs">SGS Velocity Based Outputs</a></tcmd><teq> == </teq><tblk> {CELL AVERAGE DEPTH} | SGS DEPTH OUTPUT </tblk></p>
+<p>If set to the “SGS DEPTH OUTPUT” option, the output depth specified by the <a href="TCFCommands-1.html#tcfSGSDepthOutput">SGS Depth Output</a> command above is used. Note that the velocity (v) output is not affected by these commands.</p>
 </div>
 <div id="high-resolution-outputs" class="section level5 hasAnchor" number="7.4.3.2.3">
 <h5><span class="header-section-number">7.4.3.2.3</span> High-Resolution Outputs<a href="TwoD-Domains-1.html#high-resolution-outputs" class="anchor-section" aria-label="Anchor link to header"></a></h5>

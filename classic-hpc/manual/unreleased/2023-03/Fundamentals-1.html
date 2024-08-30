@@ -780,6 +780,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="Fundamentals-1" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Section 3</span> Hydraulic Modelling Fundamentals<a href="Fundamentals-1.html#Fundamentals-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><mark><strong>NOTE: This Chapter is currently under review.</strong> </mark></p>
 <div id="Fundaments-Introduction-2" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Introduction<a href="Fundamentals-1.html#Fundaments-Introduction-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This chapter of the Manual discusses key considerations that should be
@@ -928,7 +929,7 @@ network. Following this step, the flow paths are linked at junctions, or nodes. 
 </div>
 <div id="CellSizes-3" class="section level3 hasAnchor" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> 2D Cell Sizes<a href="Fundamentals-1.html#CellSizes-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The 2D cell size of a 2D domain defines the resolution of the 2D modelling. The cell size needs to be sufficiently small to reproduce the hydraulic behaviour, yet not be excessively small that simulation times are impractical to meet project deadlines.</p>
+<p>The 2D cell size defines the resolution of the 2D hydraulic calculations. The cell size needs to be sufficiently small to reproduce the hydraulic behaviour, yet not be excessively small that simulation times are impractical to meet project deadlines.</p>
 <p>The recommended 2D cell resolution varies depending on the model design, model type, project objectives and also numerical solver. For example, when the primary flow path (river or creek) is represented in the 2D domain, the head losses along the flow path (and therefore the predicted inundation levels) can become dependent on the 2D cell size if the chosen cell size is larger than recommended. Table <a href="Fundamentals-1.html#tab:tab-twoDCellSize">3.1</a> lists a general rule of thumb recommendation for minimum cell count (size) relative to the primary flow path width in a traditional catchment flood study for the different available TUFLOW solvers.</p>
 <table>
 <caption>
@@ -961,7 +962,7 @@ Low
 </tr>
 <tr>
 <td style="text-align:left;">
-TUFLOW HPC (incl. Quadtree) without SGS
+TUFLOW HPC without SGS
 </td>
 <td style="text-align:left;">
 6-8
@@ -972,52 +973,50 @@ Medium
 </tr>
 <tr>
 <td style="text-align:left;">
-TUFLOW HPC (incl. Quadtree) with SGS
+TUFLOW HPC with SGS
 </td>
 <td style="text-align:left;">
 3-4
 </td>
 <td style="text-align:left;">
 Very Low
+(assumes terrain data is a finer resolution by a factor of 2 or more)
 </td>
 </tr>
 </tbody>
 </table>
-<p>Model resolution may vary from the values in Table <a href="Fundamentals-1.html#tab:tab-twoDCellSize">3.1</a>. Other factors to consider include:</p>
+<p>The model resolution may vary from the values in Table <a href="Fundamentals-1.html#tab:tab-twoDCellSize">3.1</a>. Other factors to consider include:</p>
 <ol style="list-style-type: decimal">
-<li>If the model design uses 1D for the primary flow path definition (river or creek) and 2D for the floodplain, coarser 2D cell resolution is typically possible.</li>
-<li>Whether it is desirable for the model to resolve flow around buildings and through streets (e.g. an urban model) – in which case a 2D cell size somewhat smaller than typical building/street size should be used.<br />
+<li>If the model uses 1D for the primary flow path definition (river or creek) and 2D for the floodplain, the 2D cell resolution is controlled by the primary flowpaths within the 2D floodplain and is typically much coarser.</li>
+<li>If the model is resolving flow around buildings and along streets (e.g. an urban surfacewater model) – the 2D cells in the urban area will be typically controlled by the flow width on the streets using the guidelines above.<br />
 </li>
-<li>If using HPC with SGS (refer Section <a href="TwoD-Domains-1.html#SGS-3">7.4.3</a>), the high-resolution output (refer Section <a href="Outputs-1.html#HRGrid-4">11.2.2.3</a>) option can provide high-resolution inundation extents, water level and depth results at the SGS resolution, which is higher resolution than the 2D cell size.<br />
+<li>If using HPC with SGS (refer Section <a href="TwoD-Domains-1.html#SGS-3">7.4.3</a>), the high-resolution output (refer Section <a href="Outputs-1.html#HRGrid-4">11.2.2.3</a>) option can provide high-resolution inundation extents, water level and depth results at the SGS resolution, which is a higher resolution than the 2D cell size.<br />
 </li>
-<li>HPC Quadtree enables the user to specify cell refinement around the
+<li>HPC’s Quadtree feature enables the user to specify cell refinement around the
 primary flow paths without having to run the entire model area at
 the same resolution. This usually yields a useful improvement in
 model run time compared to running the entire model at the finer
 resolution necessary to resolve the primary flow paths.<br />
 </li>
-<li>In HPC (incl. Quadtree) the Wu turbulence model
-(refer Section <a href="TwoD-Domains-1.html#Wu-4">7.4.2.3</a>) can cause the
-timestep to become small when very small cells are used in primary
-flow paths, causing the solution time to become long. Use a cell
-size sensitivity study to guide the choice of 2D cell size and avoid
-using an unnecessarily small cell size.</li>
+<li>The HPC Wu turbulence model (refer Section <a href="TwoD-Domains-1.html#Wu-4">7.4.2.3</a>) can cause the
+timestep to become very small (than would otherwise be expected) when very small cells are used in primary flow paths causing the depth to be much greater than the cell size, thereby triggering the diffusion number to become the critical control number for determining the timestep. Avoid excessively small cells in deep flow paths and use SGS to maximise the conveyance accuracy.</li>
 </ol>
-<p>Cell size result convergence sensitivity testing, as discussed in Section <a href="Fundamentals-1.html#CellSizeResultsConvergence-3">3.3.4</a>, is the most robust way to verify whether the chosen 2D cell size is of sufficient resolution. Cell size result convergence sensitivity should be completed early in the model development process. It should be done prior to any calibration steps, as it is not desirable to discover after calibration that the model resolution was inadequate.</p>
+<p>Cell size result convergence sensitivity testing, as discussed in Section <a href="Fundamentals-1.html#CellSizeResultsConvergence-3">3.3.4</a>, is the most robust way to verify whether the chosen 2D cell size is of sufficient and optimal resolution. Cell size result convergence sensitivity should be completed early in the model development process. It should be done prior to any calibration steps or design flood production runs, as it is not desirable to discover after considerable effort that a too coarse model resolution is contributing to the inaccuracy and uncertainty of the modelling.</p>
 </div>
 <div id="SubGridSamplingSGS-3" class="section level3 hasAnchor" number="3.3.3">
 <h3><span class="header-section-number">3.3.3</span> Sub-Grid Sampling (SGS)<a href="Fundamentals-1.html#SubGridSamplingSGS-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>2D hydraulic modelling software such as TUFLOW (and others) will usually sample the underlying digital terrain model (DTM) by taking the elevation at the cell centre (as well as cell faces in TUFLOW’s case). The cells are treated as flat-bottomed storage boxes, and the faces as flat-bottomed conveyance channels - this doesn’t take into allowance the shape of the terrain within the cells when computing storage vs elevation, nor the shape of the cross-section at the face when computing flux area vs elevation. DTM datasets
-are commonly up to 10-20 times finer than the cell sizes at which flood modelling is undertaken. Figure <a href="Fundamentals-1.html#fig:fig-SGSExampleGridTop">3.4</a> provides an example of a 20m hydraulic model grid, overlaid on top of a 1m DTM. In this case there are only 2 to 3 grid cells across the width of the river channel, and fewer in some of the floodplain channels and road embankment. The sub-grid scale topography that may be present in the DTM is not being fully utilised within the 2D hydraulic model. Whilst TUFLOW’s powerful breakline topography functions will largely compensate for hydraulic control features such as the road embankments, the single elevation per cell centre and side may provide a poor representation of the in-bank main channel storage and conveyance characteristics, and subsequently impact solution accuracy. Higher resolution hydraulic modelling would be required to increase accuracy.</p>
+<p>2D hydraulic modelling software such as TUFLOW (and others) will usually sample the underlying digital terrain model (DTM) by taking the elevation at the cell centre (as well as cell faces in TUFLOW’s case). The cells are treated as flat-bottomed storage boxes, and the faces as flat-bottomed conveyance channels - this doesn’t take into allowance the shape of the terrain within the cells when computing storage vs elevation, nor the shape of the cross-section at the face when computing flux area vs elevation.</p>
+<p>DTM datasets are commonly up to 10-20 times finer than the cell sizes at which flood modelling is undertaken. Figure <a href="Fundamentals-1.html#fig:fig-SGSExampleGridTop">3.4</a> provides an example of a 20m hydraulic model grid, overlaid on top of a 1m DTM. In this case there are only 2 to 3 grid cells across the width of the river channel, and fewer in some of the floodplain channels and road embankment. The sub-grid (sub-cell) scale topography that may be present in the DTM is not being fully utilised within the 2D hydraulic model. The single elevation per cell centre and side may provide a poor representation of the in-bank main channel storage and conveyance characteristics, and subsequently impact solution accuracy that can only be improved by using smaller cell sizes.</p>
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SGSExampleGridTop"></span>
-<img src="images/SGS_Example_Grid_Top.jpg" alt="**20m grid size shown against the 1m DTM**" width="70%" />
+<img src="images/SGS_Example_Grid_Top.jpg" alt="**20m grid size shown against the 1m DTM**" width="90%" />
 <p class="caption">
 Figure 3.4: <strong>20m grid size shown against the 1m DTM</strong>
 </p>
 </div>
 </center>
-<p>With Sub-Grid Sampling (SGS) rather than using a single elevation value for the grid cell storage estimation, SGS topography sampling extracts sub-grid data from the underlying DEM to develop a non-linear relationship between the water surface elevation and the cell’s volume to describe the cell’s storage capacity. SGS also generates a non-linear relationship between the water surface elevation and the cell face area and cell width (or wetted perimeter) to improve the representation of the fluxes across the cell faces as flow is conveyed throughout the model domain. The SGS approach still computes a single water level for each cell, but the computations to determine the cell volume and cell face fluxes utilise the higher resolution terrain data. The result is that despite the hydraulic model grid resolution being coarser than the DTM, the full array of information from the DTM is still being utilised within the 2D hydraulic modelling, improving the representation of the underlying topography and accuracy of simulated results. The conceptual difference between traditional and SGS topography sampling approaches is presented in Figure <a href="Fundamentals-1.html#fig:fig-2DTraditionalvsSGSExample">3.5</a>.</p>
+<p>With Sub-Grid Sampling (SGS), rather than using a single elevation value for the grid cell storage calculations, SGS topography sampling extracts sub-grid data from the underlying DEM to develop a non-linear relationship between the water surface elevation and the cell’s volume to describe the cell’s storage capacity with height. SGS also generates a non-linear relationship between the water surface elevation and the cell face area and cell width (or wetted perimeter) to improve the representation of the fluxes across the cell faces as flow is conveyed throughout the model domain.</p>
+<p>The SGS approach still computes a single water level for each cell, but the computations to determine the cell volume and cell face fluxes utilise the higher resolution terrain data. The result is that despite the hydraulic model grid resolution being coarser than the DTM, the full array of information from the DTM is being utilised within the 2D hydraulic modelling, improving the representation of the underlying topography and accuracy of simulated results. The conceptual difference between traditional and SGS topography sampling approaches is presented in Figure <a href="Fundamentals-1.html#fig:fig-2DTraditionalvsSGSExample">3.5</a>.</p>
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-2DTraditionalvsSGSExample"></span>
 <img src="images/2DTraditionalvsSGSExample.png" alt="**2D Topography Sampling Concept and DEM Interpretation (Traditional vs SGS)**" width="100%" />
@@ -1026,19 +1025,19 @@ Figure 3.5: <strong>2D Topography Sampling Concept and DEM Interpretation (Tradi
 </p>
 </div>
 </center>
-<p>By utilising the underlying sub-grid scale topography, it is possible to more accurately represent the storage and conveyance associated with the system being modelled. Cell Size Result Convergence, discussed in the following section, can typically be achieved using a larger cell size when using SGS, compared to when not. Using a model schematisation that enables use of a larger cell size is desirable because it is typically associated with faster simulation speeds.</p>
-<p>SGS is a feature supported by TUFLOW HPC. It is not available using TUFLOW Classic. If using TUFLOW HPC, We recommend using SGS when the available DTM data is finer than the model resolution. SGS is discussed in Section <a href="TwoD-Domains-1.html#SGS-3">7.4.3</a>.</p>
+<p>By utilising the underlying sub-grid scale topography, the storage and conveyance of the model is more accurately represented. Cell Size Result Convergence, discussed in the following section, can typically be achieved using a larger cell size when using SGS, compared to when not using SGS. Using a model schematisation that enables use of a larger cell size is highly desirable if faster simulation times are benficial.</p>
+<p>SGS is a feature of TUFLOW HPC - it is not available in TUFLOW Classic. If using TUFLOW HPC, SGS is recommended when the available DEM data is finer than the model resolution. SGS is discussed further in Section <a href="TwoD-Domains-1.html#SGS-3">7.4.3</a>.</p>
 <div id="SGS-benefits-4" class="section level4 hasAnchor" number="3.3.3.1">
 <h4><span class="header-section-number">3.3.3.1</span> Benefits of SGS<a href="Fundamentals-1.html#SGS-benefits-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <!-- PAR to EFC: think we should move benefits to Ch 3 (inc links to benchmark docs), have some benchmarking comments then to ch3.
 EFC to do this benchmarking section, ask CDH if it should be here or ch 3-->
 <!-- EFC: chris agreed to move here and I have done so-->
 <p>Benchmarking has shown the benefits to be substantial and to be a game
-changer for certain types of applications such as:</p>
+changer for the following situations.</p>
 <ul>
 <li>Catchment scale models flow much more effectively with water not being
 “trapped” by a coarse cell resolution, and, importantly, excellent
-cell size convergence (i.e. demonstration that by reducing the cell
+cell size convergence (i.e. demonstrating that by reducing the cell
 size(s) the model results do not demonstrably change) at much coarser
 cell sizes. Figure <a href="Fundamentals-1.html#fig:fig-SGS-Convergence">3.6</a> shows the flow hydrographs for a Quadtree direct rainfall whole of catchment model using two base cell size
 resolutions. The Hi-Res Quadtree grid has a base cell size half that
@@ -1051,13 +1050,13 @@ demonstrating excellent cell size convergence and the ability to use
 the faster running Lo-Res model for day-to-day modelling.</li>
 </ul>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SGS-Convergence"></span>
-<img src="images/image69.png" alt="Model Convergence with and without SGS" width="50%" />
+<img src="images/image69.png" alt="Model Convergence with and without SGS" width="80%" />
 <p class="caption">
 Figure 3.6: Model Convergence with and without SGS
 </p>
 </div>
 <ul>
-<li>The sensitivity of results to mesh size is greatly reduced and the sensitivity to mesh orientation is almost eliminated. With SGS a 2D regular mesh model can be rotated or have a change in cell size with acceptable changes in results compared with much greater and sometimes unacceptable changes in results for the traditional elevation per cell approach <span class="citation">(<a href="#ref-Kitts2020">Kitts et al., 2020</a>)</span>.</li>
+<li>The sensitivity of results to mesh size is greatly reduced and the sensitivity to mesh orientation is almost eliminated. With SGS a 2D regular mesh model can be rotated or have a change in cell size with impacting the accuracy of the results compared with much greater and sometimes unacceptable changes in results for the traditional elevation per cell approach <span class="citation">(<a href="#ref-Kitts2020">Kitts et al., 2020</a>)</span>.</li>
 <li>Disturbed flow fields that can be apparent along a “saw-tooth” regular
 grid wet-dry boundary completely disappear, with no spurious
 additional head losses generated and the results consistent with a
@@ -1068,11 +1067,11 @@ utilise 1D open channels carved through the 2D domain. The images and
 charts below show benchmarking to a U-Bend flume test for without SGS
 and with SGS. SGS causes a much smoother flow field to occur and
 importantly the head drop around the bend is correctly modelled with
-SGS on. Note, the red highlighted cells are partially wet cells with
+SGS on. The red highlighted cells indicate those cells that are partially wet with
 SGS on. The charts show the longitudinal profile on the outside
 (orange), centre (blue) and inside (grey) of the bend with lines being
 modelled and points measured – as shown, with SGS off the upstream
-water level is overpredicted as shown by the red circle.</li>
+water level is over predicted as shown by the red circle.</li>
 </ul>
 <img src="images/image70.jpg" style="display: block; margin: auto;" />
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SGS0-XS"></span>
