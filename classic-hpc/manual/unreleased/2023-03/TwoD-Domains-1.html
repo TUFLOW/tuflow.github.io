@@ -2501,7 +2501,7 @@ interrogate.</p>
 <li>It has less attributes than the minimum required for the command.
 For most commands there is only one attribute for the points layer
 (i.e. Elevation or Z) as described in Table <a href="TwoD-Domains-1.html#tab:tab-twoDZAttribute">7.8</a>. The
-exception is for <a href="TGCCommands-1.html#tgcReadGISFCShape">Read GIS FC Shape</a>, which
+exception is <a href="TGCCommands-1.html#tgcReadGISFCShape">Read GIS FC Shape</a>, which
 requires the first two attributes. This option requires that the
 points layer be defined within the command line syntax. For example:<br />
 <tcmd><a href="TGCCommands-1.html#tgcReadGISZShape">Read GIS Z Shape</a></tcmd><teq> == </teq><tblk>gis\2d_zsh_M03_002_L.shp | gis\2d_zsh_M03_002_P.shp</tblk><br />
@@ -2718,18 +2718,16 @@ Figure 7.8: Example of Log Law versus Constant Manning’s n with Depth
 </div>
 <div id="Materials-File-4" class="section level4 hasAnchor" number="7.3.6.3">
 <h4><span class="header-section-number">7.3.6.3</span> Materials File<a href="TwoD-Domains-1.html#Materials-File-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Materials file(s) contain information on a material’s roughness and, optionally, rainfall losses if using direct rainfall. The file is referenced within the .tcf file using <a href="TCFCommands-1.html#tcfReadMaterialsFile">Read Materials File</a> and can be in one of two formats (.csv or .tmf) as described below. The .tmf format does not offer all materials functionality, whereas the .csv format does. For example, the log law bed resistance option is only available via the .csv format. The .csv format also supports curves of Manning’s n versus depth.</p>
-<p>If a second argument is provided, this value is used to factor all Manning’s n values. For example, the following command increasing all Manning’s n values by 10%:</p>
-<p><tcmd><a href="TCFCommands-1.html#tcfReadMaterialsFile">Read Materials File</a></tcmd><teq> == </teq><tblk>My_Materials.tmf | 1.1</tblk></p>
+<p>Materials file(s) contain information on a material’s roughness and, optionally, rainfall losses if using direct rainfall. The file is referenced within the .tcf file using <a href="TCFCommands-1.html#tcfReadMaterialsFile">Read Materials File</a> and can be in one of two formats (.csv or .tmf). The .csv format is the recommended of the two options. It supports all functionality. The .tmf format does not. For example, the log law bed resistance option is only available via the .csv format. The .csv format also supports curves of Manning’s n versus depth.</p>
 <p>More than one materials file may be specified by repeat occurrences of the command <a href="TCFCommands-1.html#tcfReadMaterialsFile">Read Materials File</a> however, most models will use only a single materials file. Any combination of .tmf and .csv files can be used and up to 1,000 materials are allowed in total.</p>
-<!-- PAR to EFC: have switched so that the order so that the .csv is first-->
-<!-- PAR to EFC: have also removed 'Manning’s n vs Depth Curves' from the section title as it is not necessary to use-->
+<p>If a second argument is provided with <a href="TCFCommands-1.html#tcfReadMaterialsFile">Read Materials File</a>, this value is used to factor all Manning’s n values. For example, the following command increasing all Manning’s n values by 10%:</p>
+<p><tcmd><a href="TCFCommands-1.html#tcfReadMaterialsFile">Read Materials File</a></tcmd><teq> == </teq><tblk>My_Materials.tmf | 1.1</tblk></p>
 <div id="mat-csv-5" class="section level5 hasAnchor" number="7.3.6.3.1">
 <h5><span class="header-section-number">7.3.6.3.1</span> .csv Format<a href="TwoD-Domains-1.html#mat-csv-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>The .csv format materials file is a comma delimited text file containing Manning’s n and other information for different materials (e.g. land-uses).
-The format is intended to be generated from an Excel file database of materials and associated data in a similar manner to BC databases (with the option of expeditiously using the Excel TUFLOW Macro .xlam macros to export to the .csv format - the Excel TUFLOW Tools.xlam can be downloaded from <a href="https://www.tuflow.com/downloads/#utilities">here</a>). The .csv can also be written from text editor if preferred.</p>
-<p>The format of the materials .csv file is described in Table <a href="TwoD-Domains-1.html#tab:tab-MaterialsFormat">7.10</a>.</p>
-<p>Note: The .csv format offers access to all features, whereas the .tmf format does not.</p>
+The format is intended to be generated from an Excel file database of materials and associated data in a similar manner to BC databases (with the option of using the Excel TUFLOW Macro .xlam macros to export to the .csv format - the Excel TUFLOW Tools.xlam can be downloaded from <a href="https://www.tuflow.com/downloads/#utilities">here</a>). The .csv can also be written from text editor if preferred.</p>
+<p>The format of the materials.csv file is described in Table <a href="TwoD-Domains-1.html#tab:tab-MaterialsFormat">7.10</a>.</p>
+<p>Note: The .csv format offers access to all materials features, whereas the .tmf format does not.</p>
 <table>
 <caption>
 <span id="tab:tab-MaterialsFormat">Table 7.10: </span><strong>Materials .csv File Format</strong>
@@ -2761,7 +2759,7 @@ Mat (Material ID) number, which must be an integer.
 <p>Contains information on the bed resistance values (usually Manning’s n). The options available are:</p>
 <ul>
 <li>Single n value (the n value is assumed constant at all water depths).</li>
-<li>Two pairs of depth and n values (see the y<sub>1</sub>, n<sub>1</sub>, y<sub>2</sub>, n<sub>2</sub> option described in Table <a href="TwoD-Domains-1.html#tab:tab-MaterialsFile">7.11</a> for the .tmf format, ie. Columns 5 to 8). The values must be separated by commas.</li>
+<li>Two pairs of depth and n values (see the y<sub>1</sub>, n<sub>1</sub>, y<sub>2</sub>, n<sub>2</sub> option described in Table <a href="TwoD-Domains-1.html#tab:tab-MaterialsFile">7.11</a> for the .tmf format (i.e. Columns 5 to 8). The values must be separated by commas.</li>
 <li>A .csv file containing n vs depth values. By default, when the n vs depth values are read they are assumed to be in the first two columns of the .csv file containing the curve’s data. However, you can specify the columns to be used by placing the column label after the .csv filename using a vertical bar “|” to separate the column label from the .csv filename. If only one column label is given, this is assumed to be the depth column and the next column must contain the Manning’s n values. As for boundary data, TUFLOW searches down the rows until it finds the first numeric values and will start reading from this row until a row is found with no more numeric values. To view how the n values vary with depth over time, use the “n” option for <a href="TCFCommands-1.html#tcfMapOutputDataTypes">Map Output Data Types</a>.</li>
 <li>If the first four characters are “VxD:” the Manning’s n values for the material will be varied according the velocity times depth product, rather than depth. The VxD versus n values are provided in the same manner as for depths described above. Note that the Manning’s n value never increases during the simulation, it can only remain the same or decrease. This feature was provided to allow the user to reduce Manning’s n with increasing VxD to represent the “stripping” of river banks in high VxD areas, and then keeping the reduced Manning’s n as the flood recedes, hence why the n value cannot increase once decreased during the simulation. VxD was used in preference for simply V to avoid reducing n values at very shallow depths (but high velocities) when the flood first inundates the 2D cells.</li>
 <li>If the first four characters are “Log:” the bed resistance as defined by the theoretically derived log law for shallow flows is applied. Three numbers are required after the “Log:” in space or comma delimited format. These are: Ks (roughness height), Kappa (0.3 to 0.4) and the limiting Manning’s n value. See Section <a href="TwoD-Domains-1.html#log-law-4">7.3.6.2</a> for more information.
@@ -2788,7 +2786,7 @@ Reserved.
 5
 </td>
 <td style="text-align:left;">
-Defines the Storage Reduction Factor (SRF) value. If no fifth column entry exists, no SRF is applied. The default is an SRF of 0, ie. no change in storage. See Section <a href="TwoD-Domains-1.html#srf-3">7.3.9.1</a> for more information.
+Defines the Storage Reduction Factor (SRF) value. If no fifth column entry exists, no SRF is applied. The default is an SRF of 0 (i.e. no change in storage). See Section <a href="TwoD-Domains-1.html#srf-3">7.3.9.1</a> for more information.
 </td>
 </tr>
 <tr>
@@ -2798,42 +2796,33 @@ Defines the Storage Reduction Factor (SRF) value. If no fifth column entry exist
 <td style="text-align:left;">
 Defines the Fraction Impervious of the overlying material type. The value entered should be a number from 0.0 to 1.0 where 0.0 is fully pervious and 1.0 is fully impervious. The default is a value of 0.0, assuming that the overlying material is 100% pervious. This feature is used to influence the amount of water that is infiltrated into the ground with the soil infiltration feature. Refer to Section <a href="TwoD-Domains-1.html#Infiltration-2">7.3.7</a> for more information.</li>
 </ul>
-<b>Note:</b> This does not apply to rainfall losses if applying direct rainfall (see Section <a href="Boundaries-InitialConditions-1.html#Rainfall-3">8.5.3</a>).
+<b>Note: This option works with the Soli Infiltration feature (see Section <a href="TwoD-Domains-1.html#Infiltration-2">7.3.7</a>). It does not apply to materials rainfall losses (Column No 3 above) when applying direct rainfall (see Section <a href="Boundaries-InitialConditions-1.html#Rainfall-3">8.5.3</a>).</b>
 </td>
 </tr>
 </tbody>
 </table>
-<!-- PAR to EFC do you think an example showing a log: or vxd: .csv is warranted?-->
-<!--done-->
-<!-- PAR to EFC, none of these examples have a SRF or fraction impervious, if not mentioned in the relevant sections maybe this should eb included here. -->
-<!--done-->
-<!--EFC to PAR: is land use still not available?-->
-<!-- is read in but nothing happens. change tmf and csv to say land use hazard is 'reserved'. -->
-<!--done-->
 <p>An example of a materials.csv is provided in Figure <a href="TwoD-Domains-1.html#fig:fig-image104">7.9</a>. To give a description of the material, this must be done after all inputs for that material and must be preceded by a “!” or “#”.</p>
 <p>In the example shown in Figure <a href="TwoD-Domains-1.html#fig:fig-image104">7.9</a>:</p>
 <ul>
-<li>Material 1 would have a constant n value of 0.03 and no infiltration
+<li>Material 1 has a constant n value of 0.03 and no rainfall loss
 parameters.<br />
 </li>
-<li>Material 5 would vary n with depth using the four y<sub>1</sub>,
+<li>Material 5 varies n with depth using the four y<sub>1</sub>,
 n<sub>1</sub>, y<sub>2</sub>, n<sub>2</sub> values (as per .tmf format
-approach) and no infiltration parameters.<br />
+approach) and no rainfall loss parameters.<br />
 </li>
-<li>Materials 11 and 12 will source n vs y curves from a file called
+<li>Materials 11 and 12 use depth vaying n sourced from a file called
 Grass.csv. As only one column label has been specified, the y values
 must occur under that label and the n values must occur in the next
-adjoining column (see Figure <a href="TwoD-Domains-1.html#fig:fig-image105">7.10</a>). An IL of 10mm and CL of 2mm/h for both materials will be used
-for any direct rainfall.<br />
+adjoining column (see Figure <a href="TwoD-Domains-1.html#fig:fig-image105">7.10</a>). An IL of 10mm and CL of 2mm/h for both materials will be used for any direct rainfall.<br />
 </li>
-<li>Materials 21 and 22 will source n vs y curves from Trees.csv. As two
-column labels have been specified, the y and n values must occur under
+<li>Materials 21 and 22 use depth vaying n sourced from a file called Trees.csv. As two column labels have been specified, the y and n values must occur under
 the specified labels (see <a href="TwoD-Domains-1.html#fig:fig-image105">7.10</a>). An IL of 20mm
 and CL of 2mm/h for Material 21, and 25 and 2 for Material 22, will be
 used.<br />
 </li>
-<li>Material 31 will use the log law approach (Section <a href="TwoD-Domains-1.html#log-law-4">7.3.6.2</a>) with a roughness height of 0.01m, Kappa value of 0.4 and limiting Manning’s n of 0.02. IL = 0 and CL = 0. The fraction impervious value is set to 1 (fully impervious).</li>
-<li>Material 32 will extract n vs y values using Column A of Buildings.csv for y values and Column B for n values. IL = 0 and CL = 0. The storage reduction factor is set to 0.3 (30% reducetion in storage) and the fraction impervious value is set to 1 (fully impervious).</li>
+<li>Material 31 uses the log law approach (Section <a href="TwoD-Domains-1.html#log-law-4">7.3.6.2</a>) with a roughness height of 0.01m, Kappa value of 0.4 and limiting Manning’s n of 0.02. IL = 0mm and CL = 0mm. The fraction impervious value is set to 1.0 (fully impervious).</li>
+<li>Material 32 use depth vaying n sourced from a file called Buildings.csv. In Buildings.csv Column A is used for y values and Column B for n values. IL = 0 and CL = 0. The storage reduction factor is set to 0.3 (30% reduction in storage) and the fraction impervious value is set to 1 (fully impervious).</li>
 </ul>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image104"></span>
 <img src="images/image104b.png" alt="Example of Materials .csv File Format"  />
@@ -2862,7 +2851,7 @@ contain comments using the “#” and/or “!” comment characters at any loca
 When comment characters are specified, the remainder of the line is ignored.
 The format of the materials .tmf file is described in Table <a href="TwoD-Domains-1.html#tab:tab-MaterialsFile">7.11</a>. The first two
 columns are mandatory and must be specified. All other columns are
-optional.</p>
+optional. A maximum of 100 different materials can be specified in this format.</p>
 <p>Note: The .tmf format does not offer all materials functionality,
 whereas the .csv format in the above section does.</p>
 <table>
@@ -2902,7 +2891,7 @@ Mat (Material ID) number, which must be an integer.
 3
 </td>
 <td style="text-align:left;">
-Sets the initial loss in mm if using a direct rainfall boundary (via <a href="TBCCommands-1.html#tbcReadGISRF">Read GIS RF</a> or <a href="TCFCommands-1.html#tcfRainfallControlFile">Rainfall Control File</a>). Refer to Section <a href="TwoD-Domains-1.html#Rainfall-Losses-4">7.3.6.4</a>. This does not apply to <a href="TBCCommands-1.html#tbcGlobalRainfallBC">Global Rainfall BC</a>.
+Sets the initial loss if using a direct rainfall boundary (via <a href="TBCCommands-1.html#tbcReadGISRF">Read GIS RF</a> or <a href="TCFCommands-1.html#tcfRainfallControlFile">Rainfall Control File</a>). Refer to Section <a href="TwoD-Domains-1.html#Rainfall-Losses-4">7.3.6.4</a>. This does not apply to <a href="TBCCommands-1.html#tbcGlobalRainfallBC">Global Rainfall BC</a>. The units are mm, or if <a href="TCFCommands-1.html#tcfUnits">Units</a> <teq>==</teq><tblk> US Customary</tblk> inches.
 </td>
 </tr>
 <tr>
@@ -2910,7 +2899,7 @@ Sets the initial loss in mm if using a direct rainfall boundary (via <a href="TB
 4
 </td>
 <td style="text-align:left;">
-Sets the continuing loss rate in mm/hr if using a direct rainfall boundary (via <a href="TBCCommands-1.html#tbcReadGISRF">Read GIS RF</a> or <a href="TCFCommands-1.html#tcfRainfallControlFile">Rainfall Control File</a>). Refer to Section <a href="TwoD-Domains-1.html#Rainfall-Losses-4">7.3.6.4</a>. This does not apply to <a href="TBCCommands-1.html#tbcGlobalRainfallBC">Global Rainfall BC</a>.
+Sets the continuing loss rate if using a direct rainfall boundary (via <a href="TBCCommands-1.html#tbcReadGISRF">Read GIS RF</a> or <a href="TCFCommands-1.html#tcfRainfallControlFile">Rainfall Control File</a>). Refer to Section <a href="TwoD-Domains-1.html#Rainfall-Losses-4">7.3.6.4</a>. This does not apply to <a href="TBCCommands-1.html#tbcGlobalRainfallBC">Global Rainfall BC</a>. The units are mm/hr, or if <a href="TCFCommands-1.html#tcfUnits">Units</a> <teq>==</teq><tblk> US Customary</tblk> inches/hr.
 </td>
 </tr>
 <tr>
@@ -2968,70 +2957,78 @@ Defines the Storage Reduction Factor (SRF) value. The default is an SRF of 0. En
 </td>
 <td style="text-align:left;">
 <p>Defines the fraction impervious of the overlying material type. The value entered should be a number from 0.0 to 1.0 where 0.0 is fully pervious and 1.0 is fully impervious. The default is a value of 0.0, assuming that the overlying material is 100% pervious. This feature is used to influence the amount of water that is infiltrated into the ground with the soil infiltration feature. Refer to Section <a href="TwoD-Domains-1.html#Infiltration-2">7.3.7</a> for more information.</p>
-<b>Note: This does not apply to rainfall losses if applying direct rainfall (see Section <a href="Boundaries-InitialConditions-1.html#Rainfall-3">8.5.3</a>).</b>
+<b>Note: This option works with the Soli Infiltration feature (see Section <a href="TwoD-Domains-1.html#Infiltration-2">7.3.7</a>). It does not apply to materials rainfall losses (Column No 3 above) when applying direct rainfall (see Section <a href="Boundaries-InitialConditions-1.html#Rainfall-3">8.5.3</a>).</b>
 </td>
 </tr>
 </tbody>
 </table>
 <p>The .tmf file format is shown in the examples below. See <a href="TGCCommands-1.html#tgcSetMat">Set Mat</a>, <a href="TGCCommands-1.html#tgcReadGISMat">Read GIS Mat</a> and <a href="TGCCommands-1.html#tgcReadGridMat">Read Grid Mat</a> for assigning the material IDs to the 2D domains. These material values may also be used to define bed resistance values across 1D XZ cross-sections (see Section <a href="OneD-Domains-1.html#RR-M-5">5.7.1.1.2</a>).</p>
-<p><tgrn>! Comments and blank lines are allowed in this file</tgrn><br />
-<tgrn>! First value is the Mat value</tgrn><br />
-<tgrn>! Second is the Manning’s n value</tgrn><br />
-<tgrn>! Maximum of 100 different materials</tgrn><br />
+<ol>
+<tgrn>! Comments and blank lines are allowed in this file</tgrn><br />
+<tgrn>! First value is the Mat value, Second is the Manning’s n value</tgrn><br />
 <tblk>1, 0.03</tblk><tgrn>! waterways</tgrn><br />
 <tblk>2, 0.08</tblk><tgrn>! river banks</tgrn><br />
 <tblk>11, 0.06</tblk><tgrn>! grazing land</tgrn><br />
 <tblk>12, 0.04</tblk><tgrn>! parks and gardens</tgrn><br />
 <tblk>13, 0.15</tblk><tgrn>! sugar cane</tgrn><br />
 <tblk>14, 0.12</tblk><tgrn>! natural forest</tgrn><br />
-<tblk>15, 0.02</tblk><tgrn>! roads</tgrn></p>
+<tblk>15, 0.02</tblk><tgrn>! roads</tgrn>
+</ol>
 <p>To include the initial loss (mm) and the continuing loss rate (mm/h)
 optionally enter a third and fourth value as shown below. If an IL is
 specified, a CL must also be specified otherwise an ERROR occurs. Both
 can be omitted, in which case, they are both set to zero.</p>
-<p><tblk>1, 0.03</tblk><tgrn>! waterways</tgrn><br />
+<ol>
+<tblk>1, 0.03</tblk><tgrn>! waterways</tgrn><br />
 <tblk>2, 0.08, 20, 2</tblk><tgrn>! river banks</tgrn><br />
 <tblk>11, 0.06, 20, 2</tblk><tgrn>! grazing land</tgrn><br />
 <tblk>12, 0.04, 5, 1.5</tblk><tgrn>! parks and gardens</tgrn><br />
 <tblk>13, 0.15, 10, 2</tblk><tgrn>! sugar cane</tgrn><br />
 <tblk>14, 0.12, 30, 2.5</tblk><tgrn>! natural forest</tgrn><br />
-<tblk>15, 0.02, 2, 0</tblk><tgrn>! roads</tgrn></p>
+<tblk>15, 0.02, 2, 0</tblk><tgrn>! roads</tgrn>
+</ol>
 <p>To vary n values with depth (m) using two pairs of values optionally
 enter values in the fifth to eighth columns as shown below in lines 2
 and 3 (Materials 2 and 11) below. IL and CL values must be entered (use
 zero if not relevant). If depth varying manning’s n is not used, column
 5 to 8 should be left blank, not set to zero.</p>
-<p><tblk>1, 0.03</tblk><tgrn>! waterways</tgrn><br />
+<ol>
+<tblk>1, 0.03</tblk><tgrn>! waterways</tgrn><br />
 <tblk>2, 0.08, 20, 2, 0.3, 0.15, 0.5, 0.08</tblk><tgrn>! river banks with long grass 0.3m high</tgrn><br />
 <tblk>11, 0.06, 20, 2, 0.1, 0.1, 0.15, 0.06</tblk><tgrn>! grazing land</tgrn><br />
 <tblk>12, 0.04, 5, 1.5</tblk><tgrn>! parks and gardens</tgrn><br />
 <tblk>13, 0.15, 10, 2</tblk><tgrn>! sugar cane</tgrn><br />
 <tblk>14, 0.12, 30, 2.5</tblk><tgrn>! natural forest</tgrn><br />
-<tblk>15, 0.02, 2, 0</tblk><tgrn>! roads</tgrn></p>
+<tblk>15, 0.02, 2, 0</tblk><tgrn>! roads</tgrn>
+</ol>
 <p>To reduce the storage of cells, enter a SRF value in the tenth column as
 shown in line 7 for Material 15 below. The example shown reduces the
-storage (surface area) of all cells with Material ID of 15 by 20%. Note
+storage of all cells with Material ID of 15 by 20%. Note
 that a value of -1 has been entered for the ninth column as this field
 has been reserved. If not used, specify 0 to ensure
 no change in storage for the material.</p>
-<p><tblk>1, 0.03</tblk><tgrn>! waterways</tgrn><br />
+<ol>
+<tblk>1, 0.03</tblk><tgrn>! waterways</tgrn><br />
 <tblk>2, 0.08, 20, 2, 0.3, 0.15, 0.5, 0.08</tblk><tgrn>! river banks with long grass 0.3m high</tgrn><br />
 <tblk>11, 0.06, 20, 2, 0.1, 0.1, 0.15, 0.06</tblk><tgrn>! grazing land</tgrn><br />
 <tblk>12, 0.04, 5, 1.5</tblk><tgrn>! parks and gardens</tgrn><br />
 <tblk>13, 0.15, 10, 2</tblk><tgrn>! sugar cane</tgrn><br />
 <tblk>14, 0.12, 30, 2.5</tblk><tgrn>! natural forest</tgrn><br />
-<tblk>15, 0.02, 2, 0, , , , , -1, 0.2</tblk><tgrn>! roads with width reduced by 20%</tgrn></p>
+<tblk>15, 0.02, 2, 0, , , , , -1, 0.2</tblk><tgrn>! roads with width reduced by 20%</tgrn>
+</ol>
 <p>To specify a fraction impervious, enter a value between 0.0 and 1.0 in
 the eleventh column as shown in line 4 for Material 12 below. The
 example shown partially restricts the rate of infiltration by applying a
 fraction impervious of 0.1 or 10%.</p>
-<p><tblk>1, 0.03</tblk><tgrn>! waterways</tgrn><br />
+<ol>
+<tblk>1, 0.03</tblk><tgrn>! waterways</tgrn><br />
 <tblk>2, 0.08, 20, 2, 0.3, 0.15, 0.5, 0.08</tblk><tgrn>! river banks with long grass 0.3m high</tgrn><br />
 <tblk>11, 0.06, 20, 2, 0.1, 0.1, 0.15, 0.06</tblk><tgrn>! grazing land</tgrn><br />
 <tblk>12, 0.04, 5, 1.5, , , , , -1, 0, 0.1</tblk><tgrn>! parks and gardens (10% impervious)</tgrn><br />
 <tblk>13, 0.15, 10, 2</tblk><tgrn>! sugar cane</tgrn><br />
 <tblk>14, 0.12, 30, 2.5</tblk><tgrn>! natural forest</tgrn><br />
-<tblk>15, 0.02, 2, 0, , , , , -1, 0.2</tblk><tgrn>! roads with width reduced by 20%</tgrn></p>
+<tblk>15, 0.02, 2, 0, , , , , -1, 0.2</tblk><tgrn>! roads with width reduced by 20%</tgrn>
+</ol>
 </div>
 </div>
 <div id="Rainfall-Losses-4" class="section level4 hasAnchor" number="7.3.6.4">
@@ -3041,7 +3038,7 @@ fraction impervious of 0.1 or 10%.</p>
 applied as a boundary on the 2D cells. Rainfall losses are ideal for
 modelling situations in which water is prevented from reaching the
 ground, such as through the interception by trees.</p>
-<p><strong>Note that the rainfall losses are different to the ILCL infiltration
+<p><strong>Note that the ILCL rainfall losses are different to the ILCL infiltration
 losses that can be applied using the .tsoilf file (refer to Section <a href="TwoD-Domains-1.html#tsoilf-4">7.3.7.2</a>).</strong> The
 ILCL soil infiltration losses will infiltrate ponded water into the
 ground. It is possible to use both methods in the same simulation – for
@@ -3051,23 +3048,27 @@ the ground as IL/CL via soil types. The log file (see Section
 <a href="Checks-and-Logs-1.html#TLF-3">14.5.1</a>) will report the material and soil properties separately as
 shown in the example below:</p>
 <p>Example Material Properties:</p>
-<p><tgrn>#4 - Material 4:</tgrn><br />
+<ol>
+<tgrn>#4 - Material 4:</tgrn><br />
 <tblk>Fixed Manning’s n = 0.030<br />
 IL = 1.0mm, CL = 0.0mm/h<br />
 Landuse Hazard ID not set.<br />
 SRF (Storage Reduction Factor) = 0.<br />
-Fraction Impervious = 0. <tblk></p>
+Fraction Impervious = 0. <tblk>
+</ol>
 <p>Example Soil Properties:</p>
-<p><tgrn>#1 - Soil 1 [based on pre-defined soil type SAND]:</tgrn><br />
+<ol>
+<tgrn>#1 - Soil 1 [based on pre-defined soil type SAND]:</tgrn><br />
 <tblk>Suction = 49.5 mm<br />
 HydCond = 117.8 mm/hr<br />
 Porosity = 0.417<br />
 Initial Moisture = 0.2<br />
-Soil Capacity = 0.217 </tblk></p>
+Soil Capacity = 0.217 </tblk>
+</ol>
 <p>Specifying the “fraction impervious” on the material allows the
 materials and the soils to be independent (i.e. the same soil can be
 present under both road and forest). <strong>This fraction impervious only
-applies to the infiltration into the soil and not to the rainfall
+applies to the infiltration into the soil, not to the Materials file rainfall
 losses.</strong></p>
 </div>
 </div>
@@ -3083,7 +3084,7 @@ losses.</strong></p>
 <p>When using TUFLOW HPC, it is possible to model multiple vertical groundwater layers, as well as enable horizontal flow of groundwater. As these features are only available in TUFLOW HPC, they are discussed in Section <a href="TwoD-Domains-1.html#HPC-Groundwater-3">7.4.5</a>.</p>
 <p>All three methods mentioned above monitor the amount of water infiltrated and if the ground becomes saturated, infiltration ceases. The amount of water that can be infiltrated depends on:</p>
 <ul>
-<li>The loss approach and soil loss parameters used for the top most
+<li>The infiltration approach and soil parameters used for the top most
 (infiltration) soil layer.<br />
 </li>
 <li>The number, thickness, porosities, and initial moisture of the
@@ -3091,8 +3092,7 @@ groundwater layers.<br />
 </li>
 <li>The fraction impervious value of the overlying material layer.</li>
 </ul>
-<p>The cumulative infiltration data is stored and computed at cell centres. As such all soil data and
-groundwater later geometry is sampled from the GIS / GRID layers at cell centres. Likewise the material “fraction impervious” data is sampled at cell centres (unlike the mannings values which are sampled at face
+<p>The cumulative infiltration data is stored and computed at cell centres. As such all soil data and groundwater layer geometry is sampled from the GIS / GRID layers at cell centres. Likewise the material “fraction impervious” data is sampled at cell centres (unlike the Manning’s values which are sampled at face
 centres).</p>
 <p>The following .tgc commands are used to set the ID for the soil type referenced in the TUFLOW soils file (.tsoilf) (Section <a href="TwoD-Domains-1.html#tsoilf-4">7.3.7.2</a>):</p>
 <ul>
@@ -3125,7 +3125,7 @@ depth is infinite. The depth (thickness) of the groundwater layer can be set glo
 <li><a href="#tgcReadGRIDSoilBaseElevation">Read GRID Soil Base Elevation</a></li>
 </ul>
 <p>The soil thickness sets the layer depth from the surface elevation. The soil base elevation sets the absolute elevation of the bottom of the layer. If both methods are specified for a given grid cell, the highest of the two will be adopted. The input units should be in metres or feet. To set an initial groundwater level within the soil layer, see Section <a href="Boundaries-InitialConditions-1.html#IGW-3">8.9.2</a>.</p>
-<p>In previous releases, the groundwater level (or depth) was set to represent a water table. For backward compatibility, it is still possible to the set a water table, using these commands:</p>
+<p>In releases prior to 2023-03, the groundwater level (or depth) was set to represent a water table. For backward compatibility, it is still possible to the set a water table, using these commands:</p>
 <ul>
 <li><a href="TGCCommands-1.html#tgcSetGWD">Set GWD</a> or <a href="TGCCommands-1.html#tgcSetGWL">Set GWL</a></li>
 <li><a href="TGCCommands-1.html#tgcReadGISGWD">Read GIS GWD</a> or <a href="TGCCommands-1.html#tgcReadGISGWL">Read GIS GWL</a></li>
@@ -3176,8 +3176,9 @@ f(t) = K\left( 1 + \ \frac{\mathrm{\Delta}\theta\left( \varphi + h_{0} \right)}{
 <li><span class="math inline">\(F(t)\)</span> = cumulative infiltration calculated from:</li>
 </ul>
 <p><span class="math display">\[F(t) - \ \mathrm{\Delta}\theta\left( \varphi + h_{0} \right)\ln\left( 1\  + \ \frac{F(t)}{\mathrm{\Delta}\theta\left( \varphi + h_{0} \right)} \right) = Kt\]</span></p>
+<p>The <a href="https://wiki.tuflow.com/Green-Ampt_Infiltration_Parameters">TUFLOW Wiki</a> provides a detail description of the various Green-Ampt parameters, including how each influences the soil infiltration behaviour.</p>
 <p>United States Department of Agriculture (USDA) soil types have been
-hardwired into TUFLOW and are presented in Table <a href="TwoD-Domains-1.html#tab:tab-GreenAmpt">7.12</a> along with the soil parameters. Alternatively, it is possible to define a
+hardwired into TUFLOW and are presented in Table <a href="TwoD-Domains-1.html#tab:tab-GreenAmpt">7.12</a>, along with the soil parameters. Alternatively, it is possible to define a
 customised soil type by specifying user defined values as shown in
 Table <a href="TwoD-Domains-1.html#tab:tab-tsoilf">7.13</a>.</p>
 <table>
@@ -3453,7 +3454,7 @@ advection, then it can be selected by using the <tcmd><a href="TCFCommands-1.htm
 \end{equation}\]</span></p>
 <p>Where:</p>
 <ul>
-<li><span class="math inline">\(f_0\)</span> is the initial infiltration rate in mm/hr or inches/hr<br />
+<li><span class="math inline">\(f_0\)</span> is the initial infiltration rate in mm/hr or inches/hr (if using <a href="TCFCommands-1.html#tcfUnits">Units</a> <teq>==</teq><tblk> US Customary</tblk>)<br />
 </li>
 <li><span class="math inline">\(f_c\)</span> is the final (indefinite) infiltration rate<br />
 </li>
@@ -3462,8 +3463,7 @@ advection, then it can be selected by using the <tcmd><a href="TCFCommands-1.htm
 <li><span class="math inline">\(k\)</span> is the Horton decay rate.</li>
 </ul>
 <p>If an initial loss (IL) is specified, the initial loss is applied first,
-followed by the Horton infiltration. Figure <a href="TwoD-Domains-1.html#fig:fig-image110">7.13</a> shows an example
-of how the infiltration rate varies over time for <span class="math inline">\(f_0\)</span> equal
+followed by the Horton infiltration. Figure <a href="TwoD-Domains-1.html#fig:fig-image110">7.13</a> shows an example of how the infiltration rate varies over time for <span class="math inline">\(f_0\)</span> equal
 to 3, <span class="math inline">\(f_c\)</span> equal to 1 and <span class="math inline">\(k\)</span> equal to 0.1.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image110"></span>
 <img src="images/image110.jpeg" alt="Example of Horton Infiltration Rate over Time"  />
@@ -3476,8 +3476,7 @@ Figure 7.13: Example of Horton Infiltration Rate over Time
 <h5><span class="header-section-number">7.3.7.1.3</span> Initial Loss/Continuing Loss (ILCL)<a href="TwoD-Domains-1.html#initial-losscontinuing-loss-ilcl" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>The Initial Loss/Continuing Loss (IL/CL) method is a more simplistic approach
 compared to the Green-Ampt and Horton infiltration methods. The IL/CL
-method infiltrates water based on an initial amount then at a constant
-rate.</p>
+method infiltrates water based on an initial volume (at any rate) then transitions to a constant rate after the initial loss volume is exceeded.</p>
 <p><strong>Note that the IL/CL infiltration is separate to the IL/CL
 materials values used to generate excess rainfall for direct rainfall
 simulations (refer to Section <a href="TwoD-Domains-1.html#Rainfall-Losses-4">7.3.6.4</a> for further
@@ -3487,16 +3486,13 @@ information).</strong></p>
 <div id="tsoilf-4" class="section level4 hasAnchor" number="7.3.7.2">
 <h4><span class="header-section-number">7.3.7.2</span> Soils File (.tsoilf)<a href="TwoD-Domains-1.html#tsoilf-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Soils infiltration is applied to the model by defining a soils (.tsoilf)
-file which is read into the .tcf using the command <a href="TCFCommands-1.html#tcfReadSoilFile">Read Soils
-File</a>. Table <a href="TwoD-Domains-1.html#tab:tab-tsoilf">7.13</a> presents the parameters of the .tsoilf file and Figure <a href="TwoD-Domains-1.html#fig:fig-image111">7.14</a> shows an example of a completed file. A number of example models demonstrating the various soil options are available on the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Soil_Options">TUFLOW Wiki - Soil Options</a>. It is
-similar to the materials file where you assign a positive integer ID to each
-soil, define the infiltration method (options are “NONE”, “GA”, “HO” and
-“ILCL”) followed by the soil parameters as the remaining
+file, which is read into the .tcf using the <a href="TCFCommands-1.html#tcfReadSoilFile">Read Soils
+File</a> command. Table <a href="TwoD-Domains-1.html#tab:tab-tsoilf">7.13</a> presents the parameters of the .tsoilf file and Figure <a href="TwoD-Domains-1.html#fig:fig-image111">7.14</a> shows an example of a completed file. A number of example models demonstrating the various soil options are available on the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Soil_Options">TUFLOW Wiki - Soil Options</a>. The soils (.tsoilf) file is similar to the materials file where you assign a positive integer ID to each soil, define the infiltration method (options are “NONE”, “GA”, “HO” and “ILCL”) followed by the soil parameters as the remaining
 values. The Porosity (saturated moisture content), Initial Moisture (fraction of the soil that is initially wet), Max Ponding Depth and Horizontal Hydraulic Conductivity are all optional with default values of 1.0, 0.0, 0.0 and 0.0 respectively.</p>
-<p><strong>Note: Table <a href="TwoD-Domains-1.html#tab:tab-tsoilf">7.13</a> does not include the additional attributes (in regards to horizontal advection) and soil type (convection) available when using TUFLOW HPC. This is shown in Table <a href="TwoD-Domains-1.html#tab:tab-tsoilf-hpc">7.21</a> instead. </strong></p>
+<p><strong>Note: Table <a href="TwoD-Domains-1.html#tab:tab-tsoilf">7.13</a> does not include the additional attributes (in regards to horizontal advection) and soil type (convection) available when using TUFLOW HPC. For groundwater modelling including horizontal and vertical subsurface fluid movement, refer to Table <a href="TwoD-Domains-1.html#tab:tab-tsoilf-hpc">7.21</a> instead. </strong></p>
 <table>
 <caption>
-<span id="tab:tab-tsoilf">Table 7.13: </span><strong>.tsoilf Parameters</strong>
+<span id="tab:tab-tsoilf">Table 7.13: </span>** Soil File (.tsoilf) Parameters**
 </caption>
 <thead>
 <tr>
@@ -3744,8 +3740,7 @@ Integer
 </tr>
 </tbody>
 </table>
-<p>Each soil type can have a different infiltration method including a no
-infiltration option and have different infiltration parameters as shown
+<p>Each soil type can have a different infiltration method and infiltration parameters assigned to it, including a no infiltration option, as shown
 in Table <a href="TwoD-Domains-1.html#tab:tab-tsoilf">7.13</a>. Other parameters that can optionally be set are:</p>
 <ul>
 <li>The imperviousness of the surface (see Fraction Impervious parameter
@@ -3824,8 +3819,8 @@ GWD).</span>
 modelled in 2D directly, rather than using 1D elements, provided the flow width of
 the structure is of a similar or larger size than the 2D cell size. Cells
 are modified in their height (invert and obvert) and width. For bridges,
-additional losses associated with flow reaching the underside of the
-deck is specified. For box culverts, the additional resistance for
+additional losses associated with piers and flow reaching the underside of the
+deck are specified. For box culverts, the additional resistance for
 vertical walls is specified. Additional form losses (energy head losses)
 can be specified for all flow constrictions.</p>
 <p>Weir flow (across levees and other embankments) is modelled in 2D
@@ -3834,8 +3829,7 @@ domains by default, this is handled differently between TUFLOW Classic and TUFLO
 good understanding of the limitations of different approaches and the
 different flow regimes possible. The modeller must understand why and
 where the energy losses occur when assigning form losses to a 2D cell or
-contraction and expansion losses to a 1D element <span class="citation">(<a href="#ref-Syme2001b">Syme, 2001b</a>)</span>. <!--EFC to PAR: do we have a better reference now? maybe https://tuflow.com/library/webinars/#structures or https://tuflow.com/library/webinars/#nov2022_hydraulic_modelling_bridge -->
-<!--PAR: change link to both. also put in the wiki link somewhere https://wiki.tuflow.com/TUFLOW_2D_Hydraulic_Structures--><!--added the info below--></p>
+contraction and expansion losses to a 1D element <span class="citation">(<a href="#ref-Syme2001b">Syme, 2001b</a>)</span>.</p>
 <p>It is important to note that contraction and expansion losses associated
 with structures are modelled differently in 1D and 2D schemes. 1D
 schemes rely on applying form loss coefficients, as they cannot simulate
@@ -3845,25 +3839,19 @@ the introduction of form losses to the same extent as that required for
 1D schemes. 2D schemes still however require the introduction of
 additional form losses since they do not model losses in the vertical or
 fine-scale horizontal effects (such as around a bridge pier). See <span class="citation">Syme (<a href="#ref-Syme2001b">2001b</a>)</span> for further details.</p>
-<p>The following webinars by Bill Syme and Greg Collecutt (the TUFLOW Developers) discus the theory behind the energy losses and affluxes modelling associated with hydraulic structures.</p>
+<p>The following webinars by Bill Syme and Greg Collecutt (two TUFLOW Developers) discuss the theory behind the energy losses and affluxes modelling associated with hydraulic structures.</p>
 <ul>
 <li><a href="https://www.tuflow.com/library/webinars/#structures">Modelling Energy Losses at Structures</a></li>
 <li><a href="https://www.tuflow.com/library/webinars/#nov2022_hydraulic_modelling_bridge">1D, 2D &amp; 3D Hydraulic Modelling of Bridges</a></li>
 </ul>
 <p>Additionally, <a href="https://wiki.tuflow.com/TUFLOW_2D_Hydraulic_Structures">the 2D Hydralic Structures Wiki Page</a> contains information regarding 2D hydraulic structures, including theory, setup and Frequently Asked Questions (FAQs).</p>
-<p><strong>It is strongly recommended that the losses through a structure be validated through:</strong></p>
+<p>It is recommended that the losses through a structure be validated through:</p>
 <ul>
-<li><strong>Calibration to recorded information (if available).</strong><br />
-</li>
-<li><strong>Cross-checked using desktop calculations based on theory and/or
+<li>Calibration to recorded information (if available).</li>
+<li>Cross-checked using desktop calculations based on theory and/or
 standard publications (e.g. “Hydraulics of Bridge Waterways” <span class="citation">(<a href="#ref-Bradley1978">Bradley, 1978</a>)</span> or “Guide to Bridge Technology Part 8, Hydraulic Design of
-Waterway Structures” <span class="citation">(<a href="#ref-Austroads2018">Austroads, 2018</a>)</span>.</strong><br />
-</li>
-<li><strong>Crosschecked with results using other hydraulic software.</strong>
-<!-- PAR - removed a HEC-RAS dot point below, but do you think we can remove cross checked with other results?
-or maybe modified to be more 
-For applications which the structure is a key hydraulic control and calibration data is not available, consider cross-checking with other hydraulic software such as CFD.
---></li>
+Waterway Structures” <span class="citation">(<a href="#ref-Austroads2018">Austroads, 2018</a>)</span>.</li>
+<li>Crosschecked with results using other hydraulic software.</li>
 </ul>
 <p>To validate structure flows and energy losses:</p>
 <ul>
@@ -3896,8 +3884,7 @@ Where:
 <li><span class="math inline">\(V\)</span> = depth and width averaged velocity (i.e. <span class="math inline">\(\frac{Q\_}{QA}\)</span>)</li>
 </ul></li>
 </ul>
-<p>Table <a href="TwoD-Domains-1.html#tab:tab-ModellingApproaches">7.15</a> lists the recommended approaches for modelling 1D and 2D structures
-using TUFLOW. This is discussed further in the following paragraphs.</p>
+<p>Table <a href="TwoD-Domains-1.html#tab:tab-ModellingApproaches">7.15</a> lists the recommended approaches for modelling 1D and 2D structures using TUFLOW. This is discussed further in the following paragraphs.</p>
 <table>
 <caption>
 <span id="tab:tab-ModellingApproaches">Table 7.15: </span><strong>Hydraulic Structure Modelling Approaches</strong>
@@ -3964,26 +3951,19 @@ OK
 </tbody>
 </table>
 <p><strong>1D Approach</strong></p>
-<p>1D structures are discussed Section <a href="OneD-Domains-1.html#Structures-2">5.8</a>. 1D modelling is the
-preferred approach where the total structure width is less than of one
-or two 2D cells. Entry and/or exit are defined for each structure.
+<p>1D structures are discussed in Section <a href="OneD-Domains-1.html#Structures-2">5.8</a>. 1D modelling is the
+preferred approach where the total structure width is less than one
+or two 2D cells. Entry and/or exit losses are defined for each structure.
 Testing has shown that these losses may need to be reduced where the
 structure width is significant compared with the cell size <span class="citation">(<a href="#ref-Syme2001b">Syme, 2001b</a>)</span>.</p>
 <p>1D structures can be linked to the 2D domain using either an SX or HX
-connection, as outlined in (see Section <a href="DomainLinking-1.html#OneD2dLinking-2">10.2</a>). The influence of these
-connection types on the modelled flow behaviour is shown in Figure <a href="TwoD-Domains-1.html#fig:fig-image114">7.17</a>.</p>
+connection, as outlined in (see Section <a href="DomainLinking-1.html#OneD2dLinking-2">10.2</a>). The influence of these connection types on the modelled flow behaviour is shown in Figure <a href="TwoD-Domains-1.html#fig:fig-image114">7.17</a>.</p>
 <p><strong>SX Link:</strong> Momentum is not transferred into or out of the 1D element
 to/from the 2D domain. “Suppressed” flow patterns in the 2D domain occur
 at the structure outlet when using 1D elements, especially if the
 structure width is significant compared with the cell size. The water
-tends to spread, rather than jet out as there is no inertia across the
-link. The effect of this is illustrated in Figure <a href="TwoD-Domains-1.html#fig:fig-image113">7.16</a>, which shows the effect on
-flow patterns and the preservation of inertia across 1D/2D links when
-modelling a structure. Figure <a href="TwoD-Domains-1.html#fig:fig-image113">7.16</a> (red velocity arrows) is that
-using SX links, whilst Figure <a href="TwoD-Domains-1.html#fig:fig-image112">7.15</a> (green arrows) is that using a
-fully 2D solution. As can be seen, using a SX link the water tends to
-spread from the structure outlet, as opposed to forming a jet as in the
-fully 2D solution which is conserving momentum. When using the SX link,
+tends to spread, rather than jet out, as there is no inertia across the
+link. The effect of this is illustrated in Figure <a href="TwoD-Domains-1.html#fig:fig-image113">7.16</a>, which shows the effect on flow patterns and the preservation of inertia across 1D/2D links when modelling a structure. Figure <a href="TwoD-Domains-1.html#fig:fig-image113">7.16</a> (red velocity arrows) is that using SX links, whilst Figure <a href="TwoD-Domains-1.html#fig:fig-image112">7.15</a> (green arrows) is that using a fully 2D solution. As can be seen, using a SX link the water tends to spread from the structure outlet, as opposed to forming a jet as in the fully 2D solution which is conserving momentum. When using the SX link,
 a jet like effect can be created using “wing walls” in the 2D domain at
 the structure outlet by assigning flood free elevations to the ZU and ZV
 Zpts either side of where the 1D element discharges into the 2D domain.</p>
@@ -3991,19 +3971,13 @@ Zpts either side of where the 1D element discharges into the 2D domain.</p>
 to/from the 2D domain, however the velocity field across the HX link is
 assumed to be undisturbed. Provided the HX link is appropriately located
 (i.e. perpendicular to the flow field) this produces the effect of
-preserving momentum as illustrated by the dark blue arrows (Figure <a href="TwoD-Domains-1.html#fig:fig-image114">7.17</a>). Use of HX links at a structure may require a smaller 1D timestep
-than that required by a SX link.</p>
+preserving momentum, as illustrated by the dark blue arrows (Figure <a href="TwoD-Domains-1.html#fig:fig-image114">7.17</a>). Use of HX links at a structure may require a smaller 1D timestep than that required by a SX link.</p>
 <p><strong>2D Approach</strong></p>
 <p>2D representation of structures is preferred where the
 total structure width is greater than one or two 2D cells. The flow area
 must be adequately represented by the 2D Zpts and any adjustments to
-cell widths (see Section <a href="TwoD-Domains-1.html#lfcsh-4">7.3.8.3</a>). The head drop across the structure during
-different flow regimes should be validated against other methods and/or
-literature. Some additional form losses are normally required to achieve
-correct head drop (see <span class="citation">Syme (<a href="#ref-Syme2001b">2001b</a>)</span>). Momentum is transferred through the
-structure as shown in the top image (green arrows) in Figure <a href="TwoD-Domains-1.html#fig:fig-image112">7.15</a>, providing
-more realistic flow patterns than using a 1D element with a SX link, as
-illustrated by the middle image (red arrows) in Figure <a href="TwoD-Domains-1.html#fig:fig-image113">7.16</a>.</p>
+cell widths (see Section <a href="TwoD-Domains-1.html#lfcsh-4">7.3.8.3</a> and <a href="TwoD-Domains-1.html#bg-layer-4">7.3.8.2</a>. The head drop across the structure during different flow regimes should be validated against other methods and/or literature. Some additional form losses are normally required to achieve correct head drop (see <span class="citation">Syme (<a href="#ref-Syme2001b">2001b</a>)</span>). Momentum is transferred through the
+structure as shown in the top image (green arrows) in Figure <a href="TwoD-Domains-1.html#fig:fig-image112">7.15</a>, providing more realistic flow patterns than using a 1D element with a SX link, as illustrated by the middle image (red arrows) in Figure <a href="TwoD-Domains-1.html#fig:fig-image113">7.16</a>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image112"></span>
 <img src="images/image112.png" alt="Flow patterns using 2D FC cells (i.e. a fully 2D solution)"  />
 <p class="caption">
@@ -4115,7 +4089,7 @@ Figure 7.18: 2D BG Shape Attributes and Vertical Distribution of Form Loss Coeff
 <center>
 <div class="figure"><span style="display:block;" id="fig:fig-BGFLCApproach"></span>
 <div class="plotly html-widget html-fill-item" id="htmlwidget-cb54af0b52590e32d6a9" style="width:80%;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-cb54af0b52590e32d6a9">{"x":{"visdat":{"bb82045716":["function () ","plotlyVisDat"]},"cur_data":"bb82045716","attrs":{"bb82045716":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"LINEAR","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.12500000000000003,0.15000000000000005,0.17499999999999996,0.19999999999999998,0.22500000000000001,0.25,0.27500000000000002,0.29999999999999993,0.32499999999999996,0.34999999999999998,0.375,0.40000000000000002,0.42499999999999993,0.44999999999999996,0.47500000000000009,0.50000000000000011,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(26,189,201)"},"type":"scatter","mode":"lines","inherit":true},"bb82045716.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"LINEAR-CONSTANT","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.14000000000000004,0.18000000000000008,0.21999999999999995,0.26000000000000001,0.30000000000000004,0.34000000000000008,0.38000000000000012,0.41999999999999993,0.45999999999999996,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(0,85,129)"},"type":"scatter","mode":"lines","inherit":true},"bb82045716.2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.1484375,0.19375000000000009,0.23593749999999991,0.27500000000000002,0.31093749999999998,0.34375,0.37343750000000009,0.40000000000000002,0.42343750000000002,0.44374999999999998,0.4609375,0.47499999999999998,0.48593750000000002,0.49375000000000002,0.49843749999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(79,86,80)"},"type":"scatter","mode":"lines","inherit":true},"bb82045716.3":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"INVERTED-PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.10156250000000001,0.10625000000000001,0.11406249999999998,0.125,0.13906250000000001,0.15625000000000003,0.17656250000000007,0.19999999999999996,0.22656249999999997,0.25624999999999998,0.2890625,0.32500000000000007,0.36406249999999996,0.40624999999999989,0.45156249999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(226,1,119)"},"type":"scatter","mode":"lines","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Depth Averaged FLC","range":[0,0.59999999999999998]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Depth","range":[0,5]},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":true,"displaylogo":false},"data":[{"name":"LINEAR","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.12500000000000003,0.15000000000000005,0.17499999999999996,0.19999999999999998,0.22500000000000001,0.25,0.27500000000000002,0.29999999999999993,0.32499999999999996,0.34999999999999998,0.375,0.40000000000000002,0.42499999999999993,0.44999999999999996,0.47500000000000009,0.50000000000000011,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(26,189,201)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"name":"LINEAR-CONSTANT","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.14000000000000004,0.18000000000000008,0.21999999999999995,0.26000000000000001,0.30000000000000004,0.34000000000000008,0.38000000000000012,0.41999999999999993,0.45999999999999996,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(0,85,129)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"name":"PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.1484375,0.19375000000000009,0.23593749999999991,0.27500000000000002,0.31093749999999998,0.34375,0.37343750000000009,0.40000000000000002,0.42343750000000002,0.44374999999999998,0.4609375,0.47499999999999998,0.48593750000000002,0.49375000000000002,0.49843749999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(79,86,80)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"name":"INVERTED-PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.10156250000000001,0.10625000000000001,0.11406249999999998,0.125,0.13906250000000001,0.15625000000000003,0.17656250000000007,0.19999999999999996,0.22656249999999997,0.25624999999999998,0.2890625,0.32500000000000007,0.36406249999999996,0.40624999999999989,0.45156249999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(226,1,119)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-cb54af0b52590e32d6a9">{"x":{"visdat":{"cbac16b725d9":["function () ","plotlyVisDat"]},"cur_data":"cbac16b725d9","attrs":{"cbac16b725d9":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"LINEAR","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.12500000000000003,0.15000000000000005,0.17499999999999996,0.19999999999999998,0.22500000000000001,0.25,0.27500000000000002,0.29999999999999993,0.32499999999999996,0.34999999999999998,0.375,0.40000000000000002,0.42499999999999993,0.44999999999999996,0.47500000000000009,0.50000000000000011,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(26,189,201)"},"type":"scatter","mode":"lines","inherit":true},"cbac16b725d9.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"LINEAR-CONSTANT","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.14000000000000004,0.18000000000000008,0.21999999999999995,0.26000000000000001,0.30000000000000004,0.34000000000000008,0.38000000000000012,0.41999999999999993,0.45999999999999996,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(0,85,129)"},"type":"scatter","mode":"lines","inherit":true},"cbac16b725d9.2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.1484375,0.19375000000000009,0.23593749999999991,0.27500000000000002,0.31093749999999998,0.34375,0.37343750000000009,0.40000000000000002,0.42343750000000002,0.44374999999999998,0.4609375,0.47499999999999998,0.48593750000000002,0.49375000000000002,0.49843749999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(79,86,80)"},"type":"scatter","mode":"lines","inherit":true},"cbac16b725d9.3":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"INVERTED-PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.10156250000000001,0.10625000000000001,0.11406249999999998,0.125,0.13906250000000001,0.15625000000000003,0.17656250000000007,0.19999999999999996,0.22656249999999997,0.25624999999999998,0.2890625,0.32500000000000007,0.36406249999999996,0.40624999999999989,0.45156249999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(226,1,119)"},"type":"scatter","mode":"lines","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Depth Averaged FLC","range":[0,0.59999999999999998]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Depth","range":[0,5]},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":true,"displaylogo":false},"data":[{"name":"LINEAR","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.12500000000000003,0.15000000000000005,0.17499999999999996,0.19999999999999998,0.22500000000000001,0.25,0.27500000000000002,0.29999999999999993,0.32499999999999996,0.34999999999999998,0.375,0.40000000000000002,0.42499999999999993,0.44999999999999996,0.47500000000000009,0.50000000000000011,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(26,189,201)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"name":"LINEAR-CONSTANT","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.14000000000000004,0.18000000000000008,0.21999999999999995,0.26000000000000001,0.30000000000000004,0.34000000000000008,0.38000000000000012,0.41999999999999993,0.45999999999999996,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(0,85,129)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"name":"PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.1484375,0.19375000000000009,0.23593749999999991,0.27500000000000002,0.31093749999999998,0.34375,0.37343750000000009,0.40000000000000002,0.42343750000000002,0.44374999999999998,0.4609375,0.47499999999999998,0.48593750000000002,0.49375000000000002,0.49843749999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(79,86,80)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"name":"INVERTED-PARABOLIC","y":[0,2,2.1000000000000001,2.2000000000000002,2.2999999999999998,2.3999999999999999,2.5,2.6000000000000001,2.7000000000000002,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.6000000000000001,3.7999999999999998,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,4.7999999999999998,5,5.2000000000000002,5.4000000000000004,5.5999999999999996,5.7999999999999998],"x":[0.10000000000000001,0.10000000000000001,0.10156250000000001,0.10625000000000001,0.11406249999999998,0.125,0.13906250000000001,0.15625000000000003,0.17656250000000007,0.19999999999999996,0.22656249999999997,0.25624999999999998,0.2890625,0.32500000000000007,0.36406249999999996,0.40624999999999989,0.45156249999999998,0.5,0.47368421052631593,0.45000000000000012,0.42857142857142866,0.40909090909090917,0.39130434782608708,0.37500000000000011,0.3600000000000001,0.34615384615384626,0.33333333333333343,0.32142857142857156,0.31034482758620702],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(226,1,119)"},"type":"scatter","mode":"lines","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 7.19: Depth Averaged FLC Applied Using Four Adjustment Approaches
 </p>
@@ -4462,7 +4436,7 @@ Float
 <center>
 <div class="figure"><span style="display:block;" id="fig:fig-CFDBridgeFLC"></span>
 <div class="plotly html-widget html-fill-item" id="htmlwidget-5777bedaf9170a515e49" style="width:50%;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-5777bedaf9170a515e49">{"x":{"visdat":{"bb82c354194":["function () ","plotlyVisDat"]},"cur_data":"bb82c354194","attrs":{"bb82c354194":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"Category 1","y":[0.59999999999999998,0.59999999999999998,0.41999999999999998,0.28000000000000003,0.20000000000000001,0.16,0.16],"x":[-10,1,2,4,6,10,20],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(26,189,201)"},"point":{"color":"rgb(26,189,201)"},"type":"scatter","markers":"true","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"D<sub>Pier<\/sub>/T<sub>SuperS<\/sub>","range":[0,12]},"yaxis":{"domain":[0,1],"automargin":true,"title":"FLC","range":[0,0.69999999999999996]},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":true,"displaylogo":false},"data":[{"name":"Category 1","y":[0.59999999999999998,0.59999999999999998,0.41999999999999998,0.28000000000000003,0.20000000000000001,0.16,0.16],"x":[-10,1,2,4,6,10,20],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(26,189,201)"},"point":{"color":"rgb(26,189,201)"},"type":"scatter","markers":"true","mode":"markers+lines","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-5777bedaf9170a515e49">{"x":{"visdat":{"cbac708a1fec":["function () ","plotlyVisDat"]},"cur_data":"cbac708a1fec","attrs":{"cbac708a1fec":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"name":"Category 1","y":[0.59999999999999998,0.59999999999999998,0.41999999999999998,0.28000000000000003,0.20000000000000001,0.16,0.16],"x":[-10,1,2,4,6,10,20],"hovertemplate":"%{y:.2f}<extra><\/extra>","line":{"color":"rgb(26,189,201)"},"point":{"color":"rgb(26,189,201)"},"type":"scatter","markers":"true","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"D<sub>Pier<\/sub>/T<sub>SuperS<\/sub>","range":[0,12]},"yaxis":{"domain":[0,1],"automargin":true,"title":"FLC","range":[0,0.69999999999999996]},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":true,"displaylogo":false},"data":[{"name":"Category 1","y":[0.59999999999999998,0.59999999999999998,0.41999999999999998,0.28000000000000003,0.20000000000000001,0.16,0.16],"x":[-10,1,2,4,6,10,20],"hovertemplate":["%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>","%{y:.2f}<extra><\/extra>"],"line":{"color":"rgb(26,189,201)"},"point":{"color":"rgb(26,189,201)"},"type":"scatter","markers":"true","mode":"markers+lines","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 7.20: <strong>CFD benchmarking study of FLC vs <span class="math inline">\(D_{Pier}\)</span>/<span class="math inline">\(T_{SuperS}\)</span> ratio (<span class="math inline">\(h_{B}\)</span>/<span class="math inline">\(T\)</span> in the original paper)</strong>
 </p>
@@ -4476,12 +4450,8 @@ Figure 7.20: <strong>CFD benchmarking study of FLC vs <span class="math inline">
 <p>Layered flow constrictions allow losses and blockages to be varied with water
 depth. This provides the opportunity to model the flow under and over a
 bridge deck, or a pipeline crossing a waterway.</p>
-<p><strong>Note: The 2023-03-AA release introduced the 2d_bg layer, specifically
-for modelling bridges in 2D, see <a href="TwoD-Domains-1.html#bg-layer-4">2D Bridge Structures</a>.
-It is recommended that this layer be used for representation of bridges.
-Prior to this, bridges were commonly modelled using a 2d_lfcsh.</strong></p>
-<p>Four vertical layers within a layered flow constriction (not GIS layers) are represented. The
-lower three layers each have their own attributes. Each layer is
+<p><strong>Note: The 2023-03-AA release introduced the 2d_bg layer, see <a href="TwoD-Domains-1.html#bg-layer-4">2D Bridge Structures</a>. It is recommended that it be used for representation of bridges. Prior to this, bridges were commonly modelled using a 2d_lfcsh.</strong></p>
+<p>Four vertical layers within a layered flow constriction (not GIS layers) are represented. The lower three layers each have their own attributes. Each layer is
 assigned its own percentage blockage and form loss coefficient. The top
 (fourth) layer assumes the flow in Layer 4 is unimpeded. Within the same
 shape, the invert of the bed, and thickness of each layer can vary in
@@ -4513,33 +4483,25 @@ attributes increase as the water continues to rise. Similarly, for Layer
 <p>The cell side flow width is calculated by summing the flow areas of each
 layer (including the effects of layer blockages) and dividing by the
 water depth.</p>
-<p>As of the 2020-10 Release three options are available to specify the
+<p>As of the 2020-10 release three options are available to specify the
 method in which form losses are applied:</p>
 <ul>
 <li><strong>METHOD A</strong> (CUMULATE in releases prior to 2020-10): Accumulates losses through each of the layers in the 2d_lfcsh as the depth of water increases.<br />
 </li>
-<li><strong>METHOD B</strong> (PORTION in releases prior to 2020-10) – the default: Proportions the losses through each of the layers in the 2d_lfcsh based on the depth of water.<br />
-</li>
-<li><strong>METHOD C</strong>: Combines the METHOD A and METHOD B approaches by utilising METHOD A through to the top of Layer 3 and METHOD B above Layer 3.<br />
+<li><strong>METHOD B</strong> (PORTION in releases prior to 2020-10) – the default: Proportions the losses through each of the layers in the 2d_lfcsh based on the depth of water. - <strong>METHOD C</strong>: Combines the METHOD A and METHOD B approaches by utilising METHOD A through to the top of Layer 3 and METHOD B above Layer 3.<br />
 <!-- - **METHOD D**: Allows the modeller to control the depth at which the losses start to reduce when the flow transitions between pressure flow and drowned flow. From the 2023-03-AA release and onwards it is recommended to use the 2d_bg layer, see Section \@ref(bg-layer-4).--></li>
 </ul>
-<p>Whilst the default approach of using METHOD B is unchanged for
-backward compatibility purposes, it is recommended the new approaches
-of METHOD C or the 2d_bg layer be considered as they are shown to
-emulate behaviour from CFD modelling more closely for pressurised flow
-conditions <span class="citation">(<a href="#ref-BridgeDeckAfflux">Collecutt et al., 2022</a>)</span>.</p>
-<p>To specify the method on a structure by structure basis (strongly
-recommended), populate the Shape_Options attribute (refer to Table <a href="TwoD-Domains-1.html#tab:tab-LayeredFlow">7.18</a>) with
-either “Method A”, “Method B” (the default) or “Method C”.</p>
 <p>The following .tcf command can be used to set the default method to be applied to all structures in the model:</p>
 <p><tcmd><a href="TCFCommands-1.html#tcfLayeredFLCDefaultApproach">Layered FLC Default Approach</a></tcmd><teq> == </teq><tblk>[ METHOD A | {METHOD B} | METHOD C ]</tblk></p>
-<p>The differences in how the losses are applied between the two methods is explained in the following examples.</p>
-<p><!-- PAR to EFC, can we make a heading for the methods?, to me it's unclear where one methods ends and the next starts --> <!--done--></p>
+<p>To specify the method on a structure by structure basis, populate the Shape_Options attribute (refer to Table <a href="TwoD-Domains-1.html#tab:tab-LayeredFlow">7.18</a>) with
+either “Method A”, “Method B” (the default) or “Method C”.</p>
+<p>Whilst the default approach of using METHOD B is unchanged for backward compatibility purposes, it is recommended the new approaches of METHOD C or the TUFLOW HPC’s 2d_bg layer approach be considered as they are shown to emulate behaviour from CFD modelling more closely for pressurised flow conditions <span class="citation">(<a href="#ref-BridgeDeckAfflux">Collecutt et al., 2022</a>)</span>.</p>
+<p>Detailed explanation outlining how the losses are applied is provided in the following sections.</p>
 <p><strong>METHOD A</strong></p>
 <p>If the form loss method has been set to METHOD A (CUMULATE), the losses
 are accumulated as the water level rises through the layers according to
 the following equation. This approach was replaced as the default
-setting for the 2016-03 release due to producing inconsistent results
+setting for the 2016-03 release due to it producing inconsistent results
 where the bridge is substantially overtopped (drowned out) with a large
 percentage of the flow occurring through Layer 4, and the overall energy
 loss reducing with increasing water depth once the structure is
@@ -4578,8 +4540,8 @@ and METHOD B above Layer 3. METHOD C adjusts the FLC value in the
 vertical as follows.</p>
 <ul>
 <li>Water level below Layer 2: The same result as for all other
-approaches, i.e. a form loss based on that specified for Layer 1 is
-applied. This is typically used for the energy losses associated with
+approaches (i.e. a form loss based on that specified for Layer 1 is
+applied). This is typically used for the energy losses associated with
 bridge piers.<br />
 </li>
 <li>Water level below top of Layer 3: Same approach as for METHOD A.<br />
@@ -4629,7 +4591,7 @@ $\phi_{total}$ = overall cell face blockage applied-->
 When setting the blockage values, considerations need to be taken into
 account whether the source of the FLC value is based on the approach
 velocity (the velocity in the absence of piers blockage) or structure
-velocity (the velocity with area blocked out by the piers). For example, Hydraulics of Bridge Waterways <span class="citation">(<a href="#ref-Bradley1978">Bradley, 1978</a>)</span> or Guide to Bridge Technology <span class="citation">(<a href="#ref-Austroads2018">Austroads, 2018</a>)</span> derives FLC value based on the
+velocity (the velocity with area blocked out by the piers). For example, Hydraulics of Bridge Waterways <span class="citation">(<a href="#ref-Bradley1978">Bradley, 1978</a>)</span> or Guide to Bridge Technology <span class="citation">(<a href="#ref-Austroads2018">Austroads, 2018</a>)</span> derives FLC values based on the
 cross-sectional averaged velocity in the absence of piers, and thus it
 is recommended to set the Layer 1 blockage value as zero
 (0). For more information, please see the <a href="https://wiki.tuflow.com/TUFLOW_2D_Hydraulic_Structures">2D Hydraulic Structures</a> TUFLOW Wiki page.</p>
@@ -4689,7 +4651,7 @@ layer in 3D. In this case, four attributes are required as outlined in Table <a 
 This can for example be used to model an arched bridge or sloping deck.
 The point objects can be placed in a separate layer to the line or
 polygon GIS features.</p>
-<p>Please note, overlapping flow constriction inputs are not supported.</p>
+<p>Please note, overlapping flow constriction inputs is not supported.</p>
 <table>
 <caption>
 <span id="tab:tab-LayeredFlow">Table 7.18: </span>Layered Flow Constriction Shape (2d_lfcsh) Attribute Descriptions
@@ -4824,7 +4786,7 @@ L1_FLC
 <p><b>Note: So that this attribute is independent of 2D cell size it has different treatment depending on the object it is attached to as follows:</b></p>
 <ul>
 <li><b><b>Line:</b></b> For thin lines, the FLC value is applied to the cell sides unchanged. For thick (whole cell) lines, the FLC value is divided by two (two cell sides in the direction of flow). For wide lines the FLC value is divided by the number of cells across the line (i.e. the line’s width divided by the cell size) and applied to all cell-sides.</li>
-<li><b>Polygon:</b> FLC is the form loss per metre length (in the predominant direction of flow). FLC values are not dependent on the flow width, but are on the length of travel in the direction of flow.</li>
+<li><b>Polygon:</b> FLC is the form loss per unit length (in the predominant direction of flow). FLC values are not dependent on the flow width, but are on the length of travel in the direction of flow. The unit of length is metres, or feet if using <a href="TCFCommands-1.html#tcfUnits">Units</a> <teq>==</teq><tblk> US Customary</tblk>.</li>
 </ul>
 <p><b>However, if a negative FLC value is specified, the absolute value is taken and applied unadjusted to all cell-sides affected by the shape.<br />
 Note, this is not cell size independent, therefore if the 2D cell size is changed, this attribute also needs to be changed.</b></p>
@@ -4843,7 +4805,7 @@ Float
 L2_Depth
 </td>
 <td style="text-align:left;">
-The depth in metres of Layer 2.
+The depth of Layer 2. Depth units = metres, or feet if using <a href="TCFCommands-1.html#tcfUnits">Units</a> <teq>==</teq><tblk> US Customary</tblk>.
 </td>
 <td style="text-align:left;">
 Float
@@ -4885,7 +4847,7 @@ Float
 L3_Depth
 </td>
 <td style="text-align:left;">
-The depth in metres of Layer 3.
+The depth of Layer 3. Depth units = metres, or feet if using <a href="TCFCommands-1.html#tcfUnits">Units</a> <teq>==</teq><tblk> US Customary</tblk>.
 </td>
 <td style="text-align:left;">
 Float
@@ -4964,7 +4926,7 @@ Type
 Invert
 </td>
 <td style="text-align:left;">
-<p>Invert of constriction (m above datum).</p>
+<p>Invert of constriction (metres above datum)(or feet if using <a href="TCFCommands-1.html#tcfUnits">Units</a> <teq>==</teq><tblk> US Customary</tblk>).</p>
 To leave the Zpt levels unchanged (i.e. use the existing Zpt elevations), enter a value of 99999.
 </td>
 <td style="text-align:left;">
@@ -4993,7 +4955,7 @@ Float
 L2_Depth
 </td>
 <td style="text-align:left;">
-The depth in metres of Layer 2.
+The depth of Layer 2. Depth units = metres, or feet if using <a href="TCFCommands-1.html#tcfUnits">Units</a> <teq>==</teq><tblk> US Customary</tblk>.
 </td>
 <td style="text-align:left;">
 Float
@@ -5007,7 +4969,7 @@ Float
 L3_Depth
 </td>
 <td style="text-align:left;">
-The depth in metres of Layer 3.
+The depth of Layer 3. Depth units = metres, or feet if using <a href="TCFCommands-1.html#tcfUnits">Units</a> <teq>==</teq><tblk> US Customary</tblk>.
 </td>
 <td style="text-align:left;">
 Float
@@ -5036,17 +4998,12 @@ zero (i.e. no change in storage).</p>
 </li>
 <li>Using the .tgc command <a href="TGCCommands-1.html#tgcReadGridSRF">Read GRID SRF</a> to assign SRF
 values from a raster input grid.</li>
-<li>Via SX connections to 1D; the default behaviour is to increase the storage in the 2D
-cells, the average 1D node storage is distributed across connected SX cells. Refer to Section <a href="DomainLinking-1.html#SXBoundary-3">10.2.2</a> and .tcf command <a href="TCFCommands-1.html#tcfSXStorageApproach">SX Storage Approach</a>.<br />
-<!-- PAR to EFC added dot point above, not sure if this should also be mentioned in the 1d/2d linking chapter?--><!--EFC: added comment to linking chapter--></li>
+<li>Via SX connections to 1D. The default approach increases the storage in the 2D cells by the average associated 1D node storage. Refer to Section <a href="DomainLinking-1.html#SXBoundary-3">10.2.2</a> and .tcf command <a href="TCFCommands-1.html#tcfSXStorageApproach">SX Storage Approach</a>.<br />
+The applied SRF value is reported in the SRF attribute of the
+<a href="https://wiki.tuflow.com/Check_Files_2d_grd">_grd_check</a> layer.</li>
 </ol>
-<p>The applied SRF value is reported in the SRF attribute of the
-<a href="https://wiki.tuflow.com/Check_Files_2d_grd">_grd_check</a> layer.</p>
 <p><strong>Note that a user can apply a combination of material SRF values and
-<a href="TGCCommands-1.html#tgcReadGISSRF">Read GIS SRF</a> layers, but the latter prevails. The order
-is dependent on that in the .tgc file. For example, if a cell’s storage
-is adjusted by layers read in using both the <a href="TGCCommands-1.html#tgcReadGISSRF">Read GIS SRF</a>
-and <a href="TGCCommands-1.html#tgcReadGISMat">Read GIS Mat</a> commands, the latter will prevail.</strong></p>
+<a href="TGCCommands-1.html#tgcReadGISSRF">Read GIS SRF</a> layers. The item that is used by the simulation depends on the order of commands in the .tgc file. The last read input takes precedence. For example, if a cell’s storage is adjusted by layers read in using both the <a href="TGCCommands-1.html#tgcReadGISSRF">Read GIS SRF</a> and <a href="TGCCommands-1.html#tgcReadGISMat">Read GIS Mat</a> commands, though<a href="TGCCommands-1.html#tgcReadGISMat">Read GIS Mat</a> is lower in the .tgc file, it will prevail.</strong></p>
 <p>If a large reduction in cell storage is applied, for stability reasons it
 may be necessary to also reduce the cell conveyance using a higher
 roughness or cell flow width (see Section <a href="TwoD-Domains-1.html#CWF-4">7.3.9.2</a>). For example,
@@ -5070,28 +5027,23 @@ file.</p>
 <h4><span class="header-section-number">7.3.9.3</span> Form Loss Coefficient (FLC)<a href="TwoD-Domains-1.html#flc-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Form loss coefficients can be applied in the .tgc to add an additional energy
 loss at the 2D cell side (in the same manner as for 2D flow
-constrictions). Unlike flow constrictions, the FLC applied using this approach
-does not vary with depth. The form or energy loss can be applied as fixed values with the
-.tgc commands <a href="TGCCommands-1.html#tgcSetFLC">Set FLC</a>, <a href="TGCCommands-1.html#tgcReadGISFLC">Read GIS FLC</a> and
+constrictions - (Section <a href="TwoD-Domains-1.html#lfcsh-4">7.3.8.3</a> and <a href="TwoD-Domains-1.html#bg-layer-4">7.3.8.2</a>). Unlike flow constrictions, the FLC applied using this approach
+does not vary with depth. The form or energy loss can be applied as fixed values with the .tgc commands <a href="TGCCommands-1.html#tgcSetFLC">Set FLC</a>, <a href="TGCCommands-1.html#tgcReadGISFLC">Read GIS FLC</a> and
 <a href="TGCCommands-1.html#tgcReadGridFLC">Read Grid FLC</a> or on a form loss per unit length basis with
 the .tgc commands <a href="TGCCommands-1.html#tgcSetFLC/L">Set FLC/L</a>, <a href="TGCCommands-1.html#tgcReadGISFLC/L">Read GIS FLC/L</a> and
 <a href="TGCCommands-1.html#tgcReadGridFLC/L">Read Grid FLC/L</a>. The advantage to applying the FLC on a per
 unit length basis is that it makes these inputs independent
 of the 2D cell size when using regions (polygons). As such, if the 2D
-cell size is changed the same energy loss will be applied to both models
-over the area of the region. This per unit length this approach conforms
-with the existing FLC input for region objects in FC (flow constriction)
-and Layered FC GIS layers as mentioned below.</p>
-<p>Section <a href="TwoD-Domains-1.html#HydraulicStructures-3">7.3.8</a> provides a detailed discussion about the application of
-additional form losses.</p>
+cell size is changed, the same energy loss will be applied to both models
+over the area of the region.</p>
 <p>Any cell sides that fall within the polygon will have the additional form loss
 These loss can be reviewed within the
 <a href="http://wiki.tuflow.com/Check_Files_2d_uvpt">uvpt_check</a> file.</p>
+<p>Section <a href="TwoD-Domains-1.html#HydraulicStructures-3">7.3.8</a> provides a detailed discussion about the application of additional form losses.</p>
 </div>
 <div id="mod-conveyance-4" class="section level4 hasAnchor" number="7.3.9.4">
 <h4><span class="header-section-number">7.3.9.4</span> Modify Conveyance<a href="TwoD-Domains-1.html#mod-conveyance-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>The. tgc command <a href="TGCCommands-1.html#tgcReadGISZptModifyConveyance">Read GIS Zpts Modify Conveyance</a> can be used to modify the elevation for a series of cells based on an increase or decrease in
-conveyance. Three inputs are required for this operation. These are:</p>
+<p>The. tgc command <a href="TGCCommands-1.html#tgcReadGISZptModifyConveyance">Read GIS Zpts Modify Conveyance</a> can be used to modify the elevation of a series of cells based on an increase or decrease in conveyance. Three inputs are required for this operation. These are:</p>
 <ol style="list-style-type: decimal">
 <li>A GIS layer containing a region / polygon object within which the
 modification will apply;<br />
@@ -5102,7 +5054,7 @@ modification will apply;<br />
 </ol>
 <p>The command syntax is:</p>
 <p><tcmd><a href="TGCCommands-1.html#tgcReadGISZptModifyConveyance">Read GIS Zpts Modify Conveyance</a></tcmd><teq> == </teq><tblk>&lt;gis layer&gt; | &lt;K_factor&gt; | &lt;Water_Level_Grid&gt;</tblk></p>
-<p>The terrain levels are adjusted based on the depth of water relative the
+<p>The terrain levels are adjusted based on the depth of water relative to the
 water surface provided. The elevations are modified by
 <span class="math inline">\(depth\left( 1 - f^{\frac{3}{5}} \right)\)</span>, which is effectively a change
 in conveyance of <span class="math inline">\(K\times f\)</span> where <span class="math inline">\(K\)</span> is conveyance and <span class="math inline">\(f\)</span> is the multiplication
@@ -5110,7 +5062,7 @@ factor. For example, f = 1.2 would be a 20% increase in conveyance
 resulting in a deepening of the waterway. The specified base water level
 grid is a grid surface in a supported input raster format. The grid
 does not need to be in the same resolution as the 2D domains, but is
-typically the _h_Max grid output by TUFLOW from a previous run (see Section <a href="Outputs-1.html#Grid-4">11.2.2.2</a>).</p>
+typically the _h_Max grid output by TUFLOW from a previous simulation (see Section <a href="Outputs-1.html#Grid-4">11.2.2.2</a>).</p>
 <p>This feature is useful for sensitivity testing the changes in flood
 behaviour due to a deepening or accretion of a river’s bed based on a
 change in conveyance.</p>
@@ -5128,7 +5080,7 @@ this case along the river. This can be in any supported vector format (.gpkg, .s
 </li>
 <li>base_h_Max.tif is a raster grid of the peak water level grid from a base
 case simulation. It is recommended to copy this grid layer from the
-results folder and place it somewhere under model\grid\ If this grid
+results folder and place it somewhere under model\grid\. If this grid
 layer varies with AEP, it is recommended to use the one .tcf with a
 Variable to define the AEP, or alternatively a Scenario variable.</li>
 </ul>
@@ -5155,8 +5107,9 @@ suitable method for their study.</p>
 <ul>
 <li>Utilising a higher bed resistance (roughness);<br />
 </li>
-<li>Raising or removing buildings from the 2D cells;<br />
+<li>Raising the elevation of 2D cells where buildings exist;<br />
 </li>
+<li>Deactivating the 2D cells (code = 0) where buildings exist;</li>
 <li>Reducing the cell storage;<br />
 </li>
 <li>Restricting the flow using a cell width reduction or additional form loss; or<br />
@@ -5195,11 +5148,9 @@ elevations (see Section <a href="TwoD-Domains-1.html#zsh-4">7.3.5.2</a>) of the 
 thereby specifying the elevation at which the building is able to flood.
 This may allow for direct rainfall simulations using a modification of
 the cell elevations.</p>
-<p>The use of a breakline around the edges of the building can be used to
+<p>The use of a thin breakline around the edges of the building can be used to
 prevent the building becoming a flow path, whilst not removing the
-storage volume. For example, three sides of the building could be
-blocked, this will still allow water to enter the building but not flow
-through it.</p>
+storage volume (see Section <a href="TwoD-Domains-1.html#zsh-4">7.3.5.2</a>). For example, three sides of the building could be blocked, this will still allow water to enter the building but not flow through it.</p>
 <p>Layered flow constrictions (see Section <a href="TwoD-Domains-1.html#lfcsh-4">7.3.8.3</a>) or Cell Width Factor (see Section
 <a href="TwoD-Domains-1.html#CWF-4">7.3.9.2</a>) may be used to impede the flow of water as it passes
 through the building. The sides of 2D cells may be partially blocked to
@@ -5220,20 +5171,17 @@ if possible.</p>
 <p>Roads typically represent the main flow routes through urban areas. The
 chosen cell size of the 2D domain is a key factor in ensuring an
 appropriate number of cells have been used to represent the width of the
-roads as previously illustrated in Section <a href="Fundamentals-1.html#CellSizes-3">3.3.2</a>. Choosing too coarse a resolution
-may result in the roads not being accurately represented and minor flow
-routes not being represented at all. An unnecessarily fine resolution
-may result in long simulation times and stability problems if the
+roads, as previously discussed in Section <a href="Fundamentals-1.html#CellSizes-3">3.3.2</a>. Choosing too coarse a resolution may result in the roads not being accurately represented and minor flow routes not being represented at all. An unnecessarily fine resolution
+may translate to excessively long simulation times and stability problems if the
 Courant condition is exceeded. Ideally, it is recommended that the main
 flow routes be represented with a width of approximately 3-4 cells
-across. Note, when using the TUFLOW HPC SGS functionality (see Section <a href="TwoD-Domains-1.html#SGS-3">7.4.3</a>) using breaklines to represent road crests is important. The <a href="#tgcSGSBreaklineDetectionDelta">SGS Breakline Detection Delta</a> tool (see Section <a href="TwoD-Domains-1.html#SGS-Advanced-5">7.4.3.1.2</a>) can assist modellers in identifying where breaklines may need to be added.</p>
+across. Note, when using the TUFLOW HPC SGS functionality (see Section <a href="TwoD-Domains-1.html#SGS-3">7.4.3</a>) identification of locations where a breakline should be used to represent a flow control crest may be important. The <a href="#tgcSGSBreaklineDetectionDelta">SGS Breakline Detection Delta</a> tool (see Section <a href="TwoD-Domains-1.html#SGS-Advanced-5">7.4.3.1.2</a>) can assist modellers in identifying where breaklines may need to be added.</p>
 <p>For overland flood studies where a high proportion of sheet flow is
 predicted, differentiation between the road and pavement elevations may
 influence the predicted areas of inundation. A DTM based on LiDAR or ALS
 data, may not necessarily pick up this detail, therefore requiring
 manual modification of the topography using breaklines.</p>
-<p>It is possible to apply the Log Law rule for very shallow flow through automatically varying Manning’s n. This is of particularly interest for modelling flow over smooth surfaces
-such as roads and concrete (see Section <a href="TwoD-Domains-1.html#log-law-4">7.3.6.2</a>).</p>
+<p>It is possible to apply the Log Law rule for very shallow flow through automatically varying Manning’s n. This is of particularly interest for modelling flow over smooth surfaces such as roads and concrete (see Section <a href="TwoD-Domains-1.html#log-law-4">7.3.6.2</a>).</p>
 </div>
 <div id="fences-4" class="section level4 hasAnchor" number="7.3.10.3">
 <h4><span class="header-section-number">7.3.10.3</span> Fences and Walls<a href="TwoD-Domains-1.html#fences-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -5263,57 +5211,23 @@ specified amount.</p>
 </div>
 <div id="HPC-specific-2" class="section level2 hasAnchor" number="7.4">
 <h2><span class="header-section-number">7.4</span> TUFLOW HPC Specific<a href="TwoD-Domains-1.html#HPC-specific-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This section describes functionality which is unique to TUFLOW HPC.</p>
-<!-- EFC has moved the below from the intro based on PAR suggestion. Need to massage below section into what we already have written for QDT. 
-#### Quadtree Grid (HPC)
-
- EFC to PAR: how much do we want here vs the QDT chapter in HPC section
- PAR to EFC: remove
-
-The Quadtree variable refinement cartesian grid functionality allows the user to vary the resolution of a fixed grid model using the HPC 2D Solver. Quadtree refinement allows for recursive division of square cells into four smaller squares. As such, using Quadtree the refined cells all share a common orientation.
-
-
-The full 2D SWE are applied across changes in cell resolution, with
-complete computation of all the 2D SWE terms, unlike the TUFLOW Classic
-Multiple 2D Domain feature which utilises hidden 1D nodes. The result is
-a seamless, fully dynamic, solution across changes in resolution without
-artefacts or wave reflections and 100% preservation of all terms
-including inertia and sub-grid turbulence
-
-
-<span class="mark"></span>
-
--->
+<p>This section describes 2D domain functionality that is unique to TUFLOW HPC.</p>
 <div id="Quadtree-3" class="section level3 hasAnchor" number="7.4.1">
 <h3><span class="header-section-number">7.4.1</span> Quadtree<a href="TwoD-Domains-1.html#Quadtree-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The development of 2D quadtree grid refinement permits use of finer resolution 2D cells in discrete regions, such as within the open channel areas. It also allows for an increase of resolution in areas of lower hydraulic significance. Bill Syme, author of TUFLOW, discusses the benefits and implementation of Quadtree within the <a href="https://youtu.be/eJJtsS91XNo?t=1495">Future of 2D Hydraulic Modelling AWS Video</a>.</p>
-<!-- EFC to reviewer: I'm not sure if the above video, or this one: https://www.youtube.com/watch?v=2zrNwWUNTXE is more appropriate? I thought the first is a good plug to the AWS webinars, although second more relevent to this chapter?-->
-<p>Each 2D cell face can have a maximum of 2 adjoining cell faces, meaning that multiple levels of refinement will need to transition through the intermediate resolutions. The Quadtree solver uses a modified version of the HPC solver, with water levels calculated at cell centres and flows at cell faces. In Figure <a href="TwoD-Domains-1.html#fig:fig-QDT-Comp-Locs">7.21</a>, the black dots represent cell centred mean depth data, the red crosses the face centred u velocity data, and the green plus symbols the face centred v velocity data.</p>
-<p>The grid is automatically generated by TUFLOW based on a series of user specified GIS polygons. This process for generating a Quadtree grid is outlined in Section <a href="TwoD-Domains-1.html#QDT-mesh-4">7.4.1.4</a>.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-QDT-Comp-Locs"></span>
-<img src="images/QDT-Comp-Locs.png" alt="Quadtree Scheme Computational Locations"  />
+<p>Quadtree grid refinement functionality enables the user to vary the 2D cell resolution within a TUFLOW HPC model. Quadtree refinement allows for recursive division of square TUFLOW cells into four smaller square cells. Up to 9 levels of cell size refinement are permitted. All cells for all levels of refinement share a common orientation. Bill Syme, one of the TUFLOW author’s, discusses the benefits and implementation of Quadtree within the <a href="https://youtu.be/eJJtsS91XNo?t=1495">Future of 2D Hydraulic Modelling AWS Video</a>. The <a href="https://www.youtube.com/watch?v=2zrNwWUNTXE">How to Implement Quadtree</a> video also useful. An example quadtree mesh is presented in Figure <a href="TwoD-Domains-1.html#fig:fig-QTMeshIntro">7.21</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-QTMeshIntro"></span>
+<img src="images/1D2DHPCQTMesh.png" alt="TUFLOW HPC Quadtree Grid"  />
 <p class="caption">
-Figure 7.21: Quadtree Scheme Computational Locations
+Figure 7.21: TUFLOW HPC Quadtree Grid
 </p>
 </div>
-<p>Like TUFLOW HPC, Quadtree uses an explicit finite volume solution that is 2<sup>nd</sup> order in space and 4<sup>th</sup> order in time. However, there are some subtle differences between the HPC single grid and Quadtree solvers that mean they produce near identical, though not identical results if both run are over the same single grid (same cell size) grid – see Section <a href="Fundamentals-1.html#FixedGridorQuadtreeGrid-3">3.2.4</a> for further discussion. TUFLOW HPC is likely to be faster than TUFLOW HPC Quadtree for the same model on the same hardware.</p>
-<p>TUFLOW Wiki Tutorial <a href="https://wiki.tuflow.com/Tutorial_M07">Module 7</a> provides a demonstration of this model configuration feature.</p>
-<p><strong>Note:</strong> Depending on the catchment shape, Quadtree grids can have a much smaller
-memory footprint than non-Quadtree (single grid) models, because
-Quadtree models only store a grid of active cells compared with single
-fixed grid models that use the bounding rectangle to allocate memory,
-which may include large areas of inactive (redundant) cells and
-therefore consuming memory. Therefore, typically very large HPC fixed
-grid models that required two or more GPU devices to provide enough
-memory, are likely to run on a single GPU device if using
-Quadtree.</p>
-<p>TUFLOW HPC Quadtree models can be run on either GPU or CPU hardware.
-Multiple CPU cores and GPU devices are supported (prior to 2023-03 release on a single GPU or CPU core was supported).</p>
+<p>The Quadtree solver uses a modified version of the HPC solver. It uses an explicit finite volume solution that is 2<sup>nd</sup> order in space and 4<sup>th</sup> order in time, however there are some subtle differences between the HPC single grid and Quadtree solvers that mean they produce near identical, though not identical results if both run are over the same single grid (same cell size) grid – see Section <a href="Fundamentals-1.html#FixedGridorQuadtreeGrid-3">3.2.4</a> for further discussion.</p>
+<p>TUFLOW Wiki Tutorial <a href="https://wiki.tuflow.com/Tutorial_M07">Module 7</a> provides a demonstration of quadtree. The followings Sections outline how to use the feature.</p>
 <div id="qcf-commands-4" class="section level4 hasAnchor" number="7.4.1.1">
 <h4><span class="header-section-number">7.4.1.1</span> Quadtree .tcf Commands<a href="TwoD-Domains-1.html#qcf-commands-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>To use a Quadtree grid, the solution scheme should be set to HPC and a
 Quadtree Control file specified using the command
-<a href="TCFCommands-1.html#tcfQuadtreeControlFile">Quadtree Control File</a>. For example:</p>
+<a href="TCFCommands-1.html#tcfQuadtreeControlFile">Quadtree Control File</a>. GPU Hardware is also recommended. For example:</p>
 <p><tcmd>If Scenario</tcmd><teq> == </teq><tblk>HPC </tblk> <br>
  <tcmd>Solution Scheme</tcmd><teq> == </teq><tblk>HPC </tblk> <br>
  <tcmd>Hardware</tcmd><teq> == </teq><tblk>GPU </tblk> <br>
@@ -5322,8 +5236,11 @@ Quadtree Control file specified using the command
  <tcmd>Quadtree Control File</tcmd><teq> == </teq><tblk>..\model\quadtree_001.qcf </tblk><br>
  <tcmd>Hardware</tcmd><teq> == </teq><tblk>GPU </tblk><br>
 <tcmd>End If</tcmd></p>
-<p>The keyword “Single Level” can be used instead of a control file (e.g.
-“<tcmd><a href="TCFCommands-1.html#tcfQuadtreeControlFile">Quadtree Control File</a></tcmd><teq> == </teq><tblk>Single Level</tblk>”), to run the Quadtree module as a single 2D domain fixed grid model (ie. a fixed cell size). The Quadtree Control File (.qcf) is described in the next section.</p>
+<p>Note, the keyword “Single Level” can be used instead of a control file (e.g.
+“<tcmd><a href="TCFCommands-1.html#tcfQuadtreeControlFile">Quadtree Control File</a></tcmd><teq> == </teq><tblk>Single Level</tblk>”), to run the Quadtree module as a single 2D domain fixed grid model (ie. a fixed cell size). A simulation run in this manner will likely run slower than HPC, though may require a smaller
+memory footprint. This is due to quadtree only storing a grid of active cells compared with single fixed grid models that use the bounding rectangle to allocate memory, which may include large areas of inactive (redundant) cells and
+therefore consuming memory.</p>
+<p>The Quadtree Control File (.qcf) is described in the next section.</p>
 </div>
 <div id="qcf-mandatory-4" class="section level4 hasAnchor" number="7.4.1.2">
 <h4><span class="header-section-number">7.4.1.2</span> Quadtree Control File (.qcf) – Mandatory Commands<a href="TwoD-Domains-1.html#qcf-mandatory-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -5332,12 +5249,12 @@ Quadtree Control file specified using the command
 <p><tcmd><a href="QCFCommands-1.html#qcfModelOriginandExtent">Model Origin and Extent</a></tcmd><teq> == </teq><tblk>AUTO | TGC</tblk></p>
 <p>If set to “AUTO” the extents of the Level 1 GIS polygon are used to
 define the model origin and extents. If set to “TGC”, the model is
-located as per the commands in the .tgc file. Note the angle of the
+located as per the commands in the .tgc file. Note, the angle of the
 model is defined in the .qcf file using the <a href="QCFCommands-1.html#qcfOrientationAngle">Orientation Angle</a> command
-below. Also note, if set to “AUTO” the GIS nesting polygons must have a
+below. Also, if set to “AUTO” the GIS nesting polygons must have a
 Level 1 polygon defined, otherwise an ERROR is generated.</p>
-<p><tcmd><a href="QCFCommands-1.html#qcfReadGISNesting">Read GIS Nesting</a></tcmd><teq> == </teq><tblk>&lt;gis file in 2d_qnl format&gt;</tblk></p>
-<p>The <a href="QCFCommands-1.html#qcfReadGISNesting">Read GIS Nesting</a> command can be used to define polygons of grid refinement (different levels) as described in Section <a href="TwoD-Domains-1.html#QDT-mesh-4">7.4.1.4</a>.</p>
+<p><tcmd><a href="QCFCommands-1.html#qcfReadGISNesting">Read GIS Nesting</a></tcmd><teq> == </teq><tblk>&lt;gis file&gt; &gt;</tblk></p>
+<p>The <a href="QCFCommands-1.html#qcfReadGISNesting">Read GIS Nesting</a> command can be used to define polygons of grid refinement (different levels) in the 2d_qnl format file, as described in Section <a href="TwoD-Domains-1.html#QDT-mesh-4">7.4.1.4</a>.</p>
 </div>
 <div id="qcf-optional-4" class="section level4 hasAnchor" number="7.4.1.3">
 <h4><span class="header-section-number">7.4.1.3</span> Quadtree Control File (.qcf) – Optional Commands<a href="TwoD-Domains-1.html#qcf-optional-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -5367,15 +5284,12 @@ inputs. This is set using the optional .qcf control file command:</p>
 <p><tcmd><a href="QCFCommands-1.html#qcfQuadtreeMeshProcessingMethod">Quadtree Mesh Processing Method</a></tcmd><teq> == </teq><tblk>{FAST} | Memory Efficient</tblk></p>
 <p>This allows changing to a more memory efficient approach to process
 each polygon in the 2d_qnl layer. However, whilst being more memory
-efficient during grid creation, the startup may be slower. How the grid
+efficient during grid creation, the model startup may be slower. How the grid
 is processed has no effect on the speed of the hydraulic computations or
 the memory demand during the hydraulic calculations.</p>
 </div>
 <div id="QDT-mesh-4" class="section level4 hasAnchor" number="7.4.1.4">
 <h4><span class="header-section-number">7.4.1.4</span> Defining Grid Refinement Polygons<a href="TwoD-Domains-1.html#QDT-mesh-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<!-- Missing table defining the GIS template file structure
--->
-<!--EFC: added-->
 <p>A 2d_qnl (Quadtree Nesting Level) GIS layer (see Table <a href="TwoD-Domains-1.html#tab:tab-QNLAttribute">7.20</a>) is used to define the
 location and levels of grid refinement. The 2d_qnl layers should only contain
 polygon / region objects, with all other GIS object types (lines, points, etc.) ignored.</p>
@@ -5391,48 +5305,6 @@ half the base cell size).</li>
 <li>9: so on up to a maximum of Level 9 (1/256<sup>th</sup> of the base cell size).</li>
 </ul>
 <p>For numerical precision reasons when running single precision, the maximum nesting level of 9 or 1/256 of the base cell size has been adopted, but can be increased for double precision mode should there be a demand from users.</p>
-<p><strong>Note: there should only be one Level 1 polygon defined in the 2d_qnl
-layer, but for all other levels there is no limit on the number of
-polygons.</strong></p>
-<p>When refining grid areas, if a refinement polygon sits within a polygon
-of the next higher level, e.g. a Level 3 polygon is defined within a
-Level 2, as per Figure <a href="TwoD-Domains-1.html#fig:fig-image62">7.22</a>, no automatic grid refining is required.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image62"></span>
-<img src="images/image62.png" alt="Example of Quadtree Nesting Level Polygons"  />
-<p class="caption">
-Figure 7.22: Example of Quadtree Nesting Level Polygons
-</p>
-</div>
-<p>However, if a nesting level polygon does not sit within a polygon
-of the next higher level, e.g. a Level 4 polygon is defined within a
-Level 1 or Level 2 polygon, intermediate areas of refinement are
-automatically generated by TUFLOW. For example, Figure <a href="TwoD-Domains-1.html#fig:fig-image64">7.23</a> show the grid generated when transitioning from a Level 1 to Level 3 and a
-Level 1 to Level 5.</p>
-<p><img src="images/image63.jpg" width="50%" style="display: block; margin: auto;" /></p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image64"></span>
-<img src="images/image64.jpg" alt="Examples of Automatic Quadtree Refinement" width="50%" />
-<p class="caption">
-Figure 7.23: Examples of Automatic Quadtree Refinement
-</p>
-</div>
-<p>No Level 1 polygon is required if the model origin and extent
-are defined in the .tgc file. In this situation the rectangle
-representing the .tgc computational domain is used as the Level 1
-polygon. For example, if the .qcf file includes the following commands
-and the only 2d_qnl polygon is Level 3 (red polygon in Figure <a href="TwoD-Domains-1.html#fig:fig-image68">7.26</a>.
-The grid created is based on the rectangular computational domain in the
-.tgc file (as shown by the thick dashed black line) with inactive cells
-removed from the grid to reduce memory.</p>
-<p><tcmd><a href="QCFCommands-1.html#qcfBaseCellSize">Base Cell Size</a></tcmd><teq> == </teq><tblk>TGC</tblk><br />
-<tcmd><a href="#qcfModelOriginAndExtent">Model Origin and Extent</a></tcmd><teq> == </teq><tblk>TGC</tblk><br />
-<tcmd><a href="QCFCommands-1.html#qcfOrientationAngle">Orientation Angle</a></tcmd><teq> == </teq><tblk>TGC</tblk><br />
-<tcmd><a href="QCFCommands-1.html#qcfReadGISNesting">Read GIS Nesting</a></tcmd><teq> == </teq><tblk>gis\2d_qnl_999_R.shp</tblk></p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image65"></span>
-<img src="images/image65.png" alt="Example Showing Removal of Inactive Cells" width="50%" />
-<p class="caption">
-Figure 7.24: Example Showing Removal of Inactive Cells
-</p>
-</div>
 <table>
 <caption>
 <span id="tab:tab-QNLAttribute">Table 7.20: </span><strong>2D Quadtree (2d_qnl) Attribute Descriptions</strong>
@@ -5479,16 +5351,57 @@ Integer
 </tbody>
 </table></li>
 </ul>
+<p><strong>Note: there should only be one Level 1 polygon defined in the 2d_qnl
+layer, but for all other levels there is no limit on the number of
+polygons.</strong></p>
+<p>When refining grid areas, if a refinement polygon sits within a polygon
+of the next higher level (e.g. a Level 3 polygon is defined within a
+Level 2), as per Figure <a href="TwoD-Domains-1.html#fig:fig-image62">7.22</a>, no automatic grid refining is required.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image62"></span>
+<img src="images/image62.png" alt="Example of Quadtree Nesting Level Polygons"  />
+<p class="caption">
+Figure 7.22: Example of Quadtree Nesting Level Polygons
+</p>
+</div>
+<p>However, if a nesting level polygon does not sit within a polygon
+of the next higher level (e.g. a Level 4 polygon is defined within a
+Level 1 or Level 2 polygon), intermediate areas of refinement are
+automatically generated by TUFLOW. For example, Figure <a href="TwoD-Domains-1.html#fig:fig-image64">7.23</a> show the grid generated when transitioning from a Level 1 to Level 3 and a
+Level 1 to Level 5.</p>
+<p><img src="images/image63.jpg" width="50%" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image64"></span>
+<img src="images/image64.jpg" alt="Examples of Automatic Quadtree Refinement" width="50%" />
+<p class="caption">
+Figure 7.23: Examples of Automatic Quadtree Refinement
+</p>
+</div>
+<p>No Level 1 polygon is required if the model origin and extent
+are defined in the .tgc file. In this situation the rectangle
+representing the .tgc computational domain is used as the Level 1
+polygon. For example, if the .qcf file includes the following commands
+and the only 2d_qnl polygon is Level 3 (red polygon in Figure <a href="TwoD-Domains-1.html#fig:fig-image68">7.26</a>.
+The grid created is based on the rectangular computational domain in the
+.tgc file (as shown by the thick dashed black line) with inactive cells
+removed from the grid to reduce memory.</p>
+<p><tcmd><a href="QCFCommands-1.html#qcfBaseCellSize">Base Cell Size</a></tcmd><teq> == </teq><tblk>TGC</tblk><br />
+<tcmd><a href="#qcfModelOriginAndExtent">Model Origin and Extent</a></tcmd><teq> == </teq><tblk>TGC</tblk><br />
+<tcmd><a href="QCFCommands-1.html#qcfOrientationAngle">Orientation Angle</a></tcmd><teq> == </teq><tblk>TGC</tblk><br />
+<tcmd><a href="QCFCommands-1.html#qcfReadGISNesting">Read GIS Nesting</a></tcmd><teq> == </teq><tblk>gis\2d_qnl_999_R.shp</tblk></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image65"></span>
+<img src="images/image65.png" alt="Example Showing Removal of Inactive Cells" width="50%" />
+<p class="caption">
+Figure 7.24: Example Showing Removal of Inactive Cells
+</p>
+</div>
 </div>
 </div>
 <div id="HPC-Turbulence-3" class="section level3 hasAnchor" number="7.4.2">
 <h3><span class="header-section-number">7.4.2</span> HPC Turbulence<a href="TwoD-Domains-1.html#HPC-Turbulence-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>This section contains turbulence options for TUFLOW HPC.</p>
+<p>This section contains information relating to sub-grid-scale turbulence options for TUFLOW HPC.</p>
 <div id="HPC-Turbulence-4" class="section level5 hasAnchor" number="7.4.2.0.1">
 <h5><span class="header-section-number">7.4.2.0.1</span> Overview<a href="TwoD-Domains-1.html#HPC-Turbulence-4" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>For TUFLOW HPC, three options exist (Constant, Smagorinsky and Wu) for specifying eddy viscosity for the 2D domains to approximate the effect of sub-grid-scale turbulence. <span class="citation">Collecutt et al. (<a href="#ref-Collecutt2020">2020</a>)</span> discusses the turbulence models in respect to model cell size sensitivity, resulting in the Wu approach (Section <a href="TwoD-Domains-1.html#Wu-4">7.4.2.3</a>) becoming the default for TUFLOW HPC from Release 2020-01 and onwards. Discussion on the change in defaults is available in the <a href="https://wiki.tuflow.com/HPC_Turbulence_FAQ">HPC Turbulence FAQ</a> TUFLOW Wiki Page.</p>
-<p>The <a href="TCFCommands-1.html#tcfViscosityFormulation">Viscosity Formulation</a> and <a href="TCFCommands-1.html#tcfViscosityCoefficient">Viscosity Coefficient</a> commands are used to set the formulation and coefficients. Note that these commands may also be used to select the non-Newtonian module, which is discussed
-in Section <a href="TwoD-Domains-1.html#NN-3">7.4.6</a> since it is not a sub-grid turbulence model.</p>
+<p>The <a href="TCFCommands-1.html#tcfViscosityFormulation">Viscosity Formulation</a> and <a href="TCFCommands-1.html#tcfViscosityCoefficient">Viscosity Coefficient</a> commands are used to set the formulation and coefficients. Note that these commands may also be used to select the non-Newtonian module, which is discussed in Section <a href="TwoD-Domains-1.html#NN-3">7.4.6</a> since it is not a sub-grid turbulence model.</p>
 </div>
 <div id="Constant-4" class="section level4 hasAnchor" number="7.4.2.1">
 <h4><span class="header-section-number">7.4.2.1</span> Constant Eddy Viscosity<a href="TwoD-Domains-1.html#Constant-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -5502,8 +5415,7 @@ m<sup>2</sup>/s), but is not recommended for riverine flow paths.</p>
 <div id="Smagorinsky-4" class="section level4 hasAnchor" number="7.4.2.2">
 <h4><span class="header-section-number">7.4.2.2</span> Smagorinsky Approach<a href="TwoD-Domains-1.html#Smagorinsky-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The Smagorinsky approach (<tcmd><a href="TCFCommands-1.html#tcfViscosityFormulation">Viscosity
-Formulation</a> </tcmd><teq>==</teq><tblk> SMAGORINSKY</tblk>) applies a hybrid method that includes elements of both the Constant and Smagorinsky approaches, as given by the equation below.
-. This formulation is better than the CONSTANT option as the eddy viscosity is
+Formulation</a> </tcmd><teq>==</teq><tblk> SMAGORINSKY</tblk>) applies a hybrid method that includes elements of both the Constant and Smagorinsky approaches, as given by the equation below. This formulation is better than the CONSTANT option, as the eddy viscosity is
 recalculated every timestep at every cell mid-side according to the
 change in velocity magnitude and direction. This results in higher
 coefficients being applied where there is greater turbulence.</p>
@@ -5577,8 +5489,8 @@ model, where the turbulent length scale is related to cell size, the
 length scales used in the Wu model are related to water depth, and hence
 the computed eddy viscosity is not related to or dependent on cell size.
 This has been shown to significantly improve the cell size convergence
-of the results compared to the Smagorinsky model, i.e. the results are
-nearly independent of the cell size (provided there are enough cells
+of the results compared to the Smagorinsky model (i.e. the results are
+nearly independent of the cell size provided there are enough cells
 across the waterways to adequately define the flows).</p>
 <p>The computed eddy viscosity is the Pythagorean sum of 3D and 2D
 contributions:</p>
@@ -5625,7 +5537,7 @@ Output Data Types</a> command. In our testing to
 date, we have found <span class="math inline">\(C_{3D} = 7\)</span>  and <span class="math inline">\(C_{2D} = 0\)</span> to yield results that
 agree well with benchmark tests and that are not significantly
 dissimilar from those of the previous Smagorinsky method with its
-default coefficients, especially where the depth is not significantly
+default coefficients for situations where the depth is not significantly
 greater than the cell-size. The values of <span class="math inline">\(C_{3D} = 7\)</span> and <span class="math inline">\(C_{2D} = 0\)</span>
 are the default values but can be changed using the
 <a href="TCFCommands-1.html#tcfViscosityCoefficient">Viscosity Coefficient</a>
@@ -5642,8 +5554,8 @@ then this may indicate other errors (eg. boundary values or
 schematisation, poor input data, etc). As always, sensitivity testing of
 changes in parameters on the model results should also be performed.</p>
 <p>It is a common practice to represent buildings in a model as
-roughness – i.e. cells with high Manning’s bed friction
-(see discussion on modelling buildings in section <a href="TwoD-Domains-1.html#urban-areas-3">7.3.10</a>.
+roughness (i.e. cells with high Manning’s bed friction),
+see discussion on modelling buildings in section <a href="TwoD-Domains-1.html#urban-areas-3">7.3.10</a>.
 As the friction velocity includes the Manning’s value, this results in a very high
 viscosity value at those cells. This is not unreasonable, but for TUFLOW
 HPC, which handles the viscosity explicitly, this can drive the timestep
@@ -5671,26 +5583,21 @@ This section will be quite large and need to include:
 - Output options
 -->
 <!-- write as is for Method C, don't include superseded commands (but put in appendix) inc method a, method b. Ask SG if we include Method A-->
-<p>Sub-grid sampling (SGS) stores elevation points sampled on a finer
-resolution within each 2D cell to more accurately represent the
-variations in terrain inside the cell, as shown in Figure <a href="TwoD-Domains-1.html#fig:fig-image68">7.26</a>. SGS functionality is introduced in Section <a href="Fundamentals-1.html#SubGridSamplingSGS-3">3.3.3</a>. Benchmarking has shown the benefits of using SGS to be substantial, as discussed in Section <a href="Fundamentals-1.html#SGS-benefits-4">3.3.3.1</a>.</p>
-<p>The resolution at which the elevation datasets are sampled can be
-defined by the user. For example, with a 8m cell size and a 2m <a href="TCFCommands-1.html#tcfSGSSampleTargetDistance">SGS
-Sample Target Distance</a> the DEM is sampled at 5 points across each face. Shown in Figure <a href="TwoD-Domains-1.html#fig:fig-image68">7.26</a>, 25 elevation
-points would be used to define the volume vs elevation relationship
-within the 2D cell, and 5 points along each cell side for defining the
-conveyance-elevation relationship of each face.</p>
-<p>The cell volume is stored as a non-linear function of elevation, i.e. a
+<p>Sub-grid sampling (SGS) stores elevation points sampled at a finer
+resolution than the 2D cell to more accurately represent the
+variations in terrain inside the cell, as shown in Figure <a href="TwoD-Domains-1.html#fig:fig-image68">7.26</a>. SGS functionality is introduced in Section <a href="Fundamentals-1.html#SubGridSamplingSGS-3">3.3.3</a>. Benchmark testing has shown the benefits of using SGS to be substantial, as discussed in Section <a href="Fundamentals-1.html#SGS-benefits-4">3.3.3.1</a>.</p>
+<p>SGS translates the high resolution sampled elevation data into cell curve functions for its hydraulic calculations.<br />
+- The cell volume is stored as a non-linear function of elevation (i.e. a
 curve of cell volume versus elevation based on the wetted surface area
 versus depth measured from the lowest sampled elevation within the 2D
-cell.</p>
-<!-- PAR: removed SGS sampling of materials as this has been disabled -->
-<!--EFC: also made legacy in tcf-->
-<p>Across each cell side the flow area and flow width are calculated based on sampled elevations
-to produce a non-linear function of conveyance versus elevation, i.e. a
-curve of conveyance versus elevation. For determining the depth and
+cell).
+- Across each cell side the flow area and flow width are calculated based on sampled elevations to produce a non-linear function of conveyance versus elevation (i.e. a curve of conveyance versus elevation. For determining the depth and
 width averaged velocity across each cell face the flow area is also
-retained as a curve of area versus elevation.</p>
+retained as a curve of area versus elevation).</p>
+<p>The elevation dataset sample resolution can be defined by the user. For example, using a 8m cell size and a 2m <a href="TCFCommands-1.html#tcfSGSSampleTargetDistance">SGS Sample Target Distance</a> the DEM is sampled at 5 points across each face. Shown in Figure <a href="TwoD-Domains-1.html#fig:fig-image68">7.26</a> this translates to 25 elevation
+points being used to define the volume vs elevation relationship
+within the 2D cell, and 5 points along each cell side for defining the
+conveyance-elevation relationship of each face.</p>
 <div style="display: flex; justify-content: center; align-items: center;">
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image67"></span>
 <img src="images/image67.jpeg" alt="Traditional (non-SGS) Approach" width="50%" />
@@ -5706,12 +5613,11 @@ Figure 7.26: SGS Approach
 </div>
 </div>
 <p>The flow or conveyance of water through 2D cells is determined through a
-full 2D solution of the momentum equation (see Section <a href="TwoD-Domains-1.html#Solvers-2">7.2</a>). The bed resistance
-term (e.g. Manning’s equation) and the determination of the 2D
+full 2D solution of the momentum equation (see Section <a href="TwoD-Domains-1.html#Solvers-2">7.2</a>). The bed resistance term (e.g. Manning’s equation) and the determination of the 2D
 velocities are controlled by the conveyance properties of each cell
 face. If there are considerable variations in bed topography across the cell faces, SGS will provide a significantly more
-accurate representation of these variations.</p>
-<p>If the resolution of the data layer is coarser or similar to
+accurate representation of these variations, compared to a traditional 2D cell with a single elevation value per cell face.</p>
+<p>If the resolution of the DEM data layer is coarser or similar to
 the 2D cell size, the use of SGS will have little or no benefit. For
 example, if the DEM resolution is 2m and the cell size is 2m there is
 little benefit in using SGS, although a slight improvement would result
@@ -5719,27 +5625,25 @@ as the slope of the terrain across the cell would be picked up if using
 SGS. In contrast, if the cell size is 20m there would be considerable
 benefit in using SGS as the variations in terrain across the 2D cell
 will be represented. TUFLOW requires an odd number of sample locations across a cell face to ensure the cell mid-face and cell corners are sampled. The number of sample locations across a cell face is referred to as the <a href="TCFCommands-1.html#tcfSGSSampleFrequency">SGS Sample Frequency</a>.</p>
-<p>Note, if the elevation input data has a reasonable representation of the channels, gully lines are not required, or recommended, when using SGS. Including gully lines can overestimate conveyance in these channels.</p>
+<p>Note, if the elevation input data has a reasonable representation of the channels, <a href="TGCCommands-1.html#tgcReadGISZShape">Read GIS Z Shape</a> or <a href="TGCCommands-1.html#tgcReadGISZLine">Read GIS Z Line</a> “MIN, GULLY or LOWER” lines are not required, or recommended, when using SGS. Including gully lines can overestimate conveyance in these channels.</p>
 <p>The following section will focus on implementing SGS and options regarding SGS outputs.</p>
 <div id="SGS-commands-4" class="section level4 hasAnchor" number="7.4.3.1">
 <h4><span class="header-section-number">7.4.3.1</span> SGS Methodology and Commands<a href="TwoD-Domains-1.html#SGS-commands-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>To implement SGS in the control file the only command required in the .tcf is “<tcmd><a href="TCFCommands-1.html#tcfSGS">SGS</a></tcmd><teq> == </teq><tblk>ON</tblk>”.</p>
-<!-- PAR might add that we now consider older methods to be legacy, is the below too strong?-->
+<p>To implement SGS the only additional command required in the .tcf is “<tcmd><a href="TCFCommands-1.html#tcfSGS">SGS</a></tcmd><teq> == </teq><tblk>ON</tblk>”.</p>
 <p>By default, using this command will set:</p>
 <ul>
-<li>the <a href="TCFCommands-1.html#tcfSGSApproach">SGS Approach</a> to Method C. Prior to 2023 release the default was Method B. The default Method C is the recommended approach and older versions are considered legacy and provided for backward compatibility.</li>
+<li>the <a href="TCFCommands-1.html#tcfSGSApproach">SGS Approach</a> to Method C. Prior to 2023 release the default was Method B. The default Method C is the recommended approach and older versions are considered legacy though are still provided for backward compatibility.</li>
 <li>the <a href="TCFCommands-1.html#tcfSGSSampleFrequency">SGS Sample Frequency</a> to sample at the minimum grid elevation resolution that can be found from grids read in to the .tgc.</li>
 </ul>
-<!-- PAR added this heading as the below is all about options for setting sample frequency / distance-->
 <div id="SGS-Distance-5" class="section level5 hasAnchor" number="7.4.3.1.1">
 <h5><span class="header-section-number">7.4.3.1.1</span> SGS Sample Distance<a href="TwoD-Domains-1.html#SGS-Distance-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>To manually set the SGS distance, the recommended approach is to use the <a href="TCFCommands-1.html#tcfSGSSampleTargetDistance">SGS Sample Target Distance</a> command. TUFLOW requires an odd number of sample locations across a cell face, the number of sample point is calculated as Equation <a href="TwoD-Domains-1.html#eq:equ-sgs-smp-freq">(7.11)</a></p>
+<p>To manually set the SGS distance, the recommended approach is to use the .tcf <a href="TCFCommands-1.html#tcfSGSSampleTargetDistance">SGS Sample Target Distance</a> command. TUFLOW requires an odd number of sample locations across a cell face, the number of sample points is calculated from Equation <a href="TwoD-Domains-1.html#eq:equ-sgs-smp-freq">(7.11)</a></p>
 <p><span class="math display" id="eq:equ-sgs-smp-freq">\[\begin{equation}
 \text{Sample Frequency} = \frac{\text{TUFLOW Cell Size}}{\text{Target Distance}} + 1
 \tag{7.11}
 \end{equation}\]</span></p>
-<p>For example, using a cell size of 10m and a sample target distance of 1m, TUFLOW will use 11 sample points along the cell face. If the target distance specified gives an even number, TUFLOW will round up to the next odd number. For example, using a cell size of 5m and a sample target distance of 1m, TUFLOW will use 7 sample points instead of 6 points along the cell face. The sampling frequency adopted is reported in the .tlf.</p>
-<p>It is also possible to specify the <a href="TCFCommands-1.html#tcfSGSSampleFrequency">SGS Sample Frequency</a> directly rather than target distance. However, changing the cell size of the model would require a changing of the sample frequency to keep the same distance. When using a target sample distance the same value can be used across cell sizes.</p>
+<p>For example, using a cell size of 10m and a sample target distance of 1m, TUFLOW will use 11 sample points along the cell face. If the target distance specified gives an even number, TUFLOW will round up to the next odd number. For example, using a cell size of 5m and a sample target distance of 1m, TUFLOW will use 7 sample points instead of 6 points along the cell face. The adopted sampling frequency is reported in the .tlf.</p>
+<p>It is also possible to specify the <a href="TCFCommands-1.html#tcfSGSSampleFrequency">SGS Sample Frequency</a> directly instead of the target distance. However, changing the cell size of the model would require a changing to the sample frequency to maintain the same sample distance. When using a target sample distance the same value can be used across all cell sizes.</p>
 <p>To obtain the maximum resolution, the sampling frequency can be calculated as the TUFLOW cell size divided by the DEM resolution. If this yields an even number, then it should be rounded up as per Equation <a href="TwoD-Domains-1.html#eq:equ-sgs-smp-freq">(7.11)</a>. Note, there is no benefit to specify an SGS target distance smaller than the DEM resolution.</p>
 <p>If neither the <a href="TCFCommands-1.html#tcfSGSSampleTargetDistance">SGS Sample Target Distance</a> or <a href="TCFCommands-1.html#tcfSGSSampleFrequency">SGS Sample Frequency</a> commands are specified, a scan of the Geometry Control File (.tgc) is performed to find the minimum raster grid resolution used in any <a href="#tgcReadGridZpt">Read Grid Zpt</a> commands, and this is used as the sampling target distance to compute the sampling frequency.
 If there are no gridded elevation datasets, a default sampling frequency of 11 is used. In summary, there are four ways for the SGS Sample Frequency to be defined; in decreasing order of priority they are:</p>
@@ -5749,26 +5653,19 @@ If there are no gridded elevation datasets, a default sampling frequency of 11 i
 <li>Target distance automatically based on the minimum grid elevation resolution in the .tgc.</li>
 <li>Default Sampling Frequency of 11 per face / 121 per cell.</li>
 </ol>
-<p>Note: the sampling frequency per face is capped at 31 by default to avoid long pre-processing times and high memory usage. In general, a sampling frequency smaller than 31 is sufficient for most natural water ways or artificial structures, and users may not benefit from applying a super fine sample distance against the model cell size. However, if required, this upper limit can be increased by using the following tcf command:</p>
+<p>Note: the sampling frequency per face is capped at 31 by default to avoid long pre-processing times and high memory usage. In general, a sampling frequency of between 11 and 31 is sufficient for most natural water ways or artificial structures, and users may not benefit from applying a super fine sample distance against the model cell size. However, if required, high sampling resolution is possible and the set upper limit can be increased by using the following tcf command:</p>
 <p><tcmd><a href="TCFCommands-1.html#tcfSGSMaxSampleFrequency">SGS Max Sample Frequency</a> </tcmd><teq>==</teq> <span class="math inline">\(\langle\)</span>maximum frequency<span class="math inline">\(\rangle\)</span></p>
 <p>Note, a hard limit of 127 per face (16,129 samples per cell) still applies.</p>
 </div>
 <div id="SGS-Advanced-5" class="section level5 hasAnchor" number="7.4.3.1.2">
 <h5><span class="header-section-number">7.4.3.1.2</span> Advanced SGS Commands<a href="TwoD-Domains-1.html#SGS-Advanced-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<!-- say most users won't use these but document them. how big will this section be? advanced commands boundary then advance commands topography 
-
-sgs infiltration approach + negative rainfall approach could go in to advance
-
--->
-<!-- any commands specific for method b, just write about in appendix, not in chapter-->
-<p>As noted above, the only command required to implement SGS is “<tcmd><a href="TCFCommands-1.html#tcfSGS">SGS</a></tcmd><teq> == </teq><tblk>ON</tblk>”. One of the above commands to set the SGS sample distance or frequency is also recommended. This section below lists advanced commands related to SGS.</p>
+<p>As noted above, the only command required to implement SGS is “<tcmd><a href="TCFCommands-1.html#tcfSGS">SGS</a></tcmd><teq> == </teq><tblk>ON</tblk>”. One of the above commands to set the SGS sample distance or frequency is also recommended. The following section lists advanced commands related to SGS.</p>
 <hr />
 <p><tcmd><a href="TCFCommands-1.html#tcfSGSBreaklineDetectionDelta">SGS Breakline Detection Delta</a></tcmd><teq> == </teq><tblk> [ &lt;maximum_delta_value&gt; ]</p>
-<p>When the SGS elevations are being processed, every cell face will store a curve of elevation versus flow width / flow area. Likewise, each cell has a relationship of elevation versus cell volume. To make this memory efficient TUFLOW does not store the locations within the cell or along the cell face where the low / ridge elevations occur.</p>
-<p>Without breaklines, SGS will be more likely to allow “leaks” through a levee or embankment compared with running the model without SGS. For example, if a 2D cell straddles a levee, SGS will sample the low elevations on either side of the levee and will flow at a lower level than if SGS was not applied and the 2D cell centre was located on top of the levee causing the 2D cell to block flow until the levee is overtopped. Therefore, whilst the need to have breaklines is paramount, regardless of whether SGS is used, it is even more important for SGS models to accurately represent hydraulic controls such as levees (artificial or natural), road/rail embankments, fences, etc.</p>
-<p>This functionality is designed to capture locations where ridge lines may be required, as noted in Section <a href="TwoD-Domains-1.html#SGS-3">7.4.3</a>, when using SGS gully lines are not recommended for use.</p>
-<p>The SGS breakline detection check processes each 2D cell to identify the minimum water surface elevation needed for a continuous wet connection through the cell traversing between left to right and between top to bottom. The maximum invert elevation of the left and right faces is subtracted from the left-right minimum water level and reports it as “uDelta”. Similarly, the top to bottom value is reported as “vDelta”. uDelta and vDelta represent the depth of water over the cell face inverts by which a natural ridge (break) line would block any flow. The maximum of uDelta and vDelta is output to the <a href="https://wiki.tuflow.com/Check_Files_2d_grd">_grd_check</a> file in the SGS_Delta_Z attribute. If either uDelta or vDelta exceeds the <maximum delta value> a spatial (GIS) <a href="https://wiki.tuflow.com/TUFLOW_Message_3543">CHECK 3543</a> message is issued at the cell location.</p>
-<p>This command can add significant time to the initialisation process, it is recommended to perform this check during model set up and to turn off once the creation of breaklines is complete.</p>
+<p>When the SGS elevations are being processed, every cell face will store a curve of elevation versus flow width / flow area. Likewise, each cell has a curve defining the relationship of elevation versus cell volume. To make this memory efficient TUFLOW does not store information defining the specific locations within the cell or along the cell face where the low or high points in the topography occur. As a result, without breaklines, SGS will be more likely to allow “leaks” through a levee or embankment compared with running the model without SGS. For example, if a 2D cell straddles a levee, SGS will sample the low elevations on either side of the levee and will flow at a lower level than if SGS was not applied and the 2D cell centre was located on top of the levee, causing the 2D cell to block flow until the levee is overtopped. Therefore, whilst the need to have breaklines is paramount, regardless of whether SGS is used, it is even more important for SGS models to accurately represent hydraulic controls such as levees (artificial or natural), road/rail embankments, fences, etc.</p>
+<p><a href="TCFCommands-1.html#tcfSGSBreaklineDetectionDelta">SGS Breakline Detection Delta</a> is designed to identify locations where ridge lines may be required. As noted in Section <a href="TwoD-Domains-1.html#SGS-3">7.4.3</a>, <a href="TGCCommands-1.html#tgcReadGISZShape">Read GIS Z Shape</a> or <a href="TGCCommands-1.html#tgcReadGISZLine">Read GIS Z Line</a> “MIN, GULLY or LOWER” lines are not recommended for use.</p>
+<p>The SGS breakline detection check processes each 2D cell to identify the minimum water surface elevation needed for a continuous wet connection through the cell traversing between left to right and top to bottom. The maximum invert elevation of the left and right faces is subtracted from the left-right minimum water level and reports it as “uDelta”. Similarly, the top to bottom value is reported as “vDelta”. uDelta and vDelta represent the depth of water over the cell face inverts by which a natural ridge (break) line would block any flow. The maximum of uDelta and vDelta is output to the <a href="https://wiki.tuflow.com/Check_Files_2d_grd">_grd_check</a> file in the SGS_Delta_Z attribute. If either uDelta or vDelta exceeds the <maximum delta value> a spatial (GIS) <a href="https://wiki.tuflow.com/TUFLOW_Message_3543">CHECK 3543</a> message is issued at the cell location.</p>
+<p>This command can add significant time to the initialisation process, it is recommended to perform this check during model set up only, and to turn it off once the creation of breaklines is complete.</p>
 <p>Figure <a href="TwoD-Domains-1.html#fig:fig-SGS-Delta">7.27</a> shows an example of where <a href="https://wiki.tuflow.com/TUFLOW_Message_3543">CHECK 3543</a> indicates where the uDelta or vDelta has exceeded the <maximum delta value> (in this example, a value of 1m).</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SGS-Delta"></span>
 <img src="images/SGS-Delta.png" alt="SGS Breakline Detection Delta Output" width="50%" />
@@ -5778,9 +5675,8 @@ Figure 7.27: SGS Breakline Detection Delta Output
 </div>
 <hr />
 <p><tcmd><a href="TCFCommands-1.html#tcfSGSZShapeLineApproach">SGS Z Shape Line Approach</a></tcmd><teq> == </teq><tblk>Method A | {Method B}</tblk></p>
-<p>If set to Method A, cell faces are assumed flat (i.e. SGS is not applied and a rectangular section / flat
-cell is used). The default, Method B, applies a gradient along the face based on the cell corners and
-cell side Zpt values and for thick lines uses the ZC, ZU, ZV and ZH values to apply a sloping cell area
+<p>If set to Method A, cell faces modified by <a href="TGCCommands-1.html#tgcReadGISZShape">Read GIS Z Shape</a> line are assumed flat (i.e. SGS is not applied and a rectangular section / flat
+cell is used). The default, Method B, applies a gradient along the face based on the cell corners and cell side Zpt values and for thick lines uses the ZC, ZU, ZV and ZH values to apply a sloping cell area
 for the cell volume.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SGS-Z-Line"></span>
 <img src="images/SGS-Z-Line.png" alt="Diagram of SGS Z Shape Line Approach Options" width="50%" />
@@ -5790,8 +5686,7 @@ Figure 7.28: Diagram of SGS Z Shape Line Approach Options
 </div>
 <hr />
 <p><tcmd><a href="TCFCommands-1.html#tcfSGSSXZFlagApproach">SGS SX Z Flag Approach</a></tcmd><teq> == </teq><tblk>Method A | {Method B}</tblk></p>
-<p>If set to Method A, cells that are lowered by the “Z” flag on SX connections are assumed flat (ie. as
-per the approach for no SGS). The default Method B retains the SGS information, but shifts it all to
+<p>If set to Method A, cells that are lowered by the “Z” flag on 2d_bc SX connections are assumed flat (i.e. as per the approach for no SGS). The default Method B retains the SGS information, but shifts it all to
 match the lowered elevation, as per Figure <a href="TwoD-Domains-1.html#fig:fig-sgs-SX-Flag">7.29</a>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-sgs-SX-Flag"></span>
 <img src="images/sgs-SX-Flag.png" alt="Diagram of SGS SX Z Flag Approach Options" width="30%" />
@@ -5804,12 +5699,14 @@ Figure 7.29: Diagram of SGS SX Z Flag Approach Options
 <!-- SGS neg rainfall approach - is regarding surface water, no soils-->
 <hr />
 <p><tcmd><a href="TCFCommands-1.html#tcfSGSInfiltrationApproach">SGS Infiltration Approach</a></tcmd><teq> == </teq><tblk> {AUTO} | TOTAL AREA | WETTED AREA </tblk></p>
-<p>It is possible to control the cell area used when infiltration is applied with SGS, using the <a href="TCFCommands-1.html#tcfSGSInfiltrationApproach">SGS Infiltration Approach</a> command. The three options available are:</p>
+<p>It is possible to control the cell area used when infiltration is applied with SGS, using the <a href="TCFCommands-1.html#tcfSGSInfiltrationApproach">SGS Infiltration Approach</a> command. The three available options are:</p>
 <ul>
 <li>AUTO (the default): uses total area if there is a rainfall boundary and wetted area if no rainfall boundaries are present.</li>
 <li>TOTAL AREA: uses the whole cell area, regardless of the portion of the cell that is wet.</li>
-<li>WETTED AREA: uses only the wetted portion of the cell, for direct rainfall boundaries this may underpredict the infiltration</li>
+<li>WETTED AREA: uses only the wetted portion of the cell, for direct rainfall boundaries this may under predict the infiltration.</li>
 </ul>
+<hr />
+<p><tcmd><a href="TCFCommands-1.html#tcfSGSNegativeRainfallApproach">SGS Negative Rainfall Approach</a> </tcmd><teq> == </teq><tblk> TOTAL AREA | {WETTED AREA} </tblk></p>
 <p>It is also possible to control the cell area used when negative rainfall is applied in conjunction with SGS, using the <a href="TCFCommands-1.html#tcfSGSNegativeRainfallApproach">SGS Negative Rainfall Approach</a> command. The two options available are:</p>
 <ul>
 <li>TOTAL AREA: uses the whole cell area, regardless of the portion of the cell that is wet.</li>
@@ -5817,7 +5714,7 @@ Figure 7.29: Diagram of SGS SX Z Flag Approach Options
 </ul>
 <p>With SGS enabled, for cells that are partially wet the treatment of infiltration and direct rainfall is:</p>
 <ul>
-<li>For positive rainfall, i.e. rainfall on to the 2D cell, the volume source for each cell is the total cell
+<li>For positive rainfall (i.e. rainfall on to the 2D cell), the volume source for each cell is the total cell
 area times the rainfall irrespective of whether the cell is partially wet or not.</li>
 <li>For negative rainfall (evaporation), the volume of evaporation is factored by the wet area fraction
 of the cell. That is, if the cell is only 10% wet, only one tenth of the cell’s total area contributes to
@@ -6558,8 +6455,7 @@ m<sup>2</sup>/s), but is not recommended for riverine flow paths.</p>
 <div id="CLA-Smagorinsky-4" class="section level4 hasAnchor" number="7.5.1.2">
 <h4><span class="header-section-number">7.5.1.2</span> Smagorinsky<a href="TwoD-Domains-1.html#CLA-Smagorinsky-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The Smagorinsky approach (<tcmd><a href="TCFCommands-1.html#tcfViscosityFormulation">Viscosity
-Formulation</a> </tcmd><teq>==</teq><tblk> SMAGORINSKY</tblk>) applies a hybrid method that includes elements of both the Constant and Smagorinsky approaches, as given by the equation below.
-. This formulation is better than the CONSTANT option as the eddy viscosity is
+Formulation</a> </tcmd><teq>==</teq><tblk> SMAGORINSKY</tblk>) applies a hybrid method that includes elements of both the Constant and Smagorinsky approaches, as given by the equation below. This formulation is better than the CONSTANT option, as the eddy viscosity is
 recalculated every timestep at every cell mid-side according to the
 change in velocity magnitude and direction. This results in higher
 coefficients being applied where there is greater turbulence.</p>
@@ -7308,8 +7204,7 @@ Wu, W., Shields Jr., F. D., Bennett, S. J., &amp; Wang, S. S. Y. (2005). A Depth
 <div class="footnotes">
 <hr />
 <ol start="2">
-<li id="fn2"><p>Figure courtesy of University of Texas <a href="https://www.caee.utexas.edu/prof/mckinney/ce374k/Overheads/10-Infiltration.pdf#page=20" class="uri">https://www.caee.utexas.edu/prof/mckinney/ce374k/Overheads/10-Infiltration.pdf#page=20</a>
-<!--EFC to update figure--><!--done--><a href="TwoD-Domains-1.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Figure courtesy of University of Texas <a href="https://www.caee.utexas.edu/prof/mckinney/ce374k/Overheads/10-Infiltration.pdf#page=20" class="uri">https://www.caee.utexas.edu/prof/mckinney/ce374k/Overheads/10-Infiltration.pdf#page=20</a><a href="TwoD-Domains-1.html#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

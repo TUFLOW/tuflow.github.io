@@ -6545,7 +6545,7 @@ Classic and HPC
 time-stamped and written for each restart output time.</p>
 <p>OVERWRITE is the case for all prior versions of TUFLOW where the .trf
 and .erf files are overwritten each time restart files are written. If
-<a href="TCFCommands-1.html#tcfDefaults">Defaults</a> == PRE 2013 is set the default setting is
+<tcmd><a href="TCFCommands-1.html#tcfDefaults">Defaults</a></tcmd> <teq>==</teq> <tblk>PRE 2013</tblk> is set the default setting is
 OVERWRITE.</p>
 To output restart files at regular intervals use the command <a href="TCFCommands-1.html#tcfWriteRestartFileInterval">Write
 Restart File Interval</a>.
@@ -6717,7 +6717,7 @@ Classic and HPC
 <p>The addition of key words ‘Read’ or ‘Write’ can provide further context to the command to apply specifically when TUFLOW is reading or writing from a database. If neither ‘Read’ or ‘Write’ is provided, the command will be applied to both read and write contexts.</p>
 <p>Multiple SQL commands can be specified by separating the commands by a semicolon ‘;’. If this command is used multiple times, the last instance will be used and the command itself does not stack. The exception to this is separate commands can be used for ‘Read’ and ‘Write’ contexts.</p>
 <p>A typical example of using this command would to change the SQLite journal mode which can be helpful to stop database locks when multiple simulations are reading from the same database. This can happen when the journal mode is set to Write Ahead Log (WAL) and one simulation closes the database at the exact same instance another one is trying to open it. This occurs because the WAL method forces the creation of a new file (‘.WAL’) which is deleted when the database is closed (and no other processes are accessing the database). A temporary lock is placed on the database when the WAL is deleted and therefore stops any other process from opening it. In this example the user could force TUFLOW to change the journal mode to ‘delete’ which adopts a rollback journal and stops any database locks from being placed when simply reading from the database. The command to do this would be:</p>
-<tcmd>SQLite On Open SQL Read</tcmd><teq> == </teq><tblk>PRAGMA Journal Mode = Delete;</tblk>
+<tcmd>SQLite On Open SQL Read</tcmd><teq> == </teq><tblk>PRAGMA journal_mode = DELETE;</tblk>
 </td>
 </tr>
 </tbody>
