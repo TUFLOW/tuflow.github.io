@@ -294,7 +294,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.4.1" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GISFormats-3"><i class="fa fa-check"></i><b>4.4.1</b> Input Formats</a></li>
 <li class="chapter" data-level="4.4.2" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GISCommands-3"><i class="fa fa-check"></i><b>4.4.2</b> GIS Commands</a></li>
 <li class="chapter" data-level="4.4.3" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GPKG-3"><i class="fa fa-check"></i><b>4.4.3</b> GeoPackage Commands</a></li>
-<li class="chapter" data-level="4.4.4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GRID-3"><i class="fa fa-check"></i><b>4.4.4</b> GRID Commands</a></li>
+<li class="chapter" data-level="4.4.4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GRID-3"><i class="fa fa-check"></i><b>4.4.4</b> Grid Commands</a></li>
 <li class="chapter" data-level="4.4.5" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#TIN-3"><i class="fa fa-check"></i><b>4.4.5</b> TIN Commands</a></li>
 <li class="chapter" data-level="4.4.6" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#RowCol-3"><i class="fa fa-check"></i><b>4.4.6</b> RowCol Commands (Legacy)</a></li>
 </ul></li>
@@ -989,7 +989,7 @@ connections.</p>
 <ul>
 <li>Virtual Pit Inlets (Type ‘VPI’) only are used to extract flow from the model. One examples would be where there is no or insufficient data on the pipe network. Another example is where the pipe network flow discharges to a river (assuming the level in the river does not affect the flow into the pits) and no pit surcharging back onto the 2D domain occurs.<br />
 </li>
-<li>VPIs are used in with Virtual Pipe Outlets (VPOs), which allow the flow into VPIs to be discharged back onto the model. VPIs can be allocated to specific VPOs via a common network ID. VPOs can have a limiting outlet flow. Once the VPO flow reaches the limit, the excess flow is surcharged back through VPIs, which can be prioritised as to which ones surcharge first. By default, the routing of flow between VPIs and VPOs on the same network is instantaneous (i.e. no lag). However from Build 2023-03-AB, it is possible to apply a lag or shift to the flows from the inlet to the outlet by using the 1d_pit Lag_Approach and Lag_Value attributes.<br />
+<li>VPIs are used in with Virtual Pipe Outlets (VPOs), which allow the flow into VPIs to be discharged back onto the model. VPIs can be allocated to specific VPOs via a common network ID. VPOs can have a limiting outlet flow. Once the VPO flow reaches the limit, the excess flow is surcharged back through VPIs, which can be prioritised as to which ones surcharge first. By default, the routing of flow between VPIs and VPOs on the same network is instantaneous (i.e. no lag). However from the 2023-03-AB build, it is possible to apply a lag or shift to the flows from the inlet to the outlet by using the 1d_pit Lag_Approach and Lag_Value attributes.<br />
 </li>
 <li>Flows from VPIs can be connected to 1D channel nodes to drain flow from the 2D surface and reintroduce them to the 1D domain further downstream. This is a useful approach to modelling the major sub-surface drainage system as a pipe network and the minor system as VPIs feeding into the major system.</li>
 </ul>
@@ -1079,7 +1079,7 @@ Figure 10.9: <strong>SWMM 1D Connection: Culvert</strong>
 <ol style="list-style-type: decimal">
 <li>If the node allows ponding (ponding &gt; 0) (recommended configuration):
 <ul>
-<li>The surcharge discharge is based on the depth vs flow curve for custom inlets or from the orifice equation for other inlet types, plus any additional discharge from the use of the <a href="TSCFCommands-1.html#tscfReadGISSWMMInletUsage">Maximum Inlet Ponded Depth</a> command.<br />
+<li>The surcharge discharge is based on the depth vs flow curve for custom inlets or from the orifice equation for other inlet types, plus any additional discharge from the use of the <a href="TSCFCommands-1.html#tscfMaximumInletPondedDepth">Maximum Inlet Ponded Depth</a> command.<br />
 </li>
 <li>The coefficient used for inlet surcharging can be specified with the <a href="TSCFCommands-1.html#tscfInletSurchargeOrificeCoefficient">Inlet Surcharge Orifice Coefficient</a> command.<br />
 </li>
@@ -1357,13 +1357,12 @@ Flood Modeller co-ordinates are in the same projection as the TUFLOW model. <str
 <p>In the .tcf file, use either the <a href="TCFCommands-1.html#tcfReadGISISISNodes">Read GIS X1D Nodes</a> or <a href="TCFCommands-1.html#tcfReadGISISISNetwork">Read GIS X1D Network</a> command to read the 1d_x1d layer, as shown in the example below:</p>
 <p><tcmd><a href="TCFCommands-1.html#tcfReadGISISISNetwork">Read GIS X1D Network</a></tcmd><teq> == </teq><tblk>..\model\gis\1d_x1d_FM_nodes.shp</tblk></p>
 <p>The digitising of channels (lines) within a 1d_x1d GIS layer is
-optional and is only necessary if the model uses 1D Water Level Lines to display map outputs in the 1D domain (refer to Section <a href="Outputs-1.html#OneDMap-3">11.2.4</a> for further details). If GIS layer(s) are provided including channels, they are also read into the .tcf file using the command <a href="TCFCommands-1.html#tcfReadGISISISNetwork">Read GIS X1D
-Network</a>, and should be used with <a href="#tcfReadGISISISWL">Read GIS X1D
+optional and is only necessary if the model uses 1D Water Level Lines to display map outputs in the 1D domain (refer to Section <a href="Outputs-1.html#OneDMap-3">11.2.4</a> for further details). If GIS layer(s) are provided including channels, they are also read into the .tcf file using the command <a href="TCFCommands-1.html#tcfReadGISISISNetwork">Read GIS X1D Network</a>, and should be used with <a href="TCFCommands-1.html#tcfReadGISISISWLL">Read GIS X1D
 WLL</a>.</p>
-<p>The example below shows the use of these commands (with the nodes and channels in separate files) :</p>
+<p>The example below shows the use of these commands (with the nodes and channels in separate files):</p>
 <p><tcmd><a href="TCFCommands-1.html#tcfReadGISISISNodes">Read GIS X1D Nodes</a></tcmd><teq> == </teq><tblk>..\Model\gis\1d_x1d_FM_nodes.shp</tblk><br />
 <tcmd><a href="TCFCommands-1.html#tcfReadGISISISNetwork">Read GIS X1D Network</a></tcmd><teq> == </teq><tblk>..\Model\gis\1d_x1d_FM_channels.shp</tblk><br />
-<tcmd><a href="tcfReadGISISISWLL">Read GIS X1D WLL</a></tcmd><teq> == </teq><tblk>..\Model\gis\1d_x1d_FM_wlls.shp</tblk></p>
+<tcmd><a href="TCFCommands-1.html#tcfReadGISISISWLL">Read GIS X1D WLL</a></tcmd><teq> == </teq><tblk>..\Model\gis\1d_x1d_FM_wlls.shp</tblk></p>
 <p>Note, legacy models may include reference to ISIS in the above commands. For example, “X1D” in <a href="TCFCommands-1.html#tcfReadGISISISNetwork">Read GIS X1D Network</a> can be substituted with “ISIS” (i.e. <a href="TCFCommands-1.html#tcfReadGISISISNetwork">Read GIS ISIS Network</a>).</p>
 <p>Connections (CN) in the 2d_bc layer are snapped to the nodes in the
 1d_x1d layer in the same manner as a TUFLOW 1D 1d_nwk layer.</p>
@@ -1391,8 +1390,8 @@ of the 1D nodes and that the ZC elevation of a SX cell lies below the 1D
 node bed, and if not, an error occurs (see Section <a href="DomainLinking-1.html#HXBoundary-3">10.2.1</a> and Section <a href="DomainLinking-1.html#SXBoundary-3">10.2.2</a>).</p>
 <p>Use the <a href="https://wiki.tuflow.com/Check_Files_1d_x1d_nodes">_x1d_nodes_check</a> file to cross-check the external 1D nodes/sections that
 were read by TUFLOW, and the associated information passed from the 1D scheme. Also use
-the <a href="https://wiki.tuflow.com/Check_Files_1d_x1d_nodes">_1d_to_2d_check</a> file to cross-check the correct HX and SX cells are
-connected to the correct channels (units). The HX cells in the <a href="https://wiki.tuflow.com/Check_Files_1d_x1d_nodes">_1d_to_2d_check</a> layer can be colour coded using the “Primary_no” attribute to identify the external 1D channel (unit) that the
+the <a href="https://wiki.tuflow.com/Check_Files_1d_to_2d_bc">_1d_to_2d_check</a> file to cross-check the correct HX and SX cells are
+connected to the correct channels (units). The HX cells in the <a href="https://wiki.tuflow.com/Check_Files_1d_to_2d_bc">_1d_to_2d_check</a> layer can be colour coded using the “Primary_no” attribute to identify the external 1D channel (unit) that the
 flow in/out across the HX cells is associated with. For Flood Modeller,
 by default HX cells are assigned to the upstream end of a river unit as a lateral
 flow as per Flood Modeller conventions.</p>

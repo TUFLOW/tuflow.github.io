@@ -294,7 +294,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.4.1" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GISFormats-3"><i class="fa fa-check"></i><b>4.4.1</b> Input Formats</a></li>
 <li class="chapter" data-level="4.4.2" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GISCommands-3"><i class="fa fa-check"></i><b>4.4.2</b> GIS Commands</a></li>
 <li class="chapter" data-level="4.4.3" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GPKG-3"><i class="fa fa-check"></i><b>4.4.3</b> GeoPackage Commands</a></li>
-<li class="chapter" data-level="4.4.4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GRID-3"><i class="fa fa-check"></i><b>4.4.4</b> GRID Commands</a></li>
+<li class="chapter" data-level="4.4.4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GRID-3"><i class="fa fa-check"></i><b>4.4.4</b> Grid Commands</a></li>
 <li class="chapter" data-level="4.4.5" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#TIN-3"><i class="fa fa-check"></i><b>4.4.5</b> TIN Commands</a></li>
 <li class="chapter" data-level="4.4.6" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#RowCol-3"><i class="fa fa-check"></i><b>4.4.6</b> RowCol Commands (Legacy)</a></li>
 </ul></li>
@@ -2459,7 +2459,7 @@ precision and compare the results.</li>
 <div id="RF-Global-4" class="section level4 hasAnchor" number="8.5.3.3">
 <h4><span class="header-section-number">8.5.3.3</span> Global Rainfall<a href="Boundaries-InitialConditions-1.html#RF-Global-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>To apply a uniform rainfall to all active cells, the .tbc command <a href="TBCCommands-1.html#tbcGlobalRainfallBC">Global Rainfall BC</a> may be used. The <a href="TBCCommands-1.html#tbcGlobalRainfallBC">Global Rainfall BC</a> command applies a rainfall depth to every active cell within the 2d_code layer based on the input hyetograph. The input hyetograph must be in mm versus time (or inches versus time if using <a href="TCFCommands-1.html#tcfUnits">Units</a> <teq>==</teq><tblk> US Customary</tblk>), and is applied using a stepped approach. The stepped approach holds the rainfall constant for the time interval (i.e. the rainfall has a histogram stair-step shape). This means, for example, the second rainfall value in the time-series is applied as a constant rainfall from the first time value to the second time value. As with all rainfall boundaries, the first and last rainfall entries should be set to zero, otherwise these rainfall values are applied as a constant rainfall if the simulation starts before or extends beyond the first and last time values in the rainfall time-series. The hyetograph information is converted to a flow, and the flow then applied at each cell. The histogram conversion takes into account any losses and can be found in the TLF file (search ‘Global Rainfall histogram’).</p>
-<p>As of the 2020-10 release, for TUFLOW Classic models, if rainfall losses have been applied in a materials file (see Section <a href="TwoD-Domains-1.html#Materials-File-4">7.3.6.3</a>) they will be applied to the global rainfall. Prior to the 2020-10 release, for TUFLOW Classic, they weren’t applied. In TUFLOW HPC models they were already applied in releases prior to 2020-10. In both solvers, if rainfall losses have been specified in the materials file (.csv or .tmf) in conjunction with the <a href="#tbcGlobal%20Rainfall%20Initial%20Loss">Global Rainfall Initial Loss</a> or <a href="TBCCommands-1.html#tbcGlobalRainfallContinuingLoss">Global Rainfall Continuing Loss</a> commands, the losses in the materials file are applied and the global rainfall loss commands ignored (and <a href="https://wiki.tuflow.com/TUFLOW_Message_2244">WARNING 2244</a> reported). Alternatively, Soil infiltration losses can be used (see Section <a href="TwoD-Domains-1.html#Infiltration-2">7.3.7</a>).</p>
+<p>As of the 2020-10 release, for TUFLOW Classic models, if rainfall losses have been applied in a materials file (see Section <a href="TwoD-Domains-1.html#Materials-File-4">7.3.6.3</a>) they will be applied to the global rainfall. Prior to the 2020-10 release, for TUFLOW Classic, they weren’t applied. In TUFLOW HPC models they were already applied in releases prior to 2020-10. In both solvers, if rainfall losses have been specified in the materials file (.csv or .tmf) in conjunction with the <a href="TBCCommands-1.html#tbcGlobalRainfallInitialLoss">Global Rainfall Initial Loss</a> or <a href="TBCCommands-1.html#tbcGlobalRainfallContinuingLoss">Global Rainfall Continuing Loss</a> commands, the losses in the materials file are applied and the global rainfall loss commands ignored (and <a href="https://wiki.tuflow.com/TUFLOW_Message_2244">WARNING 2244</a> reported). Alternatively, Soil infiltration losses can be used (see Section <a href="TwoD-Domains-1.html#Infiltration-2">7.3.7</a>).</p>
 <p>The <a href="TCFCommands-1.html#tcfMapOutputDataTypes">Map Output Data Types</a> RFR and RFC may be used to view the rainfall rate (mm/hr or inch/hr) and cumulative rainfall (mm or inch) over time respectively (see Table <a href="Outputs-1.html#tab:tab-ExcludingHazard">11.4</a>).</p>
 <p>An example of global direct rainfall model is provided in <a href="https://wiki.tuflow.com/Tutorial_M06#Part_1_-_Global_Rainfall">Module 6 - Part 1</a>.</p>
 </div>
@@ -2869,7 +2869,7 @@ Figure 8.7: Example BC Database Source Files (flows.csv)
 <p>These lines can be specified in a separate file. The file can be read using the <a href="TCFCommands-1.html#tcfReadFile">Read File</a> command in
 all the .tcf files, see Section <a href="ControlFiles-and-Inputs-1.html#ReadFile-3">4.2.15</a>. This saves repeating these lines, and other common commands to all .tcf files.</p>
 <p>The above commands set the active BC Database to ..\bcdbase\PR_bc_dbase.csv, and defines the text “__event__” as a wildcard to be replaced by the <a href="TCFCommands-1.html#tcfBCEventName">BC Event Name</a>. The following command is added to the .tcf file for the 100-year flood simulation:</p>
-<p><tcmd><a href="TCFCommands-1.html#tcfBCEventText">BC Event Name</a></tcmd><teq> == </teq><tblk>Q100</tblk></p>
+<p><tcmd><a href="TCFCommands-1.html#tcfBCEventName">BC Event Name</a></tcmd><teq> == </teq><tblk>Q100</tblk></p>
 <p>TUFLOW replaces <strong><u>every</u></strong> occurrence of “__event__” with “Q100” in each line of the BC database. If “__event__” does not occur the line remains unchanged. In the example below, the following occurs:</p>
 <ul>
 <li>For the BC event “Oxley Ck Inflow”, the BC data is read from file “Q100.csv” rather than “__event__.csv” as indicated in the spreadsheet.<br />
@@ -3288,7 +3288,7 @@ flow regime based on a previous simulation of the model.</p>
 <p>For 1D domains, initial water levels (IWL) can be set globally as a constant using the .ecf command <a href="ECFCommands-1.html#ecfSetIWL">Set IWL</a>. IWLs can also be set to vary spatially using one or more GIS layers. The default initial water level at 1D nodes is zero metres above datum (0 mAD).</p>
 <p>To set up a GIS IWL layer for the 1D domains:</p>
 <ol style="list-style-type: decimal">
-<li>Create a 1d_iwl layer using an empty layer created by <a href="#ecfWriteEmptyMIFiles">Write Empty
+<li>Create a 1d_iwl layer using an empty layer created by <a href="TCFCommands-1.html#tcfWriteEmptyGISFiles">Write Empty
 GIS Files</a>.<br />
 </li>
 <li>Digitise points snapped to nodes and assign each point an initial
@@ -3359,7 +3359,7 @@ Float
 </li>
 <li>Use the .tcf <a href="TCFCommands-1.html#tcfReadGISIWL">Read GIS IWL</a> command or tgc <a href="TGCCommands-1.html#tgcReadGISIWL">Read GIS IWL</a> command to read in the IWL values.</li>
 </ol>
-<p>The <a href="#tcfReadGridIWL">Read Grid IWL</a> command is used to read the IWL from a grid (.tif, .flt or .asc). This can then be read into the tgc via the <a href="TGCCommands-1.html#tgcReadGridIWL">Read Grid IWL</a> command. This can be used to set the IWL based on the water level in a previous simulation, if TIF, FLT or ASC is specified in the <a href="TCFCommands-1.html#tcfMapOutputFormat">Map Output Format</a>. The results from one simulation can be directly read by another.</p>
+<p>The <a href="TGCCommands-1.html#tgcReadGridIWL">Read Grid IWL</a> .tgc command is used to read the IWL from a grid (.tif, .flt or .asc). This can be used to set the IWL based on the water level in a previous simulation, if TIF, FLT or ASC is specified in the <a href="TCFCommands-1.html#tcfMapOutputFormat">Map Output Format</a>. The results from one simulation can be directly read by another.</p>
 <p>Any number of IWL layers may be used, noting that if a cell’s IWL occurs
 more than once, the last occurrence prevails (i.e. TUFLOW overwrites any
 previous IWL already set).</p>
@@ -3422,9 +3422,9 @@ Float
 <ul>
 <li><a href="TGCCommands-1.html#tgcReadGISIGWDepth">Read GIS IGW Depth [ {} | &lt;Layer N&gt; ]</a><br />
 </li>
-<li><a href="TGCCommands-1.html#tgcReadGISIGWDepth">Read GRID IGW Depth [ {} | &lt;Layer N&gt; ]</a></li>
-<li><a href="#tgcReadGRIDIGWDepth">Read GIS IGW Level [ {} | &lt;Layer N&gt; ]</a></li>
-<li><a href="#tgcReadGRIDIGWDepth">Read GRID IGW Level [ {} | &lt;Layer N&gt; ]</a></li>
+<li><a href="TGCCommands-1.html#tgcReadGridIGWDepth">Read Grid IGW Depth [ {} | &lt;Layer N&gt; ]</a></li>
+<li><a href="TGCCommands-1.html#tgcReadGISIGWLevel">Read GIS IGW Level [ {} | &lt;Layer N&gt; ]</a></li>
+<li><a href="TGCCommands-1.html#tgcReadGridIGWLevel">Read Grid IGW Level [ {} | &lt;Layer N&gt; ]</a></li>
 </ul>
 <p>“IGW Depth” is assumed to be the depth of water in the soil (water content divided by porosity). “IGW Level” is assumed to be the level of the water table in each layer. If both methods are specified for a given grid cell, the highest initial condition will be adopted. The input units should be in meters or feet (if using <a href="TCFCommands-1.html#tcfUnits">Units</a> <teq>==</teq><tblk> US Customary</tblk>). Note, the initial conditions do not automatically cascade into layers below (i.e. setting the initial water level in the top layer will not automatically set the layers below to be 100% saturated).</p>
 <p>Setting the initial conditions in the .tgc for any given grid cell will override the “Initial Moisture” parameter set in the .tsoilf. The difference between the methods is that the .tsoilf sets the initial moisture by soil type, whereas setting the initial conditions in the .tgc allows spatial distribution. If no initial conditions are set in the .tgc for a given grid cell, the initial conditions will be determined by the “Initial Moisture” defined in the .tsoilf.</p>
@@ -3432,10 +3432,10 @@ Float
 <ul>
 <li><a href="TGCCommands-1.html#tgcSetGWD">Set GWD</a> or <a href="TGCCommands-1.html#tgcSetGWL">Set GWL</a></li>
 <li><a href="TGCCommands-1.html#tgcReadGISGWD">Read GIS GWD</a> or <a href="TGCCommands-1.html#tgcReadGISGWL">Read GIS GWL</a></li>
-<li><a href="#tgcReadGRIDGWD">Read GRID GWD</a> or <a href="#tgcReadGRIDGWL">Read GRID GWL</a></li>
+<li><a href="TGCCommands-1.html#tgcReadGridGWD">Read GRID GWD</a> or <a href="TGCCommands-1.html#tgcReadGridGWL">Read GRID GWL</a></li>
 </ul>
 <p>If the above commands are used with the multiple vertical layers (Convective layers), <a href="https://wiki.tuflow.com/TUFLOW_Message_2588">ERROR 2588</a> will be produced.</p>
-<p>The groundwater feature may only be used in conjunction with at least one of the soils infiltration methods described in Section <a href="TwoD-Domains-1.html#Infiltration-2">7.3.7</a>. Consequently, the .tgc commands used to define the groundwater depth / level must be read in following (below) at least one of the commands used to define the soil type: <a href="TGCCommands-1.html#tgcSet">Set Soil</a>, <a href="TGCCommands-1.html#tgcReadGIS">Read GIS Soil</a> or <a href="TGCCommands-1.html#tgcReadGrid">Read GRID Soil</a>.</p>
+<p>The groundwater feature may only be used in conjunction with at least one of the soils infiltration methods described in Section <a href="TwoD-Domains-1.html#Infiltration-2">7.3.7</a>. Consequently, the .tgc commands used to define the groundwater depth / level must be read in following (below) at least one of the commands used to define the soil type: <a href="TGCCommands-1.html#tgcSetSoil">Set Soil</a>, <a href="TGCCommands-1.html#tgcReadGISSoil">Read GIS Soil</a> or <a href="TGCCommands-1.html#tgcReadGridSoil">Read Grid Soil</a>.</p>
 <!-- EFC to PAR: is the 2d_gw still used by set IGW commands? If so, assume I should move this to initial groundwater levels section?-->
 <!-- yes-->
 <table>
@@ -3488,7 +3488,7 @@ Float
 <p>The 1D and 2D restart files use a .erf and .trf extension respectively and are written to the results folder.</p>
 <p>The restart file contains information on the water levels, velocities and flow regimes for the 1D and 2D parts of the model. Therefore, the number of 2D cells and 1D channels must be the same between the original model and the model using the restart file. Permitted changes between runs could include different boundary conditions, cell elevation increases (cell elevation decreases may cause issue) and roughness values.</p>
 <p>An example of writing and reading restart files is provided in <a href="https://wiki.tuflow.com/TUFLOW_Example_Models">Example Models</a> EG02_009 and EG06_004 respectively.</p>
-<p>Build 2023-03-AD added functionality to allow restart data fields to be ignored. To specify which fields to ignore the command “<tcmd><a href="TCFCommands-1.html#tcfRestartFileIgnoreFields">Restart File Ignore Fields</a></tcmd> <teq> ==</teq>” can be set in the .tcf where the fields are any combination of:</p>
+<p>The 2023-03-AD build added functionality to allow restart data fields to be ignored. To specify which fields to ignore the command “<tcmd><a href="TCFCommands-1.html#tcfRestartFileIgnoreFields">Restart File Ignore Fields</a></tcmd> <teq> ==</teq>” can be set in the .tcf where the fields are any combination of:</p>
 <ul>
 <li>Geometry (elevations and Manning’s n values)</li>
 <li>Groundwater (groundwater depths and groundwater tracer concentrations)</li>
