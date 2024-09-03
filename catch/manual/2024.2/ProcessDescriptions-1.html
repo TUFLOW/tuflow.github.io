@@ -362,7 +362,7 @@ End Material</code></pre>
 <p>As each pollutant accumulates, it is added to TUFLOW HPC’s dry store mass, which is also tracked on a cell by cell basis. It is this dry store mass that is then depleted (washed off) when user specified hydrologic conditions are met (see Section <a href="ProcessDescriptions-1.html#ProcessDescriptionsWO-4">3.2.3.1.2</a>). Each pollutant’s and each cell’s dry store mass is temporally incremented at the specified rate, up to a user specified limiting areal mass (kg/ha).</p>
 <p>One advantage of the pollutant accumulation method is that the user has full control over the spatial distribution of the associated rates, through the use of materials. Specifically, each material is assigned these rates, and materials are (typically) specified as polygons that cover regions with similar pollutant properties (analogous to roughness materials). Although it may seem natural to equate this spatial distribution of pollutant properties with land uses (as is often the case in lumped hydrology/pollutant export models), this is not a requirement of TUFLOW CATCH. Indeed, the user has full discretion with regard to how pollutant properties are set, and whilst perhaps making initial use of land use data, it is possible that different material polygons that represent the same land use are given different pollutant properties. For example, an ‘urban’ land use might be tagged to two separate housing estates in a generic land use GIS vector layer, but the user may also know that one estate has stormwater treatment devices in place and the other does not. In such an instance, different pollutant accumulation (and washoff) parameters can be applied through TUFLOW CATCH. In short, TUFLOW CATCH has been deliberately designed to allow users to insert their local knowledge of the systems being modelled into the model build process directly, down to a cell by cell spatial resolution if required, without being limited by lumping assumptions.</p>
 <p>Akin to the flexibility offered in spatial resolution, TUFLOW CATCH allows full control over the specification of pollutant accumulation rates, and in doing so allows the user to inform the modelling process with local knowledge and expertise. Users are therefore encouraged to undertake their own reviews and specifications of pollutant accumulation rates, and associated material configurations. Notwithstanding this, some indicative pollutant accumulation rates are provided in Table <a href="ProcessDescriptions-1.html#tab:tab-PollAccRates">3.1</a>. These are not to be seen as endorsed or recommended by TUFLOW, but are provided for information only. Decimal places are not intended to imply precision.</p>
-<table class="table" style="margin-left: auto; margin-right: auto;">
+<table>
 <caption>
 <span id="tab:tab-PollAccRates">Table 3.1: </span><strong>Indicative pollutant accumulation rates</strong>
 </caption>
@@ -381,7 +381,7 @@ Upper estimate (kg/ha/yr)
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;width: 8cm; ">
+<td style="text-align:left;width: 30%; ">
 Sediment
 </td>
 <td style="text-align:center;">
@@ -392,7 +392,7 @@ Sediment
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 8cm; ">
+<td style="text-align:left;width: 30%; ">
 Ammonium
 </td>
 <td style="text-align:center;">
@@ -403,7 +403,7 @@ Ammonium
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 8cm; ">
+<td style="text-align:left;width: 30%; ">
 Nitrate
 </td>
 <td style="text-align:center;">
@@ -414,7 +414,7 @@ Nitrate
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 8cm; ">
+<td style="text-align:left;width: 30%; ">
 Filterable reactive phosphorus
 </td>
 <td style="text-align:center;">
@@ -425,7 +425,7 @@ Filterable reactive phosphorus
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 8cm; ">
+<td style="text-align:left;width: 30%; ">
 Dissolved organic nitrogen
 </td>
 <td style="text-align:center;">
@@ -436,7 +436,7 @@ Dissolved organic nitrogen
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 8cm; ">
+<td style="text-align:left;width: 30%; ">
 Particulate organic nitrogen
 </td>
 <td style="text-align:center;">
@@ -447,7 +447,7 @@ Particulate organic nitrogen
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 8cm; ">
+<td style="text-align:left;width: 30%; ">
 Dissolved organic phosphorus
 </td>
 <td style="text-align:center;">
@@ -458,7 +458,7 @@ Dissolved organic phosphorus
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 8cm; ">
+<td style="text-align:left;width: 30%; ">
 Particulate organic phosphorus
 </td>
 <td style="text-align:center;">
@@ -469,7 +469,7 @@ Particulate organic phosphorus
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 8cm; ">
+<td style="text-align:left;width: 30%; ">
 Dissolved organic carbon
 </td>
 <td style="text-align:center;">
@@ -480,7 +480,7 @@ Dissolved organic carbon
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 8cm; ">
+<td style="text-align:left;width: 30%; ">
 Particulate organic carbon
 </td>
 <td style="text-align:center;">
@@ -497,11 +497,11 @@ Particulate organic carbon
 <div id="ProcessDescriptionsWO-4" class="section level5 hasAnchor" number="3.2.3.1.2">
 <h5><span class="header-section-number">3.2.3.1.2</span> Washoff<a href="ProcessDescriptions-1.html#ProcessDescriptionsWO-4" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>TUFLOW CATCH allows for the specification of the manner in which the accumulated dry store mass described in Section <a href="ProcessDescriptions-1.html#ProcessDescriptionsAcc-4">3.2.3.1.1</a> is washed off in response to local hydrologic conditions. This specification occurs in the same command line as accumulation rates (for a given pollutant), which is therefore also on a material by material basis: for a given material and pollutant, the accumulation and washoff parameters are related, and therefore co-specified.</p>
-<p>The TUFLOW CATCH washoff method is presented conceptually in Figure <a href="ProcessDescriptions-1.html#fig:fig-WO">3.4</a>. Under wet weather conditions, a mass per unit area <span class="math inline">\(\Delta\)</span> (kg/ha) is released from the dry store mass (<span class="math inline">\(\alpha_{dry}\)</span>, kg/ha) into the wet store (<span class="math inline">\(\alpha_{wet}\)</span>, concentration <span class="math inline">\(C\)</span>, mg/L) (i.e. to add to a water concentration), governed by a user defined time constant (also referred to as a time of concentration), <a href="#TCParTcon">T<span class="math inline">\(_c\)</span></a>, such that over a timestep <span class="math inline">\(dT\)</span> (with appropriate conversion factors for reconciliation of units):</p>
+<p>The TUFLOW CATCH washoff method is presented conceptually in Figure <a href="ProcessDescriptions-1.html#fig:fig-WO">3.4</a>. Under wet weather conditions, a mass per unit area <span class="math inline">\(\Delta\)</span> (kg/ha) is released from the dry store mass (<span class="math inline">\(\alpha_{dry}\)</span>, kg/ha) into the wet store (<span class="math inline">\(\alpha_{wet}\)</span>, concentration <span class="math inline">\(C\)</span>, mg/L) (i.e. to add to a water concentration), governed by a user defined time constant (also referred to as a time of concentration), <a href="AppParams.html#TCParTcon">T<span class="math inline">\(_c\)</span></a>, such that over a timestep <span class="math inline">\(dT\)</span> (with appropriate conversion factors for reconciliation of units):</p>
 <p><span class="math display" id="eq:equ-wo">\[\begin{equation}
   \Delta = dT\frac{\alpha_{dry}}{T_c} \tag{3.1}
 \end{equation}\]</span></p>
-<p>This release only occurs once user specified minimum rain rates, <a href="#TCParRnThrshd"><span class="math inline">\(R_r\)</span></a>, and surface water depths, <a href="#TCPardThresh"><span class="math inline">\(d\)</span></a>, have both been exceeded. Otherwise, the dry store masses described in Section <a href="ProcessDescriptions-1.html#ProcessDescriptionsAcc-4">3.2.3.1.1</a> are accumulated at the rates specified.</p>
+<p>This release only occurs once user specified minimum rain rates, <a href="AppParams.html#TCParRnThrshd"><span class="math inline">\(R_r\)</span></a>, and surface water depths, <a href="AppParams.html#TCPardThresh"><span class="math inline">\(d\)</span></a>, have both been exceeded. Otherwise, the dry store masses described in Section <a href="ProcessDescriptions-1.html#ProcessDescriptionsAcc-4">3.2.3.1.1</a> are accumulated at the rates specified.</p>
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-WO"></span>
 <img src="images/WO2.png" alt="**Washoff method**" width="50%" />
@@ -515,7 +515,7 @@ Figure 3.4: <strong>Washoff method</strong>
 <p><span class="math display" id="eq:equ-wo-sett">\[\begin{equation}
   \Delta = dT \times w_sC \tag{3.2}
 \end{equation}\]</span></p>
-<p><a href="#TCParDeposVel">w<span class="math inline">\(_s\)</span></a> is the user specified settling velocity, <span class="math inline">\(C\)</span> is the wet store cell concentration of pollutant. No other constraints to settling occurring are applied in this model.</p>
+<p><a href="AppParams.html#TCParDeposVel">w<span class="math inline">\(_s\)</span></a> is the user specified settling velocity, <span class="math inline">\(C\)</span> is the wet store cell concentration of pollutant. No other constraints to settling occurring are applied in this model.</p>
 <p>If soils and subsurface flow (interflow) is not simulated in TUFLOW HPC, then this transport is purely surficial. If soils are included then released pollutants will be transported in both the surface and subsurface in accordance with water flows. TUFLOW CATCH allows for the optional prevention of infiltration of a given pollutant into the subsurface flow if soils are included in the TUFLOW HPC simulation. This is most relevant for particulate pollutants such as sediment or particulate organic material.</p>
 <p>A conceptualisation of TUFLOW CATCH’s pollutant generation and transport methods is presented in Figure <a href="ProcessDescriptions-1.html#fig:fig-wopoll">3.5</a>.</p>
 <center>
@@ -539,7 +539,7 @@ Figure 3.5: <strong>TUFLOW CATCH pollutant generation method</strong>
 <p><span class="math display" id="eq:equ-mehta-er">\[\begin{equation}
   \Delta = dT \times E_r\left(\frac{\tau}{\tau_{ce}}-1\right)^{\alpha} \tag{3.3}
 \end{equation}\]</span></p>
-<p><a href="#TCParEr"><span class="math inline">\(E_r\)</span></a> is the erosion rate (g/m<span class="math inline">\(^2\)</span>/s), <span class="math inline">\(\tau\)</span> is the simulated hydrodynamic shear stress (N/m<span class="math inline">\(^2\)</span>), <a href="#TCParErosThresh"><span class="math inline">\(\tau_{ce}\)</span></a> is the user specified critical shear stress for erosion (N/m<span class="math inline">\(^2\)</span>), <span class="math inline">\(\alpha\)</span> is a dimensionless parameter set to 1.0 and <span class="math inline">\(\tau &gt; \tau_{ce}\)</span>. TUFLOW CATCH does not deploy a bed roughness model so <span class="math inline">\(\tau\)</span> is the pure hydrodynamic shear stress calculated from cell velocity. Once computed, eroded mass is tracked so that at simulation end, TUFLOW CATCH produces a map of eroded areas that allows for identification, for example, of ‘hotspot’ erosion locations. Users specify a limit to the mass of pollutant per unit area that is erodable within each material. This can be converted by the user to a depth via independent post processing steps if desired, by assuming a bulk density. This same output layer presents areas of accumulation, if this has occurred.</p>
+<p><a href="AppParams.html#TCParEr"><span class="math inline">\(E_r\)</span></a> is the erosion rate (g/m<span class="math inline">\(^2\)</span>/s), <span class="math inline">\(\tau\)</span> is the simulated hydrodynamic shear stress (N/m<span class="math inline">\(^2\)</span>), <a href="AppParams.html#TCParErosThresh"><span class="math inline">\(\tau_{ce}\)</span></a> is the user specified critical shear stress for erosion (N/m<span class="math inline">\(^2\)</span>), <span class="math inline">\(\alpha\)</span> is a dimensionless parameter set to 1.0 and <span class="math inline">\(\tau &gt; \tau_{ce}\)</span>. TUFLOW CATCH does not deploy a bed roughness model so <span class="math inline">\(\tau\)</span> is the pure hydrodynamic shear stress calculated from cell velocity. Once computed, eroded mass is tracked so that at simulation end, TUFLOW CATCH produces a map of eroded areas that allows for identification, for example, of ‘hotspot’ erosion locations. Users specify a limit to the mass of pollutant per unit area that is erodable within each material. This can be converted by the user to a depth via independent post processing steps if desired, by assuming a bulk density. This same output layer presents areas of accumulation, if this has occurred.</p>
 <p>The relevant TUFLOW CATCH commands are described in Section <a href="SimulationConstruction-1.html#SCTCCPollExpSS-5">4.5.3.3.2</a>.</p>
 </div>
 <div id="ProcessDescriptionsDep-4" class="section level5 hasAnchor" number="3.2.3.2.2">
@@ -549,7 +549,7 @@ Figure 3.5: <strong>TUFLOW CATCH pollutant generation method</strong>
 <p><span class="math display" id="eq:equ-krone-dp">\[\begin{equation}
   \Delta = dT \times \left(1-\frac{\tau}{\tau_{cd}}\right)w_sC \tag{3.4}
 \end{equation}\]</span></p>
-<p><span class="math inline">\(\tau\)</span> is the raw hydrodynamic shear stress (N/m<span class="math inline">\(^2\)</span>), <a href="#TCParDeposThresh"><span class="math inline">\(\tau_{cd}\)</span></a> is the user specified critical shear stress for deposition (N/m<span class="math inline">\(^2\)</span>), <a href="#TCParDeposVel">w<span class="math inline">\(_s\)</span></a> is the user specified settling velocity, <span class="math inline">\(C\)</span> is the wet store cell concentration of pollutant and <span class="math inline">\(\tau &lt; \tau_{cd}\)</span>.</p>
+<p><span class="math inline">\(\tau\)</span> is the raw hydrodynamic shear stress (N/m<span class="math inline">\(^2\)</span>), <a href="AppParams.html#TCParDeposThresh"><span class="math inline">\(\tau_{cd}\)</span></a> is the user specified critical shear stress for deposition (N/m<span class="math inline">\(^2\)</span>), <a href="AppParams.html#TCParDeposVel">w<span class="math inline">\(_s\)</span></a> is the user specified settling velocity, <span class="math inline">\(C\)</span> is the wet store cell concentration of pollutant and <span class="math inline">\(\tau &lt; \tau_{cd}\)</span>.</p>
 <p>The relevant TUFLOW CATCH commands are described in Section <a href="SimulationConstruction-1.html#SCTCCPollExpSS-5">4.5.3.3.2</a>.</p>
 <p><img src="images/WQFooter.jpg" width="100%" /></p>
 
