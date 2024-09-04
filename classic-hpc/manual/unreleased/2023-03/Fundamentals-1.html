@@ -806,7 +806,7 @@ Report <span class="citation">(<a href="#ref-BabisterBarton2012">Babister &amp; 
 </li>
 <li>Integrated Urban Drainage Modelling <span class="citation">(<a href="#ref-UrbanGuide2009">CIWEM, 2009</a>)</span>.</li>
 </ul>
-<p>Further specific TUFLOW guidance relating to model schematisation, model resolution, timestep and simulation time are discussed in the following sections.</p>
+<p>Specific TUFLOW guidance relating to model schematisation, model resolution, timestep and simulation time are discussed in the following sections.</p>
 </div>
 <div id="id_1D2Dor3D-3" class="section level3 hasAnchor" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Model Dimensions: 1D, 2D or 3D?<a href="Fundamentals-1.html#id_1D2Dor3D-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -814,7 +814,7 @@ Report <span class="citation">(<a href="#ref-BabisterBarton2012">Babister &amp; 
 <div id="one-dimensional-1d" class="section level4 hasAnchor" number="3.2.2.1">
 <h4><span class="header-section-number">3.2.2.1</span> One Dimensional (1D)<a href="Fundamentals-1.html#one-dimensional-1d" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>One dimensional (1D) models confine the water flow to a single dimension, specifically
-forwards or backwards along a defined path. The path can be a river or drainage channel, or an underground storm water pipe. It is possible to have a network of 1D paths with junctions, representing a network of tributaries and rivers, or an underground storm water system.</p>
+forwards or backwards along a defined path. The path can be a river or drainage channel, or an underground stormwater pipe. It is possible to have a network of 1D paths with junctions, representing a network of tributaries and rivers, or an underground stormwater system.</p>
 <p>The 1D network is comprised of links (or channels/paths/conduits) and nodes. Water volumes are associated to nodes, and velocities/flows/conveyance are associated with the links. Velocities are cross-section average velocities, i.e. flux (or flow) divided by the effective flow area. Nodes have known storage geometries, from which water elevation can be calculated from the nodal water volume. Links have known cross-sections (bed elevation and bed friction data discretised across the section) or a shape (such as a circular pipe), from which flow area and conveyance can be calculated from water levels and longitudinal slopes.</p>
 <p>TUFLOW 1D (ESTRY) and EPA SWMM are included within the TUFLOW Classic and HPC executable download as available 1D solution scheme options. Other third party 1D schemes are also dynamically linked with TUFLOW Classic and HPC.</p>
 <p><strong>Strengths</strong></p>
@@ -825,21 +825,21 @@ forwards or backwards along a defined path. The path can be a river or drainage 
 <p><strong>Limitations</strong></p>
 <ul>
 <li><p>Significant effort is required to develop the input data required for 1d model domains. The nodal area tables and path cross-sections must be defined for each element, meaning a model of even 100 elements requires much effort to construct compared with 2D or 3D domains.</p></li>
-<li><p>1D models are not well suited for situations where surface channels breakout onto floodplains. While it is possible to define nodal area tables to allow for storage on floodplains, along with links defining interconnecting flow paths, the model is reliant on the user having correctly identified the topology of the flow network on the floodplain. The flow paths in a flood model are also assumed to remain fixed or constant in terms of flow direction during a flood event, which may not be the case. For this reason, 1D models were never an option for coastal waters where, for example, the flow at a point is likely to occur in multiple directions with the rise and fall of the tide.</p></li>
+<li><p>1D models are not well suited for situations where surface channels break out onto floodplains. While it is possible to define nodal area tables to allow for storage on floodplains, along with links defining interconnecting flow paths, the model is reliant on the user having correctly identified the topology of the flow network on the floodplain. The flow paths in a flood model are also assumed to remain fixed or constant in terms of flow direction during a flood event, which may not be the case. For this reason, 1D models were never an option for coastal waters where, for example, the flow at a point is likely to occur in multiple directions with the rise and fall of the tide.</p></li>
 <li><p>1D models do not inherently compute energy loss mechanisms beyond bed friction. Energy losses caused by turbulent interaction within a cross-section (tight bends, confluences, spurs/dykes etc) must be manually accounted for with loss factors estimated by the user.</p></li>
 <li><p>Energy loss caused by structures must also be manually accounted for with loss factors or models specified by the user.</p></li>
-<li><p>The model does not capture inertial effects such as super-elevation, which in some situations can change flood levels by half a meter or more from one side of the river to the other at a river bend.</p></li>
+<li><p>The model does not capture inertial effects such as super-elevation, which in some situations can change flood levels by half a meter or more laterally across a river bend.</p></li>
 <li><p>Flow path velocities are cross-section averages. The model is unable to represent variations in velocity across the width of the cross-section, nor any depth dependent properties.</p></li>
 </ul>
 </div>
 <div id="two-dimensional-2d" class="section level4 hasAnchor" number="3.2.2.2">
 <h4><span class="header-section-number">3.2.2.2</span> Two Dimensional (2D)<a href="Fundamentals-1.html#two-dimensional-2d" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Two dimensional (2D) models allow the water to move in two dimensions, think x and y, or east-west and north-south. The model is discretised into cells that have a defined geographic area, and faces which connect one cell to the next. The cells are typically triangular (3 sided) or quadrilateral (4 sided). Such a model is well suited to modelling surface water (such as flows in rivers/creeks, floodplain inundation, urban surface water, and estuarine and coastal waters), while networks of underground storm water pipes remain very much within the remit of 1D modelling.</p>
+<p>Two dimensional (2D) models allow the water to move in two dimensions, think x and y, or east-west and north-south. The model is discretised into cells that have a defined geographic area, and faces which connect one cell to the next. The cells are typically triangular (3 sided) or quadrilateral (4 sided). Such a model is well suited to modelling surface water (such as flows in rivers/creeks, floodplain inundation, urban surface water, and estuarine and coastal waters), while networks of underground stormwater pipes remain very much within the remit of 1D modelling.</p>
 <p>In the 2D modelling framework water volumes are associated with the 2D cells, and velocities are calculated at the cell faces. Velocities are depth averaged. Cells have known storage geometries, from which water elevation can be calculated from the cell water volume. Faces have known cross-sections (bed elevation and bed friction data discretised across the face), from which flow area and conveyance can be calculated from water levels.</p>
 <p>TUFLOW Classic and HPC are 2D solution schemes. Models built using them are schematised using a grid of square cells. They are not compatible with a flexible mesh design that constructs a network of irregular shaped cells typically of triangles and quadrilaterals. Classic and HPC do allow different 2D cell sizes to be incorporated within a single model, however, the cells are always square in shape. HPC’s Sub-Grid Sampling (SGS) feature significantly reduces the negative side effects of using a fixed grid of cells.</p>
 <p><strong>Strengths</strong></p>
 <ul>
-<li><p>2D models are generally much easy to construct than 1D models. Usually high quality digital elevation data are available for the study area, and once the 2D grid extent is defined the process of deriving the cell storage data and face conveyance data is fully automated.</p></li>
+<li><p>2D models are generally much easier to construct than 1D models. Usually high quality digital elevation data are available for the study area, and once the 2D grid extent is defined the process of deriving the cell storage data and face conveyance data is fully automated.</p></li>
 <li><p>Because velocity is resolved in both transverse and longitudinal dimensions, energy loss mechanisms such as turbulent interaction within a cross-section (tight bends, confluences, spurs/dykes, etc) are automatically accounted for with a turbulence (eddy viscosity) model.</p></li>
 </ul>
 <p><strong>Limitations</strong></p>
@@ -852,13 +852,13 @@ forwards or backwards along a defined path. The path can be a river or drainage 
 <div id="three-dimensional-3d" class="section level4 hasAnchor" number="3.2.2.3">
 <h4><span class="header-section-number">3.2.2.3</span> Three Dimensional (3D)<a href="Fundamentals-1.html#three-dimensional-3d" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Three dimensional (3D) models calculate the water motion in all three spatial dimensions. Computational Fluid Dynamics (CFD) is often used for 3D modelling of flow through complex geometries. CFD software can be extremely computationally intensive, typically solving the full unsteady non-hydrostatic Reynolds-averaged Navier-Stokes equations that describe the flow physics.</p>
-<p>Alternatively, the accelerations in vertical dimension can be assumed to be negligible compared to the horizontal dimensions, also known as the hydrostatic assumption. Making this assumption enables a pancake style 3D mesh to be used (i.e. high aspect ratio cells) with a split-operator solution method. This 3D approach significantly improves solution speed compared to traditional CFD. TUFLOW FV is an example of such a 3D code.</p>
+<p>Alternatively, the accelerations in vertical dimension can be assumed to be negligible compared to the horizontal dimensions, also known as the hydrostatic assumption. Making this assumption enables a pancake style 3D mesh to be used (i.e. high aspect ratio cells) with a split-operator solution method. This 3D approach significantly improves solution speed compared to traditional CFD. TUFLOW FV is an example of such a 3D model.</p>
 <p>Similar to 2D, 3D models also use a network of cells and faces, with cells usually irregularly shaped (triangles and quadrilaterals). Volume and velocity data are also associated with cells, with complex numerical schemes available for interpolation between cell and face data. 3D models make the fewest assumptions about the water flow, and are therefore suited to situations where there is significant variation of water velocity (or other properties such as temperature and salinity) in all three dimensions. This is particularly relevant for estuarine and ocean environments where density differences in the horizontal plane can affect the flow behaviour.</p>
 <p>TUFLOW Classic and HPC are not available in a 3D form. TUFLOW FV does support 3D, accessed via the 3D module.</p>
 <p><strong>Strengths</strong></p>
 <ul>
 <li><p>Fewest assumptions or sub-models required from the user.</p></li>
-<li><p>Depth dependent properties accounted for - particularly relevant for modelling flow around bridge piers, complex culverts, tight river bends, estuaries and ocean.</p></li>
+<li><p>Depth dependent properties accounted for - particularly relevant for modelling flow around bridge piers, complex culverts, tight river bends, estuaries and the coastal ocean.</p></li>
 </ul>
 <p><strong>Limitations</strong></p>
 <ul>
@@ -916,22 +916,22 @@ Figure 3.3: <strong>TUFLOW HPC Quadtree Grid (3 Level Refinement)</strong>
 </div>
 <div id="Boundaries-3" class="section level3 hasAnchor" number="3.2.5">
 <h3><span class="header-section-number">3.2.5</span> Boundaries<a href="Fundamentals-1.html#Boundaries-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Boundary conditions are a crucial part of hydrodynamic modelling, providing the inputs where fluids can enter or leave the hydrodynamic model area. Appropriate definition and placement of boundary condition inputs is essential when developing models that are intended to represent a digital twin of reality. Furthermore, accurate calculation of boundary condition values is also critical. Boundaries are often a source of introducing significant uncertainty to the modelling due to errors in their magnitude/timing and/or being inappropriately setup. Section <a href="Boundaries-InitialConditions-1.html#BCArrangements-2">8.2</a> provides a detailed discussion focused on recommended boundary condition arrangements.</p>
+<p>Boundary conditions specify how water can enter or leave a domain. Section <a href="Boundaries-InitialConditions-1.html#BCArrangements-2">8.2</a> provides a detailed discussion of recommended boundary condition treatment.</p>
 </div>
 </div>
 <div id="ModelResolutionDiscretisation-2" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Model Resolution (Discretisation)<a href="Fundamentals-1.html#ModelResolutionDiscretisation-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="id_1DNetworks-3" class="section level3 hasAnchor" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> 1D Networks<a href="Fundamentals-1.html#id_1DNetworks-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The adequacy of the 1D domain is primarily dependent on the network representation that is adopted. Increased network detail will typically result in increased accuracy, though increased time and effort to establish the model. The end result may require a compromise between the level of detail and the manual effort required to create the model.</p>
-<p>The first step in setting up a 1D model is to define the dominant flow patterns and to use each identified flow path as the basis for a channel of the 1D
-network. Following this step, the flow paths are linked at junctions, or nodes. In TUFLOW, nodes are automatically created at the end of a channel. Each node is considered as a storage element, which accepts the flow from the adjoining channels. In this way, the model is built up as a series of interconnected channels and nodes with the channels representing the flow resistance characteristics.</p>
-<p>For compatibility with the mathematical assumptions, a channel would ideally have more or less uniform cross-sections with constant bottom slope and a minimum of longitudinal curvature along its length. In practice this requirement cannot always be met, particularly where a fine resolution of detail is not required in a portion of the study area. In this case, a flow path is represented by an “equivalent” channel. Experience has indicated that in most cases an adequate calibration can be achieved by deriving a single channel equivalent to a number of parallel channels using the steady state Manning’s relation for deriving the equivalent channel characteristics.</p>
+<p>The veracity of a 1D model domain is primarily dependent on the resolution with which on ground conditions are represented. The nature of this representation is typically a result of a balance between required resolution and the commensurate manual setup effort, the latter of which can be significant. Some approaches that can be used in establishing this balance include:</p>
+<ul>
+<li>Carefully determining where and to what extent 1D networks are required in order to address study goals, and</li>
+<li>Combining multiple 1D channels or structures into single model elements where appropriate</li>
+</ul>
 </div>
 <div id="CellSizes-3" class="section level3 hasAnchor" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> 2D Cell Sizes<a href="Fundamentals-1.html#CellSizes-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The 2D cell size defines the resolution of the 2D hydraulic calculations. The cell size needs to be sufficiently small to reproduce the hydraulic behaviour, yet not be excessively small that simulation times are impractical to meet project deadlines.</p>
-<p>The recommended 2D cell resolution varies depending on the model design, model type, project objectives and also numerical solver. For example, when the primary flow path (river or creek) is represented in the 2D domain, the head losses along the flow path (and therefore the predicted inundation levels) can become dependent on the 2D cell size if the chosen cell size is larger than recommended. Table <a href="Fundamentals-1.html#tab:tab-twoDCellSize">3.1</a> lists a general rule of thumb recommendation for minimum cell count (size) relative to the primary flow path width in a traditional catchment flood study for the different available TUFLOW solvers.</p>
+<p>The 2D cell size defines the resolution of the 2D hydraulic calculations. As for 1D simulation, this cell size needs to be sufficiently small so as to reproduce required hydraulic behaviours, but not so small that simulation times are impractical. In order to assist with this cell size selection, Table <a href="Fundamentals-1.html#tab:tab-twoDCellSize">3.1</a> lists general recommendations for minimum cell count (size) relative to primary flow path widths (e.g. creeks or streets), for different TUFLOW solvers.</p>
 <table>
 <caption>
 <span id="tab:tab-twoDCellSize">Table 3.1: </span><strong>Recommended 2D Cell Size</strong>
@@ -986,28 +986,19 @@ Very Low
 </tr>
 </tbody>
 </table>
-<p>The model resolution may vary from the values in Table <a href="Fundamentals-1.html#tab:tab-twoDCellSize">3.1</a>. Other factors to consider include:</p>
+<p>Resolution may vary from these recommendations if:</p>
 <ol style="list-style-type: decimal">
-<li>If the model uses 1D for the primary flow path definition (river or creek) and 2D for the floodplain, the 2D cell resolution is controlled by the primary flowpaths within the 2D floodplain and is typically much coarser.</li>
-<li>If the model is resolving flow around buildings and along streets (e.g. an urban surfacewater model) – the 2D cells in the urban area will be typically controlled by the flow width on the streets using the guidelines above.<br />
+<li>1D is used for primary flow path definition and 2D only for floodplains: 2D cell size can increase.</li>
+<li>Using HPC’s SGS feature (refer Section <a href="TwoD-Domains-1.html#SGS-3">7.4.3</a>): 2D cell size can increase.</li>
+<li>Using HPC’s Quadtree feature: 2D cell size can increase outside areas of interest.<br />
 </li>
-<li>If using HPC with SGS (refer Section <a href="TwoD-Domains-1.html#SGS-3">7.4.3</a>), the high-resolution output (refer Section <a href="Outputs-1.html#HRGrid-4">11.2.2.3</a>) option can provide high-resolution inundation extents, water level and depth results at the SGS resolution, which is a higher resolution than the 2D cell size.<br />
-</li>
-<li>HPC’s Quadtree feature enables the user to specify cell refinement around the
-primary flow paths without having to run the entire model area at
-the same resolution. This usually yields a useful improvement in
-model run time compared to running the entire model at the finer
-resolution necessary to resolve the primary flow paths.<br />
-</li>
-<li>The HPC Wu turbulence model (refer Section <a href="TwoD-Domains-1.html#Wu-4">7.4.2.3</a>) can cause the
-timestep to become very small (than would otherwise be expected) when very small cells are used in primary flow paths causing the depth to be much greater than the cell size, thereby triggering the diffusion number to become the critical control number for determining the timestep. Avoid excessively small cells in deep flow paths and use SGS to maximise the conveyance accuracy.</li>
+<li>Small cells are contained within deep water flow paths. These settings will slow down models considerably and should be avoided through use of SGS.</li>
 </ol>
-<p>Cell size result convergence sensitivity testing, as discussed in Section <a href="Fundamentals-1.html#CellSizeResultsConvergence-3">3.3.4</a>, is the most robust way to verify whether the chosen 2D cell size is of sufficient and optimal resolution. Cell size result convergence sensitivity should be completed early in the model development process. It should be done prior to any calibration steps or design flood production runs, as it is not desirable to discover after considerable effort that a too coarse model resolution is contributing to the inaccuracy and uncertainty of the modelling.</p>
+<p>More broadly, cell size result convergence sensitivity testing (see Section <a href="Fundamentals-1.html#CellSizeResultsConvergence-3">3.3.4</a>) is the most robust way to verify 2D cell size selection. It should be completed early in the model development process.</p>
 </div>
 <div id="SubGridSamplingSGS-3" class="section level3 hasAnchor" number="3.3.3">
 <h3><span class="header-section-number">3.3.3</span> Sub-Grid Sampling (SGS)<a href="Fundamentals-1.html#SubGridSamplingSGS-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>2D hydraulic modelling software such as TUFLOW (and others) will usually sample the underlying digital terrain model (DTM) by taking the elevation at the cell centre (as well as cell faces in TUFLOW’s case). The cells are treated as flat-bottomed storage boxes, and the faces as flat-bottomed conveyance channels - this doesn’t take into allowance the shape of the terrain within the cells when computing storage vs elevation, nor the shape of the cross-section at the face when computing flux area vs elevation.</p>
-<p>DTM datasets are commonly up to 10-20 times finer than the cell sizes at which flood modelling is undertaken. Figure <a href="Fundamentals-1.html#fig:fig-SGSExampleGridTop">3.4</a> provides an example of a 20m hydraulic model grid, overlaid on top of a 1m DTM. In this case there are only 2 to 3 grid cells across the width of the river channel, and fewer in some of the floodplain channels and road embankment. The sub-grid (sub-cell) scale topography that may be present in the DTM is not being fully utilised within the 2D hydraulic model. The single elevation per cell centre and side may provide a poor representation of the in-bank main channel storage and conveyance characteristics, and subsequently impact solution accuracy that can only be improved by using smaller cell sizes.</p>
+<p>Without SGS, TUFLOW samples an underlying DTM only at cell centres and faces when assigning bathymetry to a computational grid. Cells and faces are then effectively flat-bottomed storage boxes and conveyance channels, respectively. This approach therefore discards any higher spatial resolution DTM data. As an example, Figure <a href="Fundamentals-1.html#fig:fig-SGSExampleGridTop">3.4</a> presents a 20m hydraulic model grid, overlaying a 1m DTM. In this case only 2 to 3 grid cells span the river channel, and fewer in some of the floodplain channels and road embankment. As such, the sub-grid (sub-cell) scale topography available in the DTM is underutilised and a poor representation of bathymetry is likely. Traditional solutions to this problem would typically have involved specifying smaller cell sizes, at considerable computational penalty.</p>
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SGSExampleGridTop"></span>
 <img src="images/SGS_Example_Grid_Top.jpg" alt="**20m grid size shown against the 1m DTM**" width="90%" />
