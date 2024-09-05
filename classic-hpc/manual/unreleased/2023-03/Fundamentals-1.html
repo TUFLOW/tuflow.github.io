@@ -241,8 +241,7 @@ div.csl-indent {
 <li class="chapter" data-level="3.2.1" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#GeneralGuidance-3"><i class="fa fa-check"></i><b>3.2.1</b> General Guidance</a></li>
 <li class="chapter" data-level="3.2.2" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#id_1D2Dor3D-3"><i class="fa fa-check"></i><b>3.2.2</b> Model Dimensions: 1D, 2D or 3D?</a></li>
 <li class="chapter" data-level="3.2.3" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#Coupled1D2D-3"><i class="fa fa-check"></i><b>3.2.3</b> Coupled 1D-2D</a></li>
-<li class="chapter" data-level="3.2.4" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#FixedGridorQuadtreeGrid-3"><i class="fa fa-check"></i><b>3.2.4</b> Fixed Grid or Quadtree Grid</a></li>
-<li class="chapter" data-level="3.2.5" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#Boundaries-3"><i class="fa fa-check"></i><b>3.2.5</b> Boundaries</a></li>
+<li class="chapter" data-level="3.2.4" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#FixedGridorQuadtreeGrid-3"><i class="fa fa-check"></i><b>3.2.4</b> Quadtree Grid</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#ModelResolutionDiscretisation-2"><i class="fa fa-check"></i><b>3.3</b> Model Resolution (Discretisation)</a>
 <ul>
@@ -814,8 +813,8 @@ Report <span class="citation">(<a href="#ref-BabisterBarton2012">Babister &amp; 
 <div id="one-dimensional-1d" class="section level4 hasAnchor" number="3.2.2.1">
 <h4><span class="header-section-number">3.2.2.1</span> One Dimensional (1D)<a href="Fundamentals-1.html#one-dimensional-1d" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>One dimensional (1D) models confine the water flow to a single dimension, specifically
-forwards or backwards along a defined path. The path can be a river or drainage channel, or an underground stormwater pipe. It is possible to have a network of 1D paths with junctions, representing a network of tributaries and rivers, or an underground stormwater system.</p>
-<p>The 1D network is comprised of links (or channels/paths/conduits) and nodes. Water volumes are associated to nodes, and velocities/flows/conveyance are associated with the links. Velocities are cross-section average velocities, i.e. flux (or flow) divided by the effective flow area. Nodes have known storage geometries, from which water elevation can be calculated from the nodal water volume. Links have known cross-sections (bed elevation and bed friction data discretised across the section) or a shape (such as a circular pipe), from which flow area and conveyance can be calculated from water levels and longitudinal slopes.</p>
+forwards or backwards along a defined path. The path can be a river or drainage channel, an underground stormwater pipe or other similar settings. It is possible to have a network of 1D paths with junctions, representing a network of tributaries and rivers, or an underground stormwater system.</p>
+<p>A 1D network is comprised of links (or channels/paths/conduits) and nodes. Water volumes are associated to nodes, and velocities/flows/conveyance are associated with the links. Velocities are cross-section average velocities, i.e. flux (or flow) divided by the effective flow area. Nodes have known storage geometries, from which water elevation can be calculated from the nodal water volume. Links have known cross-sections (bed elevation and bed friction data discretised across the section) or a shape (such as a circular pipe), from which flow area and conveyance can be calculated from water levels and longitudinal slopes.</p>
 <p>TUFLOW 1D (ESTRY) and EPA SWMM are included within the TUFLOW Classic and HPC executable download as available 1D solution scheme options. Other third party 1D schemes are also dynamically linked with TUFLOW Classic and HPC.</p>
 <p><strong>Strengths</strong></p>
 <ul>
@@ -825,18 +824,18 @@ forwards or backwards along a defined path. The path can be a river or drainage 
 <p><strong>Limitations</strong></p>
 <ul>
 <li><p>Significant effort is required to develop the input data required for 1d model domains. The nodal area tables and path cross-sections must be defined for each element, meaning a model of even 100 elements requires much effort to construct compared with 2D or 3D domains.</p></li>
-<li><p>1D models are not well suited for situations where surface channels break out onto floodplains. While it is possible to define nodal area tables to allow for storage on floodplains, along with links defining interconnecting flow paths, the model is reliant on the user having correctly identified the topology of the flow network on the floodplain. The flow paths in a flood model are also assumed to remain fixed or constant in terms of flow direction during a flood event, which may not be the case. For this reason, 1D models were never an option for coastal waters where, for example, the flow at a point is likely to occur in multiple directions with the rise and fall of the tide.</p></li>
+<li><p>1D models are not well suited for situations where surface channels break out onto floodplains. While it is possible to define nodal area tables to allow for storage on floodplains, along with links defining interconnecting flow paths, the model is reliant on the user having correctly identified the topology of the flow network on the floodplain, a priori. The flow paths in a flood model are also assumed to remain fixed or constant in terms of flow direction during a flood event, which may not be the case.</p></li>
 <li><p>1D models do not inherently compute energy loss mechanisms beyond bed friction. Energy losses caused by turbulent interaction within a cross-section (tight bends, confluences, spurs/dykes etc) must be manually accounted for with loss factors estimated by the user.</p></li>
-<li><p>Energy loss caused by structures must also be manually accounted for with loss factors or models specified by the user.</p></li>
-<li><p>The model does not capture inertial effects such as super-elevation, which in some situations can change flood levels by half a meter or more laterally across a river bend.</p></li>
-<li><p>Flow path velocities are cross-section averages. The model is unable to represent variations in velocity across the width of the cross-section, nor any depth dependent properties.</p></li>
+<li><p>Energy loss caused by structures must be manually accounted for with loss factors or models specified by the user.</p></li>
+<li><p>The model does not capture inertial effects such as super-elevation, which in some situations can change lateral flood levels by half a meter or more across a river bend.</p></li>
+<li><p>Flow path velocities are cross-section averages. 1D schematisations are unable to represent variations in velocity across the width of a cross-section, nor any depth dependent properties.</p></li>
 </ul>
 </div>
 <div id="two-dimensional-2d" class="section level4 hasAnchor" number="3.2.2.2">
 <h4><span class="header-section-number">3.2.2.2</span> Two Dimensional (2D)<a href="Fundamentals-1.html#two-dimensional-2d" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Two dimensional (2D) models allow the water to move in two dimensions, think x and y, or east-west and north-south. The model is discretised into cells that have a defined geographic area, and faces which connect one cell to the next. The cells are typically triangular (3 sided) or quadrilateral (4 sided). Such a model is well suited to modelling surface water (such as flows in rivers/creeks, floodplain inundation, urban surface water, and estuarine and coastal waters), while networks of underground stormwater pipes remain very much within the remit of 1D modelling.</p>
-<p>In the 2D modelling framework water volumes are associated with the 2D cells, and velocities are calculated at the cell faces. Velocities are depth averaged. Cells have known storage geometries, from which water elevation can be calculated from the cell water volume. Faces have known cross-sections (bed elevation and bed friction data discretised across the face), from which flow area and conveyance can be calculated from water levels.</p>
-<p>TUFLOW Classic and HPC are 2D solution schemes. Models built using them are schematised using a grid of square cells. They are not compatible with a flexible mesh design that constructs a network of irregular shaped cells typically of triangles and quadrilaterals. Classic and HPC do allow different 2D cell sizes to be incorporated within a single model, however, the cells are always square in shape. HPC’s Sub-Grid Sampling (SGS) feature significantly reduces the negative side effects of using a fixed grid of cells.</p>
+<p>Two dimensional (2D) models allow water to move in two lateral dimensions. A 2D model is discretised into cells that have a defined geographic area, and faces which connect one cell to the next. Cells are typically triangular (3 sided) or quadrilateral (4 sided) and are well suited to modelling surface water such as flows in rivers/creeks, floodplain inundation, urban surface water, and estuarine and coastal waters.</p>
+<p>In the 2D modelling framework water volumes are associated with 2D cells, and velocities are calculated at cell faces. Velocities are depth averaged. Cells have known storage geometries, from which water elevation can be calculated from water volume. Faces have known cross-sections (bed elevation and bed friction data discretised across the face), from which flow area and conveyance can be calculated from water levels.</p>
+<p>TUFLOW Classic and HPC are 2D solution schemes, and their models bare schematised using a grid of square cells. They are not compatible with a flexible mesh design that constructs a network of irregular shaped cells. Classic and HPC do allow different 2D cell sizes to be incorporated within a single model, however, the cells are always square. HPC’s Sub-Grid Sampling (SGS) feature significantly reduces the negative side effects of using a fixed grid of cells.</p>
 <p><strong>Strengths</strong></p>
 <ul>
 <li><p>2D models are generally much easier to construct than 1D models. Usually high quality digital elevation data are available for the study area, and once the 2D grid extent is defined the process of deriving the cell storage data and face conveyance data is fully automated.</p></li>
@@ -844,7 +843,7 @@ forwards or backwards along a defined path. The path can be a river or drainage 
 </ul>
 <p><strong>Limitations</strong></p>
 <ul>
-<li><p>Accurate computation of flow along a primary flow path requires resolution of the cross-section within the grid. For schemes that utilise a uniform grid, this requirement can cause the entire model to have a large cell count and associated computational burden.</p></li>
+<li><p>Accurate computation of flow along a primary flow path requires resolution of cross-sections within the grid. For schemes that utilise a uniform grid, this requirement can cause the entire model to have a large cell count and an associated computational burden.</p></li>
 <li><p>Sub-cell energy losses caused by obstructions (e.g. bridge piers), flow expansion (e.g. downstream of a vena-contracta), or in the third (vertical) dimension must be manually accounted for with loss factors or models specified by the user.</p></li>
 <li><p>Face velocities are depth averaged. The model is unable to represent variations in velocity (or other properties) with depth.</p></li>
 </ul>
@@ -853,8 +852,8 @@ forwards or backwards along a defined path. The path can be a river or drainage 
 <h4><span class="header-section-number">3.2.2.3</span> Three Dimensional (3D)<a href="Fundamentals-1.html#three-dimensional-3d" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Three dimensional (3D) models calculate the water motion in all three spatial dimensions. Computational Fluid Dynamics (CFD) is often used for 3D modelling of flow through complex geometries. CFD software can be extremely computationally intensive, typically solving the full unsteady non-hydrostatic Reynolds-averaged Navier-Stokes equations that describe the flow physics.</p>
 <p>Alternatively, the accelerations in vertical dimension can be assumed to be negligible compared to the horizontal dimensions, also known as the hydrostatic assumption. Making this assumption enables a pancake style 3D mesh to be used (i.e. high aspect ratio cells) with a split-operator solution method. This 3D approach significantly improves solution speed compared to traditional CFD. TUFLOW FV is an example of such a 3D model.</p>
-<p>Similar to 2D, 3D models also use a network of cells and faces, with cells usually irregularly shaped (triangles and quadrilaterals). Volume and velocity data are also associated with cells, with complex numerical schemes available for interpolation between cell and face data. 3D models make the fewest assumptions about the water flow, and are therefore suited to situations where there is significant variation of water velocity (or other properties such as temperature and salinity) in all three dimensions. This is particularly relevant for estuarine and ocean environments where density differences in the horizontal plane can affect the flow behaviour.</p>
-<p>TUFLOW Classic and HPC are not available in a 3D form. TUFLOW FV does support 3D, accessed via the 3D module.</p>
+<p>Similar to 2D, 3D models also use a network of cells and faces. Volume and velocity data are also associated with cells, with complex numerical schemes available for interpolation between cell and face data. 3D models make the fewest assumptions about water flow, and are therefore suited to situations where there is significant variation of water velocity (or other properties such as temperature and salinity) in all three dimensions. This is particularly relevant for estuarine and ocean environments where density differences in the horizontal plane can affect the flow behaviour.</p>
+<p>TUFLOW Classic and HPC are not available in a 3D form. TUFLOW FV supports 3D simulation.</p>
 <p><strong>Strengths</strong></p>
 <ul>
 <li><p>Fewest assumptions or sub-models required from the user.</p></li>
@@ -862,17 +861,16 @@ forwards or backwards along a defined path. The path can be a river or drainage 
 </ul>
 <p><strong>Limitations</strong></p>
 <ul>
-<li><p>Computational solve time can become very long for 3D models.</p></li>
-<li><p>Not practical for catchment wide studies.</p></li>
+<li><p>Computational solve time can become long.</p></li>
+<li><p>Not always practical for catchment wide studies.</p></li>
 </ul>
 </div>
 </div>
 <div id="Coupled1D2D-3" class="section level3 hasAnchor" number="3.2.3">
 <h3><span class="header-section-number">3.2.3</span> Coupled 1D-2D<a href="Fundamentals-1.html#Coupled1D2D-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>It is commonplace for hydraulic modelling projects to adopt a schematisation that couples 1D and 2D within a single model. This section describes the most common coupled 1D and 2D model configurations.</p>
+<p>TUFLOW allows hydraulic modelling projects to adopt a schematisation that couples 1D and 2D within a single model, such that often:</p>
 <ul>
-<li>1D is typically used for cross-drainage structures (e.g. culverts under an embankment) and underground stormwater pipe networks. The 1D is coupled or dynamically linked to the 2D domain, which represents the surface flows. An example of this configuration is shown in Figure <a href="Fundamentals-1.html#fig:fig-1D2DLinkPipeNetworkExample">3.1</a>. TUFLOW Wiki Tutorial <a href="https://wiki.tuflow.com/Tutorial_M03">Module 3</a> and <a href="https://wiki.tuflow.com/Tutorial_M05">Module 5</a> provide working demonstrations of both configurations.</li>
-<li>1D is also used for open channel modelling where the 2D resolution is too coarse to represent the open channel shape. The 1D open channels are linked to a 2D domain covering the surface inundation of adjacent floodplain areas. An example of this configuration is shown in Figure <a href="Fundamentals-1.html#fig:fig-1D2DOpenChannelExample">3.2</a>. Refer to TUFLOW Wiki Tutorial <a href="https://wiki.tuflow.com/Tutorial_M11">Module 11</a> for a model demonstration.</li>
+<li>1D is used for cross-drainage structures (e.g. culverts under an embankment) and underground stormwater pipe networks. The 1D is coupled or dynamically linked to the 2D domain, which represents the surface flows. An example of this configuration is shown in Figure <a href="Fundamentals-1.html#fig:fig-1D2DLinkPipeNetworkExample">3.1</a>. TUFLOW Wiki Tutorial <a href="https://wiki.tuflow.com/Tutorial_M03">Module 3</a> and <a href="https://wiki.tuflow.com/Tutorial_M05">Module 5</a> provide working demonstrations of both configurations.</li>
 </ul>
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-1D2DLinkPipeNetworkExample"></span>
@@ -882,6 +880,9 @@ Figure 3.1: 1D Pipe Network and Embankment Culvert Linked to 2D
 </p>
 </div>
 </center>
+<ul>
+<li>1D is used for open channel modelling where the 2D resolution is too coarse to represent the open channel shape. The 1D open channels are linked to a 2D domain covering the surface inundation of adjacent floodplain areas. An example of this configuration is shown in Figure <a href="Fundamentals-1.html#fig:fig-1D2DOpenChannelExample">3.2</a>. Refer to TUFLOW Wiki Tutorial <a href="https://wiki.tuflow.com/Tutorial_M11">Module 11</a> for a model demonstration.</li>
+</ul>
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-1D2DOpenChannelExample"></span>
 <img src="images/1D2DOpenChannelExample.png" alt="1D Open Channel Linked to 2D" width="70%" />
@@ -890,20 +891,18 @@ Figure 3.2: 1D Open Channel Linked to 2D
 </p>
 </div>
 </center>
-<p>The above mentioned 1D open channel / 2D floodplain model configuration (shown in Figure <a href="Fundamentals-1.html#fig:fig-1D2DOpenChannelExample">3.2</a>) was a popular option, however, with the advent of faster computers, GPU acceleration and Sub-Grid Sampling (SGS), open channels are increasingly represented in the 2D domain. The key drivers for this are:</p>
+<p>Despite the above, the advent of faster computers, GPU acceleration and Sub-Grid Sampling (SGS) has seen open channels increasingly represented in the 2D domain in TUFLOW models. The key drivers for this are:</p>
 <ul>
 <li>Computing power increases, combined with TUFLOW HPC’s GPU acceleration, have enabled models built today to be over 100 times larger than pre 2018 models (in terms of cell count). The increased computing power means modellers can model at a finer resolution and over larger areas with no simulation time penalties.<br />
 </li>
 <li>The development of HPC’s 2D Sub-Grid Sampling (see Section <a href="Fundamentals-1.html#SubGridSamplingSGS-3">3.3.3</a>), which creates more accurate storage curves for cells and flux area curves for faces, has vastly improved the ability of a 2D model to reasonably predict the hydraulic conveyance of surface channels. SGS is built into all of the TUFLOW Tutorials.</li>
 <li>The development of HPC’s 2D quadtree grid refinement permits use of finer resolution 2D cells in discrete regions (see Section <a href="Fundamentals-1.html#FixedGridorQuadtreeGrid-3">3.2.4</a>), such as within the open channel areas.</li>
 </ul>
-<p>The model build effort associated with the 2D open channel model design (i.e. avoiding the 1D open channel representation) is significantly less. As an added benefit, the 2D approach avoids the accuracy limitations of 1D associated with inertial effects, specifically its inability to reproduce super elevation at river bends.</p>
-<p>For a detailed description how to implement 1D-2D linking, please refer to Section <a href="DomainLinking-1.html#DomainLinking-1">10</a>.</p>
+<p>Section <a href="DomainLinking-1.html#DomainLinking-1">10</a> provides a detailed description of how to implement 1D-2D linking and exploit the above within the TUFLOW suite of products.</p>
 </div>
 <div id="FixedGridorQuadtreeGrid-3" class="section level3 hasAnchor" number="3.2.4">
-<h3><span class="header-section-number">3.2.4</span> Fixed Grid or Quadtree Grid<a href="Fundamentals-1.html#FixedGridorQuadtreeGrid-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>By default TUFLOW Classic and HPC use a single 2D cell resolution over an entire model domain. This type of configuration is referred to as a fixed grid configuration.</p>
-<p>TUFLOW HPC models can use multiple resolution 2D cells within a single model as a quadtree grid or mesh (the Quadtree Module is needed). This feature enables a modeller to apply regions of targeted grid refinement where either the hydraulic features or possibly project objectives require higher resolution. The Quadtree grid refinement feature supports the recursive division of square TUFLOW cells into four smaller square cells. Up to nine levels of cell size refinement are permitted. All cells in all levels of refinement share a common orientation and the hydraulic computations are a full 2D solution across the entire quadtree grid.</p>
+<h3><span class="header-section-number">3.2.4</span> Quadtree Grid<a href="Fundamentals-1.html#FixedGridorQuadtreeGrid-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>By default TUFLOW Classic and HPC use a single 2D cell resolution over an entire model domain. This type of configuration is referred to as a fixed grid configuration. To support 2D modelling at a range of spatial resolutions (which is often a project requirement), TUFLOW HPC models can use a quadtree grid or mesh. The quadtree grid refinement feature supports the recursive division of square TUFLOW cells into four smaller square cells. Up to nine levels of cell size refinement are permitted. All cells in all levels of refinement share a common orientation and the hydraulic computations are a full 2D solution across the entire quadtree grid.</p>
 <p>An example quadtree grid is presented in Figure <a href="Fundamentals-1.html#fig:fig-QuadtreeExample">3.3</a> and detailed documentation is provided in Sections <a href="TwoD-Domains-1.html#Quadtree-3">7.4.1</a> and <a href="DomainLinking-1.html#TwoD2DLinkingQDT-3">10.7.1</a>. TUFLOW Wiki Tutorial <a href="https://wiki.tuflow.com/Tutorial_M07">Module 7</a> provides a demonstration of this model configuration feature.</p>
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-QuadtreeExample"></span>
@@ -913,10 +912,6 @@ Figure 3.3: <strong>TUFLOW HPC Quadtree Grid (3 Level Refinement)</strong>
 </p>
 </div>
 </center>
-</div>
-<div id="Boundaries-3" class="section level3 hasAnchor" number="3.2.5">
-<h3><span class="header-section-number">3.2.5</span> Boundaries<a href="Fundamentals-1.html#Boundaries-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Boundary conditions specify how water can enter or leave a domain. Section <a href="Boundaries-InitialConditions-1.html#BCArrangements-2">8.2</a> provides a detailed discussion of recommended boundary condition treatment.</p>
 </div>
 </div>
 <div id="ModelResolutionDiscretisation-2" class="section level2 hasAnchor" number="3.3">
@@ -989,7 +984,7 @@ Very Low
 <p>Resolution may vary from these recommendations if:</p>
 <ol style="list-style-type: decimal">
 <li>1D is used for primary flow path definition and 2D only for floodplains: 2D cell size can increase.</li>
-<li>Using HPC’s SGS feature (refer Section <a href="TwoD-Domains-1.html#SGS-3">7.4.3</a>): 2D cell size can increase.</li>
+<li>Using HPC’s SGS feature (refer Sections <a href="Fundamentals-1.html#SubGridSamplingSGS-3">3.3.3</a> and <a href="TwoD-Domains-1.html#SGS-3">7.4.3</a>): 2D cell size can increase.</li>
 <li>Using HPC’s Quadtree feature: 2D cell size can increase outside areas of interest.<br />
 </li>
 <li>Small cells are contained within deep water flow paths. These settings will slow down models considerably and should be avoided through use of SGS.</li>
@@ -998,7 +993,7 @@ Very Low
 </div>
 <div id="SubGridSamplingSGS-3" class="section level3 hasAnchor" number="3.3.3">
 <h3><span class="header-section-number">3.3.3</span> Sub-Grid Sampling (SGS)<a href="Fundamentals-1.html#SubGridSamplingSGS-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Without SGS, TUFLOW samples an underlying DTM only at cell centres and faces when assigning bathymetry to a computational grid. Cells and faces are then effectively flat-bottomed storage boxes and conveyance channels, respectively. This approach therefore discards any higher spatial resolution DTM data. As an example, Figure <a href="Fundamentals-1.html#fig:fig-SGSExampleGridTop">3.4</a> presents a 20m hydraulic model grid, overlaying a 1m DTM. In this case only 2 to 3 grid cells span the river channel, and fewer in some of the floodplain channels and road embankment. As such, the sub-grid (sub-cell) scale topography available in the DTM is underutilised and a poor representation of bathymetry is likely. Traditional solutions to this problem would typically have involved specifying smaller cell sizes, at considerable computational penalty.</p>
+<p>Without SGS, TUFLOW samples an underlying DTM only at cell centres and faces when assigning bathymetry to a computational grid. Cells and faces are then effectively flat-bottomed storage boxes and conveyance channels, respectively. This approach therefore discards any higher spatial resolution DTM data that may have been available. As an example, Figure <a href="Fundamentals-1.html#fig:fig-SGSExampleGridTop">3.4</a> presents a 20m hydraulic model grid, overlaying a 1m DTM. In this case only 2 to 3 grid cells span the river channel, and fewer in some of the floodplain channels and road embankments. As such, the sub-grid (sub-cell) scale topography available in the DTM is underutilised and a poor representation of bathymetry is likely. Traditional solutions to this problem would typically have involved specifying smaller cell sizes, at considerable computational penalty.</p>
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SGSExampleGridTop"></span>
 <img src="images/SGS_Example_Grid_Top.jpg" alt="**20m grid size shown against the 1m DTM**" width="90%" />
@@ -1007,8 +1002,7 @@ Figure 3.4: <strong>20m grid size shown against the 1m DTM</strong>
 </p>
 </div>
 </center>
-<p>With Sub-Grid Sampling (SGS), rather than using a single elevation value for the grid cell storage calculations, SGS topography sampling extracts sub-grid data from the underlying DEM to develop a non-linear relationship between the water surface elevation and the cell’s volume to describe the cell’s storage capacity with height. SGS also generates a non-linear relationship between the water surface elevation and the cell face area and cell width (or wetted perimeter) to improve the representation of the fluxes across the cell faces as flow is conveyed throughout the model domain.</p>
-<p>The SGS approach still computes a single water level for each cell, but the computations to determine the cell volume and cell face fluxes utilise the higher resolution terrain data. The result is that despite the hydraulic model grid resolution being coarser than the DTM, the full array of information from the DTM is being utilised within the 2D hydraulic modelling, improving the representation of the underlying topography and accuracy of simulated results. The conceptual difference between traditional and SGS topography sampling approaches is presented in Figure <a href="Fundamentals-1.html#fig:fig-2DTraditionalvsSGSExample">3.5</a>.</p>
+<p>Rather than using a single elevation value for the grid cell storage calculations, Sub-Grid Sampling (SGS) topography sampling extracts sub-grid data from an underlying DTM to develop a non-linear relationship between water surface elevation and cell volume (i.e. storage capacity). SGS also generates a non-linear relationship between water surface elevation and cell face area and width (i.e. wetted perimeter) to improve the representation of fluxes and conveyance across cell faces. As such, whilst the SGS approach still computes a single water level for each cell, higher resolution terrain data than the grid cell size is utilised within the 2D hydraulic modelling, which improves simulated results. The conceptual difference between traditional and SGS topography sampling approaches is presented in Figure <a href="Fundamentals-1.html#fig:fig-2DTraditionalvsSGSExample">3.5</a>.</p>
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-2DTraditionalvsSGSExample"></span>
 <img src="images/2DTraditionalvsSGSExample.png" alt="**2D Topography Sampling Concept and DEM Interpretation (Traditional vs SGS)**" width="100%" />
@@ -1017,15 +1011,13 @@ Figure 3.5: <strong>2D Topography Sampling Concept and DEM Interpretation (Tradi
 </p>
 </div>
 </center>
-<p>By utilising the underlying sub-grid scale topography, the storage and conveyance of the model is more accurately represented. Cell Size Result Convergence, discussed in the following section, can typically be achieved using a larger cell size when using SGS, compared to when not using SGS. Using a model schematisation that enables use of a larger cell size is highly desirable if faster simulation times are benficial.</p>
-<p>SGS is a feature of TUFLOW HPC - it is not available in TUFLOW Classic. If using TUFLOW HPC, SGS is recommended when the available DEM data is finer than the model resolution. SGS is discussed further in Section <a href="TwoD-Domains-1.html#SGS-3">7.4.3</a>.</p>
+<p>SGS is a feature of TUFLOW HPC - it is not available in TUFLOW Classic. If using TUFLOW HPC, SGS is recommended when the available DTM data is finer than the model resolution. SGS is discussed further in Section <a href="TwoD-Domains-1.html#SGS-3">7.4.3</a>.</p>
 <div id="SGS-benefits-4" class="section level4 hasAnchor" number="3.3.3.1">
 <h4><span class="header-section-number">3.3.3.1</span> Benefits of SGS<a href="Fundamentals-1.html#SGS-benefits-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <!-- PAR to EFC: think we should move benefits to Ch 3 (inc links to benchmark docs), have some benchmarking comments then to ch3.
 EFC to do this benchmarking section, ask CDH if it should be here or ch 3-->
 <!-- EFC: chris agreed to move here and I have done so-->
-<p>Benchmarking has shown the benefits to be substantial and to be a game
-changer for the following situations.</p>
+<p>Benchmarking has shown the benefits to be substantial for at least the following situations:</p>
 <ul>
 <li>Catchment scale models flow much more effectively with water not being
 “trapped” by a coarse cell resolution, and, importantly, excellent
@@ -1048,7 +1040,7 @@ Figure 3.6: Model Convergence with and without SGS
 </p>
 </div>
 <ul>
-<li>The sensitivity of results to mesh size is greatly reduced and the sensitivity to mesh orientation is almost eliminated. With SGS a 2D regular mesh model can be rotated or have a change in cell size with impacting the accuracy of the results compared with much greater and sometimes unacceptable changes in results for the traditional elevation per cell approach <span class="citation">(<a href="#ref-Kitts2020">Kitts et al., 2020</a>)</span>.</li>
+<li>The sensitivity of results to mesh size is greatly reduced and the sensitivity to mesh orientation is almost eliminated. With SGS a 2D regular mesh model can be rotated or have a change in cell size without impacting the accuracy of the results compared with much greater and sometimes unacceptable changes in results for the traditional elevation per cell approach <span class="citation">(<a href="#ref-Kitts2020">Kitts et al., 2020</a>)</span>.</li>
 <li>Disturbed flow fields that can be apparent along a “saw-tooth” regular
 grid wet-dry boundary completely disappear, with no spurious
 additional head losses generated and the results consistent with a
@@ -1079,6 +1071,12 @@ Figure 3.7: Longitudinal Profile without SGS
 Figure 3.8: Longitudinal Profile with SGS
 </p>
 </div>
+<p>In summary, utilising SGS means:</p>
+<ul>
+<li>The storage and conveyance of the model is more accurately represented.</li>
+<li>Cell Size Result Convergence, discussed in the following section, can typically be achieved using a larger cell size when using SGS, compared to when not using SGS.</li>
+<li>Faster simulation times.</li>
+</ul>
 </div>
 </div>
 <div id="CellSizeResultsConvergence-3" class="section level3 hasAnchor" number="3.3.4">
@@ -1150,16 +1148,12 @@ results to diverge with decreasing cell size once the cell face width becomes le
 <p>The following sections discuss various forms of the Shallow Water Equations. Of these, TUFLOW adopts the full dynamic wave form in its 1D and 2D solutions. The full dynamic wave solution is the most accurate option compared to the other mentioned alternative solution schemes.</p>
 <div id="FluidFlowPhysicalTerms-3" class="section level3 hasAnchor" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Fluid Flow Physical Terms<a href="Fundamentals-1.html#FluidFlowPhysicalTerms-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The laws of physics are relatively simple. Conserve mass-energy, linear and angular momentum, and electric charge.
-As the velocities involved in flood modelling are well less than the speed of light, conservation of
-mass-energy becomes just conservation of mass, and if we assume a uniform density of water, this becomes conservation
-of volume, or the ‘continuity equation’. This equation is relatively straight forward in both 1D and 2D forms, as shown
-in the subsections below. The momentum conservation equation, also shown in the subsections below, is more interesting.
-In a reference frame where the observer is travelling with the water (Lagrangian reference), the equations are written in
-terms of a total derivative <span class="math inline">\(Dh/Dt\)</span>, but for an observer that is fixed in space (Eulerian reference), the equations are written in terms of local partial derivatives. The total derivative becomes a local time derivative plus a local divergence term.</p>
+<p>The laws of physics are relatively simple. They are conserve (a) mass-energy, (b) linear and angular momentum, and (c) electric charge.</p>
+<p>As the velocities involved in hydraulic modelling are well less than the speed of light, conservation of mass-energy becomes just conservation of mass, and if we assume a uniform density of water, this becomes conservation of volume also referred to as the continuity or mass-balance equation. This equation is presented in 1D and 2D forms in the subsections below.</p>
+<p>The momentum conservation equation is more challenging. In a reference frame where the observer is travelling with the water (Lagrangian reference), the equations are written in terms of a total derivative <span class="math inline">\(Dh/Dt\)</span>, but for an observer that is fixed in space (Eulerian reference), the equations are written in terms of local partial derivatives. The total derivative becomes a local time derivative plus a local divergence (spatial) term as presented in the subsections below.</p>
 <div id="d-continuity-equation" class="section level4 hasAnchor" number="3.4.1.1">
 <h4><span class="header-section-number">3.4.1.1</span> 1D Continuity Equation<a href="Fundamentals-1.html#d-continuity-equation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>For water flow within a 1D channel the continuity equation is:</p>
+<p>For water flow within a 1D channel the continuity equation on a per unit length is:</p>
 <p><span class="math display" id="eq:equ-1DContinuity">\[\begin{equation}
 \begin{matrix}
 w \frac{\partial h}{\partial t}
@@ -1183,7 +1177,7 @@ w \frac{\partial h}{\partial t}
 </div>
 <div id="d-momentum-equation" class="section level4 hasAnchor" number="3.4.1.2">
 <h4><span class="header-section-number">3.4.1.2</span> 1D Momentum Equation<a href="Fundamentals-1.html#d-momentum-equation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>For water flow within a 1D channel the momentum equation, neglecting eddy viscosity, is:</p>
+<p>For water flow within a 1D channel the momentum equation is as follows, noting the eddy viscosity (diffusion of momentum or turbulence) term can not be included in the 1D form.</p>
 <p><span class="math display" id="eq:equ-1DMomentum">\[\begin{equation}
 \begin{matrix}
 \frac{\partial u}{\partial t}
@@ -1202,12 +1196,12 @@ w \frac{\partial h}{\partial t}
 <p>Where</p>
 <ul>
 <li><span class="math inline">\(z\)</span> is the channel bed elevation</li>
-<li><span class="math inline">\(n\)</span> is the Manning coefficient for bed friction (units time per cube-root(unit length))</li>
+<li><span class="math inline">\(n\)</span> is the Manning’s coefficient for bed friction (units time per cube-root(unit length))</li>
 <li><span class="math inline">\(R\)</span> is the hydraulic radius</li>
-<li><span class="math inline">\(S_u(x)\)</span> is the lineal momentum source term (force per unit volume per unit fluid density), used for local energy losses and atmospheric pressure gradient</li>
+<li><span class="math inline">\(g\)</span> is acceleration due to gravity</li>
+<li><span class="math inline">\(S_u(x)\)</span> is the lineal momentum source term (force per unit volume per unit fluid density), typically used for local energy losses unable to be represented by the 1D form</li>
 </ul>
-<p>Note the hydraulic radius <span class="math inline">\(R\)</span> is normally considered to be cross-sectional flow area divided by wetted perimeter, or <span class="math inline">\(A/p\)</span>.
-However, in some software it may be specified as ‘resistance radius’, which is just the water depth over the channel invert.</p>
+<p>Note the hydraulic radius <span class="math inline">\(R\)</span> is normally considered to be cross-sectional flow area divided by wetted perimeter, or <span class="math inline">\(A/P\)</span>. However, in some software it may be specified as ‘resistance radius’, which is just the water depth over the channel invert.</p>
 </div>
 <div id="d-continuity-equation-1" class="section level4 hasAnchor" number="3.4.1.3">
 <h4><span class="header-section-number">3.4.1.3</span> 2D Continuity Equation<a href="Fundamentals-1.html#d-continuity-equation-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1227,13 +1221,14 @@ However, in some software it may be specified as ‘resistance radius’, which 
 \end{equation}\]</span></p>
 <p>Where</p>
 <ul>
-<li><span class="math inline">\(u\)</span> andf <span class="math inline">\(v\)</span> are the velocity components in the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> spatial dimensions</li>
+<li><span class="math inline">\(h\)</span> is the water depth in the 2D cell</li>
+<li><span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are the velocity components in the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> spatial dimensions</li>
 <li><span class="math inline">\(S(x,y)\)</span> is the total area water source term (volume per unit time per unit area), usually rain and infiltration</li>
 </ul>
 </div>
 <div id="d-momentum-equation-1" class="section level4 hasAnchor" number="3.4.1.4">
 <h4><span class="header-section-number">3.4.1.4</span> 2D Momentum Equation<a href="Fundamentals-1.html#d-momentum-equation-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>For water flow over a 2D surface the momentum equations, including eddy viscosity but omitting coriolis acceleration, are:</p>
+<p>For water flow over a 2D surface the momentum equations, including eddy viscosity (diffusion of momentum or turbulence) but omitting coriolis acceleration, are:</p>
 <p><span class="math display" id="eq:equ-2DMomentum">\[\begin{equation}
 \begin{matrix}
 \frac{\partial (hu)}{\partial t}
@@ -1268,8 +1263,11 @@ However, in some software it may be specified as ‘resistance radius’, which 
 <h3><span class="header-section-number">3.4.2</span> Forms of the Equations<a href="Fundamentals-1.html#FormsoftheEquations-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Equations <a href="Fundamentals-1.html#eq:equ-1DContinuity">(3.1)</a> and <a href="Fundamentals-1.html#eq:equ-1DMomentum">(3.2)</a> are the 1D <strong>Dynamic</strong> Wave Equations,
 or Saint-Venant Equations. They represent a system of equations that is effectively second order in both space and time,
-and therefore admit travelling wave solutions (speed <span class="math inline">\(c=\sqrt{gh}\)</span>). Similarly <a href="Fundamentals-1.html#eq:equ-2DContinuity">(3.3)</a> and <a href="Fundamentals-1.html#eq:equ-2DMomentum">(3.4)</a> are the
-2D Dynamic Wave Equations.</p>
+and therefore admit travelling wave solutions (speed <span class="math inline">\(c=\sqrt{gh}\)</span>). Similarly Equations <a href="Fundamentals-1.html#eq:equ-2DContinuity">(3.3)</a> and <a href="Fundamentals-1.html#eq:equ-2DMomentum">(3.4)</a> are the
+2D Dynamic Wave Equations also known as the Shallow Water Equations (SWE).</p>
+<p>As described in the following subsections, the <strong>Dynamic</strong> form of the equations can be simplified to the <strong>Diffusive</strong> and <strong>Kinematic</strong> forms. However, given the available computing power today in personal computers, there is no need or defence for calculating diffusive wave or kinemative wave solutions except for very specific simplified situations. TUFLOW Classic and HPC are strictly dynamic wave solvers, in both 1D and 2D forms. Therefore, TUFLOW does not experience the inaccuracies and limitations associated with solving the diffusive wave or kinematic wave equations.</p>
+<div id="diffusive-wave-equation" class="section level4 hasAnchor" number="3.4.2.1">
+<h4><span class="header-section-number">3.4.2.1</span> Diffusive Wave Equation<a href="Fundamentals-1.html#diffusive-wave-equation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In the case of 1D, the two prognostic variables, depth <span class="math inline">\(h\)</span> and velocity <span class="math inline">\(u\)</span> co-evolve with time. However, in days past when
 computers were far less powerful, the <strong>Dynamic</strong> Wave Equation solution was computationally too much work to solve efficiently. At that time in history mathematicians looked to simplify the problem.
 The first step was to assume that the velocity field is a “slowing evolving steady state solution” (i.e.
@@ -1282,13 +1280,17 @@ evolved); it becomes a diagnostic field that is able to be computed from the dep
 <p>Equation <a href="Fundamentals-1.html#eq:equ-1DContinuity">(3.1)</a>, with the velocity field computed diagnostically from <a href="Fundamentals-1.html#eq:equ-1DSteadyStateU">(3.5)</a> is the
 1D <strong>Diffusive</strong> Wave Equation. The equation is second order in space but only first order in time, therefore it does not admit
 travelling wave solutions, but solutions that diffuse while they advect, hence the name.
-It requires less memory, less computational effort per timestep, and a larger timestep can be used to progress forward in time compared to the dynamic wave solution.
-In situations where the velocity field is gentle and slowly evolving, the solution is almost correct. Though the modeller
-cannot know in advance just how big the difference between the diffusive and dynamic wave solutions might be.
-Diffusive wave solutions are also not shock capturing, and do not accurately predict the location of hydraulic jumps.
+It requires less memory, less computational effort per timestep, and a larger timestep can be used to progress forward in time compared to the dynamic wave solution.</p>
+<p>In situations where the velocity field is gentle and slowly evolving, the <strong>Diffusive</strong> Wave solution is almost correct. However, as the modeller
+cannot know in advance just how large the difference between the diffusive and dynamic wave solutions might be, sensitivity testing by comparing results using the two forms is recommended, or the <strong>Diffusive</strong> form is simply not used.</p>
+<p>Diffusive wave solutions are also not shock capturing, and do not accurately predict the location of hydraulic jumps.
 In 2D the diffusive wave solution is even more incorrect. As the divergence of momentum in both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> is neglected, the
 solution cannot estimate super-elevation.</p>
-<p>From the diffusive wave equation solution, there are further simplifications that are possible and sometimes used by other software (not TUFLOW). For shallow flows over steeper ground it is possible to assume that <span class="math inline">\(\partial h / \partial x\)</span> &lt;&lt; <span class="math inline">\(\partial z / \partial x\)</span>, in which case the velocity field becomes a function of depth and channel bed slope, but not a function of <span class="math inline">\(\partial h / \partial x\)</span>. The equation then become first order in both space and time:</p>
+<p>For the reasons above, TUFLOW’s solvers do not offer a <strong>Diffusive</strong> Wave solution.</p>
+</div>
+<div id="kinematic-wave-equation" class="section level4 hasAnchor" number="3.4.2.2">
+<h4><span class="header-section-number">3.4.2.2</span> Kinematic Wave Equation<a href="Fundamentals-1.html#kinematic-wave-equation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>From the diffusive wave equation solution, there are further simplifications that are possible and sometimes used by other software. For shallow flows over steeper ground it is possible to assume that <span class="math inline">\(\partial h / \partial x\)</span> &lt;&lt; <span class="math inline">\(\partial z / \partial x\)</span>, in which case the velocity field becomes a function of depth and channel bed slope, but not a function of <span class="math inline">\(\partial h / \partial x\)</span>. The equation then becomes first order in both space and time:</p>
 <p><span class="math display" id="eq:equ-1DKinematic">\[\begin{equation}
 w \frac{\partial h}{\partial t}
 + \frac{\partial (A B R^\frac{2}{3})}{\partial x}
@@ -1298,17 +1300,18 @@ B = \frac{1}{n} {\left| \frac{\partial z}{\partial x} \right|}^\frac{1}{2} sgn \
 \end{equation}\]</span></p>
 <p>Equation <a href="Fundamentals-1.html#eq:equ-1DKinematic">(3.6)</a> is the 1D <strong>Kinematic</strong> Wave Equation. It is a non-linear advection equation. It is suitable for computing steady state flows (and slowly evolving steady state flows) in steep channels or over steep terrain (i.e. water surface slope is
 much the same as bed slope), but is not suitable for flows in low-lying channels/rivers.</p>
-<p>Given the available computing power today in personal computers, there is no need or defence for calculating diffusive wave or kinemative wave solutions except for very specific simplified situations. TUFLOW Classic and HPC are strictly dynamic wave solvers, in both 1D and 2D engines. TUFLOW does not suffer from the inaccuracies and limitations associated with diffusive wave or kinematic wave equation solutions.</p>
+<p>For the reasons above, TUFLOW’s solvers also do not offer a <strong>Kinematic</strong> Wave solution.</p>
+</div>
 </div>
 <div id="NumericalAccuracy-3" class="section level3 hasAnchor" number="3.4.3">
 <h3><span class="header-section-number">3.4.3</span> Numerical Accuracy<a href="Fundamentals-1.html#NumericalAccuracy-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>When computing the divergence and diffusion terms in a finite difference or finite volume scheme, it is necessary
-to calculate what the field values are at spatial locations that are in-between the locations where the field data is defined. For
-exampled, depth data is considered a node or cell property, and is therefore nominally defined at a node (1D) or cell centre (2D). When calculating
-the flow through a cross-section (1D) or a face (2D), the depth of water must be estimated at the cross-section (or face) which is located
+to calculate the field values at spatial locations that are in-between the locations where the field data are defined. For
+example, depth data is considered a node or cell property, and is therefore nominally defined at a node (1D) or cell centre (2D). When calculating
+the flow through a cross-section (1D) or a face (2D), the depth of water must be estimated at the cross-section (or face), which is located
 in-between the nodes (or cells). This process is not straight forward, the methods for which broadly fall into three categories:</p>
 <ul>
-<li>Zeroth order interpolation: The field value used at the cross-section or a face is a constant fixed value. This means that the error
+<li><strong>Zeroth order</strong> interpolation: The field value used at the cross-section or a face is a constant fixed value. This means that the error
 between the field value used and the “real” solution is constant regardless of cell size - it is a function of cell size to the
 power of zero, hence the term “zeroth order”. This method is generally not used for obvious reasons.
 <center>
@@ -1319,11 +1322,11 @@ Figure 3.10: <strong>Example of zeroth order interpolation</strong>
 </p>
 </div>
 </center></li>
-<li>First order interpolation: The field value used at the cross-section or a face is usually that of the upwind node (cell), but in rare cases can
-be that of the downwind node. This means that the error between the field value used and the real solution is proportional to cell size - it is a
-function of cell size to the power of one, hence the term “first order”. This method is computationally simple and is very stable, but has the
-tendency to cause any sudden changes (high spatial gradients) in solution to smear out with model evolution - the same effect as if the model had
-high diffusion applied to it. The method introduces artefact diffusion that isn’t real. In the case of 2D and 3D modelling, any swirls or eddies in
+<li>First order interpolation: The field value used at the cross-section or a face is usually that of the upwind (upstream) node or cell, but in rare cases can
+be that of the downwind (downstream) node/cell. This means that the error between the field value used and the real solution is proportional to the 1D element length or 2D cell size - it is a
+function of element length or cell size to the power of one, hence the term “first order”. This method is computationally simple and is very stable, but has the
+tendency to cause any sudden changes (high spatial gradients) in solution to diffuse (smooth out) over time - the same effect as if the model had
+a high diffusion rate applied. Therefore, the method introduces an artefact diffusion that isn’t real. In the case of 2D and 3D modelling, any swirls or eddies in
 the velocity field tend to decay (or simply do not form in the first place).
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-InterpolationFirstOrder"></span>
@@ -1333,8 +1336,8 @@ Figure 3.11: <strong>Example of first order interpolation</strong>
 </p>
 </div>
 </center></li>
-<li>Second order interpolation: The field value used at the cross-section or a face is usually linearly interpolated between the upwind node (cell)
-and the downwind one. This means that the error between the field value used and the real solution is proportional to cell size squared - it is a
+<li>Second order interpolation: The field value used at the cross-section or a face is usually linearly interpolated between the upwind node/cell
+and the downwind one. This means that the error between the field value used and the real solution is proportional to element length or cell size squared - it is a
 function of cell size to the power of two, hence the term “second order”. Pure linear interpolation on its own is known to be unstable - the solution
 tends to develop oscillations in locations with high gradients. To prevent these, it is common to blend between first and second order interpolation
 depending on the spatial gradients relative to the grid/mesh size - this is known as rate limiting, or a Total Variation Diminishing (TVD) method.
@@ -1350,7 +1353,7 @@ Figure 3.12: <strong>Example of second order interpolation</strong>
 </center></li>
 </ul>
 <p>TUFLOW Classic uses second order interpolation, and TUFLOW HPC defaults to second order interpolation, but does offer the user the choice to switch to
-first order (see <a href="tcfSolutionScheme">Solution Scheme</a>). However, we do not recommend this. Second order interpolation is
+first order (see <a href="tcfSolutionScheme">Solution Scheme</a>). However, for the reasons above using a first order interpolation solution is not recommend. Second order interpolation is
 significantly more accurate than first order, and this shows in cell-size sensitivity testing. The TVD scheme implemented in TUFLOW HPC is very stable,
 and the user should not need to change to first order interpolation in order to stabilise a model.</p>
 </div>
