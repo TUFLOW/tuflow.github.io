@@ -780,7 +780,6 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="Fundamentals-1" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Section 3</span> Hydraulic Modelling Fundamentals<a href="Fundamentals-1.html#Fundamentals-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><mark><strong>NOTE: This Chapter is currently under review.</strong> </mark></p>
 <div id="Fundaments-Introduction-2" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Introduction<a href="Fundamentals-1.html#Fundaments-Introduction-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This chapter of the Manual discusses key considerations that should be
@@ -833,7 +832,7 @@ forwards or backwards along a defined path. The path can be a river or drainage 
 </div>
 <div id="two-dimensional-2d" class="section level4 hasAnchor" number="3.2.2.2">
 <h4><span class="header-section-number">3.2.2.2</span> Two Dimensional (2D)<a href="Fundamentals-1.html#two-dimensional-2d" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Two dimensional (2D) models allow water to move in two lateral dimensions. A 2D model is discretised into cells that have a defined geographic area, and faces which connect one cell to the next. Cells are typically triangular (3 sided) or quadrilateral (4 sided) and are well suited to modelling surface water such as flows in rivers/creeks, floodplain inundation, urban surface water, and estuarine and coastal waters.</p>
+<p>Two dimensional (2D) models allow water to move in two lateral dimensions. A 2D model is discretised into cells that have a defined geographic area, and faces which connect one cell to the next. Cells are typically triangular (three sided) or quadrilateral (four sided) and are well suited to modelling surface water such as flows in rivers/creeks, floodplain inundation, urban surface water, and estuarine and coastal waters.</p>
 <p>In the 2D modelling framework water volumes are associated with 2D cells, and velocities are calculated at cell faces. Velocities are depth averaged. Cells have known storage geometries, from which water elevation can be calculated from water volume. Faces have known cross-sections (bed elevation and bed friction data discretised across the face), from which flow area and conveyance can be calculated from water levels.</p>
 <p>TUFLOW Classic and HPC are 2D solution schemes, and their models bare schematised using a grid of square cells. They are not compatible with a flexible mesh design that constructs a network of irregular shaped cells. Classic and HPC do allow different 2D cell sizes to be incorporated within a single model, however, the cells are always square. HPC’s Sub-Grid Sampling (SGS) feature significantly reduces the negative side effects of using a fixed grid of cells.</p>
 <p><strong>Strengths</strong></p>
@@ -1081,8 +1080,8 @@ Figure 3.8: Longitudinal Profile with SGS
 </div>
 <div id="CellSizeResultsConvergence-3" class="section level3 hasAnchor" number="3.3.4">
 <h3><span class="header-section-number">3.3.4</span> Cell Size Results Convergence<a href="Fundamentals-1.html#CellSizeResultsConvergence-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Solution convergence to cell size refers to the tendency for model simulation results to trend towards a common answer as cell size decreases. This behaviour occurs due to the discretisation of topographic features at a finer and finer resolution should trend towards a closer and closer reproduction of reality. Conversely, by using a too coarse cell size, the results can become affected by the inaccuracies introduced by trying to emulate reality with a poor (i.e. coarse) representation of the topography.</p>
-<p>The practical test required to complete cell size convergence testing is simple. The test involves reducing a model’s cell resolution and comparing the results. The process aims to identify the largest cell size possible to achieve a consistent simulation result (i.e. a simulation result that does not introduce inaccuracies caused by using an excessively large cell size). Identifying this optimum cell size will avoid the situation where an unnecessarily small cell size is chosen, which subsequently translates to longer than necessary simulation times with no significant improvement in simulation result. Figure <a href="Fundamentals-1.html#fig:fig-2DCellSizeConvergenceTestExample">3.9</a> demonstrates this concept. The 40m cell resolution model produces a result at the reporting location that is consistent with the finer cell sizes, whereas for larger cell sizes (60m and higher) the results are not consistent demonstrating they are too coarse to accurately reproduce the hydraulics. As the 40m resolution simulation time is significantly less than smaller cell sizes, it represents the optimum cell size value to achieve reliable results in the shortest run time.</p>
+<p>Solution convergence to cell size refers to the tendency for model simulation results to trend towards a common answer as cell size decreases. This behaviour occurs due to the discretisation of topographic features at a finer and finer resolution and should trend towards a closer and closer reproduction of reality. Conversely, by using too coarse a cell size, the results can become affected by the inaccuracies introduced by trying to emulate reality with a poor (i.e. coarse) representation of the topography.</p>
+<p>The practical test required to complete cell size convergence involves progressively reducing a model’s cell resolution and comparing the results. The process aims to identify the largest cell size possible to achieve a consistent simulation result (i.e. a simulation result that does not introduce inaccuracies caused by using an excessively large cell size). Identifying this optimum cell size will avoid the situation where an unnecessarily small cell size is chosen, which subsequently translates to longer than necessary simulation times with no significant improvement in simulation result. Figure <a href="Fundamentals-1.html#fig:fig-2DCellSizeConvergenceTestExample">3.9</a> demonstrates this concept. The 40m cell resolution model produces a result at the reporting location that is consistent with the finer cell sizes, whereas for larger cell sizes (60m and higher) the results are not consistent demonstrating they are too coarse to accurately reproduce the hydraulics. As the 40m resolution simulation time is significantly less than smaller cell sizes, it represents the optimum cell size value to achieve reliable results in the shortest run time.</p>
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-2DCellSizeConvergenceTestExample"></span>
 <img src="images/2DCellSizeConvergenceTestExample.png" alt="**Cell Size Convergence Concept Example **" width="100%" />
@@ -1091,14 +1090,14 @@ Figure 3.9: <strong>Cell Size Convergence Concept Example </strong>
 </p>
 </div>
 </center>
-<p>The decision as to whether or not the model results are “converged” is somewhat subjective and will depend on the purpose of the modelling and specifically what the “essential results”
+<p>The decision as to whether or not the model results are “converged” is subjective and will depend on the purpose of the modelling and specifically what the “essential results”
 are. For some studies they may be water surface elevation in a region of
 interest (e.g. a town), and for another study the essential result may
 be the peak flow at a particular location. The exact approach
 taken to establish cell size convergence is up to the user, but we present
 a selection of methods below that may be useful. Whether one of the
 following methods are used, or another method, it is important to
-document the testing and if necessary engage stakeholders in the
+document all testing and if necessary engage stakeholders in the
 decision-making making process.</p>
 <ul>
 <li>Comparing flood extent. This simple approach may be performed by
@@ -1132,8 +1131,8 @@ must be within +/- &lt;some tolerance&gt; of the results from the finest
 feasible cell size. The user determines the largest cell size that
 satisfies the criterion, and deems that as sufficiently converged.</li>
 </ul>
-<p>It is worth noting that Sub-Grid Sampling (SGS - see Section <a href="Fundamentals-1.html#SubGridSamplingSGS-3">3.3.3</a>)
-has a very significant and beneficial impact on cell size convergence. In many
+<p>SGS (see Section <a href="Fundamentals-1.html#SubGridSamplingSGS-3">3.3.3</a>)
+has a significant beneficial impact on cell size convergence. In many
 situations, a model using SGS may meet the required convergence criteria
 with a cell size that is much larger than when SGS is not used <span class="citation">(<a href="#ref-Huxley2022">Huxley et al., 2022</a>)</span>.</p>
 <p>Finally, the cell size convergence testing maybe affected by the viscosity formulation (Section <a href="TwoD-Domains-1.html#turbulence-overview">7.2.4</a>). In particular, the Smagorinsky viscosity formulation can
@@ -1143,17 +1142,18 @@ results to diverge with decreasing cell size once the cell face width becomes le
 </div>
 <div id="SolutionAccuracy-2" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Solution Accuracy<a href="Fundamentals-1.html#SolutionAccuracy-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Solving the shallow water equations in one or two dimensions is an approximate solution and therefore there are numerous solutions and different assumptions in use. The most intuitive solutions are often not the most computationally efficient, and those that are efficient often take shortcuts that ignore key components of the physics. Early computers heralded a new dawn for engineering, but to be useful required software developers to use clever, but sometimes compromised, solution methods.</p>
-<p>The mathematics and computational science that underpin numerical solutions of fluid flow are still an evolving field, but importantly, their limitations are not always considered or understood by the modeller. First and foremost solutions should be evaluated against known analytical solutions and physical tests - lots of physical tests spanning the range of physics that the solution aims to reproduce.</p>
-<p>The following sections discuss various forms of the Shallow Water Equations. Of these, TUFLOW adopts the full dynamic wave form in its 1D and 2D solutions. The full dynamic wave solution is the most accurate option compared to the other mentioned alternative solution schemes.</p>
+<p>Solving the shallow water equations in one or two dimensions is necessarily an approximation and therefore there are numerous solutions and different assumptions to be made. The following sections discuss various forms of the shallow water equations. Of these, TUFLOW adopts the full dynamic wave form in its 1D and 2D solutions. The full dynamic wave solution is the most accurate option compared to the other mentioned alternative solution schemes.</p>
 <div id="FluidFlowPhysicalTerms-3" class="section level3 hasAnchor" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Fluid Flow Physical Terms<a href="Fundamentals-1.html#FluidFlowPhysicalTerms-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The laws of physics are relatively simple. They are conserve (a) mass-energy, (b) linear and angular momentum, and (c) electric charge.</p>
-<p>As the velocities involved in hydraulic modelling are well less than the speed of light, conservation of mass-energy becomes just conservation of mass, and if we assume a uniform density of water, this becomes conservation of volume also referred to as the continuity or mass-balance equation. This equation is presented in 1D and 2D forms in the subsections below.</p>
-<p>The momentum conservation equation is more challenging. In a reference frame where the observer is travelling with the water (Lagrangian reference), the equations are written in terms of a total derivative <span class="math inline">\(Dh/Dt\)</span>, but for an observer that is fixed in space (Eulerian reference), the equations are written in terms of local partial derivatives. The total derivative becomes a local time derivative plus a local divergence (spatial) term as presented in the subsections below.</p>
+<p>The equations solved by TUFLOW are:</p>
+<ul>
+<li>Conservation of mass (also known as the continuity equation)</li>
+<li>Conservation of momentum</li>
+</ul>
+<p>These equations are presented and discussed in 1D and 2D forms in the subsections below.</p>
 <div id="d-continuity-equation" class="section level4 hasAnchor" number="3.4.1.1">
 <h4><span class="header-section-number">3.4.1.1</span> 1D Continuity Equation<a href="Fundamentals-1.html#d-continuity-equation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>For water flow within a 1D channel the continuity equation on a per unit length is:</p>
+<p>For water flow within a 1D channel the continuity equation per unit length is:</p>
 <p><span class="math display" id="eq:equ-1DContinuity">\[\begin{equation}
 \begin{matrix}
 w \frac{\partial h}{\partial t}
@@ -1222,13 +1222,13 @@ w \frac{\partial h}{\partial t}
 <p>Where</p>
 <ul>
 <li><span class="math inline">\(h\)</span> is the water depth in the 2D cell</li>
-<li><span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are the velocity components in the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> spatial dimensions</li>
+<li><span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are the velocity components in the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> spatial dimensions, respectively</li>
 <li><span class="math inline">\(S(x,y)\)</span> is the total area water source term (volume per unit time per unit area), usually rain and infiltration</li>
 </ul>
 </div>
 <div id="d-momentum-equation-1" class="section level4 hasAnchor" number="3.4.1.4">
 <h4><span class="header-section-number">3.4.1.4</span> 2D Momentum Equation<a href="Fundamentals-1.html#d-momentum-equation-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>For water flow over a 2D surface the momentum equations, including eddy viscosity (diffusion of momentum or turbulence) but omitting coriolis acceleration, are:</p>
+<p>For water flow over a 2D surface the momentum equations, including eddy viscosity (diffusion of momentum or turbulence) but omitting Coriolis acceleration <span class="math inline">\(\Omega\)</span>, are:</p>
 <p><span class="math display" id="eq:equ-2DMomentum">\[\begin{equation}
 \begin{matrix}
 \frac{\partial (hu)}{\partial t}
@@ -1265,7 +1265,7 @@ w \frac{\partial h}{\partial t}
 or Saint-Venant Equations. They represent a system of equations that is effectively second order in both space and time,
 and therefore admit travelling wave solutions (speed <span class="math inline">\(c=\sqrt{gh}\)</span>). Similarly Equations <a href="Fundamentals-1.html#eq:equ-2DContinuity">(3.3)</a> and <a href="Fundamentals-1.html#eq:equ-2DMomentum">(3.4)</a> are the
 2D Dynamic Wave Equations also known as the Shallow Water Equations (SWE).</p>
-<p>As described in the following subsections, the <strong>Dynamic</strong> form of the equations can be simplified to the <strong>Diffusive</strong> and <strong>Kinematic</strong> forms. However, given the available computing power today in personal computers, there is no need or defence for calculating diffusive wave or kinemative wave solutions except for very specific simplified situations. TUFLOW Classic and HPC are strictly dynamic wave solvers, in both 1D and 2D forms. Therefore, TUFLOW does not experience the inaccuracies and limitations associated with solving the diffusive wave or kinematic wave equations.</p>
+<p>As described in the following subsections, the <strong>Dynamic</strong> form of the equations can be simplified to the <strong>Diffusive</strong> and <strong>Kinematic</strong> forms. However, given the available computing power today in personal computers, there is no need or defence for calculating diffusive wave or kinematic wave solutions except for very specific simplified situations. TUFLOW Classic and HPC are strictly dynamic wave solvers, in both 1D and 2D forms. Therefore, TUFLOW does not experience the inaccuracies and limitations associated with solving the diffusive wave or kinematic wave equations.</p>
 <div id="diffusive-wave-equation" class="section level4 hasAnchor" number="3.4.2.1">
 <h4><span class="header-section-number">3.4.2.1</span> Diffusive Wave Equation<a href="Fundamentals-1.html#diffusive-wave-equation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In the case of 1D, the two prognostic variables, depth <span class="math inline">\(h\)</span> and velocity <span class="math inline">\(u\)</span> co-evolve with time. However, in days past when
@@ -1306,14 +1306,14 @@ much the same as bed slope), but is not suitable for flows in low-lying channels
 <div id="NumericalAccuracy-3" class="section level3 hasAnchor" number="3.4.3">
 <h3><span class="header-section-number">3.4.3</span> Numerical Accuracy<a href="Fundamentals-1.html#NumericalAccuracy-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>When computing the divergence and diffusion terms in a finite difference or finite volume scheme, it is necessary
-to calculate the field values at spatial locations that are in-between the locations where the field data are defined. For
+to calculate the field values at spatial locations that are between the locations where the field data are defined. For
 example, depth data is considered a node or cell property, and is therefore nominally defined at a node (1D) or cell centre (2D). When calculating
 the flow through a cross-section (1D) or a face (2D), the depth of water must be estimated at the cross-section (or face), which is located
-in-between the nodes (or cells). This process is not straight forward, the methods for which broadly fall into three categories:</p>
+between the nodes (or cells). This process is not straight forward, the methods for doing so broadly fall into three categories:</p>
 <ul>
 <li><strong>Zeroth order</strong> interpolation: The field value used at the cross-section or a face is a constant fixed value. This means that the error
 between the field value used and the “real” solution is constant regardless of cell size - it is a function of cell size to the
-power of zero, hence the term “zeroth order”. This method is generally not used for obvious reasons.
+power of zero, hence the term “zeroth order”. This method is generally not used.
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-InterpolationZerothOrder"></span>
 <img src="images/InterpolationZerothOrder.png" alt="**Example of zeroth order interpolation**" width="50%" />
@@ -1327,7 +1327,8 @@ be that of the downwind (downstream) node/cell. This means that the error betwee
 function of element length or cell size to the power of one, hence the term “first order”. This method is computationally simple and is very stable, but has the
 tendency to cause any sudden changes (high spatial gradients) in solution to diffuse (smooth out) over time - the same effect as if the model had
 a high diffusion rate applied. Therefore, the method introduces an artefact diffusion that isn’t real. In the case of 2D and 3D modelling, any swirls or eddies in
-the velocity field tend to decay (or simply do not form in the first place).
+the velocity field tend to decay (or simply do not form in the first place).</li>
+</ul>
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-InterpolationFirstOrder"></span>
 <img src="images/InterpolationFirstOrder.png" alt="**Example of first order interpolation**" width="50%" />
@@ -1335,7 +1336,8 @@ the velocity field tend to decay (or simply do not form in the first place).
 Figure 3.11: <strong>Example of first order interpolation</strong>
 </p>
 </div>
-</center></li>
+</center>
+<ul>
 <li>Second order interpolation: The field value used at the cross-section or a face is usually linearly interpolated between the upwind node/cell
 and the downwind one. This means that the error between the field value used and the real solution is proportional to element length or cell size squared - it is a
 function of cell size to the power of two, hence the term “second order”. Pure linear interpolation on its own is known to be unstable - the solution
@@ -1371,7 +1373,7 @@ and the user should not need to change to first order interpolation in order to 
 <li>Adaptive Timestepping: The timestep is automatically determined
 by the solution scheme and varies in value throughout the simulation depending on the hydraulic conditions at the time. TUFLOW HPC uses adaptive timestepping.</li>
 </ul>
-<p><em>Note: TUFLOW’s in-built 1D solutions,TUFLOW 1D (ESTRY) and EPA SWMM, use a variety of fixed and adaptive timestepping, depending on the 2D solution it is linked to (TUFLOW Classic or HPC).</em></p>
+<p><em>Note: TUFLOW’s in-built 1D solutions, TUFLOW 1D (ESTRY) and EPA SWMM, use a variety of fixed and adaptive timestepping, depending on the 2D solution it is linked to (TUFLOW Classic or HPC).</em></p>
 </div>
 <div id="OneDDomainsTimestep-3" class="section level3 hasAnchor" number="3.5.2">
 <h3><span class="header-section-number">3.5.2</span> TUFLOW 1D (ESTRY) and EPA SWMM<a href="Fundamentals-1.html#OneDDomainsTimestep-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1411,9 +1413,9 @@ timestep.</p>
 </ul>
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-TUFLOWHPC1D2DTimestepSync"></span>
-<img src="images/TUFLOWHPC1D2DTimestepSync.png" alt="**TUFLOW HPC 1D/2D Timestep Syncronisation**" width="90%" />
+<img src="images/TUFLOWHPC1D2DTimestepSync.png" alt="**TUFLOW HPC 1D/2D Timestep Synchronisation**" width="90%" />
 <p class="caption">
-Figure 3.13: <strong>TUFLOW HPC 1D/2D Timestep Syncronisation</strong>
+Figure 3.13: <strong>TUFLOW HPC 1D/2D Timestep Synchronisation</strong>
 </p>
 </div>
 </center>
@@ -1440,7 +1442,7 @@ Figure 3.13: <strong>TUFLOW HPC 1D/2D Timestep Syncronisation</strong>
 <span class="math inline">\(\frac{1}{2}\)</span> to <span class="math inline">\(\frac{1}{5}\)</span> of the cell size (in metres). For example, for a 10m
 model the timestep will typical be in the range 2 to 5 seconds. For steep gradient
 models with high Froude numbers and supercritical flow, smaller timesteps may be required.</p>
-<p>If the model you create is operating at high Courant numbers (&gt;10), sensitivity
+<p>If a is operating at high Courant numbers (&gt;10), sensitivity
 testing with smaller timesteps to demonstrate no measurable change in
 result is recommended. The occurrence of high 2D mass error can be an indicator that the
 2D timestep is too high.</p>
@@ -1523,7 +1525,7 @@ Repeated timesteps are displayed to the Console Window and the number of them fo
 <ul>
 <li><em>Celerity Control (Nc) number relates to water depth relative to cell size. Energy can pass through deeper water faster than shallow water, as such deep water will trigger this control. Review whether the water depth is realistic, or the result of an error in the model topography.</em></li>
 <li><em>Courant number (Nu) relates to velocity relative to the cell size. High velocities will trigger this as the control. Investigate whether the feature causing the high velocity is realistic.</em></li>
-<li><em>Diffusion control (Nd) relates diffusion of momentum relating to the sub grid viscosity. Small cells in deep water will trigger this one. Models controlled by the diffusion number tend to require a timestep significantly smaller than those controlled by the shallow wave celerity or courant numbers. If you find your model is predominantly diffusion controlled it may be that equivalent solution accuracy can be achieved by selecting a larger cell size. This is worth testing, as it will most likely increase the simulation speed with no loss of result fidelity.</em></li>
+<li><em>Diffusion control (Nd) relates diffusion of momentum relating to the sub grid viscosity. Small cells in deep water will trigger this one. Models controlled by the diffusion number tend to require a timestep significantly smaller than those controlled by the shallow wave celerity or courant numbers. If a model is predominantly diffusion controlled it may be that equivalent solution accuracy can be achieved by selecting a larger cell size. This is worth testing, as it will most likely increase the simulation speed with no loss of result fidelity.</em></li>
 </ul>
 <p><em>Section <a href="QualityControl-and-Troubleshooting-1.html#QAchecklist-2">16.4</a> includes guidance focused on reviewing model health and resolving issues.</em></p>
 <div id="TimesteppingEfficiencyOutput-4" class="section level4 hasAnchor" number="3.5.4.1">
@@ -1556,7 +1558,7 @@ however the efficiency rapidly increases as the HPC timestep increases.</p>
 <center>
 <img src="images/image18.png" width="100%" style="display: block; margin: auto;" />
 </center>
-<p><em>Note: Should your model exhibit low overall timestepping efficiency
+<p><em>Note: Should a model exhibit low overall timestepping efficiency
 (i.e. values less than around 70 to 90%), please let us know via
 <a href="mailto:support@tuflow.com" class="email">support@tuflow.com</a>, and attach the .tlf, .hpc.tlf and dt.csv files.</em></p>
 </div>
@@ -1584,15 +1586,15 @@ development of a model.</p>
 simulation times based on the cell size, catchment area and model run
 time (i.e. event duration). The spreadsheet can be downloaded from the
 <a href="https://wiki.tuflow.com/Estimating_Runtimes">TUFLOW Wiki</a>. This
-spreadsheet is a basic guide, as it has several simplified assumptions, including the timestep, number of calculations per second the computer can run and fraction of wet cells (this will change throughout the simulation). Acknolegding these assumptions, it is still a useful guide. further consideration of the model design is recommended if the spreadsheet is estimating excessively long simulation times.</p>
-<p>The speed at which TUFLOW simulations will run is dependent on the hardware that you are running the simulation on. Newer and higher CPU frequency computers will run faster than older lower CPU frequency computers. A hardware benchmark model is available from the <a href="https://wiki.tuflow.com/Hardware_Benchmarking_(2018-03-AA)">TUFLOW Wiki</a>. This page also contains the simulation times for the same model on a large range of computers.</p>
+spreadsheet is a basic guide, as it has several simplified assumptions, including the timestep, number of calculations per second the computer can run and fraction of wet cells (this will change throughout the simulation). Acknowledging these assumptions, it is still a useful guide. further consideration of the model design is recommended if the spreadsheet is estimating excessively long simulation times.</p>
+<p>The speed at which TUFLOW simulations will run is dependent on the hardware used. Newer and higher CPU frequency computers will run faster than older lower CPU frequency computers. A hardware benchmark model is available from the <a href="https://wiki.tuflow.com/Hardware_Benchmarking_(2018-03-AA)">TUFLOW Wiki</a>. This page also contains the simulation times for the same model on a large range of computers.</p>
 <ul>
 <li><a href="https://wiki.tuflow.com/Hardware_Benchmarking_-_Results#CPU_Results">TUFLOW Hardware Benchmark CPU Results</a></li>
 <li><a href="https://wiki.tuflow.com/Hardware_Benchmarking_-_Results#GPU_Results">TUFLOW Hardware Benchmark GPU Results</a></li>
 </ul>
 <p>There are several other secondary factors that can affect the speed performance of TUFLOW simulations, including:</p>
 <ul>
-<li>The latency to the location where results are being written. For fastest spped, write results directly to your computer hard drive. Lower latency associated with writing to an external hard drive can slow a simulation down significantly.<br />
+<li>The latency to the location where results are being written. For fastest speed, write results directly to a local computer hard drive. Lower latency associated with writing to an external hard drive can slow a simulation down significantly.<br />
 </li>
 <li>How frequently output is written, with more frequent output slowing the simulation;</li>
 <li>What output format is written. XMDF and DAT formats are quicker to write than grid raster output types (TIF, FLT and ASC). Use XMDF format for temporal Map Output. Reserve grid raster output formats for maximum results.<br />
