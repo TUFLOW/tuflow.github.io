@@ -2057,7 +2057,7 @@ Legacy command. Expand to find out more about the legacy settings.
 Classic Only
 </td>
 <td style="text-align:left;">
-Sets the Green Ampt iteration infiltration convergence test value. The default value is 0.001m. See Section <a href="TwoD-Domains-1.html#green-ampt-ga">7.3.7.1.1</a>. The default unit for this command is metres. If <a href="TCFCommands-1.html#tcfUnits">Units</a> <teq>==</teq><tblk> US Customary</tblk>, the unit is feet.
+Sets the Green Ampt iteration infiltration convergence test value. The default value is 0.001m. See Section <a href="TwoD-Domains-1.html#green-ampt-ga">7.3.7.1.1</a>. The default unit for this command is metres. If <tcmd><a href="TCFCommands-1.html#tcfUnits">Units</a></tcmd> <teq>==</teq><tblk> US Customary</tblk>, the unit is feet.
 </td>
 </tr>
 <tr>
@@ -2299,7 +2299,7 @@ Classic Only
 </td>
 <td style="text-align:left;">
 The global C<sub>h</sub> factor applied to flow constrictions when the
-flow upstream is submerged and the flow downstream is unsubmerged using
+flow upstream is submerged and the flow downstream is unsubmerged, using
 the pressure flow equation for upstream controlled flow. See Section <a href="TwoD-Domains-1.html#legacy-structures">7.5.6</a>.
 </td>
 </tr>
@@ -2311,7 +2311,7 @@ the pressure flow equation for upstream controlled flow. See Section <a href="Tw
 Classic Only
 </td>
 <td style="text-align:left;">
-Sets whether material rainfall losses (Section <a href="TwoD-Domains-1.html#Rainfall-Losses-4">7.3.6.4</a> are used when using a global rainfall boundary (Section <a href="Boundaries-InitialConditions-1.html#RF-Global-4">8.5.3.3</a>). Prior to the 2020-10-AA Release, if using material rainfall losses in TUFLOW Classic, the losses were not applied to any global rainflal boundaries. This command can be used to turn off material losses. The default from 2020-10-AA is to apply material losses to global rainfall boundaries (in line with TUFLOW HPC).
+Sets whether material rainfall losses (Section <a href="TwoD-Domains-1.html#Rainfall-Losses-4">7.3.6.4</a>) are used when using a global rainfall boundary (Section <a href="Boundaries-InitialConditions-1.html#RF-Global-4">8.5.3.3</a>). Prior to the 2020-10-AA release, if using material rainfall losses in TUFLOW Classic, the losses were not applied to any global rainflal boundaries. This command can be used to turn off material losses. The default for 2020-10-AA and newer is to apply material losses to global rainfall boundaries (in line with TUFLOW HPC).
 </td>
 </tr>
 <tr>
@@ -2328,8 +2328,8 @@ reproduce upstream controlled weir flow <span class="citation">(<a href="#ref-Sy
 applied globally, although spatial variation of the factor can be
 specified through a GIS layer read by the geometry control file (see
 <a href="TGCCommands-1.html#tgcReadGISWrF">Read GIS WrF</a>.</p>
-<strong>Note that the global value and the spatially varying value are
-multiplied together (i.e. one does not replace the other).</strong>
+Note that the global value and the spatially varying value are
+multiplied together (i.e. one does not replace the other).
 </td>
 </tr>
 <tr>
@@ -2490,7 +2490,7 @@ unreliable results.</strong></p>
 Classic and HPC
 </td>
 <td style="text-align:left;">
-Sets the format that TUFLOW uses to write output and check file grids (see Section <a href="Outputs-1.html#Grid-4">11.2.2.2</a>. The default is the TIF format. Table <a href="Outputs-1.html#tab:tab-FormatOptionsGrid">11.3</a> lists the available formats.
+Sets the format that TUFLOW uses to write output and check file grids (see Section <a href="Outputs-1.html#Grid-4">11.2.2.2</a>). The default is the TIF format. Table <a href="Outputs-1.html#tab:tab-FormatOptionsGrid">11.3</a> lists the available formats.
 </td>
 </tr>
 <tr>
@@ -2549,7 +2549,7 @@ Classic and HPC
 <p>This command defines the hardware to be used for the compute. See Section <a href="Hardware-1.html#Hardware-1">12</a>.</p>
 <p>CPU will run a simulation using the Central Processing Unit (CPU).</p>
 <p>GPU will run the simulation using the Graphics Processor Unit (GPU)
-hardware. GPU hardware technology means very large models (<span class="math inline">\(\rangle\)</span> 100 million
+hardware. GPU hardware technology means very large models ($$100 million
 cells) with fine grids can now be run within a sensible timeframe.</p>
 TUFLOW Classic simulations are only possible using CPU. TUFLOW HPC can
 be run using CPU or GPU. TUFLOW HPC CPU simulations can be done using a
@@ -2644,7 +2644,7 @@ TUFLOW HPC does not usually require to be run in double precision (DP)
 mode. Refer to Section <a href="Running-Simulations-1.html#iSPdSP-3">13.4.2</a> and the <a href="https://wiki.tuflow.com/Hardware_Benchmarking_Topic_Single_Precision_VS_Double_Precision">TUFLOW Wiki</a> for further information. There can
 also be substantial speed gains using single precision (SP) on some GPU
 cards, and there is a significantly less memory footprint. If DP is
-desired or required for the GPU Module specify <tcmd><a href="TCFCommands-1.html#tcfGPUDPCheck">HPC DP Check</a></tcmd> <teq>==</teq> <tblk>OFF</tblk> in the .tcf file, and run using a DP
+desired or required for the HPC (and as such, the GPU Module) specify <tcmd><a href="TCFCommands-1.html#tcfGPUDPCheck">HPC DP Check</a></tcmd> <teq>==</teq> <tblk>OFF</tblk> in the .tcf file, and run using a DP
 TUFLOW exe.
 </td>
 </tr>
@@ -2667,7 +2667,7 @@ Sets the output interval for information written to the .hpc.dt.csv file (Sectio
 HPC Only
 </td>
 <td style="text-align:left;">
-HQ boundary computes the flux across the entire boundary line and uses a rating curve to apply a water level to the model. Each line is treated as a separate boundary and has a stage-discharge relationship, this is consistent with the TUFLOW Classic approach to HQ boundaries. Earlier version of TUFLOW HPC applied the water surface slope on a cell by cell basis. It is possible to revert to all HQ boundaries using a cell by cell approach by setting this command to ‘CELL’. For more information see Section <a href="Boundaries-InitialConditions-1.html#HpcHQApproach-4">8.3.2.2</a>.
+HQ boundary computes the flux across the entire boundary line and uses a rating curve to apply a water level to the model. Each line is treated as a separate boundary and has a stage-discharge relationship, this is consistent with the TUFLOW Classic approach to HQ boundaries. Earlier versions of TUFLOW HPC applied the water surface slope on a cell by cell basis. It is possible to revert to all HQ boundaries using a cell by cell approach by setting this command to ‘CELL’. For more information see Section <a href="Boundaries-InitialConditions-1.html#HpcHQApproach-4">8.3.2.2</a>.
 </td>
 </tr>
 <tr>
@@ -2678,7 +2678,7 @@ HQ boundary computes the flux across the entire boundary line and uses a rating 
 HPC Only
 </td>
 <td style="text-align:left;">
-For cross-sections with very low longitudinal slope, the stage vs flow (HQ) relationship can become unstable - a small change in flow causes a change in level that causes a similar but opposite change in flow. The user may specify the global HQ boundary filter constant using this command, see Section <a href="Boundaries-InitialConditions-1.html#HpcHQFilter-4">8.3.2.3</a> for further detauls. The default value is 1, which means no filtering (for backward compatibility).
+For cross-sections with very low longitudinal slope, the stage vs flow (HQ) relationship can become unstable - a small change in flow causes a change in water level that subsequently causes a similar but opposite change in flow. The user may specify the global HQ boundary filter constant using this command, see Section <a href="Boundaries-InitialConditions-1.html#HpcHQFilter-4">8.3.2.3</a> for further detauls. The default value is 1, which means no filtering (for backward compatibility).
 </td>
 </tr>
 <tr>
@@ -2724,7 +2724,7 @@ Used to specify restart model geometry. From the 2020-10-AB build and onwards, t
 HPC Only
 </td>
 <td style="text-align:left;">
-Sets whether momentum flux is added to SX cells (Method B) which improves the boundary cell flow behaviour by applying appropriate momentum source/sink, or if only mass flux is added to SX cells (Method A). Method A is available for backward compatibility. See Section <a href="Boundaries-InitialConditions-1.html#HpcBoundariesOther-4">8.3.2.4</a>.
+Sets whether momentum flux is added to SX cells (Method B), which improves the boundary cell flow behaviour by applying appropriate momentum source/sink, or if only mass flux is added to SX cells (Method A). Method A is available for backward compatibility. See Section <a href="Boundaries-InitialConditions-1.html#HpcBoundariesOther-4">8.3.2.4</a>.
 </td>
 </tr>
 <tr>
@@ -2777,7 +2777,7 @@ Classic Only
 <td style="text-align:left;">
 Sets the approach to be used for automatically generated 2D HQ boundaries (refer to Section <a href="Boundaries-InitialConditions-1.html#TwoDBoundaries-2">8.5</a>).</li>
 </ul>
-<p>METHOD A extends the HQ curve by ten metres on its last point which can
+<p>METHOD A extends the HQ curve by ten metres (or 32.8 ft if using <tcmd><a href="TCFCommands-1.html#tcfUnits">Units</a></tcmd> <teq>==</teq><tblk> US Customary</tblk>) on its last point which can
 cause a sudden change in the slope of the curve at this elevation. This
 method does not issue <a href="https://wiki.tuflow.com/TUFLOW_Message_2365">WARNING 2365</a> if the top of the curve is exceeded
 during a simulation.</p>
@@ -2831,9 +2831,9 @@ HPC Only
 HPC Only
 </td>
 <td style="text-align:left;">
-SGS Only.</li>
+SGS Only.
+Sets the HR interpolation approach method. The HR output needs to interpolate cell centre water levels to cell corners. However, the interpolation methods for the standard output (<tcmd><a href="TCFCommands-1.html#tcfMapOutputCornerInterpolation">Map Output Corner Interpolation</a></tcmd> <teq>==</teq> <tblk>Method C</tblk>) can produce “bumpy” HR water level output in direct rainfall models with steep terrain, as the water level is linearly interpolated from the cell centres/corners, while the change of sub-grid elevations may not be linear.</li>
 </ul>
-<p>The HR output needs to interpolate cell centre water levels to cell corners. However, the interpolation methods for the standard output (<tcmd><a href="TCFCommands-1.html#tcfMapOutputCornerInterpolation">Map Output Corner Interpolation</a></tcmd> <teq>==</teq> <tblk>Method C</tblk>) can produce “bumpy” HR water level output in direct rainfall models with steep terrain, as the water level is linearly interpolated from the cell centres/corners, while the change of sub-grid elevations may not be linear.</p>
 <p>The following approaches are available for the HR output interpolation:</p>
 <ul>
 <li>Method A is the default option that applies the same water level interpolation method used for the standard output.</li>
@@ -2894,7 +2894,7 @@ Classic Only
 </td>
 <td style="text-align:left;">
 <p>If ON (the default), checks whether the minimum ZC elevation at or along
-a HX object (see and ) is above the 1D bed level interpolated between
+a HX object (see Table <a href="Boundaries-InitialConditions-1.html#tab:tab-twoDBoundary">8.5</a> and Table <a href="Boundaries-InitialConditions-1.html#tab:tab-ConditionsAttribute">8.6</a>) is above the 1D bed level interpolated between
 connected 1D nodes. This is necessary to ensure that there is water in
 the nodes when the 2D HX cells start to wet. If the ZC elevation is
 lower than the 1D bed level, unexpected flows or a surge of water may
@@ -2918,10 +2918,10 @@ recommended and may results in mass balance issues.
 Classic and HPC
 </td>
 <td style="text-align:left;">
-<p>Controls which commands to process for different events as specified
+<p>Controls which commands to process for different events, as specified
 using the –e run (see Section <a href="Running-Simulations-1.html#Events-3">13.3.1</a> and Table <a href="Running-Simulations-1.html#tab:tab-TUFLOWOptions">13.2</a>) or
 <a href="TCFCommands-1.html#tcfModelEvents">Model Events</a>.</p>
-<p>The “If Event” block must be terminated by “End If” otherwise an ERROR
+<p>The “If Event” block must be terminated by “End If”, otherwise an ERROR
 occurs.</p>
 Optional “Else If Event” and “Else” blocks can be embedded between
 “If Event” and “End If”. The first block encountered that refers to a
@@ -2940,9 +2940,9 @@ been processed.
 Classic and HPC
 </td>
 <td style="text-align:left;">
-<p>Controls which commands to process for different scenarios as specified
+<p>Controls which commands to process for different scenarios, as specified
 using the –s run option (see Section <a href="Running-Simulations-1.html#Scenarios-3">13.3.2</a> and Table <a href="Running-Simulations-1.html#tab:tab-TUFLOWOptions">13.2</a>) or <a href="TCFCommands-1.html#tcfModelScenarios">Model Scenarios</a>.</p>
-<p>The “If Scenario” block must be terminated by “End If” otherwise an ERROR occurs.</p>
+<p>The “If Scenario” block must be terminated by “End If”, otherwise an ERROR occurs.</p>
 Optional “Else If Scenario” and “Else” blocks can be embedded between
 “If Scenario” and “End If”. The first block encountered that refers to a
 specified scenario is processed, and all remaining blocks within the “If
@@ -3015,16 +3015,15 @@ and .tbc files, particularly those containing large number of vertices.</p>
 </tr>
 <tr>
 <td style="text-align:left;width: 10em; max-width: 24em; vertical-align:top;">
-<a id="tcfInstabilityWaterLevel"><tcmd>Instability Water Level </tcmd><teq>==<br></teq></a> <tblk>[ {see_below}  |  <span class="math inline">\(\langle\)</span> value_in_metres <span class="math inline">\(\rangle\)</span>  ]</tblk><br>
+<a id="tcfInstabilityWaterLevel"><tcmd>Instability Water Level </tcmd><teq>==<br></teq></a> <tblk>[ {see_below}  |  <span class="math inline">\(\langle\)</span> value <span class="math inline">\(\rangle\)</span>  ]</tblk><br>
 </td>
 <td style="text-align:left;vertical-align:top;">
 Classic Only
 </td>
 <td style="text-align:left;">
-<p>The default water level used to detect instabilities is ten metres
-higher than the highest cell elevation of all cells (whether wet, dry or
+<p>The default water level used to detect instabilities higher than the highest cell elevation of all cells (whether wet, dry or
 permanently dry). Any unassigned elevations (which are given a value of
-99999, are not included).</p>
+99999, are not included). The default value is 10 metres (or 10ft if using <tcmd><a href="TCFCommands-1.html#tcfUnits">Units</a></tcmd> <teq>==</teq><tblk> US Customary</tblk>).</p>
 Alternatively, this command is used to set the instability water level
 manually. See Section <a href="QualityControl-and-Troubleshooting-1.html#othertroublshooting-4">16.3.2.5</a>.
 </td>
@@ -3050,7 +3049,7 @@ value disables the Coriolis term. See Section <a href="TwoD-Domains-1.html#CLA-C
 Classic and HPC
 </td>
 <td style="text-align:left;">
-<p>Used to specify the settings for layered flow constrictions (see Section <a href="TwoD-Domains-1.html#lfcsh-4">7.3.8.3</a>). The default setting is METHOD B (PORTION). For releases prior to 2016-03 the METHOD A (CUMULATE) approach was used.</p>
+<p>Used to specify the settings for layered flow constrictions (see Section <a href="TwoD-Domains-1.html#lfcsh-4">7.3.8.3</a>). The default setting is METHOD B (PORTION). For releases prior to 2016-03 METHOD A (CUMULATE) was used.</p>
 <p>It is possible to individually specify the method to be used for each structure. Specify either METHOD A (CUMULATE), METHOD B (PORTION) or METHOD C in the Shape_Options attribute (refer to Table <a href="TwoD-Domains-1.html#tab:tab-LayeredFlow">7.18</a>). If none of the options occur, the setting as specified in the command <a href="TCFCommands-1.html#tcfLayeredFLCDefaultApproach">Layered FLC Default Approach</a> is used.</p>
 <ul>
 <li>METHOD A (named CUMULATE in releases prior to 2020-10): Accumulates losses through each of the layers in the 2d_lfcsh as the depth of water increases.</li>
@@ -3189,7 +3188,7 @@ the runs folder. For more information, see Section <a href="Checks-and-Logs-1.ht
 Classic and HPC
 </td>
 <td style="text-align:left;">
-If the value in metres is greater than zero, TUFLOW only outputs results for cells with depths above the cutoff depth. This feature is particularly useful for direct rainfall modelling where there is a need to differentiate between very shallow sheet flow and flooding. See Section <a href="Outputs-1.html#Commands-2">11.6</a>.
+The minimum depth used as the cutoff that TUFLOW outputs results. Results are only written for cells with depths above the cutoff depth. This feature is particularly useful for direct rainfall modelling where there is a need to differentiate between very shallow sheet flow and flooding. See Section <a href="Outputs-1.html#Commands-2">11.6</a>. The value is in metres (greater than zero), or feet (if using <tcmd><a href="TCFCommands-1.html#tcfUnits">Units</a></tcmd> <teq>==</teq><tblk> US Customary</tblk>).
 </td>
 </tr>
 <tr>
@@ -3313,7 +3312,7 @@ The default is to produce map output for the whole model irrespective of
 the number of Output Zones (refer to Section <a href="Outputs-1.html#OutputZones-3">11.2.5</a>) being
 written. Map output commands that occur outside Output Zone definitions
 apply to the entire model (i.e. as is the case in previous releases). If
-map output for the entire model is not required specify<tcmd><a href="TCFCommands-1.html#tcfMapOutputEntireModel">Map Output Entire Model</a></tcmd> <teq>==</teq> <tblk>OFF</tblk>.
+map output for the entire model is not required specify <tcmd><a href="TCFCommands-1.html#tcfMapOutputEntireModel">Map Output Entire Model</a></tcmd> <teq>==</teq> <tblk>OFF</tblk>.
 </td>
 </tr>
 <tr>
@@ -3423,10 +3422,8 @@ For more information, see Section <a href="Checks-and-Logs-1.html#MB-2">14.8</a>
 Classic and HPC
 </td>
 <td style="text-align:left;">
-<p>The output interval in seconds for the _MB.csv output files. See Section <a href="Checks-and-Logs-1.html#MB-2">14.8</a>. If set to
-0 (zero), the output interval used is the largest 2D computational
-timestep set by the command <a href="TCFCommands-1.html#tcfTimestep">Timestep</a>.</p>
-If the command is omitted (or set to -1), output is at the lesser of
+The output interval in seconds for the _MB.csv output files. See Section <a href="Checks-and-Logs-1.html#MB-2">14.8</a>. If set to
+0 (zero), the output interval used is the timestep set by the <a href="TCFCommands-1.html#tcfTimestep">Timestep</a> command. If the command is omitted (or set to -1), output is at the lesser of
 <a href="TCFCommands-1.html#tcfMapOutputInterval">Map Output Interval</a> and <a href="TCFCommands-1.html#tcfTimeSeriesOutputInterval">Time Series Output
 Interval</a>.
 </td>
@@ -3499,7 +3496,7 @@ level. See Section <a href="Outputs-1.html#DataTypes-3">11.2.3</a>.</p>
 <ul>
 <li>If set to a large number that exceeds the greatest depth (e.g.
 99999.), the maximum velocity will be as in releases prior to 2009-07,
-ie. based on the velocity at the peak water level.<br />
+(ie. based on the velocity at the peak water level).<br />
 </li>
 <li>If set to 0. (zero), the maximum velocity is tracked as the maximum
 velocity irrespective of the velocity at the peak water level.<br />
@@ -3509,7 +3506,7 @@ based on the velocity at the peak water level for depths below &lt;y&gt;,
 while for depths above &lt;y&gt;, the maximum velocity is based on the
 maximum velocity.</li>
 </ul>
-<p>A small value of &lt;y&gt; (e.g. 0.1m which is the default) is recommended
+<p>A small value of &lt;y&gt; (e.g. 0.1m which is the default) is recommended,
 as high velocities can occur at very shallow depths during the wetting
 and drying process.</p>
 Note, as a consequence of the velocities now being tracked independently
@@ -3648,7 +3645,7 @@ See Section <a href="Outputs-1.html#Map-2">11.2</a>.
 </tr>
 <tr>
 <td style="text-align:left;width: 10em; max-width: 24em; vertical-align:top;">
-<a id="tcfMeshparts"><tcmd>Meshparts </tcmd><teq>==<br></teq></a> <tblk>[ ON  |  {OFF ]</tblk><br>
+<a id="tcfMeshparts"><tcmd>Meshparts </tcmd><teq>==<br></teq></a> <tblk>[ ON  |  {OFF} ]</tblk><br>
 </td>
 <td style="text-align:left;vertical-align:top;">
 Classic Only
@@ -3661,7 +3658,7 @@ meshparts. Meshparts are determined as follows:</p>
 </li>
 <li>Each 1d_nwk layer constitutes one meshpart.</li>
 </ul>
-<p>The benefits of using meshparts are that for future versions of SMS,
+<p>The benefits of using meshparts are that for recent versions of SMS,
 while viewing results different meshparts can be switched on and off.
 Can also be useful when using the <a href="https://wiki.tuflow.com/TUFLOW_to_GIS">TUFLOW_to_GIS.exe utility</a> to remove meshparts from the output. An example is to remove the pipe network layer WLLs from the output.</p>
 <p>The name allocated to the meshpart is either the 2D Domain Name (see
@@ -3734,7 +3731,7 @@ projection of the model.
 Classic and HPC
 </td>
 <td style="text-align:left;">
-<p>Alternative to using the –e option when running TUFLOW (see Table <a href="Running-Simulations-1.html#tab:tab-TUFLOWOptions">13.2</a>). Up to nine (9) separate events that have been defined using <a href="#tefDefineEvent">Define Event</a> can be specified. Separate the event names using vertical bars. The event names specified will be automatically appended to the output filenames if <sub>e</sub> or <sub>eX</sub> are not in the .tcf filename.</p>
+<p>Alternative to using the –e option when running TUFLOW (see Table <a href="Running-Simulations-1.html#tab:tab-TUFLOWOptions">13.2</a>). Up to nine (9) separate events that have been defined using <a href="#tefDefineEvent">Define Event</a> can be specified. Separate the event names using vertical bars. The event names specified will be automatically appended to the output filenames if ~e~ or ~eX~ are not in the .tcf filename.</p>
 <p>For example:</p>
 <p><tcmd>Model Events </tcmd><teq>==</teq><tblk> Q100 | 02h</tblk></p>
 Note that using the –e run option will override this command.
@@ -3803,7 +3800,7 @@ Classic and HPC
 <p>Alternative to using the –s option when running TUFLOW (see Table <a href="Running-Simulations-1.html#tab:tab-TUFLOWOptions">13.2</a>). Up to nine (9) separate scenarios that occur using <a href="TCFCommands-1.html#tcfIfScenario">If
 Scenario</a> can be specified. Separate the scenarios names
 using vertical bars. The scenario names specified will be automatically
-appended to the output filenames if <sub>s</sub> or <sub>sX</sub> are not in the .tcf
+appended to the output filenames if ~s~ or ~sX~ are not in the .tcf
 filename.</p>
 <p>For example:</p>
 <p><tcmd>Model Scenarios</tcmd> <teq>==</teq> <tblk>opA | opB</tblk></p>
@@ -4228,7 +4225,7 @@ required for the 2D domain are accessed.</p>
 file command can be included.</p>
 <p><tcmd>Process All Grids</tcmd> <teq>==</teq> <tblk>ON</tblk></p>
 Processing of all input grids is set to “ON” if the previous defaults
-are used, e.g. “<tcmd>Defaults</tcmd> <teq>==</teq> <tblk>Pre 2017</tblk>”. </grid>
+are used (e.g. “<tcmd>Defaults</tcmd> <teq>==</teq> <tblk>Pre 2017</tblk>”). </grid>
 </td>
 </tr>
 <tr>
@@ -4342,7 +4339,7 @@ a separate grid is not needed for each RF input.
 Classic and HPC
 </td>
 <td style="text-align:left;">
-Rainfall timeseries read in via the <a href="TCFCommands-1.html#tcfRainfallControlFile">Rainfall Control File</a> (.trfc) (Section <a href="Boundaries-InitialConditions-1.html#TRFC-File-4">8.5.3.6</a>) can have a null value, which is user defined using this command. Otherwise the and “<tcmd>Rainfall Null Value</tcmd> <teq>==</teq> <tblk><null value></null></tblk>”. The default null value is -99, and only applies to the IDW rainfall interpolation approach. If a null value is detected at a point location, the IDW interpolation is revised to ignore the location. If all locations have a null value at a boundary time, an <a href="https://wiki.tuflow.com/TUFLOW_Message_2642">ERROR 2642</a> is generated. Note, prior to release 2020-10 the default null value was -99999, not -99.
+Rainfall timeseries read in via the <a href="TCFCommands-1.html#tcfRainfallControlFile">Rainfall Control File</a> (.trfc) (Section <a href="Boundaries-InitialConditions-1.html#TRFC-File-4">8.5.3.6</a>) can have a null value, which is user defined using this command. The default null value is -99, and only applies to the IDW rainfall interpolation approach. If a null value is detected at a point location, the IDW interpolation is revised to ignore the location. If all locations have a null value at a boundary time, an <a href="https://wiki.tuflow.com/TUFLOW_Message_2642">ERROR 2642</a> is generated. Note, prior to release 2020-10 the default null value was -99999, not -99.
 </td>
 </tr>
 <tr>
@@ -5182,7 +5179,7 @@ HPC Only
 </td>
 <td style="text-align:left;">
 <p>SGS Only.</p>
-Sets the sampling target distance in meters or feet. This is the recommended approach to set the SGS sample distance. TUFLOW requires an odd number of sample locations across a cell face. For example, using a cell size of 10m and a sample target distance of 1m, TUFLOW will use 11 sample points along the cell face. If the target distance specified gives an even number, TUFLOW will round up to the next odd number. See Section <a href="TwoD-Domains-1.html#SGS-Distance-5">7.4.3.1.1</a>.
+Sets the sampling target distance in meters or feet (if using <tcmd><a href="TCFCommands-1.html#tcfUnits">Units</a></tcmd> <teq>==</teq><tblk> US Customary</tblk>). This is the recommended approach to set the SGS sample distance. TUFLOW requires an odd number of sample locations across a cell face. For example, using a cell size of 10m and a sample target distance of 1m, TUFLOW will use 11 sample points along the cell face. If the target distance specified gives an even number, TUFLOW will round up to the next odd number. See Section <a href="TwoD-Domains-1.html#SGS-Distance-5">7.4.3.1.1</a>.
 </td>
 </tr>
 <tr>
@@ -5308,7 +5305,7 @@ Projection</a>).
 Classic and HPC
 </td>
 <td style="text-align:left;">
-Sets the method for processing of the shapefile format projection (.prj) file to ensure an input is the same as the model projection (see Section <a href="ControlFiles-and-Inputs-1.html#GISFormats-3">4.4.1</a>). Setting to PARSED (default) parses the parameter data into number values and compares each of these numbers to check they are consistent. Setting to ‘SIMPLE’ will read in the file as a character string. Note, using ‘SIMPLE’ could cause issues if moving between GIS platforms, e.g. between ArcMap and QGIS as these could write the .prj files slightly differently, particularly with a different number of decimal places. For example, consider the two extracts from .prj files; “PARAMETER[”latitude_of_origin”,0]” and “PARAMETER[”latitude_of_origin”,0.0]”. A string compare would highlight these as not matching.
+Sets the method for processing of the shapefile format projection (.prj) file to ensure an input is the same as the model projection (see Section <a href="ControlFiles-and-Inputs-1.html#GISFormats-3">4.4.1</a>). Setting to PARSED (default) parses the parameter data into number values and compares each of these numbers to check they are consistent. Setting to ‘SIMPLE’ will read in the file as a character string. Note, using ‘SIMPLE’ could cause issues if moving between GIS platforms (e.g. between ArcMap and QGIS), as these could write the .prj files slightly differently, particularly with a different number of decimal places. For example, consider the two extracts from .prj files; “PARAMETER[”latitude_of_origin”,0]” and “PARAMETER[”latitude_of_origin”,0.0]”. A string compare would highlight these as not matching.
 </td>
 </tr>
 <tr>
@@ -5556,7 +5553,7 @@ option is to be used in preference to the PRE 2002-11-AD option.
 Classic and HPC
 </td>
 <td style="text-align:left;">
-Specifies the TUFLOW SWMM control file (.tscf), see Section <a href="ControlFiles-and-Inputs-1.html#TSCF-3">4.2.14</a>.
+Specifies the TUFLOW SWMM control file (.tscf), see Section <a href="ControlFiles-and-Inputs-1.html#TSCF-3">4.2.14</a> for details. See Appendix <a href="TSCFCommands-1.html#TSCFCommands-1">I</a> for a list of the SWMM control file commands.
 </td>
 </tr>
 <tr>
@@ -5680,7 +5677,7 @@ node only start flowing once the 2D SX cell is wet and the water level
 in the cell is above the lowest channel bed. If the ZC elevation is
 higher than the lowest channel, unexpected flows or a surge of water may
 occur in the 1D channels.</p>
-<p>Using the “Z” flag (see SX in <a href="Boundaries-InitialConditions-1.html#tab:tab-ConditionsAttribute">8.6</a>), the ZC elevation is
+<p>Using the “Z” flag (see SX in Table <a href="Boundaries-InitialConditions-1.html#tab:tab-ConditionsAttribute">8.6</a>), the ZC elevation is
 automatically lowered at each cell associated with a SX object to below
 the connected or snapped 1D node bed level. Only ZC elevations that are
 above the node are lowered. The checks and any automatic lowering of ZC
