@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 10 Linked 1D and 2D Models | TUFLOW Classic/HPC User Manual</title>
+  <meta name="description" content="TUFLOW User Manual" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 10 Linked 1D and 2D Models | TUFLOW Classic/HPC User Manual" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/TUFLOW.jpg" />
+  <meta property="og:description" content="TUFLOW User Manual" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 10 Linked 1D and 2D Models | TUFLOW Classic/HPC User Manual" />
+  
+  <meta name="twitter:description" content="TUFLOW User Manual" />
+  <meta name="twitter:image" content="/images/TUFLOW.jpg" />
+
+<meta name="author" content="" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="AD-1.html"/>
+<link rel="next" href="Outputs-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://www.tuflow.com"><img src="images/TUFLOW_Manual_23.png" style="width:262px;height:61px;"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this Manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#about-this-manual"><i class="fa fa-check"></i>About this Manual</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#glossary-and-notation"><i class="fa fa-check"></i>Glossary and Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Contents</a>
+<ul>
+<li class="chapter" data-level="" data-path="contents.html"><a href="contents.html#list-of-figures"><i class="fa fa-check"></i>List of Figures</a></li>
+<li class="chapter" data-level="" data-path="contents.html"><a href="contents.html#list-of-tables"><i class="fa fa-check"></i>List of Tables</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="Introduction-1.html"><a href="Introduction-1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Introduction-1.html"><a href="Introduction-1.html#TUFLOWProducts-2"><i class="fa fa-check"></i><b>1.1</b> TUFLOW Products</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="Introduction-1.html"><a href="Introduction-1.html#TUFLOW-CLA-3"><i class="fa fa-check"></i><b>1.1.1</b> TUFLOW Classic – 2D Semi-Implicit Solver</a></li>
+<li class="chapter" data-level="1.1.2" data-path="Introduction-1.html"><a href="Introduction-1.html#TUFLOW-HPC-3"><i class="fa fa-check"></i><b>1.1.2</b> TUFLOW HPC – 2D GPU Accelerated Solver</a></li>
+<li class="chapter" data-level="1.1.3" data-path="Introduction-1.html"><a href="Introduction-1.html#TUFLOW1D-3"><i class="fa fa-check"></i><b>1.1.3</b> TUFLOW 1D (ESTRY) – 1D Explicit Solver</a></li>
+<li class="chapter" data-level="1.1.4" data-path="Introduction-1.html"><a href="Introduction-1.html#AddonModules-3"><i class="fa fa-check"></i><b>1.1.4</b> Add-on Modules</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="Introduction-1.html"><a href="Introduction-1.html#TUFLOWWebinars-2"><i class="fa fa-check"></i><b>1.2</b> TUFLOW Webinars</a></li>
+<li class="chapter" data-level="1.3" data-path="Introduction-1.html"><a href="Introduction-1.html#ModellingEnvironment-2"><i class="fa fa-check"></i><b>1.3</b> Modelling Environment</a></li>
+<li class="chapter" data-level="1.4" data-path="Introduction-1.html"><a href="Introduction-1.html#LimitationsandRecommendations-2"><i class="fa fa-check"></i><b>1.4</b> Limitations and Recommendations</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#HowtoBuildYourFirstModel-2"><i class="fa fa-check"></i><b>2.1</b> How to Build Your First Model</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#TutorialModels-3"><i class="fa fa-check"></i><b>2.1.1</b> Tutorial Models</a></li>
+<li class="chapter" data-level="2.1.2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#ExampleModels-3"><i class="fa fa-check"></i><b>2.1.2</b> Example Models</a></li>
+<li class="chapter" data-level="2.1.3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#DemonstrationModels-3"><i class="fa fa-check"></i><b>2.1.3</b> Demonstration Models</a></li>
+<li class="chapter" data-level="2.1.4" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#LicenceFreeDemoMode-3"><i class="fa fa-check"></i><b>2.1.4</b> Licence Free Demo Mode</a></li>
+<li class="chapter" data-level="2.1.5" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#eLearningModules-3"><i class="fa fa-check"></i><b>2.1.5</b> eLearning Modules</a></li>
+<li class="chapter" data-level="2.1.6" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#InstructorLedTUFLOWTrainingCourses-3"><i class="fa fa-check"></i><b>2.1.6</b> Instructor Led TUFLOW Training Courses</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#TheTUFLOWModellingConcept-2"><i class="fa fa-check"></i><b>2.2</b> The TUFLOW Modelling Concept</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#Notepad-3"><i class="fa fa-check"></i><b>2.2.1</b> Notepad++</a></li>
+<li class="chapter" data-level="2.2.2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#QGISTUFLOWViewer-3"><i class="fa fa-check"></i><b>2.2.2</b> QGIS / TUFLOW Viewer</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#InstallingandRunningTUFLOW-2"><i class="fa fa-check"></i><b>2.3</b> Installing and Running TUFLOW</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#TUFLOWDownloadsandInstallation-3"><i class="fa fa-check"></i><b>2.3.1</b> TUFLOW Downloads and Installation</a></li>
+<li class="chapter" data-level="2.3.2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#Licencing-3"><i class="fa fa-check"></i><b>2.3.2</b> Licencing</a></li>
+<li class="chapter" data-level="2.3.3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#PerformingSimulations-3"><i class="fa fa-check"></i><b>2.3.3</b> Performing Simulations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#FoldersFileTypesandFileNaming-2"><i class="fa fa-check"></i><b>2.4</b> Folders, File Types and File Naming</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#FolderStructure-3"><i class="fa fa-check"></i><b>2.4.1</b> Folder Structure</a></li>
+<li class="chapter" data-level="2.4.2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#FileTypes-3"><i class="fa fa-check"></i><b>2.4.2</b> File Types</a></li>
+<li class="chapter" data-level="2.4.3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#NamingConventions-3"><i class="fa fa-check"></i><b>2.4.3</b> Naming Conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#TipsandTricks-2"><i class="fa fa-check"></i><b>2.5</b> Tips and Tricks</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html"><i class="fa fa-check"></i><b>3</b> Hydraulic Modelling Fundamentals</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#Fundaments-Introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#Schematisation-2"><i class="fa fa-check"></i><b>3.2</b> Schematisation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#GeneralGuidance-3"><i class="fa fa-check"></i><b>3.2.1</b> General Guidance</a></li>
+<li class="chapter" data-level="3.2.2" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#id_1D2Dor3D-3"><i class="fa fa-check"></i><b>3.2.2</b> 1D, 2D or 3D?</a></li>
+<li class="chapter" data-level="3.2.3" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#FixedGridorQuadtreeGrid-3"><i class="fa fa-check"></i><b>3.2.3</b> Fixed Grid or Quadtree Grid</a></li>
+<li class="chapter" data-level="3.2.4" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#Boundaries-3"><i class="fa fa-check"></i><b>3.2.4</b> Boundaries</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#ModelResolutionDiscretisation-2"><i class="fa fa-check"></i><b>3.3</b> Model Resolution (Discretisation)</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#id_1DNetworks-3"><i class="fa fa-check"></i><b>3.3.1</b> 1D Networks</a></li>
+<li class="chapter" data-level="3.3.2" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#id_2DCellSizes-3"><i class="fa fa-check"></i><b>3.3.2</b> 2D Cell Sizes</a></li>
+<li class="chapter" data-level="3.3.3" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#SubGridSamplingSGS-3"><i class="fa fa-check"></i><b>3.3.3</b> Sub-Grid Sampling (SGS)</a></li>
+<li class="chapter" data-level="3.3.4" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#CellSizeResultsConvergence-3"><i class="fa fa-check"></i><b>3.3.4</b> Cell Size Results Convergence</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#SolutionAccuracy-2"><i class="fa fa-check"></i><b>3.4</b> Solution Accuracy</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#FluidFlowPhysicalTerms-3"><i class="fa fa-check"></i><b>3.4.1</b> Fluid Flow Physical Terms</a></li>
+<li class="chapter" data-level="3.4.2" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#FormsoftheEquations-3"><i class="fa fa-check"></i><b>3.4.2</b> Forms of the Equations</a></li>
+<li class="chapter" data-level="3.4.3" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#NumericalAccuracy-3"><i class="fa fa-check"></i><b>3.4.3</b> Numerical Accuracy</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#TimesteppingandControlNumbers-2"><i class="fa fa-check"></i><b>3.5</b> Timestepping and Control Numbers</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#FixedVersusAdaptiveTimestepping-3"><i class="fa fa-check"></i><b>3.5.1</b> Fixed versus Adaptive Timestepping</a></li>
+<li class="chapter" data-level="3.5.2" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#ImplicitVersusExplicitSchemeTimesteps-3"><i class="fa fa-check"></i><b>3.5.2</b> Implicit versus Explicit Scheme Timesteps</a></li>
+<li class="chapter" data-level="3.5.3" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#id_1DDomainsESTRY-3"><i class="fa fa-check"></i><b>3.5.3</b> 1D Domains (ESTRY)</a></li>
+<li class="chapter" data-level="3.5.4" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#TUFLOWClassic-3"><i class="fa fa-check"></i><b>3.5.4</b> TUFLOW Classic</a></li>
+<li class="chapter" data-level="3.5.5" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#TUFLOWHPC-3"><i class="fa fa-check"></i><b>3.5.5</b> TUFLOW HPC</a></li>
+<li class="chapter" data-level="3.5.6" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#id_1D2DModels-3"><i class="fa fa-check"></i><b>3.5.6</b> 1D/2D Models</a></li>
+<li class="chapter" data-level="3.5.7" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#TimestepResults-3"><i class="fa fa-check"></i><b>3.5.7</b> <mark>Timestep Results Convergence</mark></a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html#SimulationTimes-2"><i class="fa fa-check"></i><b>3.6</b> Simulation Times</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html"><i class="fa fa-check"></i><b>4</b> Control Files and Input Layers</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#control-files"><i class="fa fa-check"></i><b>4.2</b> Control Files</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#Notation-3"><i class="fa fa-check"></i><b>4.2.1</b> Rules and Notation</a></li>
+<li class="chapter" data-level="4.2.2" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#FilePath-3"><i class="fa fa-check"></i><b>4.2.2</b> File Paths</a></li>
+<li class="chapter" data-level="4.2.3" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#Units-3"><i class="fa fa-check"></i><b>4.2.3</b> Units</a></li>
+<li class="chapter" data-level="4.2.4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#TCF-3"><i class="fa fa-check"></i><b>4.2.4</b> TCF</a></li>
+<li class="chapter" data-level="4.2.5" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#ECF-3"><i class="fa fa-check"></i><b>4.2.5</b> ECF</a></li>
+<li class="chapter" data-level="4.2.6" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#TBC-3"><i class="fa fa-check"></i><b>4.2.6</b> TBC</a></li>
+<li class="chapter" data-level="4.2.7" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#TGC-3"><i class="fa fa-check"></i><b>4.2.7</b> TGC</a></li>
+<li class="chapter" data-level="4.2.8" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#QCF-3"><i class="fa fa-check"></i><b>4.2.8</b> QCF</a></li>
+<li class="chapter" data-level="4.2.9" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#TEF-3"><i class="fa fa-check"></i><b>4.2.9</b> TEF</a></li>
+<li class="chapter" data-level="4.2.10" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#TOC-3"><i class="fa fa-check"></i><b>4.2.10</b> TOC</a></li>
+<li class="chapter" data-level="4.2.11" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#TRFC-3"><i class="fa fa-check"></i><b>4.2.11</b> TRFC</a></li>
+<li class="chapter" data-level="4.2.12" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#TESF-3"><i class="fa fa-check"></i><b>4.2.12</b> TESF</a></li>
+<li class="chapter" data-level="4.2.13" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#ADCF-3"><i class="fa fa-check"></i><b>4.2.13</b> ADCF</a></li>
+<li class="chapter" data-level="4.2.14" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#TSCF-3"><i class="fa fa-check"></i><b>4.2.14</b> TSCF</a></li>
+<li class="chapter" data-level="4.2.15" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#ReadFile-3"><i class="fa fa-check"></i><b>4.2.15</b> Read File</a></li>
+<li class="chapter" data-level="4.2.16" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#Override-3"><i class="fa fa-check"></i><b>4.2.16</b> Override Files</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GISLayers-2"><i class="fa fa-check"></i><b>4.3</b> Input Layers</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GISFormats-3"><i class="fa fa-check"></i><b>4.3.1</b> Input Formats</a></li>
+<li class="chapter" data-level="4.3.2" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GISCommands-3"><i class="fa fa-check"></i><b>4.3.2</b> GIS Commands</a></li>
+<li class="chapter" data-level="4.3.3" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GRID-3"><i class="fa fa-check"></i><b>4.3.3</b> GRID Commands</a></li>
+<li class="chapter" data-level="4.3.4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#TIN-3"><i class="fa fa-check"></i><b>4.3.4</b> TIN Commands</a></li>
+<li class="chapter" data-level="4.3.5" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#RowCol-3"><i class="fa fa-check"></i><b>4.3.5</b> RowCol Commands (Legacy)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#LayeringData-2"><i class="fa fa-check"></i><b>4.4</b> Layering Data</a></li>
+<li class="chapter" data-level="4.5" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#XF-Files-2"><i class="fa fa-check"></i><b>4.5</b> XF Files</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html"><i class="fa fa-check"></i><b>5</b> 1D Network Domains - ESTRY</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#OneD-Introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Scheme-2"><i class="fa fa-check"></i><b>5.2</b> Schematisation</a></li>
+<li class="chapter" data-level="5.3" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#SolutionScheme-2"><i class="fa fa-check"></i><b>5.3</b> Solution Scheme</a></li>
+<li class="chapter" data-level="5.4" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#OneD-nwk-2"><i class="fa fa-check"></i><b>5.4</b> 1d_nwk Attributes</a></li>
+<li class="chapter" data-level="5.5" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Channel-Intro-2"><i class="fa fa-check"></i><b>5.5</b> Channels Overview</a></li>
+<li class="chapter" data-level="5.6" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Open-Channel-2"><i class="fa fa-check"></i><b>5.6</b> Open Channels</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#I-channels-3"><i class="fa fa-check"></i><b>5.6.1</b> Inertial Channels</a></li>
+<li class="chapter" data-level="5.6.2" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#NI-channels-3"><i class="fa fa-check"></i><b>5.6.2</b> Non-Inertial Channels</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#XS-2"><i class="fa fa-check"></i><b>5.7</b> Cross-Sections</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#XS-flags-3"><i class="fa fa-check"></i><b>5.7.1</b> Type “XZ” Optional Flags</a></li>
+<li class="chapter" data-level="5.7.2" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#HW-flags-3"><i class="fa fa-check"></i><b>5.7.2</b> Type “HW” Optional Flags</a></li>
+<li class="chapter" data-level="5.7.3" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Parallel-Channel-3"><i class="fa fa-check"></i><b>5.7.3</b> Parallel Channel Analysis</a></li>
+<li class="chapter" data-level="5.7.4" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Eff-vs-Total-3"><i class="fa fa-check"></i><b>5.7.4</b> Effective Area versus Total Area</a></li>
+<li class="chapter" data-level="5.7.5" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#XS-Mid-3"><i class="fa fa-check"></i><b>5.7.5</b> Mid Cross-Sections</a></li>
+<li class="chapter" data-level="5.7.6" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#XS-End-3"><i class="fa fa-check"></i><b>5.7.6</b> End Cross-Sections</a></li>
+<li class="chapter" data-level="5.7.7" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Interpolate-XS-3"><i class="fa fa-check"></i><b>5.7.7</b> Interpolated Cross-Section Protocols</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Structures-2"><i class="fa fa-check"></i><b>5.8</b> Structures</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#culverts-pipes-3"><i class="fa fa-check"></i><b>5.8.1</b> Culverts and Pipes</a></li>
+<li class="chapter" data-level="5.8.2" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Bridges-3"><i class="fa fa-check"></i><b>5.8.2</b> Bridges</a></li>
+<li class="chapter" data-level="5.8.3" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#BArch-3"><i class="fa fa-check"></i><b>5.8.3</b> Arch Bridge</a></li>
+<li class="chapter" data-level="5.8.4" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Weir-3"><i class="fa fa-check"></i><b>5.8.4</b> Weirs</a></li>
+<li class="chapter" data-level="5.8.5" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#SP-3"><i class="fa fa-check"></i><b>5.8.5</b> Spillways (SP)</a></li>
+<li class="chapter" data-level="5.8.6" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#SG-3"><i class="fa fa-check"></i><b>5.8.6</b> Sluice Gates (SG)</a></li>
+<li class="chapter" data-level="5.8.7" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#LossAdjustment-3"><i class="fa fa-check"></i><b>5.8.7</b> Adjustment of Contraction and Expansion Losses</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Special-Channels-2"><i class="fa fa-check"></i><b>5.9</b> Special Channels</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#M-Channel-3"><i class="fa fa-check"></i><b>5.9.1</b> M Channels (User Defined Flow Matrix)</a></li>
+<li class="chapter" data-level="5.9.2" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Q-Channels-3"><i class="fa fa-check"></i><b>5.9.2</b> Q Channels (Upstream Depth-Discharge Relationship)</a></li>
+<li class="chapter" data-level="5.9.3" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#XConnect-3"><i class="fa fa-check"></i><b>5.9.3</b> X Connectors</a></li>
+<li class="chapter" data-level="5.9.4" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Legacy-Channel-3"><i class="fa fa-check"></i><b>5.9.4</b> Legacy Channels</a></li>
+<li class="chapter" data-level="5.9.5" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#OneD-nwk-3"><i class="fa fa-check"></i><b>5.9.5</b> 1d_nwk Attributes (M, P, Q, SG, SP Channels)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#OperationalChannels-2"><i class="fa fa-check"></i><b>5.10</b> Operational Channels</a>
+<ul>
+<li class="chapter" data-level="5.10.1" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#TOC-Logic-3"><i class="fa fa-check"></i><b>5.10.1</b> .toc File Commands and Logic</a></li>
+<li class="chapter" data-level="5.10.2" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Pumps-3"><i class="fa fa-check"></i><b>5.10.2</b> Pumps (P and PO)</a></li>
+<li class="chapter" data-level="5.10.3" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#QO-3"><i class="fa fa-check"></i><b>5.10.3</b> QO Channels</a></li>
+<li class="chapter" data-level="5.10.4" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#RO-3"><i class="fa fa-check"></i><b>5.10.4</b> Gated Drowned Rectangular Culverts (RO)</a></li>
+<li class="chapter" data-level="5.10.5" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#SG-SGO-3"><i class="fa fa-check"></i><b>5.10.5</b> Sluice Gates (SG and SGO)</a></li>
+<li class="chapter" data-level="5.10.6" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#SPO-3"><i class="fa fa-check"></i><b>5.10.6</b> Spillways with Gates (SPO)</a></li>
+<li class="chapter" data-level="5.10.7" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Weirs-Operational-3"><i class="fa fa-check"></i><b>5.10.7</b> Weirs (WBO, WCO, WDO, WOO, WRO, WTO)</a></li>
+<li class="chapter" data-level="5.10.8" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#PFDF-3"><i class="fa fa-check"></i><b>5.10.8</b> Piping and Dam Failure</a></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Pipes-2"><i class="fa fa-check"></i><b>5.11</b> Pipe Networks</a>
+<ul>
+<li class="chapter" data-level="5.11.1" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Pipes-3"><i class="fa fa-check"></i><b>5.11.1</b> Pipes</a></li>
+<li class="chapter" data-level="5.11.2" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Pits-3"><i class="fa fa-check"></i><b>5.11.2</b> Pits</a></li>
+<li class="chapter" data-level="5.11.3" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#DD-Database-3"><i class="fa fa-check"></i><b>5.11.3</b> Pit Inlet and Depth/Stage vs Discharge Databases</a></li>
+<li class="chapter" data-level="5.11.4" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Manholes-3"><i class="fa fa-check"></i><b>5.11.4</b> Manholes</a></li>
+</ul></li>
+<li class="chapter" data-level="5.12" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Virtual-Pipes-2"><i class="fa fa-check"></i><b>5.12</b> Virtual Pipes</a></li>
+<li class="chapter" data-level="5.13" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Nodes-2"><i class="fa fa-check"></i><b>5.13</b> Nodes</a>
+<ul>
+<li class="chapter" data-level="5.13.1" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Auto-Node-3"><i class="fa fa-check"></i><b>5.13.1</b> Automatically Defined Nodes</a></li>
+<li class="chapter" data-level="5.13.2" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Manual-Node-3"><i class="fa fa-check"></i><b>5.13.2</b> Manually Defined Nodes</a></li>
+<li class="chapter" data-level="5.13.3" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html#Obvert-3"><i class="fa fa-check"></i><b>5.13.3</b> Storage Above Top of Channels</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html"><i class="fa fa-check"></i><b>6</b> 1D Network Domains - EPA SWMM</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html#SWMM-Introduction-2"><i class="fa fa-check"></i><b>6.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html#TUFLOW-SWMM-Capabilities-3"><i class="fa fa-check"></i><b>6.1.1</b> TUFLOW-SWMM Capabilities</a></li>
+<li class="chapter" data-level="6.1.2" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html#SWMM-UserResources-3"><i class="fa fa-check"></i><b>6.1.2</b> Additional SWMM User Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html#ModelSetup-2"><i class="fa fa-check"></i><b>6.2</b> Model Setup</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html#SwmmModel-3"><i class="fa fa-check"></i><b>6.2.1</b> SWMM Model</a></li>
+<li class="chapter" data-level="6.2.2" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html#TUFLOW-SWMM_Simulations-4"><i class="fa fa-check"></i><b>6.2.2</b> TUFLOW-SWMM Model Simulation</a></li>
+<li class="chapter" data-level="6.2.3" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html#SWMM_ESTRY_Linking-3"><i class="fa fa-check"></i><b>6.2.3</b> Linking SWMM to TUFLOW 2D and ESTRY</a></li>
+<li class="chapter" data-level="6.2.4" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html#SWMMSettings-3"><i class="fa fa-check"></i><b>6.2.4</b> SWMM Simulation Option Settings</a></li>
+<li class="chapter" data-level="6.2.5" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html#SWMM_BCDB-3"><i class="fa fa-check"></i><b>6.2.5</b> Using the TUFLOW BC Database in SWMM</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html#SWMMGISTools-2"><i class="fa fa-check"></i><b>6.3</b> SWMM GIS Tools</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html#SWMMGPKGFormat-3"><i class="fa fa-check"></i><b>6.3.1</b> GeoPackage File Format</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html#SWMMOutputs-2"><i class="fa fa-check"></i><b>6.4</b> SWMM Outputs</a></li>
+<li class="chapter" data-level="6.5" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html#SWMMInclusionTUFLOW-2"><i class="fa fa-check"></i><b>6.5</b> SWMM Inclusion in TUFLOW</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html#SWMMLibraryVersion-3"><i class="fa fa-check"></i><b>6.5.1</b> SWMM Library Version</a></li>
+<li class="chapter" data-level="6.5.2" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html#SWMMCode-in-TUFLOW-3"><i class="fa fa-check"></i><b>6.5.2</b> Embedded SWMM Code in TUFLOW</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html"><i class="fa fa-check"></i><b>7</b> 2D Domains</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#introduction-1"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#solvers"><i class="fa fa-check"></i><b>7.2</b> Solvers</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#tuflow-hpc-2d-solver"><i class="fa fa-check"></i><b>7.2.1</b> TUFLOW HPC 2D Solver</a></li>
+<li class="chapter" data-level="7.2.2" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#tuflow-classic-2d-solver"><i class="fa fa-check"></i><b>7.2.2</b> TUFLOW Classic 2D Solver</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#common-functionality"><i class="fa fa-check"></i><b>7.3</b> Common Functionality</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#cell-schematisation"><i class="fa fa-check"></i><b>7.3.1</b> Cell Schematisation</a></li>
+<li class="chapter" data-level="7.3.2" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#turbulence-overview"><i class="fa fa-check"></i><b>7.3.2</b> Turbulence Overview</a></li>
+<li class="chapter" data-level="7.3.3" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#defining-the-domain"><i class="fa fa-check"></i><b>7.3.3</b> Defining the Domain</a></li>
+<li class="chapter" data-level="7.3.4" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#CellCodes-3"><i class="fa fa-check"></i><b>7.3.4</b> Active / Inactive Cells</a></li>
+<li class="chapter" data-level="7.3.5" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#data-layering"><i class="fa fa-check"></i><b>7.3.5</b> Data Layering</a></li>
+<li class="chapter" data-level="7.3.6" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#elevations"><i class="fa fa-check"></i><b>7.3.6</b> Elevations</a></li>
+<li class="chapter" data-level="7.3.7" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#cell-modification"><i class="fa fa-check"></i><b>7.3.7</b> Cell Modification</a></li>
+<li class="chapter" data-level="7.3.8" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#hydraulic-structures"><i class="fa fa-check"></i><b>7.3.8</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="7.3.9" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#Materials-2"><i class="fa fa-check"></i><b>7.3.9</b> Land Use (Materials)</a></li>
+<li class="chapter" data-level="7.3.10" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#Infiltration-2"><i class="fa fa-check"></i><b>7.3.10</b> Infiltration and Groundwater Flows</a></li>
+<li class="chapter" data-level="7.3.11" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#modelling-urban-areas"><i class="fa fa-check"></i><b>7.3.11</b> Modelling Urban Areas</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#hpc-specific"><i class="fa fa-check"></i><b>7.4</b> HPC Specific</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#quadtree"><i class="fa fa-check"></i><b>7.4.1</b> Quadtree</a></li>
+<li class="chapter" data-level="7.4.2" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#hpc-turbulence"><i class="fa fa-check"></i><b>7.4.2</b> HPC Turbulence</a></li>
+<li class="chapter" data-level="7.4.3" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#sub-grid-turbulence-eddy-viscosity"><i class="fa fa-check"></i><b>7.4.3</b> Sub-Grid Turbulence (Eddy Viscosity)</a></li>
+<li class="chapter" data-level="7.4.4" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#sgs"><i class="fa fa-check"></i><b>7.4.4</b> SGS</a></li>
+<li class="chapter" data-level="7.4.5" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#sampling-of-data-sets"><i class="fa fa-check"></i><b>7.4.5</b> Sampling of Data Sets</a></li>
+<li class="chapter" data-level="7.4.6" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#d-upstream-controlled-flow-weirs-and-supercritical-flow"><i class="fa fa-check"></i><b>7.4.6</b> 2D Upstream Controlled Flow (Weirs and Supercritical Flow)</a></li>
+<li class="chapter" data-level="7.4.7" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#groundwater-flow"><i class="fa fa-check"></i><b>7.4.7</b> Groundwater Flow</a></li>
+<li class="chapter" data-level="7.4.8" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#non-newtonian-flow"><i class="fa fa-check"></i><b>7.4.8</b> Non-Newtonian Flow</a></li>
+<li class="chapter" data-level="7.4.9" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#features-not-supported-in-hpc"><i class="fa fa-check"></i><b>7.4.9</b> Features not supported in HPC</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#classic-specific"><i class="fa fa-check"></i><b>7.5</b> Classic Specific</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#classic-turbulence"><i class="fa fa-check"></i><b>7.5.1</b> Classic Turbulence</a></li>
+<li class="chapter" data-level="7.5.2" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#d-upstream-controlled-flow-weirs-and-supercritical-flow-1"><i class="fa fa-check"></i><b>7.5.2</b> 2D Upstream Controlled Flow (Weirs and Supercritical Flow)</a></li>
+<li class="chapter" data-level="7.5.3" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#d2d-model"><i class="fa fa-check"></i><b>7.5.3</b> 2D/2D model</a></li>
+<li class="chapter" data-level="7.5.4" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#legacy-structures"><i class="fa fa-check"></i><b>7.5.4</b> Legacy structures</a></li>
+<li class="chapter" data-level="7.5.5" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html#features-not-supported-in-classic"><i class="fa fa-check"></i><b>7.5.5</b> Features not supported in Classic</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html"><i class="fa fa-check"></i><b>8</b> Boundaries and Initial Conditions</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#BC-Intro-2"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#BCArrangements-2"><i class="fa fa-check"></i><b>8.2</b> Recommended BC Arrangements</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#ClassicBC-3"><i class="fa fa-check"></i><b>8.2.1</b> Classic Specific Boundaries / Options</a></li>
+<li class="chapter" data-level="8.2.2" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#ClassicHPC-3"><i class="fa fa-check"></i><b>8.2.2</b> HPC Specific Boundaries / Options</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#id_1DBoundaries-2"><i class="fa fa-check"></i><b>8.3</b> 1D Boundaries (1d_bc Layers)</a></li>
+<li class="chapter" data-level="8.4" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#id_2DBoundaries-2"><i class="fa fa-check"></i><b>8.4</b> 2D Boundaries (2d_bc, 2d_sa and 2d_rf Layers)</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#id_2DBndSlopingLevel-3"><i class="fa fa-check"></i><b>8.4.1</b> Sloping Water Level Boundaries</a></li>
+<li class="chapter" data-level="8.4.2" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#BC-Layers-3"><i class="fa fa-check"></i><b>8.4.2</b> 2d_bc Layers</a></li>
+<li class="chapter" data-level="8.4.3" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#groundwater-boundary-conditions"><i class="fa fa-check"></i><b>8.4.3</b> Groundwater Boundary Conditions</a></li>
+<li class="chapter" data-level="8.4.4" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#SA-Layers-3"><i class="fa fa-check"></i><b>8.4.4</b> 2d_sa Layers</a></li>
+<li class="chapter" data-level="8.4.5" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#Rainfall-3"><i class="fa fa-check"></i><b>8.4.5</b> Rainfall</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#bcdbase-2"><i class="fa fa-check"></i><b>8.5</b> Boundary Condition (BC) Database</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#bcdbase-Example-3"><i class="fa fa-check"></i><b>8.5.1</b> BC Database Example</a></li>
+<li class="chapter" data-level="8.5.2" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#BCEventName-3"><i class="fa fa-check"></i><b>8.5.2</b> Using the BC Event Name Command</a></li>
+<li class="chapter" data-level="8.5.3" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#DelftFEWSBoundary-3"><i class="fa fa-check"></i><b>8.5.3</b> Using the Delft FEWS Boundary Conditions</a></li>
+<li class="chapter" data-level="8.5.4" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#HECDSS-3"><i class="fa fa-check"></i><b>8.5.4</b> HEC-DSS Boundaries????</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#Cyclones-2"><i class="fa fa-check"></i><b>8.6</b> Cyclones / Hurricanes</a></li>
+<li class="chapter" data-level="8.7" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#BCSlopingLevel-2"><i class="fa fa-check"></i><b>8.7</b> Sloping water level boundaries</a></li>
+<li class="chapter" data-level="8.8" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#ExternalStress-2"><i class="fa fa-check"></i><b>8.8</b> External Stress Boundaries</a></li>
+<li class="chapter" data-level="8.9" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#InitialConditions-2"><i class="fa fa-check"></i><b>8.9</b> Initial Conditions</a>
+<ul>
+<li class="chapter" data-level="8.9.1" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#IWL-3"><i class="fa fa-check"></i><b>8.9.1</b> Initial Water Levels (IWL)</a></li>
+<li class="chapter" data-level="8.9.2" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html#RestartFiles-3"><i class="fa fa-check"></i><b>8.9.2</b> Restart Files</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="AD-1.html"><a href="AD-1.html"><i class="fa fa-check"></i><b>9</b> Advection Dispersion</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="AD-1.html"><a href="AD-1.html#AD-Overview-2"><i class="fa fa-check"></i><b>9.1</b> Overview</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="AD-1.html"><a href="AD-1.html#AD-Solution-2"><i class="fa fa-check"></i><b>9.1.1</b> Solution Method (TUFLOW Classic)</a></li>
+<li class="chapter" data-level="9.1.2" data-path="AD-1.html"><a href="AD-1.html#solution-method-tuflow-hpc"><i class="fa fa-check"></i><b>9.1.2</b> Solution Method (TUFLOW HPC)</a></li>
+<li class="chapter" data-level="9.1.3" data-path="AD-1.html"><a href="AD-1.html#constituent-transformation"><i class="fa fa-check"></i><b>9.1.3</b> Constituent Transformation</a></li>
+<li class="chapter" data-level="9.1.4" data-path="AD-1.html"><a href="AD-1.html#Dw-Formula-3"><i class="fa fa-check"></i><b>9.1.4</b> Dispersion Formulation</a></li>
+<li class="chapter" data-level="9.1.5" data-path="AD-1.html"><a href="AD-1.html#groundwater"><i class="fa fa-check"></i><b>9.1.5</b> Groundwater</a></li>
+<li class="chapter" data-level="9.1.6" data-path="AD-1.html"><a href="AD-1.html#limitations-and-recommendations"><i class="fa fa-check"></i><b>9.1.6</b> Limitations and Recommendations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="AD-1.html"><a href="AD-1.html#the-modelling-process"><i class="fa fa-check"></i><b>9.2</b> The Modelling Process</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="AD-1.html"><a href="AD-1.html#data-input-requirements"><i class="fa fa-check"></i><b>9.2.1</b> Data Input Requirements</a></li>
+<li class="chapter" data-level="9.2.2" data-path="AD-1.html"><a href="AD-1.html#calibration-and-sensitivity"><i class="fa fa-check"></i><b>9.2.2</b> Calibration and Sensitivity</a></li>
+<li class="chapter" data-level="9.2.3" data-path="AD-1.html"><a href="AD-1.html#model-resolution"><i class="fa fa-check"></i><b>9.2.3</b> Model Resolution</a></li>
+<li class="chapter" data-level="9.2.4" data-path="AD-1.html"><a href="AD-1.html#computational-timestep"><i class="fa fa-check"></i><b>9.2.4</b> Computational Timestep</a></li>
+<li class="chapter" data-level="9.2.5" data-path="AD-1.html"><a href="AD-1.html#example-ad-models"><i class="fa fa-check"></i><b>9.2.5</b> Example AD Models</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="AD-1.html"><a href="AD-1.html#data-input"><i class="fa fa-check"></i><b>9.3</b> Data Input</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="AD-1.html"><a href="AD-1.html#simulation-control-file"><i class="fa fa-check"></i><b>9.3.1</b> Simulation Control File</a></li>
+<li class="chapter" data-level="9.3.2" data-path="AD-1.html"><a href="AD-1.html#d-geometries"><i class="fa fa-check"></i><b>9.3.2</b> 1D Geometries</a></li>
+<li class="chapter" data-level="9.3.3" data-path="AD-1.html"><a href="AD-1.html#specification-of-constituent-properties"><i class="fa fa-check"></i><b>9.3.3</b> Specification of Constituent Properties</a></li>
+<li class="chapter" data-level="9.3.4" data-path="AD-1.html"><a href="AD-1.html#boundary-conditions"><i class="fa fa-check"></i><b>9.3.4</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="9.3.5" data-path="AD-1.html"><a href="AD-1.html#initial-conditions"><i class="fa fa-check"></i><b>9.3.5</b> Initial Conditions</a></li>
+<li class="chapter" data-level="9.3.6" data-path="AD-1.html"><a href="AD-1.html#minimum-dispersion-coefficient"><i class="fa fa-check"></i><b>9.3.6</b> Minimum Dispersion Coefficient</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="AD-1.html"><a href="AD-1.html#data-output"><i class="fa fa-check"></i><b>9.4</b> Data Output</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="AD-1.html"><a href="AD-1.html#console-window-display"><i class="fa fa-check"></i><b>9.4.1</b> Console Window Display</a></li>
+<li class="chapter" data-level="9.4.2" data-path="AD-1.html"><a href="AD-1.html#results"><i class="fa fa-check"></i><b>9.4.2</b> Results</a></li>
+<li class="chapter" data-level="9.4.3" data-path="AD-1.html"><a href="AD-1.html#tuflow-ad-log-files"><i class="fa fa-check"></i><b>9.4.3</b> TUFLOW AD Log Files</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html"><i class="fa fa-check"></i><b>10</b> Linked 1D and 2D Models</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#Linked-1D2D-Models-Intro-2"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#OneD2dLinking-2"><i class="fa fa-check"></i><b>10.2</b> 1D and 2D Domain Linking Theory</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#HXBoundary-3"><i class="fa fa-check"></i><b>10.2.1</b> HX 2D Head Boundary</a></li>
+<li class="chapter" data-level="10.2.2" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#SXBoundary-3"><i class="fa fa-check"></i><b>10.2.2</b> SX 2D Flow Boundary</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#OneD2DLinking-Estry-2"><i class="fa fa-check"></i><b>10.3</b> TUFLOW 1D (ESTRY) to TUFLOW 2D Linking</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#OneD2DESTRYChannel-3"><i class="fa fa-check"></i><b>10.3.1</b> Nested 1D Open Channel 2D Domain Linking</a></li>
+<li class="chapter" data-level="10.3.2" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#OneD2DESTRYCulverts-3"><i class="fa fa-check"></i><b>10.3.2</b> 1D Culvert Connections to 2D Domains</a></li>
+<li class="chapter" data-level="10.3.3" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#OneD2DESTRYPipeNetwork-3"><i class="fa fa-check"></i><b>10.3.3</b> 1D Pipe Network Connecting Pits and Virtual Pits to 2D Domains</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#OneD2DLinkingSWMM-2"><i class="fa fa-check"></i><b>10.4</b> SWMM to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#OneD2DSWMMCulverts-5"><i class="fa fa-check"></i><b>10.4.1</b> 1D Culvert Connections to 2D Domains</a></li>
+<li class="chapter" data-level="10.4.2" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#OneD2DSWMMPipeNetwork-3"><i class="fa fa-check"></i><b>10.4.2</b> 1D Pipe Network Connections to 2D Domains</a></li>
+<li class="chapter" data-level="10.4.3" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#OneD2DLinkingSWMM1D-3"><i class="fa fa-check"></i><b>10.4.3</b> SWMM to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#OneD2DLinkingFM-2"><i class="fa fa-check"></i><b>10.5</b> Flood Modeller to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#oneD2DFMLinking2D-3"><i class="fa fa-check"></i><b>10.5.1</b> Flood Modeller 1D to TUFLOW 2D Linking</a></li>
+<li class="chapter" data-level="10.5.2" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#oneD2DFMLinking1D-3"><i class="fa fa-check"></i><b>10.5.2</b> Flood Modeller 1D to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#oneD2D12D-2"><i class="fa fa-check"></i><b>10.6</b> 12D to TUFLOW Linking</a></li>
+<li class="chapter" data-level="10.7" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#TwoD2DLinking-2"><i class="fa fa-check"></i><b>10.7</b> 2D / 2D Domain Linking</a>
+<ul>
+<li class="chapter" data-level="10.7.1" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#TwoD2DLinkingQDT-3"><i class="fa fa-check"></i><b>10.7.1</b> TUFLOW HPC Quadtree</a></li>
+<li class="chapter" data-level="10.7.2" data-path="Linked-1D2D-Models-1.html"><a href="Linked-1D2D-Models-1.html#TwoD2DLinkingM2D-3"><i class="fa fa-check"></i><b>10.7.2</b> TUFLOW Classic Multiple 2D Domain</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="Outputs-1.html"><a href="Outputs-1.html"><i class="fa fa-check"></i><b>11</b> Outputs</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="Outputs-1.html"><a href="Outputs-1.html#Location-2"><i class="fa fa-check"></i><b>11.1</b> Output Location</a></li>
+<li class="chapter" data-level="11.2" data-path="Outputs-1.html"><a href="Outputs-1.html#Map-2"><i class="fa fa-check"></i><b>11.2</b> Map Outputs</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="Outputs-1.html"><a href="Outputs-1.html#TimeControl-3"><i class="fa fa-check"></i><b>11.2.1</b> Output Time Controls</a></li>
+<li class="chapter" data-level="11.2.2" data-path="Outputs-1.html"><a href="Outputs-1.html#Format-3"><i class="fa fa-check"></i><b>11.2.2</b> Map Output Formats</a></li>
+<li class="chapter" data-level="11.2.3" data-path="Outputs-1.html"><a href="Outputs-1.html#DataTypes-3"><i class="fa fa-check"></i><b>11.2.3</b> Map Output Data Types</a></li>
+<li class="chapter" data-level="11.2.4" data-path="Outputs-1.html"><a href="Outputs-1.html#OneDMap-3"><i class="fa fa-check"></i><b>11.2.4</b> 1D Map Outputs</a></li>
+<li class="chapter" data-level="11.2.5" data-path="Outputs-1.html"><a href="Outputs-1.html#OutputZones-3"><i class="fa fa-check"></i><b>11.2.5</b> Output Zones</a></li>
+<li class="chapter" data-level="11.2.6" data-path="Outputs-1.html"><a href="Outputs-1.html#GaugeLevel-3"><i class="fa fa-check"></i><b>11.2.6</b> Gauge Level Output</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="Outputs-1.html"><a href="Outputs-1.html#TimeSeries-2"><i class="fa fa-check"></i><b>11.3</b> Time-Series Outputs</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="Outputs-1.html"><a href="Outputs-1.html#OneDTS-3"><i class="fa fa-check"></i><b>11.3.1</b> 1D Time-Series Output</a></li>
+<li class="chapter" data-level="11.3.2" data-path="Outputs-1.html"><a href="Outputs-1.html#TwoDTS-3"><i class="fa fa-check"></i><b>11.3.2</b> 2D Time-Series Output</a></li>
+<li class="chapter" data-level="11.3.3" data-path="Outputs-1.html"><a href="Outputs-1.html#ReportingLocation-3"><i class="fa fa-check"></i><b>11.3.3</b> Reporting Locations</a></li>
+<li class="chapter" data-level="11.3.4" data-path="Outputs-1.html"><a href="Outputs-1.html#Structure-3"><i class="fa fa-check"></i><b>11.3.4</b> Structure Output</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="Outputs-1.html"><a href="Outputs-1.html#Specialised-2"><i class="fa fa-check"></i><b>11.4</b> Specialised Outputs</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="Outputs-1.html"><a href="Outputs-1.html#Receptors-3"><i class="fa fa-check"></i><b>11.4.1</b> Receptors</a></li>
+<li class="chapter" data-level="11.4.2" data-path="Outputs-1.html"><a href="Outputs-1.html#EvaculationRoutes-3"><i class="fa fa-check"></i><b>11.4.2</b> Evacuation Routes</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="Outputs-1.html"><a href="Outputs-1.html#ChecksLogs-2"><i class="fa fa-check"></i><b>11.5</b> Check and Log Files</a></li>
+<li class="chapter" data-level="11.6" data-path="Outputs-1.html"><a href="Outputs-1.html#Commands-2"><i class="fa fa-check"></i><b>11.6</b> Output Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="Hardware-1.html"><a href="Hardware-1.html"><i class="fa fa-check"></i><b>12</b> Hardware and Operating System</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="Hardware-1.html"><a href="Hardware-1.html#HardwareIntro-2"><i class="fa fa-check"></i><b>12.1</b> Introduction</a></li>
+<li class="chapter" data-level="12.2" data-path="Hardware-1.html"><a href="Hardware-1.html#OperatingSystems-2"><i class="fa fa-check"></i><b>12.2</b> Operating Systems</a></li>
+<li class="chapter" data-level="12.3" data-path="Hardware-1.html"><a href="Hardware-1.html#TUFLOWClassic-2"><i class="fa fa-check"></i><b>12.3</b> TUFLOW Classic</a></li>
+<li class="chapter" data-level="12.4" data-path="Hardware-1.html"><a href="Hardware-1.html#TUFLOWHPC-2"><i class="fa fa-check"></i><b>12.4</b> TUFLOW HPC (Including Quadtree)</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="Hardware-1.html"><a href="Hardware-1.html#HPC-CPU-3"><i class="fa fa-check"></i><b>12.4.1</b> TUFLOW HPC Solver on CPU</a></li>
+<li class="chapter" data-level="12.4.2" data-path="Hardware-1.html"><a href="Hardware-1.html#HPC-GPU-3"><i class="fa fa-check"></i><b>12.4.2</b> TUFLOW HPC Solver on GPU</a></li>
+<li class="chapter" data-level="12.4.3" data-path="Hardware-1.html"><a href="Hardware-1.html#GPUTypes-3"><i class="fa fa-check"></i><b>12.4.3</b> Types of GPU</a></li>
+<li class="chapter" data-level="12.4.4" data-path="Hardware-1.html"><a href="Hardware-1.html#MultipleGPUs-3"><i class="fa fa-check"></i><b>12.4.4</b> Utilising Multiple GPUs for One Model</a></li>
+<li class="chapter" data-level="12.4.5" data-path="Hardware-1.html"><a href="Hardware-1.html#MultipleModelsoneGPU-3"><i class="fa fa-check"></i><b>12.4.5</b> Running Multiple Models on a Single GPU</a></li>
+<li class="chapter" data-level="12.4.6" data-path="Hardware-1.html"><a href="Hardware-1.html#HPCRAM-3"><i class="fa fa-check"></i><b>12.4.6</b> RAM</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="Hardware-1.html"><a href="Hardware-1.html#ProxiesforCPUandGPU-2"><i class="fa fa-check"></i><b>12.5</b> Proxies for CPU and GPU performance</a></li>
+<li class="chapter" data-level="12.6" data-path="Hardware-1.html"><a href="Hardware-1.html#Virtualisation-2"><i class="fa fa-check"></i><b>12.6</b> Virtualisation</a></li>
+<li class="chapter" data-level="12.7" data-path="Hardware-1.html"><a href="Hardware-1.html#CloudCompute-2"><i class="fa fa-check"></i><b>12.7</b> Cloud Compute</a></li>
+<li class="chapter" data-level="12.8" data-path="Hardware-1.html"><a href="Hardware-1.html#HardwareCommands-2"><i class="fa fa-check"></i><b>12.8</b> Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html"><i class="fa fa-check"></i><b>13</b> Managing and Starting Simulations</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#RunningSimulationsIntro-2"><i class="fa fa-check"></i><b>13.1</b> Introduction</a></li>
+<li class="chapter" data-level="13.2" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#FileNaming-2"><i class="fa fa-check"></i><b>13.2</b> File Naming</a></li>
+<li class="chapter" data-level="13.3" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#SimulationManagement-2"><i class="fa fa-check"></i><b>13.3</b> Simulation Management</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#TimeOutputControls-3"><i class="fa fa-check"></i><b>13.3.1</b> Time and Output Controls</a></li>
+<li class="chapter" data-level="13.3.2" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#Events-3"><i class="fa fa-check"></i><b>13.3.2</b> Events</a></li>
+<li class="chapter" data-level="13.3.3" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#Scenarios-3"><i class="fa fa-check"></i><b>13.3.3</b> Scenarios</a></li>
+<li class="chapter" data-level="13.3.4" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#Variables-3"><i class="fa fa-check"></i><b>13.3.4</b> Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#TUFLOWExecDownload-2"><i class="fa fa-check"></i><b>13.4</b> TUFLOW Executable Download</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#InstallOverview-3"><i class="fa fa-check"></i><b>13.4.1</b> Overview and Where to Install</a></li>
+<li class="chapter" data-level="13.4.2" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#iSPdSP-3"><i class="fa fa-check"></i><b>13.4.2</b> Single and Double Precision</a></li>
+<li class="chapter" data-level="13.4.3" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#CustomingTUFLOW-3"><i class="fa fa-check"></i><b>13.4.3</b> Customising TUFLOW using TUFLOW_USER_DEFINED.dll</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#RunningSims-2"><i class="fa fa-check"></i><b>13.5</b> Running Simulations</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#DongleTypesandSetup-3"><i class="fa fa-check"></i><b>13.5.1</b> Dongle Types and Setup</a></li>
+<li class="chapter" data-level="13.5.2" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#StartingaSim-3"><i class="fa fa-check"></i><b>13.5.2</b> Starting a Simulation</a></li>
+<li class="chapter" data-level="13.5.3" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#RunningHPC-3"><i class="fa fa-check"></i><b>13.5.3</b> Running TUFLOW HPC</a></li>
+<li class="chapter" data-level="13.5.4" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#Running1D-3"><i class="fa fa-check"></i><b>13.5.4</b> Running TUFLOW 1D Only Simulations</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#TUFLOWExternalSchemes-2"><i class="fa fa-check"></i><b>13.6</b> Using TUFLOW with Flood Modeller, SWMM, XP-SWMM, 12D or from SMS</a>
+<ul>
+<li class="chapter" data-level="13.6.1" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#SWMMSimulations-3"><i class="fa fa-check"></i><b>13.6.1</b> Using TUFLOW with EPA SWMM</a></li>
+<li class="chapter" data-level="13.6.2" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#FMSimulations-3"><i class="fa fa-check"></i><b>13.6.2</b> Using TUFLOW with Flood Modeller</a></li>
+<li class="chapter" data-level="13.6.3" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#TwelveDSimulations-3"><i class="fa fa-check"></i><b>13.6.3</b> Using TUFLOW with 12D</a></li>
+<li class="chapter" data-level="13.6.4" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#XPSWMMSimulations-3"><i class="fa fa-check"></i><b>13.6.4</b> Using TUFLOW with XP-SWMM</a></li>
+<li class="chapter" data-level="13.6.5" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#SMSSimulations-3"><i class="fa fa-check"></i><b>13.6.5</b> Using TUFLOW with SMS</a></li>
+<li class="chapter" data-level="13.6.6" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#OptimisingSims-3"><i class="fa fa-check"></i><b>13.6.6</b> Optimising Startup and Run Times</a></li>
+<li class="chapter" data-level="13.6.7" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#AutoTerminateOptions-3"><i class="fa fa-check"></i><b>13.6.7</b> Auto Terminate (Simulation End) Options</a></li>
+</ul></li>
+<li class="chapter" data-level="13.7" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#ResultsReplication-3"><i class="fa fa-check"></i><b>13.7</b> Reproducibility of Results</a>
+<ul>
+<li class="chapter" data-level="13.7.1" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#ResultsReplicationClassic-3"><i class="fa fa-check"></i><b>13.7.1</b> TUFLOW Classic (CPU only)</a></li>
+<li class="chapter" data-level="13.7.2" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#ResultsReplicationHPCCPU-3"><i class="fa fa-check"></i><b>13.7.2</b> TUFLOW HPC (incl. Quadtree) on CPU</a></li>
+<li class="chapter" data-level="13.7.3" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#ResultsReplicationHPCGPU-3"><i class="fa fa-check"></i><b>13.7.3</b> TUFLOW HPC (incl. Quadtree) on GPU</a></li>
+<li class="chapter" data-level="13.7.4" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html#ResultsReplicationHPCMultiThread-3"><i class="fa fa-check"></i><b>13.7.4</b> TUFLOW HPC (incl. Quadtree) on multiple GPUs / CPU threads</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html"><i class="fa fa-check"></i><b>14</b> Checks and Log Files</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#Log-Introduction-1"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#ConsoleDisplay-2"><i class="fa fa-check"></i><b>14.2</b> Console (DOS) Window Display</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#Classic-3"><i class="fa fa-check"></i><b>14.2.1</b> TUFLOW Classic</a></li>
+<li class="chapter" data-level="14.2.2" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#HPC-3"><i class="fa fa-check"></i><b>14.2.2</b> TUFLOW HPC</a></li>
+<li class="chapter" data-level="14.2.3" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#ConsoleDisappear-3"><i class="fa fa-check"></i><b>14.2.3</b> The Console (DOS) Window Does Not Appear</a></li>
+<li class="chapter" data-level="14.2.4" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#QuickEdit-3"><i class="fa fa-check"></i><b>14.2.4</b> Unexpected Simulation Pause (DOS Quick Edit Mode)</a></li>
+<li class="chapter" data-level="14.2.5" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#ConsoleShortcut-3"><i class="fa fa-check"></i><b>14.2.5</b> Stopping the Console Window</a></li>
+<li class="chapter" data-level="14.2.6" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#ConsoleCustomisation-3"><i class="fa fa-check"></i><b>14.2.6</b> Customisation of Console Window</a></li>
+<li class="chapter" data-level="14.2.7" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#ErrorLevel-3"><i class="fa fa-check"></i><b>14.2.7</b> TUFLOW Windows ERROR LEVEL Reporting</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#MessageBox-2"><i class="fa fa-check"></i><b>14.3</b> Message Boxes</a></li>
+<li class="chapter" data-level="14.4" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#SimLog-2"><i class="fa fa-check"></i><b>14.4</b> Simulations .log Files</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#LocalLog-3"><i class="fa fa-check"></i><b>14.4.1</b> Local .log File</a></li>
+<li class="chapter" data-level="14.4.2" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#GlobalLog-3"><i class="fa fa-check"></i><b>14.4.2</b> Global .log File</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#SimLogFiles-2"><i class="fa fa-check"></i><b>14.5</b> Simulation Log Files</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#TLF-3"><i class="fa fa-check"></i><b>14.5.1</b> TLF</a></li>
+<li class="chapter" data-level="14.5.2" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#TSF-3"><i class="fa fa-check"></i><b>14.5.2</b> TSF</a></li>
+<li class="chapter" data-level="14.5.3" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#start-stats-3"><i class="fa fa-check"></i><b>14.5.3</b> Start Stats</a></li>
+<li class="chapter" data-level="14.5.4" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#run-stats-3"><i class="fa fa-check"></i><b>14.5.4</b> Run Stats</a></li>
+<li class="chapter" data-level="14.5.5" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#Messages-3"><i class="fa fa-check"></i><b>14.5.5</b> Messages</a></li>
+<li class="chapter" data-level="14.5.6" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#Workspaces-2"><i class="fa fa-check"></i><b>14.5.6</b> GIS Workspaces</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#EOF-2"><i class="fa fa-check"></i><b>14.6</b> 1D Output File</a></li>
+<li class="chapter" data-level="14.7" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#CheckLayers-2"><i class="fa fa-check"></i><b>14.7</b> Check Files</a></li>
+<li class="chapter" data-level="14.8" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#MB-2"><i class="fa fa-check"></i><b>14.8</b> Mass Balance Output</a>
+<ul>
+<li class="chapter" data-level="14.8.1" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#MB-CLA-3"><i class="fa fa-check"></i><b>14.8.1</b> TUFLOW Classic Mass Balance</a></li>
+<li class="chapter" data-level="14.8.2" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html#MB-HPC-3"><i class="fa fa-check"></i><b>14.8.2</b> HPC Mass Balance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html"><i class="fa fa-check"></i><b>15</b> Viewing Outputs</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#Introduction-Viewing-2"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#Output-Folder-2"><i class="fa fa-check"></i><b>15.2</b> Output Folders</a></li>
+<li class="chapter" data-level="15.3" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#View-Map-Output-2"><i class="fa fa-check"></i><b>15.3</b> Map Output</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#output-structure"><i class="fa fa-check"></i><b>15.3.1</b> Output Structure</a></li>
+<li class="chapter" data-level="15.3.2" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#d---estry"><i class="fa fa-check"></i><b>15.3.2</b> 1D - ESTRY</a></li>
+<li class="chapter" data-level="15.3.3" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#d"><i class="fa fa-check"></i><b>15.3.3</b> 2D</a></li>
+<li class="chapter" data-level="15.3.4" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#sgs-1"><i class="fa fa-check"></i><b>15.3.4</b> SGS</a></li>
+<li class="chapter" data-level="15.3.5" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#viewing"><i class="fa fa-check"></i><b>15.3.5</b> Viewing</a></li>
+<li class="chapter" data-level="15.3.6" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#sgs-considerations"><i class="fa fa-check"></i><b>15.3.6</b> SGS Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#View-TimeSeries-2"><i class="fa fa-check"></i><b>15.4</b> Time Series Output</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#output-structure-1"><i class="fa fa-check"></i><b>15.4.1</b> Output Structure</a></li>
+<li class="chapter" data-level="15.4.2" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#d---estry-1"><i class="fa fa-check"></i><b>15.4.2</b> 1D - ESTRY</a></li>
+<li class="chapter" data-level="15.4.3" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#d---epa-swmm"><i class="fa fa-check"></i><b>15.4.3</b> 1D - EPA SWMM</a></li>
+<li class="chapter" data-level="15.4.4" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#d-1"><i class="fa fa-check"></i><b>15.4.4</b> 2D</a></li>
+<li class="chapter" data-level="15.4.5" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#combined-0d_rl"><i class="fa fa-check"></i><b>15.4.5</b> Combined (0d_RL)</a></li>
+<li class="chapter" data-level="15.4.6" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#viewing-1"><i class="fa fa-check"></i><b>15.4.6</b> Viewing</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#Post-Process-2"><i class="fa fa-check"></i><b>15.5</b> Post Processing</a></li>
+<li class="chapter" data-level="15.6" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#Impact-Map-2"><i class="fa fa-check"></i><b>15.6</b> Impact Mapping</a></li>
+<li class="chapter" data-level="15.7" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#Animations-2"><i class="fa fa-check"></i><b>15.7</b> Animations</a></li>
+<li class="chapter" data-level="15.8" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#old-sections"><i class="fa fa-check"></i><b>15.8</b> Old Sections</a>
+<ul>
+<li class="chapter" data-level="15.8.1" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#gis-layers-.mif-and-.shp"><i class="fa fa-check"></i><b>15.8.1</b> GIS Layers (.MIF and .SHP)</a></li>
+</ul></li>
+<li class="chapter" data-level="15.9" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#PlotOutput-2"><i class="fa fa-check"></i><b>15.9</b> Plot Output Files and Formats</a>
+<ul>
+<li class="chapter" data-level="15.9.1" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#csv-file-outputs"><i class="fa fa-check"></i><b>15.9.1</b> .csv File Outputs</a></li>
+<li class="chapter" data-level="15.9.2" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#TS-GIS-3"><i class="fa fa-check"></i><b>15.9.2</b> _TS GIS</a></li>
+<li class="chapter" data-level="15.9.3" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html#gis-plot-viewers-qgis-tuflow-plugin-and-mitools"><i class="fa fa-check"></i><b>15.9.3</b> GIS Plot Viewers (QGIS TUFLOW Plugin and miTools)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html"><i class="fa fa-check"></i><b>16</b> Quality Control and Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#QAIntroduction-2"><i class="fa fa-check"></i><b>16.1</b> Introduction</a></li>
+<li class="chapter" data-level="16.2" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#ModelHealth-2"><i class="fa fa-check"></i><b>16.2</b> Model Health</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#TUFLOWClassicModelHealth-3"><i class="fa fa-check"></i><b>16.2.1</b> TUFLOW Classic</a></li>
+<li class="chapter" data-level="16.2.2" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#TUFLOWHPCModelHealth-3"><i class="fa fa-check"></i><b>16.2.2</b> TUFLOW HPC</a></li>
+<li class="chapter" data-level="16.2.3" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#TUFLOWQAIndicators-3"><i class="fa fa-check"></i><b>16.2.3</b> Healthy Model Indicators</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#QATroubleshooting-2"><i class="fa fa-check"></i><b>16.3</b> Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="16.3.1" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#QAGeneralComments-3"><i class="fa fa-check"></i><b>16.3.1</b> General Comments</a></li>
+<li class="chapter" data-level="16.3.2" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#tuflowinstability-3"><i class="fa fa-check"></i><b>16.3.2</b> Identifying the Cause of an Instability</a></li>
+<li class="chapter" data-level="16.3.3" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#simhardwaretroublshooting-4"><i class="fa fa-check"></i><b>16.3.3</b> Simulation Hardware Troubleshooting and Recommendations</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#QAchecklist-2"><i class="fa fa-check"></i><b>16.4</b> QA Check List and Simulation Logging</a></li>
+<li class="chapter" data-level="16.5" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#LargeModels-2"><i class="fa fa-check"></i><b>16.5</b> Large Models (exceeding RAM)</a>
+<ul>
+<li class="chapter" data-level="16.5.1" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#TUFLOWVersion-3"><i class="fa fa-check"></i><b>16.5.1</b> TUFLOW Version</a></li>
+<li class="chapter" data-level="16.5.2" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#QAmodeldesign-3"><i class="fa fa-check"></i><b>16.5.2</b> Model Design</a></li>
+<li class="chapter" data-level="16.5.3" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#memoryusage-3"><i class="fa fa-check"></i><b>16.5.3</b> Memory Usage Reporting</a></li>
+<li class="chapter" data-level="16.5.4" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#tempmemoryusage-3"><i class="fa fa-check"></i><b>16.5.4</b> Temporary Memory Usage</a></li>
+<li class="chapter" data-level="16.5.5" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#GPURAM-3"><i class="fa fa-check"></i><b>16.5.5</b> TUFLOW HPC GPU Module and RAM requirements</a></li>
+</ul></li>
+<li class="chapter" data-level="16.6" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html#backwardcompatibility-2"><i class="fa fa-check"></i><b>16.6</b> Past Release Version Backward Compatibility</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="Utilities-1.html"><a href="Utilities-1.html"><i class="fa fa-check"></i><b>17</b> Utilities</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="Utilities-1.html"><a href="Utilities-1.html#Util-Introduction-2"><i class="fa fa-check"></i><b>17.1</b> Introduction</a></li>
+<li class="chapter" data-level="17.2" data-path="Utilities-1.html"><a href="Utilities-1.html#GIS-Utilities-2"><i class="fa fa-check"></i><b>17.2</b> GIS Based Utilities</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="Utilities-1.html"><a href="Utilities-1.html#QGIS-Plugin-3"><i class="fa fa-check"></i><b>17.2.1</b> QGIS TUFLOW Plugin</a></li>
+<li class="chapter" data-level="17.2.2" data-path="Utilities-1.html"><a href="Utilities-1.html#ArcGIS-Toolbar-3"><i class="fa fa-check"></i><b>17.2.2</b> ArcGIS Pro Toolbar</a></li>
+<li class="chapter" data-level="17.2.3" data-path="Utilities-1.html"><a href="Utilities-1.html#ArcMap-Toolbox-3"><i class="fa fa-check"></i><b>17.2.3</b> ArcMap Toolbox</a></li>
+<li class="chapter" data-level="17.2.4" data-path="Utilities-1.html"><a href="Utilities-1.html#MiTools-3"><i class="fa fa-check"></i><b>17.2.4</b> MiTools</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="Utilities-1.html"><a href="Utilities-1.html#Console-2"><i class="fa fa-check"></i><b>17.3</b> Console Utilities</a>
+<ul>
+<li class="chapter" data-level="17.3.1" data-path="Utilities-1.html"><a href="Utilities-1.html#Processing-Utilites-3"><i class="fa fa-check"></i><b>17.3.1</b> Pre and Post Processing</a></li>
+<li class="chapter" data-level="17.3.2" data-path="Utilities-1.html"><a href="Utilities-1.html#Convert-Utilties-3"><i class="fa fa-check"></i><b>17.3.2</b> Convert to TUFLOW</a></li>
+<li class="chapter" data-level="17.3.3" data-path="Utilities-1.html"><a href="Utilities-1.html#Syntax-Highlighting-3"><i class="fa fa-check"></i><b>17.3.3</b> Textfile Syntax Highlighting</a></li>
+<li class="chapter" data-level="17.3.4" data-path="Utilities-1.html"><a href="Utilities-1.html#PyTUFLOW-3"><i class="fa fa-check"></i><b>17.3.4</b> PyTUFLOW</a></li>
+<li class="chapter" data-level="17.3.5" data-path="Utilities-1.html"><a href="Utilities-1.html#Excel-3"><i class="fa fa-check"></i><b>17.3.5</b> Excel Macros</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="Features-and-Changes-1.html"><a href="Features-and-Changes-1.html"><i class="fa fa-check"></i><b>18</b> Default Changes</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="Features-and-Changes-1.html"><a href="Features-and-Changes-1.html#post-release-2018-03"><i class="fa fa-check"></i><b>18.1</b> Post Release 2018-03</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="Features-and-Changes-1.html"><a href="Features-and-Changes-1.html#release-2023-03-to-release-2020-10"><i class="fa fa-check"></i><b>18.1.1</b> Release 2023-03 to Release 2020-10</a></li>
+<li class="chapter" data-level="18.1.2" data-path="Features-and-Changes-1.html"><a href="Features-and-Changes-1.html#release-2020-10-to-release-2020-01"><i class="fa fa-check"></i><b>18.1.2</b> Release 2020-10 to Release 2020-01</a></li>
+<li class="chapter" data-level="18.1.3" data-path="Features-and-Changes-1.html"><a href="Features-and-Changes-1.html#release-2020-01-to-release-2018-03"><i class="fa fa-check"></i><b>18.1.3</b> Release 2020-01 to Release 2018-03</a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="Features-and-Changes-1.html"><a href="Features-and-Changes-1.html#pre-release-2018-03"><i class="fa fa-check"></i><b>18.2</b> Pre Release 2018-03</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="TCFCommands-1.html"><a href="TCFCommands-1.html"><i class="fa fa-check"></i><b>A</b> TCF Commands</a></li>
+<li class="chapter" data-level="B" data-path="ECFCommands-1.html"><a href="ECFCommands-1.html"><i class="fa fa-check"></i><b>B</b> ECF Commands</a></li>
+<li class="chapter" data-level="C" data-path="TGCCommands-1.html"><a href="TGCCommands-1.html"><i class="fa fa-check"></i><b>C</b> TGC Commands</a></li>
+<li class="chapter" data-level="D" data-path="TBCCommands-1.html"><a href="TBCCommands-1.html"><i class="fa fa-check"></i><b>D</b> TBC Commands</a></li>
+<li class="chapter" data-level="E" data-path="TOCCommands-1.html"><a href="TOCCommands-1.html"><i class="fa fa-check"></i><b>E</b> TOC Commands</a></li>
+<li class="chapter" data-level="F" data-path="TRFCCommands-1.html"><a href="TRFCCommands-1.html"><i class="fa fa-check"></i><b>F</b> TRFC Commands</a></li>
+<li class="chapter" data-level="G" data-path="TESFCommands-1.html"><a href="TESFCommands-1.html"><i class="fa fa-check"></i><b>G</b> TESF Commands</a></li>
+<li class="chapter" data-level="H" data-path="QCFCommands-1.html"><a href="QCFCommands-1.html"><i class="fa fa-check"></i><b>H</b> QCF Commands</a></li>
+<li class="chapter" data-level="I" data-path="TSCFCommands-1.html"><a href="TSCFCommands-1.html"><i class="fa fa-check"></i><b>I</b> TSCF Commands</a></li>
+<li class="chapter" data-level="J" data-path="ADCFCommands-1.html"><a href="ADCFCommands-1.html"><i class="fa fa-check"></i><b>J</b> ADCF Commands</a></li>
+<li class="chapter" data-level="K" data-path="SWMMGeopackage-1.html"><a href="SWMMGeopackage-1.html"><i class="fa fa-check"></i><b>K</b> SWMM GeoPackage Format</a>
+<ul>
+<li class="chapter" data-level="K.1" data-path="SWMMGeopackage-1.html"><a href="SWMMGeopackage-1.html#swmm-geopackage-layer-list"><i class="fa fa-check"></i><b>K.1</b> SWMM GeoPackage Layer List</a></li>
+<li class="chapter" data-level="K.2" data-path="SWMMGeopackage-1.html"><a href="SWMMGeopackage-1.html#swmm-geopackage-layer-descriptions"><i class="fa fa-check"></i><b>K.2</b> SWMM GeoPackage Layer Descriptions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://www.tuflow.com"><img src="images/WQFooter.jpg" style="width:246px;height:10px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(0,85,129);">TUFLOW Classic/HPC User Manual</h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="Linked-1D2D-Models-1" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Section 10</span> Linked 1D and 2D Models<a href="Linked-1D2D-Models-1.html#Linked-1D2D-Models-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="Linked-1D2D-Models-Intro-2" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Introduction<a href="Linked-1D2D-Models-1.html#Linked-1D2D-Models-Intro-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This chapter of the manual discusses the methods available for
+dynamically linking domains, including 1D to 1D, 1D to 2D, or 2D to 2D domains. Linked models offer numerous benefits including greater model design flexibility, greater computational efficiency,
+and performance.</p>
+<p>1D-2D linked models are able to utilise the individual benefits of 1D
+and 2D solution schemes. 1D schemes are typically used to represent
+culverts or sub-surface pipe networks, and sometimes rivers, where the flow is essentially one-directional. A 2D scheme is suited to the representation of rivers and floodplains where more
+complex hydrodynamics may occur, which require simulation of flow in two-dimensions. TUFLOW’s 2D solution may be dynamically linked a variety of different 1D solutions, including TUFLOW 1D (ESTRY), Flood
+Modeller (previously ISIS), EPA SWMM (herein referred to as SWMM in this chapter), 12D Dynamic Drainage and XPSWMM. Linking of TUFLOW 1D directly to either Flood Modeller or SWMM is also possible. The working environment for the above 1D Solver / TUFLOW 2D combinations vary:</p>
+<ul>
+<li>TUFLOW 1D (ESTRY) and SWMM are integrated within the TUFLOW executable. Model build tasks and result viewing associated with these linked 1D solvers is typically completed using traditional TUFLOW compatible GIS software.</li>
+<li>12D Dynamic Drainage is developed by 12D Solutions. They have developed a TUFLOW interface within their own <a href="https://www.12d.com/product/12d_model_tuflow.html">12D GUI</a> that offers hybrid GUI functionality for 1D and 2D modelling tasks. The interface provides users with the ability to build models and view result entirely within its GUI. Alternatively, existing TUFLOW files created in a GIS form can be imported and used in the 12D environment too.</li>
+<li>Flood Modeller, developed by Jacobs, is not included in the TUFLOW executable download. It must be purchased, installed and configured to support the linking to TUFLOW. <a href="https://www.floodmodeller.com/tuflow">Flood Modeller TUFLOW Link</a> must also be purchased from Jacobs. The Flood Modeller GUI is used for 1D model build tasks, and execution of the linked Flood Modeller 1D / TUFLOW 2D model. Traditional TUFLOW compatible GIS software is used for the TUFLOW 2D model components.<br />
+</li>
+<li>XPSWMM functions in a fully independent GUI. As such, the GIS focused use information in this manual is not applicable. For this reason further documentation relating to it is not included in this manual.</li>
+</ul>
+<p>2D-2D linking is also an option. It is available in two forms. TUFLOW HPC is compatible with the Quadtree Module. TUFLOW Classic, uses the Multiple 2D Domain Module. 2D-2D linked models allow for a single model to contain multiple 2D domains of different cell sizes. Varying the 2D cell size within a single model enables use of a smaller cell size (finer resolution) in areas where a more detailed assessment is required, with a larger cell size used to represent the remainder of the modelled extent. Such a model design will reduce simulation times compared to a model that adopts the finer resolution over the entire model domain.</p>
+</div>
+<div id="OneD2dLinking-2" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> 1D and 2D Domain Linking Theory<a href="Linked-1D2D-Models-1.html#OneD2dLinking-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>TUFLOW 1D and 2D domains can be linked in a variety of ways. Common configurations, as shown in Figure <a href="Linked-1D2D-Models-1.html#fig:fig-1D-2DLinkingConfigurations">10.1</a>, include,</p>
+<ul>
+<li>1D culverts through 2D embankments<br />
+</li>
+<li>1D pipe networks underneath the 2D domain<br />
+</li>
+<li>Nesting of a 1D open channel (e.g. creek or river) through a 2D domain<br />
+</li>
+<li>Connection of a broader 1D network catchment model to a high resolution 2D domain</li>
+</ul>
+<center>
+<div class="figure"><span style="display:block;" id="fig:fig-1D-2DLinkingConfigurations"></span>
+<img src="images/1D2DLinkingConfigurations.png" alt="**1D/2D Linking Configurations**" width="50%" />
+<p class="caption">
+Figure 10.1: <strong>1D/2D Linking Configurations</strong>
+</p>
+</div>
+</center>
+<p>There are two types of 1D/2D linking options available. These methods
+are:</p>
+<ol style="list-style-type: decimal">
+<li><p>Head boundaries to the 2D cells (HX); and</p></li>
+<li><p>Source boundaries to the 2D cells (SX).</p></li>
+</ol>
+<p>These are described in the sections below.</p>
+<div id="HXBoundary-3" class="section level3 hasAnchor" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> HX 2D Head Boundary<a href="Linked-1D2D-Models-1.html#HXBoundary-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The HX terminology is derived from a <strong>H</strong>ead boundary being applied to
+the 2D cell using data from an e<strong>X</strong>ternal 1D scheme. This type of
+connection can be used to connect TUFLOW 2D with the 1D schemes of ESTRY (TUFLOW 1D), SWMM, Flood Modeller and XPSWMM. HX lines are typically used along riverbanks to define the 1D-2D exchange when 1D is used for in-channel representation, linked to the floodplain in 2D (commonly referred to as, 1D nested open channel modelling).</p>
+<p>For 1D nested open channel modelling, the HX cells are defined using HX lines, connected to 1D nodes (automatically created by TUFLOW at the start and end of 1D channel lines) via connection (CN) lines. HX and CN line type objects are defined in the 2d_bc format layer. The CN lines are snapped to the 1D nodes and vertices along the HX line. The open channel area modelled using 1D is deactivated from the 2D domain (2d_code: code = 0) to avoid duplicate representation of the same information in two different domains. These model features are presented in Figure <a href="Linked-1D2D-Models-1.html#fig:fig-HXSchematicPlanView">10.2</a>.</p>
+<p>When TUFLOW does its hydraulic calculations, water level information at the 1D nodes is sent to the HX line vertices. Along the HX lines, between the 1D node connections, the water levels are linearly interpolated. It is a minimum requirement that a HX line have a CN line connected to each of its end. If a single 1D node is connected to both ends of a HX line, the water level in the 2D cells between the HX vertices will be the same along the HX line, and the line should be digitised perpendicular to flow.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HXSchematicPlanView"></span>
+<img src="images/1D2DHXWaterLevel_001.png" alt="**HX Connection: Nested 1D Open Channel – Plan View**" width="70%" />
+<p class="caption">
+Figure 10.2: <strong>HX Connection: Nested 1D Open Channel – Plan View</strong>
+</p>
+</div>
+</center>
+<p>At HX connections, depending on the water level in the 2D cells that are selected as the 1D-2D boundary cells, flow can either enter or leave HX cells. The volume of water entering or leaving the 2D boundary is added or subtracted from the 1D model to preserve volume. The HX link preserves momentum in the sense that the velocity field is assumed to be undisturbed across the link. The velocity direction is however not influenced by the direction of the linked 1D channel.</p>
+<p>The elevations of 1D-2D boundary cells determine when water can transfer between the 1D and 2D. Water level is calculated at the cell centres in the 2D engine (see Section <mark>7.3.1.1</mark>), once the water level in the 1D node exceeds the elevation in the boundary cell, water can enter or leave the
+2D cell. As such, correct and accurate definition of the 2D HX cell elevation is important. If a levee aligns with the HX line, a 2d_zsh thick breakline is recommended along the levee to ensure that the 1D-2D boundary cell elevations are consistent with the levee or spill crest.</p>
+<p>In the four panels of Figure <a href="Linked-1D2D-Models-1.html#fig:fig-HXSchematicSectionView">10.3</a>, the 2D HX connection is shown in section view at four differing water level stages:</p>
+<ul>
+<li>Panel 1: In bank flow, the water level in the 1D section is below the 2D cell
+elevation and no flow is occurring across the 1D-2D connection.<br />
+</li>
+<li>Panel 2: Spill into the floodplain, the water level in the 1D section is above the 2D
+cell elevation along the left bank (but not the right bank). In this
+case, water is spilling from the 1D channel into the 2D floodplain on
+the left-hand side.<br />
+</li>
+<li>Panel 3: Flow from floodplain, the water level in the 1D is below the
+water levels in the 2D floodplains and water will drain from the
+2D domain into the 1D channel, which is typical of a flood recession.<br />
+</li>
+<li>Panel 4: Perched floodplain, the flow is still moving from the 2D into
+the 1D on the left bank, however, on the right bank, the water level
+in the floodplain is below the 2D HX cell elevation and no flow is
+occurring (the water is perched).</li>
+</ul>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HXSchematicSectionView"></span>
+<img src="images/1D2DHXWaterLevelSectionView.png" alt="**HX Connection: Nested 1D Open Channel – Section View**" width="60%" />
+<p class="caption">
+Figure 10.3: <strong>HX Connection: Nested 1D Open Channel – Section View</strong>
+</p>
+</div>
+</center>
+<p>The minimum ZC (cell centre) elevation at or along a HX object must be above the 1D bed level (interpolated between connected 1D nodes) to maintain a stable solution. TUFLOW will write an error message during the model initialisation and a simulation will not run if a 1D node elevation is above the associated 2D ZC HX cell elevation.</p>
+<p>In addition to 1D 2D connections associated with nested 1D open channel / 2D floodplain situations, HX connections are also regularly used to connect a 2D domain to a broader 1D network representing the upstream and/or downstream river and floodplain for the catchment. In Figure <a href="Linked-1D2D-Models-1.html#fig:fig-HXExternalBoundaryConnection">10.4</a>, HX lines are shown along the upstream inflow to the 2D Domain as purple lines, the CN lines are shown in green. The CN lines are snapped to the 1D node at the end of the 1D network and the two vertices at either end of the HX line. The water level at the 1D node is uniformly applied to the HX line cells wherever the water level exceeds the cell ZC ground elevation.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HXExternalBoundaryConnection"></span>
+<img src="images/1D2DHXExternalLink_001.png" alt="**HX Connection: External 1D Network Boundary Connection**" width="70%" />
+<p class="caption">
+Figure 10.4: <strong>HX Connection: External 1D Network Boundary Connection</strong>
+</p>
+</div>
+</center>
+</div>
+<div id="SXBoundary-3" class="section level3 hasAnchor" number="10.2.2">
+<h3><span class="header-section-number">10.2.2</span> SX 2D Flow Boundary<a href="Linked-1D2D-Models-1.html#SXBoundary-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The SX terminology is derived from a <strong>S</strong>ource boundary being applied to the 2D cell using data from an e<strong>X</strong>ternal 1D scheme. This type of connection can be used to connect TUFLOW 2D with the the 1D schemes of TUFLOW 1D (ESTRY), Flood Modeller, SWMM and XPSWMM. SX connections are typically used to transfer flow between 1D and 2D where a culvert is present. Unique to SWMM, when using it as the 1D solver, an SX connection is only required at the downstream end of a 1D culvert (it uses a HX link at the upstream end).</p>
+<p>At SX connections, water level in the 1D node is determined based on the average water level along the 2D SX cells. Conversely, water level in the 2D SX cell is determined based on the flow from the 1D node. Flow is proportioned via depth if multiple SX cells are connected to a single node. The <a href="TCFCommands-1.html#tcfSXFlowDist">SX Flow Distribution Cutoff Depth</a> command can be used to control the depth of water below which a cell does not receive flows from the connected 1D element.</p>
+<p>SX objects are digitised in the 2d_bc layer and have the type set to “SX”. They
+can either be a point (a single SX cell), line (multiple
+SX cells) or region object (multiple SX cells). When using the SX line
+and region objects, these are joined to the 1D nodes with a single CN type
+object, also in the 2d_bc format. This is shown in Figure <a href="Linked-1D2D-Models-1.html#fig:fig-SXSchematicCrossDrainageStructure">10.5</a>. The (2d_bc) SX point, line and region objects are shown in purple. The (2d_bc) CN lines are shown in green. The cells selected for the SX 1D-2D connection are highlighted in white.</p>
+<ul>
+<li>When using an SX point, the point object needs to snap to the 1d network (1d_nwk) at the nodes (end of the culvert). A single 2D cell is selected for the 1D-2D SX connection.<br />
+</li>
+<li>When using an SX line, a connection line snaps to the SX line and 1d network (1d_nwk) node. Multiple 2D cells are selected for the 1D-2D SX connection.<br />
+</li>
+<li>When using an SX region, a connection line snaps to a vertex of the SX region and 1d network (1d_nwk) node. Multiple 2D cells are selected for the 1D-2D SX connection.</li>
+</ul>
+<p>When connecting a SX connection for a structure it is important to
+ensure the connected SX cell width is equal or more than the width of the
+1D structure.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SXSchematicCrossDrainageStructure"></span>
+<img src="images/1D2DSXConfigurations_001.png" alt="**SX Connection Options**" width="70%" />
+<p class="caption">
+Figure 10.5: <strong>SX Connection Options</strong>
+</p>
+</div>
+</center>
+<p>The minimum ZC (cell centre) elevation associated with a SX object must be below the 1D bed level (invert) to maintain a stable solution. TUFLOW will write an error message during the model initialisation and a simulation will not run if a 1D node elevation is below the associated 2D ZC SX cell elevation.</p>
+<p>In addition to culverts through embankments, SX connections can also be used to connect 1D pipe network inlets (pits) to the surface, which is modelled in 2D. An example is presented in Figure <a href="Linked-1D2D-Models-1.html#fig:fig-SXSchematicPipeNetworkPlan">10.6</a> and <a href="Linked-1D2D-Models-1.html#fig:fig-SXSchematicPipeNetwork">10.7</a>. The SX connections are used to transfer flow between the 1D pit/pipe network and the 2D domain. Pipe network SX connections are however typically defined in the 1D solver inputs (instead of the 2d_bc layer, as per embankment culvert connections). TUFLOW has been configured with this option so the 1D 2D connection specification is associated with the related pit inlet inputs. This configuration option avoids data duplication.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SXSchematicPipeNetworkPlan"></span>
+<img src="images/1D2DSXPipeNetwork_001.png" alt="**SX Connection: Pipe Network – Plan View**" width="70%" />
+<p class="caption">
+Figure 10.6: <strong>SX Connection: Pipe Network – Plan View</strong>
+</p>
+</div>
+</center>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SXSchematicPipeNetwork"></span>
+<img src="images/image140.jpeg" alt="**SX Connection: Pipe Network -Section View**" width="70%" />
+<p class="caption">
+Figure 10.7: <strong>SX Connection: Pipe Network -Section View</strong>
+</p>
+</div>
+</center>
+</div>
+</div>
+<div id="OneD2DLinking-Estry-2" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> TUFLOW 1D (ESTRY) to TUFLOW 2D Linking<a href="Linked-1D2D-Models-1.html#OneD2DLinking-Estry-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Linked TUFLOW 1D and 2D domain models use 2D HX and 2D SX boundary types
+connected to 1D nodes (1d_nwk layer) using CN lines or points in the
+2d_bc layer, as described in <mark>Table 7.4 </mark> and <mark>Table 7.5 </mark> in Section <mark>7.4.1</mark>. The recommended approach
+for HX and SX connections are summarised in the following sections.</p>
+<div id="OneD2DESTRYChannel-3" class="section level3 hasAnchor" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> Nested 1D Open Channel 2D Domain Linking<a href="Linked-1D2D-Models-1.html#OneD2DESTRYChannel-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>2D_bc HX boundaries are preferred for transitioning between 1D domains and 2D domains (shown in Figure <a href="Linked-1D2D-Models-1.html#fig:fig-HXExternalBoundaryConnection">10.4</a>) or when nesting a 1D open channel network within a 2D domain (shown in Figure <a href="Linked-1D2D-Models-1.html#fig:fig-HXSchematicPlanView">10.2</a>).</p>
+<p>An example of a these HX connections is provided in Module 11 of the
+<a href="https://wiki.tuflow.com/Tutorial_Introduction">TUFLOW Wiki Tutorials</a>. The <a href="https://wiki.tuflow.com/TUFLOW_1D2D_Boundary_Configuration_Guidance">TUFLOW Wiki</a> also
+includes useful guidance how to stabilise problematic 1D/2D TUFLOW HPC HX
+connections when a uniform 2D cell elevation is defined along the length of the boundary.</p>
+</div>
+<div id="OneD2DESTRYCulverts-3" class="section level3 hasAnchor" number="10.3.2">
+<h3><span class="header-section-number">10.3.2</span> 1D Culvert Connections to 2D Domains<a href="Linked-1D2D-Models-1.html#OneD2DESTRYCulverts-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>2D_bc SX boundaries are preferred for inserting 1D culverts inside a 2D domain. For example, a 1D culvert underneath a road embankment, as shown in shown in Figure <a href="Linked-1D2D-Models-1.html#fig:fig-SXSchematicCrossDrainageStructure">10.5</a>.</p>
+<p>An example of a these SX connections is provided in Module 3 of the
+<a href="https://wiki.tuflow.com/Tutorial_Introduction">TUFLOW Wiki Tutorials</a>. The <a href="https://wiki.tuflow.com/TUFLOW_1D2D_Boundary_Configuration_Guidance">TUFLOW Wiki</a> also
+includes useful guidance how to stabilise problematic 1D/2D SX
+connections.</p>
+</div>
+<div id="OneD2DESTRYPipeNetwork-3" class="section level3 hasAnchor" number="10.3.3">
+<h3><span class="header-section-number">10.3.3</span> 1D Pipe Network Connecting Pits and Virtual Pits to 2D Domains<a href="Linked-1D2D-Models-1.html#OneD2DESTRYPipeNetwork-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pits/Inlets within an urban drainage environment provide bi-directional connectivity between the urban surface represented within the 2D domains and the 1D sub-surface pipe network. They use the SX type linking described in Section <a href="Linked-1D2D-Models-1.html#SXBoundary-3">10.2.2</a>. The standard approach to obtaining the flow from the 2D water level however does not use the 2d_bc approach, as per TUFLOW 1D culverts (Section @ref(#OneD2DESTRYCulverts-3). Instead SX connections are defined in the 1d_pit or 1d_nwk layer by setting the Conn_1D_2D attribute for the pit/inlet point object to “SX” and also using one of the following four methods, defined using the ‘Type’ attribute:</p>
+<ul>
+<li>“C” type pits will use circular culvert routines to determine the flow transferred between the 1D network and 2D domain.<br />
+</li>
+<li>“R” type pits will use box culvert routines to determine the flow transferred between the 1D network and 2D domain.<br />
+</li>
+<li>“W” type pits will use a weir equation to determine the flow transferred between the 1D network and 2D domain.<br />
+</li>
+<li>“Q” type pits will use a user-specified Head-Discharge boundary to transfer flow between the 2D domain and the 1D domain, based on the 2D water depth.</li>
+</ul>
+<p>Section <a href="OneD-Domains-1.html#OneD-Domains-1">5</a> contains information about the specification of pit parameters. A pipe network model example is provided in Module 5 of the
+<a href="https://wiki.tuflow.com/Tutorial_Introduction">TUFLOW Wiki Tutorials</a>.</p>
+<p>Compared to the above-mentioned approach, virtual pits are an alternative simplified way to model pits/inlets. Virtual pits provide 1D/2D connectivity, though without the full representation of the sub-surface pipe network geometry. There are 3 main approaches to the usage of virtual pits:</p>
+<ul>
+<li>Virtual Pit Inlets (Type ‘VPI’) only are used which remove flow from the 2D domain and from the model.<br />
+</li>
+<li>Virtual Pit Inlets are used in conjunction with Virtual Pipe Outlets (VPOs) which allow the drained flow to be applied elsewhere within the 2D model domain. The Virtual Pipe Outlets can have a limiting outlet flow. Should the limiting outlet flow be met then the inlet capacity is reduced, and inlets can surcharge. By default, the routing of flow between the Virtual Pit Inlet and Virtual Pit Outlet is instantaneous, however from version 2023-03-AB, it is possible to apply a lag or shift to the flows from the inlet to the outlet by entering values in to the 1d_pit Lag_Approach and Lag_Value attributes.<br />
+</li>
+<li>Flows from the virtual pit inlets are connected to 1D channel nodes to drain flow from the 2D surface and introduce them to the 1D domain. This is a useful approach to modelling the major sub-surface drainage system without modelling the minor sub-surface pipe network but also maintaining the drainage component from the 2D surface.</li>
+</ul>
+<p>Section <a href="OneD-Domains-1.html#OneD-Domains-1">5</a> contains more information about virtual pits. Examples of these model configurations are provided in Section EG15 of the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Structures">TUFLOW Wiki Example Model Database</a>.</p>
+<p>As previously mentioned, pits, virtual pits and nodes can be automatically connected to 2D domains using the 1d_nwk Conn_1D_2D attribute (see Table <mark>5 19</mark> and Table <mark>5 20</mark>). If Conn_1D_2D is set to “SX”, TUFLOW automatically connects the upstream end of the pit channel or node to the 2D domain.</p>
+<ul>
+<li>For this automated 1D-2D SX connection to establish, it is a requirement that the 2D cell must be active (2d_code, Code = 1). If no active 2D cells are found from any 2D domain, a <a href="https://wiki.tuflow.com/TUFLOW_Message_2122">WARNING 2122</a> or <a href="https://wiki.tuflow.com/TUFLOW_Message_2123">2123</a> is issued.<br />
+</li>
+<li>The command <tcmd><a href="ECFCommands-1.html#ecfPitDefault2DConnection">Pit Default 2D Connection</a></tcmd> can be used to set the global default value for the 1d_nwk Conn_1D_2D attribute.<br />
+</li>
+<li>By default, TUFLOW will connect the 1D pit/virtual pit/node to one or more 2D cells at pit connections. The number of 2D cells selected is a function of the flow width of the pit inlet (including the effects of the Number_of and Width_or_Dia 1d_nwk attributes), or the total flow width of the channels connected to the node. The total width of the 2D cells selected is always more than the pit inlet width or width of channels. For example, a width of 3.6m on a 2m grid selects two cells. The advantage of selecting more than one 2D cell is to provide enhanced stability at the 1D/2D connection when the 1D flow width exceeds the 2D cell size. The number of 2D connection cells is limited to 10 per pit inlet.</li>
+<li>The 1d_nwk Conn_No attribute can be used to change the number of 2D cells connected as follows:
+<ul>
+<li>A positive value adds that number of 2D cells to the automatic number. In the example above, if Conn_No is set to 1, three (2 + 1) 2D cells are connected. The upper limit is 10 connected cells.<br />
+</li>
+<li>If Conn_No is negative, this ignores the automatic approach and fixes the number of 2D cells connected to the absolute value of Conn_No. For example, a value of -1 would only connect the pit or node to one (1) 2D cell irrespective of the width.<br />
+</li>
+</ul></li>
+<li>If more than one 2D cell is being connected, there are two approaches available for how the 2D cells are selected.
+<ul>
+<li>For pits, the default is the G (on Grade) option that selects the 2nd, 3rd, etc… cells by traversing to the next highest 2D cell that neighbours the 2D cell(s) already selected (this includes diagonal cells, i.e. all 8 cells around a cell are considered). These cells are also automatically lowered to the same height as the first cell so that their ZC value is at or below the pit inlet.<br />
+</li>
+<li>For nodes, the default is the S (Sag) option that selects the 2nd, 3rd, etc… cells by traversing to the next lowest 2D cell. The ZC values of these cells are not changed as they are already at or below the node invert.<br />
+</li>
+</ul></li>
+<li>The above approaches can be changed using the G (Grade) and S (Sag) flags for the 1d_nwk Conn_1D_2D attribute. The G approach is that adopted by default for pits and S for nodes. To override the default approach, specify G or S as appropriate. For example, if the S approach is preferred for a pit that is draining a depression, specify an S flag for the Conn_1D_2D attribute (i.e. “SXS”). Note SX must come first before an optional flag is specified.</li>
+</ul>
+<p>Note, the conventional 1D-2D link approach using 2d_bc SX points, lines or regions can still be used to connect 1D channel ends. This gives the user complete control over which 2D cells are selected and may still be preferred in situations where large 1D structures are being connected to 2D cells.</p>
+</div>
+</div>
+<div id="OneD2DLinkingSWMM-2" class="section level2 hasAnchor" number="10.4">
+<h2><span class="header-section-number">10.4</span> SWMM to TUFLOW Linking<a href="Linked-1D2D-Models-1.html#OneD2DLinkingSWMM-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>New in the 2023-03-AD Release, TUFLOW’s 1D linking and solver options have been expanded to support the EPA Storm Water Management Model (SWMM), see <a href="OneD-SWMM-1.html#OneD-SWMM-1">6</a>. The SWMM engine has been integrated into the TUFLOW executable. As such SWMM 5 input (inp) files can be utilised as an input to TUFLOW directly.</p>
+<p>In TUFLOW-SWMM there are three categories of connections between SWMM 1D and TUFLOW:</p>
+<ul>
+<li>Direct Connections: These apply to inlets/outlets associate with culverts passing through an embankment (modelled in 2D), or also open outlets from a pipe network.<br />
+</li>
+<li>Storm-Drain Inlets: These apply to surface pits/inlets for a pipe network. Geometry information associated with the storm-drain inlet is used to determine the discharge that should flow from the 2D domain into the 1D SWMM pipe network.<br />
+</li>
+<li>SWMM 1D connection to TUFLOW 1D.</li>
+</ul>
+<div id="OneD2DSWMMCulverts-5" class="section level3 hasAnchor" number="10.4.1">
+<h3><span class="header-section-number">10.4.1</span> 1D Culvert Connections to 2D Domains<a href="Linked-1D2D-Models-1.html#OneD2DSWMMCulverts-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This type of connection would be used for embankments through a culvert or similar where a storm drain inlet is not used. HX connections are used at the Nodes–Storage object (upstream side) and SX connections are applied at the Nodes–Outfalls object (downstream). This configuration is presented in Figure <a href="Linked-1D2D-Models-1.html#fig:fig-1D2DSWMMCulvert">10.8</a>.</p>
+<p>Where a Nodes–Storage point is connected to the 2D domain using an inlet or HX connection, TUFLOW will compute the discharge that should be transferred between the 1D and 2D domain. If the water level in the 2D domain is higher than the 1D (potentially ponded) water level, then flow will be transferred from the 2D domain to the 1D. The discharge rate will depend on the difference in water levels.</p>
+<p>A TUFLOW-SWMM culvert model is provided in Module 1 of the
+<a href="https://wiki.tuflow.com/TUFLOW_SWMM_Tutorial_Introduction">TUFLOW-SWMM Wiki Tutorials</a>.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-1D2DSWMMCulvert"></span>
+<img src="images/1D2DSWMMCulvert.png" alt="**SWMM 1D Connection: Culvert**" width="70%" />
+<p class="caption">
+Figure 10.8: <strong>SWMM 1D Connection: Culvert</strong>
+</p>
+</div>
+</center>
+</div>
+<div id="OneD2DSWMMPipeNetwork-3" class="section level3 hasAnchor" number="10.4.2">
+<h3><span class="header-section-number">10.4.2</span> 1D Pipe Network Connections to 2D Domains<a href="Linked-1D2D-Models-1.html#OneD2DSWMMPipeNetwork-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>SX type linking described in Section <a href="Linked-1D2D-Models-1.html#SXBoundary-3">10.2.2</a> is recommended for pipe network storm-drain inlets. For a TUFLOW-SWMM model, storm-drain inlets can be defined in one of two ways, either:</p>
+<ol style="list-style-type: decimal">
+<li><p>Fully defined in a SWMM input (inp) file format: In this form, all table items listed below (Streets, Conduits, Inlets, and Inlet Usage) are required. In addition, a “2d_bc” layer is required to provide the connectivity between the 1D inlets and the 2D domain.</p>
+<ul>
+<li>Streets: SWMM uses the street cross-section information in this table to help compute storm drain inlet discharges, particularly for on-grade inlets.<br />
+</li>
+<li>Conduits (Streets): The conduits table is used to define streets for overland runoff and the slope is used in the storm drain inlet discharges. This table is not used directly when running a TUFLOW-SWMM model because the overland flows are calculated within TUFLOW.<br />
+</li>
+<li>Inlets: This table defines inlet configurations that describe how to determine inlet discharges. Inlets can be defined based on type and shape such as grates, curbs, and combination, or through curves that describe the relationship between depth and inlet discharge or approach flow and inlet discharge. The inlets table defines these parameters. The same inlet configuration can be used in multiple pit locations within the model.<br />
+</li>
+<li>Inlet Usage: This table identifies the placement of inlets including the street conduit, inlet (configuration), the node receiving the flow, and local parameters including blockage, size of local gutter depressions, and specification of on-grade, on-sag placement, or automatic placement.</li>
+</ul></li>
+<li><p>Defined using a SWMM input (inp) file with a “swmm_inlet_usage” GIS layer: In this form, where it was most convenient, TUFLOW have created a GIS layer to assist in the 1D-2D specification. Due to reduced data requirements and the model build workflow efficiencies associated with this combined SWMM input (inp) file / “swmm_inlet_usage” GIS layer format, it is the recommended approach. Using this format:</p>
+<ul>
+<li>Table <a href="Linked-1D2D-Models-1.html#tab:tab-SWMMinletusage">10.1</a> lists the attributes associated with the swmm_inlet_usage GIS layer.<br />
+</li>
+<li>Automatic inlet connections between the 1D network and 2D domain can be implemented via the “Conn1D_2D” attribute field (instead of manual specification of SX connection cells within a “2d_bc” GIS layer).</li>
+<li>SWMM 5 “Inlet Usage” tables are not used, and Conduits (Streets) are not required. Streets and Inlet tables must still however be defined in the SWMM input (inp) file.</li>
+<li>2D_bc SX lines may also be used the manually define on connections associated with on-grade inlets. This gives the user complete control over which 2D cells are selected for the on-grade flow calculations.</li>
+<li>The conventional 1D-2D link approach using 2d_bc CN lines and SX lines can be used (instead of the automated methods) if the modeller wishes to have greater control over what 2D cells are selected for 1D-2D on-grade inlet connections.</li>
+<li>The conventional 1D-2D link approach using 2d_bc HX lines and SX points, lines or regions is still required to connect 1D channel ends where “direct” connection to the 2D is desired.</li>
+</ul></li>
+</ol>
+<p>An example model configuration is shown in Figure <a href="Linked-1D2D-Models-1.html#fig:fig-1D2DSWMMPipeNetwork">10.9</a>. An example TUFLOW-SWMM pipe network model is also provided in Module 2, 3 and 4 of the
+<a href="https://wiki.tuflow.com/TUFLOW_SWMM_Tutorial_Introduction">TUFLOW-SWMM Wiki Tutorials</a>.</p>
+<p>Whether inlet usage details are defined in SWMM or in a separate GIS layer, the inlet discharges are computed within TUFLOW using modified EPA SWMM 5.2 code before being passed to the SWMM engine for the 1D solution computations. This approach has been selected due to its ability to leverage TUFLOW 2D model results, such as velocities and water levels.</p>
+<p>If the pressure head in the 1D domain exceeds the 2D water level, the 1D domain will overflow (surcharge) into the 2D domain. The approach used to compute the surcharge discharge depends on the inlet setup and whether or not the SWMM node ponds.</p>
+<ol style="list-style-type: decimal">
+<li>If the node allows ponding (ponding &gt; 0)(Recommended Configuration):
+<ul>
+<li>The discharge becomes the surcharging discharge based on the depth vs flow curve for custom inlets or from the orifice equation for other inlet types, plus any additional discharge from the use of the <a href="TSCFCommands-1.html#tscfReadGISSWMMInletUsage">Maximum Inlet Ponded Depth</a> command.<br />
+</li>
+<li>The coefficient used for inlet surcharging can be specified with the <a href="TSCFCommands-1.html#tscfInletSurchargeOrificeCoefficient">Inlet Surcharge Orifice Coefficient</a> command.<br />
+</li>
+<li>The discharge for custom curves is applied directly in reverse. For example, a 1D water level 0.3 feet above the 2D water level will produce the equal, though opposite, discharge as a 2D water level 0.3 feet above the 1D water level (or ground elevation).</li>
+</ul></li>
+<li>If the node does not allow ponding (ponding = 0):
+<ul>
+<li>Any volume that exceeds the maximum nodal water level (YMax) plus any surcharge depth (YSur) is reported as flooding by SWMM, which no longer tracks it. Therefore, the water is passed directly from the SWMM engine to the TUFLOW 2D cells. Although possible, this approach is not recommended because it prevents the 1D network from utilizing the full pressure head in its flow calculations.</li>
+</ul></li>
+</ol>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-1D2DSWMMPipeNetwork"></span>
+<img src="images/1D2DSWMMPipeNetwork_001.png" alt="**SWMM 1D Connection: Pipe Network**" width="70%" />
+<p class="caption">
+Figure 10.9: <strong>SWMM 1D Connection: Pipe Network</strong>
+</p>
+</div>
+</center>
+<table>
+<caption>
+<span id="tab:tab-SWMMinletusage">Table 10.1: </span><strong>SWMM Inlet Usage (swmm_inlet_usage) Attribute Descriptions</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+No. 
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Default GIS Attribute Name
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;width: 5%; ">
+1
+</td>
+<td style="text-align:left;width: 10%; ">
+Inlet
+</td>
+<td style="text-align:left;width: 30%; ">
+The name of the inlet defined in the SWMM inp file “INLETS” section
+</td>
+<td style="text-align:left;width: 10%; ">
+Char (100)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+2
+</td>
+<td style="text-align:left;width: 10%; ">
+StreetXSEC
+</td>
+<td style="text-align:left;width: 30%; ">
+The name of the street cross-section that must be included in the SWMM SWMM inp file “Streets” section.
+</td>
+<td style="text-align:left;width: 10%; ">
+Char (100)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+3
+</td>
+<td style="text-align:left;width: 10%; ">
+Elevation
+</td>
+<td style="text-align:left;width: 30%; ">
+The elevation of the inlet. If a value of –99999 is entered, the elevation will be based on the 2D cell’s elevation.  
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+4
+</td>
+<td style="text-align:left;width: 10%; ">
+SlopePct_Long
+</td>
+<td style="text-align:left;width: 30%; ">
+The longitudinal slope of the street near the inlet.
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+5
+</td>
+<td style="text-align:left;width: 10%; ">
+Number
+</td>
+<td style="text-align:left;width: 30%; ">
+The number of inlets in series at the location (generally 1).
+</td>
+<td style="text-align:left;width: 10%; ">
+Integer
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+6
+</td>
+<td style="text-align:left;width: 10%; ">
+CloggedPct
+</td>
+<td style="text-align:left;width: 30%; ">
+The percentage that the inlet is blocked (defaults to 0.0).
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+7
+</td>
+<td style="text-align:left;width: 10%; ">
+Qmax
+</td>
+<td style="text-align:left;width: 30%; ">
+The maximum discharge through the inlet (default is 0 which does not enforce a maximum).
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+8
+</td>
+<td style="text-align:left;width: 10%; ">
+aLocal
+</td>
+<td style="text-align:left;width: 30%; ">
+The depth of a local depression at the inlet (default 0.0).
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+9
+</td>
+<td style="text-align:left;width: 10%; ">
+wLocal
+</td>
+<td style="text-align:left;width: 30%; ">
+The width of a local depression at the inlet (default 0.0).
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+10
+</td>
+<td style="text-align:left;width: 10%; ">
+Placement
+</td>
+<td style="text-align:left;width: 30%; ">
+Specifies whether the inlet should be treated as at a sag or on a grade. Options are ON_GRADE, ON_SAG, or AUTOMATIC. AUTOMATIC is the default and will switch between ON_GRADE and ON_SAG depending upon the flow conditions at the inlet.
+</td>
+<td style="text-align:left;width: 10%; ">
+Char(10)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+11
+</td>
+<td style="text-align:left;width: 10%; ">
+Conn1D_2D
+</td>
+<td style="text-align:left;width: 30%; ">
+<p>Used to specify a “SX” connection and any additional flags such as “SXZ” or “SXG” that automatically creates a 2D SX cell and connection at the 2D cell within which the SWMM node occurs. This negates the need to create SX objects in a 2d_bc layer.</p>
+<p>Flags:</p>
+<ul>
+<li>“L” – sets the ZU and ZV elevations to be the same as the ZC value only if they are lower. This can improve instabilities where the ZU and ZV values are significantly lower in elevation and can cause a sudden increase in transfer of water to//from the cell when the cell wets.</li>
+<li>“Z” – Adjust the ZC elevation at each cell at//along//within the 2D SX object to below the 1D node bed elevation where ZC is higher. The ZC elevation is set to the Cell Wet/Dry Depth below the 1D node bed. An error occurs if the minimum ZC elevation plus the Cell Wet//Dry Depth at//along a SX object is not below the connected 1D node bed. Also see SX ZC Check permits the user to define a maximum change in ZC elevation. It is not recommended to use the Z flag without first checking that the reason for the discrepancy in elevations between 1D and 2D domains is appropriate</li>
+</ul>
+By default, if more than one 2D cell is automatically connected, nodes are assumed to be connected using the Sag (S) approach. To override the default approach, specify “SXG” for an on-grade connection.
+</td>
+<td style="text-align:left;width: 10%; ">
+Char (10)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+12
+</td>
+<td style="text-align:left;width: 10%; ">
+Conn_Width
+</td>
+<td style="text-align:left;width: 30%; ">
+<p>If “SX” is specified for Conn1D_2D, this field controls the number of 2D cells connected as follows. Note this approach is slightly different than is used by TUFLOW-ESTRY models.</p>
+<ul>
+<li>A positive value indicates the flow width that should be used to compute the number of 2D cells to connect to. TUFLOW will choose the nearest cells that are collectively as wide or wider than the specified flow width.</li>
+<li>If negative, the number of cells selected is the absolute value of the number specified. For example, a value of –1 would connect the inlet to a single 2D cell.
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+</div>
+<div id="OneD2DLinkingSWMM1D-3" class="section level3 hasAnchor" number="10.4.3">
+<h3><span class="header-section-number">10.4.3</span> SWMM to TUFLOW 1D (ESTRY) Linking<a href="Linked-1D2D-Models-1.html#OneD2DLinkingSWMM1D-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>SWMM can be linked to TUFLOW 1D (ESTRY). Full support for 1D open channel modelling using SWMM is not yet available. Considering this, SWMM / TUFLOW 1D linking enables 1D open channel modelling using TUFLOW 1D, linked to SWMM culvert of pipe network features. The combined SWMM 1D-TUFLOW 1D configuration can be dynamically linked to TUFLOW 2D using the approaches outlined in the previous sections.</p>
+<p>SWMM and TUFLOW 1D nodes will be considered linked if:</p>
+<ol style="list-style-type: decimal">
+<li><p>A TUFLOW 1D node in a 1d_nwk layer, and a SWMM node layer are snapped to each other, and</p></li>
+<li><p>The TUFLOW 1D node has a 1d_nwk Conn_1D_2D attribute of either “X1DH” or
+“X1DQ”.</p>
+<ul>
+<li>A “X1DH” link means a SWMM 1D water level is being
+applied at the TUFLOW 1D node (i.e. SWMM sends TUFLOW 1D a water
+level and TUFLOW 1D sends back a +/- flow to SWMM). This is applicable at SWMM Nodes–Junctions and Nodes–Storage locations.<br />
+</li>
+<li>A “X1DQ” link means a SWMM inflow/outflow is being
+applied at the TUFLOW 1D node (i.e. SWMM sends TUFLOW 1D a +/-
+flow and TUFLOW 1D sends back a water level). This is applicable at SWMM Nodes–Outfalls locations.</li>
+</ul></li>
+</ol>
+<p>Note:</p>
+<ul>
+<li>The upstream and downstream inverts for the TUFLOW 1D node linked to SWMM should be set to -99999 unless the node is also being used to set the inverts of channels snapped to it.<br />
+</li>
+<li>SWMM cannot be connected to TUFLOW 1D and TUFLOW 2D from the same SWMM node. Only a single linkage is supported from a single SWMM node. This limitation is highlighted in the zoomed inset of Figure <a href="Linked-1D2D-Models-1.html#fig:fig-1D1DSWMMTUFLOWConnection">10.10</a>. In this example the SWMM Link–Conduit is only linked to TUFLOW 1D, it is not connect to TUFLOW 2D via CN and HX lines. The connection of TUFLOW 2D is associated with the TUFLOW 1D open channels, offset from SWMM by a single short TUFLOW 1D channel length.</li>
+</ul>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-1D1DSWMMTUFLOWConnection"></span>
+<img src="images/1D1DSWMMTUFLOWLink.png" alt="**SWMM 1D / TUFLOW 1D Connection**" width="70%" />
+<p class="caption">
+Figure 10.10: <strong>SWMM 1D / TUFLOW 1D Connection</strong>
+</p>
+</div>
+</center>
+</div>
+</div>
+<div id="OneD2DLinkingFM-2" class="section level2 hasAnchor" number="10.5">
+<h2><span class="header-section-number">10.5</span> Flood Modeller to TUFLOW Linking<a href="Linked-1D2D-Models-1.html#OneD2DLinkingFM-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>TUFLOW 2D domains can be dynamically linked to Flood Modeller
+(previously known as ISIS). Flood Modeller can also link to TUFLOW 1D
+(previously known as ISIS-TUFLOW-PIPE or ISIS-ESTRY).</p>
+<p>Unlike TUFLOW 1D or SWMM, Flood Modeller is not included in the TUFLOW executable download. It must be installed and configured to support the linking to TUFLOW. <a href="https://www.floodmodeller.com/tuflow">TUFLOW Link</a> must be purchased from Jacobs and an appropriate software version used. It is recommended that TUFLOW 2020-10-AD or later is used in conjunction with Flood Modeller Version 5 or later. Figure <a href="Linked-1D2D-Models-1.html#fig:fig-FMTUFLOWVersionCompatability">10.11</a> provides the compatibility between Flood Modeller and TUFLOW for recent versions. Versions prior to Flood Modeller 4.5 will support TUFLOW Classic only. Current versions of Flood Modeller and TUFLOW support all hydraulic solvers. Regardless of the solver, the linking mechanism is the same.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-FMTUFLOWVersionCompatability"></span>
+<img src="images/FM_TUFLOW_Version_Compatability.png" alt="**Compatibility of Recent Flood Modeller and TUFLOW versions**" width="80%" />
+<p class="caption">
+Figure 10.11: <strong>Compatibility of Recent Flood Modeller and TUFLOW versions</strong>
+</p>
+</div>
+</center>
+<div id="oneD2DFMLinking2D-3" class="section level3 hasAnchor" number="10.5.1">
+<h3><span class="header-section-number">10.5.1</span> Flood Modeller 1D to TUFLOW 2D Linking<a href="Linked-1D2D-Models-1.html#oneD2DFMLinking2D-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To link Flood Modeller’s 1D scheme to TUFLOW 2D, a TUFLOW 1d_x1d GIS layer defining the locations of the Flood Modeller 1D nodes is required. The 1d_x1d layer can either be created by the user or by the Flood Modeller interface.</p>
+<p>For linking 1D Flood Modeller to TUFLOW 2D, the TUFLOW 1d_x1d layer requires only one attribute, namely a string 12 characters long that contains the unique IDs of the Flood Modeller 1D nodes/sections. Any other attributes are presently ignored. Creation of this layer manually is possible through exporting a text or csv file containing the Node ID and XY coordinates of the nodes, provided the
+Flood Modeller co-ordinates are in the same projection as the TUFLOW model. Note, the specified IDs are case sensitive (because Flood Modeller IDs are case sensitive).</p>
+<p>In the .tcf file, use either the <a href="TCFCommands-1.html#tcfReadMIISISNodes">Read GIS X1D Nodes</a> or <a href="TCFCommands-1.html#tcfReadMIISISNetwork">Read GIS X1D Network</a> command to read the 1d_x1d layer, as shown in the example below:</p>
+<p><tcmd>Read GIS X1D Network</tcmd><teq> == </teq><tblk>..\model\gis\1d_x1d_FM_nodes.shp</tblk></p>
+<p>The digitising of channels (polylines) within a 1d_x1d GIS layer is
+optional and is only necessary if the model uses 1D Water Level Lines to display map outputs in the 1D domain (1d_wll – refer to Section <mark>9.5</mark> for further details). If GIS layer(s) are provided including channels, they are also read into the .tcf file using the command <a href="TCFCommands-1.html#tcfReadMIISISNetwork">Read GIS X1D
+Network</a>, and should be used with <a href="#tcfReadMIISISWL">Read GIS X1D
+WLL</a>.</p>
+<p>The example below shows the use of these commands (with the nodes and channels in separate files) :</p>
+<p><tcmd><a href="TCFCommands-1.html#tcfReadMIISISNodes">Read GIS X1D Nodes</a></tcmd><teq> == </teq><tblk>..\Model\gis\1d_x1d_FM_nodes.shp</tblk></p>
+<p><tcmd><a href="TCFCommands-1.html#tcfReadMIISISNetwork">Read GIS X1D Network</a></tcmd><teq> == </teq><tblk>..\Model\gis\1d_x1d_FM_channels.shp</tblk></p>
+<p><tcmd><a href="tcfReadMIISISWLL">Read GIS X1D WLL</a></tcmd><teq> == </teq><tblk>..\Model\gis\1d_x1d_FM_wlls.shp</tblk></p>
+<p>Note, legacy models may include reference to ISIS in the above commands. For example, “X1D” in <a href="TCFCommands-1.html#tcfReadMIISISNetwork">Read GIS X1D Network</a> can be substituted with “ISIS” (i.e. <a href="TCFCommands-1.html#tcfReadMIISISNetwork">Read GIS ISIS Network</a>).</p>
+<p>Connections (CN) in the 2d_bc layer are snapped to the nodes in the
+1d_x1d layer in the same manner as a TUFLOW 1D 1d_nwk layer.</p>
+<p>The following restriction apply when connecting Flood Modeller nodes to TUFLOW 2D:</p>
+<ul>
+<li>HX lines should only be connected to Flood Modeller RIVER units. Flood
+Modeller INTERPOLATE and REPLICATE units are also permitted. This
+requires that the Flood Modeller unit between consecutive connections
+along a HX line is always a RIVER unit. If this is not the case, an
+“<a href="https://wiki.tuflow.com/TUFLOW_Message_2043">ERROR 2043</a> - 2D HX cell has been assigned to a non-RIVER unit” occurs. Where a non-RIVER unit occurs (e.g. at a structure), the HX
+line needs to be broken.<br />
+</li>
+<li>Special Flood Modeller units may be required for some HX and SX
+connections (refer to the <a href="https://help.floodmodeller.com/docs/how-to-select-the-tuflow-link-type-to-use">Flood Modeller
+documentation</a>).</li>
+</ul>
+<p>It is not necessary for all Flood Modeller RIVER units between the
+upstream and downstream ends of the HX line to be connected. Nodes/Sections may
+be intentionally or accidentally omitted as with TUFLOW 1D nodes. Please note
+that this is not recommended because by missing or omitting nodes the 1D
+water level water surface gradient that is applied along the HX lines
+will not be correctly represented.</p>
+<p>TUFLOW checks whether the ZC elevation of a HX cell lies above the bed
+of the 1D nodes and that the ZC elevation of a SX cell lies below the 1D
+node bed, and if not, an error occurs (see Section <a href="Linked-1D2D-Models-1.html#HXBoundary-3">10.2.1</a> and <a href="Linked-1D2D-Models-1.html#SXBoundary-3">10.2.2</a>).</p>
+<p>Use the _x1d_nodes_check file to cross-check the external 1D nodes/sections that
+were read by TUFLOW, and the associated information passed from the 1D scheme. Also use
+the 1d_to_2d_check file to cross-check which HX and SX cells are
+connected to which nodes. The HX cells in the 1d_to_2d_check layer can be colour coded using the “Primary_no” attribute to identify the external 1D channel/node that the
+flow in/out across the HX cells is associated with. For Flood Modeller,
+by default HX cells are assigned to the upstream river unit as a lateral
+flow.</p>
+<p>Note, the start and end simulation times and the timestep are
+controlled by Flood Modellers GUI input fields, therefore, any
+<a href="TCFCommands-1.html#tcfStartTime">Start Time</a>, <a href="TCFCommands-1.html#tcfEndTime">End Time</a> and
+<a href="TCFCommands-1.html#tcfTimestep">Timestep</a> commands are ignored in the .tcf file. It is best practice to therefore remove these parameters from the tcf. Within the Flood Modeller GUI, the Flood Modeller 1D timestep can differ from the TUFLOW timestep. It is recommended that the Flood Modeller timestep be set as an integer divisor of the TUFLOW timestep.</p>
+<p>No TUFLOW 1D .ecf file is required, and the TUFLOW 1D <a href="TCFCommands-1.html#tcfESTRYControlFile">ESTRY Control
+File</a> command should not be specified unless there
+are also TUFLOW 1D domain(s) in addition to the external scheme 1D
+domain(s). Flood Modeller nodes can also be directly linked to TUFLOW 1D
+domains - refer to Section <a href="Linked-1D2D-Models-1.html#oneD2DFMLinking1D-3">10.5.2</a>. An example model demonstrating both ‘SX’ and ‘HX’ type links between Flood Modeller and TUFLOW is available <a href="https://gitlab.com/tuflow-user-group/third-party-tools/other/flood-modeller-tuflow-linked-examples">here</a>.</p>
+<p>Note that Flood Modeller HX links may benefit from assigning a Form Loss Coefficient
+(typically 0.1 to 0.5 in value) to HX lines using the 2d_bc “a”
+attribute. For HX lines running along the riverbanks, especially
+those with high overtopping velocities, improved stability and
+representation of the energy losses associated with the water peeling
+off from the river to the floodplain or vice versa can be achieved.</p>
+<p>For model review purposes, the .tcf command <a href="TCFCommands-1.html#tcfWriteX1DCheckFiles">Write X1D Check Files</a> writes
+out check_x1D_H_to_2D.csv and check_2D_Q_to_x1D.csv files. These contain
+the water levels and flows sent to the 2D to/from Flood Modeller.</p>
+<p>Example models demonstrating TUFLOW / Flood Modeller linking is available from the <a href="https://gitlab.com/tuflow-user-group/third-party-tools/other/flood-modeller-tuflow-linked-examples">TUFLOW Gitlab User Group</a>. Detailed documentation for the example models is available from the <a href="https://wiki.tuflow.com/TUFLOW_1D_Flood_Modeller_Connectivity">TUFLOW Wiki</a>. A TUFLOW / Flood Modeller linked model is provided in Module 1 of the <a href="https://wiki.tuflow.com/Flood_Modeller_Tutorial_Module02">TUFLOW / Flood Modeller Wiki Tutorials</a>.</p>
+</div>
+<div id="oneD2DFMLinking1D-3" class="section level3 hasAnchor" number="10.5.2">
+<h3><span class="header-section-number">10.5.2</span> Flood Modeller 1D to TUFLOW 1D (ESTRY) Linking<a href="Linked-1D2D-Models-1.html#oneD2DFMLinking1D-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>TUFLOW models can also be configured with Flood Modeller for dynamically
+linked 1D pipe network / 2D overland flow modelling, with a 1D linkage between the Flood Modeller and TUFLOW 1D. The main driver for this feature is for Flood Modeller - TUFLOW models to utilise the
+powerful sub-surface pipe network and manhole modelling capabilities of TUFLOW 1D (see
+Section <mark>5.12</mark>) and link these networks into a Flood
+Modeller river model.</p>
+<p>Flood Modeller and TUFLOW 1D (ESTRY) nodes will be considered linked if:</p>
+<ol style="list-style-type: decimal">
+<li><p>A TUFLOW 1D node in a 1d_nwk layer, and a Flood Modeller node in a <a href="TCFCommands-1.html#tcfReadMIISISNodes">Read GIS X1D Nodes</a> or <a href="TCFCommands-1.html#tcfReadMIISISNetwork">Read GIS X1D Network</a> layer are snapped.</p>
+<ul>
+<li>Note, legacy models may include reference to ISIS in the command. For example, “X1D” in <a href="TCFCommands-1.html#tcfReadMIISISNodes">Read GIS X1D Nodes</a> can be substituted with “ISIS” (i.e. <a href="TCFCommands-1.html#tcfReadMIISISNodes">Read GIS ISIS Nodes</a>).</li>
+</ul></li>
+<li><p>The TUFLOW 1D node connection method is defined using the TUFLOW 1D 1d_nwk Conn_1D_2D attribute. If the Conn_1D_2D field is blank, a “X1DH” type is assumed. This is the default approach. Alternatively, a value of “X1DH” or “X1DQ” can be manually specified.</p>
+<ul>
+<li>A “X1DH” link means a Flood Modeller 1D water level is being applied at the TUFLOW 1D node (i.e. Flood Modeller sends TUFLOW 1D a water level and TUFLOW 1D sends back a +/- flow to Flood Modeller).</li>
+<li>A “X1DQ” link means a Flood Modeller inflow/outflow is being applied at the TUFLOW 1D node (i.e. Flood Modeller sends TUFLOW 1D a +/- flow and TUFLOW 1D sends back a water level).</li>
+<li>If the end of the TUFLOW 1D channel and the snapped Flood Modeller / TUFLOW 1D nodes are not in the same location a TUFLOW 1D 1d_nwk connector “X” channel type can be used to connect the end of the linked TUFLOW 1D channel to the TUFLOW 1D node snapped to the Flood Modeller node.<br />
+</li>
+<li>Note that the upstream and downstream inverts for the TUFLOW 1D node
+linked to Flood Modeller should be set to -99999 unless the node
+is also being used to set the inverts of channels snapped to it.</li>
+<li>As a general rule, a TUFLOW 1D X1DH (the default) would be used for most Flood Modeller
+TUFLOW 1D links. An X1DQ might be more appropriate where a Flood
+Modeller model stops and flows into an TUFLOW 1D model.</li>
+</ul></li>
+</ol>
+<p>Generally, a TUFLOW 1D timestep will be smaller than the Flood Modeller
+timestep. In these cases, the total volume is accumulated over all TUFLOW 1D
+timesteps within a Flood Modeller timestep, and applied to the Flood
+Modeller model as a discharge by dividing the volume by the Flood
+Modeller timestep.</p>
+<p>When running a TUFLOW 1D Flood Modeller linked model, the mass balance output _MB1D.csv file includes four new columns (not present if linking were not used):</p>
+<ul>
+<li>X1DH V In: The volume of water in via a X1DH link.<br />
+</li>
+<li>X1DH V Out: The volume of water out via a X1DH link.<br />
+</li>
+<li>X1DQ V In: The volume of water in via a X1DQ link.<br />
+</li>
+<li>X1DQ V Out: The volume of water out via a X1DQ link.</li>
+</ul>
+<p>Also, for model review purposes, the type or existence of a connection can be checked following a simulation by viewing the Conn_1D_2D attribute in the 1d_nwk_N_check layer. The
+_messages.mif/.shp layer also contains <a href="https://wiki.tuflow.com/TUFLOW_Message_1393">CHECK 1393</a> messages at each TUFLOW 1D node linked to a Flood Modeller node.</p>
+<p>Example models demonstrating TUFLOW Flood Modeller linking is available from the <a href="https://gitlab.com/tuflow-user-group/third-party-tools/other/flood-modeller-tuflow-linked-examples">TUFLOW Gitlab User Group</a>. Detailed documentation for the example models is available from the <a href="https://wiki.tuflow.com/TUFLOW_1D_Flood_Modeller_Connectivity">TUFLOW Wiki</a>. A TUFLOW 1D Flood Modeller linked model is also provided in Module 2 of the <a href="https://wiki.tuflow.com/Flood_Modeller_Tutorial_Module02">TUFLOW / Flood Modeller Wiki Tutorials</a>.</p>
+</div>
+</div>
+<div id="oneD2D12D-2" class="section level2 hasAnchor" number="10.6">
+<h2><span class="header-section-number">10.6</span> 12D to TUFLOW Linking<a href="Linked-1D2D-Models-1.html#oneD2D12D-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>12D Dynamic Drainage is developed by 12D Solutions. They have developed a TUFLOW interface within their own <a href="https://www.12d.com/product/12d_model_tuflow.html">12D GUI</a> that offers hybrid GUI functionality for 1D and 2D modelling tasks. The interface provides users with the ability to build models and view result entirely within its GUI. Alternatively, existing TUFLOW files created in a GIS form can be imported and used in the 12D environment too.The 12D solution links TUFLOW 2D with 12D’s 1D scheme.</p>
+<p>A TUFLOW engine licence, either purchased directly from <a href="https://www.12d.com/sales/australia.html">12D Solutions</a> or from <a href="sales@tuflow.com">TUFLOW</a> is required to use any of the 12D 2D Dynamic Drainage tools. If purchased from TUFLOW, additional 12D modules, such as the TCF Interface Module and 12D 1D Drainage Integration Module, will need to be purchased from 12D Solutions.</p>
+<p>For information detailing how to complete TUFLOW modelling using the 12D interface, including linking TUFLOW 2D with 12D’s 1D scheme to, please contact <a href="https://www.12d.com/sales/australia.html">12D Solutions</a>.</p>
+</div>
+<div id="TwoD2DLinking-2" class="section level2 hasAnchor" number="10.7">
+<h2><span class="header-section-number">10.7</span> 2D / 2D Domain Linking<a href="Linked-1D2D-Models-1.html#TwoD2DLinking-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The Multiple 2D Domain Module license enables access to TUFLOW HPC Quadtree (QT) and TUFLOW Classic Multiple 2D Domain (M2D) features. Please contact <a href="mailto:sales@tuflow.com" class="email">sales@tuflow.com</a> if you wish to use the these features, though do not have this module enabled on your licence.</p>
+<div id="TwoD2DLinkingQDT-3" class="section level3 hasAnchor" number="10.7.1">
+<h3><span class="header-section-number">10.7.1</span> TUFLOW HPC Quadtree<a href="Linked-1D2D-Models-1.html#TwoD2DLinkingQDT-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Quadtree (QT) mesh refinement functionality allows the user to vary the 2D cell resolution within a TUFLOW HPC model. QT refinement allows for recursive division of square TUFLOW cells into four smaller square cells. Up to 9 levels of cell size refinement are permitted. All cells for all levels of refinement share a common orientation. An example QT mesh is presented in Figure <a href="Linked-1D2D-Models-1.html#fig:fig-HPCQTMeshIntro">10.12</a></p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HPCQTMeshIntro"></span>
+<img src="images/1D2DHPCQTMesh.png" alt="**TUFLOW HPC Quadtree Mesh**" width="70%" />
+<p class="caption">
+Figure 10.12: <strong>TUFLOW HPC Quadtree Mesh</strong>
+</p>
+</div>
+</center>
+<p>TUFLOW HPC QT and TUFLOW Classic M2D use different 2D 2D linkage approaches:</p>
+<ul>
+<li>TUFLOW HPC QT applies the full 2D Shallow Water Equations (SWE) across the changes in cell resolution, with complete computation of all the 2D SWE terms, unlike the TUFLOW Classic M2D feature which utilises hidden 1D nodes. The TUFLOW HPC QT result is a seamless solution across changes in resolution without undesirable numerical artefacts or wave reflections.<br />
+</li>
+<li>TUFLOW HPC QT mesh refinement is implemented by the modeller using a largely automated approach. Definition of 2D cell resolution regions is all that’s required. Following definition of the 2D cell resolution regions, all 2D 2D linkages, domain active / inactive allocations, topography input and update details, inflow / outflow boundary condition and 1D-2D linkage boundary condition locations are applied to the appropriate 2D cell within the QT mesh. By comparison TUFLOW Classic M2D requires manual definition of all 2D 2D linkage aspects.</li>
+</ul>
+<p>Due to the workflow efficient nature of its implementation, superior stability and preservation of inertia, TUFLOW HPC QT has superseded TUFLOW Classic’s Multiple 2D Domain (M2D) feature as the recommended approach for models that require varied 2D cell sizes within a single model.</p>
+<p>TUFLOW HPC QT mesh refinement and 2D 2D linking is activated when a Quadtree Control File is specified, using the TCF command:<tcmd><a href="TCFCommands-1.html#tcfQuadtreeControlFile">Quadtree Control File</a></tcmd>. The nesting level (i.e. levels of mesh refinement) is defined using the Quadtree Control File (QCF) GIS file reference command:
+<tcmd><a href="QCFCommands-1.html#qcfReadGISNesting">Read GIS Nesting</a></tcmd>. Within the GIS Nesting layer (2d_qnl), the nest level attribute must be in the range 1 to 9. A value of 1 value represents the most coarse resolution, and is also referred to as the “Base Cell Size” value. A value of 2 indicates the cell size within the polygon would be at Level 2 (i.e. half the base cell size). 3 would be cells at ¼ of the base cell size, 4 for 1/8th and so on up to a maximum of 9 (1/256th). For numerical precision reasons, the maximum nesting level of 9 (or 1/256) of the base cell size has been adopted. Note, if it is defined, there should only be a maximum of one Level 1 polygon included in the 2d_qnl layer, but for all other nest levels there is no limit on the number of polygons.</p>
+<p>It is a requirement that each 2D cell face can have a maximum of 2 adjoining cell faces. When refining mesh areas, if a nesting level polygon does not sit within another polygon of the next higher level, such as if a Level 4 polygon is defined within a Level 1 or Level 2 polygon, intermediate areas of refinement are automatically generated by TUFLOW. This QT mesh behaviour is shown at the road intersection in Figure <a href="Linked-1D2D-Models-1.html#fig:fig-HPCQTMeshAuto">10.13</a>. Alternatively if a refinement polygon sits within a polygon of the next higher level (e.g. a Level 3 polygon is defined within a Level 2), no automatic refinement is required or occurs, as shown in Figure <a href="Linked-1D2D-Models-1.html#fig:fig-HPCQTMeshManual">10.14</a>.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HPCQTMeshAuto"></span>
+<img src="images/1D2DHPCQTMesh_Auto.png" alt="**TUFLOW HPC Quadtree Mesh - Automatic Refinement**" width="70%" />
+<p class="caption">
+Figure 10.13: <strong>TUFLOW HPC Quadtree Mesh - Automatic Refinement</strong>
+</p>
+</div>
+</center>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HPCQTMeshManual"></span>
+<img src="images/1D2DHPCQTMesh_Manual.png" alt="**TUFLOW HPC Quadtree Mesh - Manual Refinement **" width="70%" />
+<p class="caption">
+Figure 10.14: <strong>TUFLOW HPC Quadtree Mesh - Manual Refinement </strong>
+</p>
+</div>
+</center>
+<p>Detailed TUFLOW HPC QT documentation is provided in Section <a href="TwoD-Domains-1.html#TwoD-Domains-1">7</a>. For a complete description of the 2D TUFLOW HPC QT solution and associated commands, please refer to Chapter <mark>XXX</mark>.</p>
+<!-- CDH comment - QT chapter has not been tagged in the 2D Domains chapter yet - need to update this link when it's ready)
+ -->
+<p>An example TUFLOW HPC QT model is available in Module 7 of the <a href="https://wiki.tuflow.com/Tutorial_Introduction">TUFLOW Wiki Tutorials</a>. A video demonstration the implementation of this multiple 2D Domain feature is also available in the <a href="https://www.tuflow.com/library/videos/#howtoquadtree">TUFLOW Library</a>.</p>
+</div>
+<div id="TwoD2DLinkingM2D-3" class="section level3 hasAnchor" number="10.7.2">
+<h3><span class="header-section-number">10.7.2</span> TUFLOW Classic Multiple 2D Domain<a href="Linked-1D2D-Models-1.html#TwoD2DLinkingM2D-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Due to the workflow efficient nature of its implementation, superior stability and preservation of inertia, TUFLOW HPC Quadtree has superseded TUFLOW Classic’s Multiple 2D Domain feature as the recommended approach for models that require varied 2D cell sizes within a single model. The following documentation is however provided for people working with legacy models using the TUFLOW Classic M2D.</p>
+<p>When using TUFLOW Classic with the Multiple 2D Domain Module, any number of 2D domains of different cell size and orientation can be combined to form one model. The 2D domains can be linked via 1D domains
+or directly to each other. For example, a 1D domain of a river system
+may have several 2D domains embedded to represent several towns
+where a more detailed analysis is required. Alternatively, direct 2D to
+2D linking can be achieved by using the 2d_bc 2D link type (see XXXX).
+Examples of these model configurations are shown in Figure <a href="Linked-1D2D-Models-1.html#fig:fig-MultipleDomainModellinkedvia1DDomain">10.15</a> and Figure <a href="Linked-1D2D-Models-1.html#fig:fig-MultipleDomainModellinkedvia2DLink">10.16</a> .</p>
+<!-- CDH table link missing above. -->
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-MultipleDomainModellinkedvia1DDomain"></span>
+<img src="images/image142.png" alt="**Schematic of a Multiple Domain Model linked via a 1D Domain**" width="50%" />
+<p class="caption">
+Figure 10.15: <strong>Schematic of a Multiple Domain Model linked via a 1D Domain</strong>
+</p>
+</div>
+</center>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-MultipleDomainModellinkedvia2DLink"></span>
+<img src="images/image143.png" alt="**Schematic of a Multiple 2D Domain Model using the 2d_bc “2D” Link**" width="50%" />
+<p class="caption">
+Figure 10.16: <strong>Schematic of a Multiple 2D Domain Model using the 2d_bc “2D” Link</strong>
+</p>
+</div>
+</center>
+<p>To specify more than one 2D domain use <a href="TCFCommands-1.html#tcfStart2DDomain">Start 2D
+Domain</a> and <a href="TCFCommands-1.html#tcfEnd2DDomain">End 2D Domain</a> in the
+.tcf file to start and end blocks of commands applicable for each 2D
+domain. The <a href="TCFCommands-1.html#tcfESTRYControlFile">ESTRY Control File</a> and <a href="TCFCommands-1.html#tcfBCDatabase">BC
+Database</a> commands are independent of the 2D domain
+block. As such they are typically not included within the 2D domain
+block.</p>
+<p>The mandatory .tcf commands that occur within a 2D domain block are:</p>
+<table>
+<colgroup>
+<col style="width: 49%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>
+<a href="TCFCommands-1.html#tcfGeometryControlFile">Geometry Control File</a><br />
+<a href="TCFCommands-1.html#tcfBCControlFile">BC Control File</a>
+</th>
+<th>
+<a href="TCFCommands-1.html#tcfTimestep">Timestep</a>
+</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>Optional commands that can be used are:</p>
+<table>
+<colgroup>
+<col style="width: 49%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>
+<a href="TCFCommands-1.html#tcfCellWetDryDepth">Cell Wet/Dry Depth</a><br />
+<a href="TCFCommands-1.html#tcfInstabilityWaterLevel">Instability Water Level</a><br />
+<a href="TCFCommands-1.html#tcfReadMIFC">Read GIS FC</a><br />
+<a href="TCFCommands-1.html#tcfReadMIGLO">Read GIS GLO</a>
+</th>
+<th>
+<a href="TCFCommands-1.html#tcfReadMIIWL">Read GIS IWL</a><br />
+<a href="TCFCommands-1.html#tcfReadMIDIWL">Read RowCol IWL</a><br />
+<a href="TCFCommands-1.html#tcfReadMILP">Read GIS LP</a><br />
+<a href="TCFCommands-1.html#tcfReadMIPO">Read GIS PO</a>
+</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p><strong>Note that specifying one of the above commands outside a Start/End 2D
+Domain block does not apply that command to all 2D domains.</strong> For
+example, specifying <a href="TCFCommands-1.html#tcfCellWetDryDepth">Cell Wet/Dry Depth</a> outside a
+block will not set the <a href="TCFCommands-1.html#tcfCellWetDryDepth">Cell Wet/Dry Depth</a> value
+to all 2D domains, and causes ERROR 2107 to occur.</p>
+<p>An example of using 2D domain blocks is given below:</p>
+<tcmd><a href="TCFCommands-1.html#tcfStart2DDomain">Start 2D Domain</a></tcmd><teq> == </teq><tblk>East_Domain</tblk><br>
+<ol>
+<tcmd><a href="TCFCommands-1.html#tcfGeometryControlFile">Geometry Control File</a></tcmd><teq> == </teq><tblk>..\model\east_domain.tgc</tblk><br>
+<tcmd><a href="TCFCommands-1.html#tcfBCControlFile">BC Control File</a></tcmd><teq> == </teq><tblk>..\model\east_domain.tbc</tblk><br>
+<tcmd><a href="TCFCommands-1.html#tcfTimestep">Timestep</a></tcmd><teq> == </teq><tblk>10</tblk><br>
+</ol>
+<p><tcmd><a href="TCFCommands-1.html#tcfEnd2DDomain">End 2D Domain</a></tcmd><br></p>
+<tcmd><a href="TCFCommands-1.html#tcfStart2DDomain">Start 2D Domain</a></tcmd><teq> == </teq><tblk>West_Domain</tblk><br>
+<ol>
+<tcmd><a href="TCFCommands-1.html#tcfGeometryControlFile">Geometry Control File</a></tcmd><teq> == </teq><tblk>..\model\west_domain.tgc</tblk><br>
+<tcmd><a href="TCFCommands-1.html#tcfBCControlFile">BC Control File</a></tcmd><teq> == </teq><tblk>..\model\west_domain.tbc</tblk><br>
+<tcmd><a href="TCFCommands-1.html#tcfTimestep">Timestep</a></tcmd><teq> == </teq><tblk>5</tblk><br>
+</ol>
+<p><tcmd><a href="TCFCommands-1.html#tcfEnd2DDomain">End 2D Domain</a></tcmd></p>
+<p><tcmd><a href="TCFCommands-1.html#tcfBCDatabase">BC Database</a></tcmd><teq> == </teq><tblk>..\bc_dbase\bcdbase_Q100_2hr_001.csv</tblk><br>
+<tcmd><a href="TCFCommands-1.html#tcfESTRYControlFile">ESTRY Control File</a></tcmd><teq> == </teq><tblk>..\model\1D_domain.ecf</tblk><br>
+<tcmd><a href="TCFCommands-1.html#tcfReadMaterialsFile">Read Materials File</a></tcmd><teq> == </teq><tblk>..\model\n_values.tmf</tblk><br>
+<tcmd><a href="TCFCommands-1.html#tcfStartTime">Start Time</a></tcmd><teq> == </teq><tblk>0</tblk><br>
+<tcmd><a href="TCFCommands-1.html#tcfEndTime">End Time</a></tcmd><teq> == </teq><tblk>12</tblk></p>
+<p>Multiple 2D domain models use the 2d_bc “2D” link type (see <mark>Table 7‑</mark>4
+and <mark>Table 7‑</mark>5) as the boundary cells which transfer flow between the
+neighbouring domains. The link type creates hidden 1D nodes at each
+vertex along the 2D link line and also at a regular interval, as defined
+by the “d” attribute (see <mark>Table 7‑</mark>5). The hidden 1D nodes act as storage
+that convey the water from one 2D domain to the other. The water levels
+along the 2d_bc 2D link line are linearly interpolated using the water
+levels in the hidden 1D nodes. If the water level profile in reality is
+not close to linear between vertices, strange flow patterns may occur
+which can lead to model instability. As such, appropriate resolution of
+the hidden 1D nodes is an important feature of multiple 2D domain
+models. The .tcf command <a href="TCFCommands-1.html#tcfReveal1DNodes">Reveal 1D Nodes</a> can be
+used to view the hidden 1D nodes. The hidden nodes will be written to
+the nwk_N check layer, as shown in Figure <a href="Linked-1D2D-Models-1.html#fig:fig-Multiple2DDomainModelLinkCheckFiles">10.17</a> . For multiple domain
+models using the 2d_bc “2D” link, note that this GIS layer must be read
+into the .tbc files of <strong>both</strong> 2D domains. The 2D link can then be
+checked by viewing the _2d_to_2d_check layer which displays the 2D
+cells used to link the two domains together. These features, and their
+check files are shown in Figure <a href="Linked-1D2D-Models-1.html#fig:fig-Multiple2DDomainModelLinkCheckFiles">10.17</a>.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-Multiple2DDomainModelLinkCheckFiles"></span>
+<img src="images/image144.png" alt="**Multiple 2D Domain Model “2D” Link Check Files**" width="50%" />
+<p class="caption">
+Figure 10.17: <strong>Multiple 2D Domain Model “2D” Link Check Files</strong>
+</p>
+</div>
+</center>
+<p>The following guidance is recommended when defining the location and
+orientation of the 2d_bc “2D” link.</p>
+<ul>
+<li>2D link lines will be most stable if digitised perpendicular to the
+dominant flow direction in high conveyance locations (e.g. rivers and
+creeks).<br />
+</li>
+<li>Orientation of the 2D link lines is less critical in low conveyance
+regions, such as floodplain storage areas (i.e. perpendicular
+orientation is not a necessity). High resolution definition of the
+hidden 1D nodes may be required. If used, the automated hidden 1D
+nodes distance attribute “d” should not be set finer than three times
+the larger cell size.</li>
+</ul>
+<p>If the extents of the 2D domains overlap, it will be necessary to
+deactivate the overlapping cells in the other domain. Using the example
+above, the active area for the ‘West Domain’ will need to be deactivated
+in the .tgc file of the ‘East Domain’ and vice versa. The <a href="TGCCommands-1.html#tgcReadGISCode">Read GIS Code
+Invert</a> command is useful for this process as it allows
+for the same GIS layer to be used to active/deactivate cells.</p>
+<p>A unique model <a href="TCFCommands-1.html#tcfTimestep">Timestep</a> is recommended for each 2D
+domain. The timestep should be defined so that conforms to the Courant
+stability criteria for each domain, as discussed in Section <mark>3.5</mark>.
+The timesteps of all 2D and 1D domains should be an integer multiple of
+one another.</p>
+<p>A TUFLOW Classic Multiple 2D Domain model is available in Module 9 of the <a href="https://wiki.tuflow.com/Tutorial_Model_Archive">TUFLOW Wiki Tutorials Archive</a>.</p>
+<p><img src="images/WQFooter.jpg" width="100%" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="AD-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="Outputs-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": false,
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
