@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Section 11 Outputs | TUFLOW Classic/HPC User Manual 2023-03</title>
   <meta name="description" content="Section 11 Outputs | TUFLOW Classic/HPC User Manual 2023-03" />
-  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Section 11 Outputs | TUFLOW Classic/HPC User Manual 2023-03" />
   <meta property="og:type" content="book" />
@@ -53,18 +53,19 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -700,7 +701,7 @@ div.csl-indent {
 <li class="chapter" data-level="9.3.1" data-path="AD-1.html"><a href="AD-1.html#simulation-control-file"><i class="fa fa-check"></i><b>9.3.1</b> Simulation Control File</a>
 <ul>
 <li class="chapter" data-level="9.3.1.1" data-path="AD-1.html"><a href="AD-1.html#ADControlFile-4"><i class="fa fa-check"></i><b>9.3.1.1</b> TUFLOW AD Control File (.adcf File)</a></li>
-<li class="chapter" data-level="9.3.1.2" data-path="AD-1.html"><a href="AD-1.html#gis-input-file-types-and-naming-conventions"><i class="fa fa-check"></i><b>9.3.1.2</b> GIS Input File Types and Naming Conventions</a></li>
+<li class="chapter" data-level="9.3.1.2" data-path="AD-1.html"><a href="AD-1.html#AD-inputs-4"><i class="fa fa-check"></i><b>9.3.1.2</b> GIS Input File Types and Naming Conventions</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3.2" data-path="AD-1.html"><a href="AD-1.html#d-geometries"><i class="fa fa-check"></i><b>9.3.2</b> 1D Geometries</a></li>
 <li class="chapter" data-level="9.3.3" data-path="AD-1.html"><a href="AD-1.html#ADConstituentProp-3"><i class="fa fa-check"></i><b>9.3.3</b> Specification of Constituent Properties</a></li>
@@ -1175,7 +1176,7 @@ Interval</a> command.<br />
 triangular mesh of the 1D and 2D domains. This output is the closest reproduction of the hydraulic calculations, with minimal interpolation from the 1D and 2D computational points. These formats include: XMDF, DAT, TMO and WRB.<br />
 </li>
 <li><a href="Outputs-1.html#Grid-4">Grid Based</a>: The output is over a regular north-south grid in a similar manner to a raster DEM. The hydraulic output at each output grid cell is interpolated from the computational mesh using the Mesh Based output above. These formats include: TIF, GPKG, FLT, ASC, NC, TGO, WRR.</li>
-<li><a href="Outputs-1.html#HRGrid-4">High Resolution Grid Based</a>: If using the “Method C” <a href="TCFCommands-1.html#tcfSGSApproach">SGS Approach</a>, the retained sampled elevations can be used to produce high-resolution (HR) grid outputs. All supported <a href="Outputs-1.html#Grid-4">Grid Based</a> outputs can be high-resolution: HRTIF, HRGPKG, HRFLT, HRASC, HRNC, HRTGO, HRWRR.</li>
+<li><a href="Outputs-1.html#HRGrid-4">High Resolution Grid Based</a>: If using <a href="TCFCommands-1.html#tcfSGS">SGS</a>, the retained sampled elevations can be used to produce high-resolution (HR) grid outputs. All supported <a href="Outputs-1.html#Grid-4">Grid Based</a> outputs can be high-resolution: HRTIF, HRGPKG, HRFLT, HRASC, HRNC, HRTGO, HRWRR.</li>
 <li><a href="Outputs-1.html#Combined-4">Combination Mesh and Grid</a>: This format includes: WRC.<br />
 </li>
 <li><a href="Outputs-1.html#GISBased-4">GIS Based</a>: GIS layers written as the simulation proceeds (similar to using the post-processing <a href="https://wiki.tuflow.com/TUFLOW_to_GIS">TUFLOW_to_GIS</a> utility). The format is set by <a href="TCFCommands-1.html#tcfGISFormat">GIS Format</a>.</li>
@@ -1192,10 +1193,10 @@ triangular mesh of the 1D and 2D domains. This output is the closest reproductio
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Format
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
 </tr>
@@ -1275,10 +1276,10 @@ VxD(s).</p>
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Format
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
 </tr>
@@ -1400,10 +1401,10 @@ slopes may experience a more significant change.</p>
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Format
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
 </tr>
@@ -1560,17 +1561,17 @@ to its grid-based formatting. The output values are the cell centre values for e
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Flag
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Map Output<br />
 Data Type
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Supported Formats
 </th>
 </tr>
@@ -1587,7 +1588,7 @@ Atmospheric Pressure
 Atmospheric pressure in hPa. Atmospheric Pressure is only available if using the <a href="TCFCommands-1.html#tcfReadGISCyclone">Read GIS Cyclone</a> or <a href="TCFCommands-1.html#tcfReadGISCyclone">Read GIS Hurricane</a> commands. Maximum and minimum output is not available.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1605,7 +1606,7 @@ English Units: <span class="math display">\[\tau_{bed} = \frac{\rho g V^2 n^2}{2
 Note, prior to the 2017 release BSS output in English Units were in Poundals per square foot (pdl/ft<sup>2</sup>).
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1628,7 +1629,7 @@ Cumulative Infiltration
 When any of the three options (multiple vertical layers, horizontal movement or negative rainfall) are used, the water content in the layer is no longer a “cumulative value”.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1643,7 +1644,7 @@ Courant Number
 Courant number (2D domains only). Maximum and minimum output is not available.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1672,7 +1673,7 @@ Depth
 For maximum depth output this is calculated at the end of the simulation based on the maximum water level and the ground elevation. For models that utilise varying ground elevations (using the <a href="TGCCommands-1.html#tgcReadGISVariableZShape">Read GIS Variable Z Shape</a> or variable geometry (VG) boundaries), care should be taken when interpreting maximum depth outputs. Hazard outputs (based on velocity and depth) are tracked at each timestep, and the maximum for these is the maximum at any timestep during the model.
 </td>
 <td style="text-align:left;">
-All formats excluding WRB
+All formats excluding WRB.
 </td>
 </tr>
 <tr>
@@ -1688,7 +1689,7 @@ Depth to Groundwater
 Maximum and minimum output is not available.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1703,7 +1704,7 @@ Minimum Timestep
 The dt map output is a grid map output that displays the calculated minimum timestep at each grid cell. It does not necessarily align with the timestep adopted in the model (the timestep in the model could be less if the previous timesteps were smaller). This helps identify which cells in the model are controlling the model timestep. For more information see the <a href="https://wiki.tuflow.com/HPC_Model_Review#dt_Map_Output">TUFLOW Wiki</a>.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1719,7 +1720,7 @@ Energy
 Maximum energy levels is for when the maximum water level occurs (<b>Note: This may cause undulations in the maximum energy due to variations in the time of the maximum water level</b>).
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1733,7 +1734,7 @@ Froude Number
 Froude number output. No maximum and minimum output is available at this stage.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1762,7 +1763,7 @@ Groundwater Depth
 Reported in metres or feet.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1777,7 +1778,7 @@ Groundwater Level
 Reported in metres or feet.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1791,7 +1792,7 @@ Groundwater Moisture
 Groundwater moisture output. Dimensionless number in the range of zero to one representing a “fraction full” for each sub-surface layer(s) when layered interflow has been defined (see Section <a href="TwoD-Domains-1.html#HPC-Groundwater-3">7.4.5</a>).
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1806,7 +1807,7 @@ Groundwater Unit Flow
 Reported in m<sup>2</sup>/hr or ft<sup>2</sup>/hr.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1821,7 +1822,7 @@ Groundwater Velocity
 Reported in m/hr or ft/hr.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1835,7 +1836,7 @@ Water Level
 Water level output. For the cell cornered results formats (see Section <a href="Outputs-1.html#Mesh-5">11.2.2.1.1</a>) the water levels are interpolated from the water levels calculated at the cell centres. Both maximum and minimum outputs are available.
 </td>
 <td style="text-align:left;">
-All formats
+All formats.
 </td>
 </tr>
 <tr>
@@ -1850,7 +1851,7 @@ Infiltration Rate
 If using multiple sub-surface layers (see Section <a href="TwoD-Domains-1.html#HPC-Groundwater-3">7.4.5</a>) the infiltration rate is reported for the first (top) layer only.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1866,7 +1867,7 @@ Mass Balance
 This output does not include 1D output from WLLs.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1882,7 +1883,7 @@ Mass Balance
 This output does not include 1D output from WLLs.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1896,7 +1897,7 @@ Manning’s n
 Manning’s n values. The n values only vary over time for materials using the Manning’s n varying with depth feature. The n values at the cell corners in the _n.xmdf file are interpolated from the surrounding four cell mid-sides. Maximum and minimum output is not available.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1911,7 +1912,7 @@ Shallow Wave Celerity Number
 The Shallow Wave Celerity Number. One of the three controls TUFLOW HPC uses to determine the maximum timestep to maintain stability. See the <a href="https://wiki.tuflow.com/HPC_Adaptive_Timestepping">HPC Adaptive Timestepping Wiki Page</a> for discussion on adaptive timestepping and the Nc number.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1926,7 +1927,7 @@ Diffusion Number
 The Diffusion Number. One of the three controls TUFLOW HPC uses to determine the maximum timestep to maintain stability. See the <a href="https://wiki.tuflow.com/HPC_Adaptive_Timestepping">HPC Adaptive Timestepping Wiki Page</a> for discussion on adaptive timestepping and the Nd number.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1941,7 +1942,7 @@ Courant Number
 The Courant Number. One of the three controls TUFLOW HPC uses to determine the maximum timestep to maintain stability. See the <a href="https://wiki.tuflow.com/HPC_Adaptive_Timestepping">HPC Adaptive Timestepping Wiki Page</a> for discussion on adaptive timestepping and the Nu number.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1957,7 +1958,7 @@ Vector Unit Flow
 Note: The maximum unit flow is not tracked for the q output, the Z0 scalar hazard value option can be used, as this output is tracked at each timestep.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1972,7 +1973,7 @@ Flow Regime
 Flow regime. The output value is 0 (zero) for normal (sub-critical flow with momentum); greater than 1 for upstream controlled friction flow (e.g. supercritical flow); ‑1.5 for broad-crested weir flow; and ‑1 for flow through a flow constriction when the deck is submerged. No maximum and minimum output is available at this stage. The flow regime at the cell corners and centre is a weighted average (using unit flow) of the flow regimes at the four surrounding cell mid-sides, therefore, where there’s different flow regimes at any of the four cell faces the R value can be misleading due to the averaging.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -1987,7 +1988,7 @@ Route Category
 The maximum RC category value is tracked every timestep and output (if tracking maximums is switched on, which is the default).
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -2002,7 +2003,7 @@ Cumulative Rainfall
 Maximum and minimum output is not applicable/available, as it is a cumulative output.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -2016,7 +2017,7 @@ Material Based Rainfall Loss
 The output contains the total rainfall losses applied due the initial and continuing rainfall losses specified in the <a href="TCFCommands-1.html#tcfReadMaterialsFile">Read Materials File</a> (.tmf or .csv) file. The RFML option can be used to track the rainfall based material losses that have been applied spatially. The RFC and RFR map output data types can be used to output the cumulative rainfall and rainfall rate.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -2030,7 +2031,7 @@ Rainfall Rate
 The rainfall rate in mm/hr or inches/hr over time when direct rainfall has been applied to the model (refer to Section <a href="Boundaries-InitialConditions-1.html#Rainfall-3">8.5.3</a>). See also the RFC (cumulative rainfall) map output type above. Maximum and minimum output is not available.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -2047,7 +2048,7 @@ Stream Power
 Prior to the 2017 release SP output in English Units were in Poundals per square foot (pdl/ft<sup>2</sup>). From the 2017 release onwards the units are in Pounds Force per square foot (lbf/ft<sup>2</sup>), therefore, the SP values are 32.174 times smaller than for releases prior to 2017.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -2062,7 +2063,7 @@ Sink / Source Flow
 Maximum and minimum output is not available.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -2076,7 +2077,7 @@ Viscosity Coeff
 Eddy viscosity coefficient. This is useful for checking the Smagorinsky coefficient values. No maximum and minimum output is available at this stage.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -2091,7 +2092,7 @@ Shear stress
 The output values are in Newtons per square metre (N/m<sup>2</sup>) for SI units and pound-force per square foot (lbf/ft<sup>2</sup>) for US customary (English) units.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -2106,7 +2107,7 @@ Vector Velocity
 Note: The maximum and minimum velocities are tracked over time, however, be careful interpreting maximum velocities displayed as vectors as the flow patterns may appear to be opposing each other - this is due to the maximum velocities not all occuring at the same instant in time. By default the maximum velocities are tracked over 0.1m depth, below this depth the velocity at maximum water level is used. See the <a href="TCFCommands-1.html#tcfMaximumVelocityCutoffDepth">Maximum Velocity Cutoff Depth</a> command for more information.
 </td>
 <td style="text-align:left;">
-All formats
+All formats excluding HR.
 </td>
 </tr>
 <tr>
@@ -2120,7 +2121,7 @@ Wind Vector
 Wind Vector output in m/s at a height of 10m. Available when a cyclone/hurricane boundary is used, see Section <a href="Boundaries-InitialConditions-1.html#Cyclones-2">8.7</a>.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 <tr>
@@ -2136,7 +2137,7 @@ Bathymetry
 Currently, no maximum and minimum output is available.
 </td>
 <td style="text-align:left;">
-All formats excluding TMO and WRB
+All formats excluding TMO, WRB and HR.
 </td>
 </tr>
 </tbody>
@@ -2183,13 +2184,13 @@ compatible with both TUFLOW Classic and HPC solvers.</p>
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Flag
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Supported Formats
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
 </tr>
@@ -2716,16 +2717,16 @@ only the vertices along the WLL are generated.</p>
 </caption>
 <thead>
 <tr>
-<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 No
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Default GIS Attribute Name
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Type
 </th>
 </tr>
@@ -2813,16 +2814,16 @@ Dist_for_Add_Points value.</p>
 </caption>
 <thead>
 <tr>
-<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 No
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Default GIS Attribute Name
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Type
 </th>
 </tr>
@@ -3034,16 +3035,16 @@ last occurrence of the command will be used.</p>
 </caption>
 <thead>
 <tr>
-<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 No
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Default GIS Attribute Name
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Type
 </th>
 </tr>
@@ -3158,13 +3159,13 @@ Figure 11.4: <strong>Interpretation of PO Objects and Map Output</strong>
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Flag
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Comments
 </th>
 </tr>
@@ -3532,16 +3533,16 @@ Velocity in Y-direction
 </caption>
 <thead>
 <tr>
-<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 No
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Default GIS Attribute Name
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Type
 </th>
 </tr>
@@ -3604,16 +3605,16 @@ Char (250)
 </caption>
 <thead>
 <tr>
-<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 No
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Default GIS Attribute Name
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Type
 </th>
 </tr>
@@ -3676,16 +3677,16 @@ Char (250)
 </caption>
 <thead>
 <tr>
-<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 No
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Default GIS Attribute Name
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Type
 </th>
 </tr>
@@ -3862,10 +3863,10 @@ in relation to the water level at a gauge.</p>
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 GIS Attribute
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
 </tr>
@@ -3962,16 +3963,16 @@ animate the route category values.</p>
 </caption>
 <thead>
 <tr>
-<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 No
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Default GIS Attribute Name
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Type
 </th>
 </tr>
@@ -4096,10 +4097,10 @@ Char(80)
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 GIS Attribute
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
 </tr>
@@ -4196,16 +4197,16 @@ Some other notes
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Requirement
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Command
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Description
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
 Category
 </th>
 </tr>
