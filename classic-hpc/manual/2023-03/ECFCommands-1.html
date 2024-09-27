@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Appendix B ECF Commands | TUFLOW Classic/HPC User Manual 2023-03</title>
   <meta name="description" content="Appendix B ECF Commands | TUFLOW Classic/HPC User Manual 2023-03" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Appendix B ECF Commands | TUFLOW Classic/HPC User Manual 2023-03" />
   <meta property="og:type" content="book" />
@@ -53,19 +53,18 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -1073,20 +1072,114 @@ div.csl-indent {
              });
          } );
 </script>
-<p>The TUFLOW ESTRY Control File (.ecf) includes commands and data inputs to build the 1D ESTRY domain, it is read into the .tcf using the <a href="TCFCommands-1.html#tcfESTRYControlFile">ESTRY Control File</a> command. For more information on the .ecf, see Section <a href="ControlFiles-and-Inputs-1.html#ECF-3">4.2.5</a>. Building the 1D domain is discussed in Chapter <a href="OneD-Domains-1.html#OneD-Domains-1">5</a>. The available ECF commands are detailed in Table <a href="ECFCommands-1.html#tab:tab-ECFCommands">B.1</a>.</p>
+<p>The TUFLOW ESTRY Control File (.ecf) includes commands and data inputs to build the 1D ESTRY domain, it is read into the .tcf using the <a href="TCFCommands-1.html#tcfESTRYControlFile">ESTRY Control File</a> command. For more information on the .ecf, see Section <a href="ControlFiles-and-Inputs-1.html#ECF-3">4.2.5</a>. Building the 1D domain is discussed in Chapter <a href="OneD-Domains-1.html#OneD-Domains-1">5</a>. The available ECF commands are listed below and are detailed in Table <a href="ECFCommands-1.html#tab:tab-ECFCommands">B.1</a>.</p>
+<!-- lists all commands in table-->
+<div style="columns: 3;">
+<p><a href="ECFCommands-1.html#ecfArchBridgeMinimumBlockage">Arch Bridge Minimum Blockage (%)</a><br />
+<a href="ECFCommands-1.html#ecfBCDatabase">BC Database</a><br />
+<a href="ECFCommands-1.html#ecfBCEventName">BC Event Name</a><br />
+<a href="ECFCommands-1.html#ecfBCEventText">BC Event Text</a><br />
+<a href="ECFCommands-1.html#ecfBridgeFlow">Bridge Flow</a><br />
+<a href="ECFCommands-1.html#ecfBridgeZeroCoefficients">Bridge Zero Coefficients</a><br />
+<a href="ECFCommands-1.html#ecfConveyanceCalculation">Conveyance Calculation</a><br />
+<a href="ECFCommands-1.html#ecfCreateNodes">Create Nodes</a><br />
+<a href="ECFCommands-1.html#ecfCSVFormat">CSV Format</a><br />
+<a href="ECFCommands-1.html#ecfCSVMaximumNumberColumns">CSV Maximum Number Columns</a><br />
+<a href="ECFCommands-1.html#ecfCSVTime">CSV Time</a><br />
+<a href="ECFCommands-1.html#ecfCulvertCriticalHD">Culvert Critical H/D</a><br />
+<a href="ECFCommands-1.html#ecfCulvertFlow">Culvert Flow</a><br />
+<a href="ECFCommands-1.html#ecfCulvertZeroCoefficients">Culvert Zero Coefficients</a><br />
+<a href="ECFCommands-1.html#ecfDepthDischargeDatabase">Depth Discharge Database</a><br />
+<a href="ECFCommands-1.html#ecfDepthLimitFactor">Depth Limit Factor</a><br />
+<a href="ECFCommands-1.html#ecfFlowArea">Flow Area</a><br />
+<a href="ECFCommands-1.html#ecfFlowCalculation">Flow Calculation</a><br />
+<a href="ECFCommands-1.html#ecfFroudeCheck">Froude Check</a><br />
+<a href="ECFCommands-1.html#ecfFroudeDepthAdjustment">Froude Depth Adjustment</a><br />
+<a href="ECFCommands-1.html#ecfHeadRateCreepFactor">Head Rate Creep Factor</a><br />
+<a href="ECFCommands-1.html#ecfHeadRateLimitMinimum">Head Rate Limit Minimum</a><br />
+<a href="ECFCommands-1.html#ecfHeadRateLimit">Head Rate Limit</a><br />
+<a href="ECFCommands-1.html#ecfInterpolateCrossSections">Interpolate Cross-Sections</a><br />
+<a href="ECFCommands-1.html#ecfInterpolateCulvertInverts">Interpolate Culvert Inverts</a><br />
+<a href="ECFCommands-1.html#ecfMChannelApproach">M Channel Approach</a><br />
+<a href="ECFCommands-1.html#ecfM11Network">M11 Network</a><br />
+<a href="ECFCommands-1.html#ecfManholeApproach">Manhole Approach</a><br />
+<a href="ECFCommands-1.html#ecfManholeDefaultCExitCoefficient">Manhole Default C Exit Coefficient</a><br />
+<a href="ECFCommands-1.html#ecfManholeDefaultLossApproach">Manhole Default Loss Approach</a><br />
+<a href="ECFCommands-1.html#ecfManholeDefaultRExitCoefficient">Manhole Default R Exit Coefficient</a><br />
+<a href="ECFCommands-1.html#ecfManholeDefaultSideClearance">Manhole Default Side Clearance</a><br />
+<a href="ECFCommands-1.html#ecfManholeDefaultType">Manhole Default Type</a><br />
+<a href="ECFCommands-1.html#ecfManholeKMaximumBendDrop">Manhole K Maximum Bend/Drop</a><br />
+<a href="ECFCommands-1.html#ecfManholeMinimumDimension">Manhole Minimum Dimension</a><br />
+<a href="ECFCommands-1.html#ecfManholesatAllCulvertJunctions">Manholes at All Culvert Junctions</a><br />
+<a href="ECFCommands-1.html#ecfMaximumOperationalControls">Maximum Operational Controls</a><br />
+<a href="ECFCommands-1.html#ecfMinimumChannelConveyanceLength">Minimum Channel Conveyance Length</a><br />
+<a href="ECFCommands-1.html#ecfMinimumChannelStorageLength">Minimum Channel Storage Length</a><br />
+<a href="ECFCommands-1.html#ecfMinimumNAPit">Minimum NA Pit</a><br />
+<a href="ECFCommands-1.html#ecfMinimumNA">Minimum NA</a><br />
+<a href="ECFCommands-1.html#ecfMomentumEquation">Momentum Equation</a><br />
+<a href="ECFCommands-1.html#ecfOrderOutput">Order Output</a><br />
+<a href="ECFCommands-1.html#ecfOutputDataTypes">Output Data Types</a><br />
+<a href="ECFCommands-1.html#ecfOutputFolder">Output Folder</a><br />
+<a href="ECFCommands-1.html#ecfOutputInterval">Output Interval</a><br />
+<a href="ECFCommands-1.html#ecfOutputTimesSameas2D">Output Times Same as 2D</a><br />
+<a href="ECFCommands-1.html#ecfPitChannelOffset">Pit Channel Offset</a><br />
+<a href="ECFCommands-1.html#ecfPitDefault2DConnection">Pit Default 2D Connection</a><br />
+<a href="ECFCommands-1.html#ecfPitDefaultExtrapolateQCurve">Pit Default Extrapolate Q Curve</a><br />
+<a href="ECFCommands-1.html#ecfPitDefaultRoadCrossfall">Pit Default Road Crossfall</a><br />
+<a href="ECFCommands-1.html#ecfPitInletDatabase">Pit Inlet Database</a><br />
+<a href="ECFCommands-1.html#ecfPitSearchDistance">Pit Search Distance</a><br />
+<a href="ECFCommands-1.html#ecfReadFile">Read File</a><br />
+<a href="ECFCommands-1.html#ecfReadGISBC">Read GIS BC</a><br />
+<a href="ECFCommands-1.html#ecfReadGISIWL">Read GIS IWL</a><br />
+<a href="ECFCommands-1.html#ecfReadGISManhole">Read GIS Manhole</a><br />
+<a href="ECFCommands-1.html#ecfReadGISNetwork">Read GIS Network</a><br />
+<a href="ECFCommands-1.html#ecfReadGISNode">Read GIS Node</a><br />
+<a href="ECFCommands-1.html#ecfReadGISPit">Read GIS Pits</a><br />
+<a href="ECFCommands-1.html#ecfReadGISTableLinks">Read GIS Table Links</a><br />
+<a href="ECFCommands-1.html#ecfReadGISWLLPoints">Read GIS WLL Points</a><br />
+<a href="ECFCommands-1.html#ecfReadGISWLL">Read GIS WLL</a><br />
+<a href="ECFCommands-1.html#ecfReadOperatingControlsFile">Read Operating Controls File</a><br />
+<a href="ECFCommands-1.html#ecfSChannelApproach">S Channel Approach</a><br />
+<a href="ECFCommands-1.html#ecfSetIWL">Set IWL</a><br />
+<a href="ECFCommands-1.html#ecfSetVariable">Set Variable <span class="math inline">\(\langle\)</span>name<span class="math inline">\(\rangle\)</span></a><br />
+<a href="ECFCommands-1.html#ecfSpatialDatabase">Spatial Database</a><br />
+<a href="ECFCommands-1.html#ecfStartOutput">Start Output</a><br />
+<a href="ECFCommands-1.html#ecfStorageAboveStructureObvert">Storage Above Structure Obvert</a><br />
+<a href="ECFCommands-1.html#ecfStructureFlowLevels">Structure Flow Levels</a><br />
+<a href="ECFCommands-1.html#ecfStructureLossesApproach">Structure Losses Approach</a><br />
+<a href="ECFCommands-1.html#ecfStructureLossesSX">Structure Losses SX</a><br />
+<a href="ECFCommands-1.html#ecfStructureLosses">Structure Losses</a><br />
+<a href="ECFCommands-1.html#ecfStructureRoutines">Structure Routines</a><br />
+<a href="ECFCommands-1.html#ecfTaperClosedNATable">Taper Closed NA Table</a><br />
+<a href="ECFCommands-1.html#ecfTimestep">Timestep</a><br />
+<a href="ECFCommands-1.html#ecfTrimXZProfiles">Trim XZ Profiles</a><br />
+<a href="ECFCommands-1.html#ecfCreepFactor">Vel Rate Creep Factor</a><br />
+<a href="ECFCommands-1.html#ecfVelRateLimitMinimum">Vel Rate Limit Minimum</a><br />
+<a href="ECFCommands-1.html#ecfVelRateLimit">Vel Rate Limit</a><br />
+<a href="ECFCommands-1.html#ecfWeirApproach">Weir Approach</a><br />
+<a href="ECFCommands-1.html#ecfWeirFlow">Weir Flow</a><br />
+<a href="ECFCommands-1.html#ecfWLLApproach">WLL Approach</a><br />
+<a href="ECFCommands-1.html#ecfWLLAutomatic">WLL Automatic</a><br />
+<a href="ECFCommands-1.html#ecfWLLNoWeirs">WLL No Weirs</a><br />
+<a href="ECFCommands-1.html#ecfWLLVerticalOffset">WLL Vertical Offset</a><br />
+<a href="ECFCommands-1.html#ecfWLLpInterpolateBed">WLLp Interpolate Bed</a><br />
+<a href="ECFCommands-1.html#ecfWriteCheckFiles">Write Check Files</a><br />
+<a href="ECFCommands-1.html#ecfXSDatabase">XS Database</a></p>
+</div>
+<p><br></p>
 <table>
 <caption>
 <span id="tab:tab-ECFCommands">Table B.1: </span><strong>TUFLOW Classic/HPC ECF Commands</strong>
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
 Command
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
 Solver
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
 Description
 </th>
 </tr>

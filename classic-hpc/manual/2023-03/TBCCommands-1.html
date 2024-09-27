@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Appendix D TBC Commands | TUFLOW Classic/HPC User Manual 2023-03</title>
   <meta name="description" content="Appendix D TBC Commands | TUFLOW Classic/HPC User Manual 2023-03" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Appendix D TBC Commands | TUFLOW Classic/HPC User Manual 2023-03" />
   <meta property="og:type" content="book" />
@@ -53,19 +53,18 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -1073,20 +1072,42 @@ div.csl-indent {
              });
          } );
 </script>
-<p>The TUFLOW Boundary Control File (.tbc) includes commands and data inputs to set boundaries and initial conditions, it is read into the .tcf using the <a href="#tcfBoundaryControlFile">Boundary Control File</a> command. For more information on the .tbc see Section <a href="ControlFiles-and-Inputs-1.html#TBC-3">4.2.6</a>. Boundaries and initial conditions are discussed in Chapter <a href="Boundaries-InitialConditions-1.html#Boundaries-InitialConditions-1">8</a>. The available TBC commands are detailed in Table <a href="TBCCommands-1.html#tab:tab-TBCCommands">D.1</a>.</p>
+<p>The TUFLOW Boundary Control File (.tbc) includes commands and data inputs to set boundaries and initial conditions, it is read into the .tcf using the <a href="#tcfBoundaryControlFile">Boundary Control File</a> command. For more information on the .tbc see Section <a href="ControlFiles-and-Inputs-1.html#TBC-3">4.2.6</a>. Boundaries and initial conditions are discussed in Chapter <a href="Boundaries-InitialConditions-1.html#Boundaries-InitialConditions-1">8</a>. The available TBC commands are listed below and are detailed in Table <a href="TBCCommands-1.html#tab:tab-TBCCommands">D.1</a>.</p>
+<!-- lists all commands in table-->
+<div style="columns: 3;">
+<p><a href="TBCCommands-1.html#tbcBCDatabase">BC Database</a><br />
+<a href="TBCCommands-1.html#tbcBCEventName">BC Event Name</a><br />
+<a href="TBCCommands-1.html#tbcBCEventText">BC Event Text</a><br />
+<a href="TBCCommands-1.html#tbcBlankBCType">Blank BC Type</a><br />
+<a href="TBCCommands-1.html#tbcBlankHQSlope">Blank HQ Slope</a><br />
+<a href="TBCCommands-1.html#tbcBlankBCType">Global Rainfall Area Factor</a><br />
+<a href="TBCCommands-1.html#tbcGlobalRainfallBC">Global Rainfall BC</a><br />
+<a href="TBCCommands-1.html#tbcGlobalRainfallContinuingLoss">Global Rainfall Continuing Loss</a><br />
+<a href="TBCCommands-1.html#tbcGlobalRainfallInitialLoss">Global Rainfall Initial Loss</a><br />
+<a href="TBCCommands-1.html#tbcIfScenario">If Scenario</a><br />
+<a href="TBCCommands-1.html#tbcReadGISBC">Read GIS BC</a><br />
+<a href="TBCCommands-1.html#tbcReadGISRF">Read GIS RF</a><br />
+<a href="TBCCommands-1.html#tbcReadGISSA">Read GIS SA</a><br />
+<a href="TBCCommands-1.html#tbcReadGISStreams">Read GIS Streams</a><br />
+<a href="TBCCommands-1.html#tbcReadRowColRF">Read RowCol RF</a><br />
+<a href="TBCCommands-1.html#tbcSetVariable">Set Variable</a><br />
+<a href="TBCCommands-1.html#tbcSpatialDatabase">Spatial Database</a><br />
+<a href="TBCCommands-1.html#tbcUnusedHXandSXConnections">Unused HX and SX Connections</a></p>
+</div>
+<p><br></p>
 <table>
 <caption>
 <span id="tab:tab-TBCCommands">Table D.1: </span><strong>TUFLOW Classic/HPC TBC Commands</strong>
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
 Command
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
 Solver
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
 Description
 </th>
 </tr>

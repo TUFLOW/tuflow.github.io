@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Appendix C TGC Commands | TUFLOW Classic/HPC User Manual 2023-03</title>
   <meta name="description" content="Appendix C TGC Commands | TUFLOW Classic/HPC User Manual 2023-03" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Appendix C TGC Commands | TUFLOW Classic/HPC User Manual 2023-03" />
   <meta property="og:type" content="book" />
@@ -53,19 +53,18 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -1073,54 +1072,136 @@ div.csl-indent {
              });
          } );
 </script>
-<p>The TUFLOW Geometry Control File (.tgc) includes commands and geometric / topographic data inputs to build the 2D domain. It is read into the .tcf using the <a href="TCFCommands-1.html#tcfGeometryControlFile">Geometry Control File</a> command. For more information on the .tgc, see Section <a href="ControlFiles-and-Inputs-1.html#TGC-3">4.2.7</a>. Building the 2D domain is discussed in Chapter <a href="TwoD-Domains-1.html#TwoD-Domains-1">7</a>. The available TGC commands are detailed in Table <a href="TGCCommands-1.html#tab:tab-TGCCommands">C.1</a>.</p>
-<!-- EFC: commenting this out for now, at later date go ahead with categorisation of commands
-are listed by category below and 
-<div style="columns: 2;">
-<div>
-__Domain Commands:__
-
-- [Cell Size](#tgcCellSize)  
-- [Orientation](#tgcOrientation)
-- Orientation Angle
-- Origin
-- Read Grid Location
-
-__Elevation Commands:__
-
-- [Create TIN Zpts](#tgcCreateTINZpts)  
-- [Default Land Z](#tgcDefaultLandZ)
-
+<p>The TUFLOW Geometry Control File (.tgc) includes commands and geometric / topographic data inputs to build the 2D domain. It is read into the .tcf using the <a href="TCFCommands-1.html#tcfGeometryControlFile">Geometry Control File</a> command. For more information on the .tgc, see Section <a href="ControlFiles-and-Inputs-1.html#TGC-3">4.2.7</a>. Building the 2D domain is discussed in Chapter <a href="TwoD-Domains-1.html#TwoD-Domains-1">7</a>. The available TGC commands are listed below and are detailed in Table <a href="TGCCommands-1.html#tab:tab-TGCCommands">C.1</a>.</p>
+<!-- lists all commands in table-->
+<div style="columns: 3;">
+<p><a href="TGCCommands-1.html#tgc12DAReadApproach">12DA Read Approach</a><br />
+<a href="TGCCommands-1.html#tgcAllowDanglingZLines">Allow Dangling Z Lines</a><br />
+<a href="TGCCommands-1.html#tgcCellSize">Cell Size</a><br />
+<a href="TGCCommands-1.html#tgcCreateTINZpts">Create TIN Zpts</a><br />
+<a href="TGCCommands-1.html#tgcDefaultLandZ">Default Land Z</a><br />
+<a href="TGCCommands-1.html#tgcGridApproach">Grid Approach</a><br />
+<a href="TGCCommands-1.html#tgcGridSizeNM">Grid Size (N,M)</a><br />
+<a href="TGCCommands-1.html#tgcGridSizeXY">Grid Size (X,Y)</a><br />
+<a href="TGCCommands-1.html#tgcIfScenario">If Scenario</a><br />
+<a href="TGCCommands-1.html#tgcInterpolateZC">Interpolate ZC</a><br />
+<a href="TGCCommands-1.html#tgcInterpolateZHC">Interpolate ZHC</a><br />
+<a href="TGCCommands-1.html#tgcInterpolateZUV">Interpolate ZUV</a><br />
+<a href="TGCCommands-1.html#tgcInterpolateZUVC">Interpolate ZUVC</a><br />
+<a href="TGCCommands-1.html#tgcInterpolateZUVH">Interpolate ZUVH</a><br />
+<a href="TGCCommands-1.html#tgcOrientationAngle">Orientation Angle</a><br />
+<a href="TGCCommands-1.html#tgcOrientation">Orientation</a><br />
+<a href="TGCCommands-1.html#tgcOrigin">Origin</a><br />
+<a href="TGCCommands-1.html#tgcPauseWhenPolylineDoesNotFindZpt">Pause When Polyline Does Not Find Zpt</a><br />
+<a href="TGCCommands-1.html#tgcReadFile">Read File</a><br />
+<a href="TGCCommands-1.html#tgcReadGIS">Read GIS <span class="math inline">\(\langle\)</span>option<span class="math inline">\(\rangle\)</span></a><br />
+<a href="TGCCommands-1.html#tgcReadGISBGShape">Read GIS BG Shape</a><br />
+<a href="TGCCommands-1.html#tgcReadGISCnM">Read GIS CnM</a><br />
+<a href="TGCCommands-1.html#tgcReadGISCode">Read GIS Code</a><br />
+<a href="TGCCommands-1.html#tgcReadGISCWF">Read GIS CWF</a><br />
+<a href="TGCCommands-1.html#tgcReadGISFCShape">Read GIS FC Shape</a><br />
+<a href="TGCCommands-1.html#tgcReadGISFLC/L">Read GIS FLC/L</a><br />
+<a href="TGCCommands-1.html#tgcReadGISFLC">Read GIS FLC</a><br />
+<a href="TGCCommands-1.html#tgcReadGISFRIC">Read GIS FRIC</a><br />
+<a href="TGCCommands-1.html#tgcReadGISGWD">Read GIS GWD</a><br />
+<a href="TGCCommands-1.html#tgcReadGISGWL">Read GIS GWL</a><br />
+<a href="TGCCommands-1.html#tgcReadGISIGWConc">Read GIS IGW Conc Layer N1,N2,..N Tracer M1,M2,..M</a><br />
+<a href="TGCCommands-1.html#tgcReadGISIGWDepth">Read GIS IGW Depth</a><br />
+<a href="TGCCommands-1.html#tgcReadGISIGWLevel">Read GIS IGW Level</a><br />
+<a href="TGCCommands-1.html#tgcReadGISIWL">Read GIS IWL</a><br />
+<a href="TGCCommands-1.html#tgcReadGISLayeredFCShape">Read GIS Layered FC Shape</a><br />
+<a href="TGCCommands-1.html#tgcReadGISLocation">Read GIS Location</a><br />
+<a href="TGCCommands-1.html#tgcReadGISMat">Read GIS Mat</a><br />
+<a href="TGCCommands-1.html#tgcReadGISObjects">Read GIS Objects</a><br />
+<a href="TGCCommands-1.html#tgcReadGISReceptors">Read GIS Receptors</a><br />
+<a href="TGCCommands-1.html#tgcReadGISSoil">Read GIS Soil</a><br />
+<a href="TGCCommands-1.html#tgcReadGISSoilBaseElevation">Read GIS Soil Base Elevation</a><br />
+<a href="TGCCommands-1.html#tgcReadGISSoilThickness">Read GIS Soil Thickness</a><br />
+<a href="TGCCommands-1.html#tgcReadGISSRF">Read GIS SRF</a><br />
+<a href="TGCCommands-1.html#tgcReadGISVariableZShape">Read GIS Variable Z Shape</a><br />
+<a href="TGCCommands-1.html#tgcReadGISWrF">Read GIS WrF</a><br />
+<a href="TGCCommands-1.html#tgcReadGISZHXLine">Read GIS Z HX Line</a><br />
+<a href="TGCCommands-1.html#tgcReadGISZLine">Read GIS Z Line</a><br />
+<a href="TGCCommands-1.html#tgcReadGISZShape">Read GIS Z Shape</a><br />
+<a href="TGCCommands-1.html#tgcReadGISZShapeRoute">Read GIS Z Shape Route</a><br />
+<a href="TGCCommands-1.html#tgcReadGISZpt">Read GIS Zpts</a><br />
+<a href="TGCCommands-1.html#tgcReadGISZptModifyConveyance">Read GIS Zpts Modify Conveyance</a><br />
+<a href="TGCCommands-1.html#tgcReadGrid">Read Grid <span class="math inline">\(\langle\)</span>option<span class="math inline">\(\rangle\)</span></a><br />
+<a href="TGCCommands-1.html#tgcReadGridCnM">Read Grid CnM</a><br />
+<a href="TGCCommands-1.html#tgcReadGridCode">Read Grid Code</a><br />
+<a href="TGCCommands-1.html#tgcReadGridCWF">Read Grid CWF</a><br />
+<a href="TGCCommands-1.html#tgcReadGridFLC/L">Read Grid FLC/L</a><br />
+<a href="TGCCommands-1.html#tgcReadGridFLC">Read Grid FLC</a><br />
+<a href="TGCCommands-1.html#tgcReadGridGWD">Read Grid GWD</a><br />
+<a href="TGCCommands-1.html#tgcReadGridGWL">Read Grid GWL</a><br />
+<a href="TGCCommands-1.html#tgcReadGridIGWConc">Read Grid IGW Conc Layer N1,N2,..N Tracer M1,M2,..M</a><br />
+<a href="TGCCommands-1.html#tgcReadGridIGWDepth">Read Grid IGW Depth</a><br />
+<a href="TGCCommands-1.html#tgcReadGridIGWLevel">Read Grid IGW Level</a><br />
+<a href="TGCCommands-1.html#tgcReadGridIWL">Read Grid IWL</a><br />
+<a href="TGCCommands-1.html#tgcReadGridLocation">Read Grid Location</a><br />
+<a href="TGCCommands-1.html#tgcReadGridMat">Read Grid Mat</a><br />
+<a href="TGCCommands-1.html#tgcReadGridSoil">Read Grid Soil</a><br />
+<a href="TGCCommands-1.html#tgcReadGridSoilBaseElevation">Read Grid Soil Base Elevation</a><br />
+<a href="TGCCommands-1.html#tgcReadGridSoilThickness">Read Grid Soil Thickness</a><br />
+<a href="TGCCommands-1.html#tgcReadGridSRF">Read Grid SRF</a><br />
+<a href="TGCCommands-1.html#tgcReadGridWrF">Read Grid WrF</a><br />
+<a href="TGCCommands-1.html#tgcReadGridZpts">Read Grid Zpts</a><br />
+<a href="TGCCommands-1.html#tgcReadRowCol">Read RowCol <span class="math inline">\(\langle\)</span>option<span class="math inline">\(\rangle\)</span></a><br />
+<a href="TGCCommands-1.html#tgcReadRowColWrF">Read RowCol WrF</a><br />
+<a href="TGCCommands-1.html#tgcReadRowColGrid">Read RowCol Zpts</a><br />
+<a href="TGCCommands-1.html#tgcReadTINZpts">Read TIN Zpts</a><br />
+<a href="TGCCommands-1.html#tgcSet">Set <span class="math inline">\(\langle\)</span>option<span class="math inline">\(\rangle\)</span></a><br />
+<a href="TGCCommands-1.html#tgcSetCnM">Set CnM</a><br />
+<a href="TGCCommands-1.html#tgcSetCode">Set Code</a><br />
+<a href="TGCCommands-1.html#tgcSetCodeandCleanZpt">Set Code and Clean Zpt</a><br />
+<a href="TGCCommands-1.html#tgcSetCWF">Set CWF</a><br />
+<a href="TGCCommands-1.html#tgcSetFLC/L">Set FLC/L</a><br />
+<a href="TGCCommands-1.html#tgcSetFLC">Set FLC</a><br />
+<a href="TGCCommands-1.html#tgcSetFRIC">Set FRIC</a><br />
+<a href="TGCCommands-1.html#tgcSetGWD">Set GWD</a><br />
+<a href="TGCCommands-1.html#tgcSetGWL">Set GWL</a><br />
+<a href="TGCCommands-1.html#tgcSetIGWConc">Set IGW Conc Layer N1,N2,..N Tracer M1,M2,..M</a><br />
+<a href="TGCCommands-1.html#tgcSetIGWDepth">Set IGW Depth</a><br />
+<a href="TGCCommands-1.html#tgcSetIGWLevel">Set IGW Level</a><br />
+<a href="TGCCommands-1.html#tgcSetIWL">Set IWL</a><br />
+<a href="TGCCommands-1.html#tgcSetMat">Set Mat</a><br />
+<a href="TGCCommands-1.html#tgcSetRouteCutOffType">Set Route Cut Off Type</a><br />
+<a href="TGCCommands-1.html#tgcSetRouteCutOffValues">Set Route Cut Off Values</a><br />
+<a href="TGCCommands-1.html#tgcSetSoil">Set Soil</a><br />
+<a href="TGCCommands-1.html#tgcSetSoilBaseElevation">Set Soil Base Elevation</a><br />
+<a href="TGCCommands-1.html#tgcSetSoilThickness">Set Soil Thickness</a><br />
+<a href="TGCCommands-1.html#tgcSetSRF">Set SRF</a><br />
+<a href="TGCCommands-1.html#tgcSetVariable">Set Variable <span class="math inline">\(\langle\)</span>name<span class="math inline">\(\rangle\)</span></a><br />
+<a href="TGCCommands-1.html#tgcSetWrF">Set WrF</a><br />
+<a href="TGCCommands-1.html#tgcSetZpt">Set Zpt</a><br />
+<a href="TGCCommands-1.html#tgcSGSSampleDistance">SGS</a><br />
+<a href="TGCCommands-1.html#tgcSGSGridMaxNullFrac">SGS Grid Max Null Frac</a><br />
+<a href="TGCCommands-1.html#tgcSGSPartialGridUpdateNullFrac">SGS Partial Grid Update Null Frac</a><br />
+<a href="TGCCommands-1.html#tgcSpatialDatabase">Spatial Database</a><br />
+<a href="TGCCommands-1.html#tgcStop">Stop</a><br />
+<a href="TGCCommands-1.html#tgcTINAngles">Thin Line as Thick</a><br />
+<a href="TGCCommands-1.html#tgcTINAngles">TIN Angles</a><br />
+<a href="TGCCommands-1.html#tgcTINCoincidentPointDistance">TIN Coincident Point Distance</a><br />
+<a href="TGCCommands-1.html#tgcWriteGISDomain">Write GIS Domain</a><br />
+<a href="TGCCommands-1.html#tgcWriteGISGrid">Write GIS Grid</a><br />
+<a href="TGCCommands-1.html#tgcWriteGISZpt">Write GIS Zpts</a><br />
+<a href="TGCCommands-1.html#tgcZC">ZC</a><br />
+<a href="TGCCommands-1.html#tgcZeroZPoint">Zero Z Point</a></p>
 </div>
-
-<div>
-__Material Commands:__
-
-- [Read GIS MAT](#tgcReadGISMAT)  
-- [Read Grid MAT](#tgcReadGISMAT)  
-
-__Uncommon / Legacy Commands:__
-
-- [Grid Approach](#tgcGridApproach)  
-  
-</div>
-</div>
-
-
--->
+<p><br></p>
 <table>
 <caption>
 <span id="tab:tab-TGCCommands">Table C.1: </span><strong>TUFLOW Classic/HPC TGC Commands</strong>
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
 Command
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
 Solver
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
 Description
 </th>
 </tr>

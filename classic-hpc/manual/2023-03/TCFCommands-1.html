@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Appendix A TCF Commands | TUFLOW Classic/HPC User Manual 2023-03</title>
   <meta name="description" content="Appendix A TCF Commands | TUFLOW Classic/HPC User Manual 2023-03" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Appendix A TCF Commands | TUFLOW Classic/HPC User Manual 2023-03" />
   <meta property="og:type" content="book" />
@@ -53,19 +53,18 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -1062,352 +1061,348 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="TCFCommands-1" class="section level1 hasAnchor" number="19">
 <h1><span class="header-section-number">Appendix A</span> TCF Commands<a href="TCFCommands-1.html#TCFCommands-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>The TUFLOW Control File (.tcf) is the main control file used to execute a TUFLOW simulation. It includes reference to the second level control files used to consolidate model commands (for geometry, boundaries, 1D domain, events, etc.). It also lists the simulation parameters that define the solver settings, time controls and simulation outputs. The available TCF commands are detailed in Table <a href="TCFCommands-1.html#tab:tab-TCFCommands">A.1</a>.
-<!--
+<p>The TUFLOW Control File (.tcf) is the main control file used to execute a TUFLOW simulation. It includes reference to the second level control files used to consolidate model commands (for geometry, boundaries, 1D domain, events, etc.). It also lists the simulation parameters that define the solver settings, time controls and simulation outputs. The available TCF commands are listed below and detailed in Table <a href="TCFCommands-1.html#tab:tab-TCFCommands">A.1</a>.</p>
+<!-- lists all commands in table-->
 <div style="columns: 3;">
-
-[AD Control File](#tcfADControlFile)  
-[Adjust Head at ESTRY Interface](#tcfAdjustHeadatESTRYInterface)  
-[Auto Terminate dV Cell Tolerance](#tcfAutoTerminatedVCellTolerance)  
-[Auto Terminate dV Value Tolerance](#tcfAutoTerminatedVValueTolerance)  
-[Auto Terminate Start Time](#tcfAutoTerminateStartTime)  
-[Auto Terminate Wet Cell Tolerance](#tcfAutoTerminateWetCellTolerance)  
-[BC Control File](#tcfBCControlFile)  
-[BC Database](#tcfBCDatabase)  
-[BC Event Name](#tcfBCEventName)  
-[BC Event Source](#tcfBCEventSource)  
-[BC Event Text](#tcfBCEventText)  
-[BC Wet/Dry Method](#tcfBCWetDryMethod)  
-[BC Zero Flow](#tcfBCZeroFlow)  
-[Bed Resistance Cell Sides](#tcfBedResistanceCellSides)  
-[Bed Resistance Depth Interpolation](#tcfBedResistanceDepthInterpolation)  
-[Bed Resistance Values](#tcfBedResistanceValues)  
-[BG FLC Default Approach](#tcfBGFLCDefaultApproach)  
-[Blank BG FLC Approach](#tcfBlankBGFLCApproach)  
-[Blockage AEP](#tcfBlockageAEP)  
-[Blockage ARI](#tcfBlockageARI)  
-[Blockage Default](#tcfBlockageDefault)  
-[Blockage Matrix](#tcfBlockageMatrix)  
-[Blockage Matrix File](#tcfBlockageMatrixFile)  
-[Blockage Method](#tcfBlockageMethod)  
-[Blockage Override](#tcfBlockageOverride)  
-[Blockage PMF AEP](#tcfBlockagePMFAEP)  
-[Blockage PMF ARI](#tcfBlockagePMFARI)  
-[Blockage Return Period](#tcfBlockageReturnPeriod)  
-[Blue Kenue Start Date](#tcfBlueKenueStartDate)  
-[Boundary Viscosity Factor](#tcfBoundaryViscosityFactor)  
-[BSS Cutoff Depth](#tcfBSSCutoffDepth)  
-[Calibration Points MI File](#tcfCalibrationPointsMIFile)  
-[Cell Side Wet/Dry Depth](#tcfCellSideWetDryDepth)  
-[Cell Size](#tcfCellSize)  
-[Cell Wet/Dry Depth](#tcfCellWetDryDepth)  
-[Change Zero Material Values to One](#tcfChangeZeroMaterialValuestoOne)  
-[Check Inside Grid](#tcfCheckInsideGrid)  
-[Check MI Save Date](#tcfCheckMISaveDate)  
-[Check MI Save Ext](#tcfCheckMISaveExt)  
-[Command Line Processing](#tcfCommandLineProcessing)  
-[Control Number Factor](#tcfControlNumberFactor)  
-[CPU Threads](#tcfCPUThreads)  
-[CSV Header Line](#tcfCSVHeaderLine)  
-[CSV Maximum Number Columns](#tcfCSVMaximumNumberColumns)  
-[CSV Time](#tcfCSVTime)  
-[Defaults](#tcfDefaults)  
-[Define Output Zone](#tcfDefineOutputZone)  
-[Demo Model](#tcfDemoModel)  
-[Density of Air](#tcfDensityofAir)  
-[Density of Water](#tcfDensityofWater)  
-[Depth/Ripple Height Factor Limit](#tcfDepthRippleHeightFactorLimit)  
-[Display Water Level](#tcfDisplayWaterLevel)  
-[Distribute HX Flows](#tcfDistributeHXFlows)  
-[End 1D Domain](#tcfEnd1DDomain)  
-[End 2D Domain](#tcfEnd2DDomain)  
-[End After Maximum](#tcfEndAfterMaximum)  
-[End After Maximum Start Time](#tcfEndAfterMaximumStartTime)  
-[End Define](#tcfEndDefine)  
-[End Map Output](#tcfEndMapOutput)  
-[End Time](#tcfEndTime)  
-[ESTRY Control File](#tcfESTRYControlFile)  
-[Event File](#tcfEventFile)  
-[Excel Start Date](#tcfExcelStartDate)  
-[External Stress File](#tcfExternalStressFile)  
-[FEWS Geodatum](#tcfFEWSGeodatum)  
-[FEWS Input File](#tcfFEWSInputfile)  
-[File Retry Max Count](#tcfFileRetryMaxCount)  
-[File Retry Timeout](#tcfFileRetryTimeout)  
-[First Sweep Direction](#tcfFirstSweepDirection)  
-[Force File IO Display](#tcfForceFileIODisplay)  
-[Free Overfall](#tcfFreeOverfall)  
-[Free Overfall Factor](#tcfFreeOverfallFactor)  
-[Froude Check](#tcfFroudeCheck)  
-[Froude Depth Adjustment](#tcfFroudeDepthAdjustment)  
-[GA Convergence Value](#tcfGAConvergenceValue)  
-[GA Maximum Iterations](#tcfGAMaximumIternations)  
-[Geometry Control File](#tcfGeometryControlFile)  
-[GIS Format](#tcfGISFormat)  
-[GIS Grid Vector Direction](#tcfGISGridVectorDirection)  
-[GIS Grid Vector SF](#tcfGISGridVectorSF)  
-[GIS Grid Vector TTF](#tcfGISGridVectorTTF)  
-[GIS Grid Vector Type](#tcfGISGridVectorType)  
-[GIS Project Path Format](#tcfGISProjectPathFormat)  
-[GIS Projection Check](#tcfGISProjectionCheck)  
-[GIS Supported Object Ignored](#tcfGISSupportedObjectIgnored)  
-[GIS Unsupported Object](#tcfGISUnsupportedObject)  
-[Global FC Ch Factor](#tcfGlobalFCChFactor)  
-[Global Rainfall Use Material Loss](#tcfGlobalRainfallUseMaterialLoss)  
-[Global Weir Factor](#tcfGlobalWeirFactor)  
-[GPKG Compression](#tcfGPKGCompression)  
-[GPKG Compression Predictor](#tcfGPKGCompressionPredictor)  
-[GPKG Conversion Check ](#tcfGPKGConversionCheck)  
-[GPKG Inputs Read Only](#tcfGPKGInputsReadOnly)  
-[GPKG Projection](#tcfGPKGProjection)  
-[GPU Device IDs](#tcfGPUDeviceIDs)  
-[GPU DP Check](#tcfGPUDPCheck)  
-[GPU Peer to Peer Access ](#tcfGPUPeertoPeerAccess)  
-[GPU Solver](#tcfGPUSolver)  
-[GPU Temporal Scheme](#tcfGPUTemporalScheme)  
-[Grid Format](#tcfGridFormat)  
-[Grid Output Cell Size](#tcfGridOutputCellSize)  
-[Grid Output Origin](#tcfGridOutputOrigin)  
-[Groundwater Blend Threshold](#tcfGroundwaterBlendThreshold)  
-[Hardware](#tcfHardware)  
-[HEC-DSS Start Date](#tcfHEC-DSSStartDate)  
-[HPC [Thin | Thick] Weir Parameters](#tcfHPCWeirParameters)  
-[HPC 1D Synchronisation](#tcfHPC1DSynchronisation)  
-[HPC Boundary Approach](#tcfHPCBoundaryApproach)  
-[HPC Device Split](#tcfHPCDeviceSplit)  
-[HPC DP Check](#tcfHPCDPCheck)  
-[HPC dt Write Interval](#tcfHPCdtWriteInterval)  
-[HPC HQ Boundary Approach](#tcfHPCHQBoundaryApproach)  
-[HPC HQ Boundary Filter Constant](#tcfHPCHQBoundaryFilterConstant)  
-[HPC Infiltration Drying Approach](#tcfHPCInfiltrationDryingApproach)  
-[HPC Mannings Depth Approach](#tcfHPCManningsDepthApproach)  
-[HPC Restart Geometry](#tcfHPCRestartGeometry)  
-[HPC SX Momentum Approach](#tcfHPCSXMomentumApproach)  
-[HPC Temporal Scheme](#tcfHPCTemporalScheme)  
-[HPC Weir Approach](#tcfHPCWeirApproach)  
-[HQ Boundary Approach](#tcfHQBoundaryApproach)  
-[HR Grid Output Cell Size](#tcfHRGridOutputCellSize)  
-[HR Grid Output Use Face Elevations](#tcfHRGridOutputUseFaceElevations)  
-[HR Interpolation Approach](#tcfHRInterpolationApproach)  
-[HR Thin Z Line Output Adjustment](#tcfHRThinZLineOutputAdjustment)  
-[HX Force Weir Equation](#tcfHXForceWeirEquation)  
-[HX ZC Check](#tcfHXZCCheck)  
-[If Event](#tcfIfEvent)  
-[If Scenario](#tcfIfScenario)  
-[Index 1D2D Links](#tcfIndex1D2DLinks)  
-[Input Drive](#tcfInputDrive)  
-[Inside Region](#tcfInsideRegion)  
-[Instability Water Level](#tcfInstabilityWaterLevel)  
-[Latitude](#tcfLatitude)  
-[Layered FLC Default Approach](#tcfLayeredFLCDefaultApproach)  
-[Line Cell Selection](#tcfLineCellSelection)  
-[Link 2D2D Adjust Velocity Head](#tcfLink2D2DAdjustVelocityHead)  
-[Link 2D2D Approach](#tcfLink2D2DApproach)  
-[Link 2D2D Distribute Flow](#tcfLink2D2DDistributeFlow)  
-[Link 2D2D Global Stability Factor](#tcfLink2D2DGlobalStabilityFactor)  
-[Log Folder](#tcfLogFolder)  
-[Map Cutoff Depth](#tcfMapCutoffDepth)  
-[Map Cutoff SGS ](#tcfMapCutoffSGS)  
-[Map Cutoff Vector](#tcfMapCutoffVector)  
-[Map Output Corner Interpolation](#tcfMapOutputCornerInterpolation)  
-[Map Output Data Types](#tcfMapOutputDataTypes)  
-[Map Output Entire Model](#tcfMapOutputEntireModel)  
-[Map Output Format](#tcfMapOutputFormat)  
-[Map Output Interval](#tcfMapOutputInterval)  
-[Mass Balance Corrector](#tcfMassBalanceCorrector)  
-[Mass Balance Output](#tcfMassBalanceOutput)  
-[Mass Balance Output Interval](#tcfMassBalanceOutputInterval)  
-[Maximum 1D Channels](#tcfMaximum1DChannels)  
-[Maximum Courant Number](#tcfMaxCourantNumber)  
-[Maximum Points](#tcfMaximumPoints)  
-[Maximum Velocity Cutoff Depth](#tcfMaximumVelocityCutoffDepth)  
-[Maximum Vertices](#tcfMaximumVertices)  
-[Maximums and Minimums](#tcfMaximumsandMinimums)  
-[Maximums and Minimums Only for Grids](#tcfMaximumsandMinimumsOnlyforGrids)  
-[Maximums and Minimums Time Series](#tcfMaximumsandMinimumsTimeSeries)  
-[Maximums Approach](#tcfMaximumsApproach)  
-[Maximums Start Track Time](#tcfMaximumsStartTrackTime)  
-[Maximums Track Time](#tcfMaximumsTrackTime)  
-[Meshparts](#tcfMeshparts)  
-[MI Projection](#tcfMIProjection)  
-[MI Projection Check Ignore Bounds ](#tcfMIProjectionIgnoreBounds)  
-[Model Events](#tcfModelEvents)  
-[Model Output Zones](#tcfModelOutputZones)  
-[Model Platform](#tcfModelPlatform)  
-[Model Precision](#tcfModelPrecision)  
-[Model Scenarios](#tcfModelScenarios)  
-[Model TUFLOW Build](#tcfModelTUFLOWBuild)  
-[Model TUFLOW Release](#tcfModelTUFLOWRelease)  
-[Negative Depth Approach](#tcfNegativeDepthApproach)  
-[NetCDF Output Compression](#tcfNetCDFOutputCompression)  
-[NetCDF Output Direction](#tcfNetCDFOutputDirection)  
-[NetCDF Output Format](#tcfNetCDFOutputFormat)  
-[NetCDF Output Start Date](#tcfNetCDFOutputStartDate)  
-[NetCDF Output Time Unit](#tcfNetCDFOutputTimeUnit)  
-[Non-Newtonian Mixing Exponent](#tcfNon-NewtonianMixingExponent)  
-[Null Cell Checks](#tcfNullCellChecks)  
-[Number 2D2D Link Iterations](#tcfNumber2D2DLinkIterations)  
-[Number Iterations](#tcfNumberIterations)  
-[Output Approach](#tcfOutputApproach)  
-[Output Drive](#tcfOutputDrive)  
-[Output Files [ {ALL} | NONE | INCLUDE | EXCLUDE ] ](#tcfOutputFiles)  
-[Output Folder](#tcfOutputFolder)  
-[Pause](#tcfPause)  
-[Pit Default Extrapolate Q Curve](#tcfPitDefaultExtrapolateQCurve)  
-[Pit No 1D Connection](#tcfPitNo1DConnection)  
-[Plot Output Invalid Type](#tcfPlotOutputInvalidType)  
-[PO Approach](#tcfPOApproach)  
-[Process All Grids](#tcfProcessAllGrids)  
-[Quadtree BC Parallel Inertia Approach](#tcfQuadtreeBCParallelInertiaApproach)  
-[Quadtree Control File](#tcfQuadtreeControlFile)  
-[Rainfall Boundaries](#tcfRainfallBoundaries)  
-[Rainfall Boundary Factor](#tcfRainfallBoundaryFactor)  
-[Rainfall Control File](#tcfRainfallControlFile)  
-[Rainfall Gauges](#tcfRainfallControlFile)  
-[Rainfall Null Value](#tcfRainfallNullValue)  
-[RAM Optimisation](#tcfRAMOptimisation)  
-[Read File](#tcfReadFile)  
-[Read GIS 12D Network](#tcfReadGIS12DNetwork)  
-[Read GIS 12D Nodes](#tcfReadGIS12DNodes)  
-[Read GIS 12D WLL](#tcfReadGIS12DWLL)  
-[Read GIS 12D WLL Points](#tcfReadGIS12DWLLPoints)  
-[Read GIS Auto Terminate](#tcfReadGISAutoTerminate)  
-[Read GIS Cyclone/Hurricane [ {} | NO PRESSURE ] [ {} | NO WIND ] ](#tcfReadGISCyclone)  
-[Read GIS FC](#tcfReadGISFC)  
-[Read GIS GLO](#tcfReadGISGLO)  
-[Read GIS ISIS Network](#tcfReadGISISISNetwork)  
-[Read GIS ISIS Nodes](#tcfReadGISISISNodes)  
-[Read GIS ISIS WLL](#tcfReadGISISISWLL)  
-[Read GIS ISIS WLL Points](#tcfReadGISISISWLLPoints)  
-[Read GIS IWL](#tcfReadGISIWL)  
-[Read GIS LP](#tcfReadGISLP)  
-[Read GIS Output Zone](#tcfReadGISOutputZone)  
-[Read GIS PO](#tcfReadGISPO)  
-[Read GIS Reporting Location](#tcfReadGISReportingLocation)  
-[Read GIS X1D Network](#tcfReadGISX1DNetwork)  
-[Read GIS X1D Nodes](#tcfReadGISX1DNodes)  
-[Read GIS X1D WLL](#tcfReadGISX1DWLL)  
-[Read GIS X1D WLL Points](#tcfReadGISX1DWLLPoints)  
-[Read GIS XP Network](#tcfReadGISXPNetwork)  
-[Read GIS XP Nodes](#tcfReadGISXPNodes)  
-[Read GIS XP WLL](#tcfReadGISXPWLL)  
-[Read GIS XP WLL Points](#tcfReadGISXPWLLPoints)  
-[Read Grid RF](#tcfReadGridRF)  
-[Read Hazard File](#tcfReadHazardFile)  
-[Read Materials File](#tcfReadMaterialsFile)  
-[Read Restart File](#tcfReadRestartFile)  
-[Read RowCol IWL](#tcfReadGISDIWL)  
-[Read Soils File](#tcfReadSoilFile)  
-[Recalculate Chezy Interval](#tcfRecalculateChezyInterval)  
-[Record Gauge Data](#tcfRecordGaugeData)  
-[Record Gauge Data EXCLUDE](#tcfRecordGaugeDataEXCLUDE)  
-[Restart File Ignore Fields](#tcfRestartFileIgnoreFields)  
-[Reveal 1D Nodes](#tcfReveal1DNodes)  
-[SA Minimum Depth](#tcfSAminDepth)  
-[SA Proportion to Depth](#tcfSAPropDepth)  
-[Screen/Log Display Interval](#tcfScreenLogDisplayInterval)  
-[Set Auto Terminate](#tcfSetAutoTerminate)  
-[Set IWL](#tcfSetIWL)  
-[Set Route Cut Off Type](#tcfSetRouteCutOffType)  
-[Set Route Cut Off Values](#tcfSetRouteCutOffValues)  
-[Set Variable](#tcfSetVariable)  
-[SGS](#tcfSGS)  
-[SGS Approach](#tcfSGSApproach)  
-[SGS Breakline Detection Delta](#tcfSGSBreaklineDetectionDelta)  
-[SGS Depth Output](#tcfSGSDepthOutput)  
-[SGS Infiltration Approach](#tcfSGSInfiltrationApproach)  
-[SGS Map Extent  $\langle$ Full or Trim $\rangle$](#tcfSGSMapExtent)  
-[SGS Materials](#tcfSGSMaterials)  
-[SGS Max Sample Frequency](#tcfSGSMaxSampleFrequency)  
-[SGS Negative Rainfall Approach ](#tcfSGSNegativeRainfallApproach)  
-[SGS Sample Frequency](#tcfSGSSampleFrequency)  
-[SGS Sample Target Distance](#tcfSGSSampleTargetDistance)  
-[SGS SX Z Flag Approach ](#tcfSGSSXZFlagApproach)  
-[SGS TIN Memory Allocation Factor](#tcfSGSTINMemoryAllocationFactor)  
-[SGS Velocity Based Outputs](#tcfSGSVelocityBasedOutputs)  
-[SGS Z Shape Line Approach ](#tcfSGSZShapeLineApproach)  
-[SGS ZH Sample Ratio](#tcfSGSZHSampleRatio)  
-[SGS Zpt MAX/MIN Approach ](#tcfSGSZptMAX/MINApproach)  
-[Shallow Depth Stability Factor](#tcfShallowDepthStabilityFactor)  
-[SHP Projection](#tcfSHPProjection)  
-[SHP Projection Check Method ](#tcfSHPProjectionCheckMethod)  
-[Simulation Pause Interval](#tcfSimulationPauseInterval)  
-[Simulation Pause Start](#tcfSimulationPauseStart)  
-[Simulations Log Folder ](#tcfSimulationsLogFolder)  
-[Snap Tolerance](#tcfSnapTolerance)  
-[Soil Initial Loss](#tcfSoilInitialLoss)  
-[Soil Negative Rainfall Approach ](#tcfSoilNegativeRainfallApproach)  
-[Soil Negative Rainfall Factor ](#tcfSoilNegativeRainfallFactor)  
-[Solution Scheme ](#tcfSolutionScheme)  
-[Spatial Database](#tcfSpatialDatabase)  
-[Spatial Database Output](#tcfSpatialDatabaseOutput)  
-[SQLite On Open SQL [ {} | Read | Write ]](#tcfSQLiteOnOpenSQL)  
-[Start 1D Domain](#tcfStart1DDomain)  
-[Start 2D Domain](#tcfStart2DDomain)  
-[Start Map Output](#tcfStartMapOutput)  
-[Start Time](#tcfStartTime)  
-[Start Time Series Output](#tcfStartTimeSeriesOutput)  
-[Supercritical](#tcfSupercritical)  
-[SWMM Control File](#tcfSWMMControlFile)  
-[SX Flow Distribution Cutoff Depth](#tcfSXFlowDist)  
-[SX FMP Unit Type Error](#tcfSXFMPUnitTypeError)  
-[SX Head Adjustment](#tcfSXHeadAdjustment)  
-[SX Head Distribution Cutoff Depth](#tcfSXHeadDistributionCutoffDepth)  
-[SX Storage Approach](#tcfSXStorageApproach)  
-[SX Storage Factor](#tcfSXStorageFactor)  
-[SX ZC Check](#tcfSXZCCheck)  
-[TIF Compression](#tcfTIFCompression)  
-[TIF Compression Predictor](#tcfTIFCompressionPredictor)  
-[TIF Projection](#tcfTIFProjection)  
-[Time Output Corner Interpolation](#tcfTimeOutputCornerInterpolation)  
-[Time Output Cutoff [Depths | VxD |  $\langle$Hazard$\rangle$ ]](#tcfTimeOutputCutoff)  
-[Time Series Null Value](#tcfTimeSeriesNullValue)  
-[Time Series Output Format](#tcfTimeSeriesOutputFormat)  
-[Time Series Output Interval](#tcfTimeSeriesOutputInterval)  
-[Timestep](#tcfTimestep)  
-[Timestep Initial](#tcfTimestepInitial)  
-[Timestep Maximum](#tcfTimestepMaximum)  
-[Timestep Maximum Increase (%)](#tcfTimestepMaxInc)  
-[Timestep Minimum](#tcfTimestepMinimum)  
-[Timestep Repeats](#tcfTimestepMinimum)  
-[TSF Update Interval](#tcfTSFUpdateInterval)  
-[Tutorial Model](#tcfTutorialModel)  
-[UK Hazard Debris Factor](#tcfUKHazardDebrisFactor)  
-[UK Hazard Formula](#tcfUKHazardFormula)  
-[UK Hazard Land Use](#tcfUKHazardLandUse)  
-[Units](#tcfUnits)  
-[Unused HX and SX Connections](#tcfUnusedHXandSXConnections)  
-[Use Forward Slash](#tcfUseForwardSlash)  
-[Verbose](#tcfVerbose)  
-[VG Z Adjustment](#tcfVGZAdjustment)  
-[Viscosity Approach](#tcfViscosityApproach)  
-[Viscosity Coefficient](#tcfViscosityCoefficient)  
-[Viscosity Formulation](#tcfViscosityFormulation)  
-[Water Level Checks](#tcfWaterLevelChecks)  
-[Wetting and Drying](#tcfWettingandDrying)  
-[WIBU FIRM Code Search Order](#tcfWIBUFIRMCodeSearchOrder)  
-[Wind/Wave Shallow Depths](#tcfWindWaveShallowDepths)  
-[Write Check Files [ {ALL} | NONE | INCLUDE | EXCLUDE ] ](#tcfWriteCheckFiles)  
-[Write Empty GIS Files](#tcfWriteEmptyGISFiles)  
-[Write PO Online](#tcfWritePOOnline)  
-[Write Restart File at Time](#tcfWriteRestartFileatTime)  
-[Write Restart File Interval](#tcfWriteRestartFileInterval)  
-[Write Restart File Version](#tcfWriteRestartFileVersion)  
-[Write Restart Filename](#tcfWriteRestartFilename)  
-[Write X1D Check Files](#tcfWriteX1DCheckFiles)  
-[XF Files](#tcfXFFiles)  
-[XF Files Boundaries](#tcfXFFilesBoundaries)  
-[XF Files Include in Filename](#tcfXFFilesIncludeinFilename)  
-[XF Files Merge TIN Elevations](#tcfXFFilesMergeTINElevations)  
-[XMDF Output Compression](#tcfXMDFOutputCompression)  
-[Zero Negative Depths](#tcfZeroNegativeDepths)  
-[Zero Rainfall Check](#tcfZeroRainfallCheck)  
-[ZP Hazard Cutoff Depth](#tcfZPHazardCutoffDepth)  
-[Zpt Range Check](#tcfZptRangeCheck)  
-
-
+<p><a href="TCFCommands-1.html#tcfADControlFile">AD Control File</a><br />
+<a href="TCFCommands-1.html#tcfAdjustHeadatESTRYInterface">Adjust Head at ESTRY Interface</a><br />
+<a href="TCFCommands-1.html#tcfAutoTerminatedVCellTolerance">Auto Terminate dV Cell Tolerance</a><br />
+<a href="TCFCommands-1.html#tcfAutoTerminatedVValueTolerance">Auto Terminate dV Value Tolerance</a><br />
+<a href="TCFCommands-1.html#tcfAutoTerminateStartTime">Auto Terminate Start Time</a><br />
+<a href="TCFCommands-1.html#tcfAutoTerminateWetCellTolerance">Auto Terminate Wet Cell Tolerance</a><br />
+<a href="TCFCommands-1.html#tcfBCControlFile">BC Control File</a><br />
+<a href="TCFCommands-1.html#tcfBCDatabase">BC Database</a><br />
+<a href="TCFCommands-1.html#tcfBCEventName">BC Event Name</a><br />
+<a href="TCFCommands-1.html#tcfBCEventSource">BC Event Source</a><br />
+<a href="TCFCommands-1.html#tcfBCEventText">BC Event Text</a><br />
+<a href="TCFCommands-1.html#tcfBCWetDryMethod">BC Wet/Dry Method</a><br />
+<a href="TCFCommands-1.html#tcfBCZeroFlow">BC Zero Flow</a><br />
+<a href="TCFCommands-1.html#tcfBedResistanceCellSides">Bed Resistance Cell Sides</a><br />
+<a href="TCFCommands-1.html#tcfBedResistanceDepthInterpolation">Bed Resistance Depth Interpolation</a><br />
+<a href="TCFCommands-1.html#tcfBedResistanceValues">Bed Resistance Values</a><br />
+<a href="TCFCommands-1.html#tcfBGFLCDefaultApproach">BG FLC Default Approach</a><br />
+<a href="TCFCommands-1.html#tcfBlankBGFLCApproach">Blank BG FLC Approach</a><br />
+<a href="TCFCommands-1.html#tcfBlockageAEP">Blockage AEP</a><br />
+<a href="TCFCommands-1.html#tcfBlockageARI">Blockage ARI</a><br />
+<a href="TCFCommands-1.html#tcfBlockageDefault">Blockage Default</a><br />
+<a href="TCFCommands-1.html#tcfBlockageMatrixFile">Blockage Matrix File</a><br />
+<a href="TCFCommands-1.html#tcfBlockageMatrix">Blockage Matrix</a><br />
+<a href="TCFCommands-1.html#tcfBlockageMethod">Blockage Method</a><br />
+<a href="TCFCommands-1.html#tcfBlockageOverride">Blockage Override</a><br />
+<a href="TCFCommands-1.html#tcfBlockagePMFAEP">Blockage PMF AEP</a><br />
+<a href="TCFCommands-1.html#tcfBlockagePMFARI">Blockage PMF ARI</a><br />
+<a href="TCFCommands-1.html#tcfBlockageReturnPeriod">Blockage Return Period</a><br />
+<a href="TCFCommands-1.html#tcfBlueKenueStartDate">Blue Kenue Start Date</a><br />
+<a href="TCFCommands-1.html#tcfBoundaryViscosityFactor">Boundary Viscosity Factor</a><br />
+<a href="TCFCommands-1.html#tcfBSSCutoffDepth">BSS Cutoff Depth</a><br />
+<a href="TCFCommands-1.html#tcfCalibrationPointsMIFile">Calibration Points MI File</a><br />
+<a href="TCFCommands-1.html#tcfCellSideWetDryDepth">Cell Side Wet/Dry Depth</a><br />
+<a href="TCFCommands-1.html#tcfCellSize">Cell Size</a><br />
+<a href="TCFCommands-1.html#tcfCellWetDryDepth">Cell Wet/Dry Depth</a><br />
+<a href="TCFCommands-1.html#tcfChangeZeroMaterialValuestoOne">Change Zero Material Values to One</a><br />
+<a href="TCFCommands-1.html#tcfCheckInsideGrid">Check Inside Grid</a><br />
+<a href="TCFCommands-1.html#tcfCheckMISaveDate">Check MI Save Date</a><br />
+<a href="TCFCommands-1.html#tcfCheckMISaveExt">Check MI Save Ext</a><br />
+<a href="TCFCommands-1.html#tcfCommandLineProcessing">Command Line Processing</a><br />
+<a href="TCFCommands-1.html#tcfControlNumberFactor">Control Number Factor</a><br />
+<a href="TCFCommands-1.html#tcfCPUThreads">CPU Threads</a><br />
+<a href="TCFCommands-1.html#tcfCSVHeaderLine">CSV Header Line</a><br />
+<a href="TCFCommands-1.html#tcfCSVMaximumNumberColumns">CSV Maximum Number Columns</a><br />
+<a href="TCFCommands-1.html#tcfCSVTime">CSV Time</a><br />
+<a href="TCFCommands-1.html#tcfDefaults">Defaults</a><br />
+<a href="TCFCommands-1.html#tcfDefineOutputZone">Define Output Zone</a><br />
+<a href="TCFCommands-1.html#tcfDemoModel">Demo Model</a><br />
+<a href="TCFCommands-1.html#tcfDensityofAir">Density of Air</a><br />
+<a href="TCFCommands-1.html#tcfDensityofWater">Density of Water</a><br />
+<a href="TCFCommands-1.html#tcfDepthRippleHeightFactorLimit">Depth/Ripple Height Factor Limit</a><br />
+<a href="TCFCommands-1.html#tcfDisplayWaterLevel">Display Water Level</a><br />
+<a href="TCFCommands-1.html#tcfDistributeHXFlows">Distribute HX Flows</a><br />
+<a href="TCFCommands-1.html#tcfEnd1DDomain">End 1D Domain</a><br />
+<a href="TCFCommands-1.html#tcfEnd2DDomain">End 2D Domain</a><br />
+<a href="TCFCommands-1.html#tcfEndAfterMaximumStartTime">End After Maximum Start Time</a><br />
+<a href="TCFCommands-1.html#tcfEndAfterMaximum">End After Maximum</a><br />
+<a href="TCFCommands-1.html#tcfEndDefine">End Define</a><br />
+<a href="TCFCommands-1.html#tcfEndMapOutput">End Map Output</a><br />
+<a href="TCFCommands-1.html#tcfEndTime">End Time</a><br />
+<a href="TCFCommands-1.html#tcfESTRYControlFile">ESTRY Control File</a><br />
+<a href="TCFCommands-1.html#tcfEventFile">Event File</a><br />
+<a href="TCFCommands-1.html#tcfExcelStartDate">Excel Start Date</a><br />
+<a href="TCFCommands-1.html#tcfExternalStressFile">External Stress File</a><br />
+<a href="TCFCommands-1.html#tcfFEWSGeodatum">FEWS Geodatum</a><br />
+<a href="TCFCommands-1.html#tcfFEWSInputfile">FEWS Input File</a><br />
+<a href="TCFCommands-1.html#tcfFileRetryMaxCount">File Retry Max Count</a><br />
+<a href="TCFCommands-1.html#tcfFileRetryTimeout">File Retry Timeout</a><br />
+<a href="TCFCommands-1.html#tcfFirstSweepDirection">First Sweep Direction</a><br />
+<a href="TCFCommands-1.html#tcfForceFileIODisplay">Force File IO Display</a><br />
+<a href="TCFCommands-1.html#tcfFreeOverfallFactor">Free Overfall Factor</a><br />
+<a href="TCFCommands-1.html#tcfFreeOverfall">Free Overfall</a><br />
+<a href="TCFCommands-1.html#tcfFroudeCheck">Froude Check</a><br />
+<a href="TCFCommands-1.html#tcfFroudeDepthAdjustment">Froude Depth Adjustment</a><br />
+<a href="TCFCommands-1.html#tcfGAConvergenceValue">GA Convergence Value</a><br />
+<a href="TCFCommands-1.html#tcfGAMaximumIternations">GA Maximum Iterations</a><br />
+<a href="TCFCommands-1.html#tcfGeometryControlFile">Geometry Control File</a><br />
+<a href="TCFCommands-1.html#tcfGISFormat">GIS Format</a><br />
+<a href="TCFCommands-1.html#tcfGISGridVectorDirection">GIS Grid Vector Direction</a><br />
+<a href="TCFCommands-1.html#tcfGISGridVectorSF">GIS Grid Vector SF</a><br />
+<a href="TCFCommands-1.html#tcfGISGridVectorTTF">GIS Grid Vector TTF</a><br />
+<a href="TCFCommands-1.html#tcfGISGridVectorType">GIS Grid Vector Type</a><br />
+<a href="TCFCommands-1.html#tcfGISProjectPathFormat">GIS Project Path Format</a><br />
+<a href="TCFCommands-1.html#tcfGISProjectionCheck">GIS Projection Check</a><br />
+<a href="TCFCommands-1.html#tcfGISSupportedObjectIgnored">GIS Supported Object Ignored</a><br />
+<a href="TCFCommands-1.html#tcfGISUnsupportedObject">GIS Unsupported Object</a><br />
+<a href="TCFCommands-1.html#tcfGlobalFCChFactor">Global FC Ch Factor</a><br />
+<a href="TCFCommands-1.html#tcfGlobalRainfallUseMaterialLoss">Global Rainfall Use Material Loss</a><br />
+<a href="TCFCommands-1.html#tcfGlobalWeirFactor">Global Weir Factor</a><br />
+<a href="TCFCommands-1.html#tcfGPKGCompressionPredictor">GPKG Compression Predictor</a><br />
+<a href="TCFCommands-1.html#tcfGPKGCompression">GPKG Compression</a><br />
+<a href="TCFCommands-1.html#tcfGPKGConversionCheck">GPKG Conversion Check</a><br />
+<a href="TCFCommands-1.html#tcfGPKGInputsReadOnly">GPKG Inputs Read Only</a><br />
+<a href="TCFCommands-1.html#tcfGPKGProjection">GPKG Projection</a><br />
+<a href="TCFCommands-1.html#tcfGPUDeviceIDs">GPU Device IDs</a><br />
+<a href="TCFCommands-1.html#tcfGPUDPCheck">GPU DP Check</a><br />
+<a href="TCFCommands-1.html#tcfGPUPeertoPeerAccess">GPU Peer to Peer Access</a><br />
+<a href="TCFCommands-1.html#tcfGPUSolver">GPU Solver</a><br />
+<a href="TCFCommands-1.html#tcfGPUTemporalScheme">GPU Temporal Scheme</a><br />
+<a href="TCFCommands-1.html#tcfGridFormat">Grid Format</a><br />
+<a href="TCFCommands-1.html#tcfGridOutputCellSize">Grid Output Cell Size</a><br />
+<a href="TCFCommands-1.html#tcfGridOutputOrigin">Grid Output Origin</a><br />
+<a href="TCFCommands-1.html#tcfGroundwaterBlendThreshold">Groundwater Blend Threshold</a><br />
+<a href="TCFCommands-1.html#tcfHardware">Hardware</a><br />
+<a href="TCFCommands-1.html#tcfHEC-DSSStartDate">HEC-DSS Start Date</a><br />
+<a href="TCFCommands-1.html#tcfHPCWeirParameters">HPC</a><br />
+<a href="TCFCommands-1.html#tcfHPC1DSynchronisation">HPC 1D Synchronisation</a><br />
+<a href="TCFCommands-1.html#tcfHPCBoundaryApproach">HPC Boundary Approach</a><br />
+<a href="TCFCommands-1.html#tcfHPCDeviceSplit">HPC Device Split</a><br />
+<a href="TCFCommands-1.html#tcfHPCDPCheck">HPC DP Check</a><br />
+<a href="TCFCommands-1.html#tcfHPCdtWriteInterval">HPC dt Write Interval</a><br />
+<a href="TCFCommands-1.html#tcfHPCHQBoundaryApproach">HPC HQ Boundary Approach</a><br />
+<a href="TCFCommands-1.html#tcfHPCHQBoundaryFilterConstant">HPC HQ Boundary Filter Constant</a><br />
+<a href="TCFCommands-1.html#tcfHPCInfiltrationDryingApproach">HPC Infiltration Drying Approach</a><br />
+<a href="TCFCommands-1.html#tcfHPCManningsDepthApproach">HPC Mannings Depth Approach</a><br />
+<a href="TCFCommands-1.html#tcfHPCRestartGeometry">HPC Restart Geometry</a><br />
+<a href="TCFCommands-1.html#tcfHPCSXMomentumApproach">HPC SX Momentum Approach</a><br />
+<a href="TCFCommands-1.html#tcfHPCTemporalScheme">HPC Temporal Scheme</a><br />
+<a href="TCFCommands-1.html#tcfHPCWeirApproach">HPC Weir Approach</a><br />
+<a href="TCFCommands-1.html#tcfHQBoundaryApproach">HQ Boundary Approach</a><br />
+<a href="TCFCommands-1.html#tcfHRGridOutputCellSize">HR Grid Output Cell Size</a><br />
+<a href="TCFCommands-1.html#tcfHRGridOutputUseFaceElevations">HR Grid Output Use Face Elevations</a><br />
+<a href="TCFCommands-1.html#tcfHRInterpolationApproach">HR Interpolation Approach</a><br />
+<a href="TCFCommands-1.html#tcfHRThinZLineOutputAdjustment">HR Thin Z Line Output Adjustment</a><br />
+<a href="TCFCommands-1.html#tcfHXForceWeirEquation">HX Force Weir Equation</a><br />
+<a href="TCFCommands-1.html#tcfHXZCCheck">HX ZC Check</a><br />
+<a href="TCFCommands-1.html#tcfIfEvent">If Event</a><br />
+<a href="TCFCommands-1.html#tcfIfScenario">If Scenario</a><br />
+<a href="TCFCommands-1.html#tcfIndex1D2DLinks">Index 1D2D Links</a><br />
+<a href="TCFCommands-1.html#tcfInputDrive">Input Drive</a><br />
+<a href="TCFCommands-1.html#tcfInsideRegion">Inside Region</a><br />
+<a href="TCFCommands-1.html#tcfInstabilityWaterLevel">Instability Water Level</a><br />
+<a href="TCFCommands-1.html#tcfLatitude">Latitude</a><br />
+<a href="TCFCommands-1.html#tcfLayeredFLCDefaultApproach">Layered FLC Default Approach</a><br />
+<a href="TCFCommands-1.html#tcfLineCellSelection">Line Cell Selection</a><br />
+<a href="TCFCommands-1.html#tcfLink2D2DAdjustVelocityHead">Link 2D2D Adjust Velocity Head</a><br />
+<a href="TCFCommands-1.html#tcfLink2D2DApproach">Link 2D2D Approach</a><br />
+<a href="TCFCommands-1.html#tcfLink2D2DDistributeFlow">Link 2D2D Distribute Flow</a><br />
+<a href="TCFCommands-1.html#tcfLink2D2DGlobalStabilityFactor">Link 2D2D Global Stability Factor</a><br />
+<a href="TCFCommands-1.html#tcfLogFolder">Log Folder</a><br />
+<a href="TCFCommands-1.html#tcfMapCutoffDepth">Map Cutoff Depth</a><br />
+<a href="TCFCommands-1.html#tcfMapCutoffSGS">Map Cutoff SGS</a><br />
+<a href="TCFCommands-1.html#tcfMapCutoffVector">Map Cutoff Vector</a><br />
+<a href="TCFCommands-1.html#tcfMapOutputCornerInterpolation">Map Output Corner Interpolation</a><br />
+<a href="TCFCommands-1.html#tcfMapOutputDataTypes">Map Output Data Types</a><br />
+<a href="TCFCommands-1.html#tcfMapOutputEntireModel">Map Output Entire Model</a><br />
+<a href="TCFCommands-1.html#tcfMapOutputFormat">Map Output Format</a><br />
+<a href="TCFCommands-1.html#tcfMapOutputInterval">Map Output Interval</a><br />
+<a href="TCFCommands-1.html#tcfMassBalanceCorrector">Mass Balance Corrector</a><br />
+<a href="TCFCommands-1.html#tcfMassBalanceOutputInterval">Mass Balance Output Interval</a><br />
+<a href="TCFCommands-1.html#tcfMassBalanceOutput">Mass Balance Output</a><br />
+<a href="TCFCommands-1.html#tcfMaximum1DChannels">Maximum 1D Channels</a><br />
+<a href="TCFCommands-1.html#tcfMaxCourantNumber">Maximum Courant Number</a><br />
+<a href="TCFCommands-1.html#tcfMaximumPoints">Maximum Points</a><br />
+<a href="TCFCommands-1.html#tcfMaximumVelocityCutoffDepth">Maximum Velocity Cutoff Depth</a><br />
+<a href="TCFCommands-1.html#tcfMaximumVertices">Maximum Vertices</a><br />
+<a href="TCFCommands-1.html#tcfMaximumsandMinimumsOnlyforGrids">Maximums and Minimums Only for Grids</a><br />
+<a href="TCFCommands-1.html#tcfMaximumsandMinimumsTimeSeries">Maximums and Minimums Time Series</a><br />
+<a href="TCFCommands-1.html#tcfMaximumsandMinimums">Maximums and Minimums</a><br />
+<a href="TCFCommands-1.html#tcfMaximumsApproach">Maximums Approach</a><br />
+<a href="TCFCommands-1.html#tcfMaximumsStartTrackTime">Maximums Start Track Time</a><br />
+<a href="TCFCommands-1.html#tcfMaximumsTrackTime">Maximums Track Time</a><br />
+<a href="TCFCommands-1.html#tcfMeshparts">Meshparts</a><br />
+<a href="TCFCommands-1.html#tcfMIProjectionIgnoreBounds">MI Projection Check Ignore Bounds</a><br />
+<a href="TCFCommands-1.html#tcfMIProjection">MI Projection</a><br />
+<a href="TCFCommands-1.html#tcfModelEvents">Model Events</a><br />
+<a href="TCFCommands-1.html#tcfModelOutputZones">Model Output Zones</a><br />
+<a href="TCFCommands-1.html#tcfModelPlatform">Model Platform</a><br />
+<a href="TCFCommands-1.html#tcfModelPrecision">Model Precision</a><br />
+<a href="TCFCommands-1.html#tcfModelScenarios">Model Scenarios</a><br />
+<a href="TCFCommands-1.html#tcfModelTUFLOWBuild">Model TUFLOW Build</a><br />
+<a href="TCFCommands-1.html#tcfModelTUFLOWRelease">Model TUFLOW Release</a><br />
+<a href="TCFCommands-1.html#tcfNegativeDepthApproach">Negative Depth Approach</a><br />
+<a href="TCFCommands-1.html#tcfNetCDFOutputCompression">NetCDF Output Compression</a><br />
+<a href="TCFCommands-1.html#tcfNetCDFOutputDirection">NetCDF Output Direction</a><br />
+<a href="TCFCommands-1.html#tcfNetCDFOutputFormat">NetCDF Output Format</a><br />
+<a href="TCFCommands-1.html#tcfNetCDFOutputStartDate">NetCDF Output Start Date</a><br />
+<a href="TCFCommands-1.html#tcfNetCDFOutputTimeUnit">NetCDF Output Time Unit</a><br />
+<a href="TCFCommands-1.html#tcfNon-NewtonianMixingExponent">Non-Newtonian Mixing Exponent</a><br />
+<a href="TCFCommands-1.html#tcfNullCellChecks">Null Cell Checks</a><br />
+<a href="TCFCommands-1.html#tcfNumber2D2DLinkIterations">Number 2D2D Link Iterations</a><br />
+<a href="TCFCommands-1.html#tcfNumberIterations">Number Iterations</a><br />
+<a href="TCFCommands-1.html#tcfOutputApproach">Output Approach</a><br />
+<a href="TCFCommands-1.html#tcfOutputDrive">Output Drive</a><br />
+<a href="TCFCommands-1.html#tcfOutputFiles">Output Files</a><br />
+<a href="TCFCommands-1.html#tcfOutputFolder">Output Folder</a><br />
+<a href="TCFCommands-1.html#tcfPause">Pause</a><br />
+<a href="TCFCommands-1.html#tcfPitDefaultExtrapolateQCurve">Pit Default Extrapolate Q Curve</a><br />
+<a href="TCFCommands-1.html#tcfPitNo1DConnection">Pit No 1D Connection</a><br />
+<a href="TCFCommands-1.html#tcfPlotOutputInvalidType">Plot Output Invalid Type</a><br />
+<a href="TCFCommands-1.html#tcfPOApproach">PO Approach</a><br />
+<a href="TCFCommands-1.html#tcfProcessAllGrids">Process All Grids</a><br />
+<a href="TCFCommands-1.html#tcfQuadtreeBCParallelInertiaApproach">Quadtree BC Parallel Inertia Approach</a><br />
+<a href="TCFCommands-1.html#tcfQuadtreeControlFile">Quadtree Control File</a><br />
+<a href="TCFCommands-1.html#tcfRainfallBoundaries">Rainfall Boundaries</a><br />
+<a href="TCFCommands-1.html#tcfRainfallBoundaryFactor">Rainfall Boundary Factor</a><br />
+<a href="TCFCommands-1.html#tcfRainfallControlFile">Rainfall Control File</a><br />
+<a href="TCFCommands-1.html#tcfRainfallControlFile">Rainfall Gauges</a><br />
+<a href="TCFCommands-1.html#tcfRainfallNullValue">Rainfall Null Value</a><br />
+<a href="TCFCommands-1.html#tcfRAMOptimisation">RAM Optimisation</a><br />
+<a href="TCFCommands-1.html#tcfReadFile">Read File</a><br />
+<a href="TCFCommands-1.html#tcfReadGIS12DNetwork">Read GIS 12D Network</a><br />
+<a href="TCFCommands-1.html#tcfReadGIS12DNodes">Read GIS 12D Nodes</a><br />
+<a href="TCFCommands-1.html#tcfReadGIS12DWLLPoints">Read GIS 12D WLL Points</a><br />
+<a href="TCFCommands-1.html#tcfReadGIS12DWLL">Read GIS 12D WLL</a><br />
+<a href="TCFCommands-1.html#tcfReadGISAutoTerminate">Read GIS Auto Terminate</a><br />
+<a href="TCFCommands-1.html#tcfReadGISCyclone">Read GIS Cyclone/Hurricane</a><br />
+<a href="TCFCommands-1.html#tcfReadGISFC">Read GIS FC</a><br />
+<a href="TCFCommands-1.html#tcfReadGISGLO">Read GIS GLO</a><br />
+<a href="TCFCommands-1.html#tcfReadGISISISNetwork">Read GIS ISIS Network</a><br />
+<a href="TCFCommands-1.html#tcfReadGISISISNodes">Read GIS ISIS Nodes</a><br />
+<a href="TCFCommands-1.html#tcfReadGISISISWLLPoints">Read GIS ISIS WLL Points</a><br />
+<a href="TCFCommands-1.html#tcfReadGISISISWLL">Read GIS ISIS WLL</a><br />
+<a href="TCFCommands-1.html#tcfReadGISIWL">Read GIS IWL</a><br />
+<a href="TCFCommands-1.html#tcfReadGISLP">Read GIS LP</a><br />
+<a href="TCFCommands-1.html#tcfReadGISOutputZone">Read GIS Output Zone</a><br />
+<a href="TCFCommands-1.html#tcfReadGISPO">Read GIS PO</a><br />
+<a href="TCFCommands-1.html#tcfReadGISReportingLocation">Read GIS Reporting Location</a><br />
+<a href="TCFCommands-1.html#tcfReadGISX1DNetwork">Read GIS X1D Network</a><br />
+<a href="TCFCommands-1.html#tcfReadGISX1DNodes">Read GIS X1D Nodes</a><br />
+<a href="TCFCommands-1.html#tcfReadGISX1DWLLPoints">Read GIS X1D WLL Points</a><br />
+<a href="TCFCommands-1.html#tcfReadGISX1DWLL">Read GIS X1D WLL</a><br />
+<a href="TCFCommands-1.html#tcfReadGISXPNetwork">Read GIS XP Network</a><br />
+<a href="TCFCommands-1.html#tcfReadGISXPNodes">Read GIS XP Nodes</a><br />
+<a href="TCFCommands-1.html#tcfReadGISXPWLLPoints">Read GIS XP WLL Points</a><br />
+<a href="TCFCommands-1.html#tcfReadGISXPWLL">Read GIS XP WLL</a><br />
+<a href="TCFCommands-1.html#tcfReadGridRF">Read Grid RF</a><br />
+<a href="TCFCommands-1.html#tcfReadHazardFile">Read Hazard File</a><br />
+<a href="TCFCommands-1.html#tcfReadMaterialsFile">Read Materials File</a><br />
+<a href="TCFCommands-1.html#tcfReadRestartFile">Read Restart File</a><br />
+<a href="TCFCommands-1.html#tcfReadGISDIWL">Read RowCol IWL</a><br />
+<a href="TCFCommands-1.html#tcfReadSoilFile">Read Soils File</a><br />
+<a href="TCFCommands-1.html#tcfRecalculateChezyInterval">Recalculate Chezy Interval</a><br />
+<a href="TCFCommands-1.html#tcfRecordGaugeDataEXCLUDE">Record Gauge Data EXCLUDE</a><br />
+<a href="TCFCommands-1.html#tcfRecordGaugeData">Record Gauge Data</a><br />
+<a href="TCFCommands-1.html#tcfRestartFileIgnoreFields">Restart File Ignore Fields</a><br />
+<a href="TCFCommands-1.html#tcfReveal1DNodes">Reveal 1D Nodes</a><br />
+<a href="TCFCommands-1.html#tcfSAminDepth">SA Minimum Depth</a><br />
+<a href="TCFCommands-1.html#tcfSAPropDepth">SA Proportion to Depth</a><br />
+<a href="TCFCommands-1.html#tcfScreenLogDisplayInterval">Screen/Log Display Interval</a><br />
+<a href="TCFCommands-1.html#tcfSetAutoTerminate">Set Auto Terminate</a><br />
+<a href="TCFCommands-1.html#tcfSetIWL">Set IWL</a><br />
+<a href="TCFCommands-1.html#tcfSetRouteCutOffType">Set Route Cut Off Type</a><br />
+<a href="TCFCommands-1.html#tcfSetRouteCutOffValues">Set Route Cut Off Values</a><br />
+<a href="TCFCommands-1.html#tcfSetVariable">Set Variable</a><br />
+<a href="TCFCommands-1.html#tcfSGSApproach">SGS Approach</a><br />
+<a href="TCFCommands-1.html#tcfSGSBreaklineDetectionDelta">SGS Breakline Detection Delta</a><br />
+<a href="TCFCommands-1.html#tcfSGSDepthOutput">SGS Depth Output</a><br />
+<a href="TCFCommands-1.html#tcfSGSInfiltrationApproach">SGS Infiltration Approach</a><br />
+<a href="TCFCommands-1.html#tcfSGSMapExtent">SGS Map Extent <span class="math inline">\(\langle\)</span> Full or Trim <span class="math inline">\(\rangle\)</span></a><br />
+<a href="TCFCommands-1.html#tcfSGSMaterials">SGS Materials</a><br />
+<a href="TCFCommands-1.html#tcfSGSMaxSampleFrequency">SGS Max Sample Frequency</a><br />
+<a href="TCFCommands-1.html#tcfSGSNegativeRainfallApproach">SGS Negative Rainfall Approach</a><br />
+<a href="TCFCommands-1.html#tcfSGSSampleFrequency">SGS Sample Frequency</a><br />
+<a href="TCFCommands-1.html#tcfSGSSampleTargetDistance">SGS Sample Target Distance</a><br />
+<a href="TCFCommands-1.html#tcfSGSSXZFlagApproach">SGS SX Z Flag Approach</a><br />
+<a href="TCFCommands-1.html#tcfSGSTINMemoryAllocationFactor">SGS TIN Memory Allocation Factor</a><br />
+<a href="TCFCommands-1.html#tcfSGSVelocityBasedOutputs">SGS Velocity Based Outputs</a><br />
+<a href="TCFCommands-1.html#tcfSGSZShapeLineApproach">SGS Z Shape Line Approach</a><br />
+<a href="TCFCommands-1.html#tcfSGSZHSampleRatio">SGS ZH Sample Ratio</a><br />
+<a href="TCFCommands-1.html#tcfSGSZptMAX/MINApproach">SGS Zpt MAX/MIN Approach</a><br />
+<a href="TCFCommands-1.html#tcfSGS">SGS</a><br />
+<a href="TCFCommands-1.html#tcfShallowDepthStabilityFactor">Shallow Depth Stability Factor</a><br />
+<a href="TCFCommands-1.html#tcfSHPProjectionCheckMethod">SHP Projection Check Method</a><br />
+<a href="TCFCommands-1.html#tcfSHPProjection">SHP Projection</a><br />
+<a href="TCFCommands-1.html#tcfSimulationPauseInterval">Simulation Pause Interval</a><br />
+<a href="TCFCommands-1.html#tcfSimulationPauseStart">Simulation Pause Start</a><br />
+<a href="TCFCommands-1.html#tcfSimulationsLogFolder">Simulations Log Folder</a><br />
+<a href="TCFCommands-1.html#tcfSnapTolerance">Snap Tolerance</a><br />
+<a href="TCFCommands-1.html#tcfSoilInitialLoss">Soil Initial Loss</a><br />
+<a href="TCFCommands-1.html#tcfSoilNegativeRainfallApproach">Soil Negative Rainfall Approach</a><br />
+<a href="TCFCommands-1.html#tcfSoilNegativeRainfallFactor">Soil Negative Rainfall Factor</a><br />
+<a href="TCFCommands-1.html#tcfSolutionScheme">Solution Scheme</a><br />
+<a href="TCFCommands-1.html#tcfSpatialDatabaseOutput">Spatial Database Output</a><br />
+<a href="TCFCommands-1.html#tcfSpatialDatabase">Spatial Database</a><br />
+<a href="TCFCommands-1.html#tcfSQLiteOnOpenSQL">SQLite On Open SQL</a><br />
+<a href="TCFCommands-1.html#tcfStart1DDomain">Start 1D Domain</a><br />
+<a href="TCFCommands-1.html#tcfStart2DDomain">Start 2D Domain</a><br />
+<a href="TCFCommands-1.html#tcfStartMapOutput">Start Map Output</a><br />
+<a href="TCFCommands-1.html#tcfStartTimeSeriesOutput">Start Time Series Output</a><br />
+<a href="TCFCommands-1.html#tcfStartTime">Start Time</a><br />
+<a href="TCFCommands-1.html#tcfSupercritical">Supercritical</a><br />
+<a href="TCFCommands-1.html#tcfSWMMControlFile">SWMM Control File</a><br />
+<a href="TCFCommands-1.html#tcfSXFlowDist">SX Flow Distribution Cutoff Depth</a><br />
+<a href="TCFCommands-1.html#tcfSXFMPUnitTypeError">SX FMP Unit Type Error</a><br />
+<a href="TCFCommands-1.html#tcfSXHeadAdjustment">SX Head Adjustment</a><br />
+<a href="TCFCommands-1.html#tcfSXHeadDistributionCutoffDepth">SX Head Distribution Cutoff Depth</a><br />
+<a href="TCFCommands-1.html#tcfSXStorageApproach">SX Storage Approach</a><br />
+<a href="TCFCommands-1.html#tcfSXStorageFactor">SX Storage Factor</a><br />
+<a href="TCFCommands-1.html#tcfSXZCCheck">SX ZC Check</a><br />
+<a href="TCFCommands-1.html#tcfTIFCompressionPredictor">TIF Compression Predictor</a><br />
+<a href="TCFCommands-1.html#tcfTIFCompression">TIF Compression</a><br />
+<a href="TCFCommands-1.html#tcfTIFProjection">TIF Projection</a><br />
+<a href="TCFCommands-1.html#tcfTimeOutputCornerInterpolation">Time Output Corner Interpolation</a><br />
+<a href="TCFCommands-1.html#tcfTimeOutputCutoff">Time Output Cutoff</a><br />
+<a href="TCFCommands-1.html#tcfTimeSeriesNullValue">Time Series Null Value</a><br />
+<a href="TCFCommands-1.html#tcfTimeSeriesOutputFormat">Time Series Output Format</a><br />
+<a href="TCFCommands-1.html#tcfTimeSeriesOutputInterval">Time Series Output Interval</a><br />
+<a href="TCFCommands-1.html#tcfTimestepInitial">Timestep Initial</a><br />
+<a href="TCFCommands-1.html#tcfTimestepMaxInc">Timestep Maximum Increase (%)</a><br />
+<a href="TCFCommands-1.html#tcfTimestepMaximum">Timestep Maximum</a><br />
+<a href="TCFCommands-1.html#tcfTimestepMinimum">Timestep Minimum</a><br />
+<a href="TCFCommands-1.html#tcfTimestepMinimum">Timestep Repeats</a><br />
+<a href="TCFCommands-1.html#tcfTimestep">Timestep</a><br />
+<a href="TCFCommands-1.html#tcfTSFUpdateInterval">TSF Update Interval</a><br />
+<a href="TCFCommands-1.html#tcfTutorialModel">Tutorial Model</a><br />
+<a href="TCFCommands-1.html#tcfUKHazardDebrisFactor">UK Hazard Debris Factor</a><br />
+<a href="TCFCommands-1.html#tcfUKHazardFormula">UK Hazard Formula</a><br />
+<a href="TCFCommands-1.html#tcfUKHazardLandUse">UK Hazard Land Use</a><br />
+<a href="TCFCommands-1.html#tcfUnits">Units</a><br />
+<a href="TCFCommands-1.html#tcfUnusedHXandSXConnections">Unused HX and SX Connections</a><br />
+<a href="TCFCommands-1.html#tcfUseForwardSlash">Use Forward Slash</a><br />
+<a href="TCFCommands-1.html#tcfVerbose">Verbose</a><br />
+<a href="TCFCommands-1.html#tcfVGZAdjustment">VG Z Adjustment</a><br />
+<a href="TCFCommands-1.html#tcfViscosityApproach">Viscosity Approach</a><br />
+<a href="TCFCommands-1.html#tcfViscosityCoefficient">Viscosity Coefficient</a><br />
+<a href="TCFCommands-1.html#tcfViscosityFormulation">Viscosity Formulation</a><br />
+<a href="TCFCommands-1.html#tcfWaterLevelChecks">Water Level Checks</a><br />
+<a href="TCFCommands-1.html#tcfWettingandDrying">Wetting and Drying</a><br />
+<a href="TCFCommands-1.html#tcfWIBUFIRMCodeSearchOrder">WIBU FIRM Code Search Order</a><br />
+<a href="TCFCommands-1.html#tcfWindWaveShallowDepths">Wind/Wave Shallow Depths</a><br />
+<a href="TCFCommands-1.html#tcfWriteCheckFiles">Write Check Files</a><br />
+<a href="TCFCommands-1.html#tcfWriteEmptyGISFiles">Write Empty GIS Files</a><br />
+<a href="TCFCommands-1.html#tcfWritePOOnline">Write PO Online</a><br />
+<a href="TCFCommands-1.html#tcfWriteRestartFileatTime">Write Restart File at Time</a><br />
+<a href="TCFCommands-1.html#tcfWriteRestartFileInterval">Write Restart File Interval</a><br />
+<a href="TCFCommands-1.html#tcfWriteRestartFileVersion">Write Restart File Version</a><br />
+<a href="TCFCommands-1.html#tcfWriteRestartFilename">Write Restart Filename</a><br />
+<a href="TCFCommands-1.html#tcfWriteX1DCheckFiles">Write X1D Check Files</a><br />
+<a href="TCFCommands-1.html#tcfXFFilesBoundaries">XF Files Boundaries</a><br />
+<a href="TCFCommands-1.html#tcfXFFilesIncludeinFilename">XF Files Include in Filename</a><br />
+<a href="TCFCommands-1.html#tcfXFFilesMergeTINElevations">XF Files Merge TIN Elevations</a><br />
+<a href="TCFCommands-1.html#tcfXFFiles">XF Files</a><br />
+<a href="TCFCommands-1.html#tcfXMDFOutputCompression">XMDF Output Compression</a><br />
+<a href="TCFCommands-1.html#tcfZeroNegativeDepths">Zero Negative Depths</a><br />
+<a href="TCFCommands-1.html#tcfZeroRainfallCheck">Zero Rainfall Check</a><br />
+<a href="TCFCommands-1.html#tcfZPHazardCutoffDepth">ZP Hazard Cutoff Depth</a><br />
+<a href="TCFCommands-1.html#tcfZptRangeCheck">Zpt Range Check</a></p>
 </div>
---></p>
 <!-- Table properties -->
 <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js">
@@ -1419,19 +1414,20 @@ div.csl-indent {
              });
          } );
 </script>
+<p><br></p>
 <table>
 <caption>
 <span id="tab:tab-TCFCommands">Table A.1: </span><strong>TUFLOW Classic/HPC TCF Commands</strong>
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
 Command
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
 Solver
 </th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
 Description
 </th>
 </tr>
@@ -1628,7 +1624,7 @@ boundaries would have to be placed in two separate GIS layers.</p>
 Classic and HPC
 </td>
 <td style="text-align:left;">
-<p>Typically used within <a href="#tefDefineEvent">Define Event</a> blocks in a .tef
+<p>Typically used within <a href="TEFCommands-1.html#tefDefineEvent">Define Event</a> blocks in a .tef
 file (TUFLOW Event File) – see Section <a href="Running-Simulations-1.html#Events-3">13.3.1</a>, but can be used
 one or more times in a .tcf file.</p>
 <p><a href="https://wiki.tuflow.com/TUFLOW_Message_2313">ERROR 2313</a> occurs if &lt;bc_event_text&gt; is not unique for a
@@ -3858,7 +3854,7 @@ Classic and HPC
 </td>
 <td style="text-align:left;">
 <p>Default value recommended.</p>
-<p>When using <a href="TCFCommands-1.html#tcfMapCutoffDepth">Map Cutoff Depth</a> with mesh-based output files (XMDF, DAT), the display of scalar and vector outputs at each mesh is controlled by a 0/1 flag, which is set as 0 if the local depth is below the cutoff depth. This flag disables the vector display in SMS however does not in other GIS programs (e.g. QGIS release version 3.14), and thus the velocity vectors could display everywhere for a global rainfall model even if the <a href="TCFCommands-1.html#tcfMapCutoffDepth">Map Cutoff Depth</a> command is specified. See Section <a href="Features-and-Changes-1.html#changes-from-2020-01">18.1.2</a>.</p>
+<p>When using <a href="TCFCommands-1.html#tcfMapCutoffDepth">Map Cutoff Depth</a> with mesh-based output files (XMDF, DAT), the display of scalar and vector outputs at each mesh is controlled by a 0/1 flag, which is set as 0 if the local depth is below the cutoff depth. This flag disables the vector display in SMS however does not in other GIS programs (e.g. QGIS release version 3.14), and thus the velocity vectors could display everywhere for a global rainfall model even if the <a href="TCFCommands-1.html#tcfMapCutoffDepth">Map Cutoff Depth</a> command is specified.</p>
 The “ON” option (default) enables the map cutoff depth and sets the vector output value as zero if the cell water depth is below the cutoff depth.
 “OFF” option can be used for backward compatibility.
 </td>
@@ -4358,7 +4354,7 @@ projection of the model.
 Classic and HPC
 </td>
 <td style="text-align:left;">
-<p>Alternative to using the –e option when running TUFLOW (see Table <a href="Running-Simulations-1.html#tab:tab-TUFLOWOptions">13.2</a>). Up to nine (9) separate events that have been defined using <a href="#tefDefineEvent">Define Event</a> can be specified. Separate the event names using vertical bars. The event names specified will be automatically appended to the output filenames if ~e~ or ~eX~ are not in the .tcf filename.</p>
+<p>Alternative to using the –e option when running TUFLOW (see Table <a href="Running-Simulations-1.html#tab:tab-TUFLOWOptions">13.2</a>). Up to nine (9) separate events that have been defined using <a href="TEFCommands-1.html#tefDefineEvent">Define Event</a> can be specified. Separate the event names using vertical bars. The event names specified will be automatically appended to the output filenames if ~e~ or ~eX~ are not in the .tcf filename.</p>
 <p>For example:</p>
 <p><tcmd>Model Events </tcmd><teq>==</teq><tblk> Q100 | 02h</tblk></p>
 Note that using the –e run option will override this command.
@@ -4864,7 +4860,7 @@ HPC Only
 </td>
 <td style="text-align:left;">
 <p>TUFLOW HPC Quadtree Only.</p>
-Controls the handling of inertia parallel at head boundaries for Quadtree simulations. “Method B” provides consistency with TUFLOW Classic and single level HPC. “Method A” is available for backward compatibility. The default approach is recommended. For more information see Section <a href="Features-and-Changes-1.html#changes-from-2020-10">18.1.1</a>.
+Controls the handling of inertia parallel at head boundaries for Quadtree simulations. “Method B” provides consistency with TUFLOW Classic and single level HPC. “Method A” is available for backward compatibility. The default approach is recommended.
 </td>
 </tr>
 <tr>
@@ -6815,7 +6811,7 @@ situations to the stability of the flow over the breach.<br />
 <p>HPC Only</p>
 </td>
 <td style="text-align:left;">
-<p>Sets the viscosity approach, from the 2020 release onwards “Method B” is the default (which is based on the approach developed for TUFLOW Classic). For backward compatibility, the previous approach “Method A” can be used. See Section <a href="Features-and-Changes-1.html#changes-from-2018-03">18.1.3</a>.</p>
+<p>Sets the viscosity approach, from the 2020 release onwards “Method B” is the default (which is based on the approach developed for TUFLOW Classic). For backward compatibility, the previous approach “Method A” can be used.</p>
 </td>
 </tr>
 <tr>
