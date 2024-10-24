@@ -1,0 +1,65 @@
+{"0": {
+    "doc": "Changelog for 2024.0.0",
+    "title": "Changelog for TUFLOW 2024.0.0",
+    "content": "Release date: 29 Nov 2024 . | General Notes | New Features and Enhancements . | TUFLOW CATCH | Tracer Advection in ESTRY | Quadtree HQ Boundary Processing Optimisation | SWMM: Additional Time Series Datasets | Support For SMS 2DM Tin Format | New TIN Triangulation Method | GPKG Write Optimisations | WIBU Retry Count Includes All License Types | . | Changes to Defaults | Bug Fixes . | Domain Construction | Boundaries and Links | GIS Formats | . | . ",
+    "url": "/classic-hpc/changelog/2024.0.0/#changelog-for-tuflow-202400",
+    
+    "relUrl": "/2024.0.0/#changelog-for-tuflow-202400"
+  },"1": {
+    "doc": "Changelog for 2024.0.0",
+    "title": "General Notes",
+    "content": "The TUFLOW 2024 release changes the version numbering system. From the 2024 release and onwards, version numering will use the following convention major.minor.patch where the major version will correspond to the year it was released e.g. this version is 2024.0.0. and the next minor release will be 2024.1.0. The release notes that have previously accompanied each TUFLOW release have also been replaced by a changelog (this document), which offers a much more concise overview of the changes in each release. Any extra details or information that would have typically been in the release notes are now added directly to the TUFLOW User Manual, with each major TUFLOW release also having an accompanying TUFLOW User Manual release. ",
+    "url": "/classic-hpc/changelog/2024.0.0/#general-notes",
+    
+    "relUrl": "/2024.0.0/#general-notes"
+  },"2": {
+    "doc": "Changelog for 2024.0.0",
+    "title": "New Features and Enhancements",
+    "content": "TUFLOW CATCH . Major Feature . The 2024 release introduces TUFLOW CATCH. TUFLOW CATCH is a whole-of-catchment platform that can simulate hydrologic, hydraulic, pollutant export, and receiving waterway processes. Please visit the TUFLOW CATCH User Manual for more information, examples, and tutorials. Tracer Advection in ESTRY . Major Feature . Tracer advection is now supported in ESTRY. All ESTRY channel types and 1D/2D linking methods are supported. Dispersion of tracers is not yet supported. For more information, please visit the TUFLOW User Manual - Advection Dispersion. Quadtree HQ Boundary Processing Optimisation . The boundary processing time for HQ boundaries in Quadtree has been significantly sped up for boundary lines that select a lot of cells. SWMM: Additional Time Series Datasets . The GPKG time series output written by TUFLOW for TUFLOW/SWMM linked models now includes discharges and cumulative volumes entering SWMM pipe network from the 2D domain. Similar to ESTRY, negative discharges indicate that flow is surcharging from the pipe network into the 2D domain. Support For SMS 2DM Tin Format . Support has been added for the SMS 2dm TIN format when using the command Read TIN Zpts. New TIN Triangulation Method . Beta Functionality . A new TIN triangulation method has been implemented as a beta functionality. The current method distributes points along breaklines to encourage triangle edges along breaklines. The new method enforces breaklines, produces more balanced triangulations, and is more robust. This can be activated using the following command: . TIN Triangulation Approach == Method B . GPKG Write Optimisations . Sped up writing large data to GeoPackage files. Between changes made in 2023-AF and 2024.0.0, the combined time to write the grid, zpt, and uvpt check tables to a GeoPackage file went from about 43 seconds to about 6 seconds. This is about 7 times faster! . WIBU Retry Count Includes All License Types . The WIBU retry count setting will now loop through all license types when trying to find an available license. Previously this only searched for BMT hardware licenses. ",
+    "url": "/classic-hpc/changelog/2024.0.0/#new-features-and-enhancements",
+    
+    "relUrl": "/2024.0.0/#new-features-and-enhancements"
+  },"3": {
+    "doc": "Changelog for 2024.0.0",
+    "title": "Changes to Defaults",
+    "content": "| Description of Change | Section | Backward Compatibility Command | . | Reset all defaults to the 2023 release | N/A | Defaults == PRE 2024 | . | Example | Example | Example == Example | . ",
+    "url": "/classic-hpc/changelog/2024.0.0/#changes-to-defaults",
+    
+    "relUrl": "/2024.0.0/#changes-to-defaults"
+  },"4": {
+    "doc": "Changelog for 2024.0.0",
+    "title": "Bug Fixes",
+    "content": "Domain Construction . | Fixed a should not be here - counter &gt;= mPoly that could trigger in quadtree when coded polygons that contained holes existed within the hole of another code polygon. | . Boundaries and Links . | Fixed an issue with reading HEC-DSS files for boundary conditions described in the TUFLOW User Manual. Quadtree models previously gave an error message and now work as expected. | Fixed an issue when a single QT or HT boundary line overlapped itself in Quadtree that could incorrectly trigger ERROR 2030. | Global rainfall losses have been made consistent with material losses. There was a very slight discrepency in how global rainfall losses were being applied due to the fact that they were removed before the simulation started from the global rainfall. This meant the global losses were applied to the input rainfall timesteps rather than the model timestep. If there was rainfall left over after losses were applied in a given timestep, this was being applied over the entire timestep which was resulting in decreased intensity over that timestep. | . GIS Formats . | Fixed an issue with the Coordinate Reference System (CRS) being written to GeoTIFFs. The change reduces the number of “Tags” in the TIFF header when information in the reference GeoTIFF does not include all geo-referencing information (previously empty tags were being written). This change also removes a couple of duplicate tags that were accidentally being written. | Fixed an issue that could cause memory corruption when an empty 2d_qnl GPKG layer was used in Quadtree. The new behaviour is now similar to using Quadtree Control File == Single Level. | Fixed an issue where GPKG outputs, check files, and log files were not being grouped into centralised databasese if no check files were being written. | . ",
+    "url": "/classic-hpc/changelog/2024.0.0/#bug-fixes",
+    
+    "relUrl": "/2024.0.0/#bug-fixes"
+  },"5": {
+    "doc": "Changelog for 2024.0.0",
+    "title": "Changelog for 2024.0.0",
+    "content": " ",
+    "url": "/classic-hpc/changelog/2024.0.0/",
+    
+    "relUrl": "/2024.0.0/"
+  },"6": {
+    "doc": "TUFLOW Classic HPC Changelogs",
+    "title": "TUFLOW Classic/HPC Changelog",
+    "content": "New releases are typically linked to the release of major new features and/or improvements in the computational hydraulic engines. Whilst some changes in results can be expected between releases due to computational engine improvements, the intent is not to have any changes in results between minor releases. The default settings are also intended to remain unchanged between minor releases, but can vary between major releases to force users to use the latest advancements. Users can revert to the default settings and prior computational engine approaches by using the Defaults command. Defaults == PRE 2024 ! An example that sets the defaults back to the 2023 release . There are also commands to revert specific defaults without having to revert all defaults back to a specific version. For these, please search the table of changed defaults in the respective changelog where the default was changed. ",
+    "url": "/classic-hpc/changelog/#tuflow-classichpc-changelog",
+    
+    "relUrl": "/#tuflow-classichpc-changelog"
+  },"7": {
+    "doc": "TUFLOW Classic HPC Changelogs",
+    "title": "Changelogs",
+    "content": "Below you will find the changelogs for the TUFLOW Classic/HPC since version 2024.0.0. For previous versions prior to the 2024 release, please see the relevant release notes within the TUFLOW Classic/HPC Release Archive. ",
+    "url": "/classic-hpc/changelog/#changelogs",
+    
+    "relUrl": "/#changelogs"
+  },"8": {
+    "doc": "TUFLOW Classic HPC Changelogs",
+    "title": "TUFLOW Classic HPC Changelogs",
+    "content": " ",
+    "url": "/classic-hpc/changelog/",
+    
+    "relUrl": "/"
+  }
+}
