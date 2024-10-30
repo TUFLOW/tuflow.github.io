@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Appendix C Files and data fields | TUFLOW CATCH User Manual" />
   <meta name="twitter:image" content="https://docs.tuflow.com/catch/manual/2024.2/images/TUFLOW%20Catch-01-01.png" />
 
-<meta name="author" content="Version 2024.2" />
+<meta name="author" content="Release 2024.0" />
 
 
 
@@ -55,6 +55,17 @@
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{sectsty}
+\usepackage{fontspec}
+\setmainfont{Arial}
+\definecolor{BMTChapter}{rgb}{0.00, 0.33, 0.50}
+\definecolor{BMTSection}{rgb}{0.102, 0.741, 0.788}
+\chapterfont{\color{BMTChapter}}  % sets colour of chapters
+\sectionfont{\color{BMTSection}}  % sets colour of section headers
+\subsectionfont{\color{BMTSection}}  % sets colour of section headers
+\subsubsectionfont{\color{BMTSection}}  % sets colour of section headers
 
 
 
@@ -87,6 +98,7 @@
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#tables"><i class="fa fa-check"></i>Tables</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#commands"><i class="fa fa-check"></i>Commands</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#parameter-notation"><i class="fa fa-check"></i>Parameter notation</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#portable-document-format"><i class="fa fa-check"></i>Portable Document Format</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#feedback"><i class="fa fa-check"></i>Feedback</a></li>
 </ul></li>
 </ul></li>
@@ -284,7 +296,7 @@
 </ul></li>
 <li>Name:
 <ul>
-<li>“Conc &lt;pollutant_name&gt;”, e.g. “Conc WQ_NITRATE_MG_L”</li>
+<li>“<tblk>Conc &lt;pollutant_name&gt;</tblk>”, e.g. “<tblk>Conc WQ_NITRATE_MG_L</tblk>”</li>
 </ul></li>
 <li>Units:
 <ul>
@@ -304,7 +316,7 @@
 </ul></li>
 <li>Name:
 <ul>
-<li>“GW Layer &lt;Layer number&gt; Conc &lt;pollutant_name&gt;”, e.g. “GW Layer 1 Conc PFAS”</li>
+<li>“<tblk>GW Layer &lt;Layer number&gt; Conc &lt;pollutant_name&gt;</tblk>”, e.g. “<tblk>GW Layer 1 Conc PFAS</tblk>”</li>
 </ul></li>
 <li>Units:
 <ul>
@@ -312,10 +324,8 @@
 <li>mg/L when Shear1 erosion rates are specified in g/m<span class="math inline">\(^2\)</span>/s</li>
 </ul></li>
 </ul>
-<p>These fields are reported at all TUFLOW HPC cells for all simulated constituents that are listed within pollutant export material blocks. Constant and timeseries pollutants are not reported because they are assigned only during boundary condition writing, rather than being simulated in the catchment domain. These GW Layer data fields will be zero at all times and locations for a given pollutant &lt;name&gt; if its infiltration has been set to off via</p>
-<blockquote>
-<p><a href="#TCHPCInfil">Infiltration &lt;name&gt; ==</a> off</p>
-</blockquote>
+<p>These fields are reported at all TUFLOW HPC cells for all simulated constituents that are listed within pollutant export material blocks. Constant and timeseries pollutants are not reported because they are assigned only during boundary condition writing, rather than being simulated in the catchment domain. These GW Layer data fields will be zero at all times and locations for a given pollutant <tblk>&lt;name&gt;</tblk> if its infiltration has been set to off via</p>
+<p><a href="#TCHPCInfil">Infiltration &lt;name&gt;</a> <teq>==</teq><tblk> OFF</tblk></p>
 </div>
 <div id="AppOutputsDryMass" class="section level2 hasAnchor" number="9.3">
 <h2><span class="header-section-number">C.3</span> Dry mass<a href="AppOutputs.html#AppOutputsDryMass" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -327,7 +337,7 @@
 </ul></li>
 <li>Name:
 <ul>
-<li>“Dry Mass &lt;pollutant_name&gt;”, e.g. “Dry Mass WQ_POC_MG_L”</li>
+<li>“<tblk>Dry Mass &lt;pollutant_name&gt;</tblk>”, e.g. “<tblk>Dry Mass WQ_POC_MG_L</tblk>”</li>
 </ul></li>
 <li>Units:
 <ul>
@@ -346,7 +356,7 @@
 </ul></li>
 <li>Name:
 <ul>
-<li>“Net Mass &lt;pollutant_name&gt;”, e.g. “Net Mass WQ_SED_FINES”</li>
+<li>“<tblk>Net Mass &lt;pollutant_name&gt;</tblk>”, e.g. “<tblk>Net Mass WQ_SED_FINES</tblk>”</li>
 </ul></li>
 <li>Units:
 <ul>
@@ -357,11 +367,9 @@
 </div>
 <div id="AppOutputsOther" class="section level2 hasAnchor" number="9.5">
 <h2><span class="header-section-number">C.5</span> Other outputs<a href="AppOutputs.html#AppOutputsOther" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>TUFLOW CATCH produces a small suite of supporting outputs that are simple text files. These are listed below. If the TUFLOW CATCH BC output folder is set to ..\bc_dase as recommended:</p>
-<blockquote>
-<p><a href="AppCommands.html#TCCatchDir">Catch BC Output Folder ==</a> ..\bc_dbase</p>
-</blockquote>
-<p>then all files below are written to the TUFLOWCatch\bc_dbase\ folder.</p>
+<p>TUFLOW CATCH produces a small suite of supporting outputs that are simple text files. These are listed below. If the TUFLOW CATCH BC output folder is set to <tblk>..\bc_dase</tblk> as recommended:</p>
+<p><a href="AppCommands.html#TCCatchDir">Catch BC Output Folder</a> <teq>==</teq><tblk> ..\bc_dbase</tblk></p>
+<p>then all files below are written to the <tblk>TUFLOWCatch\bc_dbase\</tblk> folder.</p>
 <div id="AppOutputsOtherMB" class="section level3 hasAnchor" number="9.5.1">
 <h3><span class="header-section-number">C.5.1</span> Mass balance<a href="AppOutputs.html#AppOutputsOtherMB" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A series of three mass balance files are written as follows (assuming a *.tcc file name of Model_001.tcc).</p>
@@ -478,19 +486,19 @@
 <ul>
 <li>Content:
 <ul>
-<li>TUFLOW FV BC blocks that direct TUFLOW FV to boundary condition data files prepared by TUFLOW HPC under TUFLOW CATCH. Only produced in the <strong>Hydrology</strong> and <strong>Integrated</strong> TUFLOW CATCH configurations. Two example blocks are shown below</li>
-</ul>
-<pre><code>!-----------------------------------------------------------------------------------------
-! Nodestring boundaries
-BC == Q, NW_Inflow, NW_Inflow.csv
- Sub-Type == 2
- BC Header == Time,Flow,Salinity,Temperature,SED_FINES
-End BC
-!-----------------------------------------------------------------------------------------
-! Lateral boundaries
-BC == QC, 1178572.028, 4996161.397, cell1.csv
- BC Header == Time,Flow,Salinity,Temperature,SED_FINES
-End BC</code></pre></li>
+<li>TUFLOW FV BC blocks that direct TUFLOW FV to boundary condition data files prepared by TUFLOW HPC under TUFLOW CATCH. Only produced in the <strong>Hydrology</strong> and <strong>Integrated</strong> TUFLOW CATCH configurations. Two example blocks are shown below <br>
+<tgrn>!—————————————————————————————–</tgrn><br />
+<tgrn>! Nodestring boundaries</tgrn><br />
+<tcmd>BC </tcmd><teq>==</teq><tblk> Q, NW_Inflow, NW_Inflow.csv</tblk><br />
+  <tcmd>Sub-Type </tcmd><teq>==</teq><tblk> 2</tblk><br />
+  <tcmd>BC Header </tcmd><teq>==</teq><tblk> Time,Flow,Salinity,Temperature,SED_FINES</tblk><br />
+<tcmd>End BC</tcmd><br />
+<tgrn>!—————————————————————————————–</tgrn><br />
+<tgrn>! Lateral boundaries</tgrn><br />
+<tcmd>BC </tcmd><teq>==</teq><tblk> QC, 1178572.028, 4996161.397, cell1.csv</tblk><br />
+  <tcmd>BC Header </tcmd><teq>==</teq><tblk> Time,Flow,Salinity,Temperature,SED_FINES</tblk><br />
+<tcmd>End BC</tcmd></li>
+</ul></li>
 <li>Name:
 <ul>
 <li>Model_001_catchment_hydraulic.fvcatchbc</li>
@@ -509,9 +517,7 @@ End BC</code></pre></li>
 <div id="AppOutputsOtherNS" class="section level4 hasAnchor" number="9.5.3.2">
 <h4><span class="header-section-number">C.5.3.2</span> Nodestring boundary data<a href="AppOutputs.html#AppOutputsOtherNS" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>If TUFLOW CATCH has been executed in the <strong>Hydrology</strong> or <strong>Integrated</strong> configuration and TUFLOW FV nodestrings have been specified as catchment inflows via</p>
-<blockquote>
-<p><a href="AppCommands.html#TCFVnstring">Catchment BC Nodestring ==</a> &lt;path to GIS nodestring file&gt;</p>
-</blockquote>
+<p><a href="#TCFVnstring">Catchment BC Nodestring</a> <teq>==</teq><tblk> &lt;path to GIS nodestring file&gt;</tblk></p>
 <p>then individual data files are produced for each nodestring boundary:</p>
 <ul>
 <li>Content:

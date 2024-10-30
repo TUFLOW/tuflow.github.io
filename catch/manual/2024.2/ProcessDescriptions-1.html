@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Section 3 Process descriptions | TUFLOW CATCH User Manual" />
   <meta name="twitter:image" content="https://docs.tuflow.com/catch/manual/2024.2/images/TUFLOW%20Catch-01-01.png" />
 
-<meta name="author" content="Version 2024.2" />
+<meta name="author" content="Release 2024.0" />
 
 
 
@@ -55,6 +55,17 @@
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{sectsty}
+\usepackage{fontspec}
+\setmainfont{Arial}
+\definecolor{BMTChapter}{rgb}{0.00, 0.33, 0.50}
+\definecolor{BMTSection}{rgb}{0.102, 0.741, 0.788}
+\chapterfont{\color{BMTChapter}}  % sets colour of chapters
+\sectionfont{\color{BMTSection}}  % sets colour of section headers
+\subsectionfont{\color{BMTSection}}  % sets colour of section headers
+\subsubsectionfont{\color{BMTSection}}  % sets colour of section headers
 
 
 
@@ -87,6 +98,7 @@
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#tables"><i class="fa fa-check"></i>Tables</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#commands"><i class="fa fa-check"></i>Commands</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#parameter-notation"><i class="fa fa-check"></i>Parameter notation</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#portable-document-format"><i class="fa fa-check"></i>Portable Document Format</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#feedback"><i class="fa fa-check"></i>Feedback</a></li>
 </ul></li>
 </ul></li>
@@ -304,30 +316,28 @@ Figure 3.3: <strong>Example of transferral of an inflow (from left to right) fro
 </ul></li>
 </ul>
 <p>Different pollutant export methods across the above options can be used within a single TUFLOW CATCH simulation for different pollutants. A given pollutant, however, should not have different material based pollutant export methods applied to it within a given simulation. Commands are provided in detail in Section <a href="SimulationConstruction-1.html#SimulationConstruction-1">4</a>, however an example of such a specification is provided following, with incomplete (…) parameter lists for brevity.</p>
-<pre><code>Constant POLLUTANT_A == 8.0
-Time-series POLLUTANT_B == temptre
-
-Material == ALL
-  POLLUTANT_C,Method==method1,param1==100.0...
-  POLLUTANT_D,Method==method2,param1==10.0...
-  POLLUTANT_E,Method==method1,param1==0.17...
-  POLLUTANT_F,Method==method2,param1==1.23...
-  ...
-End Material
-
-Material == 1,4
-  POLLUTANT_C,Method==method1,param1==43.0...
-  POLLUTANT_E,Method==method1,param1==0.37...
-  ...
-End Material</code></pre>
+<p><tcmd>Constant POLLUTANT_A</tcmd><teq> == </teq><tblk>8.0</tblk><br />
+<tcmd>Time-series POLLUTANT_B</tcmd><teq> == </teq><tblk>temptre</tblk></p>
+<p><tcmd>Material</tcmd><teq> == </teq><tblk>ALL</tblk><br />
+  <tcmd>POLLUTANT_C,Method</tcmd><teq>==</teq><tblk>method1,</tblk><tcmd>param1</tcmd><teq>==</teq><tblk>100.0<span class="math inline">\(\ldots\)</span></tblk><br />
+  <tcmd>POLLUTANT_D,Method</tcmd><teq>==</teq><tblk>method2,</tblk><tcmd>param1</tcmd><teq>==</teq><tblk>10.0<span class="math inline">\(\ldots\)</span></tblk><br />
+  <tcmd>POLLUTANT_E,Method</tcmd><teq>==</teq><tblk>method1,</tblk><tcmd>param1</tcmd><teq>==</teq><tblk>0.17<span class="math inline">\(\ldots\)</span></tblk><br />
+  <tcmd>POLLUTANT_F,Method</tcmd><teq>==</teq><tblk>method2,</tblk><tcmd>param1</tcmd><teq>==</teq><tblk>1.23<span class="math inline">\(\ldots\)</span></tblk><br />
+  <tblk><span class="math inline">\(\ldots\)</span></tblk><br />
+<tcmd>End Material</tcmd></p>
+<p><tcmd>Material</tcmd><teq> == </teq><tblk>1,4</tblk><br />
+  <tcmd>POLLUTANT_C,Method</tcmd><teq>==</teq><tblk>method1,</tblk><tcmd>param1</tcmd><teq>==</teq><tblk>43.0<span class="math inline">\(\ldots\)</span></tblk><br />
+  <tcmd>POLLUTANT_E,Method</tcmd><teq>==</teq><tblk>method1,</tblk><tcmd>param1</tcmd><teq>==</teq><tblk>0.37<span class="math inline">\(\ldots\)</span></tblk><br />
+  <tblk><span class="math inline">\(\ldots\)</span></tblk><br />
+<tcmd>End Material</tcmd></p>
 <p>Multiple constant and time-series pollutants can be specified (via individual command lines), and material blocks can be specified to apply to more than one material (the above example applies to ALL materials, then materials 1 and 4, for example). In a manner akin to specification of roughness in TUFLOW HPC, sequences of material blocks progressively spatially overwrite in the order presented. In the above example, materials 1 and 4 would therefore be interpreted as</p>
-<pre><code>Material == 1,4
-  POLLUTANT_C,Method==method1,param1==43.0...
-  POLLUTANT_D,Method==method2,param1==10.0...
-  POLLUTANT_E,Method==method1,param1==0.37...
-  POLLUTANT_F,Method==method2,param1==1.23...
-  ...
-End Material</code></pre>
+<p><tcmd>Material</tcmd><teq> == </teq><tblk>1,4</tblk><br />
+  <tcmd>POLLUTANT_C,Method</tcmd><teq>==</teq><tblk>method1,</tblk><tcmd>param1</tcmd><teq>==</teq><tblk>43.0<span class="math inline">\(\ldots\)</span></tblk><br />
+  <tcmd>POLLUTANT_D,Method</tcmd><teq>==</teq><tblk>method2,</tblk><tcmd>param1</tcmd><teq>==</teq><tblk>10.0<span class="math inline">\(\ldots\)</span></tblk><br />
+  <tcmd>POLLUTANT_E,Method</tcmd><teq>==</teq><tblk>method1,</tblk><tcmd>param1</tcmd><teq>==</teq><tblk>0.37<span class="math inline">\(\ldots\)</span></tblk><br />
+  <tcmd>POLLUTANT_F,Method</tcmd><teq>==</teq><tblk>method2,</tblk><tcmd>param1</tcmd><teq>==</teq><tblk>1.23<span class="math inline">\(\ldots\)</span></tblk><br />
+  <tblk><span class="math inline">\(\ldots\)</span></tblk><br />
+<tcmd>End Material</tcmd></p>
 <p>Materials 2 and 3 would be as per the ALL specification above.</p>
 <p>Different computational pollutant export methods can be assigned to different pollutants within a single material block. The same computational pollutant export method should be assigned to the same pollutant across multiple material blocks, albeit with different parameterisations. For example, POLLUTANT_C should not have the Washoff1 method applied in material 3 and the Shear1 method applied in material 1.</p>
 <p>The above pollutant export models are described following.</p>
@@ -404,7 +414,7 @@ Nitrate
 </tr>
 <tr>
 <td style="text-align:left;width: 30%; ">
-Filterable reactive phosphorus
+Filterable Reactive Phosphorus
 </td>
 <td style="text-align:center;">
 0.01
@@ -415,7 +425,7 @@ Filterable reactive phosphorus
 </tr>
 <tr>
 <td style="text-align:left;width: 30%; ">
-Dissolved organic nitrogen
+Dissolved Organic Nitrogen
 </td>
 <td style="text-align:center;">
 1.00
@@ -426,7 +436,7 @@ Dissolved organic nitrogen
 </tr>
 <tr>
 <td style="text-align:left;width: 30%; ">
-Particulate organic nitrogen
+Particulate Organic Nitrogen
 </td>
 <td style="text-align:center;">
 1.00
@@ -437,7 +447,7 @@ Particulate organic nitrogen
 </tr>
 <tr>
 <td style="text-align:left;width: 30%; ">
-Dissolved organic phosphorus
+Dissolved Organic Phosphorus
 </td>
 <td style="text-align:center;">
 0.01
@@ -448,7 +458,7 @@ Dissolved organic phosphorus
 </tr>
 <tr>
 <td style="text-align:left;width: 30%; ">
-Particulate organic phosphorus
+Particulate Organic Phosphorus
 </td>
 <td style="text-align:center;">
 0.06
@@ -459,7 +469,7 @@ Particulate organic phosphorus
 </tr>
 <tr>
 <td style="text-align:left;width: 30%; ">
-Dissolved organic carbon
+Dissolved Organic Carbon
 </td>
 <td style="text-align:center;">
 20.00
@@ -470,7 +480,7 @@ Dissolved organic carbon
 </tr>
 <tr>
 <td style="text-align:left;width: 30%; ">
-Particulate organic carbon
+Particulate Organic Carbon
 </td>
 <td style="text-align:center;">
 12.00

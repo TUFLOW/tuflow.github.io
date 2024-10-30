@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Appendix D Demonstration model | TUFLOW CATCH User Manual" />
   <meta name="twitter:image" content="https://docs.tuflow.com/catch/manual/2024.2/images/TUFLOW%20Catch-01-01.png" />
 
-<meta name="author" content="Version 2024.2" />
+<meta name="author" content="Release 2024.0" />
 
 
 
@@ -55,6 +55,17 @@
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{sectsty}
+\usepackage{fontspec}
+\setmainfont{Arial}
+\definecolor{BMTChapter}{rgb}{0.00, 0.33, 0.50}
+\definecolor{BMTSection}{rgb}{0.102, 0.741, 0.788}
+\chapterfont{\color{BMTChapter}}  % sets colour of chapters
+\sectionfont{\color{BMTSection}}  % sets colour of section headers
+\subsectionfont{\color{BMTSection}}  % sets colour of section headers
+\subsubsectionfont{\color{BMTSection}}  % sets colour of section headers
 
 
 
@@ -87,6 +98,7 @@
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#tables"><i class="fa fa-check"></i>Tables</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#commands"><i class="fa fa-check"></i>Commands</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#parameter-notation"><i class="fa fa-check"></i>Parameter notation</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#portable-document-format"><i class="fa fa-check"></i>Portable Document Format</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#feedback"><i class="fa fa-check"></i>Feedback</a></li>
 </ul></li>
 </ul></li>
@@ -298,12 +310,12 @@ Figure D.2: <strong>TUFLOW CATCH demonstration model: receiving waterway</strong
 </div>
 <div id="AppDemoModelModelsPE-3" class="section level3 hasAnchor" number="10.3.2">
 <h3><span class="header-section-number">D.3.2</span> Pollutant export<a href="AppDemoModel.html#AppDemoModelModelsPE-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The pollutant export model has various forms depending on the TUFLOW CATCH configuration is simulated. Across these various forms, both shear1 and washoff1 methods are deployed, and other pollutant export parameters are set using the guidance provided in this manual. In all cases where applicable:</p>
+<p>The pollutant export model has various forms depending on the TUFLOW CATCH configuration is simulated. Across these various forms, both Shear1 and Washoff1 methods are deployed, and other pollutant export parameters are set using the guidance provided in this manual. In all cases where applicable:</p>
 <ul>
 <li>Salinity, dissolved oxygen, silicate, adsorbed phosphorus and phytoplankton are set to <a href="ProcessDescriptions-1.html#ProcessDescriptionsConst-3">constant</a> concentrations</li>
 <li>Sediment and particulate organics are <a href="SimulationConstruction-1.html#SCTCCPollExpPT-4">prohibited from infiltrating to groundwater</a></li>
 <li>Water temperature is provided as a <a href="ProcessDescriptions-1.html#ProcessDescriptionsTS-3">timeseries</a></li>
-<li>Sediment uses the <a href="ProcessDescriptions-1.html#ProcessDescriptionsSS-3">shear1</a> method, and all other pollutants use the <a href="ProcessDescriptions-1.html#ProcessDescriptionsAccWO-3">washoff1</a> method</li>
+<li>Sediment uses the <a href="ProcessDescriptions-1.html#ProcessDescriptionsSS-3">Shear1</a> method, and all other pollutants use the <a href="ProcessDescriptions-1.html#ProcessDescriptionsAccWO-3">Washoff1</a> method</li>
 </ul>
 </div>
 <div id="AppDemoModelModelsFV-3" class="section level3 hasAnchor" number="10.3.3">
@@ -323,63 +335,127 @@ Figure D.2: <strong>TUFLOW CATCH demonstration model: receiving waterway</strong
 <div id="AppDemoModelSuite-2" class="section level2 hasAnchor" number="10.4">
 <h2><span class="header-section-number">D.4</span> Simulation suite<a href="AppDemoModel.html#AppDemoModelSuite-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The demonstration model suite includes the following simulations.</p>
-<!---
 <table>
-<caption>(\#tab:tab-suite)**Demonstration TUFLOW CATCH Simulations**</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;"> Simulation name </th>
-   <th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;"> Description </th>
-   <th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;"> Use case </th>
-   <th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;"> TUFLOW CATCH Configuration </th>
-  </tr>
- </thead>
+<caption>
+<span id="tab:tab-suite">Table D.1: </span><strong>Demonstration TUFLOW CATCH Simulations</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Simulation name
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Use case
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+TUFLOW CATCH Configuration
+</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;width: 15%; vertical-align:top;"> Demonstration_001.tcc </td>
-   <td style="text-align:left;"> Catchment hydraulic calibration: HPC 2d outlet </td>
-   <td style="text-align:left;"> Calibration of catchment hydraulic model without receiving model </td>
-   <td style="text-align:left;"> [TUFLOW HPC calibration only](#SCTCSumHPC-4) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 15%; vertical-align:top;"> Demonstration_002.tcc </td>
-   <td style="text-align:left;"> Catchment hydraulic calibration: Pollutant export configuration with constant salinity and temperature timeseries </td>
-   <td style="text-align:left;"> Calibration of catchment hydraulic model with downstream polygon </td>
-   <td style="text-align:left;"> [Pollutant export](#ExCoordPE-4) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 15%; vertical-align:top;"> Demonstration_003.tcc </td>
-   <td style="text-align:left;"> Catchment pollutant calibration: Pollutant export configuration with user pollutant/s </td>
-   <td style="text-align:left;"> Only catchment hydraulic and pollutant export models are to be used, with non-TUFLOW FV pollutants and downstream polygon </td>
-   <td style="text-align:left;"> [Pollutant export](#ExCoordPE-4) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 15%; vertical-align:top;"> Demonstration_004.tcc </td>
-   <td style="text-align:left;"> Catchment pollutant calibration: Pollutant export configuration with TUFLOW FV pollutants </td>
-   <td style="text-align:left;"> Calibration of catchment pollutant export model following 002 calibration, to TUFLOW FV pollutants with downstream polygon </td>
-   <td style="text-align:left;"> [Pollutant export](#ExCoordPE-4) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 15%; vertical-align:top;"> Demonstration_005.tcc </td>
-   <td style="text-align:left;"> Linked catchment and receiving model: Integrated configuration with all TUFLOW FV pollutants </td>
-   <td style="text-align:left;"> Generation of first pass spatially resolved TUFLOW FV HD and pollutant boundaries for subsequent TUFLOW FV calibration initiation </td>
-   <td style="text-align:left;"> [Integrated](#ExCoordInt-4) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 15%; vertical-align:top;"> Demonstration_006.tcc </td>
-   <td style="text-align:left;"> Receiving model calibration: TUFLOW FV simulation with preserved inflows </td>
-   <td style="text-align:left;"> Catchment hydraulic and pollutant modelling complete (or largely so) and TUFLOW FV is to be calibrated without reunning catchment model </td>
-   <td style="text-align:left;"> [Integrated](#ExCoordInt-4) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 15%; vertical-align:top;"> Demonstration_007.tcc </td>
-   <td style="text-align:left;"> Linked catchment and receiving model: Hydrology configuration with salinity and temperature </td>
-   <td style="text-align:left;"> No pollutant simulation required in TUFLOW - extend 002 above to include TUFLOW FV model </td>
-   <td style="text-align:left;"> [Hydrology](#ExCoordHyd-4) </td>
-  </tr>
+<tr>
+<td style="text-align:left;width: 15%; vertical-align:top;">
+Demonstration_001.tcc
+</td>
+<td style="text-align:left;">
+Catchment hydraulic calibration: HPC 2d outlet
+</td>
+<td style="text-align:left;">
+Calibration of catchment hydraulic model without receiving model
+</td>
+<td style="text-align:left;">
+<a href="SimulationConstruction-1.html#SCTCSumHPC-4">TUFLOW HPC calibration only</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 15%; vertical-align:top;">
+Demonstration_002.tcc
+</td>
+<td style="text-align:left;">
+Catchment hydraulic calibration: Pollutant export configuration with constant salinity and temperature timeseries
+</td>
+<td style="text-align:left;">
+Calibration of catchment hydraulic model with downstream polygon
+</td>
+<td style="text-align:left;">
+<a href="Architecture-1.html#ExCoordPE-4">Pollutant export</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 15%; vertical-align:top;">
+Demonstration_003.tcc
+</td>
+<td style="text-align:left;">
+Catchment pollutant calibration: Pollutant export configuration with user pollutant/s
+</td>
+<td style="text-align:left;">
+Only catchment hydraulic and pollutant export models are to be used, with non-TUFLOW FV pollutants and downstream polygon
+</td>
+<td style="text-align:left;">
+<a href="Architecture-1.html#ExCoordPE-4">Pollutant export</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 15%; vertical-align:top;">
+Demonstration_004.tcc
+</td>
+<td style="text-align:left;">
+Catchment pollutant calibration: Pollutant export configuration with TUFLOW FV pollutants
+</td>
+<td style="text-align:left;">
+Calibration of catchment pollutant export model following 002 calibration, to TUFLOW FV pollutants with downstream polygon
+</td>
+<td style="text-align:left;">
+<a href="Architecture-1.html#ExCoordPE-4">Pollutant export</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 15%; vertical-align:top;">
+Demonstration_005.tcc
+</td>
+<td style="text-align:left;">
+Linked catchment and receiving model: Integrated configuration with all TUFLOW FV pollutants
+</td>
+<td style="text-align:left;">
+Generation of first pass spatially resolved TUFLOW FV HD and pollutant boundaries for subsequent TUFLOW FV calibration initiation
+</td>
+<td style="text-align:left;">
+<a href="Architecture-1.html#ExCoordInt-4">Integrated</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 15%; vertical-align:top;">
+Demonstration_006.tcc
+</td>
+<td style="text-align:left;">
+Receiving model calibration: TUFLOW FV simulation with preserved inflows
+</td>
+<td style="text-align:left;">
+Catchment hydraulic and pollutant modelling complete (or largely so) and TUFLOW FV is to be calibrated without reunning catchment model
+</td>
+<td style="text-align:left;">
+<a href="Architecture-1.html#ExCoordInt-4">Integrated</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 15%; vertical-align:top;">
+Demonstration_007.tcc
+</td>
+<td style="text-align:left;">
+Linked catchment and receiving model: Hydrology configuration with salinity and temperature
+</td>
+<td style="text-align:left;">
+No pollutant simulation required in TUFLOW - extend 002 above to include TUFLOW FV model
+</td>
+<td style="text-align:left;">
+<a href="Architecture-1.html#ExCoordHyd-4">Hydrology</a>
+</td>
+</tr>
 </tbody>
 </table>
--->
 </div>
 <div id="AppDemoModelDLoad-2" class="section level2 hasAnchor" number="10.5">
 <h2><span class="header-section-number">D.5</span> Downloads<a href="AppDemoModel.html#AppDemoModelDLoad-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -391,18 +467,18 @@ Figure D.2: <strong>TUFLOW CATCH demonstration model: receiving waterway</strong
 <li>TUFLOW HPC</li>
 <li><a href="https://www.tuflow.com/downloads/#tuflow_fv">TUFLOW FV</a></li>
 </ul>
-<p>It is suggested that these are saved in a convenient and centralised location. For the purposes of explanation in this Appendix, it has been assumed that they are saved to the following locations (with ReleaseXX/YY/ZZ being a placeholder for the release version of each, which will be different):</p>
+<p>It is suggested that these are saved in a convenient and centralised location. For the purposes of explanation in this Appendix, it has been assumed that they are saved to the following locations (with <tblk>ReleaseXX/YY/ZZ</tblk> being a placeholder for the release version of each, which will be different):</p>
 <ul>
-<li>C:\TUFLOW\EXE\TUFLOWCATCH\ReleaseXX\TUFLOWCATCH.exe</li>
-<li>C:\TUFLOW\EXE\TUFLOW\ReleaseYY\TUFLOW_iSP_w64.exe</li>
-<li>C:\TUFLOW\EXE\TUFLOWFV\ReleaseZZ\TUFLOWFV.exe</li>
+<li><tblk>C:\TUFLOW\EXE\TUFLOWCATCH\ReleaseXX\TUFLOWCATCH.exe</tblk></li>
+<li><tblk>C:\TUFLOW\EXE\TUFLOW\ReleaseYY\TUFLOW_iSP_w64.exe</tblk></li>
+<li><tblk>C:\TUFLOW\EXE\TUFLOWFV\ReleaseZZ\TUFLOWFV.exe</tblk></li>
 </ul>
 </div>
 <div id="AppDemoModelFils-3" class="section level3 hasAnchor" number="10.5.2">
 <h3><span class="header-section-number">D.5.2</span> Simulation files<a href="AppDemoModel.html#AppDemoModelFils-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The demonstration model suite can be downloaded <a href="https://www.tuflow.com/downloads/"> here</a>, in the TUFLOW CATCH section. For the purposes of explanation in this Appendix, it has been assumed that the suite is saved to the following location and then unzipped:</p>
+<p>The demonstration model suite can be downloaded <a href="https://www.tuflow.com/downloads/ "target="_blank"> here</a>, in the TUFLOW CATCH section. For the purposes of explanation in this Appendix, it has been assumed that the suite is saved to the following location and then unzipped:</p>
 <ul>
-<li>C:\TUFLOW\Demonstration\TUFLOWCATCH\</li>
+<li><tblk>C:\TUFLOW\Demonstration\TUFLOWCATCH\</tblk></li>
 </ul>
 <p>When unzipped, the high level folder structure will be as follows:</p>
 <ul>
@@ -415,53 +491,53 @@ Figure D.2: <strong>TUFLOW CATCH demonstration model: receiving waterway</strong
 </ul>
 <p>The key directory for executing TUFLOW CATCH is then</p>
 <ul>
-<li>C:\TUFLOW\Demonstration\TUFLOWCATCH\Modelling\TUFLOWCATCH\runs</li>
+<li><tblk>C:\TUFLOW\Demonstration\TUFLOWCATCH\Modelling\TUFLOWCATCH\runs</tblk></li>
 </ul>
 <p>Once downloaded and unzipped, the user is required to:</p>
 <ul>
-<li><p>In the Modelling\TUFLOWCATCH\runs\run_simulation.bat file:</p>
+<li>In the <tblk>Modelling\TUFLOWCATCH\runs\run_simulation.bat</tblk> file:
 <ul>
-<li>On line 2, copy and paste in the exact path to the TUFLOW CATCH executable over the placeholder &lt;TUFLOW CATCH EXECUTABLE FULL PATH&gt;, so that:</li>
-</ul>
-<pre><code>set exe=&lt;TUFLOW CATCH EXECUTABLE FULL PATH&gt;</code></pre>
-<p>becomes (using the example path above):</p>
-<pre><code>set exe=C:\TUFLOW\EXE\TUFLOWCATCH\ReleaseXX\TUFLOWCATCH.exe</code></pre>
+<li><p>On line 2, copy and paste in the exact path to the TUFLOW CATCH executable over the placeholder <tblk>&lt;TUFLOW CATCH EXECUTABLE FULL PATH&gt;</tblk>, so that:<br>
+<tcmd>set</tcmd><tblk> exe</tblk><teq>=</teq><tblk>&lt;TUFLOW CATCH EXECUTABLE FULL PATH&gt;</tblk><br>
+becomes (using the example path above):<br>
+<tcmd>set</tcmd><tblk> exe</tblk><teq>=</teq><tblk>C:\TUFLOW\EXE\TUFLOWCATCH\ReleaseXX\TUFLOWCATCH.exe</tblk></p></li>
+<li><p>Uncomment the desired simulation command by deleting the preceding ‘<tgrn>::</tgrn>’ , so that (if simulation 001 was to be run):<br>
+<tgrn>:: %exe% Demonstration_001.tcc</tgrn><br>
+becomes:<br>
+<tblk>%exe% Demonstration_001.tcc</tblk></p></li>
+</ul></li>
+<li>In the <tblk>Modelling\TUFLOWCATCH\runs\Demonstration_001.tcc</tblk> file (and any other Demonstration_00*.tcc file to be executed):
 <ul>
-<li>Uncomment the desired simulation command by deleting the preceding ‘::’ , so that (if simulation 001 was to be run):</li>
+<li><p>In the <tgrn>CATCHMENT HYDRAULICS</tgrn> block, copy and paste in the exact path to the TUFLOW HPC executable over the placeholder <tblk>&lt;TUFLOW EXECUTABLE FULL PATH&gt;</tblk>, so that:<br>
+<tcmd>EXE</tcmd><teq> == </teq><tblk>&lt;TUFLOW EXECUTABLE FULL PATH&gt;<br>
+becomes (using the example path above):<br>
+<tcmd>EXE</tcmd><teq> == </teq><tblk>C:\TUFLOW\EXE\TUFLOW\ReleaseYY\TUFLOW_iSP_w64.exe</tblk></p></li>
+<li><p>In the <tgrn>RECEIVING HYDRODYNAMICS AND WQ</tgrn> block, copy and paste in the exact path to the TUFLOW FV executable over the placeholder <tblk>&lt;TUFLOW FV EXECUTABLE FULL PATH&gt;</tblk>, so that:<br>
+<tcmd>EXE</tcmd><teq> == </teq><tblk>&lt;TUFLOW FV EXECUTABLE FULL PATH&gt;</tblk><br>
+becomes (using the example path above):<br>
+<tcmd>EXE</tcmd><teq> == </teq><tblk>C:\TUFLOW\EXE\TUFLOWFV\ReleaseZZ\TUFLOWFV.exe</tblk></p></li>
+</ul></li>
 </ul>
-<pre><code>:: %exe% Demonstration_001.tcc</code></pre>
-<p>becomes:</p>
-<pre><code>%exe% Demonstration_001.tcc</code></pre></li>
-<li><p>In the Modelling\TUFLOWCATCH\runs\Demonstration_001.tcc file (and any other Demonstration_00*.tcc file to be executed):</p>
-<ul>
-<li>In the Catchment Hydraulic Model block, copy and paste in the exact path to the TUFLOW HPC executable over the placeholder &lt;TUFLOW EXECUTABLE FULL PATH&gt;, so that:</li>
-</ul>
-<pre><code>EXE == &lt;TUFLOW EXECUTABLE FULL PATH&gt;</code></pre>
-<p>becomes (using the example path above):</p>
-<pre><code>EXE == C:\TUFLOW\EXE\TUFLOW\ReleaseYY\TUFLOW_iSP_w64.exe</code></pre>
-<ul>
-<li>In the Receiving Model block, copy and paste in the exact path to the TUFLOW FV executable over the placeholder &lt;TUFLOW FV EXECUTABLE FULL PATH&gt;, so that:</li>
-</ul>
-<pre><code>EXE == &lt;TUFLOW FV EXECUTABLE FULL PATH&gt;</code></pre>
-<p>becomes (using the example path above):</p>
-<pre><code>EXE == C:\TUFLOW\EXE\TUFLOWFV\ReleaseZZ\TUFLOWFV.exe</code></pre>
-<p>Some text editors offer support for changing the above executable paths in multiple files at once, if required.</p></li>
-</ul>
+<p>Some text editors offer support for changing the above executable paths in multiple files at once, if required.</p>
 </div>
 </div>
 <div id="AppDemoModelExe-2" class="section level2 hasAnchor" number="10.6">
 <h2><span class="header-section-number">D.6</span> Execution<a href="AppDemoModel.html#AppDemoModelExe-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Once the binaries and simulation files have been downloaded and paths altered as above (and altered files saved), a TUFLOW CATCH simulation can be executed as follows:</p>
 <ul>
-<li>Open a command prompt and navigate to the TUFLOW CATCH runs folder</li>
+<li>Open a command prompt and navigate to the TUFLOW CATCH runs folder:</li>
 </ul>
-<pre><code>cd C:\TUFLOW\Demonstration\TUFLOWCATCH\Modelling\TUFLOWCATCH\runs
-C:\</code></pre>
+<div class="scrollable-block">
+<p><tblk>cd C:\TUFLOW\Demonstration\TUFLOWCATCH\Modelling\TUFLOWCATCH\runs</tblk><br />
+<tblk>C:</tblk></p>
+</div>
 <ul>
 <li>Ensure the path to the TUFLOW CATCH executable has been set in run_simulations.bat, and that at least one simulation has been uncommented</li>
 <li>Type the following in the command prompt and hit enter, and TUFLOW CATCH will execute:</li>
 </ul>
-<pre><code>run_simulations</code></pre>
+<div class="scrollable-block">
+<p><tblk>run_simulations</tblk></p>
+</div>
 <p>Some notes on executing the demonstration simulations:</p>
 <ul>
 <li>Although not mandatory, it is suggested that the simulations be run one at a time, and in order, and results reviewed after each execution</li>
@@ -469,19 +545,21 @@ C:\</code></pre>
 <li>To ensure that Demonstration_006.tcc can access these boundaries generated by Demonstration_005.tcc, either:
 <ul>
 <li>Manually make a copy of Demonstration_005_catchment_hydraulic.fvcatchbc and rename it as Demonstration_006_catchment_hydraulic.fvcatchbc in the same location, or</li>
-<li>Uncomment the line beginning ‘copy…’ in the run_simulations.bat file provided with the demonstration model (third line below)</li>
+<li>Uncomment the line beginning ‘<tgrn>copy…</tgrn>’ in the run_simulations.bat file provided with the demonstration model (third line below)</li>
 </ul></li>
 </ul>
-<pre><code>REM Receiving model calibration: TUFLOW FV simulation with preserved inflows
-REM Use case: Catchment hydraulic and pollutant modelling complete (or largely so) and TUFLOW FV is to be calibrated without reunning catchment model
-copy ..\bc_dbase\Demonstration_005_catchment_hydraulic.fvcatchbc ..\bc_dbase\Demonstration_006_catchment_hydraulic.fvcatchbc 
-%exe% Demonstration_006.tcc</code></pre>
+<div class="scrollable-block">
+<p><tgrn>REM Receiving model calibration: TUFLOW FV simulation with preserved inflows</tgrn><br />
+<tgrn>REM Use case: Catchment hydraulic and pollutant modelling complete (or largely so) and TUFLOW FV is to be calibrated without rerunning catchment model</trgn><br />
+<tcmd>copy</tcmd><tblk> ..\bc_dbase\Demonstration_005_catchment_hydraulic.fvcatchbc ..\bc_dbase\Demonstration_006_catchment_hydraulic.fvcatchbc</tblk><br />
+<tblk>%exe% Demonstration_006.tcc</tblk></p>
+</div>
 </div>
 <div id="AppDemoModelResInt-2" class="section level2 hasAnchor" number="10.7">
 <h2><span class="header-section-number">D.7</span> Results interrogation<a href="AppDemoModel.html#AppDemoModelResInt-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Once executed, results will be written to:</p>
 <ul>
-<li>C:\TUFLOW\Demonstration\TUFLOWCATCH\Modelling\TUFLOWCATCH\results</li>
+<li><tblk>C:\TUFLOW\Demonstration\TUFLOWCATCH\Modelling\TUFLOWCATCH\results</tblk></li>
 </ul>
 <p>Use the QGIS TUFLOW CATCH plugin (see Section <a href="SimulationConstruction-1.html#SimulationConstructionInit-2">4.3</a>) to generate a .json file and view the results. Simulations that involve only TUFLOW HPC or TUFLOW FV can have their *.xmdf and *.nc results interrogated in the normal manner through the TUFLOW Viewer as shown in Figure <a href="AppDemoModel.html#fig:fig-demnormres">D.3</a>.</p>
 <center>
@@ -533,7 +611,7 @@ function setPlaySpeed() {
 </div>
 <div id="AppDemoModelres-2" class="section level3 hasAnchor" number="10.7.2">
 <h3><span class="header-section-number">D.7.2</span> Example results<a href="AppDemoModel.html#AppDemoModelres-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>An example of a dry mass accumulation predicted by TUFLOW HPC (under the washoff1 model) at a point in time just prior to rainfall is presented in Figure <a href="AppDemoModel.html#fig:fig-demHPCFRP">D.6</a>, for FRP. The different accumulations of FRP in different land use areas are clear. The red areas are urban areas, which had the highest accumulation rates of FRP set within the simulation.</p>
+<p>An example of a dry mass accumulation predicted by TUFLOW HPC (under the Washoff1 model) at a point in time just prior to rainfall is presented in Figure <a href="AppDemoModel.html#fig:fig-demHPCFRP">D.6</a>, for FRP. The different accumulations of FRP in different land use areas are clear. The red areas are urban areas, which had the highest accumulation rates of FRP set within the simulation.</p>
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-demHPCFRP"></span>
 <img src="images/FRP_drymass.png" alt="**TUFLOW CATCH demonstration model: FRP dry mass accumulation**" width="100%" />
@@ -542,7 +620,7 @@ Figure D.6: <strong>TUFLOW CATCH demonstration model: FRP dry mass accumulation<
 </p>
 </div>
 </center>
-<p>An example of a net mass distribution predicted by TUFLOW HPC (under the shear1 model) at simulation end is presented in Figure <a href="AppDemoModel.html#fig:fig-demHPCSF">D.7</a>, for SED_FINES. Positive (negative) results reflect net accumulation (erosion) at simulation end. Erosion (and deposition) limits were set to 1 kg/ha in the simulation. The figure shows that (at least) the catchment areas within the stream network have been eroded to this maximum (blue colour), and no more.</p>
+<p>An example of a net mass distribution predicted by TUFLOW HPC (under the Shear1 model) at simulation end is presented in Figure <a href="AppDemoModel.html#fig:fig-demHPCSF">D.7</a>, for SED_FINES. Positive (negative) results reflect net accumulation (erosion) at simulation end. Erosion (and deposition) limits were set to 1 kg/ha in the simulation. The figure shows that (at least) the catchment areas within the stream network have been eroded to this maximum (blue colour), and no more.</p>
 <center>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-demHPCSF"></span>
 <img src="images/SF_netmass.png" alt="**TUFLOW CATCH demonstration model: SEDFINES net mass at simulation end**" width="100%" />

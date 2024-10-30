@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Appendix E Application under version control | TUFLOW CATCH User Manual" />
   <meta name="twitter:image" content="https://docs.tuflow.com/catch/manual/2024.2/images/TUFLOW%20Catch-01-01.png" />
 
-<meta name="author" content="Version 2024.2" />
+<meta name="author" content="Release 2024.0" />
 
 
 
@@ -55,6 +55,17 @@
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{sectsty}
+\usepackage{fontspec}
+\setmainfont{Arial}
+\definecolor{BMTChapter}{rgb}{0.00, 0.33, 0.50}
+\definecolor{BMTSection}{rgb}{0.102, 0.741, 0.788}
+\chapterfont{\color{BMTChapter}}  % sets colour of chapters
+\sectionfont{\color{BMTSection}}  % sets colour of section headers
+\subsectionfont{\color{BMTSection}}  % sets colour of section headers
+\subsubsectionfont{\color{BMTSection}}  % sets colour of section headers
 
 
 
@@ -87,6 +98,7 @@
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#tables"><i class="fa fa-check"></i>Tables</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#commands"><i class="fa fa-check"></i>Commands</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#parameter-notation"><i class="fa fa-check"></i>Parameter notation</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#portable-document-format"><i class="fa fa-check"></i>Portable Document Format</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#feedback"><i class="fa fa-check"></i>Feedback</a></li>
 </ul></li>
 </ul></li>
@@ -245,7 +257,7 @@
 <div id="AppDemoModelResContWF-3" class="section level2 hasAnchor" number="11.3">
 <h2><span class="header-section-number">E.3</span> Possible workflow #1<a href="AppDemoModelResCont-2.html#AppDemoModelResContWF-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The following is a possible workflow for the two modellers delivering the use case described above, working largely independently until recombination of their work into an overall TUFLOW CATCH simulation. Alterations to this are expected to be required on a case by case basis, and one such example is presented subsequently as a second workflow in Section <a href="AppDemoModelResCont-2.html#AppDemoModelResContWF2-3">E.4</a>.</p>
-<p>The steps below assume an introductory level of knowledge of Git commands and processes, and are not intended to be exhaustive. Users should familiarise themselves with basic Git protocols and concepts before reviewing the below. For example, users should appropriately configure their .gitignore file, and be familiar with commands such as <code>git log</code> and <code>git status</code> to keep track of their work.</p>
+<p>The steps below assume an introductory level of knowledge of Git commands and processes, and are not intended to be exhaustive. Users should familiarise themselves with basic Git protocols and concepts before reviewing the below. For example, users should appropriately configure their .gitignore file, and be familiar with commands such as <tblk>git log</tblk> and <tblk>git status</tblk> to keep track of their work.</p>
 <ul>
 <li>Preliminaries
 <ul>
@@ -275,35 +287,37 @@ Figure E.2: <strong>Copying the https address of a newly created Git project</st
 </div>
 <ul>
 <li>Open a new DOS command prompt and navigate to a location where modelling is to be undertaken, preferably under a folder called ‘Modelling’</li>
-<li>Clone the new Git project to the Modelling folder, by typing the following, pasting the https address copied above in the &lt;placeholder&gt; location</li>
+<li>Clone the new Git project to the Modelling folder, by typing the following, pasting the https address copied above in the <tblk>&lt;placeholder&gt;</tblk> location</li>
 </ul>
-<pre><code>git clone &lt;placeholder&gt;</code></pre>
+<p>  <tblk>git clone <placeholder></tblk></p>
 <p>An example might look like the following. A new folder under Modelling will be created named the same as the Git project name (in this case, ‘catch-demo’). It is this lower folder that is the git project:</p>
-<pre><code>git clone https://xx-gitlab.yy-zz.local/user.last/catch-demo.git</code></pre>
+<p><tblk>git clone <a href="https://xx-gitlab.yy-zz.local/user.last/catch-demo.git" class="uri">https://xx-gitlab.yy-zz.local/user.last/catch-demo.git</a></tblk></p>
 <ul>
-<li>Change directory into the cloned folder (using the name of the project, in this case ‘catch-demo’)</li>
+<li>Change directory into the cloned folder (using the name of the project, in this case ‘catch-demo’)<br></li>
 </ul>
-<pre><code>cd catch-demo</code></pre>
+<p>  <tblk>cd catch-demo</tblk></p>
 <ul>
-<li>Copy the TUFLOW CATCH folder structure created above into this project directory (‘Modelling\catch-demo’ in this example), either through windows explorer or the DOS prompt</li>
+<li>Copy the TUFLOW CATCH folder structure created above into this project directory (‘<tblk>Modelling\catch-demo</tblk>’ in this example), either through windows explorer or the DOS prompt</li>
 <li>In the DOS command prompt whilst in the catch-demo directory, add the new files to a Git commit by typing:</li>
 </ul>
-<pre><code>git add .
-git commit -m &quot;First commit&quot;</code></pre>
+<p>  <tblk>git add .</tblk><br />
+  <tblk>git commit -m “First commit”</tblk></p>
 <ul>
-<li>Push the new commit back up to the Git web interface</li>
+<li>Push the new commit back up to the Git web interface<br></li>
 </ul>
-<pre><code>git push</code></pre>
+<p>  <tblk>git push</tblk></p>
 <p>The project created earlier is now populated with vanilla TUFLOW CATCH template files, both locally and in the web repository.</p>
 <ul>
 <li>Update files
 <ul>
 <li>Modify template files locally to set up overall TUFLOW CATCH simulation with common commands (e.g. project etc) and save files</li>
 <li>Commit changes and push</li>
+</ul></li>
 </ul>
-<pre><code>git add .
-git commit -m &quot;Populates initial TUFLOW CATCH files for branching&quot;
-git push</code></pre></li>
+<p>    <tblk>git add .</tblk><br />
+    <tblk>git commit -m “Populates initial TUFLOW CATCH files for branching”</tblk><br />
+    <tblk>git push</tblk></p>
+<ul>
 <li>Create branches
 <ul>
 <li>In the web interface, which now has the “Populates initial TUFLOW CATCH files for branching” commit present, create a new branch from main for the TUFLOW HPC modeller. This is often achieved via clicking a blue button. Call the branch ‘HPC’ when prompted for a name. Create this new branch from main</li>
@@ -324,62 +338,48 @@ Figure E.3: <strong>Create a branch in a Git project</strong>
 <ul>
 <li>The TUFLOW HPC modeller now:
 <ul>
-<li>Opens a DOS command prompt and navigates to the directory to be used for modelling. This can be anywhere and does not need to be related to the TUFLOW FV modeller’s work</li>
-<li>Following the steps above, clones the project</li>
-</ul>
-<pre><code>git clone https://xx-gitlab.yy-zz.local/user.last/catch-demo.git
-cd catch-demo</code></pre>
+<li><p>Opens a DOS command prompt and navigates to the directory to be used for modelling. This can be anywhere and does not need to be related to the TUFLOW FV modeller’s work</p></li>
+<li><p>Following the steps above, clones the project<br>
+<tblk>git clone <a href="https://xx-gitlab.yy-zz.local/user.last/catch-demo.git" class="uri">https://xx-gitlab.yy-zz.local/user.last/catch-demo.git</a></tblk><br />
+<tblk>cd catch-demo</tblk></p></li>
+<li><p>Once in the catch-demo (or project) directory it is essential that the TUFLOW HPC modeller not work in the ‘main’ branch, but work in the ‘HPC’ branch. As a warning, the ‘main’ branch will most likely be set as the default branch for the modeller to work in when the project is first cloned, so this needs to be changed manually. This requires the TUFLOW HPC modeller to check out the HPC branch by typing:<br>
+<tblk>git checkout HPC</tblk></p></li>
+<li><p>The TUFLOW HPC modeller should then begin construction of the TUFLOW HPC model through the TUFLOW CATCH *.tcc control file in this HPC branch, noting:</p>
 <ul>
-<li>Once in the catch-demo (or project) directory it is essential that the TUFLOW HPC modeller not work in the ‘main’ branch, but work in the ‘HPC’ branch. As a warning, the ‘main’ branch will most likely be set as the default branch for the modeller to work in when the project is first cloned, so this needs to be changed manually. This requires the TUFLOW HPC modeller to check out the HPC branch by typing:</li>
-</ul>
-<pre><code>git checkout HPC</code></pre>
-<ul>
-<li>The TUFLOW HPC modeller should then begin construction of the TUFLOW HPC model through the TUFLOW CATCH *.tcc control file in this HPC branch, noting:</li>
-<li>Set up and execution of the TUFLOW HPC model should only occur through the *.tcc file. The modeller should never create a *.tcf file</li>
-<li>References to boundary database files etc, should point into the TUFLOW directory structure from the *.tcc, for example</li>
-</ul>
-<pre><code>Geometry Control File == ..\..\TUFLOW\model\Demonstration_001.tgc</code></pre>
-<ul>
-<li>The TUFLOW CATCH simulation should use the <a href="SimulationConstruction-1.html#SCTCSumHPC-4">TUFLOW HPC calibration only</a> or <a href="Architecture-1.html#ExCoordPE-4">Pollutant export</a> configuration with a downstream polygon as a placeholder for the TUFLOW FV mesh. This does not involve making any changes to the Receiving Model block of the *.tcc (which will be modified by the TUFLOW FV modeller)</li>
-<li>At key stages of construction, the TUFLOW HPC modeller should stage, commit and push changes to the web project</li>
-</ul>
-<pre><code>git add .
-git commit -m &quot;A useful commit message&quot;
-git push</code></pre>
-<ul>
-<li>When construction is finished, the TUFLOW HPC modeller is ready to merge into the main branch to populate the overall TUFLOW CATCH simulation</li>
+<li><p>Set up and execution of the TUFLOW HPC model should only occur through the *.tcc file. The modeller should never create a *.tcf file</p></li>
+<li><p>References to boundary database files etc, should point into the TUFLOW directory structure from the *.tcc, for example<br>
+<tcmd>Geometry Control File </tcmd><teq>==</teq><tblk> ..\..\TUFLOW\model\Demonstration_001.tgc</tblk></p></li>
+<li><p>The TUFLOW CATCH simulation should use the <a href="SimulationConstruction-1.html#SCTCSumHPC-4">TUFLOW HPC calibration only</a> or <a href="Architecture-1.html#ExCoordPE-4">Pollutant export</a> configuration with a downstream polygon as a placeholder for the TUFLOW FV mesh. This does not involve making any changes to the Receiving Model block of the *.tcc (which will be modified by the TUFLOW FV modeller)</p></li>
+<li><p>At key stages of construction, the TUFLOW HPC modeller should stage, commit and push changes to the web project<br>
+<tblk>git add .</tblk><br />
+<tblk>git commit -m “A useful commit message”</tblk><br />
+<tblk>git push</tblk></p></li>
+</ul></li>
+<li><p>When construction is finished, the TUFLOW HPC modeller is ready to merge into the main branch to populate the overall TUFLOW CATCH simulation</p></li>
 </ul></li>
 <li>In parallel with the TUFLOW HPC works, the TUFLOW FV modeller:
 <ul>
-<li>Opens a DOS command prompt and navigates to the directory to be used for modelling. This can be anywhere and does not need to be related to the TUFLOW HPC modeller’s work</li>
-<li>Following the steps above, clones the project</li>
-</ul>
-<pre><code>git clone https://xx-gitlab.yy-zz.local/user.last/catch-demo.git
-cd catch-demo</code></pre>
-<ul>
-<li>Once in the catch-demo (or project) directory it is essential that the TUFLOW FV modeller not work in the ‘main’ branch, but work in the ‘FV’ branch. As a warning, the ‘main’ branch will most likely be set as the default branch for the modeller to work in when the project is first cloned, so this needs to be changed manually. This requires the TUFLOW FV modeller to check out the FV branch by typing:</li>
-</ul>
-<pre><code>git checkout FV</code></pre>
-<ul>
-<li>The TUFLOW FV modeller should then begin construction of the TUFLOW FV model through the TUFLOW CATCH *.tcc control file in this FV branch, noting:</li>
-<li>Set up and execution of the TUFLOW FV model should only occur through the *.tcc file. The modeller should never create an *.fvc file</li>
-<li>References to boundary, geometry and files etc, should point into the TUFLOWFV directory structure from the *.tcc, for example</li>
-</ul>
-<pre><code>Geometry 2D == ..\..\TUFLOWFV\model\geoDemonstration_001.2dm</code></pre>
-<ul>
-<li>The TUFLOW CATCH simulation should use the <a href="SimulationConstruction-1.html#SCTCSumFV-4">TUFLOW FV calibration only</a> configuration. This does not involve making any changes to the Catchment Hydraulic Model block of the *.tcc (which will be modified by the TUFLOW HPC modeller)</li>
-<li>At key stages of construction, the TUFLOW HPC modeller should stage, commit and push changes to the web project</li>
-</ul>
-<pre><code>git add .
-git commit -m &quot;A useful commit message&quot;
-git push</code></pre>
-<ul>
-<li>When construction is finished, the TUFLOW FV modeller is ready to merge into the main branch to populate the overall TUFLOW CATCH simulation</li>
+<li><p>Opens a DOS command prompt and navigates to the directory to be used for modelling. This can be anywhere and does not need to be related to the TUFLOW HPC modeller’s work</p></li>
+<li><p>Following the steps above, clones the project<br>
+<tblk>git clone <a href="https://xx-gitlab.yy-zz.local/user.last/catch-demo.git" class="uri">https://xx-gitlab.yy-zz.local/user.last/catch-demo.git</a></tblk><br />
+<tblk>cd catch-demo</tblk></p></li>
+<li><p>Once in the catch-demo (or project) directory it is essential that the TUFLOW FV modeller not work in the ‘main’ branch, but work in the ‘FV’ branch. As a warning, the ‘main’ branch will most likely be set as the default branch for the modeller to work in when the project is first cloned, so this needs to be changed manually. This requires the TUFLOW FV modeller to check out the FV branch by typing:<br>
+<tblk>git checkout FV</tblk></p></li>
+<li><p>The TUFLOW FV modeller should then begin construction of the TUFLOW FV model through the TUFLOW CATCH *.tcc control file in this FV branch, noting:</p></li>
+<li><p>Set up and execution of the TUFLOW FV model should only occur through the *.tcc file. The modeller should never create an *.fvc file</p></li>
+<li><p>References to boundary, geometry and files etc, should point into the TUFLOWFV directory structure from the *.tcc, for example<br>
+<tcmd>Geometry 2D </tcmd><teq>==</teq><tblk> ..\..\TUFLOWFV\model\geoDemonstration_001.2dm</tblk></p></li>
+<li><p>The TUFLOW CATCH simulation should use the <a href="SimulationConstruction-1.html#SCTCSumFV-4">TUFLOW FV calibration only</a> configuration. This does not involve making any changes to the Catchment Hydraulic Model block of the *.tcc (which will be modified by the TUFLOW HPC modeller)</p></li>
+<li><p>At key stages of construction, the TUFLOW HPC modeller should stage, commit and push changes to the web project<br>
+<tblk>git add .</tblk><br />
+<tblk>git commit -m “A useful commit message”</tblk><br />
+<tblk>git push</tblk></p></li>
+<li><p>When construction is finished, the TUFLOW FV modeller is ready to merge into the main branch to populate the overall TUFLOW CATCH simulation</p></li>
 </ul></li>
 </ul></li>
 <li><p>The HPC and FV branches can be merged into the main branch to generate the overall TUFLOW CATCH simulation</p>
 <ul>
-<li>Because the modellers have been working in separate blocks of the *.tcc, and populating separate folder structures for base data (..\TUFLOW\ and ..\TUFLOWFV\), conflicts should be minimal</li>
+<li>Because the modellers have been working in separate blocks of the *.tcc, and populating separate folder structures for base data (<tblk>..\TUFLOW\</tblk> and <tblk>..\TUFLOWFV\</tblk>), conflicts should be minimal</li>
 <li>Free packages such as Winmerge can be used to assist with this process. This is a suggestion only and not an endorsement of Winmerge by TUFLOW</li>
 </ul></li>
 </ul>
@@ -391,11 +391,11 @@ git push</code></pre>
 <li>Merging sufficiently complete HPC and FV branches into the main branch to produce a TUFLOW CATCH <strong>integrated</strong> configuration simulation from time to time, instead of only at the end of individual calibration tasks</li>
 <li>Executing TUFLOW CATCH in <strong>integrated</strong> configuration to produce all spatially and temporally resolved boundary inflows for TUFLOW FV</li>
 <li>Add, commit and push the boundary files to the main branch</li>
-<li>Copy the boundary files (including header blocks (.fvcatchbc) and data files (.csv)) to the \TUFLOWCATCH\bc_dbase\ folder in the FV branch being used by the TUFLOW FV modeller for subsequent access</li>
+<li>Copy the boundary files (including header blocks (.fvcatchbc) and data files (.csv)) to the <tblk>\TUFLOWCATCH\bc_dbase\</tblk> folder in the FV branch being used by the TUFLOW FV modeller for subsequent access</li>
 <li>Rename the *.fvcatchbc file to be the same as the TUFLOW FV modellers *.tcc file name so that it is automatically found by the current *.tcc simulation</li>
 <li>Rerun the TUFLOW FV modeller’s *.tcc simulation, adding the command below inside the Receiving Model block so that blank catchment boundary files (the default) are not produced and so do not overwrite those developed in the above <strong>integrated</strong> TUFLOW CATCH simulation</li>
 </ul>
-<pre><code>Preserve Catchment Inflows == ON</code></pre>
+<p>  <tcmd>Preserve Catchment Inflows </tcmd><teq>==</teq><tblk> ON</tblk></p>
 <ul>
 <li>The TUFLOW FV modeller can then continue the calibration process with revised inflows. The above process can be repeated at intervals that suit the modelling project and timelines.</li>
 <li>Once complete, the HPC and FV branches can be finally merged, and the full TUFLOW CATCH simulation executed</li>
