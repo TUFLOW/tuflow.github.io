@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 2 Hydrodynamic Engine Updates and Enhancements | TUFLOW FV 2025.0.0 Release Notes</title>
+  <meta name="description" content="Section 2 Hydrodynamic Engine Updates and Enhancements | TUFLOW FV 2025.0.0 Release Notes" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 2 Hydrodynamic Engine Updates and Enhancements | TUFLOW FV 2025.0.0 Release Notes" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/1024in300px_Blue-01.svg" />
+  <meta property="og:description" content="Section 2 Hydrodynamic Engine Updates and Enhancements | TUFLOW FV 2025.0.0 Release Notes" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 2 Hydrodynamic Engine Updates and Enhancements | TUFLOW FV 2025.0.0 Release Notes" />
+  
+  <meta name="twitter:description" content="Section 2 Hydrodynamic Engine Updates and Enhancements | TUFLOW FV 2025.0.0 Release Notes" />
+  <meta name="twitter:image" content="/images/1024in300px_Blue-01.svg" />
+
+<meta name="author" content="" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="SimManagment-1.html"/>
+<link rel="next" href="PT-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#document-updates-and-important-notices"><i class="fa fa-check"></i>Document Updates and Important Notices</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#using-the-release-notes-and-user-manuals"><i class="fa fa-check"></i>Using the Release Notes and User Manuals</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#changes-to-tuflow-fv-version-numbering"><i class="fa fa-check"></i>Changes to TUFLOW FV Version Numbering</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="SimManagment-1.html"><a href="SimManagment-1.html"><i class="fa fa-check"></i><b>1</b> Simulation Management</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentFeatures-2"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentNomenclature-2"><i class="fa fa-check"></i><b>1.2</b> Nomenclature</a></li>
+<li class="chapter" data-level="1.3" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentEvents-2"><i class="fa fa-check"></i><b>1.3</b> Events</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentTEF-3"><i class="fa fa-check"></i><b>1.3.1</b> TUFLOW Event File</a></li>
+<li class="chapter" data-level="1.3.2" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentRunningEvents-3"><i class="fa fa-check"></i><b>1.3.2</b> Running Events</a></li>
+<li class="chapter" data-level="1.3.3" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentEventExamples-3"><i class="fa fa-check"></i><b>1.3.3</b> Event Examples</a></li>
+<li class="chapter" data-level="1.3.4" data-path="SimManagment-1.html"><a href="SimManagment-1.html#additional-functionality"><i class="fa fa-check"></i><b>1.3.4</b> Additional Functionality</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentScenarios-2"><i class="fa fa-check"></i><b>1.4</b> Scenarios</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentRunningScenarios-3"><i class="fa fa-check"></i><b>1.4.1</b> Running Scenarios</a></li>
+<li class="chapter" data-level="1.4.2" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentScenarioExamples-3"><i class="fa fa-check"></i><b>1.4.2</b> Scenario Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentVariables-2"><i class="fa fa-check"></i><b>1.5</b> Variables</a></li>
+<li class="chapter" data-level="1.6" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentExamples-2"><i class="fa fa-check"></i><b>1.6</b> Simulation Management Example Models</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="HD-1.html"><a href="HD-1.html"><i class="fa fa-check"></i><b>2</b> Hydrodynamic Engine Updates and Enhancements</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="HD-1.html"><a href="HD-1.html#HDBCHeaders-2"><i class="fa fa-check"></i><b>2.1</b> BC Headers</a></li>
+<li class="chapter" data-level="2.2" data-path="HD-1.html"><a href="HD-1.html#HDGIS-2"><i class="fa fa-check"></i><b>2.2</b> GIS Integration Enhancements</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="HD-1.html"><a href="HD-1.html#HDGISTIN-3"><i class="fa fa-check"></i><b>2.2.1</b> TIN Bathymetry Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="HD-1.html"><a href="HD-1.html#HDStructures-2"><i class="fa fa-check"></i><b>2.3</b> Hydraulic Structure Updates</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="HD-1.html"><a href="HD-1.html#HDCulvertHeighWidthContraction-3"><i class="fa fa-check"></i><b>2.3.1</b> Default Culvert Height And Width Contraction Coefficients</a></li>
+<li class="chapter" data-level="2.3.2" data-path="HD-1.html"><a href="HD-1.html#HDCulvertEntExLoss-3"><i class="fa fa-check"></i><b>2.3.2</b> Default Culvert Entry and Exit Loss Coefficients</a></li>
+<li class="chapter" data-level="2.3.3" data-path="HD-1.html"><a href="HD-1.html#HDCulvertInvertChecking-3"><i class="fa fa-check"></i><b>2.3.3</b> Improved Culvert Invert Checking</a></li>
+<li class="chapter" data-level="2.3.4" data-path="HD-1.html"><a href="HD-1.html#HDTargetRule-3"><i class="fa fa-check"></i><b>2.3.4</b> Target Rule Structure Control Fix</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="HD-1.html"><a href="HD-1.html#HDMinorEnhancements-2"><i class="fa fa-check"></i><b>2.4</b> Minor Enhancements and Fixes</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="HD-1.html"><a href="HD-1.html#HDExTurbScaling-3"><i class="fa fa-check"></i><b>2.4.1</b> External Turbulence Scaling</a></li>
+<li class="chapter" data-level="2.4.2" data-path="HD-1.html"><a href="HD-1.html#HDDVProduct-3"><i class="fa fa-check"></i><b>2.4.2</b> Depth Velocity Product Output Parameter</a></li>
+<li class="chapter" data-level="2.4.3" data-path="HD-1.html"><a href="HD-1.html#HDPointOutputParameters-3"><i class="fa fa-check"></i><b>2.4.3</b> Additional Point Output Parameters Supported</a></li>
+<li class="chapter" data-level="2.4.4" data-path="HD-1.html"><a href="HD-1.html#HDBCOverlap-3"><i class="fa fa-check"></i><b>2.4.4</b> Improved Boundary Nodestring Overlap Checking</a></li>
+<li class="chapter" data-level="2.4.5" data-path="HD-1.html"><a href="HD-1.html#HDGPUErrorFix-3"><i class="fa fa-check"></i><b>2.4.5</b> GPU 3D Drying Z Layer Message Fix</a></li>
+<li class="chapter" data-level="2.4.6" data-path="HD-1.html"><a href="HD-1.html#HDDuplicateFluxFile-3"><i class="fa fa-check"></i><b>2.4.6</b> Duplicate Flux File Fix</a></li>
+<li class="chapter" data-level="2.4.7" data-path="HD-1.html"><a href="HD-1.html#HDDepthAverageTURBZ-3"><i class="fa fa-check"></i><b>2.4.7</b> Turbulence Map Output Fix</a></li>
+<li class="chapter" data-level="2.4.8" data-path="HD-1.html"><a href="HD-1.html#HDFluxOutputHeader-3"><i class="fa fa-check"></i><b>2.4.8</b> Flux Output Header Fix</a></li>
+<li class="chapter" data-level="2.4.9" data-path="HD-1.html"><a href="HD-1.html#HD2dmOutputFix-3"><i class="fa fa-check"></i><b>2.4.9</b> Structured Mesh Check File Fix</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="PT-1.html"><a href="PT-1.html"><i class="fa fa-check"></i><b>3</b> Particle Tracking Module</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="PT-1.html"><a href="PT-1.html#PTMinorEnhancements-2"><i class="fa fa-check"></i><b>3.1</b> Minor Enhancements and Fixes</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="PT-1.html"><a href="PT-1.html#PTMultipleGroupFix-3"><i class="fa fa-check"></i><b>3.1.1</b> Multiple Particle Groups Fix</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="Tools-1.html"><a href="Tools-1.html"><i class="fa fa-check"></i><b>4</b> Visualisation and Model Development Tools</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="Tools-1.html"><a href="Tools-1.html#xmdf-and-netcdf-file-locking-hdf5-compatibility-issues"><i class="fa fa-check"></i><b>4.1</b> XMDF and NetCDF File Locking (HDF5 Compatibility Issues)</a></li>
+<li class="chapter" data-level="4.2" data-path="Tools-1.html"><a href="Tools-1.html#ToolsGetTools-2"><i class="fa fa-check"></i><b>4.2</b> TUFLOW FV Boundary Condition Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="Support-1.html"><a href="Support-1.html"><i class="fa fa-check"></i><b>5</b> User Manuals, Tutorials and Supporting Materials</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="Support-1.html"><a href="Support-1.html#SupportTutorialModels-2"><i class="fa fa-check"></i><b>5.1</b> Updated Tutorial Models</a></li>
+<li class="chapter" data-level="5.2" data-path="Support-1.html"><a href="Support-1.html#SupportExampleModels-2"><i class="fa fa-check"></i><b>5.2</b> New Example Models</a></li>
+<li class="chapter" data-level="5.3" data-path="Support-1.html"><a href="Support-1.html#SupportTUFLOWFVWiki-2"><i class="fa fa-check"></i><b>5.3</b> TUFLOW FV Wiki Updates</a></li>
+<li class="chapter" data-level="5.4" data-path="Support-1.html"><a href="Support-1.html#SupportUserManuals-2"><i class="fa fa-check"></i><b>5.4</b> User Manuals</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="LicensingInstallation-1.html"><a href="LicensingInstallation-1.html"><i class="fa fa-check"></i><b>6</b> Licensing</a></li>
+<li class="divider"></li>
+<li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(0,85,129);">TUFLOW FV 2025.0.0 Release Notes</h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="HD-1" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Section 2</span> Hydrodynamic Engine Updates and Enhancements<a href="HD-1.html#HD-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="HDBCHeaders-2" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> BC Headers<a href="HD-1.html#HDBCHeaders-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Within a BC block users can now specify boundary condition headers, scale and offset commands independently for hydrodynamics, sediment, tracers and water quality. This decouples the previous single line ordering required for specification of these quantities across modules. This effective subdivision of a previous single BC block’s commands is:</p>
+<ul>
+<li>Hydrodynamics
+<ul>
+<li><tcmd>BC Header</tcmd><teq> ==</teq></li>
+<li><tcmd>BC Scale</tcmd><teq> ==</teq></li>
+<li><tcmd>BC Offset</tcmd><teq> ==</teq></li>
+<li><tcmd>BC Default</tcmd><teq> ==</teq></li>
+</ul></li>
+<li>Sediment
+<ul>
+<li><tcmd>Sed Header</tcmd><teq> ==</teq></li>
+<li><tcmd>Sed Scale</tcmd><teq> ==</teq></li>
+<li><tcmd>Sed Offset</tcmd><teq> ==</teq></li>
+<li><tcmd>Sed Default</tcmd><teq> ==</teq></li>
+</ul></li>
+<li>Tracer
+<ul>
+<li><tcmd>Trace Header</tcmd><teq> ==</teq></li>
+<li><tcmd>Trace Scale</tcmd><teq> ==</teq></li>
+<li><tcmd>Trace Offset</tcmd><teq> ==</teq></li>
+<li><tcmd>Trace Default</tcmd><teq> ==</teq></li>
+</ul></li>
+<li>Water Quality
+<ul>
+<li><tcmd>WQ Header</tcmd><teq> ==</teq></li>
+<li><tcmd>WQ Scale</tcmd><teq> ==</teq></li>
+<li><tcmd>WQ Offset</tcmd><teq> ==</teq></li>
+<li><tcmd>WQ Default</tcmd><teq> ==</teq></li>
+</ul></li>
+</ul>
+<p>For example, if a model uses the QC boundary condition type, with salinity, temperature, one sediment fraction, one tracer, and one water quality constituent included, the legacy BC block would be written as shown in the below example.</p>
+<p><tcmd>BC</tcmd><teq> == </teq><tblk>QC, STP_Outfall, ..\bc_dbase_MGL_HIGH_FLOW.csv</tblk><br />
+<tgrn>! Headers: Q, Salinity, Temperature, Sediment, Tracer, WQ</tgrn><br>
+    <tcmd>BC Header</tcmd><teq> == </teq><tblk>Time,STP_HIGH_FLOW,S,T,CLAY,Tracer_1,HIGH_DO</tblk><br>
+    <tcmd>BC Scale</tcmd><teq> == </teq><tblk>1.1,1.2,1.2,1.2,1.2,1.2</tblk><br>
+    <tcmd>BC Offset</tcmd><teq> == </teq><tblk>0.1,0.1,2.0,1.5,1.5,1.5</tblk><br>
+    <tcmd>BC Default</tcmd><teq> == </teq><tblk>0.0,0.0,22.0,15.0,50.0,10.0</tblk><br>
+<tcmd>End BC</tcmd></p>
+<p>As of TUFLOW FV 2025.0.0, this can be rewritten as follows.</p>
+<p><tcmd>BC</tcmd><teq> == </teq><tblk>QC, STP_Outfall, ..\bc_dbase_MGL_HIGH_FLOW.csv</tblk><br />
+<tgrn>! Headers: Q, Salinity, Temperature</tgrn><br>
+    <tcmd>BC Header</tcmd><teq> == </teq><tblk>Time,STP_HIGH_FLOW,S,T</tblk><br>
+    <tcmd>BC Scale</tcmd><teq> == </teq><tblk>1.1,1.2,1.2</tblk><br>
+    <tcmd>BC Offset</tcmd><teq> == </teq><tblk>0.1,0.1,2.0</tblk><br>
+    <tcmd>BC Default</tcmd><teq> == </teq><tblk>0.0,0.0,22.0</tblk><br>
+<tgrn>! Sediment header/scale/offset</tgrn><br>
+    <tcmd>Sed Header</tcmd><teq> == </teq><tblk>CLAY</tblk><br>
+    <tcmd>Sed Scale</tcmd><teq> == </teq><tblk>1.2</tblk><br>
+    <tcmd>Sed Offset</tcmd><teq> == </teq><tblk>1.5</tblk><br>
+    <tcmd>Sed Default</tcmd><teq> == </teq><tblk>15.0</tblk><br>
+<tgrn>! Tracer header/scale/offset</tgrn><br>
+    <tcmd>Trace Header</tcmd><teq> == </teq><tblk>Tracer_1</tblk><br>
+    <tcmd>Trace Scale</tcmd><teq> == </teq><tblk>1.2</tblk><br>
+    <tcmd>Trace Offset</tcmd><teq> == </teq><tblk>1.5</tblk><br>
+    <tcmd>Trace Default</tcmd><teq> == </teq><tblk>50.0</tblk><br>
+<tgrn>! WQ header/scale/offset</tgrn><br>
+    <tcmd>WQ Header</tcmd><teq> == </teq><tblk>HIGH_DO</tblk><br>
+    <tcmd>WQ Scale</tcmd><teq> == </teq><tblk>1.2</tblk><br>
+    <tcmd>WQ Offset</tcmd><teq> == </teq><tblk>1.5</tblk><br>
+    <tcmd>WQ Default</tcmd><teq> == </teq><tblk>10.0</tblk><br>
+<tcmd>End BC</tcmd></p>
+<p>This new approach means that, for example, an additional sediment fraction can be added to the simulation and added to the QC BC block without impacting the subsequent tracer or water quality BC commands.</p>
+<p>Notes:</p>
+<ul>
+<li>If users specify headers/scale/offset/default in both the <tcmd>BC Header</tcmd><teq> == </teq>, <tcmd>BC Scale</tcmd><teq> == </teq>, <tcmd>BC Offset</tcmd><teq> == </teq>, and <tcmd>BC Default</tcmd><teq> == </teq> commands and any of the subsequent sediment, tracer, or WQ BC commands within a BC block, the values defined in the subsequent sediment/tracer/WQ specification commands will overwrite the <tcmd>BC Header</tcmd><teq> == </teq>, <tcmd>BC Scale</tcmd><teq> == </teq>, <tcmd>BC Offset</tcmd><teq> == </teq>, and <tcmd>BC Default</tcmd><teq> == </teq> commands</li>
+<li>It is recommended to use the BC header/scale/offset/default commands for hydrodynamic, salinity, and temperature headers/scale/offset/default only, while using the sediment, tracer, and WQ-specific commands for their respective variables</li>
+<li>Reference to the boundary condition time variable should only be specified by the <tcmd>BC Header</tcmd><teq> == </teq> command. Time should not be repeated for any of the <tcmd>Sed Header</tcmd><teq> == </teq>, <tcmd>Trace Header</tcmd><teq> == </teq>, or <tcmd>WQ Header</tcmd><teq> == </teq> commands</li>
+<li>When salinity or temperature functionality is disabled (e.g., <tcmd>Include Salinity</tcmd><teq> == </teq><tblk>0, 0</tblk>), the <tcmd>BC Header</tcmd><teq> == </teq> line should be updated accordingly to remove salinity. If this is not undertaken then the undeleted salinity entries will be interpreted as temperature entries</li>
+<li>Users should always check the log file to verify that the BC variable names match the expected headers in the BC file</li>
+</ul>
+</div>
+<div id="HDGIS-2" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> GIS Integration Enhancements<a href="HD-1.html#HDGIS-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="HDGISTIN-3" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> TIN Bathymetry Assignment<a href="HD-1.html#HDGISTIN-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Cell centre elevations can now be set using a triangulated irregular network (TIN) using the <tcmd>Read TIN Zpts</tcmd> command. Currently the command supports <a href="https://xmswiki.com/wiki/TIN_Files">Aquaveo SMS .tin</a> format to set cell centre elevations within the TIN extent.</p>
+<p><tcmd>Read TIN Zpts</tcmd> adopts TUFLOW FV’s layering approach and can be used in combination with the following common elevation commands:</p>
+<ul>
+<li><tcmd>Set Zpts</tcmd><teq> == </teq></li>
+<li><tcmd>Read GRID Zpts</tcmd> <teq> == </teq></li>
+<li><tcmd>Read GIS Z Line</tcmd><teq> == </teq></li>
+<li><tcmd>Cell Elevation File</tcmd><teq> == </teq></li>
+</ul>
+<p>The below example shows the use of <tcmd>Read TIN Zpts</tcmd> to update mesh elevations for a proposed development. The SMS .tin file is shown in Figures <a href="HD-1.html#fig:fig-SMS-TIN-Example-Plan">2.1</a> and <a href="HD-1.html#fig:fig-SMS-TIN-Example-Oblique-Dev-wTIN">2.2</a>.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SMS-TIN-Example-Plan"></span>
+<img src="images/SMS_TIN_Example_Plan.PNG" alt="Design TIN Layout" width="80%" />
+<p class="caption">
+Figure 2.1: Design TIN Layout
+</p>
+</div>
+</center>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SMS-TIN-Example-Oblique-Dev-wTIN"></span>
+<img src="images/SMS_TIN_Example_Oblique_Dev_wTIN.PNG" alt="Oblique View of Design Mesh Topoography" width="80%" />
+<p class="caption">
+Figure 2.2: Oblique View of Design Mesh Topoography
+</p>
+</div>
+</center>
+<p>To ‘stamp’ the development elevations onto the mesh, the TIN is specified at a position in the .fvc below the assignment of the existing topography as follows.</p>
+<p><tgrn>!_________________________________________________________________<br>
+! GEOMETRY<br></tgrn>
+<tcmd>Geometry 2D </ttcmd><teq>==</teq><tblk> ..\model\geo\Floodplain_001.2dm<br></tblk></p>
+<p><tgrn>! Topography<br></tgrn>
+<tcmd>Set Zpts </tcmd><teq>==</teq><tblk> 90.<br></tblk>
+<tcmd>Read Grid Zpts </tcmd><teq>==</teq><tblk> ..\model\geo\dem_m01.asc<br></tblk>
+<tcmd>Read GIS Z Line </tcmd><teq>==</teq><tblk> ..\model\gis\2d_zln_M03_thalweg_001_L.shp | ..\model\gis\2d_zln_M03_thalweg_001_P.shp<br></tblk>
+<tcmd>Read GIS Z Line </tcmd><teq>==</teq><tblk> ..\model\gis\2d_zln_M03_Rd_Crest_001_L.shp | ..\model\gis\2d_zln_M03_Rd_Crest_001_P.shp<br></tblk>
+<tcmd>Read GIS Z Line </tcmd><teq>==</teq><tblk> ..\model\gis\2d_zln_Invert_Correction_001_R.shp </tblk><tgrn>! Enforce mesh Zb to surveyed culvert invert levels<br></tgrn></p>
+<p><tgrn>! New Development Design Earthworks<br></tgrn>
+<tcmd>Read TIN Zpts </tcmd><teq>==</teq><tblk> ..\model\geo\Development_Design.tin<br></tblk></p>
+<p>If the <tcmd>Write Check Files</tcmd> command is enabled, the resulting model elevations can be reviewed within the mesh check file.</p>
+</div>
+</div>
+<div id="HDStructures-2" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Hydraulic Structure Updates<a href="HD-1.html#HDStructures-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="HDCulvertHeighWidthContraction-3" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Default Culvert Height And Width Contraction Coefficients<a href="HD-1.html#HDCulvertHeighWidthContraction-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Culvert width contraction (Width_Cont) and height contraction (Height_Cont) coefficients have been updated to default to 1.0. Previously if the Width_Cont and Height_Cont were not explicitly set in the culvert database file, TUFLOW FV would default to 0.0 resulting in no flow through the structure.</p>
+<p>Note:</p>
+<ul>
+<li><p>The height contraction coefficient Height_Cont for box culverts is usually 0.6 for square edged entrances to 0.8 for rounded edges. This factor is not used and is ignored for circular culverts</p></li>
+<li><p>The width contraction coefficient Width_Cont for box culverts typically varies from 0.9 for sharp edges to 1.0 for rounded edges. This factor is normally set to 1.0 for circular culverts.</p></li>
+</ul>
+</div>
+<div id="HDCulvertEntExLoss-3" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Default Culvert Entry and Exit Loss Coefficients<a href="HD-1.html#HDCulvertEntExLoss-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Culvert entry loss (Entry_Loss) and exit loss (Exit_Loss) coefficients have been updated to default to 0.5 and 1.0, respectively. Previously if these parameters were set to zero in the culvert database file, TUFLOW FV would default both to 0.0. Setting these to zero now results in these new defaults being applied.</p>
+<p>Note:</p>
+<ul>
+<li>If 0.0 is required for either of these coefficients then this can be effectively achieved by setting very small numbers in the culvert database file. Any number greater than 10<span class="math inline">\(^{-6}\)</span> will serve this purpose.</li>
+</ul>
+</div>
+<div id="HDCulvertInvertChecking-3" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Improved Culvert Invert Checking<a href="HD-1.html#HDCulvertInvertChecking-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An error message is now output if 1D culvert inverts are specified below the minimum ground elevation of connected nodestrings or zones. The default error behaviour can be set to a warning using the global .fvc command <tcmd>Culvert Invert Check</tcmd> <teq> == </teq> <tblk>WARNING</tblk>.</p>
+<p>The error/warning message is output to the TUFLOW FV log file (.log) and the GIS messages layer (located within the log directory) if GIS integration is enabled.</p>
+<p>An example of the error message is provided below.</p>
+<pre><code>Downstream culvert invert elevation is 36.50000
+Downstream ground elevation (minimum) is 37.50000
+
+ERROR: Culvert downstream invert is less than ground elevation, ID 1</code></pre>
+<p>This warning message is provided to highlight areas where the 1D/2D connection may need improvement, or mesh elevations at the inlet or outlet of a culvert structure may need to be amended to reflect surveyed culvert invert levels.</p>
+</div>
+<div id="HDTargetRule-3" class="section level3 hasAnchor" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> Target Rule Structure Control Fix<a href="HD-1.html#HDTargetRule-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A fix has been implemented for structures using the Target Rule control type. The value being returned by the control block sample parameter was being incorrectly set to a NaN resulting in zero structure flow.</p>
+</div>
+</div>
+<div id="HDMinorEnhancements-2" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Minor Enhancements and Fixes<a href="HD-1.html#HDMinorEnhancements-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="HDExTurbScaling-3" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> External Turbulence Scaling<a href="HD-1.html#HDExTurbScaling-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When using <tcmd>Vertical Mixing Model</tcmd> <teq> ==</teq><tblk> External</tblk>, the computed eddy viscosity and scalar diffusivity can be optionally scaled through the <tcmd>Vertical Mixing Parameters</tcmd> command. This command requires two parameters: Eddy viscosity scale factor and Scalar diffusivity scale factor. The final (modelled) eddy viscosity and scalar diffusivity are determined as follows.</p>
+<pre><code>Eddy viscosity = Computed eddy viscosity x Eddy viscosity scale factor
+Scalar diffusivity = Computed scalar diffusivity x Scalar diffusivity scale factor</code></pre>
+<p>For example:</p>
+<p><tcmd>Vertical Mixing Model</tcmd> <teq>==</teq><tblk> External</tblk><br>
+<tcmd>Vertical Mixing Parameters</tcmd><teq> ==</teq><tblk> 1.0, 1.0</tblk>  <tgrn>! {1.0} Eddy viscosity scale factor, {1.0} Scalar diffusivity scale factor</tgrn><br></p>
+</div>
+<div id="HDDVProduct-3" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Depth Velocity Product Output Parameter<a href="HD-1.html#HDDVProduct-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The product of depth and velocity is now available by invoking the map or point output parameter ‘z0’ noting:</p>
+<ul>
+<li>The 0 in z0 is a zero, not the letter O</li>
+<li>2D or 3D map output is supported for NetCDF output format</li>
+<li>2D output is calculated by multiplying the water depth by the depth averaged velocity</li>
+<li>3D output is calculated by multiplying the water depth by the surface 3D layer velocity</li>
+<li>Maximum and minimum statistics tracking is supported via the <tcmd>Output Statistics</tcmd> output block command</li>
+<li>Depth averaged map output is available via XMDF and DATV output formats</li>
+<li>Point output is supported</li>
+</ul>
+<p>The following two examples show the output of z0 for NetCDF and Point outputs respectively.</p>
+<p><tcmd>Output</tcmd> <teq>==</teq> <tblk>NetCDF</tblk><br>
+  <tcmd>Output Parameters</tcmd> <teq>==</teq> <tblk>h, v, d, zb, z0</tblk><br>
+  <tcmd>Output Interval</tcmd> <teq>==</teq> <tblk>300.</tblk><br>
+  <tcmd>Output Statistics</tcmd> <teq>==</teq> <tblk>max</tblk><br>
+  <tcmd>Output Statistics dt</tcmd> <teq>==</teq> <tblk>1</tblk><br>
+<tcmd>End Output</tcmd><br><br></p>
+<p><tcmd>Output</tcmd> <teq>==</teq> <tblk>Points</tblk><br>
+  <tcmd>Read GIS PO</tcmd> <teq>==</teq> <tblk>..\3d_po_Output_Points_001_P.shp</tblk><br>
+  <tcmd>Output Parameters</tcmd> <teq>==</teq> <tblk>h, v, d, rhow, z0</tblk><br>
+  <tcmd>Output Interval</tcmd> <teq>==</teq> <tblk>300.</tblk><br>
+<tcmd>End Output</tcmd></p>
+</div>
+<div id="HDPointOutputParameters-3" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> Additional Point Output Parameters Supported<a href="HD-1.html#HDPointOutputParameters-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The output parameters outlined in Table
+<a href="HD-1.html#tab:tab-NewPointOutputParameters">2.1</a> are now available for point time series output. Each can be specified using the <tcmd>Output Parameters</tcmd> output block command as follows.</p>
+<p><tcmd>Output </tcmd><teq>==</teq><tblk> Points</tblk><br>
+  <tcmd> Read GIS PO </tcmd><teq>==</teq><tblk> ..\3d_po_Output_Points_001_P.shp</tblk><br>
+  <tcmd> Output Parameters </tcmd><teq>==</teq><tblk> h, v, rhow</tblk><tgrn> ! water level, vel, density</tgrn><br>
+  <tcmd> Output Interval </tcmd><teq>==</teq><tblk> 900.</tblk><br>
+<tcmd>End Output</tcmd></p>
+<table>
+<caption>
+<span id="tab:tab-NewPointOutputParameters">Table 2.1: </span>Newly Supported Point Output Parameters
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Point Output Parameter
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: #1ABDC9 !important;">
+Units
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+BEDLOAD_SED_X
+</td>
+<td style="text-align:left;">
+Bedload for a specific sediment fraction X
+</td>
+<td style="text-align:left;">
+g/m/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PAR
+</td>
+<td style="text-align:left;">
+Photsynthetically active radiation - Z-face
+</td>
+<td style="text-align:left;">
+W/m<span class="math inline">\(^2\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PAR_CC
+</td>
+<td style="text-align:left;">
+Photsynthetically active radiation - Cell-centered
+</td>
+<td style="text-align:left;">
+W/m<span class="math inline">\(^2\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RHOW
+</td>
+<td style="text-align:left;">
+Water density
+</td>
+<td style="text-align:left;">
+kg/m<span class="math inline">\(^3\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SEDLOAD_SED_X
+</td>
+<td style="text-align:left;">
+Sediment load for a specific sediment fraction X
+</td>
+<td style="text-align:left;">
+g/m/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SUSPLOAD_SED_X
+</td>
+<td style="text-align:left;">
+Suspload for a specific sediment fraction X
+</td>
+<td style="text-align:left;">
+g/m/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TURBZ
+</td>
+<td style="text-align:left;">
+Turbulence Output Parameter which includes each of the following TURBZ_ outputs.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TURBZ_BVFSQ
+</td>
+<td style="text-align:left;">
+Cell z-face buoyancy production (BRUNT-VAISALA) frequency squared
+</td>
+<td style="text-align:left;">
+/s<span class="math inline">\(^2\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TURBZ_EPS
+</td>
+<td style="text-align:left;">
+Cell z-face turbulence dissipation
+</td>
+<td style="text-align:left;">
+m<span class="math inline">\(^2\)</span>/s<span class="math inline">\(^3\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TURBZ_L
+</td>
+<td style="text-align:left;">
+Cell z-face turbulence length-scale
+</td>
+<td style="text-align:left;">
+m
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TURBZ_NUH
+</td>
+<td style="text-align:left;">
+Cell z-face vertical temperature diffusivity
+</td>
+<td style="text-align:left;">
+m<span class="math inline">\(^2\)</span>/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TURBZ_NUM
+</td>
+<td style="text-align:left;">
+Cell z-face vertical eddy viscosity
+</td>
+<td style="text-align:left;">
+m<span class="math inline">\(^2\)</span>/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TURBZ_NUS
+</td>
+<td style="text-align:left;">
+Cell z-face vertical salinity diffusivity
+</td>
+<td style="text-align:left;">
+m<span class="math inline">\(^2\)</span>/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TURBZ_SPFSQ
+</td>
+<td style="text-align:left;">
+Cell z-face shear production frequency squared
+</td>
+<td style="text-align:left;">
+/s<span class="math inline">\(^2\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TURBZ_TKE
+</td>
+<td style="text-align:left;">
+Cell z-face turbulent kinetic energy
+</td>
+<td style="text-align:left;">
+m<span class="math inline">\(^2\)</span>/s<span class="math inline">\(^2\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VMAG
+</td>
+<td style="text-align:left;">
+Velocity magnitude
+</td>
+<td style="text-align:left;">
+m/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W
+</td>
+<td style="text-align:left;">
+Vertical velocity
+</td>
+<td style="text-align:left;">
+m/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WVPERBOT
+</td>
+<td style="text-align:left;">
+Wave near-bed orbital motion period
+</td>
+<td style="text-align:left;">
+s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WVUBOT
+</td>
+<td style="text-align:left;">
+Wave near-bed orbital motion amplitude
+</td>
+<td style="text-align:left;">
+m/s
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="HDBCOverlap-3" class="section level3 hasAnchor" number="2.4.4">
+<h3><span class="header-section-number">2.4.4</span> Improved Boundary Nodestring Overlap Checking<a href="HD-1.html#HDBCOverlap-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>TUFLOW FV will now return an error and stop a run if it detects overlap between two or more open boundary nodestrings specified across .2dm and 2d_ns GIS files.</p>
+<p>If the model has GIS integration enabled, an entry will be added to the GIS messages layer output to the log directory. This can be reviewed in GIS (refer Figure <a href="HD-1.html#fig:fig-Nodestring-Overlap-Check">2.3</a>).</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-Nodestring-Overlap-Check"></span>
+<img src="images/Nodestring_Overlap_Check.png" alt="Nodestring Overlap Check" width="60%" />
+<p class="caption">
+Figure 2.3: Nodestring Overlap Check
+</p>
+</div>
+</center>
+</div>
+<div id="HDGPUErrorFix-3" class="section level3 hasAnchor" number="2.4.5">
+<h3><span class="header-section-number">2.4.5</span> GPU 3D Drying Z Layer Message Fix<a href="HD-1.html#HDGPUErrorFix-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This fix concerns an incorrect error message for models using z or z-hybrid 3D layering on GPU hardware. CPU runs are not affected.</p>
+<p>During simulation, if the top z-layer dried out TUFLOW FV was incorrectly reporting a water level and/or velocity magnitude exceedance message as follows.</p>
+<pre><code>ERROR: Water Surface and/or Velocity Magntitude has exceeded limits in cell 20
+</code></pre>
+<p>The z-layer drying error message has been fixed and the correct error is now reported. For example:</p>
+<pre><code>ERROR: Water Surface is less than 0.001m above top zlayer at cell 20</code></pre>
+</div>
+<div id="HDDuplicateFluxFile-3" class="section level3 hasAnchor" number="2.4.6">
+<h3><span class="header-section-number">2.4.6</span> Duplicate Flux File Fix<a href="HD-1.html#HDDuplicateFluxFile-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A fix has been added to allow the output of multiple flux output blocks. As shown in the example below, after one flux output block has been specified, subsequent flux output blocks can be added, provided they contain the <tcmd>Suffix</tcmd> command.</p>
+<p><tgrn>! Multiple Flux Outputs </tgrn><br>
+<tcmd>Output</tcmd> <teq>==</teq> <tblk>flux</tblk><br>
+  <tcmd>Output Interval</tcmd><teq> ==</teq> <tblk>300.</tblk> <tgrn>! 5mins</tgrn><br>
+<tcmd>End Output</tcmd><br></p>
+<p><tcmd>Output</tcmd> <teq>== </teq><tblk>flux</tblk><br>
+  <tcmd>Output Interval</tcmd><teq> ==</teq> <tblk>60.</tblk><br>
+  <tcmd>Suffix</tcmd> <teq>==</teq> <tblk>HR</tblk><tgrn> ! 1min HR (high resolution)</tgrn><br>
+<tcmd>End Output</tcmd><br></p>
+</div>
+<div id="HDDepthAverageTURBZ-3" class="section level3 hasAnchor" number="2.4.7">
+<h3><span class="header-section-number">2.4.7</span> Turbulence Map Output Fix<a href="HD-1.html#HDDepthAverageTURBZ-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Vertical averaging of the ‘TURBZ’ map output parameter has been added for NetCDF format. Previously TUFLOW FV would exit prematurely.</p>
+<p>The 2D output of 3D variables is achieved via the <tcmd>Vertical Averaging</tcmd> map output block command. For example:</p>
+<p><tgrn>! Average the results 6 to 12m below the water surface and output as 2D</tgrn><br>
+<tcmd>Output</tcmd> <teq>==</teq> <tblk>netcdf</tblk><br>
+  <tcmd>Output Parameters</tcmd> <teq>==</teq> <tblk>TURBZ</tblk> <tgrn>! Cell face turbulence outputs</tgrn><br>
+  <tcmd>Output Interval</tcmd> <teq>==</teq> <tblk>900.</tblk> <tgrn>! 15mins</tgrn><br>
+  <tcmd>Vertical Averaging</tcmd> <teq>==</teq> <tblk>depth-range, 6, 12</tblk> <tgrn>! 3D to 2D averaging command</tgrn><br>
+<tcmd>End Output</tcmd></p>
+</div>
+<div id="HDFluxOutputHeader-3" class="section level3 hasAnchor" number="2.4.8">
+<h3><span class="header-section-number">2.4.8</span> Flux Output Header Fix<a href="HD-1.html#HDFluxOutputHeader-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Flux output csv files have been updated to ensure ‘NS’ is prefixed on all flux file headings. This now supports integer and string nodestring names and provides backward compatibility for existing post-processing scripts such as MATLAB and Python time series extraction.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-Flux-Header-2024"></span>
+<img src="images/Flux_Header_2024.png" alt="Flux Header Fix" width="80%" />
+<p class="caption">
+Figure 2.4: Flux Header Fix
+</p>
+</div>
+</center>
+</div>
+<div id="HD2dmOutputFix-3" class="section level3 hasAnchor" number="2.4.9">
+<h3><span class="header-section-number">2.4.9</span> Structured Mesh Check File Fix<a href="HD-1.html#HD2dmOutputFix-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The coordinate field width for the .2dm check file when using regular meshes has been increased to ensure coordinates are written correctly for both spherical and cartesian models. Previously, x and y coordinates were not being correctly delimited for cartesian models, leading to .2dm read errors in supporting GIS software.</p>
+<p><img src="images/WQFooter.jpg" width="100%" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="SimManagment-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="PT-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": false,
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["https://downloads.tuflow.com/TUFLOWFV/Manuals/2025.0/ReleaseNotes/TUFLOW_FV_ReleaseNotes.pdf", "pdf"]],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
