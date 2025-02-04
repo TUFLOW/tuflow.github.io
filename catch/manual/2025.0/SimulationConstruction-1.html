@@ -345,7 +345,7 @@ Figure 4.3: <strong>Opening one text file from the relative path in an already o
 <li>Catchment Pollutant Export Model</li>
 <li>Receiving Model (TUFLOW FV) commands</li>
 </ol>
-<p>All blocks must be included in the above order, but the latter three can be optionally switched on and off with a single command (rather than extensive line commenting) to suit modelling needs. For example, a user working only on initial TUFLOW HPC model build and testing tasks can turn off the pollutant export and TUFLOW FV blocks (by specifying these block models to be the keyword ‘none’) and continue building a TUFLOW HPC model as per normal, without the need to always execute all components of TUFLOW CATCH (See <a href="AppCommands.html#TCCHMS">Catchment Hydraulic Model</a> <teq>==</teq>, <a href="AppCommands.html#TCCPEMS">Pollutant Export Model</a> <teq>==</teq> or <a href="AppCommands.html#TCRS">Receiving Model</a> <teq>==</teq> ).</p>
+<p>All blocks must be included in the above order, but the latter three can be optionally switched on and off with a single command (rather than extensive line commenting) to suit modelling needs. For example, a user working only on initial TUFLOW HPC model build and testing tasks can turn off the pollutant export and TUFLOW FV blocks (by specifying these block models to be the keyword ‘none’) and continue building a TUFLOW HPC model as per normal, without the need to always execute all components of TUFLOW CATCH (See <a href="AppCommands.html#TCCHMS">Catchment Hydraulic Model</a> <teq>==</teq>, <a href="AppCommands.html#TCCPEMS">Catchment Pollutant Export Model</a> <teq>==</teq> or <a href="AppCommands.html#TCRS">Receiving Model</a> <teq>==</teq> ).</p>
 <p>Construction of each of the TUFLOW CATCH control file blocks is described in the following sections.</p>
 <div id="SCTCCGlobal-3" class="section level3 hasAnchor" number="4.5.1">
 <h3><span class="header-section-number">4.5.1</span> Global commands<a href="SimulationConstruction-1.html#SCTCCGlobal-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -565,18 +565,18 @@ Set the beginning of the block, with command arguments as either HPC or none, an
 <p>This block of the TUFLOW CATCH control file contains commands that control pollutant export (and other constituent) simulation.</p>
 <p>The pollutant model definition must be declared as a block that encloses all commands. This is analogous to the declaration of a catchment hydraulic model.</p>
 <p>Set the beginning of the block, with command arguments as either mass accumulation release or none, and the end of the block (with no command arguments). The key phrase <em>mass accumulation release</em> activates all available pollutant export submodels. The keyword none turns off pollutant export simulation and would be used with the <strong>Hydrology</strong> configuration (see Section <a href="Overview-1.html#Configs-2">1.3</a>) or if only TUFLOW FV calibration is being undertaken, for example:</p>
-<p><tcmd>Pollutant Export Model</tcmd><teq> == </teq><br />
+<p><tcmd>Catchment Pollutant Export Model</tcmd><teq> == </teq><br />
   <tblk><span class="math inline">\(\ldots\)</span>pollutant export model commands<span class="math inline">\(\ldots\)</span></tblk><br />
   <tblk><span class="math inline">\(\ldots\)</span>pollutant export model commands<span class="math inline">\(\ldots\)</span></tblk><br />
   <tblk><span class="math inline">\(\ldots\)</span>pollutant export model commands<span class="math inline">\(\ldots\)</span></tblk><br />
-<tcmd>End Pollutant Export Model</tcmd></p>
+<tcmd>End Catchment Pollutant Export Model</tcmd></p>
 <p>If pollutant export is simulated, then all pollutants (and constituents) declared in the catchment hydraulic model (TUFLOW HPC via <a href="AppCommands.html#TCPolls">Pollutant</a> <teq>==</teq>) or receiving model (TUFLOW FV, and including all called modules such as Sediment Transport and Water Quality) must be accounted for with the correct name in the pollutant export block. Each must be assigned either:</p>
 <ul>
 <li>A constant value/concentration for application to receiving model boundary condition, or</li>
 <li>A timeseries value/concentration for application to receiving model boundary conditions, or</li>
 <li>A pollutant export model, with supporting parameters, for TUFLOW CATCH pollutant export simulation for every material</li>
 </ul>
-<p>As such, not all the Pollutant Export Model block TUFLOW CATCH commands are mandatory, but, in combination, need to ensure that all pollutants are specified across the entire TUFLOW HPC domain.</p>
+<p>As such, not all the Catchment Pollutant Export Model block TUFLOW CATCH commands are mandatory, but, in combination, need to ensure that all pollutants are specified across the entire TUFLOW HPC domain.</p>
 <div id="SCTCCPollExpConst-4" class="section level4 hasAnchor" number="4.5.3.1">
 <h4><span class="header-section-number">4.5.3.1</span> Constant<a href="SimulationConstruction-1.html#SCTCCPollExpConst-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Constant value/concentrations can be assigned when dynamic simulation is not required, such as for salinity or dissolved oxygen, for example. This specification is applied globally.</p>
