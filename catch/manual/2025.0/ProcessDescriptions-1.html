@@ -252,13 +252,13 @@
 <li><a href="https://www.tuflow.com/downloads/#tuflow">TUFLOW HPC</a></li>
 <li><a href="https://tuflow.com/downloads/#tuflow_fv">TUFLOW FV</a></li>
 </ul>
-<p>TUFLOW CATCH provides three primary functions:</p>
+<p>TUFLOW CATCH provides these primary functions:</p>
 <ul>
 <li>Coordination of the execution of TUFLOW HPC and TUFLOW FV across a whole-of-catchment domain (<strong>Hydrology</strong> and <strong>Integrated</strong> configurations)</li>
 <li>Automatic geolocation and writing of flow and concentration boundary conditions for TUFLOW FV (as the receiving water model), generated from TUFLOW HPC predictions (as the catchment model) (<strong>Hydrology</strong> and <strong>Integrated</strong> configurations)</li>
 <li>Pollutant export and transport calculations within a catchment (<strong>Pollutant export</strong> and <strong>Integrated</strong> configurations)</li>
 </ul>
-<p>The first of these is its core architectural capability and so is described in Section <a href="Architecture-1.html#ExCoord-3">2.3.1</a>. The latter two are technical componentry of this architecture and so are detailed here in Sections <a href="ProcessDescriptions-1.html#ProcessDescriptionsGeo-2">3.1</a> and <a href="ProcessDescriptions-1.html#ProcessDescriptionsPollExp-2">3.2</a>, respectively.</p>
+<p>The first of these is its core architectural capability and so is described in Section <a href="Architecture-1.html#ExCoord-3">2.3.1</a>. The latter are technical componentry of this architecture and so are detailed here in Sections <a href="ProcessDescriptions-1.html#ProcessDescriptionsGeo-2">3.1</a>, <a href="ProcessDescriptions-1.html#ProcessDescriptionsPollExp-2">3.2</a> and @ref(#ProcessDescriptionsInterv-2), respectively.</p>
 <div id="ProcessDescriptionsGeo-2" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Geolocation<a href="ProcessDescriptions-1.html#ProcessDescriptionsGeo-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Manually linking catchment and receiving water models can potentially be a time consuming and error prone process. When executed in configurations other than <strong>Pollutant export</strong> (see Section <a href="Overview-1.html#Configs-2">1.3</a>), TUFLOW CATCH undertakes this task automatically via a process of geolocation, whereby TUFLOW HPC cells that spatially coincide with either TUFLOW FV nodestring inflows (user nominated, see Section <a href="SimulationConstruction-1.html#SCTCCFV-3">4.5.4</a>) or TUFLOW FV mesh cells are identified. These TUFLOW HPC cells are called transfer cells. Once identified, these transfer cells track the local surface and groundwater flow volumes and constituent masses predicted by TUFLOW HPC, and each transfer cell’s outflows are converted into timeseries and exported into the comma delimited (.csv) format expected by TUFLOW FV as boundary conditions. It is noted that:</p>
@@ -363,140 +363,10 @@ Figure 3.3: <strong>Example of transferral of an inflow (from left to right) fro
 <p>Accumulation/washoff methods are common in urban water modelling and are conceptually distinct from event mean concentration / dry weather concentration (EMC/DWC) methods. The former have been the subject of considerable research and development since at least the 1970s. In short, the accumulation washoff method conceptualises pollutant accumulation during no-flow or low-flow conditions and washoff during higher-flow conditions. Typically, a proportion of the accumulated pollutant runs off if a threshold flow or flow depth is reached (i.e. enough energy is available for liberation of mass). This mechanism is generally based on a non-linear function for the runoff, if runoff is not explicitly simulated (e.g. in models that make lumped average assumptions). TUFLOW CATCH’s implementation of this method (that explicitly simulates hydrology so does not resort to such lumped assumptions) is described following. It can be applied equally to both dissolved and particulate pollutants.</p>
 <div id="ProcessDescriptionsAcc-4" class="section level5 hasAnchor" number="3.2.3.1.1">
 <h5><span class="header-section-number">3.2.3.1.1</span> Accumulation<a href="ProcessDescriptions-1.html#ProcessDescriptionsAcc-4" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>TUFLOW CATCH allows for the specification of accumulation rates (kg/ha/yr) for each pollutant simulated, on a spatially varying (material by material) basis. These rates are linearly applied in time until a user specified maximum areal mass (also kg/ha/yr) is reached. Even though these rates and maximums are specified per material, they are used to undertake accumulation calculations on a cell by cell basis at the beginning of every timestep. For example, if a user has specified a 5 metre TUFLOW HPC grid size, then pollutant accumulation calculations will be undertaken at this same spatial resolution.</p>
+<p>TUFLOW CATCH allows for the specification of accumulation rates for each pollutant simulated, on a spatially varying (material by material) basis. These rates are linearly applied in time until a user specified maximum areal mass (also kg/ha/yr) is reached. Even though these rates and maximums are specified per material, they are used to undertake accumulation calculations on a cell by cell basis at the beginning of every timestep. For example, if a user has specified a 5 metre TUFLOW HPC grid size, then pollutant accumulation calculations will be undertaken at this same spatial resolution.</p>
 <p>As each pollutant accumulates, it is added to TUFLOW HPC’s dry store mass, which is also tracked on a cell by cell basis. It is this dry store mass that is then depleted (washed off) when user specified hydrologic conditions are met (see Section <a href="ProcessDescriptions-1.html#ProcessDescriptionsWO-4">3.2.3.1.2</a>). Each pollutant’s and each cell’s dry store mass is temporally incremented at the specified rate, up to a user specified limiting areal mass (kg/ha). Accumulation does not occur (i.e. the accumulation rate is set to zero) if washoff is occurring during a given timestep.</p>
 <p>One advantage of the pollutant accumulation method is that the user has full control over the spatial distribution of the associated rates, through the use of materials. Specifically, each material is assigned these rates, and materials are (typically) specified as polygons that cover regions with similar pollutant properties (analogous to roughness materials). Although it may seem natural to equate this spatial distribution of pollutant properties with land uses (as is often the case in lumped hydrology/pollutant export models), this is not a requirement of TUFLOW CATCH. Indeed, the user has full discretion with regard to how pollutant properties are set, and whilst perhaps making initial use of land use data, it is possible that different material polygons that represent the same land use are given different pollutant properties. For example, an ‘urban’ land use might be tagged to two separate housing estates in a generic land use GIS vector layer, but the user may also know that one estate has stormwater treatment devices in place and the other does not. In such an instance, different pollutant accumulation (and washoff) parameters can be applied through TUFLOW CATCH. In short, TUFLOW CATCH has been deliberately designed to allow users to insert their local knowledge of the systems being modelled into the model build process directly, down to a cell by cell spatial resolution if required, without being limited by lumping assumptions.</p>
-<p>Akin to the flexibility offered in spatial resolution, TUFLOW CATCH allows full control over the specification of pollutant accumulation rates, and in doing so allows the user to inform the modelling process with local knowledge and expertise. Users are therefore encouraged to undertake their own reviews and specifications of pollutant accumulation rates, and associated material configurations. Notwithstanding this, some indicative pollutant accumulation rates are provided in Table <a href="ProcessDescriptions-1.html#tab:tab-PollAccRates">3.1</a>. These are not to be seen as endorsed or recommended by TUFLOW, but are provided for information only. Decimal places are not intended to imply precision.</p>
-<table>
-<caption>
-<span id="tab:tab-PollAccRates">Table 3.1: </span><strong>Indicative pollutant accumulation rates</strong>
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;font-weight: bold;color: #FFFFFF !important;background-color: #1ABDC9 !important;">
-Pollutant
-</th>
-<th style="text-align:center;font-weight: bold;color: #FFFFFF !important;background-color: #1ABDC9 !important;">
-Lower estimate (kg/ha/yr)
-</th>
-<th style="text-align:center;font-weight: bold;color: #FFFFFF !important;background-color: #1ABDC9 !important;">
-Upper estimate (kg/ha/yr)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;width: 30%; ">
-Sediment
-</td>
-<td style="text-align:center;">
-55.00
-</td>
-<td style="text-align:center;">
-300.00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30%; ">
-Ammonium
-</td>
-<td style="text-align:center;">
-0.20
-</td>
-<td style="text-align:center;">
-2.00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30%; ">
-Nitrate
-</td>
-<td style="text-align:center;">
-0.50
-</td>
-<td style="text-align:center;">
-3.00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30%; ">
-Filterable Reactive Phosphorus
-</td>
-<td style="text-align:center;">
-0.01
-</td>
-<td style="text-align:center;">
-0.03
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30%; ">
-Dissolved Organic Nitrogen
-</td>
-<td style="text-align:center;">
-1.00
-</td>
-<td style="text-align:center;">
-2.00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30%; ">
-Particulate Organic Nitrogen
-</td>
-<td style="text-align:center;">
-1.00
-</td>
-<td style="text-align:center;">
-3.00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30%; ">
-Dissolved Organic Phosphorus
-</td>
-<td style="text-align:center;">
-0.01
-</td>
-<td style="text-align:center;">
-0.05
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30%; ">
-Particulate Organic Phosphorus
-</td>
-<td style="text-align:center;">
-0.06
-</td>
-<td style="text-align:center;">
-0.60
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30%; ">
-Dissolved Organic Carbon
-</td>
-<td style="text-align:center;">
-20.00
-</td>
-<td style="text-align:center;">
-70.00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30%; ">
-Particulate Organic Carbon
-</td>
-<td style="text-align:center;">
-12.00
-</td>
-<td style="text-align:center;">
-40.00
-</td>
-</tr>
-</tbody>
-</table>
+<p>Akin to the flexibility offered in spatial resolution, TUFLOW CATCH allows full control over the specification of pollutant accumulation rates, and in doing so allows the user to inform the modelling process with local knowledge and expertise.</p>
 <p>The relevant TUFLOW CATCH commands are described in Section <a href="SimulationConstruction-1.html#SCTCCPollExpAW-5">4.5.3.3.1</a>.</p>
 </div>
 <div id="ProcessDescriptionsWO-4" class="section level5 hasAnchor" number="3.2.3.1.2">

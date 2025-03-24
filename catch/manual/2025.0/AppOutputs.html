@@ -306,8 +306,7 @@
 </ul></li>
 <li>Units:
 <ul>
-<li>mg/L when Washoff1 model accumulation rates are specified in kg/ha/yr</li>
-<li>mg/L when Shear1 erosion rates are specified in g/m<span class="math inline">\(^2\)</span>/s</li>
+<li>See Section <a href="SimulationConstruction-1.html#SCTCCPollExpUnits-5">4.5.3.3.3</a> and Table <a href="SimulationConstruction-1.html#tab:tab-SCTCCPollExpUnits">4.1</a>, “Map output concentration” column</li>
 </ul></li>
 </ul>
 <p>These fields are reported at all wet TUFLOW HPC cells for all simulated constituents that are listed within pollutant export material blocks. Constant and timeseries pollutants are not reported because they are assigned only during boundary condition writing, rather than being numerically simulated in the catchment domain.</p>
@@ -326,12 +325,11 @@
 </ul></li>
 <li>Units:
 <ul>
-<li>mg/L when Washoff1 model accumulation rates are specified in kg/ha/yr</li>
-<li>mg/L when Shear1 erosion rates are specified in g/m<span class="math inline">\(^2\)</span>/s</li>
+<li>See Section <a href="SimulationConstruction-1.html#SCTCCPollExpUnits-5">4.5.3.3.3</a> and Table <a href="SimulationConstruction-1.html#tab:tab-SCTCCPollExpUnits">4.1</a>, “Map output concentration” column</li>
 </ul></li>
 </ul>
 <p>These fields are reported at all TUFLOW HPC cells for all simulated constituents that are listed within pollutant export material blocks. Constant and timeseries pollutants are not reported because they are assigned only during boundary condition writing, rather than being simulated in the catchment domain. These GW Layer data fields will be zero at all times and locations for a given pollutant <tblk>&lt;name&gt;</tblk> if its infiltration has been set to off via</p>
-<p><a href="#TCHPCInfil">Infiltration &lt;name&gt;</a> <teq>==</teq><tblk> OFF</tblk></p>
+<p><a href="AppCommands.html#TCHPCInfil">Infiltration &lt;name&gt;</a> <teq>==</teq><tblk> OFF</tblk></p>
 </div>
 <div id="AppOutputsDryMass" class="section level2 hasAnchor" number="9.3">
 <h2><span class="header-section-number">C.3</span> Dry mass<a href="AppOutputs.html#AppOutputsDryMass" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -347,7 +345,7 @@
 </ul></li>
 <li>Units:
 <ul>
-<li>kg/ha when Washoff1 model accumulation rates are specified in kg/ha/yr</li>
+<li>See Section <a href="SimulationConstruction-1.html#SCTCCPollExpUnits-5">4.5.3.3.3</a> and Table <a href="SimulationConstruction-1.html#tab:tab-SCTCCPollExpUnitsStore">4.2</a>, “Dry store mass” column</li>
 </ul></li>
 </ul>
 <p>These fields are reported at all TUFLOW HPC cells for all simulated constituents that are listed within pollutant export material blocks and use the Washoff1 pollutant export model. Constant and timeseries pollutants are not reported because they are assigned only during boundary condition writing, rather than being simulated in the catchment domain. Multiplying each pollutant’s Dry Mass outputs by the TUFLOW HPC cell area (in hectares) and summing across the domain will compute the total dry store mass of each pollutant (in kilograms) as a function of time.</p>
@@ -366,7 +364,7 @@
 </ul></li>
 <li>Units:
 <ul>
-<li>kg/ha when Shear1 model erosion rates are specified in g/m<span class="math inline">\(^2\)</span>/s</li>
+<li>See Section <a href="SimulationConstruction-1.html#SCTCCPollExpUnits-5">4.5.3.3.3</a> and Table <a href="SimulationConstruction-1.html#tab:tab-SCTCCPollExpUnitsStore">4.2</a>, “Net mass” column</li>
 </ul></li>
 </ul>
 <p>These fields are reported at all TUFLOW HPC cells for all simulated constituents that are listed within pollutant export material blocks and use the Shear1 pollutant export model. Constant and timeseries pollutants are not reported because they are assigned only during boundary condition writing, rather than being simulated in the catchment domain. Dividing each pollutant’s Net Mass outputs by a user defined bulk density, and then again dividing by 10000 (i.e. m<span class="math inline">\(^2\)</span>/ha) will compute the erosion or deposition depth of each pollutant as a function of space and time.</p>
@@ -378,12 +376,7 @@
 <p>then all files below are written to the <tblk>TUFLOWCatch\bc_dbase\</tblk> folder.</p>
 <div id="AppOutputsOtherMB" class="section level3 hasAnchor" number="9.5.1">
 <h3><span class="header-section-number">C.5.1</span> Mass balance<a href="AppOutputs.html#AppOutputsOtherMB" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A series of three mass balance files are written as follows (assuming a *.tcc file name of Model_001.tcc). Units quoted assume that:</p>
-<ul>
-<li>Accumulation rates have been specified in kg/ha/yr</li>
-<li>Erosion rates have been specified in g/m<span class="math inline">\(^2\)</span>/s</li>
-</ul>
-<p>As per Section <a href="SimulationConstruction-1.html#SCTCCPollExpUnits-5">4.5.3.3.3</a>, these result in units of mg/L being reported in concentration fields and boundary condition file writes. As described below, these also result in reported mass balance file units of grams. If, however, accumulation rates are specified in g/ha/yr rather than kg/ha/yr (and therefore concentration are reported in <span class="math inline">\(\mu\)</span>g/L), then the reported masses in the mass balance outputs described below will be in mg rather than grams.</p>
+<p>A series of three mass balance files are written as follows (assuming a *.tcc file name of Model_001.tcc).</p>
 <div id="AppOutputsOtherMBSurf" class="section level4 hasAnchor" number="9.5.1.1">
 <h4><span class="header-section-number">C.5.1.1</span> Surface water mass balance<a href="AppOutputs.html#AppOutputsOtherMBSurf" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>One file per simulation is produced as follows:</p>
@@ -400,7 +393,7 @@
 <ul>
 <li>Time: ISODATE format</li>
 <li>Volume: m<span class="math inline">\(^3\)</span> (cumulative)</li>
-<li>All pollutants: g (cumulative) (not reported for <strong>Hydrology</strong> configuration as pollutants are not simulated)</li>
+<li>All pollutants: See Section <a href="SimulationConstruction-1.html#SCTCCPollExpUnits-5">4.5.3.3.3</a> and Table <a href="SimulationConstruction-1.html#tab:tab-SCTCCPollExpUnits">4.1</a>, “Mass balance mass” column (cumulative mass, not reported for <strong>Hydrology</strong> configuration as pollutants are not simulated)</li>
 </ul></li>
 <li>Uses
 <ul>
@@ -425,7 +418,7 @@
 <ul>
 <li>Time: ISODATE format</li>
 <li>Volume: m<span class="math inline">\(^3\)</span> (cumulative)</li>
-<li>All pollutants: g (cumulative) (not reported for <strong>Hydrology</strong> configuration as pollutants are not simulated)</li>
+<li>All pollutants: See Section <a href="SimulationConstruction-1.html#SCTCCPollExpUnits-5">4.5.3.3.3</a> and Table <a href="SimulationConstruction-1.html#tab:tab-SCTCCPollExpUnits">4.1</a>, “Mass balance mass” column (cumulative mass, not reported for <strong>Hydrology</strong> configuration as pollutants are not simulated)</li>
 </ul></li>
 <li>Uses
 <ul>
@@ -450,7 +443,7 @@
 <ul>
 <li>Time: ISODATE format</li>
 <li>Volume: m<span class="math inline">\(^3\)</span> (cumulative)</li>
-<li>All pollutants: g (cumulative) (not reported for <strong>Hydrology</strong> configuration as pollutants are not simulated)</li>
+<li>All pollutants: See Section <a href="SimulationConstruction-1.html#SCTCCPollExpUnits-5">4.5.3.3.3</a> and Table <a href="SimulationConstruction-1.html#tab:tab-SCTCCPollExpUnits">4.1</a>, “Mass balance mass” column (cumulative mass, not reported for <strong>Hydrology</strong> configuration as pollutants are not simulated)</li>
 </ul></li>
 <li>Uses
 <ul>
@@ -462,12 +455,7 @@
 </div>
 <div id="AppOutputsOtherRP" class="section level3 hasAnchor" number="9.5.2">
 <h3><span class="header-section-number">C.5.2</span> Receiving polygon<a href="AppOutputs.html#AppOutputsOtherRP" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If TUFLOW CATCH has been executed in the <strong>Pollutant export</strong> configuration, then a timeseries output file is produced that reports incoming flow and concentrations to that user defined polygon. This is broadly a concentration based equivalent to the output described in Section <a href="AppOutputs.html#AppOutputsOtherMBTot">C.5.1.3</a>, with some extra fields reported. Units quoted below assume that:</p>
-<ul>
-<li>Accumulation rates have been specified in kg/ha/yr</li>
-<li>Erosion rates have been specified in g/m<span class="math inline">\(^2\)</span>/s</li>
-</ul>
-<p>As per Section <a href="SimulationConstruction-1.html#SCTCCPollExpUnits-5">4.5.3.3.3</a> and below, these result in units of mg/L being reported in concentration fields, boundary condition file writes and polygon output files. If, however, accumulation rates are specified in g/ha/yr rather than kg/ha/yr, polygon concentration are reported in <span class="math inline">\(\mu\)</span>g/L.</p>
+<p>If TUFLOW CATCH has been executed in the <strong>Pollutant export</strong> configuration, then a timeseries output file is produced that reports incoming flow and concentrations to that user defined polygon. This is broadly a concentration based equivalent to the output described in Section <a href="AppOutputs.html#AppOutputsOtherMBTot">C.5.1.3</a>, with some extra fields reported.</p>
 <p>Assuming a *.tcc file name of Model_001.tcc has been executed, the file is as follows:</p>
 <ul>
 <li>Content:
@@ -482,9 +470,7 @@
 <ul>
 <li>Time: ISODATE format</li>
 <li>Flow: m<span class="math inline">\(^3\)</span>/s</li>
-<li>Salinity: g/L if used</li>
-<li>Temperature: <span class="math inline">\(^{\circ}\)</span>C if used</li>
-<li>All pollutants: mg/L</li>
+<li>All pollutants: See Section <a href="SimulationConstruction-1.html#SCTCCPollExpUnits-5">4.5.3.3.3</a> and Table <a href="SimulationConstruction-1.html#tab:tab-SCTCCPollExpUnits">4.1</a>, “Receiving polygon concentration” column</li>
 </ul></li>
 <li>Uses
 <ul>
@@ -495,12 +481,7 @@
 </div>
 <div id="AppOutputsOtherFV" class="section level3 hasAnchor" number="9.5.3">
 <h3><span class="header-section-number">C.5.3</span> TUFLOW FV boundaries<a href="AppOutputs.html#AppOutputsOtherFV" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A series of TUFLOW FV boundary related files are written as follows. Units quoted below assume that:</p>
-<ul>
-<li>Accumulation rates have been specified in kg/ha/yr</li>
-<li>Erosion rates have been specified in g/m<span class="math inline">\(^2\)</span>/s</li>
-</ul>
-<p>As per Section <a href="SimulationConstruction-1.html#SCTCCPollExpUnits-5">4.5.3.3.3</a> and below, these result in units of mg/L being reported in boundary condition file writes. If, however, accumulation rates are specified in g/ha/yr rather than kg/ha/yr, boundary condition concentrations are reported in <span class="math inline">\(\mu\)</span>g/L.</p>
+<p>A series of TUFLOW FV boundary related files are written as follows.</p>
 <div id="AppOutputsOtherBCb" class="section level4 hasAnchor" number="9.5.3.1">
 <h4><span class="header-section-number">C.5.3.1</span> BC blocks<a href="AppOutputs.html#AppOutputsOtherBCb" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>A single file that contains all required TUFLOW FV nodestring (Q) and cell (QC) inflow boundary BC blocks is written by TUFLOW CATCH. This file is called automatically by TUFLOW FV under TUFLOW CATCH when required. It is at the heart of the automated linking offered by TUFLOW CATCH. Users should not edit this file in any way.</p>
@@ -553,9 +534,7 @@
 <ul>
 <li>Time: ISODATE format</li>
 <li>Flow: m<span class="math inline">\(^3\)</span>/s</li>
-<li>Salinity: g/L if used</li>
-<li>Temperature: <span class="math inline">\(^{\circ}\)</span>C if used</li>
-<li>All pollutants: mg/L for each sediment fraction or water quality pollutant</li>
+<li>All pollutants: See Section <a href="SimulationConstruction-1.html#SCTCCPollExpUnits-5">4.5.3.3.3</a> and Table <a href="SimulationConstruction-1.html#tab:tab-SCTCCPollExpUnits">4.1</a>, “TUFLOW FV BC concentration” column</li>
 </ul></li>
 <li>Uses
 <ul>
@@ -579,9 +558,7 @@
 <ul>
 <li>Time: ISODATE format</li>
 <li>Flow: m<span class="math inline">\(^3\)</span>/s</li>
-<li>Salinity: g/L if used</li>
-<li>Temperature: <span class="math inline">\(^{\circ}\)</span>C if used</li>
-<li>All pollutants: mg/L for each sediment fraction or water quality pollutant</li>
+<li>All pollutants: See Section <a href="SimulationConstruction-1.html#SCTCCPollExpUnits-5">4.5.3.3.3</a> and Table <a href="SimulationConstruction-1.html#tab:tab-SCTCCPollExpUnits">4.1</a>, “TUFLOW FV BC concentration” column</li>
 </ul></li>
 <li>Uses
 <ul>
