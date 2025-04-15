@@ -4,23 +4,23 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 4 Simulation construction | TUFLOW CATCH User Manual Release Candidate 2025.1</title>
+  <title>Section 4 Simulation construction | TUFLOW CATCH User Manual Beta 2025.2</title>
   <meta name="description" content="TUFLOW CATCH User Manual" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Section 4 Simulation construction | TUFLOW CATCH User Manual Release Candidate 2025.1" />
+  <meta property="og:title" content="Section 4 Simulation construction | TUFLOW CATCH User Manual Beta 2025.2" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://docs.tuflow.com/catch/manual/2024.2/images/TUFLOW%20Catch-01-01.png" />
   <meta property="og:description" content="TUFLOW CATCH User Manual" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 4 Simulation construction | TUFLOW CATCH User Manual Release Candidate 2025.1" />
+  <meta name="twitter:title" content="Section 4 Simulation construction | TUFLOW CATCH User Manual Beta 2025.2" />
   
   <meta name="twitter:description" content="TUFLOW CATCH User Manual" />
   <meta name="twitter:image" content="https://docs.tuflow.com/catch/manual/2024.2/images/TUFLOW%20Catch-01-01.png" />
 
-<meta name="author" content="RELEASE CANDIDATE      This is an interim manual that accompanies the TUFLOW CATCH 2025.1.0-rc.1 release candidate. The information contained within this interim version may vary from the subsequent final version. " />
+<meta name="author" content="BETA      This is an interim manual that accompanies the TUFLOW CATCH 2025.2.0-beta.1 beta. The information contained within this interim version may vary from the subsequent final version. " />
 
 
 
@@ -130,6 +130,7 @@
 <ul>
 <li class="chapter" data-level="3.3.1" data-path="ProcessDescriptions-1.html"><a href="ProcessDescriptions-1.html#ProcessDescriptionsIntervMR-3"><i class="fa fa-check"></i><b>3.3.1</b> Mass removal</a></li>
 </ul></li>
+<li class="chapter" data-level="3.4" data-path="ProcessDescriptions-1.html"><a href="ProcessDescriptions-1.html#ProcessDescriptionsSAs-2"><i class="fa fa-check"></i><b>3.4</b> Non-hydrologic surface loads</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html"><i class="fa fa-check"></i><b>4</b> Simulation construction</a>
 <ul>
@@ -247,7 +248,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(0,85,129);"><bmtpink>TUFLOW CATCH User Manual Release Candidate 2025.1</bmtpink></h0></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(0,85,129);"><bmtpink>TUFLOW CATCH User Manual Beta 2025.2</bmtpink></h0></a>
           </h1>
         </div>
 
@@ -1187,6 +1188,97 @@ Figure 4.4: <strong>Example intervention device table input</strong>
 <li>The absolute mass removed will still be reported in units of grams (see Section <a href="Outputs-1.html#OOutputsOther">6.3</a>)</li>
 </ul>
 <p><strong>End: Experimental feature subject to change</strong></p>
+</div>
+</div>
+<div id="SCTCCSAs-4" class="section level4 hasAnchor" number="4.5.3.6">
+<h4><span class="header-section-number">4.5.3.6</span> Non-hydrologic surface loads<a href="SimulationConstruction-1.html#SCTCCSAs-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Non-hydrologic pollutant flows and loads can be specified at any location within the TUFLOW model domain using point, line or region GIS geometry types (via empty layer ‘2d_sa_’). These geometry features can be digitised such that they correspond to actual on ground locations, and as such treat all (and only) water flowing through these locations - lumped subcatchment assumptions are avoided.</p>
+<p>Whilst the related commands are specified within the Pollutant Export block of a TUFLOW CATCH control file, they are those already in use in other TUFLOW products as ‘SA’ inflows. The hyperlink on the command below therefore points to the relevant information in the TUFLOW Classic/HPC User manual, and this can be followed directly, with the caveat that only the ‘ALL’ option described in the TUFLOW/HPC manual is supported by TUFLOW CATCH.</p>
+<p><a href="https://docs.tuflow.com/classic-hpc/manual/2025.0/TBCCommands-1.html#tbcReadGISSA">Read GIS SA</a> <teq>==</teq><tblk> &lt;path to GIS file&gt;</tblk></p>
+<p>Any number of these commands can be issued, and all non-hydrologic inflows of a given geometry type (point, line or region) need not be in a single GIS layer. The only attribute required by the 2d_sa_ GIS layer for each feature is &lt;Name&gt;. This can be any name the user desires, although the use of spaces and special characters is to be avoided.</p>
+<p>Once GIS features have been created and assigned names, TUFLOW CATCH requires that each feature be associated with:</p>
+<ul>
+<li>[Mandatory] A flow timeseries</li>
+<li>[Optional] A pollutant concentration timeseries for each pollutant wishing to be associated with the above flow. It is not mandatory that every pollutant be assigned a concentration timeseries. If no pollutant concentration is assigned then it will assumed to be zero</li>
+</ul>
+<p>This association is affected by entries to the TUFLOW bc_dbase file, which is described <a href="https://docs.tuflow.com/classic-hpc/manual/2025.0/Boundaries-InitialConditions-1.html#bcdbase-2">here</a> in the TUFLOW Classic/HPC manual. The same <a href="https://docs.tuflow.com/classic-hpc/manual/2025.0/Boundaries-InitialConditions-1.html#tab:tab-KeywordDescriptions">column headers</a> are used by TUFLOW Classic/HPC and TUFLOW CATCH, and these are used by TUFLOW CATCH as follows (bc_dbase header names are <strong>bolded</strong>):</p>
+<ul>
+<li>[Mandatory for every GIS feature] Flow specification:
+<ul>
+<li>Mandatory:
+<ul>
+<li><strong>Name</strong>: Name given to a point, line or region GIS feature in 2s_sa_ GIS layer</li>
+<li><strong>Source</strong>: Filename of csv file that contains flow timeseries data</li>
+<li><strong>Column1</strong>: Header of column in csv timeseries file corresponding to time in TUFLOW hours (ISODATE is not supported)</li>
+<li><strong>Column2</strong>: Header of column in csv timeseries file corresponding to flow rate (m<span class="math inline">\(^3\)</span>/s)</li>
+</ul></li>
+<li>Optional:
+<ul>
+<li><strong>Add Col 1</strong>: Value to add to time column</li>
+<li><strong>Mult Col 2</strong>: Value to multiply flow column</li>
+<li><strong>Add Col 2</strong>: Value to add to flow column</li>
+<li><strong>Column3</strong>, <strong>Column4</strong>: unused</li>
+</ul></li>
+</ul></li>
+<li>[Optional for every GIS feature] Concentration specification:
+<ul>
+<li>Mandatory (if used for a pollutant):
+<ul>
+<li><strong>Name</strong>: A ’_’ concatenation of the
+<ul>
+<li>Name given to a point, line or region GIS feature in 2s_sa_ GIS layer, and</li>
+<li>Name given to the relevant pollutant</li>
+</ul></li>
+<li><strong>Source</strong>: Filename of csv file that contains concentration timeseries data</li>
+<li><strong>Column1</strong>: Header of column in csv timeseries file corresponding to time in TUFLOW hours (ISODATE is not supported)</li>
+<li><strong>Column2</strong>: Header of column in csv timeseries file corresponding to concentration rate (m<span class="math inline">\(^3\)</span>/s)</li>
+</ul></li>
+<li>Optional:
+<ul>
+<li><strong>Add Col 1</strong>: Value to add to time column</li>
+<li><strong>Mult Col 2</strong>: Value to multiply concentration column</li>
+<li><strong>Add Col 2</strong>: Value to add to concentration column</li>
+<li><strong>Column3</strong>, <strong>Column4</strong>: unused</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>An example of a bc_dase file is presented in Figure <a href="SimulationConstruction-1.html#fig:fig-bcdb">4.5</a> for a TUFLOW CATCH model with:</p>
+<ul>
+<li>GIS features:
+<ul>
+<li>One point feature inflow with name attribute ‘STP’</li>
+<li>One region feature inflow with the name attribute ‘Groundwater’</li>
+</ul></li>
+<li>Pollutants:
+<ul>
+<li>EColi (from STP only)</li>
+<li>DOC (from STP and Groundwater)</li>
+</ul></li>
+</ul>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-bcdb"></span>
+<img src="images/bcdbase.png" alt="**TUFLOW CATCH bc_dbase file example**" width="90%" />
+<p class="caption">
+Figure 4.5: <strong>TUFLOW CATCH bc_dbase file example</strong>
+</p>
+</div>
+</center>
+<p>Some features of this file include:</p>
+<ul>
+<li>All GIS feature names and pollutants are concatenated with a ’_’</li>
+<li>Groundwater has no concentration entry for EColi, so that pollutant will be assigned zero concentration for the groundwater inflow</li>
+<li>The groundwater entries call different csv files</li>
+<li>Flow multipliers have been applied to both features</li>
+<li>The headers are user defined in each csv file, and have included units (e.g. DOC_mgl)for clarity but this is not mandatory</li>
+</ul>
+<div id="SCTCCSAUnits-5" class="section level5 hasAnchor" number="4.5.3.6.1">
+<h5><span class="header-section-number">4.5.3.6.1</span> Units<a href="SimulationConstruction-1.html#SCTCCSAUnits-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Start: Experimental feature subject to change</strong></p>
+<p>The units used for all non-hydrologic flows and loads are:</p>
+<ul>
+<li>Flow: m<span class="math inline">\(^3\)</span>/s</li>
+<li>Concentration: As per the ‘Map output concentration’ column in Table <a href="SimulationConstruction-1.html#tab:tab-SCTCCPollExpUnits">4.1</a></li>
+</ul>
 <p>An example all the above Pollutant Export Model block commands within TUFLOW CATCH (with clarifying section headers as comments), including interventions is:</p>
 <style>
   .align1 {
@@ -1251,10 +1343,10 @@ Figure 4.4: <strong>Example intervention device table input</strong>
 <span class="align2"><tcmd> Depth Threshold</tcmd><teq> == </teq><tblk>0.120,</tblk> </span>
 <span class="align2"><tcmd> Deposition Velocity</tcmd><teq> == </teq><tblk>0.0</tblk></span><br />
   <tcmd>End Material</tcmd></p>
-<p>  <tgrn>! Interventions</tgrn><br />
+<p>  <tgrn>! Interventions - Locations</tgrn><br />
   <tcmd>Read GIS Intervention</tcmd><teq> == </teq><tblk>..\bc_dbase\Wetland_removals.csv</tblk><br>
   <tcmd>Read GIS Intervention</tcmd><teq> == </teq><tblk>..\bc_dbase\Swale_removals.csv</tblk></p>
-<p>  <tgrn>! Mass Removal Properties</tgrn><br />
+<p>  <tgrn>! Interventions - Mass Removal Properties</tgrn><br />
   <tcmd>Device</tcmd><teq> == </teq><tblk>ALL</tblk><br />
     <span class="align3"><tblk>SED_TSS,</tblk> </span>
 <span class="align3"><tcmd> Method</tcmd><teq> == </teq><tblk>Eqn,</tblk> </span>
@@ -1317,7 +1409,14 @@ Figure 4.4: <strong>Example intervention device table input</strong>
 <span class="align3"><tcmd> Method</tcmd><teq> == </teq><tblk>Table,</tblk> </span>
 <span class="align3"><tcmd> Path</tcmd><teq> == </teq><tblk>..\..\bc_dbase\Swale3.csv</tblk></span><br />
   <tcmd>End Device</tcmd></p>
-<p>  <tcmd>Units</tcmd> <tblk>WQ_PHYTO_BLUEGREEN_CONC_MICG_L</tblk><teq> == </teq><tblk> MICGL</tblk></p>
+<p>  <tgrn>! Non-hydrologic flows</tgrn><br />
+  <tcmd>Read GIS SA</tcmd> <teq>==</teq><tblk> ..\..\model\gis\2d_sa_STP_001_P.shp</tblk><br>
+  <tcmd>Read GIS SA</tcmd> <teq>==</teq><tblk> ..\..\model\gis\2d_sa_STP_002_P.shp</tblk><br>
+  <tcmd>Read GIS SA ALL</tcmd> <teq>==</teq><tblk> ..\..\model\gis\2d_sa_Groundwater_001_R.shp</tblk><br>
+  <tcmd>Read GIS SA</tcmd> <teq>==</teq><tblk> ..\..\model\gis\2d_sa_Groundwater_001_L.shp</tblk> <br>
+  <tcmd>Read GIS SA ALL</tcmd> <teq>==</teq><tblk> ..\..\model\gis\2d_sa_Groundwater_002_L.shp</tblk></p>
+<p>  <tgrn>! Units</tgrn><br />
+  <tcmd>Units</tcmd> <tblk>WQ_PHYTO_BLUEGREEN_CONC_MICG_L</tblk><teq> == </teq><tblk> MICGL</tblk></p>
 <p><tcmd>End Catchment Pollutant Export Model</tcmd></p>
 </div>
 </pre>
