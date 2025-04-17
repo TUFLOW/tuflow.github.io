@@ -153,20 +153,62 @@
     
     "relUrl": "/2025.0.3/"
   },"22": {
+    "doc": "Changelog for 2025.1.0-rc",
+    "title": "Changelog for TUFLOW 2025.1.0-rc",
+    "content": "Release date: 17 Apr 2025 . Build version: 2025.1.0-rc.1 . | General Notes | Backwards Compatibility | New Features and Enhancements . | Porosity Removed from the Groundwater Horizontal Flux Calculation | Using Relative Saturation for Groundwater Flux | Soil Moisture Dependent Horizontal Conductivity | New HPC Infiltration Approach | Enhancement to SGS Sheet Flow Approach | . | Bug Fixes . | Domain Construction | Boundaries and Links | 1D Network Domains – External | 1D Network Domains – EPA SWMM | 1D Network Domains – ESTRY | Outputs and Check Files | . | . ",
+    "url": "/classic-hpc/changelog/2025.1.0/#changelog-for-tuflow-202510-rc",
+    
+    "relUrl": "/2025.1.0/#changelog-for-tuflow-202510-rc"
+  },"23": {
+    "doc": "Changelog for 2025.1.0-rc",
+    "title": "General Notes",
+    "content": "The 2025.1.0 release is a minor release that contains a number of enhancements and bug fixes. The enhancements include updates to groundwater flow, HPC infiltration drying approach, and sheet flow in models using SGS. Note, many enhancements override existing methods and can cause changes in results. Therefore, they are not turned on by default in the 2025.1.0 release. This is to preserve backward compatibility (i.e. no changes in results) with previous 2025 releases. It is recommended that users consider using the new methods for new model builds, or for existing models where the new methods are appropriate and changes in results are acceptable. The recommended commands and their settings are: . | Groundwater Horizontal Flux Include Porosity == OFF | Groundwater Vertical Flux Model == Darcy's Law | 2 | Groundwater Horizontal Flux Model == Soil Moisture Dependent | HPC Infiltration Drying Approach == Method C | SGS Sheet Flow Approach == Method B | SGS Gradient Limiter == Method B | . ",
+    "url": "/classic-hpc/changelog/2025.1.0/#general-notes",
+    
+    "relUrl": "/2025.1.0/#general-notes"
+  },"24": {
+    "doc": "Changelog for 2025.1.0-rc",
+    "title": "Backwards Compatibility",
+    "content": "It is not expected that the 2025.1.0 release would cause changes in results if upgrading from any of the prior 2025 releases except for the specifics of the bug fixes listed below. However, as always, it is recommended that when switching to a new minor or major build with an established model, test runs are carried out and comparisons made between the old and new builds e.g. subtracting the two maximum water level (h) data sets and reviewing any differences. ",
+    "url": "/classic-hpc/changelog/2025.1.0/#backwards-compatibility",
+    
+    "relUrl": "/2025.1.0/#backwards-compatibility"
+  },"25": {
+    "doc": "Changelog for 2025.1.0-rc",
+    "title": "New Features and Enhancements",
+    "content": "Porosity Removed from the Groundwater Horizontal Flux Calculation . The option to remove the porosity term from the horizontal groundwater flux calculation has been added to HPC. Note ON is the default option in the 2025.1.0 release for backwards compatibility. Groundwater Horizontal Flux Include Porosity == OFF . Using Relative Saturation for Groundwater Flux . An option to reduce the groundwater flux based on the power function of relative saturation has been added to HPC. This feature can be applied to both the vertical flux and the horizontal flux, but the primary reason to implement this feature is to improve the timing of vertical infiltration in multi-soil layered models. The power exponent can be supplied globally by using the commands below by providing a second argument along side “Darcy’s Law”. A default value of zero (no adjustment) is used if no exponent is provided. See the TUFLOW User Manual for more information. For models that specify one or two groundwater layer(s) for the root zone (0~1m deep), an Exv value of two was found to produce the best results in benchmarking tests. Groundwater Horizontal Flux Model == Darcy's Law | &lt;Exh&gt; Groundwater Vertical Flux Model == Darcy's Law | &lt;Exv&gt; . Soil Moisture Dependent Horizontal Conductivity . An option to apply van Genuchten (1980)’s soil moisture dependent function (in place of Darcy’s Law) to adjust the horizontal hydraulic conductivity has been added to HPC. This feature is designed to improve the performance of variably saturated flow (VSF) simulation through the vadose zone. See the TUFLOW User Manual for more information. Additionally, the Groundwater Modelling webinar presents some of the testing and benefits of using a soil moisture dependent horizontal conductivity. Groundwater Horizontal Flux Model == Soil Moisture Dependent . New HPC Infiltration Approach . A new HPC infiltration drying approach has been added to HPC to improve the stability of direct rainfall models using soil infiltration. HPC Infiltration Drying Approach == Method C . This approach allows the infiltration to occur below the wetting depth (set by the Cell Wet/Dry Depth command), until the depth reaches the drying depth (defined as 0.0001 m below the wetting depth in HPC). This new method prevents cells from repeatedly alternating between dry and wet states when the applied rainfall rate is less than the infiltration rate, and can improve the stability in both SGS and non-SGS models. Note, the default approach is still Method A for non-SGS model and Method B for SGS models in the 2025.1.0 release for backwards compatibility. Enhancement to SGS Sheet Flow Approach . Two new approaches (working in conjunction) have been implemented to improve how sheet flow is handled in models using SGS. The new methods can significantly improve the prediction of velocity magnitude and direction for cells experiencing sheet flow. Note, if these new methods are being used, they should be used in conjunction. Additionally, it has been noticed that they can affect the cell size convergence in direct rainfall models, therefore it is recommended to perform cell size sensitivity. The new methods are described below the commands. SGS Sheet Flow Approach == Method B SGS Gradient Limiter == Method B . SGS Sheet Flow Approach Method B . Method B (the new method) checks whether cells in SGS models are being subjected to sheet flow conditions or not, and it will adjust the depth used in the bed friction calculation accordingly. Sheet flow conditions often occur in direct rainfall models on steep slopes where water can form a thin layer of flow. Method A (the default) assumes water fills up from the bottom of the cell, and will use the depth above minimum cell elevation in the bed friction calculation. Method B applies cell averaged depth for sheet flow cells instead to avoid the overestimation of the bed friction at these cells. Note, the new approach does not affect non-sheet flow cells and Method A is still the default approach in the 2025.1.0 release for backwards compatibility. SGS Gradient Limiter Method B . Method B (the new method) has fixed an issue where the water level gradient limiter could be overestimated for SGS models in cells experiencing sheet flow. This could, in turn, affect the water surface gradient term in the momentum equation. Note, Method A is the default approach in 2025.1.0 release for backwards compatibility. ",
+    "url": "/classic-hpc/changelog/2025.1.0/#new-features-and-enhancements",
+    
+    "relUrl": "/2025.1.0/#new-features-and-enhancements"
+  },"26": {
+    "doc": "Changelog for 2025.1.0-rc",
+    "title": "Bug Fixes",
+    "content": "Domain Construction . | Not a number (NaN) values in grid inputs are now always treated as “no data values”. Previously, NaNs anywhere in the grid input could lead to ERROR 2445. | . Boundaries and Links . | Fixed a bug when reading in a NetCDF rainfall grid that did not use the lower left corner as the origin. The rainfall data could be incorrectly flipped by TUFLOW depending on where the origin was set. The origin can now be defined as any of the grid corners. | Fixed a bug where the d attribute representing the maximum depth for a generated HQ curve was being ignored for HPC. This value is now applied correctly allowing the user to extend HQ curves as needed. This did not affect Quadtree or Classic models. | Fixed a bug when reading rainfall CSV files that contained rows that were over 100,000 characters wide. This could potentially lead to missing data later in the simulation and cause ERROR 0141. | Fixed a bug where the HPC solver would report a runtime memory error when a GT boundary was used without activating the horizontal advection component of the groundwater flow (which is a requirement for GT boundaries to propagate water). WARNING 2936 is now reported during model initialisation in these situations and the GT boundary is not applied. | . 1D Network Domains – External . | Fixed a bug when using a 1d_x1d layer in GPKG format that could incorrectly cause ERROR 0310 and ERROR 0253 | . 1D Network Domains – EPA SWMM . | Fixed a bug that could occur when a relatively large initial timestep was specified compared to the SWMM output interval. It is anticipated that the setup would only occur rarely since output intervals are typically much larger than timesteps. This situation is now handled appropriately. | Fixed a bug that caused TUFLOW-SWMM to report an error if pipe elevations were provided as “elevations” rather than “offsets” and the elevation values were below zero. This is not valid when using elevation offsets but valid when using absolute elevations. | . 1D Network Domains – ESTRY . | Fixed an issue where inactivated portions of a cross-section were used in conveyance calculations leading to decreases in conveyance with height and likely instabilities. | . Outputs and Check Files . | Fixed a bug where WLL TIN’s were not being generated correctly when the number of 1d_nwk + 1d_pit input layers exceeded 100. This limit has been removed except when using the command Meshparts == ON (meshparts is off by default). When meshparts is on, the 100 input file limit is enforced with ERROR 1464. | Fixed a bug where long profile (2d_lp) plot output results tended to be stretched horizontally relative to the original polylines. The methodology was updated so the distances in the plot and the polyline would track better. The issue was most noticeable for Quadtree models and LP polylines that spanned multiple grid levels. | Fixed a bug where cells that remain dry throughout the simulation had a large negative value reported in the times output in the .TMO format, instead of a null value. | . ",
+    "url": "/classic-hpc/changelog/2025.1.0/#bug-fixes",
+    
+    "relUrl": "/2025.1.0/#bug-fixes"
+  },"27": {
+    "doc": "Changelog for 2025.1.0-rc",
+    "title": "Changelog for 2025.1.0-rc",
+    "content": "This is an interim changelog that accompanies the TUFLOW 2025.1.0-rc.1 release candidate. The information contained within this interim version may vary from the subsequent final version. ",
+    "url": "/classic-hpc/changelog/2025.1.0/",
+    
+    "relUrl": "/2025.1.0/"
+  },"28": {
     "doc": "TUFLOW Classic HPC Changelogs",
     "title": "TUFLOW Classic/HPC Changelog",
     "content": "New releases are typically linked to the release of major new features and/or improvements in the computational hydraulic engines. Whilst some changes in results can be expected between releases due to computational engine improvements, the intent is not to have any changes in results between minor releases. The default settings are also intended to remain unchanged between minor releases, but can vary between major releases to encourage users to use the latest advancements. Users can revert to the default settings and prior computational engine approaches by using the Defaults command. Defaults == PRE 2025 ! An example that sets the defaults back to the 2023 release . Some defaults can be reverted without having to change all defaults back to a specific version. For these, see the TUFLOW User Manual . ",
     "url": "/classic-hpc/changelog/#tuflow-classichpc-changelog",
     
     "relUrl": "/#tuflow-classichpc-changelog"
-  },"23": {
+  },"29": {
     "doc": "TUFLOW Classic HPC Changelogs",
     "title": "Changelogs",
     "content": "Below are the changelogs for the TUFLOW Classic/HPC since version 2025.0.0. For versions prior, see the relevant release notes within the TUFLOW Classic/HPC Release Archive. ",
     "url": "/classic-hpc/changelog/#changelogs",
     
     "relUrl": "/#changelogs"
-  },"24": {
+  },"30": {
     "doc": "TUFLOW Classic HPC Changelogs",
     "title": "TUFLOW Classic HPC Changelogs",
     "content": " ",
