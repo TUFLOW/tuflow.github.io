@@ -184,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.1" data-path="HD-1.html"><a href="HD-1.html#HDCulvertHeighWidthContraction-3"><i class="fa fa-check"></i><b>2.3.1</b> Default Culvert Height And Width Contraction Coefficients</a></li>
 <li class="chapter" data-level="2.3.2" data-path="HD-1.html"><a href="HD-1.html#HDCulvertEntExLoss-3"><i class="fa fa-check"></i><b>2.3.2</b> Default Culvert Entry and Exit Loss Coefficients</a></li>
 <li class="chapter" data-level="2.3.3" data-path="HD-1.html"><a href="HD-1.html#HDCulvertInvertChecking-3"><i class="fa fa-check"></i><b>2.3.3</b> Improved Culvert Invert Checking</a></li>
-<li class="chapter" data-level="2.3.6" data-path="HD-1.html"><a href="HD-1.html#HDTriggerRule-3"><i class="fa fa-check"></i><b>2.3.6</b> Control Block Trigger Rule Fix</a></li>
+<li class="chapter" data-level="2.3.7" data-path="HD-1.html"><a href="HD-1.html#HDTriggerRule-3"><i class="fa fa-check"></i><b>2.3.7</b> Control Block Trigger Rule Fix</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="HD-1.html"><a href="HD-1.html#HDMinorEnhancements-2"><i class="fa fa-check"></i><b>2.4</b> Minor Enhancements and Fixes</a>
 <ul>
@@ -440,28 +440,32 @@ ERROR: Culvert downstream invert is less than ground elevation, ID 1</code></pre
 <div class="newbox1">
 <div id="HDWSUDW3" class="section level3 hasAnchor" number="2.3.4">
 <h3><span class="header-section-number">2.3.4</span> Weir Structure User Defined Width<a href="HD-1.html#HDWSUDW3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>An additional user-defined weir flow width property has been added to weir structures: WEIR, WEIR_DZ, WEIR_ADJUST, and WEIR_DZ_ADJUST. This argument, denoted ‘B’ is the seventh argument of the structure block <tcmd>Properties</tcmd> command.</p>
+<p>An additional user-defined weir flow width property has been added for the WEIR flux function. This argument, denoted ‘B’ is the seventh argument of the structure block <tcmd>Properties</tcmd> command.</p>
 <p>For example:</p>
-<p><tcmd>Stucture</tcmd> <teq>==</teq> <tblk>Nodestring, Creek_St</tblk><br>
+<p><tcmd>Stucture</tcmd> <teq>==</teq> <tblk>Linked Nodestrings, Road_US, Road_DS</tblk><br>
     <tcmd>Flux Function</tcmd> <teq>==</teq> <tblk>Weir</tblk><br>
-    <tcmd>Properties </tcmd> <teq>==</teq> <tblk>0.1, 1.705, 1.5, 8.55, 0.556, 0.7, 12.6 </tblk><br>
+    <tcmd>Properties </tcmd> <teq>==</teq> <tblk>2.5, 1.705, 1.5, 8.55, 0.556, 0.7, 12.6 </tblk><br>
     <tgrn>! H, C, Ex, a, b, Csf_min, B (set the weir available flow width to 12.6 meters)</tgrn><br>
 <tcmd>End Structure</tcmd></p>
+<p>User-defined flow width is supported for linked nodestring and linked zones structure types. It is not supported for single nodestring structure types.</p>
 <p>If the user-defined width ‘B’ is not specified, the weir width is set either via:</p>
 <ul>
 <li>The Max Open Width command for linked zones structure types</li>
-<li>The average nodestring length for linked nodestrings structure types</li>
+<li>The average of the upstream and downstream nodestring lengths for linked nodestrings structure types</li>
 <li>The nodestring length for nodestring structure types</li>
 </ul>
-<p>This update also fixes a weir width memory allocation issue when using the WEIR_ADJUST, and WEIR_DZ_ADJUST flux function types.</p>
 </div>
-<div id="HDTargetRule-3" class="section level3 hasAnchor" number="2.3.5">
-<h3><span class="header-section-number">2.3.5</span> Target Rule Structure Control Fix<a href="HD-1.html#HDTargetRule-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="HDWAMAF3" class="section level3 hasAnchor" number="2.3.5">
+<h3><span class="header-section-number">2.3.5</span> Weir Adjust Memory Allocation Fix<a href="HD-1.html#HDWAMAF3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A fix has been included that addresses a memory allocation issue when using the WEIR_ADJUST, and WEIR_DZ_ADJUST flux function types.</p>
+</div>
+<div id="HDTargetRule-3" class="section level3 hasAnchor" number="2.3.6">
+<h3><span class="header-section-number">2.3.6</span> Target Rule Structure Control Fix<a href="HD-1.html#HDTargetRule-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A fix has been implemented for structures using the Target Rule control type. The value being returned by the control block sample parameter was being incorrectly set to a NaN resulting in zero structure flow.</p>
 </div>
 </div>
-<div id="HDTriggerRule-3" class="section level3 hasAnchor newbox2" number="2.3.6">
-<h3><span class="header-section-number">2.3.6</span> Control Block Trigger Rule Fix<a href="HD-1.html#HDTriggerRule-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="HDTriggerRule-3" class="section level3 hasAnchor newbox2" number="2.3.7">
+<h3><span class="header-section-number">2.3.7</span> Control Block Trigger Rule Fix<a href="HD-1.html#HDTriggerRule-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>An issue has been resolved with parameter sampling when using the trigger control type. In some models, this caused out-of-bounds memory access, leading to memory corruption and premature model termination.</p>
 </div>
 </div>
