@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.8 Simulation Class: Organics | TUFLOW FV Water Quality (WQ) Module User Manual Release Candiate 2025.2</title>
+  <meta name="description" content="TUFLOW FV Water Quality (WQ) Module User Manual" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.8 Simulation Class: Organics | TUFLOW FV Water Quality (WQ) Module User Manual Release Candiate 2025.2" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/tuflow.png" />
+  <meta property="og:description" content="TUFLOW FV Water Quality (WQ) Module User Manual" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.8 Simulation Class: Organics | TUFLOW FV Water Quality (WQ) Module User Manual Release Candiate 2025.2" />
+  
+  <meta name="twitter:description" content="TUFLOW FV Water Quality (WQ) Module User Manual" />
+  <meta name="twitter:image" content="/images/tuflow.png" />
+
+<meta name="author" content="RELEASE CANDIDATE     This is an interim manual that accompanies the TUFLOW FV 2025.2.0-rc.1. The information contained within this interim version may vary from the subsequent final version. " />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="SimSetSimClInorg-2.html"/>
+<link rel="next" href="Outputs-3.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet" />
+<script src="libs/vis-9.1.0/vis-network.min.js"></script>
+<script src="libs/visNetwork-binding-2.1.2/visNetwork.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://www.tuflow.com"><img src="images/tuflow.png" style="width:246px;height:68px;"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#about-this-manual"><i class="fa fa-check"></i>About this manual</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#tables"><i class="fa fa-check"></i>Tables</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#figures"><i class="fa fa-check"></i>Figures</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#networks"><i class="fa fa-check"></i>Networks</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#commands"><i class="fa fa-check"></i>Commands</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#parameter-notation"><i class="fa fa-check"></i>Parameter notation</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#concentration-nomenclature"><i class="fa fa-check"></i>Concentration nomenclature</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#feedback"><i class="fa fa-check"></i>Feedback</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="Overview-1.html"><a href="Overview-1.html"><i class="fa fa-check"></i><b>1</b> Overview</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="OverviewContext-2.html"><a href="OverviewContext-2.html"><i class="fa fa-check"></i><b>1.1</b> Context</a></li>
+<li class="chapter" data-level="1.2" data-path="Features-2.html"><a href="Features-2.html"><i class="fa fa-check"></i><b>1.2</b> Features</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="Features-2.html"><a href="Features-2.html#Usability-3"><i class="fa fa-check"></i><b>1.2.1</b> Usability</a></li>
+<li class="chapter" data-level="1.2.2" data-path="Features-2.html"><a href="Features-2.html#CnsFeats-3"><i class="fa fa-check"></i><b>1.2.2</b> Constituents and processes</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="Science-2.html"><a href="Science-2.html"><i class="fa fa-check"></i><b>1.3</b> Science</a></li>
+<li class="chapter" data-level="1.4" data-path="Versioning-2.html"><a href="Versioning-2.html"><i class="fa fa-check"></i><b>1.4</b> Versioning</a></li>
+<li class="chapter" data-level="1.5" data-path="Support-2.html"><a href="Support-2.html"><i class="fa fa-check"></i><b>1.5</b> Support</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="Architecture-1.html"><a href="Architecture-1.html"><i class="fa fa-check"></i><b>2</b> Architecture</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="ArchitectureContext-2.html"><a href="ArchitectureContext-2.html"><i class="fa fa-check"></i><b>2.1</b> Context</a></li>
+<li class="chapter" data-level="2.2" data-path="SimulationTiers-2.html"><a href="SimulationTiers-2.html"><i class="fa fa-check"></i><b>2.2</b> Simulation Tiers</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="SimulationTiers-2.html"><a href="SimulationTiers-2.html#SimulationClass-3"><i class="fa fa-check"></i><b>2.2.1</b> Tier 1: Simulation Class</a></li>
+<li class="chapter" data-level="2.2.2" data-path="SimulationTiers-2.html"><a href="SimulationTiers-2.html#ConstituentModel-3"><i class="fa fa-check"></i><b>2.2.2</b> Tier 2: Model Class</a></li>
+<li class="chapter" data-level="2.2.3" data-path="SimulationTiers-2.html"><a href="SimulationTiers-2.html#ConMod-3"><i class="fa fa-check"></i><b>2.2.3</b> Tier 3: Constituent Model</a></li>
+<li class="chapter" data-level="2.2.4" data-path="SimulationTiers-2.html"><a href="SimulationTiers-2.html#ComputedVariableParameters-3"><i class="fa fa-check"></i><b>2.2.4</b> Tier 4: Computed Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="ArchitectureLinkageWithFV-2.html"><a href="ArchitectureLinkageWithFV-2.html"><i class="fa fa-check"></i><b>2.3</b> Linkage with TUFLOW FV</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="ArchitectureLinkageWithFV-2.html"><a href="ArchitectureLinkageWithFV-2.html#ArchProc-3"><i class="fa fa-check"></i><b>2.3.1</b> Process</a></li>
+<li class="chapter" data-level="2.3.2" data-path="ArchitectureLinkageWithFV-2.html"><a href="ArchitectureLinkageWithFV-2.html#ProcessDescriptionsLight-3"><i class="fa fa-check"></i><b>2.3.2</b> Treatment of light</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="ArchAPI.html"><a href="ArchAPI.html"><i class="fa fa-check"></i><b>2.4</b> Linkage with Other Hydrodynamic Models</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ProcessDescriptions-1.html"><a href="ProcessDescriptions-1.html"><i class="fa fa-check"></i><b>3</b> Process Descriptions</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="SimProcSimuClDO-2.html"><a href="SimProcSimuClDO-2.html"><i class="fa fa-check"></i><b>3.1</b> Simulation Class: DO</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="SimProcSimuClDO-2.html"><a href="SimProcSimuClDO-2.html#DOOverview-3"><i class="fa fa-check"></i><b>3.1.1</b> Overview</a></li>
+<li class="chapter" data-level="3.1.2" data-path="SimProcSimuClDO-2.html"><a href="SimProcSimuClDO-2.html#ConModDODO-3"><i class="fa fa-check"></i><b>3.1.2</b> Model Class: Oxygen</a>
+<ul>
+<li class="chapter" data-level="3.1.2.1" data-path="SimProcSimuClDO-2.html"><a href="SimProcSimuClDO-2.html#ConModDOO2-4"><i class="fa fa-check"></i><b>3.1.2.1</b> Constituent Model: O2</a></li>
+</ul></li>
+<li class="chapter" data-level="3.1.3" data-path="SimProcSimuClDO-2.html"><a href="SimProcSimuClDO-2.html#ConModDOPath-3"><i class="fa fa-check"></i><b>3.1.3</b> Model Class: Pathogens (optional)</a>
+<ul>
+<li class="chapter" data-level="3.1.3.1" data-path="SimProcSimuClDO-2.html"><a href="SimProcSimuClDO-2.html#ConModPathFree-4"><i class="fa fa-check"></i><b>3.1.3.1</b> Constituent Model: Free</a></li>
+<li class="chapter" data-level="3.1.3.2" data-path="SimProcSimuClDO-2.html"><a href="SimProcSimuClDO-2.html#ConModPathAtt-4"><i class="fa fa-check"></i><b>3.1.3.2</b> Constituent Model: Attached</a></li>
+</ul></li>
+<li class="chapter" data-level="3.1.4" data-path="SimProcSimuClDO-2.html"><a href="SimProcSimuClDO-2.html#DOCompVars-3"><i class="fa fa-check"></i><b>3.1.4</b> Computed variables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="SimProcSimuClInorg-2.html"><a href="SimProcSimuClInorg-2.html"><i class="fa fa-check"></i><b>3.2</b> Simulation Class: Inorganics</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="SimProcSimuClInorg-2.html"><a href="SimProcSimuClInorg-2.html#InorgOverview-3"><i class="fa fa-check"></i><b>3.2.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2.2" data-path="SimProcSimuClInorg-2.html"><a href="SimProcSimuClInorg-2.html#ConModInorgDO-3"><i class="fa fa-check"></i><b>3.2.2</b> Model Class: Oxygen</a></li>
+<li class="chapter" data-level="3.2.3" data-path="SimProcSimuClInorg-2.html"><a href="SimProcSimuClInorg-2.html#ConModInorgSi-3"><i class="fa fa-check"></i><b>3.2.3</b> Model Class: Silicate</a>
+<ul>
+<li class="chapter" data-level="3.2.3.1" data-path="SimProcSimuClInorg-2.html"><a href="SimProcSimuClInorg-2.html#ConModSiSi-4"><i class="fa fa-check"></i><b>3.2.3.1</b> Constituent Model: Si</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2.4" data-path="SimProcSimuClInorg-2.html"><a href="SimProcSimuClInorg-2.html#ConModInorgN-3"><i class="fa fa-check"></i><b>3.2.4</b> Model Class: Inorganic nitrogen</a>
+<ul>
+<li class="chapter" data-level="3.2.4.1" data-path="SimProcSimuClInorg-2.html"><a href="SimProcSimuClInorg-2.html#ConModNAmmNit-4"><i class="fa fa-check"></i><b>3.2.4.1</b> Constituent Model: AmmoniumNitrate</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2.5" data-path="SimProcSimuClInorg-2.html"><a href="SimProcSimuClInorg-2.html#ConModInorgP-3"><i class="fa fa-check"></i><b>3.2.5</b> Model Class: Inorganic phosphorus</a>
+<ul>
+<li class="chapter" data-level="3.2.5.1" data-path="SimProcSimuClInorg-2.html"><a href="SimProcSimuClInorg-2.html#ConModFRPhs-4"><i class="fa fa-check"></i><b>3.2.5.1</b> Constituent Model: FRPhs</a></li>
+<li class="chapter" data-level="3.2.5.2" data-path="SimProcSimuClInorg-2.html"><a href="SimProcSimuClInorg-2.html#ConModFRPhsAds-4"><i class="fa fa-check"></i><b>3.2.5.2</b> Constituent Model: FRPhsAds</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2.6" data-path="SimProcSimuClInorg-2.html"><a href="SimProcSimuClInorg-2.html#ConModInorgPhy-3"><i class="fa fa-check"></i><b>3.2.6</b> Model Class: Phytoplankton</a>
+<ul>
+<li class="chapter" data-level="3.2.6.1" data-path="SimProcSimuClInorg-2.html"><a href="SimProcSimuClInorg-2.html#ConModPhyBas-4"><i class="fa fa-check"></i><b>3.2.6.1</b> Constituent Model: Basic</a></li>
+<li class="chapter" data-level="3.2.6.2" data-path="SimProcSimuClInorg-2.html"><a href="SimProcSimuClInorg-2.html#ConModPhyAdv-4"><i class="fa fa-check"></i><b>3.2.6.2</b> Constituent Model: Advanced</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2.7" data-path="SimProcSimuClInorg-2.html"><a href="SimProcSimuClInorg-2.html#ConModInorgPath-3"><i class="fa fa-check"></i><b>3.2.7</b> Model Class: Pathogens (optional)</a></li>
+<li class="chapter" data-level="3.2.8" data-path="SimProcSimuClInorg-2.html"><a href="SimProcSimuClInorg-2.html#InorgCompVars-3"><i class="fa fa-check"></i><b>3.2.8</b> Computed variables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="SimProcSimuClOrg-2.html"><a href="SimProcSimuClOrg-2.html"><i class="fa fa-check"></i><b>3.3</b> Simulation Class: Organics</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="SimProcSimuClOrg-2.html"><a href="SimProcSimuClOrg-2.html#OrgOverview-3"><i class="fa fa-check"></i><b>3.3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.3.2" data-path="SimProcSimuClOrg-2.html"><a href="SimProcSimuClOrg-2.html#ConModOrgDO-3"><i class="fa fa-check"></i><b>3.3.2</b> Model Class: Oxygen</a></li>
+<li class="chapter" data-level="3.3.3" data-path="SimProcSimuClOrg-2.html"><a href="SimProcSimuClOrg-2.html#ConModOrgSi-3"><i class="fa fa-check"></i><b>3.3.3</b> Model Class: Silicate</a></li>
+<li class="chapter" data-level="3.3.4" data-path="SimProcSimuClOrg-2.html"><a href="SimProcSimuClOrg-2.html#ConModOrgN-3"><i class="fa fa-check"></i><b>3.3.4</b> Model Class: Inorganic nitrogen</a></li>
+<li class="chapter" data-level="3.3.5" data-path="SimProcSimuClOrg-2.html"><a href="SimProcSimuClOrg-2.html#ConModOrgP-3"><i class="fa fa-check"></i><b>3.3.5</b> Model Class: Inorganic phosphorus</a></li>
+<li class="chapter" data-level="3.3.6" data-path="SimProcSimuClOrg-2.html"><a href="SimProcSimuClOrg-2.html#ConModOrgOrg-3"><i class="fa fa-check"></i><b>3.3.6</b> Model Class: Organic matter</a>
+<ul>
+<li class="chapter" data-level="3.3.6.1" data-path="SimProcSimuClOrg-2.html"><a href="SimProcSimuClOrg-2.html#ConModOrgLab-4"><i class="fa fa-check"></i><b>3.3.6.1</b> Constituent Model: Labile</a></li>
+<li class="chapter" data-level="3.3.6.2" data-path="SimProcSimuClOrg-2.html"><a href="SimProcSimuClOrg-2.html#ConModOrgRef-4"><i class="fa fa-check"></i><b>3.3.6.2</b> Constituent Model: Refractory</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3.7" data-path="SimProcSimuClOrg-2.html"><a href="SimProcSimuClOrg-2.html#ConModOrgPhy-3"><i class="fa fa-check"></i><b>3.3.7</b> Model Class: Phytoplankton</a>
+<ul>
+<li class="chapter" data-level="3.3.7.1" data-path="SimProcSimuClOrg-2.html"><a href="SimProcSimuClOrg-2.html#ConModPhyBasOrg-4"><i class="fa fa-check"></i><b>3.3.7.1</b> Constituent Model: Basic</a></li>
+<li class="chapter" data-level="3.3.7.2" data-path="SimProcSimuClOrg-2.html"><a href="SimProcSimuClOrg-2.html#ConModPhyAdvOrg-4"><i class="fa fa-check"></i><b>3.3.7.2</b> Constituent Model: Advanced</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3.8" data-path="SimProcSimuClOrg-2.html"><a href="SimProcSimuClOrg-2.html#ConModOrgPath-3"><i class="fa fa-check"></i><b>3.3.8</b> Model Class: Pathogens (optional)</a></li>
+<li class="chapter" data-level="3.3.9" data-path="SimProcSimuClOrg-2.html"><a href="SimProcSimuClOrg-2.html#OrgCompVars-3"><i class="fa fa-check"></i><b>3.3.9</b> Computed variables</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html"><i class="fa fa-check"></i><b>4</b> Simulation Construction</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="SimulationConstructionContext-2.html"><a href="SimulationConstructionContext-2.html"><i class="fa fa-check"></i><b>4.1</b> Context</a></li>
+<li class="chapter" data-level="4.2" data-path="SimUnits-2.html"><a href="SimUnits-2.html"><i class="fa fa-check"></i><b>4.2</b> Units</a></li>
+<li class="chapter" data-level="4.3" data-path="TFVGeneral-2.html"><a href="TFVGeneral-2.html"><i class="fa fa-check"></i><b>4.3</b> General arrangement</a></li>
+<li class="chapter" data-level="4.4" data-path="TFVCommands-2.html"><a href="TFVCommands-2.html"><i class="fa fa-check"></i><b>4.4</b> TUFLOW FV control file commands</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="TFVCommands-2.html"><a href="TFVCommands-2.html#WQMActivation-3"><i class="fa fa-check"></i><b>4.4.1</b> WQ Module activation</a></li>
+<li class="chapter" data-level="4.4.2" data-path="TFVCommands-2.html"><a href="TFVCommands-2.html#InitBCCond-3"><i class="fa fa-check"></i><b>4.4.2</b> Initial and boundary conditions</a>
+<ul>
+<li class="chapter" data-level="4.4.2.1" data-path="TFVCommands-2.html"><a href="TFVCommands-2.html#ICGeneral-4"><i class="fa fa-check"></i><b>4.4.2.1</b> Initial conditions</a></li>
+<li class="chapter" data-level="4.4.2.2" data-path="TFVCommands-2.html"><a href="TFVCommands-2.html#BCGeneral-4"><i class="fa fa-check"></i><b>4.4.2.2</b> Boundary conditions</a></li>
+<li class="chapter" data-level="4.4.2.3" data-path="TFVCommands-2.html"><a href="TFVCommands-2.html#Ordering-4"><i class="fa fa-check"></i><b>4.4.2.3</b> Ordering</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="WQctrlfil-2.html"><a href="WQctrlfil-2.html"><i class="fa fa-check"></i><b>4.5</b> Water quality control file commands</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="WQctrlfil-2.html"><a href="WQctrlfil-2.html#SimCtrls-3"><i class="fa fa-check"></i><b>4.5.1</b> Part 1: Simulation controls</a></li>
+<li class="chapter" data-level="4.5.2" data-path="WQctrlfil-2.html"><a href="WQctrlfil-2.html#ConModSttngs-3"><i class="fa fa-check"></i><b>4.5.2</b> Part 2: Constituent model settings</a></li>
+<li class="chapter" data-level="4.5.3" data-path="WQctrlfil-2.html"><a href="WQctrlfil-2.html#MatSpecs-3"><i class="fa fa-check"></i><b>4.5.3</b> Part 3: Material specifications</a></li>
+<li class="chapter" data-level="4.5.4" data-path="WQctrlfil-2.html"><a href="WQctrlfil-2.html#SimSetSum-2"><i class="fa fa-check"></i><b>4.5.4</b> Summary</a></li>
+<li class="chapter" data-level="4.5.5" data-path="WQctrlfil-2.html"><a href="WQctrlfil-2.html#SimSetLog-2"><i class="fa fa-check"></i><b>4.5.5</b> Log files</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html"><i class="fa fa-check"></i><b>4.6</b> Simulation Class: DO</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#PrereqDO-3"><i class="fa fa-check"></i><b>4.6.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="4.6.2" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#SimCtrlsDO-3"><i class="fa fa-check"></i><b>4.6.2</b> Part 1: Simulation specification</a></li>
+<li class="chapter" data-level="4.6.3" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#ConModSttngsDO-3"><i class="fa fa-check"></i><b>4.6.3</b> Part 2: Constituent model specification</a>
+<ul>
+<li class="chapter" data-level="4.6.3.1" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#ConModClssOxy-4"><i class="fa fa-check"></i><b>4.6.3.1</b> Model class: Oxygen</a></li>
+<li class="chapter" data-level="4.6.3.2" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#ConModClssPth-4"><i class="fa fa-check"></i><b>4.6.3.2</b> Model class: Pathogens (optional)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6.4" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#MatSpecsDO-3"><i class="fa fa-check"></i><b>4.6.4</b> Part 3: Material specification</a></li>
+<li class="chapter" data-level="4.6.5" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#ConOrdDO-3"><i class="fa fa-check"></i><b>4.6.5</b> Constituent ordering</a>
+<ul>
+<li class="chapter" data-level="4.6.5.1" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#ConOrdDOPath-4"><i class="fa fa-check"></i><b>4.6.5.1</b> Pathogens (optional)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6.6" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#ExampleDO"><i class="fa fa-check"></i><b>4.6.6</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html"><i class="fa fa-check"></i><b>4.7</b> Simulation Class: Inorganics</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#PrereqInorg-3"><i class="fa fa-check"></i><b>4.7.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="4.7.2" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#SimCtrlsInorg-3"><i class="fa fa-check"></i><b>4.7.2</b> Part 1: Simulation specification</a></li>
+<li class="chapter" data-level="4.7.3" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConModSttngsInorg-3"><i class="fa fa-check"></i><b>4.7.3</b> Part 2: Constituent model specification</a>
+<ul>
+<li class="chapter" data-level="4.7.3.1" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConModClssInorg-4"><i class="fa fa-check"></i><b>4.7.3.1</b> Model class: Oxygen</a></li>
+<li class="chapter" data-level="4.7.3.2" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConModClssSil-4"><i class="fa fa-check"></i><b>4.7.3.2</b> Model class: Silicate</a></li>
+<li class="chapter" data-level="4.7.3.3" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConModClssNit-4"><i class="fa fa-check"></i><b>4.7.3.3</b> Model class: Inorganic nitrogen</a></li>
+<li class="chapter" data-level="4.7.3.4" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConModClssPhs-4"><i class="fa fa-check"></i><b>4.7.3.4</b> Model class: Inorganic phosphorus</a></li>
+<li class="chapter" data-level="4.7.3.5" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConModClssPhy-4"><i class="fa fa-check"></i><b>4.7.3.5</b> Model class: Phytoplankton</a></li>
+<li class="chapter" data-level="4.7.3.6" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConModClssPth-4a"><i class="fa fa-check"></i><b>4.7.3.6</b> Model class: Pathogens (optional)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7.4" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#MatSpecsInorg-3"><i class="fa fa-check"></i><b>4.7.4</b> Part 3: Material specification</a></li>
+<li class="chapter" data-level="4.7.5" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConOrdInorg-3"><i class="fa fa-check"></i><b>4.7.5</b> Constituent ordering</a>
+<ul>
+<li class="chapter" data-level="4.7.5.1" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConOrdExPhy-4"><i class="fa fa-check"></i><b>4.7.5.1</b> Excluding phytoplankton</a></li>
+<li class="chapter" data-level="4.7.5.2" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConOrdIncPhy-4"><i class="fa fa-check"></i><b>4.7.5.2</b> Including phytoplankton</a></li>
+<li class="chapter" data-level="4.7.5.3" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConOrdInorgIncPth-4"><i class="fa fa-check"></i><b>4.7.5.3</b> Including pathogens (optional)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7.6" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ExampleInorg"><i class="fa fa-check"></i><b>4.7.6</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html"><i class="fa fa-check"></i><b>4.8</b> Simulation Class: Organics</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#PrereqOrg-3"><i class="fa fa-check"></i><b>4.8.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="4.8.2" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#SimCtrlsOrg-3"><i class="fa fa-check"></i><b>4.8.2</b> Part 1: Simulation specification</a></li>
+<li class="chapter" data-level="4.8.3" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModSttngsOrg-3"><i class="fa fa-check"></i><b>4.8.3</b> Part 2: Constituent model specification</a>
+<ul>
+<li class="chapter" data-level="4.8.3.1" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModClssInorg-4a"><i class="fa fa-check"></i><b>4.8.3.1</b> Model class: Oxygen</a></li>
+<li class="chapter" data-level="4.8.3.2" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModClssSil-4a"><i class="fa fa-check"></i><b>4.8.3.2</b> Model class: Silicate</a></li>
+<li class="chapter" data-level="4.8.3.3" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModClssNit-4a"><i class="fa fa-check"></i><b>4.8.3.3</b> Model class: Inorganic nitrogen</a></li>
+<li class="chapter" data-level="4.8.3.4" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModClssPhs-4a"><i class="fa fa-check"></i><b>4.8.3.4</b> Model class: Inorganic phosphorus</a></li>
+<li class="chapter" data-level="4.8.3.5" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModClssOrgs-4"><i class="fa fa-check"></i><b>4.8.3.5</b> Model class: Organic matter</a></li>
+<li class="chapter" data-level="4.8.3.6" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModClssPhy-4a"><i class="fa fa-check"></i><b>4.8.3.6</b> Model class: Phytoplankton</a></li>
+<li class="chapter" data-level="4.8.3.7" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModClssPth-4b"><i class="fa fa-check"></i><b>4.8.3.7</b> Model class: Pathogens (optional)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8.4" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#MatSpecsOrg-3"><i class="fa fa-check"></i><b>4.8.4</b> Part 3: Material specification</a></li>
+<li class="chapter" data-level="4.8.5" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConOrdOrg-3"><i class="fa fa-check"></i><b>4.8.5</b> Constituent ordering</a>
+<ul>
+<li class="chapter" data-level="4.8.5.1" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConOrdLabOrg-4"><i class="fa fa-check"></i><b>4.8.5.1</b> Labile</a></li>
+<li class="chapter" data-level="4.8.5.2" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConOrdRefOrg-4"><i class="fa fa-check"></i><b>4.8.5.2</b> Refractory</a></li>
+<li class="chapter" data-level="4.8.5.3" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConOrdOrgIncPth-4"><i class="fa fa-check"></i><b>4.8.5.3</b> Including pathogens (optional)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8.6" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ExampleOrg"><i class="fa fa-check"></i><b>4.8.6</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="Outputs-3.html"><a href="Outputs-3.html"><i class="fa fa-check"></i><b>4.9</b> Outputs</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="Outputs-3.html"><a href="Outputs-3.html#WQMOutputs-4"><i class="fa fa-check"></i><b>4.9.1</b> WQ Module outputs</a></li>
+<li class="chapter" data-level="4.9.2" data-path="Outputs-3.html"><a href="Outputs-3.html#FVOutputs-4"><i class="fa fa-check"></i><b>4.9.2</b> TUFLOW FV outputs</a></li>
+<li class="chapter" data-level="4.9.3" data-path="Outputs-3.html"><a href="Outputs-3.html#units-3"><i class="fa fa-check"></i><b>4.9.3</b> Units</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="AppSyntax.html"><a href="AppSyntax.html"><i class="fa fa-check"></i><b>A</b> Syntax of command descriptions</a>
+<ul>
+<li class="chapter" data-level="" data-path="AppSyntax.html"><a href="AppSyntax.html#commands-1"><i class="fa fa-check"></i>Commands</a></li>
+<li class="chapter" data-level="" data-path="AppSyntax.html"><a href="AppSyntax.html#arguments"><i class="fa fa-check"></i>Arguments</a></li>
+<li class="chapter" data-level="" data-path="AppSyntax.html"><a href="AppSyntax.html#defaults"><i class="fa fa-check"></i>Defaults</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="AppCommands.html"><a href="AppCommands.html"><i class="fa fa-check"></i><b>B</b> Commands</a></li>
+<li class="chapter" data-level="C" data-path="AppDemoModel.html"><a href="AppDemoModel.html"><i class="fa fa-check"></i><b>C</b> Demonstration model</a></li>
+<li class="chapter" data-level="D" data-path="AppO.html"><a href="AppO.html"><i class="fa fa-check"></i><b>D</b> Processes: oxygen</a>
+<ul>
+<li class="chapter" data-level="D.1" data-path="AtmosphericAeration-3.html"><a href="AtmosphericAeration-3.html"><i class="fa fa-check"></i><b>D.1</b> Atmospheric oxygen flux</a></li>
+<li class="chapter" data-level="D.2" data-path="SedOxyCons-3.html"><a href="SedOxyCons-3.html"><i class="fa fa-check"></i><b>D.2</b> Sediment oxygen flux</a></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="AppSil.html"><a href="AppSil.html"><i class="fa fa-check"></i><b>E</b> Processes: silicate</a>
+<ul>
+<li class="chapter" data-level="E.1" data-path="SedSilProd-3.html"><a href="SedSilProd-3.html"><i class="fa fa-check"></i><b>E.1</b> Sediment silicate flux</a></li>
+</ul></li>
+<li class="chapter" data-level="F" data-path="AppIN.html"><a href="AppIN.html"><i class="fa fa-check"></i><b>F</b> Processes: inorganic nitrogen</a>
+<ul>
+<li class="chapter" data-level="F.1" data-path="SedAmmNitProd-3.html"><a href="SedAmmNitProd-3.html"><i class="fa fa-check"></i><b>F.1</b> Sediment ammonium and nitrate flux</a></li>
+<li class="chapter" data-level="F.2" data-path="Nitrif-3.html"><a href="Nitrif-3.html"><i class="fa fa-check"></i><b>F.2</b> Nitrification</a></li>
+<li class="chapter" data-level="F.3" data-path="Denitrif-3.html"><a href="Denitrif-3.html"><i class="fa fa-check"></i><b>F.3</b> Denitrification</a></li>
+<li class="chapter" data-level="F.4" data-path="Anammox-3.html"><a href="Anammox-3.html"><i class="fa fa-check"></i><b>F.4</b> Anaerobic oxidation of ammonium</a></li>
+<li class="chapter" data-level="F.5" data-path="DRNA-3.html"><a href="DRNA-3.html"><i class="fa fa-check"></i><b>F.5</b> Dissimilatory reduction of nitrate to ammonium</a></li>
+<li class="chapter" data-level="F.6" data-path="WetDepIN-3.html"><a href="WetDepIN-3.html"><i class="fa fa-check"></i><b>F.6</b> Wet deposition of inorganic nitrogen</a></li>
+<li class="chapter" data-level="F.7" data-path="DryDepIN-3.html"><a href="DryDepIN-3.html"><i class="fa fa-check"></i><b>F.7</b> Dry deposition of inorganic nitrogen</a></li>
+</ul></li>
+<li class="chapter" data-level="G" data-path="AppIP.html"><a href="AppIP.html"><i class="fa fa-check"></i><b>G</b> Processes: inorganic phosphorus</a>
+<ul>
+<li class="chapter" data-level="G.1" data-path="SedFRPhsProd-3.html"><a href="SedFRPhsProd-3.html"><i class="fa fa-check"></i><b>G.1</b> Sediment FRP flux</a></li>
+<li class="chapter" data-level="G.2" data-path="WetDepIP-3.html"><a href="WetDepIP-3.html"><i class="fa fa-check"></i><b>G.2</b> Wet deposition of inorganic phosphorus</a></li>
+<li class="chapter" data-level="G.3" data-path="DryDepIP-3.html"><a href="DryDepIP-3.html"><i class="fa fa-check"></i><b>G.3</b> Dry deposition of inorganic phosphorus</a></li>
+<li class="chapter" data-level="G.4" data-path="FRPhsAdsDsp-3.html"><a href="FRPhsAdsDsp-3.html"><i class="fa fa-check"></i><b>G.4</b> Adsorption and desorption</a>
+<ul>
+<li class="chapter" data-level="G.4.1" data-path="FRPhsAdsDsp-3.html"><a href="FRPhsAdsDsp-3.html#FRPhsAdsDspLin-4"><i class="fa fa-check"></i><b>G.4.1</b> Linear model</a></li>
+<li class="chapter" data-level="G.4.2" data-path="FRPhsAdsDsp-3.html"><a href="FRPhsAdsDsp-3.html#FRPhsAdsDspQuad-4"><i class="fa fa-check"></i><b>G.4.2</b> Quadratic model</a></li>
+</ul></li>
+<li class="chapter" data-level="G.5" data-path="SettlingIP-3.html"><a href="SettlingIP-3.html"><i class="fa fa-check"></i><b>G.5</b> Settling</a></li>
+</ul></li>
+<li class="chapter" data-level="H" data-path="AppPhy.html"><a href="AppPhy.html"><i class="fa fa-check"></i><b>H</b> Processes: phyto general</a>
+<ul>
+<li class="chapter" data-level="H.1" data-path="PhyGeneral-3.html"><a href="PhyGeneral-3.html"><i class="fa fa-check"></i><b>H.1</b> General</a></li>
+<li class="chapter" data-level="H.2" data-path="PhyUnits-3.html"><a href="PhyUnits-3.html"><i class="fa fa-check"></i><b>H.2</b> Units</a></li>
+</ul></li>
+<li class="chapter" data-level="I" data-path="PhyRates-3.html"><a href="PhyRates-3.html"><i class="fa fa-check"></i><b>I</b> Processes: phyto biomass rates</a>
+<ul>
+<li class="chapter" data-level="I.1" data-path="PhyProd-4.html"><a href="PhyProd-4.html"><i class="fa fa-check"></i><b>I.1</b> Primary productivity</a></li>
+<li class="chapter" data-level="I.2" data-path="PhyResp-4.html"><a href="PhyResp-4.html"><i class="fa fa-check"></i><b>I.2</b> Respiration</a></li>
+<li class="chapter" data-level="I.3" data-path="PhyExud-4.html"><a href="PhyExud-4.html"><i class="fa fa-check"></i><b>I.3</b> Exudation</a></li>
+<li class="chapter" data-level="I.4" data-path="PhySettle-4.html"><a href="PhySettle-4.html"><i class="fa fa-check"></i><b>I.4</b> Settling</a>
+<ul>
+<li class="chapter" data-level="I.4.1" data-path="PhySettle-4.html"><a href="PhySettle-4.html#PhySettleNone-5"><i class="fa fa-check"></i><b>I.4.1</b> None</a></li>
+<li class="chapter" data-level="I.4.2" data-path="PhySettle-4.html"><a href="PhySettle-4.html#PhySettleConst-5"><i class="fa fa-check"></i><b>I.4.2</b> Constant</a></li>
+<li class="chapter" data-level="I.4.3" data-path="PhySettle-4.html"><a href="PhySettle-4.html#PhySettleConstD-5"><i class="fa fa-check"></i><b>I.4.3</b> Constant with density correction</a></li>
+<li class="chapter" data-level="I.4.4" data-path="PhySettle-4.html"><a href="PhySettle-4.html#PhySettleStokes-5"><i class="fa fa-check"></i><b>I.4.4</b> Stokes</a></li>
+<li class="chapter" data-level="I.4.5" data-path="PhySettle-4.html"><a href="PhySettle-4.html#PhySettleMotile-5"><i class="fa fa-check"></i><b>I.4.5</b> Motile</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="J" data-path="PhyLimits-3.html"><a href="PhyLimits-3.html"><i class="fa fa-check"></i><b>J</b> Processes: phyto limitation</a>
+<ul>
+<li class="chapter" data-level="J.1" data-path="PhyLimGen-4.html"><a href="PhyLimGen-4.html"><i class="fa fa-check"></i><b>J.1</b> General</a></li>
+<li class="chapter" data-level="J.2" data-path="PhyLimT-4.html"><a href="PhyLimT-4.html"><i class="fa fa-check"></i><b>J.2</b> Temperature</a>
+<ul>
+<li class="chapter" data-level="J.2.1" data-path="PhyLimT-4.html"><a href="PhyLimT-4.html#PhyLimT0"><i class="fa fa-check"></i><b>J.2.1</b> None</a></li>
+<li class="chapter" data-level="J.2.2" data-path="PhyLimT-4.html"><a href="PhyLimT-4.html#PhyLimT1"><i class="fa fa-check"></i><b>J.2.2</b> Standard</a></li>
+</ul></li>
+<li class="chapter" data-level="J.3" data-path="PhyLimN-4.html"><a href="PhyLimN-4.html"><i class="fa fa-check"></i><b>J.3</b> Nitrogen</a>
+<ul>
+<li class="chapter" data-level="J.3.1" data-path="PhyLimN-4.html"><a href="PhyLimN-4.html#PhyLimisNB-5"><i class="fa fa-check"></i><b>J.3.1</b> Basic phytoplankton constituent model</a></li>
+<li class="chapter" data-level="J.3.2" data-path="PhyLimN-4.html"><a href="PhyLimN-4.html#PhyLimisNA-5"><i class="fa fa-check"></i><b>J.3.2</b> Advanced phytoplankton constituent model</a></li>
+</ul></li>
+<li class="chapter" data-level="J.4" data-path="PhyLimP-4.html"><a href="PhyLimP-4.html"><i class="fa fa-check"></i><b>J.4</b> Phosphorus</a>
+<ul>
+<li class="chapter" data-level="J.4.1" data-path="PhyLimP-4.html"><a href="PhyLimP-4.html#PhyLimisPB-5"><i class="fa fa-check"></i><b>J.4.1</b> Basic phytoplankton constituent model</a></li>
+<li class="chapter" data-level="J.4.2" data-path="PhyLimP-4.html"><a href="PhyLimP-4.html#PhyLimisPA-5"><i class="fa fa-check"></i><b>J.4.2</b> Advanced phytoplankton constituent model</a></li>
+</ul></li>
+<li class="chapter" data-level="J.5" data-path="PhyLimSi-4.html"><a href="PhyLimSi-4.html"><i class="fa fa-check"></i><b>J.5</b> Silicate</a></li>
+<li class="chapter" data-level="J.6" data-path="PhyLimLght-4.html"><a href="PhyLimLght-4.html"><i class="fa fa-check"></i><b>J.6</b> Light</a>
+<ul>
+<li class="chapter" data-level="J.6.1" data-path="PhyLimLght-4.html"><a href="PhyLimLght-4.html#PhyLimBasic-5"><i class="fa fa-check"></i><b>J.6.1</b> Basic</a></li>
+<li class="chapter" data-level="J.6.2" data-path="PhyLimLght-4.html"><a href="PhyLimLght-4.html#PhyLimMonod-5"><i class="fa fa-check"></i><b>J.6.2</b> Monod</a></li>
+<li class="chapter" data-level="J.6.3" data-path="PhyLimLght-4.html"><a href="PhyLimLght-4.html#PhyLimSteele-5"><i class="fa fa-check"></i><b>J.6.3</b> Steele</a></li>
+<li class="chapter" data-level="J.6.4" data-path="PhyLimLght-4.html"><a href="PhyLimLght-4.html#PhyLimWebb-5"><i class="fa fa-check"></i><b>J.6.4</b> Webb</a></li>
+<li class="chapter" data-level="J.6.5" data-path="PhyLimLght-4.html"><a href="PhyLimLght-4.html#PhyLimJassby-5"><i class="fa fa-check"></i><b>J.6.5</b> Jassby</a></li>
+<li class="chapter" data-level="J.6.6" data-path="PhyLimLght-4.html"><a href="PhyLimLght-4.html#PhyLimChalker-5"><i class="fa fa-check"></i><b>J.6.6</b> Chalker</a></li>
+<li class="chapter" data-level="J.6.7" data-path="PhyLimLght-4.html"><a href="PhyLimLght-4.html#PhyLimKlepper-5"><i class="fa fa-check"></i><b>J.6.7</b> Klepper</a></li>
+<li class="chapter" data-level="J.6.8" data-path="PhyLimLght-4.html"><a href="PhyLimLght-4.html#PhyLimIntegrated-5"><i class="fa fa-check"></i><b>J.6.8</b> Integrated</a></li>
+</ul></li>
+<li class="chapter" data-level="J.7" data-path="PhyLimSal-4.html"><a href="PhyLimSal-4.html"><i class="fa fa-check"></i><b>J.7</b> Salinity</a>
+<ul>
+<li class="chapter" data-level="J.7.1" data-path="PhyLimSal-4.html"><a href="PhyLimSal-4.html#PhyLimNone-5"><i class="fa fa-check"></i><b>J.7.1</b> None</a></li>
+<li class="chapter" data-level="J.7.2" data-path="PhyLimSal-4.html"><a href="PhyLimSal-4.html#PhyLimFresh-5"><i class="fa fa-check"></i><b>J.7.2</b> Freshwater</a>
+<ul>
+<li class="chapter" data-level="J.7.2.1" data-path="PhyLimSal-4.html"><a href="PhyLimSal-4.html#PhyLimFreshPP-6"><i class="fa fa-check"></i><b>J.7.2.1</b> Primary productivity</a></li>
+<li class="chapter" data-level="J.7.2.2" data-path="PhyLimSal-4.html"><a href="PhyLimSal-4.html#PhyLimFreshR-6"><i class="fa fa-check"></i><b>J.7.2.2</b> Respiration</a></li>
+</ul></li>
+<li class="chapter" data-level="J.7.3" data-path="PhyLimSal-4.html"><a href="PhyLimSal-4.html#PhyLimMarine-5"><i class="fa fa-check"></i><b>J.7.3</b> Marine</a>
+<ul>
+<li class="chapter" data-level="J.7.3.1" data-path="PhyLimSal-4.html"><a href="PhyLimSal-4.html#PhyLimMarinePP-6"><i class="fa fa-check"></i><b>J.7.3.1</b> Primary productivity</a></li>
+<li class="chapter" data-level="J.7.3.2" data-path="PhyLimSal-4.html"><a href="PhyLimSal-4.html#PhyLimMarineR-6"><i class="fa fa-check"></i><b>J.7.3.2</b> Respiration</a></li>
+</ul></li>
+<li class="chapter" data-level="J.7.4" data-path="PhyLimSal-4.html"><a href="PhyLimSal-4.html#PhyLimMixed-5"><i class="fa fa-check"></i><b>J.7.4</b> Mixed</a>
+<ul>
+<li class="chapter" data-level="J.7.4.1" data-path="PhyLimSal-4.html"><a href="PhyLimSal-4.html#PhyLimMixedPP-6"><i class="fa fa-check"></i><b>J.7.4.1</b> Primary productivity</a></li>
+<li class="chapter" data-level="J.7.4.2" data-path="PhyLimSal-4.html"><a href="PhyLimSal-4.html#PhyLimMixedR-6"><i class="fa fa-check"></i><b>J.7.4.2</b> Respiration</a></li>
+</ul></li>
+<li class="chapter" data-level="J.7.5" data-path="PhyLimSal-4.html"><a href="PhyLimSal-4.html#PhyLimEstuarine-5"><i class="fa fa-check"></i><b>J.7.5</b> Estuarine</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="K" data-path="PhyUptake-3.html"><a href="PhyUptake-3.html"><i class="fa fa-check"></i><b>K</b> Processes: phyto uptake</a>
+<ul>
+<li class="chapter" data-level="K.1" data-path="PhyUptakeC-4.html"><a href="PhyUptakeC-4.html"><i class="fa fa-check"></i><b>K.1</b> Carbon</a></li>
+<li class="chapter" data-level="K.2" data-path="PhyLimUpN-4.html"><a href="PhyLimUpN-4.html"><i class="fa fa-check"></i><b>K.2</b> Nitrogen</a>
+<ul>
+<li class="chapter" data-level="K.2.1" data-path="PhyLimUpN-4.html"><a href="PhyLimUpN-4.html#PhyLimUPNB-5"><i class="fa fa-check"></i><b>K.2.1</b> Basic phytoplankton constituent model</a></li>
+<li class="chapter" data-level="K.2.2" data-path="PhyLimUpN-4.html"><a href="PhyLimUpN-4.html#PhyLimUPNA-5"><i class="fa fa-check"></i><b>K.2.2</b> Advanced phytoplankton constituent model</a></li>
+<li class="chapter" data-level="K.2.3" data-path="PhyLimUpN-4.html"><a href="PhyLimUpN-4.html#PhyLimUPNFix-5"><i class="fa fa-check"></i><b>K.2.3</b> Nitrogen fixing</a></li>
+</ul></li>
+<li class="chapter" data-level="K.3" data-path="PhyLimUpP-4.html"><a href="PhyLimUpP-4.html"><i class="fa fa-check"></i><b>K.3</b> Phosphorus</a>
+<ul>
+<li class="chapter" data-level="K.3.1" data-path="PhyLimUpP-4.html"><a href="PhyLimUpP-4.html#PhyLimUPPB-5"><i class="fa fa-check"></i><b>K.3.1</b> Basic phytoplankton constituent model</a></li>
+<li class="chapter" data-level="K.3.2" data-path="PhyLimUpP-4.html"><a href="PhyLimUpP-4.html#PhyLimUPPA-5"><i class="fa fa-check"></i><b>K.3.2</b> Advanced phytoplankton constituent model</a></li>
+</ul></li>
+<li class="chapter" data-level="K.4" data-path="PhyLimUpSi-4.html"><a href="PhyLimUpSi-4.html"><i class="fa fa-check"></i><b>K.4</b> Silicate</a></li>
+</ul></li>
+<li class="chapter" data-level="L" data-path="PhyLosses-3.html"><a href="PhyLosses-3.html"><i class="fa fa-check"></i><b>L</b> Processes: phyto losses</a>
+<ul>
+<li class="chapter" data-level="L.1" data-path="PhyLossC-4.html"><a href="PhyLossC-4.html"><i class="fa fa-check"></i><b>L.1</b> Carbon</a></li>
+<li class="chapter" data-level="L.2" data-path="PhyLossN-4.html"><a href="PhyLossN-4.html"><i class="fa fa-check"></i><b>L.2</b> Nitrogen</a></li>
+<li class="chapter" data-level="L.3" data-path="PhyLossP-4.html"><a href="PhyLossP-4.html"><i class="fa fa-check"></i><b>L.3</b> Phosphorus</a></li>
+<li class="chapter" data-level="L.4" data-path="PhyLossSi-4.html"><a href="PhyLossSi-4.html"><i class="fa fa-check"></i><b>L.4</b> Silicate</a></li>
+</ul></li>
+<li class="chapter" data-level="M" data-path="AppphyOther.html"><a href="AppphyOther.html"><i class="fa fa-check"></i><b>M</b> Processes: phyto other</a>
+<ul>
+<li class="chapter" data-level="M.1" data-path="PhySelfShad-3.html"><a href="PhySelfShad-3.html"><i class="fa fa-check"></i><b>M.1</b> Self shading</a></li>
+<li class="chapter" data-level="M.2" data-path="PhyCellDens-3.html"><a href="PhyCellDens-3.html"><i class="fa fa-check"></i><b>M.2</b> Cell density</a></li>
+</ul></li>
+<li class="chapter" data-level="N" data-path="AppOrg.html"><a href="AppOrg.html"><i class="fa fa-check"></i><b>N</b> Processes: organic matter</a>
+<ul>
+<li class="chapter" data-level="N.1" data-path="SedDissOrgProd-3.html"><a href="SedDissOrgProd-3.html"><i class="fa fa-check"></i><b>N.1</b> Sediment flux</a></li>
+<li class="chapter" data-level="N.2" data-path="Hydrol-3.html"><a href="Hydrol-3.html"><i class="fa fa-check"></i><b>N.2</b> Hydrolysis</a>
+<ul>
+<li class="chapter" data-level="N.2.1" data-path="Hydrol-3.html"><a href="Hydrol-3.html#HydrolCons-4"><i class="fa fa-check"></i><b>N.2.1</b> Consumption</a></li>
+<li class="chapter" data-level="N.2.2" data-path="Hydrol-3.html"><a href="Hydrol-3.html#HydrolProd-4"><i class="fa fa-check"></i><b>N.2.2</b> Production</a></li>
+</ul></li>
+<li class="chapter" data-level="N.3" data-path="Break-3.html"><a href="Break-3.html"><i class="fa fa-check"></i><b>N.3</b> Breakdown</a>
+<ul>
+<li class="chapter" data-level="N.3.1" data-path="Break-3.html"><a href="Break-3.html#BreakCons-4"><i class="fa fa-check"></i><b>N.3.1</b> Consumption</a></li>
+<li class="chapter" data-level="N.3.2" data-path="Break-3.html"><a href="Break-3.html#BreakProd-4"><i class="fa fa-check"></i><b>N.3.2</b> Production</a></li>
+</ul></li>
+<li class="chapter" data-level="N.4" data-path="Miner-3.html"><a href="Miner-3.html"><i class="fa fa-check"></i><b>N.4</b> Mineralisation</a>
+<ul>
+<li class="chapter" data-level="N.4.1" data-path="Miner-3.html"><a href="Miner-3.html#MinerCons-4"><i class="fa fa-check"></i><b>N.4.1</b> Consumption</a></li>
+<li class="chapter" data-level="N.4.2" data-path="Miner-3.html"><a href="Miner-3.html#MinerProd-4"><i class="fa fa-check"></i><b>N.4.2</b> Production</a></li>
+</ul></li>
+<li class="chapter" data-level="N.5" data-path="Active-3.html"><a href="Active-3.html"><i class="fa fa-check"></i><b>N.5</b> Activation</a>
+<ul>
+<li class="chapter" data-level="N.5.1" data-path="Active-3.html"><a href="Active-3.html#ActiveCons-4"><i class="fa fa-check"></i><b>N.5.1</b> Consumption</a></li>
+<li class="chapter" data-level="N.5.2" data-path="Active-3.html"><a href="Active-3.html#ActiveProd-4"><i class="fa fa-check"></i><b>N.5.2</b> Production</a></li>
+</ul></li>
+<li class="chapter" data-level="N.6" data-path="OrgPhot-3.html"><a href="OrgPhot-3.html"><i class="fa fa-check"></i><b>N.6</b> Photolysis</a>
+<ul>
+<li class="chapter" data-level="N.6.1" data-path="OrgPhot-3.html"><a href="OrgPhot-3.html#PhotCons-4"><i class="fa fa-check"></i><b>N.6.1</b> Consumption</a></li>
+<li class="chapter" data-level="N.6.2" data-path="OrgPhot-3.html"><a href="OrgPhot-3.html#PhotProd-4"><i class="fa fa-check"></i><b>N.6.2</b> Production</a></li>
+</ul></li>
+<li class="chapter" data-level="N.7" data-path="OrgLight-3.html"><a href="OrgLight-3.html"><i class="fa fa-check"></i><b>N.7</b> Self shading</a></li>
+<li class="chapter" data-level="N.8" data-path="OrgSettle-3.html"><a href="OrgSettle-3.html"><i class="fa fa-check"></i><b>N.8</b> Settling</a>
+<ul>
+<li class="chapter" data-level="N.8.1" data-path="OrgSettle-3.html"><a href="OrgSettle-3.html#OrgSettleNone-5"><i class="fa fa-check"></i><b>N.8.1</b> None</a></li>
+<li class="chapter" data-level="N.8.2" data-path="OrgSettle-3.html"><a href="OrgSettle-3.html#OrgSettleConst-5"><i class="fa fa-check"></i><b>N.8.2</b> Constant</a></li>
+<li class="chapter" data-level="N.8.3" data-path="OrgSettle-3.html"><a href="OrgSettle-3.html#OrgSettleConstD-5"><i class="fa fa-check"></i><b>N.8.3</b> Constant with density correction</a></li>
+<li class="chapter" data-level="N.8.4" data-path="OrgSettle-3.html"><a href="OrgSettle-3.html#OrgSettleStokes-5"><i class="fa fa-check"></i><b>N.8.4</b> Stokes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="O" data-path="AppPath.html"><a href="AppPath.html"><i class="fa fa-check"></i><b>O</b> Processes: pathogens</a>
+<ul>
+<li class="chapter" data-level="O.1" data-path="Mortal-3.html"><a href="Mortal-3.html"><i class="fa fa-check"></i><b>O.1</b> Mortality</a></li>
+<li class="chapter" data-level="O.2" data-path="Inactivation-3.html"><a href="Inactivation-3.html"><i class="fa fa-check"></i><b>O.2</b> Inactivation</a></li>
+<li class="chapter" data-level="O.3" data-path="PathAttach-3.html"><a href="PathAttach-3.html"><i class="fa fa-check"></i><b>O.3</b> Attachment</a></li>
+<li class="chapter" data-level="O.4" data-path="PathSettling-3.html"><a href="PathSettling-3.html"><i class="fa fa-check"></i><b>O.4</b> Settling</a></li>
+<li class="chapter" data-level="O.5" data-path="Pathother-3.html"><a href="Pathother-3.html"><i class="fa fa-check"></i><b>O.5</b> Other</a>
+<ul>
+<li class="chapter" data-level="O.5.1" data-path="Pathother-3.html"><a href="Pathother-3.html#Pathtot-3"><i class="fa fa-check"></i><b>O.5.1</b> Total pathogens</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="P" data-path="AppConstits.html"><a href="AppConstits.html"><i class="fa fa-check"></i><b>P</b> Computed variables</a></li>
+<li class="chapter" data-level="Q" data-path="AppDiags.html"><a href="AppDiags.html"><i class="fa fa-check"></i><b>Q</b> Diagnostic variables</a></li>
+<li class="chapter" data-level="R" data-path="AppParams.html"><a href="AppParams.html"><i class="fa fa-check"></i><b>R</b> Parameters</a></li>
+<li class="chapter" data-level="S" data-path="AppMBal.html"><a href="AppMBal.html"><i class="fa fa-check"></i><b>S</b> Mass Conservation Model</a>
+<ul>
+<li class="chapter" data-level="S.1" data-path="AppMBalIntent.html"><a href="AppMBalIntent.html"><i class="fa fa-check"></i><b>S.1</b> Intent</a></li>
+<li class="chapter" data-level="S.2" data-path="AppMBalDescription.html"><a href="AppMBalDescription.html"><i class="fa fa-check"></i><b>S.2</b> Description</a></li>
+<li class="chapter" data-level="S.3" data-path="AppMBalMdel.html"><a href="AppMBalMdel.html"><i class="fa fa-check"></i><b>S.3</b> Model suite</a></li>
+<li class="chapter" data-level="S.4" data-path="AppMBalCalcs.html"><a href="AppMBalCalcs.html"><i class="fa fa-check"></i><b>S.4</b> Calculations</a></li>
+<li class="chapter" data-level="S.5" data-path="AppMBalExecuting.html"><a href="AppMBalExecuting.html"><i class="fa fa-check"></i><b>S.5</b> Access and execution</a>
+<ul>
+<li class="chapter" data-level="S.5.1" data-path="AppMBalExecuting.html"><a href="AppMBalExecuting.html#AppMBalAccess"><i class="fa fa-check"></i><b>S.5.1</b> Access</a></li>
+<li class="chapter" data-level="S.5.2" data-path="AppMBalExecuting.html"><a href="AppMBalExecuting.html#AppMBalExecu"><i class="fa fa-check"></i><b>S.5.2</b> Execution</a></li>
+</ul></li>
+<li class="chapter" data-level="S.6" data-path="AppMBalExRes-2.html"><a href="AppMBalExRes-2.html"><i class="fa fa-check"></i><b>S.6</b> Example results</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://www.tuflow.com"><img src="images/tuflow.png" style="width:246px;height:68px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(226,1,119);">TUFLOW FV Water Quality (WQ) Module User Manual Release Candiate 2025.2</h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<p class="wmark before"></p>
+<div id="SimSetSimClOrg-2" class="section level2 hasAnchor" number="4.8">
+<h2><span class="header-section-number">4.8</span> Simulation Class: Organics<a href="SimSetSimClOrg-2.html#SimSetSimClOrg-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>If the organics simulation class is specified with no subsequent constituent model blocks, then a simulation will be automatically constructed using this organics class, and populated with library defaults for all parameters. Computed variables will be:</p>
+<ul>
+<li>Dissolved oxygen</li>
+<li>Silicate</li>
+<li>Ammonium</li>
+<li>Nitrate</li>
+<li>Filterable reactive phosphorus</li>
+<li>Dissolved organic carbon</li>
+<li>Particulate organic carbon</li>
+<li>Dissolved organic nitrogen</li>
+<li>Particulate organic nitrogen</li>
+<li>Dissolved organic phosphorus</li>
+<li>Particulate organic phosphorus</li>
+<li>One phytoplankton group named ‘dummy’ that uses the basic phytoplankton constituent model</li>
+</ul>
+<p>For clarity, this section uses acronyms for some computed variable names, and these acronyms are expanded in Appendix <a href="AppConstits.html#AppConstits">P</a>. All references below to “organic matter” are to labile organic computed variables, unless specifically termed as refractory.</p>
+<div id="PrereqOrg-3" class="section level3 hasAnchor" number="4.8.1">
+<h3><span class="header-section-number">4.8.1</span> Prerequisites<a href="SimSetSimClOrg-2.html#PrereqOrg-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The organics simulation class requires simulation of the following in TUFLOW FV:</p>
+<ul>
+<li>Hydrodynamics, in either two or three dimensions (including any internal one dimensional structures if present)</li>
+<li>Salinity</li>
+<li>Temperature</li>
+<li>Heat module on (i.e. meteorological forcing is required)</li>
+</ul>
+<p>Simulation of suspended sediment (via TUFLOW FV’s sediment transport module) is required only if adsorbed phosphorus is to be simulated by the WQ Module.</p>
+</div>
+<div id="SimCtrlsOrg-3" class="section level3 hasAnchor" number="4.8.2">
+<h3><span class="header-section-number">4.8.2</span> Part 1: Simulation specification<a href="SimSetSimClOrg-2.html#SimCtrlsOrg-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The organics simulation class is set via</p>
+<p><a href="AppCommands.html#WQSimulationClass">Simulation Class</a> <teq>==</teq><tblk> Organics</tblk></p>
+<p>The other commands in this part are not specific to this simulation class. See section <a href="WQctrlfil-2.html#SimCtrls-3">4.5.1</a>.</p>
+</div>
+<div id="ConModSttngsOrg-3" class="section level3 hasAnchor" number="4.8.3">
+<h3><span class="header-section-number">4.8.3</span> Part 2: Constituent model specification<a href="SimSetSimClOrg-2.html#ConModSttngsOrg-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As per Tables <a href="SimulationTiers-2.html#tab:tab-ConClasses">2.2</a> and <a href="SimulationTiers-2.html#tab:tab-ConClassMods">2.3</a>, there are several constituent model classes available within the organics simulation class. The commands for each are described following. To avoid repetition, cross references to explanations are provided for commands that are included in previous simulation classes and remain the same for this class.</p>
+<div id="ConModClssInorg-4a" class="section level4 hasAnchor" number="4.8.3.1">
+<h4><span class="header-section-number">4.8.3.1</span> Model class: Oxygen<a href="SimSetSimClOrg-2.html#ConModClssInorg-4a" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="ConModO2-5b" class="section level5 hasAnchor" number="4.8.3.1.1">
+<h5><span class="header-section-number">4.8.3.1.1</span> Constituent model: O2<a href="SimSetSimClOrg-2.html#ConModO2-5b" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The commands for this constituent model are described in Section <a href="SimSetSimClInorg-2.html#ConModO2-5a">4.7.3.1.1</a>.</p>
+</div>
+</div>
+<div id="ConModClssSil-4a" class="section level4 hasAnchor" number="4.8.3.2">
+<h4><span class="header-section-number">4.8.3.2</span> Model class: Silicate<a href="SimSetSimClOrg-2.html#ConModClssSil-4a" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="ConModSi-5a" class="section level5 hasAnchor" number="4.8.3.2.1">
+<h5><span class="header-section-number">4.8.3.2.1</span> Constituent model: Si<a href="SimSetSimClOrg-2.html#ConModSi-5a" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The commands for this constituent model are described in Section <a href="SimSetSimClInorg-2.html#ConModSi-5">4.7.3.2.1</a>.</p>
+</div>
+</div>
+<div id="ConModClssNit-4a" class="section level4 hasAnchor" number="4.8.3.3">
+<h4><span class="header-section-number">4.8.3.3</span> Model class: Inorganic nitrogen<a href="SimSetSimClOrg-2.html#ConModClssNit-4a" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="ConModAmmNit-5a" class="section level5 hasAnchor" number="4.8.3.3.1">
+<h5><span class="header-section-number">4.8.3.3.1</span> Constituent model: AmmoniumNitrate<a href="SimSetSimClOrg-2.html#ConModAmmNit-5a" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The commands for this constituent model are described in Section <a href="SimSetSimClInorg-2.html#ConModAmmNit-5">4.7.3.3.1</a>.</p>
+</div>
+</div>
+<div id="ConModClssPhs-4a" class="section level4 hasAnchor" number="4.8.3.4">
+<h4><span class="header-section-number">4.8.3.4</span> Model class: Inorganic phosphorus<a href="SimSetSimClOrg-2.html#ConModClssPhs-4a" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="ConModFRPhs-5a" class="section level5 hasAnchor" number="4.8.3.4.1">
+<h5><span class="header-section-number">4.8.3.4.1</span> Constituent model: FRPhs<a href="SimSetSimClOrg-2.html#ConModFRPhs-5a" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The commands for this constituent model are described in Section <a href="SimSetSimClInorg-2.html#ConModFRPhs-5">4.7.3.4.1</a>.</p>
+</div>
+<div id="ConModFRPhsAds-5a" class="section level5 hasAnchor" number="4.8.3.4.2">
+<h5><span class="header-section-number">4.8.3.4.2</span> Constituent model: FRPhsAds<a href="SimSetSimClOrg-2.html#ConModFRPhsAds-5a" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The commands for this constituent model are described in Section <a href="SimSetSimClInorg-2.html#ConModFRPhsAds-5">4.7.3.4.2</a>.</p>
+</div>
+</div>
+<div id="ConModClssOrgs-4" class="section level4 hasAnchor" number="4.8.3.5">
+<h4><span class="header-section-number">4.8.3.5</span> Model class: Organic matter<a href="SimSetSimClOrg-2.html#ConModClssOrgs-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="ConModOrgLab-5" class="section level5 hasAnchor" number="4.8.3.5.1">
+<h5><span class="header-section-number">4.8.3.5.1</span> Constituent model: Labile<a href="SimSetSimClOrg-2.html#ConModOrgLab-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>This constituent model is specified as:</p>
+<p><a href="AppCommands.html#WQOrgMod">Organic Matter Model</a> <teq>==</teq><tblk> Labile</tblK></p>
+<p>Minimum and maximum concentrations are specified as:</p>
+<p><a href="AppCommands.html#WQOCMinMax">Carbon Min Max</a> <teq>==</teq> <a href="AppParams.html#WQParMinPOC"><span class="math inline">\(\left[POC\right]_{min}^{POC}\)</span></a>, <a href="AppParams.html#WQParMaxPOC"><span class="math inline">\(\left[POC\right]_{max}^{POC}\)</span></a>, <a href="AppParams.html#WQParMinDOC"><span class="math inline">\(\left[DOC\right]_{min}^{DOC}\)</span></a>, <a href="AppParams.html#WQParMaxDOC"><span class="math inline">\(\left[DOC\right]_{max}^{DOC}\)</span></a></p>
+<p><a href="AppCommands.html#WQONMinMax">Nitrogen Min Max</a> <teq>==</teq> <a href="AppParams.html#WQParMinPON"><span class="math inline">\(\left[PON\right]_{min}^{PON}\)</span></a>, <a href="AppParams.html#WQParMaxPON"><span class="math inline">\(\left[PON\right]_{max}^{PON}\)</span></a>, <a href="AppParams.html#WQParMinDON"><span class="math inline">\(\left[DON\right]_{min}^{DON}\)</span></a>, <a href="AppParams.html#WQParMaxDON"><span class="math inline">\(\left[DON\right]_{max}^{DON}\)</span></a></p>
+<p><a href="AppCommands.html#WQOPMinMax">Phosphorus Min Max</a> <teq>==</teq> <a href="AppParams.html#WQParMinPOP"><span class="math inline">\(\left[POP\right]_{min}^{POP}\)</span></a>, <a href="AppParams.html#WQParMaxPOP"><span class="math inline">\(\left[POP\right]_{max}^{POP}\)</span></a>, <a href="AppParams.html#WQParMinDOP"><span class="math inline">\(\left[DOP\right]_{min}^{DOP}\)</span></a>, <a href="AppParams.html#WQParMaxDOP"><span class="math inline">\(\left[DOP\right]_{max}^{DOP}\)</span></a></p>
+<p>Global benthic flux parameters (used in Equation <a href="SedDissOrgProd-3.html#eq:equ-sed-org-flux">(N.1)</a>) are specified as:</p>
+<p><a href="AppCommands.html#WQOrgBenFlxPars">Organics Benthic</a> <teq>==</teq> <a href="AppParams.html#WQParKsedDOM"><span class="math inline">\(K_{sed-O_2}^{DOM}\)</span></a>, <a href="AppParams.html#WQParthetasedDOM"><span class="math inline">\(\theta_{sed}^{DOM}\)</span></a></p>
+<p>Although not strictly necessary, the use of “<tblk>organics</tblk>” to prefix the above block command is deliberate so as to maintain consistency of command style with other constituent model blocks that include more than one computed variable, such as nitrogen and phosphorus. The command will also be accepted simply as <tcmd>Benthic </tcmd><teq>==</teq>.</p>
+<p>Particulate organic hydrolysis parameters (used in <a href="Hydrol-3.html#eq:equ-pel-hydrolysis-rate">(N.2)</a> and therefore <a href="Hydrol-3.html#eq:equ-pel-hydrolysis-fluxcons">(N.3)</a>) are set in a single command as:</p>
+<p><a href="AppCommands.html#WQPOMHydPars">Hydrolysis</a> <teq>==</teq> <a href="AppParams.html#WQParRhydPOC"><span class="math inline">\(R_{hyd}^{POC}\)</span></a>, <a href="AppParams.html#WQParRhydPON"><span class="math inline">\(R_{hyd}^{PON}\)</span></a>, <a href="AppParams.html#WQParRhydPOP"><span class="math inline">\(R_{hyd}^{POP}\)</span></a>, <a href="AppParams.html#WQParKhydPOM"><span class="math inline">\(K_{hyd-O_2}^{POM}\)</span></a>, <a href="AppParams.html#WQParthetahydPOM"><span class="math inline">\(\theta_{hyd}^{POM}\)</span></a></p>
+<p>Dissolved organic mineralisation parameters (used in <a href="Miner-3.html#eq:equ-pel-miner-rate">(N.8)</a> and therefore <a href="Miner-3.html#eq:equ-pel-miner-fluxcons">(N.9)</a>) are set in a single command, together with the corresponding denitrification parameters describing associated consumption of nitrate due to mineralisation (used in Equations <a href="Miner-3.html#eq:equ-pel-miner-dosink">(N.10)</a> and <a href="Miner-3.html#eq:equ-pel-miner-flux-no3sink">(N.14)</a>) as:</p>
+<p><a href="AppCommands.html#WQDOMMinerPars">Mineralisation</a> <teq>==</teq> <a href="AppParams.html#WQParRminerDOM"><span class="math inline">\(R_{miner}^{DOM}\)</span></a>, <a href="AppParams.html#WQParKminerDOM"><span class="math inline">\(K_{miner-O_2}^{DOM}\)</span></a>, <a href="AppParams.html#WQParthetaminerDOM"><span class="math inline">\(\theta_{miner}^{DOM}\)</span></a>, <a href="AppParams.html#WQParfanminer"><span class="math inline">\(f_{an}\)</span></a>, <a href="AppParams.html#WQParKminerNitDOM"><span class="math inline">\(K_{miner-NO_3}^{NO_3}\)</span></a></p>
+<p>If <a href="AppParams.html#WQParKminerNitDOM"><span class="math inline">\(K_{miner-NO_3}^{NO_3}\)</span></a> is set to 0.0, then the consumption of nitrate due to mineralisation of organic matter is switched off.</p>
+<p>Settling of labile particulate organic matter can be specified by one of the following models:</p>
+<ul>
+<li>None</li>
+</ul>
+<p>  <a href="AppCommands.html#WQOrgSettNone">Settling</a> <teq>==</teq> <a href="AppCommands.html#WQOrgSettNone">None</a></p>
+<p>  or</p>
+<ul>
+<li>Constant</li>
+</ul>
+<p>  <a href="AppCommands.html#WQOrgSettConst">Settling</a> <teq>==</teq> <a href="AppCommands.html#WQOrgSettConst">Constant</a>, <a href="AppParams.html#WQParConVLOrg"><span class="math inline">\(V_{settle}^{lorg}\)</span></a></p>
+<p>  or</p>
+<ul>
+<li>Constant with density correction (as per Equation <a href="OrgSettle-3.html#eq:eq-pel-org-settdens">(N.28)</a>)</li>
+</ul>
+<p>  <a href="AppCommands.html#WQOrgSettRho">Settling</a> <teq>==</teq> <a href="AppCommands.html#WQOrgSettRho">Thermal</a>, <a href="AppParams.html#WQParConVLOrg"><span class="math inline">\(V_{settle}^{lorg}\)</span></a></p>
+<p>  or</p>
+<ul>
+<li>Stokes (used in Equation <a href="OrgSettle-3.html#eq:eq-pel-org-settstokes1">(N.29)</a>)</li>
+</ul>
+<p>  <a href="AppCommands.html#WQOrgSettStokes">Settling</a> <teq>==</teq> <a href="AppCommands.html#WQOrgSettStokes">Stokes</a>, <a href="AppParams.html#WQParDLOrg"><span class="math inline">\(d_{lorg}\)</span></a>, <a href="AppParams.html#WQParRhoLOrg"><span class="math inline">\(\rho_{lorg}\)</span></a></p>
+<p>Self shading due to the presence of labile organics (used in Equation <a href="OrgLight-3.html#eq:eq-pel-org-selfshad">(N.26)</a>) parameters are set as:</p>
+<p><a href="AppCommands.html#WQDOMSelShadPars">Self Shading</a> <teq>==</teq> <a href="AppParams.html#WQParKePOM"><span class="math inline">\(Ke^{POM}\)</span></a>, <a href="AppParams.html#WQParKeDOM"><span class="math inline">\(Ke^{DOM}\)</span></a></p>
+<p>This constituent model block must be terminated using the command:</p>
+<p><a href="AppCommands.html#WQOrgModEnd">End Organic Matter Model</a></p>
+</div>
+<div id="ConModOrgRef-5" class="section level5 hasAnchor" number="4.8.3.5.2">
+<h5><span class="header-section-number">4.8.3.5.2</span> Constituent model: Refractory<a href="SimSetSimClOrg-2.html#ConModOrgRef-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>This constituent model encompasses all the functionality (and commands) of the labile organic matter constituent model, but offers further commands to simulate refractory organic processes, and their interaction with labile organic and inorganic computed variables.</p>
+<p>This constituent model is specified as:</p>
+<p><a href="AppCommands.html#WQOrgMod">Organic Matter Model</a> <teq>==</teq><tblk> Refractory</tblk></p>
+<p>Minimum and maximum concentrations are specified as follows. The carbon command includes the specification of refractory particulate organic matter minimums and maximums, as well as dissolved refractories.</p>
+<p><a href="AppCommands.html#WQROCMinMax">Ref Carbon Min Max</a> <teq>==</teq> <a href="AppParams.html#WQParMinRPOM"><span class="math inline">\(\left[RPOM\right]_{min}^{RPOM}\)</span></a>, <a href="AppParams.html#WQParMaxRPOM"><span class="math inline">\(\left[RPOM\right]_{max}^{RPOM}\)</span></a>, <a href="AppParams.html#WQParMinRDOC"><span class="math inline">\(\left[RDOC\right]_{min}^{RDOC}\)</span></a>, <a href="AppParams.html#WQParMaxRDOC"><span class="math inline">\(\left[RDOC\right]_{max}^{RDOC}\)</span></a></p>
+<p><a href="AppCommands.html#WQRONMinMax">Ref Nitrogen Min Max</a> <teq>==</teq> <a href="AppParams.html#WQParMinRDON"><span class="math inline">\(\left[RDON\right]_{min}^{RDON}\)</span></a>, <a href="AppParams.html#WQParMaxRDON"><span class="math inline">\(\left[RDON\right]_{max}^{RDON}\)</span></a></p>
+<p><a href="AppCommands.html#WQROPMinMax">Ref Phosphorus Min Max</a> <teq>==</teq> <a href="AppParams.html#WQParMinRDOP"><span class="math inline">\(\left[RDOP\right]_{min}^{RDOP}\)</span></a>, <a href="AppParams.html#WQParMaxRDOP"><span class="math inline">\(\left[RDOP\right]_{max}^{RDOP}\)</span></a></p>
+<p>The breakdown of refractory particulate organic matter into labile particulate organic matter (used in Equations <a href="Break-3.html#eq:equ-pel-bdown-rate">(N.5)</a> and <a href="Break-3.html#eq:equ-pel-bdown-fluxcons">(N.6)</a>) parameters are set as:</p>
+<p><a href="AppCommands.html#WQRPOMbdnPars">Ref Breakdown</a> <teq>==</teq> <a href="AppParams.html#WQParRbdnRPOM"><span class="math inline">\(R_{bdn}^{RPOM}\)</span></a>, <a href="AppParams.html#WQParXNRPOM"><span class="math inline">\(X_N^{RPOM}\)</span></a>, <a href="AppParams.html#WQParXPRPOM"><span class="math inline">\(X_P^{RPOM}\)</span></a></p>
+<p>The activation of refractory dissolved organic matter to labile dissolved organic matter (used in Equations <a href="Active-3.html#eq:equ-pel-active-rate">(N.17)</a> and <a href="Active-3.html#eq:equ-pel-active-fluxcons">(N.18)</a>) parameter is set as:</p>
+<p><a href="AppCommands.html#WQRDOMactPars">Ref Activation</a> <teq>==</teq> <a href="AppParams.html#WQParRactRDOM"><span class="math inline">\(R_{act}^{RDOM}\)</span></a></p>
+<p>The photolysis of refractory organics (used in Equation <a href="OrgLight-3.html#eq:eq-pel-rorg-selfshad">(N.27)</a>) is not turned on unless the following command is issued. It sets the parameter that proportions the split of photolysed refractory dissolved organics to labile dissolved organics and inorganics:</p>
+<p><a href="AppCommands.html#WQRefphotoPars">Ref Photolysis</a> <teq>==</teq> <a href="AppParams.html#WQParfphotoDOM"><span class="math inline">\(f_{photo}^{RDOM}\)</span></a></p>
+<p>Settling of refractory particulate organic matter can be specified by one of the following models:</p>
+<ul>
+<li>None</li>
+</ul>
+<p>  <a href="AppCommands.html#WQOrgSettNoneR">Ref Settling</a> <teq>==</teq> <a href="AppCommands.html#WQOrgSettNoneR">None</a></p>
+<p>  or</p>
+<ul>
+<li>Constant</li>
+</ul>
+<p>  <a href="AppCommands.html#WQOrgSettConstR">Ref Settling</a> <teq>==</teq> <a href="AppCommands.html#WQOrgSettConstR">Constant</a>, <a href="AppParams.html#WQParConVROrg"><span class="math inline">\(V_{settle}^{rorg}\)</span></a></p>
+<p>  or</p>
+<ul>
+<li>Constant with density correction (as per Equation <a href="OrgSettle-3.html#eq:eq-pel-org-settdens">(N.28)</a>)</li>
+</ul>
+<p>  <a href="AppCommands.html#WQOrgSettRhoR">Ref Settling</a> <teq>==</teq> <a href="AppCommands.html#WQOrgSettRhoR">Thermal</a>, <a href="AppParams.html#WQParConVROrg"><span class="math inline">\(V_{settle}^{rorg}\)</span></a></p>
+<p>  or</p>
+<ul>
+<li>Stokes (used in Equation <a href="OrgSettle-3.html#eq:eq-pel-org-settstokes1">(N.29)</a>)</li>
+</ul>
+<p>  <a href="AppCommands.html#WQOrgSettStokesR">Ref Settling</a> <teq>==</teq> <a href="AppCommands.html#WQOrgSettStokesR">Stokes</a>, <a href="AppParams.html#WQParDROrg"><span class="math inline">\(d_{rorg}\)</span></a>, <a href="AppParams.html#WQParRhoROrg"><span class="math inline">\(\rho_{rorg}\)</span></a></p>
+<p>The settling model selected for the refractory particulate organic matter model must be the same as that of the labile particulate organic matter. The input parameters to this model may be different.</p>
+<p>Self shading due to the presence of refractory organics (used in Equation <a href="OrgLight-3.html#eq:eq-pel-rorg-selfshad">(N.27)</a>) parameters are set as:</p>
+<p><a href="AppCommands.html#WQDOMRSelShadPars">Ref Self Shading</a> <teq>==</teq> <a href="AppParams.html#WQParKeRPOM"><span class="math inline">\(Ke^{RPOM}\)</span></a>, <a href="AppParams.html#WQParKeRDOM"><span class="math inline">\(R_{CDOM}^{RDOM}\)</span></a></p>
+<p>This constituent model block must be terminated using the command:</p>
+<p><a href="AppCommands.html#WQOrgModEnd">End Organic Matter Model</a></p>
+</div>
+</div>
+<div id="ConModClssPhy-4a" class="section level4 hasAnchor" number="4.8.3.6">
+<h4><span class="header-section-number">4.8.3.6</span> Model class: Phytoplankton<a href="SimSetSimClOrg-2.html#ConModClssPhy-4a" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="ConModPhyBas-5a" class="section level5 hasAnchor" number="4.8.3.6.1">
+<h5><span class="header-section-number">4.8.3.6.1</span> Constituent model: Basic<a href="SimSetSimClOrg-2.html#ConModPhyBas-5a" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The commands for this constituent model are described in Section <a href="SimSetSimClInorg-2.html#ConModPhyBas-5">4.7.3.5.1</a>.</p>
+</div>
+<div id="ConModPhyAdv-5a" class="section level5 hasAnchor" number="4.8.3.6.2">
+<h5><span class="header-section-number">4.8.3.6.2</span> Constituent model: Advanced<a href="SimSetSimClOrg-2.html#ConModPhyAdv-5a" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The commands for this constituent model are described in Section <a href="SimSetSimClInorg-2.html#ConModPhyAdv-5">4.7.3.5.2</a>.</p>
+</div>
+</div>
+<div id="ConModClssPth-4b" class="section level4 hasAnchor" number="4.8.3.7">
+<h4><span class="header-section-number">4.8.3.7</span> Model class: Pathogens (optional)<a href="SimSetSimClOrg-2.html#ConModClssPth-4b" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>This model class is optional.</p>
+<div id="ConModFree-5b" class="section level5 hasAnchor" number="4.8.3.7.1">
+<h5><span class="header-section-number">4.8.3.7.1</span> Constituent model: Free<a href="SimSetSimClOrg-2.html#ConModFree-5b" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The commands for this constituent model are described in Section <a href="SimSetSimClDO-2.html#ConModFree-5">4.6.3.2.1</a>.</p>
+</div>
+<div id="ConModAtt-5b" class="section level5 hasAnchor" number="4.8.3.7.2">
+<h5><span class="header-section-number">4.8.3.7.2</span> Constituent model: Attached<a href="SimSetSimClOrg-2.html#ConModAtt-5b" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The commands for this constituent model are described in Section <a href="SimSetSimClDO-2.html#ConModAtt-5">4.6.3.2.2</a>.</p>
+</div>
+</div>
+</div>
+<div id="MatSpecsOrg-3" class="section level3 hasAnchor" number="4.8.4">
+<h3><span class="header-section-number">4.8.4</span> Part 3: Material specification<a href="SimSetSimClOrg-2.html#MatSpecsOrg-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Oxygen, silicate, ammonium, nitrate FRP, dissolved organic carbon, dissolved organic nitrogen and dissolved organic phosphorus benthic fluxes are specified within both default and numbered material blocks as:</p>
+<p><a href="introduction.html#WQOxyBenFlx">Oxygen Flux</a> <teq>==</teq> <a href="AppDiags.html#WQParFsedO2"><span class="math inline">\(F_{sed}^{O_2}\)</span></a><br />
+<a href="AppCommands.html#WQSilBenFlx">Silicate Flux</a> <teq>==</teq> <a href="AppDiags.html#WQParFsedSi"><span class="math inline">\(F_{sed}^{sil}\)</span></a><br />
+<a href="AppCommands.html#WQAmmBenFlx">Ammonium Flux</a> <teq>==</teq> <a href="AppDiags.html#WQParFsedAmm"><span class="math inline">\(F_{sed}^{NH_4}\)</span></a><br />
+<a href="AppCommands.html#WQNitBenFlx">Nitrate Flux</a> <teq>==</teq> <a href="AppDiags.html#WQParFsedNit"><span class="math inline">\(F_{sed}^{NO_3}\)</span></a><br />
+<a href="AppCommands.html#WQFRPBenFlx">FRP Flux</a> <teq>==</teq> <a href="AppDiags.html#WQParFsedFRP"><span class="math inline">\(F_{sed}^{FRP}\)</span></a><br />
+<a href="AppCommands.html#WQDOCBenFlx">DOC Flux</a> <teq>==</teq> <a href="AppDiags.html#WQParFsedDOC"><span class="math inline">\(F_{sed}^{DOC}\)</span></a><br />
+<a href="AppCommands.html#WQDONBenFlx">DON Flux</a> <teq>==</teq> <a href="AppDiags.html#WQParFsedDON"><span class="math inline">\(F_{sed}^{DON}\)</span></a><br />
+<a href="AppCommands.html#WQDOPBenFlx">DOP Flux</a> <teq>==</teq> <a href="AppDiags.html#WQParFsedDOP"><span class="math inline">\(F_{sed}^{DOP}\)</span></a></p>
+<p>No adsorbed FRP, phytoplankton or particulate organic fluxes are required.</p>
+</div>
+<div id="ConOrdOrg-3" class="section level3 hasAnchor" number="4.8.5">
+<h3><span class="header-section-number">4.8.5</span> Constituent ordering<a href="SimSetSimClOrg-2.html#ConOrdOrg-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As for the inorganics simulation class (see Section <a href="SimSetSimClInorg-2.html#ConOrdInorg-3">4.7.5</a>) different organic matter constituent model selections require different orderings in specifying computed variable initial conditions and <tcmd>BC Header </tcmd><teq>==</teq> commands. Notwithstanding this, all the ordering information presented in Section <a href="SimSetSimClInorg-2.html#ConOrdInorg-3">4.7.5</a> for the inorganics simulation class applies equally to the organics simulation class, other than for insertions related to the simulation of organics (described below). As such, that section should be reviewed with regard to ordering of the following:</p>
+<ul>
+<li>Dissolved oxygen</li>
+<li>Silicate</li>
+<li>Inorganic nitrogen</li>
+<li>Inorganic phosphorus (including the optional simulation of adsorbed FRP), and</li>
+<li>Phytoplankton groups (including the basic and advanced phytoplankton constituent models, with and without simulation of cell density)</li>
+</ul>
+<p>The additional initial condition and <tcmd>BC Header </tcmd><teq>==</teq> fields related to the organics simulation class do not change the order of computed variable fields presented in Section <a href="SimSetSimClInorg-2.html#ConOrdInorg-3">4.7.5</a> other than to insert organic matter constituent model computed variables immediately after FRP computed variables and immediately prior to required phytoplankton fields. This insertion and ordering is presented following for the labile and refractory organic matter constituent models.</p>
+<div id="ConOrdLabOrg-4" class="section level4 hasAnchor" number="4.8.5.1">
+<h4><span class="header-section-number">4.8.5.1</span> Labile<a href="SimSetSimClOrg-2.html#ConOrdLabOrg-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The computed variables required to be specified within the labile organic matter constituent model are, in order:</p>
+<ul>
+<li>Dissolved organic carbon</li>
+<li>Particulate organic carbon</li>
+<li>Dissolved organic nitrogen</li>
+<li>Particulate organic nitrogen</li>
+<li>Dissolved organic phosphorus</li>
+<li>Particulate organic phosphorus</li>
+</ul>
+<p>All columnar and list style initial condition computed variables are therefore expected in the following order (and map to “<tblk>WQ_1</tblk>” etc accordingly)</p>
+<div class="scrollable-block">
+<p><a href="AppCommands.html#FVInitWQGlob">Initial WQ Concentration</a> <teq>==</teq><tblk> <span class="math inline">\(\left[ DO \right]\)</span>, <span class="math inline">\(\left[ Si \right]\)</span>, <span class="math inline">\(\left[ NH_4 \right]\)</span>, <span class="math inline">\(\left[ NO_3 \right]\)</span>, <span class="math inline">\(\left[ FRP \right]\)</span>, (optionally <span class="math inline">\(\left[ FRPads \right]\)</span>), <span class="math inline">\(\left[ DOC \right]\)</span>, <span class="math inline">\(\left[ POC \right]\)</span>, <span class="math inline">\(\left[ DON \right]\)</span>, <span class="math inline">\(\left[ PON \right]\)</span>, <span class="math inline">\(\left[ DOP \right]\)</span>, <span class="math inline">\(\left[ POP \right]\)</span>, <span class="math inline">\(\ldots\)</span> {phytoplankton placeholder/s}</tblk></p>
+</div>
+<p><br></p>
+<p>Similarly, in a <tcmd>BC Header </tcmd><teq>==</teq> command within a BC block, the following order of computed variables is expected after hydrodynamic (HD BCs) boundary conditions (and map to “<tblk>WQ_1</tblk>” etc accordingly):</p>
+<div class="scrollable-block">
+<p><tcmd>BC Header </tcmd><teq>==</teq><tblk> {HD BCs} <span class="math inline">\(\ldots\)</span> DO_mgL, Si_mgL, Amm_mgL, Nit_mgL, FRP_mgL, (optionally FRPads_mgL), DOC_mgL, POC_mgL, DON_mgL, PON_mgL, DOP_mgL, POP_mgL, <span class="math inline">\(\ldots\)</span> {phytoplankton placeholder/s}</tblk></p>
+</div>
+<p><br></p>
+<p>With regard to the above <tcmd>BC Header </tcmd><teq>==</teq> command:</p>
+<ul>
+<li>DO_mgL, Si_mgL, Amm_mgL, Nit_mgL, FRP_mgL (optionally FRPads_mgL), DOC_mgL, POC_mgL, DON_mgL, PON_mgL, DOP_mgL and POP_mgL are the headers used to designate oxygen, silicate, ammonium, nitrate, FRP (optionally adsorbed FRP), dissolved organic carbon, particulate organic carbon, dissolved organic nitrogen, particulate organic nitrogen, dissolved organic phosphorus and particulate organic phosphorus in the related boundary condition file, respectively</li>
+<li>Whilst this ordering in the command is fixed, the corresponding columnar data can appear in any order in the associated boundary condition file</li>
+<li>The header texts “<tblk>DO_mgL</tblk>”, “<tblk>Si_mgL</tblk>”, “<tblk>Amm_mgL</tblk>”, “<tblk>Nit_mgL</tblk>”, “<tblk>FRP_mgL</tblk>” (optionally “<tblk>FRPads_mgL</tblk>”), “<tblk>DOC_mgL</tblk>”, “<tblk>POC_mgL</tblk>”, “<tblk>DON_mgL</tblk>”, “<tblk>PON_mgL</tblk>”, “<tblk>DOP_mgL</tblk>” and “<tblk>POP_mgL</tblk>” are not special keywords. They can be any headers desired, as long as they match the correct respective boundary condition file column headers</li>
+</ul>
+</div>
+<div id="ConOrdRefOrg-4" class="section level4 hasAnchor" number="4.8.5.2">
+<h4><span class="header-section-number">4.8.5.2</span> Refractory<a href="SimSetSimClOrg-2.html#ConOrdRefOrg-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The computed variables required to be specified within the labile organic matter constituent model are, in order:</p>
+<ul>
+<li>Dissolved organic carbon</li>
+<li>Particulate organic carbon</li>
+<li>Dissolved organic nitrogen</li>
+<li>Particulate organic nitrogen</li>
+<li>Dissolved organic phosphorus</li>
+<li>Particulate organic phosphorus</li>
+<li>Refractory dissolved organic carbon</li>
+<li>Refractory dissolved organic nitrogen</li>
+<li>Refractory dissolved organic phosphorus</li>
+<li>Refractory particulate organic matter</li>
+</ul>
+<p>All columnar and list style initial condition computed variables are therefore expected in the following order (and map to “<tblk>WQ_1</tblk>” etc accordingly)</p>
+<div class="scrollable-block">
+<p><a href="AppCommands.html#FVInitWQGlob">Initial WQ Concentration</a> <teq>==</teq><tblk> <span class="math inline">\(\left[ DO \right]\)</span>, <span class="math inline">\(\left[ Si \right]\)</span>, <span class="math inline">\(\left[ NH_4 \right]\)</span>, <span class="math inline">\(\left[ NO_3 \right]\)</span>, <span class="math inline">\(\left[ FRP \right]\)</span>, (optionally <span class="math inline">\(\left[ FRPads \right]\)</span>), <span class="math inline">\(\left[ DOC \right]\)</span>, <span class="math inline">\(\left[ POC \right]\)</span>, <span class="math inline">\(\left[ DON \right]\)</span>, <span class="math inline">\(\left[ PON \right]\)</span>, <span class="math inline">\(\left[ DOP \right]\)</span>, <span class="math inline">\(\left[ POP \right]\)</span>, <span class="math inline">\(\left[ RDOC \right]\)</span>, <span class="math inline">\(\left[ RDON \right]\)</span>, <span class="math inline">\(\left[ RDOP \right]\)</span>, <span class="math inline">\(\left[ RPOM \right]\)</span>, <span class="math inline">\(\ldots\)</span> {phytoplankton placeholder/s}</p>
+</div>
+<p>Similarly, in a <tcmd>BC Header </tcmd><teq>==</teq> command within a BC block, the following order of computed variables is expected after hydrodynamic (HD BCs) boundary conditions (and map to “<tblk>WQ_1</tblk>” etc accordingly):</p>
+<div class="scrollable-block">
+<p><tcmd>BC Header </tcmd><teq>==</teq><tblk> {HD BCs} <span class="math inline">\(\ldots\)</span> DO_mgL, Si_mgL, Amm_mgL, Nit_mgL, FRP_mgL, (optionally FRPads_mgL), DOC_mgL, POC_mgL, DON_mgL, PON_mgL, DOP_mgL, POP_mgL, RDOC_mgL, RDON_mgL, RDOP_mgL, RPOM_mgL, <span class="math inline">\(\ldots\)</span> {phytoplankton placeholder/s}</p>
+</div>
+<p>With regard to the above <tcmd>BC Header </tcmd><teq>==</teq> command:</p>
+<ul>
+<li>DO_mgL, Si_mgL, Amm_mgL, Nit_mgL, FRP_mgL (optionally FRPads_mgL), DOC_mgL, POC_mgL, DON_mgL, PON_mgL, DOP_mgL, POP_mgL, RDOC_mgL, RDON_mgL, RDOP_mgL and RPOM_mgL are the headers used to designate oxygen, silicate, ammonium, nitrate, FRP (optionally adsorbed FRP), dissolved organic carbon, particulate organic carbon, dissolved organic nitrogen, particulate organic nitrogen, dissolved organic phosphorus, particulate organic phosphorus, refractory dissolved organic carbon, refractory dissolved nitrogen, refractory dissolved phosphorus and refractory particulate organic matter in the related boundary condition file, respectively</li>
+<li>Whilst this ordering in the command is fixed, the corresponding columnar data can appear in any order in the associated boundary condition file</li>
+<li>The header texts “<tblk>DO_mgL</tblk>”, “<tblk>Si_mgL</tblk>”, “<tblk>Amm_mgL</tblk>”, “<tblk>Nit_mgL</tblk>”, “<tblk>FRP_mgL</tblk>” (optionally “<tblk>FRPads_mgL</tblk>”), “<tblk>DOC_mgL</tblk>”, “<tblk>POC_mgL</tblk>”, “<tblk>DON_mgL</tblk>”, “<tblk>PON_mgL</tblk>”, “<tblk>DOP_mgL</tblk>”, “<tblk>POP_mgL</tblk>”, “<tblk>RDOC_mgL</tblk>”, “<tblk>RDON_mgL</tblk>”, “<tblk>RDOP_mgL</tblk>” and “<tblk>RPOM_mgL</tblk>” are not special keywords. They can be any headers desired, as long as they match the correct respective boundary condition file column headers.</li>
+</ul>
+</div>
+<div id="ConOrdOrgIncPth-4" class="section level4 hasAnchor" number="4.8.5.3">
+<h4><span class="header-section-number">4.8.5.3</span> Including pathogens (optional)<a href="SimSetSimClOrg-2.html#ConOrdOrgIncPth-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The ordering requirements for pathogens are the same as those described in Section <a href="SimSetSimClDO-2.html#ConOrdDOPath-4">4.6.5.1</a>. Pathogen headers are always included last (i.e. after phytoplankton in the organics simulation class).</p>
+</div>
+</div>
+<div id="ExampleOrg" class="section level3 hasAnchor" number="4.8.6">
+<h3><span class="header-section-number">4.8.6</span> Example<a href="SimSetSimClOrg-2.html#ExampleOrg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Following is an example of all the available WQ Module <tcmd>Simulation Class </tcmd><teq>==</teq><tblk> Organics</tblk> commands, with a single material applied as zeros everywhere as the default, and then modified by a further specification for materials 3 and 7. Two phytoplankton groups (one each of the basic and advanced models) are set, and the refractory organic matter constituent model deployed. Pathogens have been omitted for clarity, but could be added as per Section <a href="SimSetSimClDO-2.html#ExampleDO">4.6.6</a>.</p>
+<p><tcmd>Simulation Class </tcmd><teq>==</teq><tblk> Organics</tblk><br />
+<tcmd>WQ dt </tcmd><teq>==</teq><tblk> 900</tblk><br />
+<tcmd>WQ Units </tcmd><teq>==</teq><tblk> mgL</tblk></p>
+<p><tcmd>Oxygen Model </tcmd><teq>==</teq><tblk> O2</tblk><br />
+  <tcmd>Oxygen Benthic </tcmd><teq>==</teq><tblk> 4.0, 1.05</tblk><br />
+  <tcmd>Oxygen Min Max </tcmd><teq>==</teq><tblk> 0.0, 25.0</tblk><br />
+<tcmd>End Oxygen Model</tcmd></p>
+<p><tcmd>Silicate Model </tcmd><teq>==</teq><tblk> Si</tblk><br />
+  <tcmd>Silicate Benthic </tcmd><teq>==</teq><tblk> 4.0, 1.05</tblk><br />
+  <tcmd>Silicate Min Max </tcmd><teq>==</teq><tblk> 0.0, 2500.0</tblk><br />
+  <tcmd>Oxygen </tcmd><teq>==</teq><tblk> ON</tblk><br />
+<tcmd>End Silicate Model</tcmd></p>
+<p><tcmd>Inorganic Nitrogen Model </tcmd><teq>==</teq><tblk> AmmoniumNitrate</tblk><br />
+  <tcmd>Ammonium Benthic </tcmd><teq>==</teq><tblk> 4.0, 1.05</tblk><br />
+  <tcmd>Nitrate Benthic </tcmd><teq>==</teq><tblk> 4.0, 1.05</tblk><br />
+  <tcmd>Ammonium Min Max </tcmd><teq>==</teq><tblk> 0.0, 50.0</tblk><br />
+  <tcmd>Nitrate Min Max </tcmd><teq>==</teq><tblk> 0.0, 50.0</tblk><br />
+  <tcmd>Nitrification </tcmd><teq>==</teq><tblk> 0.1, 4.0, 1.05</tblk><br />
+  <tcmd>Denitrification </tcmd><teq>==</teq><tblk> Exponential, 0.5, 8.0, 1.05</tblk><br />
+  <tcmd>Atmospheric Deposition </tcmd><teq>==</teq><tblk> 10.0, 2.4, 0.15</tblk><br />
+  <tcmd>Oxygen </tcmd><teq>==</teq><tblk> ON</tblk><br />
+<tcmd>End Inorganic Nitrogen Model</tcmd></p>
+<p><tcmd>Inorganic Phosphorus Model </tcmd><teq>==</teq><tblk> FRPhsAds</tblk><br />
+  <tcmd>FRP Benthic </tcmd><teq>==</teq><tblk> 4.0, 1.05</tblk><br />
+  <tcmd>FRP Min Max </tcmd><teq>==</teq><tblk> 0.0, 35.0</tblk><br />
+  <tcmd>FRPads Min Max </tcmd><teq>==</teq><tblk> 0.0, 35.0</tblk><br />
+  <tcmd>Atmospheric Deposition </tcmd><teq>==</teq><tblk> 5.0, 1.4</tblk><br />
+  <tcmd>Adsorption </tcmd><teq>==</teq><tblk> Quadratic, 1.5, 0.5</tblk><br />
+  <tcmd>Oxygen </tcmd><teq>==</teq><tblk> ON</tblk><br />
+<tcmd>End Inorganic Phosphorus Model</tcmd></p>
+<p><tcmd>Phyto Model </tcmd><teq>==</teq><tblk> Basic, Green</tblk><br />
+  <tcmd>Min Max </tcmd><teq>==</teq><tblk> 0.01, 40.0</tblk><br />
+  <tcmd>Temperature Limitation </tcmd><teq>==</teq><tblk> Standard, 11.0, 14.0, 30.0</tblk><br />
+  <tcmd>Salinity Limitation </tcmd><teq>==</teq><tblk> None </tblk><br />
+  <tcmd>Light Limitation </tcmd><teq>==</teq><tblk> Monod, 0.3, 70.0</tblk><br />
+  <tcmd>Settling </tcmd><teq>==</teq><tblk> Constant, 0.01</tblk><br />
+  <tcmd>Nitrogen Limitation </tcmd><teq>==</teq><tblk> 0.01, 1.5</tblk><br />
+  <tcmd>Phosphorus Limitation </tcmd><teq>==</teq><tblk> 0.001, 0.03</tblk><br />
+  <tcmd>Silicate Limitation </tcmd><teq>==</teq><tblk> 0.5, 7.0</tblk><br />
+  <tcmd>Uptake </tcmd><teq>==</teq><tblk> 4.7, 0.6, 8.9</tblk><br />
+  <tcmd>Carbon Chla Ratio </tcmd><teq>==</teq><tblk> 32.0</tblk><br />
+  <tcmd>Primary Productivity </tcmd><teq>==</teq><tblk> 2.0, 1.06</tblk><br />
+  <tcmd>Respiration </tcmd><teq>==</teq><tblk> 0.02, 1.04, 0.1, 0.05, 0.6</tblk><br />
+<tcmd>End Phyto Model</tcmd></p>
+<p><tcmd>Phyto Model </tcmd><teq>==</teq><tblk> Advanced, Bluegreen</tblk><br />
+  <tcmd>Min Max </tcmd><teq>==</teq><tblk> 0.5, 50.0</tblk><br />
+  <tcmd>Temperature Limitation </tcmd><teq>==</teq><tblk> Standard, 10.0, 15.0, 25.0</tblk><br />
+  <tcmd>Salinity Limitation </tcmd><teq>==</teq><tblk> Estuarine, 22.0, 35.0, 0.0 </tblk><br />
+  <tcmd>Light Limitation </tcmd><teq>==</teq><tblk> Monod, 0.5, 51.0</tblk><br />
+  <tcmd>Settling </tcmd><teq>==</teq><tblk> Motile, 0.5</tblk><br />
+  <tcmd>Nitrogen Limitation </tcmd><teq>==</teq><tblk> 0.05, 2.5, 4.0, 5.0</tblk><br />
+  <tcmd>Phosphorus Limitation </tcmd><teq>==</teq><tblk> 0.01, 0.05, 0.64, 0.67</tblk><br />
+  <tcmd>Silicate Limitation </tcmd><teq>==</teq><tblk> 1.0, 5.0</tblk><br />
+  <tcmd>Uptake </tcmd><teq>==</teq><tblk> 0.05, 0.05, 8.9</tblk><br />
+  <tcmd>Carbon Chla Ratio </tcmd><teq>==</teq><tblk> 27.0</tblk><br />
+  <tcmd>Nitrogen Fixing </tcmd><teq>==</teq><tblk> 0.100, 0.100</tblk><br />
+  <tcmd>Primary Productivity </tcmd><teq>==</teq><tblk> 1.0, 1.08</tblk><br />
+  <tcmd>Respiration </tcmd><teq>==</teq><tblk> 0.01, 1.01, 0.2, 0.0, 0.4</tblk><br />
+<tcmd>End Phyto Model</tcmd></p>
+<p><tcmd>Organic Matter Model </tcmd><teq>==</teq><tblk> Refractory</tblk><br />
+  <tcmd>Carbon Min Max </tcmd><teq>==</teq><tblk> 0.0, 35.0, 0.0, 35.0, 0.0, 50.0</tblk><br />
+  <tcmd>Nitrogen Min Max </tcmd><teq>==</teq><tblk> 0.0, 25.0, 0.0, 25.0</tblk><br />
+  <tcmd>Phosphorus Min Max </tcmd><teq>==</teq><tblk> 0.0, 5.0, 0.0, 5.0 </tblk><br />
+  <tcmd>Organics Benthic </tcmd><teq>==</teq><tblk> 4.5, 1.03</tblk><br />
+  <tcmd>Hydrolysis </tcmd><teq>==</teq><tblk> 1.2, 0.19, 0.031, 4.2, 1.1</tblk><br />
+  <tcmd>Mineralisation </tcmd><teq>==</teq><tblk> 0.053, 4.1, 1.02, 0.6, 1.2</tblk><br />
+  <tcmd>Self Shading </tcmd><teq>==</teq><tblk> 0.0003, 0.00025</tblk><br />
+  <tcmd>Ref Carbon Min Max </tcmd><teq>==</teq><tblk> 0.0, 40.0, 0.0, 35.0 </tblk><br />
+  <tcmd>Ref Nitrogen Min Max </tcmd><teq>==</teq><tblk> 0.0, 25.0</tblk><br />
+  <tcmd>Ref Phosphorus Min Max </tcmd><teq>==</teq><tblk> 0.0, 5.0</tblk><br />
+  <tcmd>Ref Breakdown </tcmd><teq>==</teq><tblk> 0.002, 0.15, 0.0094</tblk><br />
+  <tcmd>Ref Activation </tcmd><teq>==</teq><tblk> 0.02</tblk><br />
+  <tcmd>Ref Photolysis </tcmd><teq>==</teq><tblk> 0.03</tblk><br />
+  <tcmd>Ref Self Shading </tcmd><teq>==</teq><tblk> 0.00031, 0.00022</tblk><br />
+<tcmd>End Organic Matter Model</tcmd></p>
+<p><tcmd>Material </tcmd><teq>==</teq><tblk> Default</tblk><br />
+  <tcmd>Oxygen Flux </tcmd><teq>==</teq><tblk> 0.0 </tblk><br />
+  <tcmd>Silicate Flux </tcmd><teq>==</teq><tblk> 0.0 </tblk><br />
+  <tcmd>Ammonium Flux </tcmd><teq>==</teq><tblk> 0.0 </tblk><br />
+  <tcmd>Nitrate Flux </tcmd><teq>==</teq><tblk> 0.0 </tblk><br />
+  <tcmd>FRP Flux </tcmd><teq>==</teq><tblk> 0.0 </tblk><br />
+  <tcmd>DOC Flux </tcmd><teq>==</teq><tblk> 0.0</tblk><br />
+  <tcmd>DON Flux </tcmd><teq>==</teq><tblk> 0.0</tblk><br />
+  <tcmd>DOP Flux </tcmd><teq>==</teq><tblk> 0.0</tblk><br />
+<tcmd>End Material</tcmd></p>
+<p><tcmd>Material </tcmd><teq>==</teq><tblk> 3, 7</tblk><br />
+  <tcmd>Oxygen Flux </tcmd><teq>==</teq><tblk> -400.0 </tblk><br />
+  <tcmd>Silicate Flux </tcmd><teq>==</teq><tblk> 12.0 </tblk><br />
+  <tcmd>Ammonium Flux </tcmd><teq>==</teq><tblk> 33.0 </tblk><br />
+  <tcmd>Nitrate Flux </tcmd><teq>==</teq><tblk> 3.7 </tblk><br />
+  <tcmd>FRP Flux </tcmd><teq>==</teq><tblk> 1.4 </tblk><br />
+  <tcmd>DOC Flux </tcmd><teq>==</teq><tblk> 12.0</tblk><br />
+  <tcmd>DON Flux </tcmd><teq>==</teq><tblk> 1.81</tblk><br />
+  <tcmd>DOP Flux </tcmd><teq>==</teq><tblk> 0.29</tblk><br />
+<tcmd>End Material</tcmd></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="SimSetSimClInorg-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="Outputs-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": false,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": false,
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.8 Mass conservation analysis | TUFLOW FV Water Quality (WQ) Module User Manual</title>
+  <meta name="description" content="1.8 Mass conservation analysis | TUFLOW FV Water Quality (WQ) Module User Manual" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.8 Mass conservation analysis | TUFLOW FV Water Quality (WQ) Module User Manual" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/tuflow.png" />
+  <meta property="og:description" content="1.8 Mass conservation analysis | TUFLOW FV Water Quality (WQ) Module User Manual" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.8 Mass conservation analysis | TUFLOW FV Water Quality (WQ) Module User Manual" />
+  
+  <meta name="twitter:description" content="1.8 Mass conservation analysis | TUFLOW FV Water Quality (WQ) Module User Manual" />
+  <meta name="twitter:image" content="/images/tuflow.png" />
+
+<meta name="author" content="Release 2025.1" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="AppMBalRes.html"/>
+<link rel="next" href="AppMBInterp.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet" />
+<script src="libs/vis-9.1.0/vis-network.min.js"></script>
+<script src="libs/visNetwork-binding-2.1.2/visNetwork.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://www.tuflow.com"><img src="images/tuflow.png" style="width:246px;height:68px;"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#about-this-manual"><i class="fa fa-check"></i>About this manual</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#tables"><i class="fa fa-check"></i>Tables</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#figures"><i class="fa fa-check"></i>Figures</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#networks"><i class="fa fa-check"></i>Networks</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#commands"><i class="fa fa-check"></i>Commands</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#parameter-notation"><i class="fa fa-check"></i>Parameter notation</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#concentration-nomenclature"><i class="fa fa-check"></i>Concentration nomenclature</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#feedback"><i class="fa fa-check"></i>Feedback</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="AppMBal.html"><a href="AppMBal.html"><i class="fa fa-check"></i><b>1</b> Mass Conservation Model</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="AppMBalIntent.html"><a href="AppMBalIntent.html"><i class="fa fa-check"></i><b>1.1</b> Intent</a></li>
+<li class="chapter" data-level="1.2" data-path="AppMBalDescription.html"><a href="AppMBalDescription.html"><i class="fa fa-check"></i><b>1.2</b> Description</a></li>
+<li class="chapter" data-level="1.3" data-path="AppMBalMdel.html"><a href="AppMBalMdel.html"><i class="fa fa-check"></i><b>1.3</b> Model suite</a></li>
+<li class="chapter" data-level="1.4" data-path="AppMBalCalcs.html"><a href="AppMBalCalcs.html"><i class="fa fa-check"></i><b>1.4</b> Calculations</a></li>
+<li class="chapter" data-level="1.5" data-path="AppMBalPerformance.html"><a href="AppMBalPerformance.html"><i class="fa fa-check"></i><b>1.5</b> Mass conservation performance</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="AppMBalPerformance.html"><a href="AppMBalPerformance.html#AppMBalDO"><i class="fa fa-check"></i><b>1.5.1</b> Simulation class: DO</a></li>
+<li class="chapter" data-level="1.5.2" data-path="AppMBalPerformance.html"><a href="AppMBalPerformance.html#AppMBalInorg"><i class="fa fa-check"></i><b>1.5.2</b> Simulation class: Inorganics</a></li>
+<li class="chapter" data-level="1.5.3" data-path="AppMBalPerformance.html"><a href="AppMBalPerformance.html#AppMBalOrg"><i class="fa fa-check"></i><b>1.5.3</b> Simulation class: Organics</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="AppMBalExecuting.html"><a href="AppMBalExecuting.html"><i class="fa fa-check"></i><b>1.6</b> Access and execution</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="AppMBalExecuting.html"><a href="AppMBalExecuting.html#AppMBalAccess"><i class="fa fa-check"></i><b>1.6.1</b> Access</a></li>
+<li class="chapter" data-level="1.6.2" data-path="AppMBalExecuting.html"><a href="AppMBalExecuting.html#AppMBalExecu"><i class="fa fa-check"></i><b>1.6.2</b> Execution</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="AppMBalRes.html"><a href="AppMBalRes.html"><i class="fa fa-check"></i><b>1.7</b> Results</a></li>
+<li class="chapter" data-level="1.8" data-path="AppMBalMassCons.html"><a href="AppMBalMassCons.html"><i class="fa fa-check"></i><b>1.8</b> Mass conservation analysis</a>
+<ul>
+<li class="chapter" data-level="1.8.1" data-path="AppMBalMassCons.html"><a href="AppMBalMassCons.html#AppMBMatlab"><i class="fa fa-check"></i><b>1.8.1</b> MATLAB</a>
+<ul>
+<li class="chapter" data-level="1.8.1.1" data-path="AppMBalMassCons.html"><a href="AppMBalMassCons.html#AppMBMatlabSetup"><i class="fa fa-check"></i><b>1.8.1.1</b> Set up</a></li>
+<li class="chapter" data-level="1.8.1.2" data-path="AppMBalMassCons.html"><a href="AppMBalMassCons.html#AppMBMatlabExe"><i class="fa fa-check"></i><b>1.8.1.2</b> Execution</a></li>
+<li class="chapter" data-level="1.8.1.3" data-path="AppMBalMassCons.html"><a href="AppMBalMassCons.html#AppMBMatlabOut"><i class="fa fa-check"></i><b>1.8.1.3</b> Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8.2" data-path="AppMBalMassCons.html"><a href="AppMBalMassCons.html#AppMBPython"><i class="fa fa-check"></i><b>1.8.2</b> Python</a>
+<ul>
+<li class="chapter" data-level="1.8.2.1" data-path="AppMBalMassCons.html"><a href="AppMBalMassCons.html#AppMBPythonSetup"><i class="fa fa-check"></i><b>1.8.2.1</b> Set up</a></li>
+<li class="chapter" data-level="1.8.2.2" data-path="AppMBalMassCons.html"><a href="AppMBalMassCons.html#AppMBPythonExe"><i class="fa fa-check"></i><b>1.8.2.2</b> Execution</a></li>
+<li class="chapter" data-level="1.8.2.3" data-path="AppMBalMassCons.html"><a href="AppMBalMassCons.html#AppMBPythonOut"><i class="fa fa-check"></i><b>1.8.2.3</b> Outputs</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="AppMBInterp.html"><a href="AppMBInterp.html"><i class="fa fa-check"></i><b>1.9</b> Notes</a>
+<ul>
+<li class="chapter" data-level="1.9.1" data-path="AppMBInterp.html"><a href="AppMBInterp.html#AppMBInterpUnits"><i class="fa fa-check"></i><b>1.9.1</b> Units</a></li>
+<li class="chapter" data-level="1.9.2" data-path="AppMBInterp.html"><a href="AppMBInterp.html#AppMBPrecision"><i class="fa fa-check"></i><b>1.9.2</b> Precision</a></li>
+<li class="chapter" data-level="1.9.3" data-path="AppMBInterp.html"><a href="AppMBInterp.html#AppMBPlatform"><i class="fa fa-check"></i><b>1.9.3</b> Platform</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="SimulationConstruction-1.html"><a href="SimulationConstruction-1.html"><i class="fa fa-check"></i><b>2</b> Simulation Construction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="SimulationConstructionContext-2.html"><a href="SimulationConstructionContext-2.html"><i class="fa fa-check"></i><b>2.1</b> Context</a></li>
+<li class="chapter" data-level="2.2" data-path="SimUnits-2.html"><a href="SimUnits-2.html"><i class="fa fa-check"></i><b>2.2</b> Units</a></li>
+<li class="chapter" data-level="2.3" data-path="TFVGeneral-2.html"><a href="TFVGeneral-2.html"><i class="fa fa-check"></i><b>2.3</b> General arrangement</a></li>
+<li class="chapter" data-level="2.4" data-path="TFVCommands-2.html"><a href="TFVCommands-2.html"><i class="fa fa-check"></i><b>2.4</b> TUFLOW FV control file commands</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="TFVCommands-2.html"><a href="TFVCommands-2.html#WQMActivation-3"><i class="fa fa-check"></i><b>2.4.1</b> WQ Module activation</a></li>
+<li class="chapter" data-level="2.4.2" data-path="TFVCommands-2.html"><a href="TFVCommands-2.html#InitBCCond-3"><i class="fa fa-check"></i><b>2.4.2</b> Initial and boundary conditions</a>
+<ul>
+<li class="chapter" data-level="2.4.2.1" data-path="TFVCommands-2.html"><a href="TFVCommands-2.html#ICGeneral-4"><i class="fa fa-check"></i><b>2.4.2.1</b> Initial conditions</a></li>
+<li class="chapter" data-level="2.4.2.2" data-path="TFVCommands-2.html"><a href="TFVCommands-2.html#BCGeneral-4"><i class="fa fa-check"></i><b>2.4.2.2</b> Boundary conditions</a></li>
+<li class="chapter" data-level="2.4.2.3" data-path="TFVCommands-2.html"><a href="TFVCommands-2.html#Ordering-4"><i class="fa fa-check"></i><b>2.4.2.3</b> Ordering</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="WQctrlfil-2.html"><a href="WQctrlfil-2.html"><i class="fa fa-check"></i><b>2.5</b> Water quality control file commands</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="WQctrlfil-2.html"><a href="WQctrlfil-2.html#SimCtrls-3"><i class="fa fa-check"></i><b>2.5.1</b> Part 1: Simulation controls</a></li>
+<li class="chapter" data-level="2.5.2" data-path="WQctrlfil-2.html"><a href="WQctrlfil-2.html#ConModSttngs-3"><i class="fa fa-check"></i><b>2.5.2</b> Part 2: Constituent model settings</a></li>
+<li class="chapter" data-level="2.5.3" data-path="WQctrlfil-2.html"><a href="WQctrlfil-2.html#MatSpecs-3"><i class="fa fa-check"></i><b>2.5.3</b> Part 3: Material specifications</a></li>
+<li class="chapter" data-level="2.5.4" data-path="WQctrlfil-2.html"><a href="WQctrlfil-2.html#SimSetSum-2"><i class="fa fa-check"></i><b>2.5.4</b> Summary</a></li>
+<li class="chapter" data-level="2.5.5" data-path="WQctrlfil-2.html"><a href="WQctrlfil-2.html#SimSetLog-2"><i class="fa fa-check"></i><b>2.5.5</b> Log files</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html"><i class="fa fa-check"></i><b>2.6</b> Simulation Class: DO</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#PrereqDO-3"><i class="fa fa-check"></i><b>2.6.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2.6.2" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#SimCtrlsDO-3"><i class="fa fa-check"></i><b>2.6.2</b> Part 1: Simulation specification</a></li>
+<li class="chapter" data-level="2.6.3" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#ConModSttngsDO-3"><i class="fa fa-check"></i><b>2.6.3</b> Part 2: Constituent model specification</a>
+<ul>
+<li class="chapter" data-level="2.6.3.1" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#ConModClssOxy-4"><i class="fa fa-check"></i><b>2.6.3.1</b> Model class: Oxygen</a></li>
+<li class="chapter" data-level="2.6.3.2" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#ConModClssPth-4"><i class="fa fa-check"></i><b>2.6.3.2</b> Model class: Pathogens (optional)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6.4" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#MatSpecsDO-3"><i class="fa fa-check"></i><b>2.6.4</b> Part 3: Material specification</a></li>
+<li class="chapter" data-level="2.6.5" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#ConOrdDO-3"><i class="fa fa-check"></i><b>2.6.5</b> Constituent ordering</a>
+<ul>
+<li class="chapter" data-level="2.6.5.1" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#ConOrdDOPath-4"><i class="fa fa-check"></i><b>2.6.5.1</b> Pathogens (optional)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6.6" data-path="SimSetSimClDO-2.html"><a href="SimSetSimClDO-2.html#ExampleDO"><i class="fa fa-check"></i><b>2.6.6</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html"><i class="fa fa-check"></i><b>2.7</b> Simulation Class: Inorganics</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#PrereqInorg-3"><i class="fa fa-check"></i><b>2.7.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2.7.2" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#SimCtrlsInorg-3"><i class="fa fa-check"></i><b>2.7.2</b> Part 1: Simulation specification</a></li>
+<li class="chapter" data-level="2.7.3" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConModSttngsInorg-3"><i class="fa fa-check"></i><b>2.7.3</b> Part 2: Constituent model specification</a>
+<ul>
+<li class="chapter" data-level="2.7.3.1" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConModClssInorg-4"><i class="fa fa-check"></i><b>2.7.3.1</b> Model class: Oxygen</a></li>
+<li class="chapter" data-level="2.7.3.2" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConModClssSil-4"><i class="fa fa-check"></i><b>2.7.3.2</b> Model class: Silicate</a></li>
+<li class="chapter" data-level="2.7.3.3" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConModClssNit-4"><i class="fa fa-check"></i><b>2.7.3.3</b> Model class: Inorganic nitrogen</a></li>
+<li class="chapter" data-level="2.7.3.4" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConModClssPhs-4"><i class="fa fa-check"></i><b>2.7.3.4</b> Model class: Inorganic phosphorus</a></li>
+<li class="chapter" data-level="2.7.3.5" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConModClssPhy-4"><i class="fa fa-check"></i><b>2.7.3.5</b> Model class: Phytoplankton</a></li>
+<li class="chapter" data-level="2.7.3.6" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConModClssPth-4a"><i class="fa fa-check"></i><b>2.7.3.6</b> Model class: Pathogens (optional)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7.4" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#MatSpecsInorg-3"><i class="fa fa-check"></i><b>2.7.4</b> Part 3: Material specification</a></li>
+<li class="chapter" data-level="2.7.5" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConOrdInorg-3"><i class="fa fa-check"></i><b>2.7.5</b> Constituent ordering</a>
+<ul>
+<li class="chapter" data-level="2.7.5.1" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConOrdExPhy-4"><i class="fa fa-check"></i><b>2.7.5.1</b> Excluding phytoplankton</a></li>
+<li class="chapter" data-level="2.7.5.2" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConOrdIncPhy-4"><i class="fa fa-check"></i><b>2.7.5.2</b> Including phytoplankton</a></li>
+<li class="chapter" data-level="2.7.5.3" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ConOrdInorgIncPth-4"><i class="fa fa-check"></i><b>2.7.5.3</b> Including pathogens (optional)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7.6" data-path="SimSetSimClInorg-2.html"><a href="SimSetSimClInorg-2.html#ExampleInorg"><i class="fa fa-check"></i><b>2.7.6</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html"><i class="fa fa-check"></i><b>2.8</b> Simulation Class: Organics</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#PrereqOrg-3"><i class="fa fa-check"></i><b>2.8.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2.8.2" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#SimCtrlsOrg-3"><i class="fa fa-check"></i><b>2.8.2</b> Part 1: Simulation specification</a></li>
+<li class="chapter" data-level="2.8.3" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModSttngsOrg-3"><i class="fa fa-check"></i><b>2.8.3</b> Part 2: Constituent model specification</a>
+<ul>
+<li class="chapter" data-level="2.8.3.1" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModClssInorg-4a"><i class="fa fa-check"></i><b>2.8.3.1</b> Model class: Oxygen</a></li>
+<li class="chapter" data-level="2.8.3.2" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModClssSil-4a"><i class="fa fa-check"></i><b>2.8.3.2</b> Model class: Silicate</a></li>
+<li class="chapter" data-level="2.8.3.3" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModClssNit-4a"><i class="fa fa-check"></i><b>2.8.3.3</b> Model class: Inorganic nitrogen</a></li>
+<li class="chapter" data-level="2.8.3.4" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModClssPhs-4a"><i class="fa fa-check"></i><b>2.8.3.4</b> Model class: Inorganic phosphorus</a></li>
+<li class="chapter" data-level="2.8.3.5" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModClssOrgs-4"><i class="fa fa-check"></i><b>2.8.3.5</b> Model class: Organic matter</a></li>
+<li class="chapter" data-level="2.8.3.6" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModClssPhy-4a"><i class="fa fa-check"></i><b>2.8.3.6</b> Model class: Phytoplankton</a></li>
+<li class="chapter" data-level="2.8.3.7" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConModClssPth-4b"><i class="fa fa-check"></i><b>2.8.3.7</b> Model class: Pathogens (optional)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8.4" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#MatSpecsOrg-3"><i class="fa fa-check"></i><b>2.8.4</b> Part 3: Material specification</a></li>
+<li class="chapter" data-level="2.8.5" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConOrdOrg-3"><i class="fa fa-check"></i><b>2.8.5</b> Constituent ordering</a>
+<ul>
+<li class="chapter" data-level="2.8.5.1" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConOrdLabOrg-4"><i class="fa fa-check"></i><b>2.8.5.1</b> Labile</a></li>
+<li class="chapter" data-level="2.8.5.2" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConOrdRefOrg-4"><i class="fa fa-check"></i><b>2.8.5.2</b> Refractory</a></li>
+<li class="chapter" data-level="2.8.5.3" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ConOrdOrgIncPth-4"><i class="fa fa-check"></i><b>2.8.5.3</b> Including pathogens (optional)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8.6" data-path="SimSetSimClOrg-2.html"><a href="SimSetSimClOrg-2.html#ExampleOrg"><i class="fa fa-check"></i><b>2.8.6</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="Outputs-3.html"><a href="Outputs-3.html"><i class="fa fa-check"></i><b>2.9</b> Outputs</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="Outputs-3.html"><a href="Outputs-3.html#WQMOutputs-4"><i class="fa fa-check"></i><b>2.9.1</b> WQ Module outputs</a></li>
+<li class="chapter" data-level="2.9.2" data-path="Outputs-3.html"><a href="Outputs-3.html#FVOutputs-4"><i class="fa fa-check"></i><b>2.9.2</b> TUFLOW FV outputs</a></li>
+<li class="chapter" data-level="2.9.3" data-path="Outputs-3.html"><a href="Outputs-3.html#units-3"><i class="fa fa-check"></i><b>2.9.3</b> Units</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://www.tuflow.com"><img src="images/tuflow.png" style="width:246px;height:68px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(0,85,129);">TUFLOW FV Water Quality (WQ) Module User Manual</h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="AppMBalMassCons" class="section level2 hasAnchor" number="1.8">
+<h2><span class="header-section-number">1.8</span> Mass conservation analysis<a href="AppMBalMassCons.html#AppMBalMassCons" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Two options are available to assess the mass conservation performance of the WQ Module. These use:</p>
+<ul>
+<li>MATLAB, or</li>
+<li>Python</li>
+</ul>
+<p>These perform identical calculations but are offered to support users in their preference for post processing platforms. Both platforms can handle simulations that have used either the MGL or MMM units systems.</p>
+<p>The mass conservation analysis (by its nature) deals with mass, and as such, whilst the MMM analysis expects millimoles inputs for both user parameters and WQ Module results files, the core of the analysis engine operates in units of mass. Mass conservation outcomes from both MGL and MMM units systems are similarly reported as mass (not moles) errors.</p>
+<div id="AppMBMatlab" class="section level3 hasAnchor" number="1.8.1">
+<h3><span class="header-section-number">1.8.1</span> MATLAB<a href="AppMBalMassCons.html#AppMBMatlab" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The MATLAB mass conservation scripts should be executed using MATLAB R2022a, or later.</p>
+<div id="AppMBMatlabSetup" class="section level4 hasAnchor" number="1.8.1.1">
+<h4><span class="header-section-number">1.8.1.1</span> Set up<a href="AppMBalMassCons.html#AppMBMatlabSetup" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The following steps set up the mass conservation analysis in MATLAB:</p>
+<ol style="list-style-type: decimal">
+<li>Open a MATLAB session</li>
+<li>Navigate to the directory where the mass conservation model has been downloaded (assumed to be <tblk>C:\TUFLOWFV\Models\wqm\mass_conservation_model\</tblk> here)</li>
+<li>Set the working directory to be the same location</li>
+<li>In the MATLAB editor (or any text editor), open either of the following mfiles, depending on the units systems being used (MGL or MMM):
+<ul>
+<li><tblk>C:\TUFLOWFV\Models\wqm\mass_conservation_model\execute_mass_conservation_MGL.m</tblk>, or</li>
+<li><tblk>C:\TUFLOWFV\Models\wqm\mass_conservation_model\execute_mass_conservation_MMM.m</tblk></li>
+</ul></li>
+</ol>
+<p>These files:</p>
+<ul>
+<li>Control the mass conservation analysis, and</li>
+<li>Contain the user specifiable and alterable parameters that are required by the mass conservation analysis</li>
+</ul>
+<p>In addition to the above, two folders that contain MATLAB scripts need to be added to the MATLAB path, including adding all subfolders. The mass conservation analysis uses scripts in these folders. These folders are:</p>
+<ul>
+<li>The MATLAB scripts provided <a href="https://downloads.tuflow.com/Utilities/TUFLOWFV_MATLAB_Utilities/TUFLOWFV_Matlab_Utilities_001.zip" target="_blank">here</a>. This folder is named TUFLOWFV_Matlab_Utilities_001</li>
+<li>The functions folder included in the zip download, which (using the assumed download location) is here:
+<ul>
+<li><tblk>C:\TUFLOWFV\Models\wqm\mass_conservation_model\matlab\functions\</tblk></li>
+</ul></li>
+</ul>
+<p>None of the scripts in either of these folders should be edited.</p>
+</div>
+<div id="AppMBMatlabExe" class="section level4 hasAnchor" number="1.8.1.2">
+<h4><span class="header-section-number">1.8.1.2</span> Execution<a href="AppMBalMassCons.html#AppMBMatlabExe" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The following steps execute the mass conservation analysis in MATLAB:</p>
+<ol style="list-style-type: decimal">
+<li>Set the <tblk>runID</tblk> variable in <tblk>execute_mass_conservation_MGL.m</tblk> or <tblk>execute_mass_conservation_MMM.m</tblk> to be the simulation desired. Do this by uncommenting the required line. This <tblk>runID</tblk> will need to be that of a simulation that has already been executed (see Section <a href="AppMBalExecuting.html#AppMBalExecu">1.6.2</a>). The naming convention is the same as the commands used previously in the command window to execute a simulation:
+<ul>
+<li><tblk>MB_&lt;simulation class&gt;_&lt;units system&gt;</tblk></li>
+</ul></li>
+<li>Make sure that the series of parameters set in <tblk>execute_mass_conservation_MGL.m</tblk> (or <tblk>execute_mass_conservation_MMM.m</tblk>) coincide exactly with those used to execute the relevant water quality simulation. Any differences will adversely impact mass conservation calculations. To do so:
+<ul>
+<li>Only alter <tblk>execute_mass_conservation_MGL.m</tblk> (or <tblk>execute_mass_conservation_MMM.m</tblk>). Do not alter any other mfiles</li>
+<li>Within this mfile, only alter parameters in the section titled ‘<tgrn>% User inputs</tgrn>’:</li>
+</ul></li>
+</ol>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="images/matlab_user_inputs.png" alt="**Mass conservation mfile user inputs section**" width="70%" />
+<p class="caption">
+Figure 1.33: <strong>Mass conservation mfile user inputs section</strong>
+</p>
+</div>
+</center>
+<p>In this regard:</p>
+<ul>
+<li>Not all parameters are always used. For example, the DO simulation class uses none of the parameters listed in this section, other than <tblk>runID</tblk></li>
+<li>Hyperlinks to the user manual descriptions of all parameters are included in the mfile</li>
+<li>Do not alter the lengths of the arrays – only change their values.</li>
+<li>Do not add further phytoplankton groups. The mass conservation model has two groups, with one each from the Basic and Advanced classes, so does not need additional groups to serve its purpose</li>
+<li>The user parameters must match those specified in the relevant WQ Module control file. If these differ then mass conservation will not hold. Ensure that any changes made to WQ Module control file parameters are mirrored in the parameter section shown above. The parameters in the WQ Module control files and MGL and MMM mfiles are consistent within the unchanged zip download</li>
+<li>Do not alter any other mfiles</li>
+</ul>
+<p>To execute the mass conservation analysis, and having navigated to the MATLAB directory containing <tblk>execute_mass_conservation_MGL.m</tblk> (or <tblk>execute_mass_conservation_MMM.m</tblk>) type the following in the MATLAB command window:</p>
+<p><tblk>execute_mass_conservation_MGL</tblk></p>
+<p>for MGL units systems, or</p>
+<p><tblk>execute_mass_conservation_MMM</tblk></p>
+<p>for MMM units systems.</p>
+<p>The following will initially appear (using the MB_DO_MGL model as an example)</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-12"></span>
+<img src="images/matlab_commentary1.png" alt="**Initial MATLAB commentary**" width="30%" />
+<p class="caption">
+Figure 1.34: <strong>Initial MATLAB commentary</strong>
+</p>
+</div>
+</center>
+<p>If running the mass conservation process for the first time, a MATLAB warning similar to the following may appear. This can be ignored, and will not appear on subsequent runs of the same WQ Module simulation name:</p>
+<ul>
+<li>Could Not Find <tblk>C:\TUFLOWFV\Models\wqm\mass_conservation_model\results\MB_DO_MGL_mass_conservation.xlsx</tblk></li>
+</ul>
+</div>
+<div id="AppMBMatlabOut" class="section level4 hasAnchor" number="1.8.1.3">
+<h4><span class="header-section-number">1.8.1.3</span> Outputs<a href="AppMBalMassCons.html#AppMBMatlabOut" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>All outputs are written to the results folder at:</p>
+<ul>
+<li><tblk>C:\TUFLOWFV\Models\wqm\mass_conservation_model\results\</tblk></li>
+</ul>
+<p>Two results files are written (named according to simulation as above) in the units system adopted (MGL is used as an example here):</p>
+<ul>
+<li><tblk>MB_DO_MGL_mass_conservation.mat</tblk>. This is a MATLAB datafile that contains all environment, flux and mass conservation data. The latter are timeseries, integrated over the entire mass conservation model domain. This can be loaded into MATLAB for further analysis using the MATLAB command (again, with varying name based on the <tblk>runID</tblk>):</li>
+</ul>
+<p><tblk>load(‘C:\TUFLOWFV\Models\wqm\mass_conservation_model\results\MB_DO_MGL_mass_conservation.mat’)</tblk></p>
+<ul>
+<li><tblk>MB_DO_MGL_mass_conservation.xlsx</tblk>. This contains the same flux and mass conservation data as <tblk>MB_DO_MGL_mass_conservation.mat</tblk>, but as columns in an Excel spreadsheet. These can also be used in further analysis as required</li>
+</ul>
+<p>MATLAB also produces figures that graphically present the mass conservation analysis for every computed variable. The x- and y- axes are time (in hours) and mass conservation deviation (%), respectively. In the case of inorganics and organics simulation classes, an additional figure is produced that plots the same information, but for total nutrients. These figures can be reproduced using the data save in either <tblk>MB_DO_MGL_mass_conservation.mat</tblk> or <tblk>MB_DO_MGL_mass_conservation.xlsx</tblk>.</p>
+</div>
+</div>
+<div id="AppMBPython" class="section level3 hasAnchor" number="1.8.2">
+<h3><span class="header-section-number">1.8.2</span> Python<a href="AppMBalMassCons.html#AppMBPython" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Python mass conservation scripts should be executed using Python 3.8, or later.</p>
+<div id="AppMBPythonSetup" class="section level4 hasAnchor" number="1.8.2.1">
+<h4><span class="header-section-number">1.8.2.1</span> Set up<a href="AppMBalMassCons.html#AppMBPythonSetup" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The following steps set up the mass conservation analysis in Python:</p>
+<ol style="list-style-type: decimal">
+<li>Install Python (if not already installed). Python installation and configuration are required prior to executing the scripts provided. The steps to do so are presented <a href="https://fvwiki.tuflow.com/index.php?title=FV_Python_Install" target="_blank">here</a> in the TUFLOW FV wiki.</li>
+<li>Install Python integrated development environment (IDE) (if not already installed). An IDE is used to control execution of the provided scripts. Any IDE can be used, although PyCharm is recommended and its setup is also described <a href="https://fvwiki.tuflow.com/index.php?title=FV_Python_Tools_PC" target="_blank">here</a> in the TUFLOW FV wiki.<br />
+</li>
+<li>Check that the following dependent Python packages are installed (e.g. using the command <tblk>pip list</tblk> in the command line window if pip is installed), at the noted versions or later:
+<ol style="list-style-type: lower-roman">
+<li>Numpy 1.19.0</li>
+<li>netCDF4 1.5.3</li>
+<li>pandas 1.2.4</li>
+<li>matplotlib 3.2.2</li>
+<li>openpyxl 3.0.10
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-13"></span>
+<img src="images/Pythonpip.png" alt="**Check Python package versions in command prompt**" width="60%" />
+<p class="caption">
+Figure 1.35: <strong>Check Python package versions in command prompt</strong>
+</p>
+</div>
+</center></li>
+</ol></li>
+<li>If any of these packages are missing then install package <tblk>XXXX</tblk> using the terminal command <tblk>pip install XXXX</tblk> command. For example, if <tblk>openpyxl</tblk> is missing, then in the Python terminal type <tblk>pip install openpyxl</tblk>, and so on.</li>
+<li>Open either of the following python script files in the Python IDE selected (PyCharm is recommended), depending on the units systems being used (MGL or MMM):
+<ul>
+<li><tblk>C:\TUFLOWFV\Models\wqm\mass_conservation_model\execute_mass_conservation_MGL.py</tblk>, or</li>
+<li><tblk>C:\TUFLOWFV\Models\wqm\mass_conservation_model\execute_mass_conservation_MMM.py</tblk></li>
+</ul></li>
+</ol>
+<p>These files:</p>
+<ul>
+<li>Control the mass conservation analysis, and</li>
+<li>Contain the user specifiable and alterable parameters that are required by the mass conservation analysis</li>
+</ul>
+<p>The python folder included in the zip download contains supplementary python scripts is here (using the assumed download location):
+- <tblk>C:\TUFLOWFV\Models\wqm\mass_conservation_model\python\</tblk></p>
+<p>Files in this folder should not be altered.</p>
+</div>
+<div id="AppMBPythonExe" class="section level4 hasAnchor" number="1.8.2.2">
+<h4><span class="header-section-number">1.8.2.2</span> Execution<a href="AppMBalMassCons.html#AppMBPythonExe" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The following steps execute the mass conservation analysis in Python:</p>
+<ol style="list-style-type: decimal">
+<li>Set the <tblk>runID</tblk> variable in <tblk>execute_mass_conservation_MGL.py</tblk> or <tblk>execute_mass_conservation_MMM.py</tblk> to be the simulation desired. Do this by uncommenting the required line. This <tblk>runID</tblk> will need to be that of a simulation that has already been executed (see Section <a href="AppMBalExecuting.html#AppMBalExecu">1.6.2</a>). The naming convention is the same as the commands used previously in the command window to execute a simulation:
+<ul>
+<li><tblk>MB_&lt;simulation class&gt;_&lt;units system&gt;</tblk></li>
+</ul></li>
+<li>Make sure that the series of parameters set in <tblk>execute_mass_conservation_MGL.py</tblk> (or <tblk>execute_mass_conservation_MMM.py</tblk>) coincide exactly with those used to execute the relevant water quality simulation. Any differences will adversely impact mass conservation calculations. To do so:
+<ul>
+<li>Only alter <tblk>execute_mass_conservation_MGL.py</tblk> (or <tblk>execute_mass_conservation_MMM.py</tblk>). Do not alter any other scripts</li>
+<li>Within this script, only alter parameters in the section titled ‘<tblk>User inputs</tblk>’. In this regard:
+<ul>
+<li>Not all parameters are always used. For example, the DO simulation class uses none of the parameters listed in this section, other than <tblk>runID</tblk></li>
+<li>Hyperlinks to the user manual descriptions of all parameters are included in the scripts.</li>
+<li>Do not alter the lengths of the arrays – only change their values.</li>
+<li>Do not add further phytoplankton groups. The mass conservation model has two groups, with one each from the Basic and Advanced classes, so does not need additional groups to serve its purpose</li>
+<li>The user parameters must match those specified in the relevant WQ Module control file. If these differ then mass conservation will not hold. Ensure that any changes made to WQ Module control file parameters are mirrored in the parameter section shown above. The parameters in the WQ Module control files and MGL and MMM scripts are consistent within the unchanged zip download</li>
+<li>Do not alter any other scripts</li>
+</ul></li>
+</ul></li>
+<li>Run the Python scripts <tblk>execute_mass_balance_MGL.py</tblk> or <tblk>execute_mass_balance_MMM.py</tblk> in the Python IDE. As an example, a script can be run by right-clicking its header and selecting ‘run’:
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-14"></span>
+<img src="images/Pycharm.png" alt="**Run scripts in PyCharm**" width="30%" />
+<p class="caption">
+Figure 1.36: <strong>Run scripts in PyCharm</strong>
+</p>
+</div>
+</center></li>
+</ol>
+<p>The following warning messages can be ignored if they appear:</p>
+<p><tblk>MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previous axes currently reuses the earlier instance. In a future version, a new instance will always be created and returned. Meanwhile, this warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance.</tblk></p>
+<p><tblk>No artists with labels found to put in legend. Note that artists whose label start with an underscore are ignored when legend() is called with no argument.</tblk></p>
+<p>A window will appear that displays the relevant plot. The figure window can be saved before closing by clicking on the save icon beneath the plot axes. The python script will exit once the plot window has been closed by the user. Some other messages may appear in the python console, but if the following message appears as the final run output, the script has run successfully.</p>
+<p><tblk>Process finished with exit code 0</tblk></p>
+<p>Following successful execution of the Python scripts, the outputs described in the next section will be generated.</p>
+</div>
+<div id="AppMBPythonOut" class="section level4 hasAnchor" number="1.8.2.3">
+<h4><span class="header-section-number">1.8.2.3</span> Outputs<a href="AppMBalMassCons.html#AppMBPythonOut" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>All outputs are written to the results folder at:</p>
+<ul>
+<li><tblk>C:\TUFLOWFV\Models\wqm\mass_conservation_model\results\</tblk></li>
+</ul>
+<p>The result files are written (named according to simulation as above) in the units system adopted (MGL is used as an example here):</p>
+<ul>
+<li><tblk>MB_DO_MGL_mass_conservation.xlsx</tblk></li>
+</ul>
+<p>This contains the flux and mass conservation data as columns in an Excel spreadsheet. These can also be used in further analysis as required.</p>
+<p>The script also produces figures that graphically present the mass conservation analysis for every computed variable. The x- and y- axes are time (in hours) and mass conservation deviation (%), respectively. In the case of inorganics and organics simulation classes, an additional figure is produced that plots the same information, but for total nutrients. This additional figure is blank if a DO simulation is processed.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="AppMBalRes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="AppMBInterp.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": false,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": false,
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["https://downloads.tuflow.com/TUFLOWFV/Manuals/2025.1/WQ/TUFLOWFV_WQM_Manual.pdf", "pdf"]],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
