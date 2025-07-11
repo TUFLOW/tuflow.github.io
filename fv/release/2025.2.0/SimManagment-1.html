@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 1 Simulation Management | TUFLOW FV Release Notes Release Candidate 2025.2</title>
+  <meta name="description" content="TUFLOW FV 2025.2.0-rc Release Notes" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 1 Simulation Management | TUFLOW FV Release Notes Release Candidate 2025.2" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/1024in300px_Blue-01.svg" />
+  <meta property="og:description" content="TUFLOW FV 2025.2.0-rc Release Notes" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 1 Simulation Management | TUFLOW FV Release Notes Release Candidate 2025.2" />
+  
+  <meta name="twitter:description" content="TUFLOW FV 2025.2.0-rc Release Notes" />
+  <meta name="twitter:image" content="/images/1024in300px_Blue-01.svg" />
+
+<meta name="author" content="RELEASE CANDIDATE      These are interim release notes that accompany the TUFLOW FV 2025.2.0-rc.1 release candidate. The information contained within this interim version may vary from the subsequent final version. " />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="HD-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#document-updates-and-important-notices"><i class="fa fa-check"></i>Document Updates and Important Notices</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#using-the-release-notes-and-user-manuals"><i class="fa fa-check"></i>Using the Release Notes and User Manuals</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#changes-to-tuflow-fv-version-numbering"><i class="fa fa-check"></i>Changes to TUFLOW FV Version Numbering</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="SimManagment-1.html"><a href="SimManagment-1.html"><i class="fa fa-check"></i><b>1</b> Simulation Management</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentFeatures-2"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentNomenclature-2"><i class="fa fa-check"></i><b>1.2</b> Nomenclature</a></li>
+<li class="chapter" data-level="1.3" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentEvents-2"><i class="fa fa-check"></i><b>1.3</b> Events</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentTEF-3"><i class="fa fa-check"></i><b>1.3.1</b> TUFLOW Event File</a></li>
+<li class="chapter" data-level="1.3.2" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentRunningEvents-3"><i class="fa fa-check"></i><b>1.3.2</b> Running Events</a></li>
+<li class="chapter" data-level="1.3.3" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentEventExamples-3"><i class="fa fa-check"></i><b>1.3.3</b> Event Examples</a></li>
+<li class="chapter" data-level="1.3.4" data-path="SimManagment-1.html"><a href="SimManagment-1.html#additional-functionality"><i class="fa fa-check"></i><b>1.3.4</b> Additional Functionality</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentScenarios-2"><i class="fa fa-check"></i><b>1.4</b> Scenarios</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentRunningScenarios-3"><i class="fa fa-check"></i><b>1.4.1</b> Running Scenarios</a></li>
+<li class="chapter" data-level="1.4.2" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentScenarioExamples-3"><i class="fa fa-check"></i><b>1.4.2</b> Scenario Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentVariables-2"><i class="fa fa-check"></i><b>1.5</b> Variables</a></li>
+<li class="chapter" data-level="1.6" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentExamples-2"><i class="fa fa-check"></i><b>1.6</b> Simulation Management Example Models</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="HD-1.html"><a href="HD-1.html"><i class="fa fa-check"></i><b>2</b> Hydrodynamic Engine Updates and Enhancements</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="HD-1.html"><a href="HD-1.html#HDBCHeaders-2"><i class="fa fa-check"></i><b>2.1</b> BC Headers</a></li>
+<li class="chapter" data-level="2.2" data-path="HD-1.html"><a href="HD-1.html#HDGIS-2"><i class="fa fa-check"></i><b>2.2</b> GIS Integration Enhancements</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="HD-1.html"><a href="HD-1.html#HDGISTIN-3"><i class="fa fa-check"></i><b>2.2.1</b> TIN Bathymetry Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="HD-1.html"><a href="HD-1.html#HDStructures-2"><i class="fa fa-check"></i><b>2.3</b> Hydraulic Structure Updates</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="HD-1.html"><a href="HD-1.html#HDCulvertHeighWidthContraction-3"><i class="fa fa-check"></i><b>2.3.1</b> Default Culvert Height And Width Contraction Coefficients</a></li>
+<li class="chapter" data-level="2.3.2" data-path="HD-1.html"><a href="HD-1.html#HDCulvertEntExLoss-3"><i class="fa fa-check"></i><b>2.3.2</b> Default Culvert Entry and Exit Loss Coefficients</a></li>
+<li class="chapter" data-level="2.3.3" data-path="HD-1.html"><a href="HD-1.html#HDCulvertInvertChecking-3"><i class="fa fa-check"></i><b>2.3.3</b> Improved Culvert Invert Checking</a></li>
+<li class="chapter" data-level="2.3.7" data-path="HD-1.html"><a href="HD-1.html#HDTriggerRule-3"><i class="fa fa-check"></i><b>2.3.7</b> Control Block Trigger Rule Fix</a></li>
+<li class="chapter" data-level="2.3.8" data-path="HD-1.html"><a href="HD-1.html#HDPSLSF-3"><i class="fa fa-check"></i><b>2.3.8</b> Porous Structure Linked Structure Fixes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="HD-1.html"><a href="HD-1.html#HDMassBalance-2"><i class="fa fa-check"></i><b>2.4</b> Mass Balance</a></li>
+<li class="chapter" data-level="2.5" data-path="HD-1.html"><a href="HD-1.html#HDMinorEnhancements-2"><i class="fa fa-check"></i><b>2.5</b> Minor Enhancements and Fixes</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="HD-1.html"><a href="HD-1.html#HDExTurbScaling-3"><i class="fa fa-check"></i><b>2.5.1</b> External Turbulence Scaling</a></li>
+<li class="chapter" data-level="2.5.2" data-path="HD-1.html"><a href="HD-1.html#HDDVProduct-3"><i class="fa fa-check"></i><b>2.5.2</b> Depth Velocity Product Output Parameter</a></li>
+<li class="chapter" data-level="2.5.3" data-path="HD-1.html"><a href="HD-1.html#HDPointOutputParameters-3"><i class="fa fa-check"></i><b>2.5.3</b> Additional Point Output Parameters Supported</a></li>
+<li class="chapter" data-level="2.5.4" data-path="HD-1.html"><a href="HD-1.html#HDBCOverlap-3"><i class="fa fa-check"></i><b>2.5.4</b> Improved Boundary Nodestring Overlap Checking</a></li>
+<li class="chapter" data-level="2.5.5" data-path="HD-1.html"><a href="HD-1.html#HDGPUErrorFix-3"><i class="fa fa-check"></i><b>2.5.5</b> GPU 3D Drying Z Layer Message Fix</a></li>
+<li class="chapter" data-level="2.5.6" data-path="HD-1.html"><a href="HD-1.html#HDDuplicateFluxFile-3"><i class="fa fa-check"></i><b>2.5.6</b> Duplicate Flux File Fix</a></li>
+<li class="chapter" data-level="2.5.7" data-path="HD-1.html"><a href="HD-1.html#HDDepthAverageTURBZ-3"><i class="fa fa-check"></i><b>2.5.7</b> Turbulence Map Output Fix</a></li>
+<li class="chapter" data-level="2.5.8" data-path="HD-1.html"><a href="HD-1.html#HDFluxOutputHeader-3"><i class="fa fa-check"></i><b>2.5.8</b> Flux Output Header Fix</a></li>
+<li class="chapter" data-level="2.5.9" data-path="HD-1.html"><a href="HD-1.html#HD2dmOutputFix-3"><i class="fa fa-check"></i><b>2.5.9</b> Structured Mesh Check File Fix</a></li>
+<li class="chapter" data-level="2.5.14" data-path="HD-1.html"><a href="HD-1.html#HDUMUNC-3"><i class="fa fa-check"></i><b>2.5.14</b> Unstructured Mesh Unused Nodes Check</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="VMM-1.html"><a href="VMM-1.html"><i class="fa fa-check"></i><b>3</b> Internal Vertical Mixing Model</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="VMM-1.html"><a href="VMM-1.html#VMM-Intr-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="VMM-1.html"><a href="VMM-1.html#VMM-KEVMM-2"><i class="fa fa-check"></i><b>3.2</b> <em>k-ε</em> Vertical Mixing Model</a></li>
+<li class="chapter" data-level="3.3" data-path="VMM-1.html"><a href="VMM-1.html#VMM-KOVMM-2"><i class="fa fa-check"></i><b>3.3</b> <em>k-ω</em> Vertical Mixing Model</a></li>
+<li class="chapter" data-level="3.4" data-path="VMM-1.html"><a href="VMM-1.html#VMM-UVSFF-2"><i class="fa fa-check"></i><b>3.4</b> Unstratified vs. Stratified Flow Fields</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="VMM-1.html"><a href="VMM-1.html#VMM-UVSFF-SOM-3"><i class="fa fa-check"></i><b>3.4.1</b> Second Order Model</a></li>
+<li class="chapter" data-level="3.4.2" data-path="VMM-1.html"><a href="VMM-1.html#VMM-UVSFF-LL-3"><i class="fa fa-check"></i><b>3.4.2</b> Lengthscale Limiter</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="VMM-1.html"><a href="VMM-1.html#VMM-IWMM-2"><i class="fa fa-check"></i><b>3.5</b> Internal Wave Mixing Model</a></li>
+<li class="chapter" data-level="3.6" data-path="VMM-1.html"><a href="VMM-1.html#VMM-Refe-2"><i class="fa fa-check"></i><b>3.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="AD-1.html"><a href="AD-1.html"><i class="fa fa-check"></i><b>4</b> Advection Dispersion Module</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="AD-1.html"><a href="AD-1.html#ADMinorEnhancements-2"><i class="fa fa-check"></i><b>4.1</b> Minor Enhancements and Fixes</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="AD-1.html"><a href="AD-1.html#ADOBCF-2"><i class="fa fa-check"></i><b>4.1.1</b> Fully Specified Grid Boundary Fix</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="AD-1.html"><a href="AD-1.html#ADMassBalance-2"><i class="fa fa-check"></i><b>4.2</b> Mass Balance</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ST-1.html"><a href="ST-1.html"><i class="fa fa-check"></i><b>5</b> Sediment Transport Module</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ST-1.html"><a href="ST-1.html#STMassBalance-2"><i class="fa fa-check"></i><b>5.1</b> Mass Balance</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="WQ-1.html"><a href="WQ-1.html"><i class="fa fa-check"></i><b>6</b> Water Quality Module</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="WQ-1.html"><a href="WQ-1.html#WQMassBalance-2"><i class="fa fa-check"></i><b>6.1</b> Mass Balance</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="PT-1.html"><a href="PT-1.html"><i class="fa fa-check"></i><b>7</b> Particle Tracking Module</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="PT-1.html"><a href="PT-1.html#PTMinorEnhancements-2"><i class="fa fa-check"></i><b>7.1</b> Minor Enhancements and Fixes</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="PT-1.html"><a href="PT-1.html#PTMultipleGroupFix-3"><i class="fa fa-check"></i><b>7.1.1</b> Multiple Particle Groups Fix</a></li>
+<li class="chapter" data-level="7.1.2" data-path="PT-1.html"><a href="PT-1.html#PTSCPPF-3"><i class="fa fa-check"></i><b>7.1.2</b> Spherical Coordinate Particle Position Fix</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="Tools-1.html"><a href="Tools-1.html"><i class="fa fa-check"></i><b>8</b> Visualisation and Model Development Tools</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="Tools-1.html"><a href="Tools-1.html#xmdf-and-netcdf-file-locking-hdf5-compatibility-issues"><i class="fa fa-check"></i><b>8.1</b> XMDF and NetCDF File Locking (HDF5 Compatibility Issues)</a></li>
+<li class="chapter" data-level="8.2" data-path="Tools-1.html"><a href="Tools-1.html#ToolsGetTools-2"><i class="fa fa-check"></i><b>8.2</b> TUFLOW FV Boundary Condition Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="Support-1.html"><a href="Support-1.html"><i class="fa fa-check"></i><b>9</b> User Manuals, Tutorials and Supporting Materials</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="Support-1.html"><a href="Support-1.html#SupportTutorialModels-2"><i class="fa fa-check"></i><b>9.1</b> Updated Tutorial Models</a></li>
+<li class="chapter" data-level="9.2" data-path="Support-1.html"><a href="Support-1.html#SupportExampleModels-2"><i class="fa fa-check"></i><b>9.2</b> New Example Models</a></li>
+<li class="chapter" data-level="9.3" data-path="Support-1.html"><a href="Support-1.html#SupportTUFLOWFVWiki-2"><i class="fa fa-check"></i><b>9.3</b> TUFLOW FV Wiki Updates</a></li>
+<li class="chapter" data-level="9.4" data-path="Support-1.html"><a href="Support-1.html#SupportUserManuals-2"><i class="fa fa-check"></i><b>9.4</b> User Manuals</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="LicensingInstallation-1.html"><a href="LicensingInstallation-1.html"><i class="fa fa-check"></i><b>10</b> Licensing</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html"><i class="fa fa-check"></i><b>A</b> Vertical Mixing Model Science</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#App-VMMS-KEMS-2"><i class="fa fa-check"></i><b>A.1</b> K-Epsilon Model Science</a></li>
+<li class="chapter" data-level="A.2" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#App-VMMS-KOMS-2"><i class="fa fa-check"></i><b>A.2</b> K-Omega Model Science</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#tab-C3ModelParameters"><i class="fa fa-check"></i><b>A.2.1</b> Table: Model Parameters C<sub>3</sub> for <em>k</em>-ε and <em>k</em>-ω Models</a></li>
+</ul></li>
+<li class="chapter" data-level="A.3" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#App-VMMS-SOMS-2"><i class="fa fa-check"></i><b>A.3</b> Second Order Model Science</a>
+<ul>
+<li class="chapter" data-level="A.3.1" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#tab-SOParameterGroups"><i class="fa fa-check"></i><b>A.3.1</b> Table: Empirical Parameters Group in Second-Order Turbulence Model</a></li>
+</ul></li>
+<li class="chapter" data-level="A.4" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#App-VMMS-Refe-2"><i class="fa fa-check"></i><b>A.4</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html"><i class="fa fa-check"></i><b>B</b> Vertical Mixing Model Benchmarking</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#App-VMMB-Over-2"><i class="fa fa-check"></i><b>B.1</b> Overview</a></li>
+<li class="chapter" data-level="B.2" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#App-VMMB-OCF-2"><i class="fa fa-check"></i><b>B.2</b> Open Channel Flow</a></li>
+<li class="chapter" data-level="B.3" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#App-VMMB-WC-2"><i class="fa fa-check"></i><b>B.3</b> Wind Circulation</a></li>
+<li class="chapter" data-level="B.4" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#App-VMMB-EOWML-2"><i class="fa fa-check"></i><b>B.4</b> Entrainment Of Wind Mixed Layer</a>
+<ul>
+<li class="chapter" data-level="B.4.1" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#wind-entrainment-with-coriolis-forcing"><i class="fa fa-check"></i><b>B.4.1</b> Wind Entrainment With Coriolis Forcing</a></li>
+</ul></li>
+<li class="chapter" data-level="B.5" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#App-VMMB-Refe-2"><i class="fa fa-check"></i><b>B.5</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(0,85,129);"><bmtpink>TUFLOW FV Release Notes Release Candidate 2025.2</bmtpink></h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="SimManagment-1" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Section 1</span> Simulation Management<a href="SimManagment-1.html#SimManagment-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p class="wmark before">
+</p>
+<div id="SimManagmentFeatures-2" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Overview<a href="SimManagment-1.html#SimManagmentFeatures-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Modelling studies often require the simulation of different events or
+time periods. For example:</p>
+<ul>
+<li>A coastal study may need to consider different seasons, climate change scenarios, multiple tidal periods or the duration of separate dredging campaigns</li>
+<li>A storm tide study may consider different potential combinations of tropical cyclone tracks and tides</li>
+<li>A flood study may have to consider the 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0 and 50.0% Annual Exceedance Probability (AEP) events and extreme floods</li>
+<li>A water quality study may require investigation of multiple scenarios to assess the impact of proposed changes or the efficacy of management intervention</li>
+</ul>
+<p>To assist with associated simulation management and quality control,
+TUFLOW FV now includes three features as follows, which can be used in combination.</p>
+<ul>
+<li><a href="SimManagment-1.html#SimManagmentEvents-2">Model Events</a>
+<ul>
+<li>Event management allows running multiple event combinations
+(e.g. magnitude, duration, temporal patterns, climate change)
+using a single set of control files rather than creating a new
+set of control files for every simulation</li>
+</ul></li>
+<li><a href="SimManagment-1.html#SimManagmentScenarios-2">Model Scenarios</a>
+<ul>
+<li>Model Scenarios provide the framework to allow the simulation of
+different model configurational options (e.g. proposed bathymetric changes)
+from a single .fvc control file, rather than needing to create
+separate control files for each scenario</li>
+</ul></li>
+<li><a href="SimManagment-1.html#SimManagmentVariables-2">Model Variables</a>
+<ul>
+<li>Used to assign a user-specified value (that typically appears in
+multiple locations in a set a control files) to a string
+variable</li>
+</ul></li>
+</ul>
+<p>Details are provided on how to construct and use events, scenarios and variables in the following sections, after an explanation of the general nomenclature used to do so.</p>
+</div>
+<div id="SimManagmentNomenclature-2" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Nomenclature<a href="SimManagment-1.html#SimManagmentNomenclature-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A method of text substitution is required in order to use a single *.fvc control file to support re-execution of numerous events and/or scenarios. TUFLOW FV achieves this by using the tilde ‘~’ symbol to surround substitutable event and scenario names in *.fvc filenames. That is, the name given to a *.fvc control file includes tilde pairs for as many scenarios and events are required to be simulated in combination. This same single control file is then called repeatedly but with differing scenario and event arguments sent to it, that then perform various functions within the *.fvc as described below. These arguments are substituted where tilde pairs are present in the *.fvc filename.</p>
+<p>For example, if a particular model required consideration of two events (perhaps one inflow and one tidal) and one scenario (perhaps bathymetric settings) then the *.fvc will need to accommodate these three substitutable quantities using tilde pairs, and therefore might be named as follows (where ‘eX’ and ‘sX’ are keywords that refer to events and scenarios, respectively, and X is a sequential integer).</p>
+<pre><code>Model_~e1~_~e2~_~s1~_001.fvc</code></pre>
+<p>If in one instance the user had then set e1 to be ‘Q100’, e2 to be ‘HighTide’ and s1 to be ‘BASECASE’, then the above reusable *.fvc would be interpreted as follows.</p>
+<pre><code>Model_Q100_HighTide_BASECASE_001.fvc</code></pre>
+<p>Importantly, this *.fvc would not be created as such (doing so would defeat the purpose of using wildcards in a single *.fvc) but the results files the simulation write would be named accordingly.</p>
+<pre><code>Model_Q100_HighTide_BASECASE_001.nc
+Model_Q100_HighTide_BASECASE_001.csv</code></pre>
+<p>This means that only one *.fvc is used, but multiple sets of uniquely named output files are created.</p>
+<p>In addition to the above tilde substitution for events and scenarios, variables are referred to within *.fvc files using double angled bracket nomenclature. For example, if a user has specified that a variable called DO_HIGH has a value of 6.0, then the variable DO_HIGH can be referenced anywhere subsequently in an *.fvc as &lt;&lt;DO_HIGH&gt;&gt;. An example of setting water quality initial conditions is provided below.</p>
+<p><tcmd>Initial WQ Concentration</tcmd><teq> == </teq><tblk>&lt;&lt;DO_HIGH&gt;&gt;</tblk></p>
+<p>The use of this nomenclature in setting up and executing scenarios and events, and deploying variables, is described following.</p>
+</div>
+<div id="SimManagmentEvents-2" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Events<a href="SimManagment-1.html#SimManagmentEvents-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Event management allows running multiple event combinations (e.g.
+magnitude, duration, temporal patterns, climate change) using a single
+set of control files rather than creating a new set of control files for
+every simulation. For example, a flood study requires simulation of the
+1%, 2% and 5% Annual Exceedence Probability (AEP). Each AEP needs to be run for the 1hr and 2hr storm duration. The number of .fvc files required with and without event
+management is shown in Figure <a href="SimManagment-1.html#fig:fig-ExampleTEF">1.1</a>.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:fig-ExampleTEF"></span>
+<img src="images/ExampleTEF.png" alt="Reduction of Control Files using Event Management" width="70%" height="70%" />
+<p class="caption">
+Figure 1.1: Reduction of Control Files using Event Management
+</p>
+</div>
+</center>
+<div id="SimManagmentTEF-3" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> TUFLOW Event File<a href="SimManagment-1.html#SimManagmentTEF-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Multiple events are set up through the creation of a TUFLOW Event File
+(recommended extension .tef) containing .fvc commands that are
+particular to a specific event.</p>
+<p>The .tef file is referenced in the .fvc file using the command
+<tcmd>Event File</tcmd>. Up to nine (9) different types of events can be
+specified for a simulation, although in most cases only one or two is
+all that is needed.</p>
+<p>The location of Event File within the .fvc file and the location of the
+commands within the .tef file are important. Specifically, the commands
+from the .tef file (for the events specified using the –e run option or the
+<tcmd>Model Events</tcmd> command) are inserted into the .fvc at the location of the Event File command, and are processed as if they are embedded into the .fvc
+file at that location. The event file will typically be used to overwrite default command values and therefore Event File is usually placed as the last command, at the bottom of the .fvc file.</p>
+<p>The following is an example TUFLOW Event File call within the .fvc file.</p>
+<p><tgrn>!_________________________________________________________________</tgrn><br>
+<tgrn>! EVENTS</tgrn><br> <tcmd>Event File </tcmd><teq>==</teq><tblk>
+FLD008_005.tef</tblk><tgrn> ! Reference to the TUFLOW Event
+File</tgrn><br></p>
+<p>Within the .tef, event-specific commands are contained between
+<tcmd>Define Event</tcmd> and <tcmd>End Define</tcmd> commands, which
+declare an event block. Define Event contains the name of the event and associated event block. Commands within an event block are either read or ignored at model startup depending on whether the event has been assigned via the –e command line option or by the <tcmd>Model Events</tcmd> command. The options for running events are described in Section <a href="SimManagment-1.html#SimManagmentRunningEvents-3">1.3.2</a>.</p>
+<p>Any TUFLOW FV command can be placed within a define event block, however
+event blocks are typically used for commands that relate to model
+boundary conditions, and simulation period, such as start and end times. Global .fvc commands can also be used in the .tef by placing
+commands outside the Define Event blocks (normally at the top).</p>
+<p>The new command <tcmd>BC Event Source</tcmd> enables dynamic text replacement within .fvc files at runtime. This approach allows alternative boundary conditions, include files, or model parameters to be modified using a single .fvc file.</p>
+<p>An example .tef is provided as follows, noting that it conforms to the same general nomenclature as described in Section <a href="SimManagment-1.html#SimManagmentNomenclature-2">1.2</a> with pairs of tildes surrounding text that is to be substituted. Since these substitutable text strings are not part of a *.fvc control file name, they can be user defined and are not keywords (e.g. ‘aep’ is user defined as below, but e1 is a keyword).</p>
+<p><tgrn>! TUFLOW EVENT FILE (.TEF) defines the parameters for the model
+events</tgrn><br></p>
+<p><tcmd>Define Event</tcmd><teq> == </teq><tblk>Q100</tblk><tgrn> ! Start
+definition of block of commands for event ‘Q100’</tgrn><br>   <tcmd>BC
+Event Source</tcmd><teq> == </teq><tblk>~aep~ | 100yr</tblk><tgrn> !
+Text for runtime substitution</tgrn><br>   <tcmd>Timestep
+Limits</tcmd><teq> == </teq><tblk>0.01, 0.3</tblk><tgrn> ! Minimum and
+maximum time steps allowed</tgrn><br> <tcmd>End Define</tcmd><tgrn> !
+End definition of block of commands for event ‘Q100’</tgrn><br></p>
+<p><tcmd>Define Event</tcmd><teq> == </teq><tblk>2h</tblk><tgrn> ! Start
+definition of block of commands for event ‘2h’</tgrn><br>   <tcmd>BC
+Event Source</tcmd><teq> == </teq><tblk>~dur~ | 2hr</tblk><tgrn> !
+Text for runtime substitution</tgrn><br>   <tcmd>End Time</tcmd><teq> ==
+</teq><tblk>3.0</tblk><tgrn> ! Simulation end time</tgrn><br> <tcmd>End
+Define</tcmd><tgrn> ! End definition of block of commands for event
+‘2h’</tgrn><br></p>
+<p>The <tcmd>BC Event Source</tcmd> and <tcmd>Timestep Limits</tcmd>
+commands within the event block will be executed if the events ‘Q100’ and ‘2h’ are
+specified at runtime (refer <a href="SimManagment-1.html#SimManagmentRunningEvents-3">Running
+Events</a>) and complete the following
+function.</p>
+<ul>
+<li>In the Define Event block the <tcmd>Timestep Limits</tcmd> are
+selected as a function of the event severity. Timesteps are
+modified to allow for events with larger water depths and
+velocities.</li>
+<li><tcmd>BC Event Source</tcmd> assigns dynamic text replacement variables for rainfall intensity and storm duration.</li>
+</ul>
+<p>Using the above event block example as a guide, dynamic text replacement
+using <tcmd>BC Event Source</tcmd> is governed by the following rules.</p>
+<ol style="list-style-type: decimal">
+<li>Replacement of text in directory and file paths to the right of the
+== is supported. For example:</li>
+</ol>
+<ol>
+<p><tcmd>BC</tcmd> <teq>==</teq><tblk> Q, 1,
+..\bc_dbase_~aep~_~dur~.csv</tblk><br></p>
+<p>becomes:</p>
+<p><tcmd>BC</tcmd> <teq>==</teq><tblk> Q, 1,
+..\bc_dbase_100yr_2hr.csv</tblk><br></p>
+</ol>
+<ol start="2" style="list-style-type: decimal">
+<li>Replacement of command input parameters to the right of the == is
+supported. For example:</li>
+</ol>
+<ol>
+<p><tcmd>BC Header</tcmd><teq> == </teq><tblk> inflow_time_~dur~,
+inflow_~aep~_~dur~_FC01</tblk></p>
+<p>becomes:</p>
+<p><tcmd>BC Header</tcmd><teq> == </teq><tblk> inflow_time_2hr,
+inflow_100yr_2hr_FC01</tblk></p>
+</ol>
+<ol start="3" style="list-style-type: decimal">
+<li>Replacement is not allowed in TUFLOW FV command syntax to the left
+of the ==. For example:</li>
+</ol>
+<ol>
+<p><tcmd>BC Header ~aep~ </tcmd> <teq>==</teq><tblk>
+inflow_time_hr,inflow_~aep~_FC01</tblk></p>
+<p>Will result in an error due to the ~aep~ to the left of the ==.</p>
+</ol>
+<ol start="4" style="list-style-type: decimal">
+<li>BC Event Source text replacement is currently limited to .fvc and
+include file commands. It is not currently available for commands
+within Sediment Transport (.fvsed), Water Quality (.fvwq) and
+Particle Tracking (.fvptm) Control Files.</li>
+</ol>
+</div>
+<div id="SimManagmentRunningEvents-3" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Running Events<a href="SimManagment-1.html#SimManagmentRunningEvents-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Two options are available to run multiple events from the same .fvc
+file:</p>
+<ol style="list-style-type: decimal">
+<li>Using a batch file (.bat): Specifying –e or –eX options (where X is a number from 1 to 9) to run the
+multiple events using the same .fvc file – refer to the <a href="SimManagment-1.html#SimManagmentEventExamples-3">Event
+Examples</a>. This is the recommended
+approach.</li>
+<li>Using the <tcmd>Model Events</tcmd> command: Change the events
+manually before each simulation within the .fvc file. Note that if
+using the –e option, a .bat file –e events will override any
+events defined using Model Events within the .fvc. The Model Events
+command is typically used to set the default event(s).</li>
+</ol>
+<p>To automatically insert the name of the event(s) into the output
+filenames so as to make the output names unique, place “~e~” or
+“~e&lt;X&gt;~” where &lt;X&gt; is a number from 1 to 9 into the .fvc file name as shown in the following example.</p>
+<pre><code>MODEL_~e1~_001.fvc
+
+Can be configured to run any number of e1 event names:
+
+- e1=0100F:  MODEL_0100F_001.fvc
+- e1=0200F:  MODEL_0200F_001.fvc
+- e1=0500F:  MODEL_0500F_001.fvc
+- e1=1000F:  MODEL_1000F_001.fvc</code></pre>
+<p>Multiple events can be simulated from the one .fvc file using a batch
+file. The example below uses three events to vary the event rainfall intensity, duration and temporal pattern.</p>
+<pre><code>set EXE=C:\Program Files\TUFLOWFV\TUFLOWFV.exe
+set OMP_NUM_THREADS=4
+%EXE%   –e1         10pct   –e2         01h     –e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   –e1         10pct   –e2         01h     –e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   –e1         10pct   –e2         02h     –e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   –e1         10pct   –e2         02h     –e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   –e1         05pct   –e2         01h     –e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   –e1         05pct   –e2         01h     –e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   –e1         05pct   –e2         02h     –e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   –e1         05pct   –e2         02h     –e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   –e1         02pct   –e2         01h     –e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   –e1         02pct   –e2         01h     –e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   –e1         02pct   –e2         02h     –e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   –e1         02pct   –e2         02h     –e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   –e1         01pct   –e2         01h     –e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   –e1         01pct   –e2         01h     –e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   –e1         01pct   –e2         02h     –e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   –e1         01pct   –e2         02h     –e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc</code></pre>
+<p>When many events are to be executed, it can be convenient to do so through a series of loops in a batch file, rather than listing multiple rows of (relatively repetitive) commands as above. Native batch file syntax can be used to do so (in Windows), by defining arrays and then looping through these arrays accordingly. For example, the above 16 calls to TUFLOW FV can be written more succinctly (and robustly) as follows.</p>
+<pre><code>set EXE=C:\Program Files\TUFLOWFV\TUFLOWFV.exe
+set OMP_NUM_THREADS=4
+
+REM Set arrays e1, e2 and e3
+set ev1=10pct 05pct 02pct 01pct
+set ev2=01h 02h
+set ev3=T01 T02
+
+REM Loop through arrays
+for %%a in (%ev1%) do (
+  for %%b in (%ev2%) do (
+    for %%c in (%ev3%) do (
+      %EXE% -e1 %%a -e2 %%b -e3 %%c Nile_~e1~_~e2~_~e3~_001.fvc
+    )
+  )
+)</code></pre>
+<p>For further examples on running events from batch files, including
+advanced batch looping refer to the <a href="https://fvwiki.tuflow.com/Run_TUFLOW_FV_From_A_Batch_File">TUFLOW FV
+Wiki</a>.</p>
+</div>
+<div id="SimManagmentEventExamples-3" class="section level3 hasAnchor" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Event Examples<a href="SimManagment-1.html#SimManagmentEventExamples-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Three examples are presented below.</p>
+<ul>
+<li>Examples 1 and 2 are an estuary model use case that runs a series of simulation years 2016-2018. Example 1 uses one type of event to select the year to run. Example 2 adds a second event to select climate change allowances for inflow and downstream water levels.</li>
+<li>Example 3 is a catchment model that uses three events to run combinations of rainfall event intensities, durations and temporal patterns.</li>
+</ul>
+<p>In the examples, note how the start and end time, initial conditions, and output dir commands are used within the event blocks to vary the model configuration as a function of the event simulated.</p>
+<p><strong>Events Example 1</strong></p>
+<p>Within each BC Block:</p>
+<p><tgrn>! ~simperiod~ replaced by event file BC Event Source text</tgrn><br>
+<tcmd>BC </tcmd><teq>== </teq><tblk>Q, Upstream,
+..\bc_dbase\Estuary_Inflows_~simperiod~.csv</tblk><br>  <tcmd>BC
+Header </tcmd><teq>== </teq><tblk>Time_UTC, Flow_cumecs, Salinity_ppt,
+Temp_degC</tblk><br> <tcmd>End BC</tcmd><br></p>
+<p><tgrn>! ~simperiod~ replaced by event file BC Event Source text</tgrn><br>
+<tcmd>BC </tcmd><teq>== </teq><tblk>WL, Downstream,
+..\bc_dbase\Estuary_Water_Levels_~simperiod~.csv</tblk><br>
+ <tcmd>BC Header </tcmd><teq>== </teq><tblk>Time_UTC, Level_mMSL,
+Salinity_ppt, Temp_degC</tblk><br> <tcmd>End BC</tcmd><br></p>
+<p>Include “~e1~” in the .fvc file name, for example
+“Example_Estuary_~e1~_001.fvc”, and add the following line: <tcmd>Event
+File</tcmd> <teq>==</teq> <tblk>Estuary_Events.tef.</tblk><br></p>
+<p>The “Estuary Events.tef” file contains the following.</p>
+<p><tgrn>!__________________________________________________________________________<br>
+! Global Default Settings</tgrn><br> <tcmd>Time Format
+</tcmd><teq>==</teq><tblk> ISODATE</tblk><br> <tcmd>Start Time
+</tcmd><teq>==</teq><tblk> 01/01/2016 00:00:00 </tblk><tgrn>! (UTC)
+Unless Start Time is subsequently repeated start in 2016</tgrn><br>
+<tgrn>!__________________________________________________________________________<br>
+! Simulation Year Event Definitions</tgrn><br></p>
+<p><tgrn>! Commands Specific to 2016</tgrn><br><tcmd>Define Event
+</tcmd><teq>==</teq><tblk> 2016</tblk><br>   <tcmd>BC Event Source
+</tcmd><teq>==</teq><tblk> ~simperiod~ | 20160101_20170101</tblk>  <tgrn>! .fvc file runtime text replacement</tgrn><br>
+  <tcmd>End Time </tcmd><teq>==</teq><tblk> 01/01/2017 00:00:00
+</tblk><br>   <tcmd>Output Dir </tcmd><teq>==</teq><tblk>
+..\results\2016</tblk><br>   <tcmd>Write Check Files
+</tcmd><teq>==</teq><tblk> ..\check\2016</tblk><br>   <tcmd>Initial
+Water Level </tcmd><teq>==</teq><tblk> 0.1</tblk><br>   <tcmd>Initial
+Salinity </tcmd><teq>==</teq><tblk> 35.0</tblk><br>   <tcmd>Initial
+Temperature </tcmd><teq>==</teq><tblk> 18.</tblk><br> <tcmd>End
+Define</tcmd><br><br></p>
+<p><tgrn>! Commands Specific to 2017</tgrn><br>
+<tcmd>Define Event </tcmd><teq>==</teq><tblk> 2017</tblk><br>   <tcmd>BC
+Event Source </tcmd><teq>==</teq><tblk> ~simperiod~ |
+20170101_20180101</tblk>  <tgrn>! .fvc file runtime text replacement</tgrn><br>   <tcmd>Start Time
+</tcmd><teq>==</teq><tblk> 01/01/2017 00:00:00</tblk><br>   <tcmd>End
+Time </tcmd><teq>==</teq><tblk> 01/01/2018 00:00:00 </tblk><br>
+  <tcmd>Output Dir </tcmd><teq>==</teq><tblk>
+..\results\2017</tblk><br>   <tcmd>Write Check Files
+</tcmd><teq>==</teq><tblk> ..\check\2017</tblk><br>   <tcmd>Restart
+File </tcmd><teq>==</teq><tblk>
+..\log\Example_Estuary_2016_001.rst</tblk><br> <tcmd>End
+Define</tcmd><br><br></p>
+<p><tgrn>! Commands Specific to 2018</tgrn><br>
+<tcmd>Define Event </tcmd><teq>==</teq><tblk> 2018</tblk><br>   <tcmd>BC
+Event Source </tcmd><teq>==</teq><tblk> ~simperiod~ |
+20180101_20190101</tblk>  <tgrn>! .fvc file runtime text replacement</tgrn><br>   <tcmd>Start Time
+</tcmd><teq>==</teq><tblk> 01/01/2018 00:00:00</tblk><br>   <tcmd>End
+Time </tcmd><teq>==</teq><tblk> 01/01/2019 00:00:00 </tblk><br>
+  <tcmd>Output Dir </tcmd><teq>==</teq><tblk>
+..\results\2018</tblk><br>   <tcmd>Write Check Files
+</tcmd><teq>==</teq><tblk> ..\check\2018</tblk><br>   <tcmd>Restart
+File </tcmd><teq>==</teq><tblk>
+..\log\Example_Estuary_2017_001.rst</tblk><br> <tcmd>End
+Define</tcmd><br><br></p>
+<p>Multiple events can be simulated from the one .fvc file using a batch
+file. For more information on running batch files refer to the <a href="https://fvwiki.tuflow.com/Run_TUFLOW_FV_From_A_Batch_File">TUFLOW
+FV Wiki</a>.</p>
+<pre><code>set EXE=C:\Program Files\TUFLOWFV\TUFLOWFV.exe
+set OMP_NUM_THREADS=4
+%EXE%   –e1         2016        Example_Estuary_~e1~_001.fvc
+%EXE%   –e1         2017        Example_Estuary_~e1~_001.fvc
+%EXE%   –e1         2018        Example_Estuary_~e1~_001.fvc</code></pre>
+<p><strong>Events Example 2</strong></p>
+<p>Within each BC Block:</p>
+<p><tgrn>! ~simperiod~ and climate ~clim~ replaced by event file BC Event Source text</tgrn><br>
+<tcmd>BC </tcmd><teq>== </teq><tblk>Q, Upstream,
+..\bc_dbase\Estuary_Inflows_~simperiod~_~clim~.csv</tblk><br>
+ <tcmd>BC Header </tcmd><teq>== </teq><tblk>Time_UTC, Flow_cumecs,
+Salinity_ppt, Temp_degC</tblk><br> <tcmd>End BC</tcmd><br><br></p>
+<p><tgrn>! ~simperiod~ and sea level rise allowance ~clim_wl_offset~ replaced by event file BC Event Source text</tgrn><br>
+<tcmd>BC </tcmd><teq>== </teq><tblk>WL, Downstream,
+…\bc_dbase\Estuary_Inflows_~simperiod~.csv</tblk><br>  <tcmd>BC
+Header </tcmd><teq>== </teq><tblk>Time_UTC, Level_mMSL, Salinity_ppt,
+Temp_degC</tblk><br>  <tcmd>BC Offset </tcmd><teq>==
+</teq><tblk>~clim_wl_offset~, 1.0, 1.0</tblk><br> <tcmd>End BC</tcmd></p>
+<p>Include “~e1~” and “~e2~” in the .fvc file name, for example
+“Example_Estuary_~e1~_~e2~_001.fvc”, and add the line: Event
+File == Estuary_Events.tef</p>
+<p>The “Estuary Events.tef” file contains the following:</p>
+<p><tgrn>!__________________________________________________________________________<br>
+! Global Default Settings</tgrn><br> <tcmd>Time Format
+</tcmd><teq>==</teq><tblk> ISODATE</tblk><br> <tcmd>Start Time
+</tcmd><teq>==</teq><tblk> 01/01/2016 00:00:00 </tblk><tgrn>! (UTC)
+Unless Start Time is subsequently repeated start in 2016</tgrn><br>
+<tgrn>!__________________________________________________________________________<br>
+! Simulation Year Event Definitions</tgrn><br></p>
+<p><tgrn>! Commands Specific to 2016</tgrn><br>
+<tcmd>Define Event
+</tcmd><teq>==</teq><tblk> 2016</tblk><br>   <tcmd>BC Event Source
+</tcmd><teq>==</teq><tblk> ~simperiod~ | 20160101_20170101</tblk>  <tgrn>! .fvc file runtime text replacement</tgrn><br>
+  <tcmd>End Time </tcmd><teq>==</teq><tblk> 01/01/2017 00:00:00
+</tblk><br>   <tcmd>Output Dir </tcmd><teq>==</teq><tblk>
+..\results\2016</tblk><br>   <tcmd>Write Check Files
+</tcmd><teq>==</teq><tblk> ..\check\2016</tblk><br>   <tcmd>Initial
+Water Level </tcmd><teq>==</teq><tblk> 0.1</tblk><br>   <tcmd>Initial
+Salinity </tcmd><teq>==</teq><tblk> 35.0</tblk><br>   <tcmd>Initial
+Temperature </tcmd><teq>==</teq><tblk> 18.</tblk><br> <tcmd>End
+Define</tcmd><br><br></p>
+<p><tgrn>! Commands Specific to 2017</tgrn><br>
+<tcmd>Define Event </tcmd><teq>==</teq><tblk> 2017</tblk><br>   <tcmd>BC
+Event Source </tcmd><teq>==</teq><tblk> ~simperiod~ |
+20170101_20180101</tblk>  <tgrn>! .fvc file runtime text replacement</tgrn><br>   <tcmd>Start Time
+</tcmd><teq>==</teq><tblk> 01/01/2017 00:00:00</tblk><br>   <tcmd>End
+Time </tcmd><teq>==</teq><tblk> 01/01/2018 00:00:00 </tblk><br>
+  <tcmd>Output Dir </tcmd><teq>==</teq><tblk>
+..\results\2017</tblk><br>   <tcmd>Write Check Files
+</tcmd><teq>==</teq><tblk> ..\check\2017</tblk><br>   <tcmd>Restart
+File </tcmd><teq>==</teq><tblk>
+..\log\Example_Estuary_2016_&lt;&lt;~e2~&gt;&gt;_001.rst</tblk>  <tgrn>! &lt;&lt;~e2~&gt;&gt; event name variable</tgrn><br> <tcmd>End
+Define</tcmd><br><br></p>
+<p><tgrn>! Commands Specific to 2018</tgrn><br>
+<tcmd>Define Event </tcmd><teq>==</teq><tblk> 2018</tblk><br>   <tcmd>BC
+Event Source </tcmd><teq>==</teq><tblk> ~simperiod~ |
+20180101_20190101</tblk>  <tgrn>! .fvc file runtime text replacement</tgrn><br>   <tcmd>Start Time
+</tcmd><teq>==</teq><tblk> 01/01/2018 00:00:00</tblk><br>   <tcmd>End
+Time </tcmd><teq>==</teq><tblk> 01/01/2019 00:00:00 </tblk><br>
+  <tcmd>Output Dir </tcmd><teq>==</teq><tblk>
+..\results\2018</tblk><br>   <tcmd>Write Check Files
+</tcmd><teq>==</teq><tblk> ..\check\2018</tblk><br>   <tcmd>Restart
+File </tcmd><teq>==</teq><tblk>
+..\log\Example_Estuary_2017_&lt;&lt;~e2~&gt;&gt;_001.rst</tblk>  !<tgrn> &lt;&lt;~e2~&gt;&gt; event name variable</tgrn><br> <tcmd>End
+Define</tcmd><br><br></p>
+<p><tgrn>!__________________________________________________________________________<br>
+! Climate Change Definitions</tgrn><br></p>
+<p><tgrn>! Commands Specific to Existing Climate Conditions</tgrn><br>
+<tcmd>Define Event </tcmd><teq>==</teq><tblk> CC_EXST</tblk><br>
+  <tcmd>BC Event Source </tcmd><teq>==</teq><tblk> ~clim~ |
+CC_EXST</tblk><br>   <tcmd>BC Event Source </tcmd><teq>==</teq><tblk>
+~clim_wl_offset~ | 0.0</tblk>    <tgrn>! Sea level rise</tgrn><br> <tcmd>End Define</tcmd><br><br></p>
+<p><tgrn>! Commands Specific to 2050 Climate Projections</tgrn><br>
+<tcmd>Define Event </tcmd><teq>==</teq><tblk> CC_2050</tblk><br>
+  <tcmd>BC Event Source </tcmd><teq>==</teq><tblk> ~clim~ |
+CC_2050</tblk><br>   <tcmd>BC Event Source </tcmd><teq>==</teq><tblk>
+~clim_wl_offset~ | 0.3</tblk>    <tgrn>! Sea level rise</tgrn><br> <tcmd>End Define</tcmd><br><br></p>
+<p><tgrn>! Commands Specific to 2100 Climate Projections</tgrn><br>
+<tcmd>Define Event </tcmd><teq>==</teq><tblk> CC_2100</tblk><br>
+  <tcmd>BC Event Source </tcmd><teq>==</teq><tblk> |
+CC_2100</tblk><br>   <tcmd>BC Event Source </tcmd><teq>==</teq><tblk>
+~clim_wl_offset~ | 1.0</tblk>    <tgrn>! Sea level rise</tgrn><br> <tcmd>End Define</tcmd><br><br></p>
+<p><tgrn>! Commands Specific to 2150 Climate Projections</tgrn><br>
+<tcmd>Define Event </tcmd><teq>==</teq><tblk> CC_2150</tblk><br>
+  <tcmd>BC Event Source </tcmd><teq>==</teq><tblk> ~clim~ |
+CC_2150</tblk><br>   <tcmd>BC Event Source </tcmd><teq>==</teq><tblk>
+~clim_wl_offset~ | 1.5</tblk>    <tgrn>! Sea level rise</tgrn><br> <tcmd>End Define</tcmd><br></p>
+<p>Multiple events can be simulated from the one .fvc file using a batch
+file. For more information on running batch files refer to the <a href="https://fvwiki.tuflow.com/Run_TUFLOW_FV_From_A_Batch_File">TUFLOW
+FV Wiki</a>.</p>
+<pre><code>set EXE=C:\Program Files\TUFLOWFV\TUFLOWFV.exe
+set OMP_NUM_THREADS=4
+
+%EXE%   –e1         2016    –e2         CC_EXST         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   –e1         2016    –e2         CC_2050         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   –e1         2016    –e2         CC_2100         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   –e1         2016    –e2         CC_2150         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   –e1         2017    –e2         CC_EXST         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   –e1         2017    –e2         CC_2050         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   –e1         2017    –e2         CC_2100         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   –e1         2017    –e2         CC_2150         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   –e1         2018    –e2         CC_EXST         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   –e1         2018    –e2         CC_2050         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   –e1         2018    –e2         CC_2100         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   –e1         2018    –e2         CC_2150         Example_Estuary_~e1~_~e2~_001.fvc</code></pre>
+<p><strong>Events Example 3</strong></p>
+<p>The following example shows the setup for a floodplain model with
+multiple different design rainfall intensities, rainfall durations, and
+temporal patterns.</p>
+<p>Within each BC Block:</p>
+<p><tgrn>! Storm intensity, duration and temporal pattern replaced by event file BC Event Source text</tgrn><br>
+<tcmd>BC </tcmd><teq>==</teq><tblk> Q, Nile_River,
+..\bc_dbase\Inflows\Nile_~AEP~_~durn~.csv</tblk><br>   <tcmd>BC
+Header </tcmd><teq>==</teq><tblk> Time_hrs,
+Flow_cumecs_~tpattern~</tblk><br> <tcmd>End BC</tcmd><br><br></p>
+<p><tgrn>! Storm intensity, duration and temporal pattern replaced by event file BC Event Source text</tgrn><br>
+<tcmd>BC </tcmd><teq>==</teq><tblk> QC, Back_Creek,
+..\bc_dbase\Inflows\Back_Creek_~AEP~_~durn~.csv</tblk><br>   <tcmd>BC
+Header </tcmd><teq>==</teq><tblk> Time_hrs,
+Flow_cumecs_~tpattern~</tblk><br> <tcmd>End BC</tcmd></p>
+<p>Include “~e1~”, “~e2~”, and “~e3~” in the .fvc file name, for
+example “Nile_~e1~_~e2~_~e3~_001.fvc”, and add the line:
+<tcmd>Event File</tcmd><teq> == </teq><tblk>Nile_Events.tef</blk></p>
+<p>The “Nile Events.tef” file contains the event block logic provided below.</p>
+<p><tgrn>!__________________________________________________________________________<br>
+! Global Default Settings</tgrn><br> <tcmd>Time Format
+</tcmd><teq>==</teq><tblk> HOURS</tblk><br> <tcmd>Start Time
+</tcmd><teq>==</teq><tblk> 0.0 </tblk><tgrn>! Unless Start Time is
+subsequently repeated all start at time 0</tgrn><br>
+<tgrn>!__________________________________________________________________________<br>
+! Annual Exceedance Probability Definitions</tgrn><br> <br> <tcmd>Define
+Event </tcmd><teq>==</teq><tblk> 10pct</tblk><br>  <tcmd>BC Event Source
+</tcmd><teq>==</teq><tblk> ~AEP~ | 010pct</tblk><br>  <tcmd>Output
+Folder </tcmd><teq>==</teq><tblk> ..\10pct</tblk><br> <tcmd>End
+Define</tcmd><br> <br> <tcmd>Define Event </tcmd><teq>==</teq><tblk>
+05pct</tblk><br>  <tcmd>BC Event Source </tcmd><teq>==</teq><tblk>
+~AEP~ | 05pct</tblk><br>  <tcmd>Output Dir
+</tcmd><teq>==</teq><tblk> ..\05pct</tblk><br> <tcmd>End
+Define</tcmd><br> <br> <tcmd>Define Event </tcmd><teq>==</teq><tblk>
+02pct</tblk><br>  <tcmd>BC Event Source </tcmd><teq>==</teq><tblk>
+~AEP~ | 02pct</tblk><br>  <tcmd>Output Dir
+</tcmd><teq>==</teq><tblk> ..\02pct</tblk><br> <tcmd>End
+Define</tcmd><br> <br> <tcmd>Define Event </tcmd><teq>==</teq><tblk>
+01pct</tblk><br>  <tcmd>BC Event Source </tcmd><teq>==</teq><tblk>
+~AEP~ | 01pct</tblk><br>  <tcmd>Output Dir
+</tcmd><teq>==</teq><tblk> ..\01pct</tblk><br> <tcmd>End
+Define</tcmd><br> <br>
+<tgrn>!__________________________________________________________________________________<br>
+! Storm duration definitions</tgrn><br> <tcmd>Define Event
+</tcmd><teq>==</teq><tblk> 01h</tblk><br>  <tcmd>BC Event Source
+</tcmd><teq>==</teq><tblk> ~durn~ | 01h</tblk><br>  <tcmd>End Time
+</tcmd><teq>==</teq><tblk> 3.0</tblk><br> <tcmd>End Define</tcmd><br>
+<br> <tcmd>Define Event </tcmd><teq>==</teq><tblk> 02h</tblk><br>
+ <tcmd>BC Event Source </tcmd><teq>==</teq><tblk> ~durn~ |
+02h</tblk><br>  <tcmd>End Time </tcmd><teq>==</teq><tblk> 4.0</tblk><br>
+<tcmd>End Define</tcmd><br> <br>
+<tgrn>!__________________________________________________________________________________<br>
+! Temporal patterns definitions</tgrn><br> <tcmd>Define Event
+</tcmd><teq>==</teq><tblk> T01</tblk><br>  <tcmd>BC Event Source
+</tcmd><teq>==</teq><tblk> ~tpattern~ | T01</tblk><br> <tcmd>End
+Define</tcmd><br> <br> <tcmd>Define Event </tcmd><teq>==</teq><tblk>
+T02</tblk><br>  <tcmd>BC Event Source </tcmd><teq>==</teq><tblk>
+~tpattern~ | T02</tblk><br> <tcmd>End Define</tcmd></p>
+</div>
+<div id="additional-functionality" class="section level3 hasAnchor" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> Additional Functionality<a href="SimManagment-1.html#additional-functionality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="SimManagmentIfEventAndEventVariables-3" class="section level4 hasAnchor" number="1.3.4.1">
+<h4><span class="header-section-number">1.3.4.1</span> Event Logic Blocks<a href="SimManagment-1.html#SimManagmentIfEventAndEventVariables-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Whilst an <tcmd>Event File </tcmd> can be constructed that defines any number of events and their associated commands, event names can also be used within *.fvc files to dynamically issue commands within If… Else If… Else… End If logical blocks. For example, the timestep limits can be set within a *.fvc, depending on the event chosen as follows. Specifically, if <em>any event</em> has one of these names then the timestep limits will be set accordingly.</p>
+<p><tgrn>! Modify the model timestep limits as a function of rainfall intensity</tgrn><br>
+<tcmd>If Event</tcmd><teq> == </teq><tblk>Q1</tblk><br>
+     <tcmd>Timestep Limits</tcmd><teq> == </teq><tblk>0.1,1.0</tblk><br>
+<tcmd>Else If Event</tcmd><teq> == </teq><tblk>Q10</tblk><br>
+     <tcmd>Timestep Limits</tcmd><teq> == </teq><tblk>0.01,0.1</tblk><br>
+<tcmd>Else If Event</tcmd><teq> == </teq><tblk>Q50</tblk><br>
+     <tcmd>Timestep Limits</tcmd><teq> == </teq><tblk>0.01,0.1</tblk><br>
+<tcmd>Else If Event</tcmd><teq> == </teq><tblk>Q100</tblk><br>
+     <tcmd>Timestep Limits</tcmd><teq> == </teq><tblk>0.001,0.1</tblk><br>
+<tcmd>Else</tcmd><br>
+     <tcmd>Pause</tcmd><teq> == </teq><tblk>Should not be here - invalid event specified.</tblk><br>
+<tcmd>End If<br></p>
+<p>The Pause command causes TUFLOW FV to stop whenever it is encountered, which in the above case would be if no event had been specified called any of Q1, Q10, Q50 or Q100.</p>
+<p>‘Or’ logic can also be used in blocks such as the above by deploying the ‘|’ character. Noting that the Q50 and Q100 <tcmd>Timestep Limits</tcmd> are the same above, the overall block could be written more succinctly as demonstrated in the following example.</p>
+<p><tgrn>! Modify the model timestep limits as a function of rainfall intensity</tgrn><br>
+<tcmd>If Event</tcmd><teq> == </teq><tblk>Q1</tblk><br>
+     <tcmd>Timestep Limits</tcmd><teq> == </teq><tblk>0.1,1.0</tblk><br>
+<tcmd>Else If Event</tcmd><teq> == </teq><tblk>Q10 | Q50</tblk><tgrn>     ! Example ‘OR’ logic using ‘|’ character</tgrn><br>
+     <tcmd>Timestep Limits</tcmd><teq> == </teq><tblk>0.01,0.1</tblk><br>
+<tcmd>Else If Event</tcmd><teq> == </teq><tblk>Q100</tblk><br>
+     <tcmd>Timestep Limits</tcmd><teq> == </teq><tblk>0.001,0.1</tblk><br>
+<tcmd>Else</tcmd><br>
+     <tcmd>Pause</tcmd><teq> == </teq><tblk>Should not be here - invalid event specified.</tblk><br>
+<tcmd>End If<br></p>
+</div>
+<div id="SimManagmentEventsAsVariables-3" class="section level4 hasAnchor" number="1.3.4.2">
+<h4><span class="header-section-number">1.3.4.2</span> Events as Variables<a href="SimManagment-1.html#SimManagmentEventsAsVariables-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Events are also automatically defined as <a href="SimManagment-1.html#SimManagmentVariables-2">variables</a> and can be assigned accordingly within *.fvc control files. For example, if multiple events (e1) were set up and executed but a separate folder was desired for each events’s suite of outputs, then the following syntax in the *.fvc would accomplish this outcome.</p>
+<p><tcmd>Output Dir</tcmd><teq> == </teq><tblk>..\results\&lt;&lt;~e1~&gt;&gt;\</tblk><br></p>
+<p>If e1 was set be Q2 then the above would be interpreted as</p>
+<p><tcmd>Output Dir</tcmd><teq> == </teq><tblk>..\results\Q2\</tblk><br></p>
+<p>Similar approaches can be applied to other TUFLOW FV *.fvc commands.</p>
+</div>
+</div>
+</div>
+<div id="SimManagmentScenarios-2" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Scenarios<a href="SimManagment-1.html#SimManagmentScenarios-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When completing project or research work, it is common to require the
+comparison of the ‘existing’ or ‘base case’ conditions with a future
+‘design’, or series of ‘design options’. This may include for example:</p>
+<ul>
+<li>Earthworks or changes in landuse for a proposed coastal or
+floodplain development</li>
+<li>New capital works for a new port, dredge channel, or a series of new
+channel designs</li>
+<li>Changes to dam operations</li>
+<li>Different bridge or structure upgrade options</li>
+</ul>
+<p>Model Scenarios provide the framework to allow the simulation of
+different design options from a single .fvc control file, rather than
+needing to create separate control files for each scenario.</p>
+<p>The <tcmd>If Scenario</tcmd> feature controls which commands are to be
+applied depending on the scenario or combination of scenarios specified
+by the user. Using <tcmd>If Scenario</tcmd> is similar to using If…Else If…
+Else…End If constructs in a programming or macro language.</p>
+<div id="SimManagmentRunningScenarios-3" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Running Scenarios<a href="SimManagment-1.html#SimManagmentRunningScenarios-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The approach to running scenarios is analogous to Model Events, with the
+exception that a ‘Scenario File’ similar to the ‘Event File .tef’ is not
+required.</p>
+<p>Two options are available to run scenarios from the same .fvc file:</p>
+<ol style="list-style-type: decimal">
+<li>Using a batch file (.bat): Specifying –s or –sX options (where X is a number from 1 to 9) to run
+single, or mutliple scenarios using the same .fvc file – refer to
+the <a href="SimManagment-1.html#SimManagmentScenarioExamples-3">Scenario Examples</a>. This is
+the recommended approach.</li>
+<li>Using the <tcmd>Model Scenarios</tcmd> command: Change the scenarios
+manually before each simulation within the .fvc file. Note that if
+using the –s option, a .bat file –s calls will override any
+scenarios defined using Model Scenarios which is defined within the
+.fvc. The Model Scenarios command is typically used to set the
+default scenario(s).</li>
+</ol>
+<p>To automatically insert the name of the scenario(s) into the output
+filenames so as to make the output names unique, place “~s~” or
+“~s&lt;X&gt;~” where &lt;X&gt; is a number from 1 to 9 into the .fvc. For example a study on the Mary River with fvc name:</p>
+<pre><code>MR_~s1~_~s2~_001.fvc</code></pre>
+<p>Can be configured to run any number of s1 and s2 scenario. For example:</p>
+<pre><code>set EXE=C:\Program Files\TUFLOWFV\TUFLOWFV.exe
+set OMP_NUM_THREADS=4
+
+%EXE%   –s1         EXG   –s2         BASE        MR_~s1~_~s2~_001.fvc
+%EXE%   –s1         DEV   –s2         OPT1        MR_~s1~_~s2~_001.fvc
+%EXE%   –s1         DEV   –s2         OPT2        MR_~s1~_~s2~_001.fvc
+%EXE%   –s1         DEV   –s2         OPT3        MR_~s1~_~s2~_001.fvc</code></pre>
+<p>becomes:</p>
+<pre><code>s1=EXG and s2=BASE:   MR_EXG_BASE_001.fvc
+s1=DEV and s2=OPT1:   MR_DEV_OPT1_001.fvc
+s1=DEV and s2=OPT2:   MR_DEV_OPT2_001.fvc
+s1=DEV and s2=OPT3:   MR_DEV_OPT3_001.fvc</code></pre>
+<p><em>Note that the character length for s1 (3) and s2 (4) is consistent
+between each run. This is optional.</em></p>
+<p>For further examples on running scenarios from batch files, including
+advanced batch looping refer to the <a href="https://fvwiki.tuflow.com/Run_TUFLOW_FV_From_A_Batch_File">TUFLOW FV
+Wiki</a>.</p>
+</div>
+<div id="SimManagmentScenarioExamples-3" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Scenario Examples<a href="SimManagment-1.html#SimManagmentScenarioExamples-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Scenarios Example 1</strong></p>
+<p>In a .fvc file:</p>
+<p><tgrn>!__________________________________________________________________________________</tgrn><br>
+<tgrn>! Apply materials</tgrn><br> <tcmd>Set Mat
+</tcmd><teq>==</teq><tblk> 1 </tblk><tgrn>! Set materials to
+default of 1</tgrn><br> <tcmd>Read GIS Mat </tcmd><teq>==</teq><tblk>
+shp\2d_mat_existing.shp </tblk><tgrn>! Apply existing
+materials</tgrn><br> <tcmd>If Scenario </tcmd><teq>==</teq><tblk>
+opA</tblk><br>   <tcmd>Read GIS Mat </tcmd><teq>==</teq><tblk>
+shp\2d_mat_opA.shp </tblk><tgrn>! Option A changes existing
+materials</tgrn><br> <tcmd>End If</tcmd></p>
+<p>TUFLOW FV will carry out the following steps:</p>
+<ol style="list-style-type: decimal">
+<li>Set all material values over the entire 2D domain to a value of 1.</li>
+<li>Process the 2d_mat_existing.shp layer to assign material values from
+a layer of land-use polygons representing the existing situation.</li>
+<li>One of the following will then occur:</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-roman">
+<li><p>If “-s1 opA” is specified as a run option in a
+batch file, or <tcmd>Model Scenarios</tcmd><teq> ==
+</teq><tblk>opA</tblk> is specified in the .fvc file, then the
+2d_mat_opA.shp layer is processed to modify the material values
+where Option A has changed the landuse. If “~s1~”
+occurs within the .fvc filename, it is replaced by “opA” in the
+output filenames, otherwise “opA” is appended to the .filename
+for the output filenames.</p></li>
+<li><p>If opA was not specified as a scenario, this layer would be
+ignored. For example, as would be required if modelling the
+existing scenario.</p></li>
+</ol>
+<p>Example 1 can be extended to include an Option B, where Option B is a
+modified version of Option A as shown in Example 2a below.</p>
+<p><strong>Scenarios Example 2a</strong></p>
+<p><tcmd>Set Mat </tcmd><teq>==</teq><tblk> 1 </tblk><tgrn>! Set
+unspecified materials to default of 1</tgrn><br> <tcmd>Read GIS Mat
+</tcmd><teq>==</teq><tblk> shp\2d_mat_existing.shp </tblk><tgrn>! Apply
+existing materials</tgrn><br> <tcmd>If Scenario
+</tcmd><teq>==</teq><tblk> opA | opB</tblk><br>   <tcmd>Read GIS Mat
+</tcmd><teq>==</teq><tblk> shp\2d_mat_opA.shp </tblk><tgrn>! Option A
+changes to existing materials</tgrn><br> <tcmd>End If</tcmd><br>
+<tcmd>If Scenario </tcmd><teq>==</teq><tblk> opB</tblk><br>   <tcmd>Read
+GIS Mat </tcmd><teq>==</teq><tblk> shp\2d_mat_opB.shp </tblk><tgrn>!
+Option B changes to Existing and Option A</tgrn><br> <tcmd>End
+If</tcmd><br></p>
+<p>In the above example, either “–s opB” or “–s1 opA –s2 opB” can be
+used for the run options when modelling the Option B scenario.</p>
+<p><strong>Scenarios Example 2b</strong></p>
+<p><tcmd>Set Mat </tcmd><teq>==</teq><tblk> 1 </tblk><tgrn>! Set
+unspecified materials to default of 1</tgrn><br> <tcmd>Read GIS Mat
+</tcmd><teq>==</teq><tblk> shp\2d_mat_existing.shp </tblk><tgrn>! Apply
+existing materials</tgrn><br> <tcmd>If Scenario
+</tcmd><teq>==</teq><tblk> opA</tblk><br>   <tcmd>Read GIS Mat
+</tcmd><teq>==</teq><tblk> shp\2d_mat_opA.shp </tblk><tgrn>! Option A
+changes to existing materials</tgrn><br> <tcmd>End If</tcmd><br>
+<tcmd>If Scenario </tcmd><teq>==</teq><tblk> opB</tblk><br>   <tcmd>Read
+GIS Mat </tcmd><teq>==</teq><tblk> shp\2d_mat_opB.shp </tblk><tgrn>!
+Option B changes to existing materials</tgrn><br> <tcmd>End
+If</tcmd><br></p>
+<p>Alternatively, the following would give the same result.</p>
+<p><tcmd>Set Mat </tcmd><teq>==</teq><tblk> 1 </tblk><tgrn>! Set
+unspecified materials to default of 1 </tgrn><br> <tcmd>Read GIS Mat
+</tcmd><teq>==</teq><tblk> shp\2d_mat_existing.shp </tblk><tgrn>! Apply
+existing materials</tgrn><br> <tcmd>If Scenario
+</tcmd><teq>==</teq><tblk> opA</tblk><br>   <tcmd>Read GIS Mat
+</tcmd><teq>==</teq><tblk> shp\2d_mat_opA.shp </tblk><tgrn>! Option A
+changes to existing materials</tgrn><br> <tcmd>Else If Scenario
+</tcmd><teq>==</teq><tblk> opB</tblk><br>   <tcmd>Read GIS Mat
+</tcmd><teq>==</teq><tblk> shp\2d_mat_opB.shp </tblk><tgrn>! Option B
+changes to existing materials</tgrn><br> <tcmd>End If</tcmd><br></p>
+<p>In the above, either “–s opB” or “Model Scenarios == opB” would be used
+when modelling Option B. If the Existing, Option A and Option B
+scenarios all had their own layer of materials for the whole model the
+commands could be laid out as shown in Example 2c noting the use of the
+Else option which forces the use of the layer 2d_mat_existing.shp if opA
+or opB is not specified.</p>
+<p><strong>Scenarios Example 2c</strong></p>
+<p><tcmd> Set Mat </tcmd><teq> == </teq><tblk>1</tblk><tgrn> ! Set
+unspecified materials to default of 1</tgrn><br> <tcmd> If Scenario
+</tcmd><teq> == </teq><tblk>opA</tblk><br>   <tcmd>Read GIS Mat
+</tcmd><teq> == </teq><tblk>shp\2d_mat_opA.shp</tblk><tgrn> ! Option A
+materials for whole model</tgrn><br> <tcmd> Else If Scenario
+</tcmd><teq> == </teq><tblk>opB</tblk><br>   <tcmd>Read GIS Mat
+</tcmd><teq> == </teq><tblk>shp\2d_mat_opB.shp</tblk><tgrn> ! Option B
+materials for whole model</tgrn><br> <tcmd> Else </tcmd><br>
+  <tcmd>Read GIS Mat </tcmd><teq> ==
+</teq><tblk>shp\2d_mat_existing.shp</tblk><tgrn> ! Existing materials
+for whole model</tgrn><br> <tcmd> End If </tcmd><br><br></p>
+<p>Or, a more explicit approach is shown below.</p>
+<p><tcmd> Set Mat </tcmd><teq> == </teq><tblk>1</tblk><tgrn> ! Set
+unspecified materials to default of 1</tgrn><br> <tcmd> If Scenario
+</tcmd><teq> == </teq><tblk>exg</tblk><br>   <tcmd>Read GIS Mat
+</tcmd><teq> == </teq><tblk>shp\2d_mat_existing.shp</tblk><tgrn> !
+Existing materials for whole model</tgrn><br> <tcmd> Else If Scenario
+</tcmd><teq> == </teq><tblk>opA</tblk><br>   <tcmd>Read GIS Mat
+</tcmd><teq> == </teq><tblk>shp\2d_mat_opA.shp</tblk><tgrn> ! Option A
+materials for whole model</tgrn><br> <tcmd> Else If Scenario
+</tcmd><teq> == </teq><tblk>opB</tblk><br>   <tcmd>Read GIS Mat
+</tcmd><teq> == </teq><tblk>shp\2d_mat_opB.shp</tblk><tgrn> ! Option B
+materials for whole model</tgrn><br> <tcmd> End If </tcmd></p>
+<p><strong>Scenarios Example 3</strong></p>
+<p>The If Scenario command can be nested up to 10 levels. The extract below
+is from an .fvc file of a complex model that calls various model
+sub-domains at different floodplain mesh resolutions (20m and 60m). The
+logic as to which other sub-models/boundaries the CAS sub-model needs
+is built into include files using nested If Scenarios.</p>
+<p><tcmd>If Scenario </tcmd><teq>==</teq><tblk> CAS </tblk><br> <tgrn> !
+Cell size dependent commands</tgrn><br>   <tcmd>If Scenario
+</tcmd><teq>==</teq><tblk> 20m </tblk><tgrn> ### 20m grid
+Domain</tgrn><br>     <tcmd>Geometry 2d</tcmd><teq>==</teq><tblk>
+..\model\geo\CAS_20m_001.2dm</tblk><br>     <tcmd>Timestep Limits
+</tcmd><teq>==</teq><tblk> 0.01, 0.1</tblk><br>   <tcmd>Else If Scenario
+</tcmd><teq>==</teq><tblk> 60m </tblk><tgrn> ### 60m grid
+Domain</tgrn><br>     <tcmd>Geometry 2d </tcmd><teq>==</teq><tblk>
+..\model\geo\CAS_60m_001.2dm</tblk><br>     <tcmd>Timestep Limits
+</tcmd><teq>==</teq><tblk> 0.05, 0.5</tblk><br>   <tcmd>Else</tcmd><br>
+    <tcmd>Pause </tcmd><teq>==</teq><tblk> Should not be here - invalid
+CAS cell size scenario specified.</tblk><br>   <tcmd>End If</tcmd><br>
+<tgrn> ! Cell size independent commands</tgrn><br>   <tcmd>Include
+</tcmd><teq>==</teq><tblk> ..\model\CAS_BCs_001.fvc</tblk><br>
+  <tcmd>Include </tcmd><teq>==</teq><tblk>
+..\model\CAS_Outputs_001.fvc</tblk><br> <tcmd>End If</tcmd></p>
+<p>The Pause command causes TUFLOW FV to stop whenever it encounters it. In
+the example above, the Pause command is used to pause the simulation and
+display the message shown as a cross-check that an appropriate cell size
+scenario has been specified.</p>
+<p>Any scenarios are automatically set as variables, so have uses parallel to those described for <a href="SimManagment-1.html#SimManagmentEventsAsVariables-3">Events</a> above.</p>
+</div>
+</div>
+<div id="SimManagmentVariables-2" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Variables<a href="SimManagment-1.html#SimManagmentVariables-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <tcmd>Set Variable</tcmd> command can be used to assign a
+user-specified value to a string variable. This command operates at a
+higher level than If Scenario or If Event logic blocks so that variables
+can differ within different scenarios/events.</p>
+<p><strong>Note:</strong> Set variable commands can only be specified in the .fvc or
+within an include file referenced from the .fvc. They are not yet
+available within sediment, particle or water quality control files.</p>
+<p>The example below is a floodplain model where two different mesh
+resolutions are being tested. To manage the size of result output, the
+variable “NC_OUTPUT_INTERVAL” is used to set the map output interval.</p>
+<p>In the .fvc file we have the following syntax.</p>
+<p><tgrn>!_________________________________________________________________<br>
+! MODEL VARIABLES</tgrn><br> <tcmd>If Scenario </tcmd><teq>==
+</teq><tblk>HRES</tblk><br>  <tcmd>Geometry 2D </tcmd><teq>==
+</teq><tblk>..\model\geo\Floodplain_001.2dm</tblk><tgrn>  ! High resolution mesh</tgrn><br>  <tcmd>Set
+Variable NC_OUTPUT_INTERVAL </tcmd><teq>== </teq><tblk>900.</tblk><tgrn>         ! Assign variable 900 seconds</tgrn><br>
+<tcmd>Else If Scenario </tcmd><teq>== </teq><tblk>LRES</tblk><br>
+ <tcmd>Geometry 2D </tcmd><teq>==
+</teq><tblk>..\model\geo\Floodplain_002.2dm</tblk><tgrn>  ! Low resolution mesh</tgrn><br>  <tcmd>Set
+Variable NC_OUTPUT_INTERVAL </tcmd><teq>== </teq><tblk>300.</tblk><tgrn>         ! Assign variable 300 seconds</tgrn><br>
+<tcmd>Else </tcmd><br>  <tcmd>Pause </tcmd><teq>==
+</teq><tblk>Unexpected Scenario Specified - Refer FVC</tblk><br>
+<tcmd>End If</tcmd><br><br></p>
+<p>The variable NC_OUTPUT_INTERVAL is dynamically replaced at runtime to
+adjust the NetCDF output interval.</p>
+<p><tcmd>Output </tcmd><teq>== </teq><tblk>NetCDF</tblk><br>  <tcmd>Output
+Parameters </tcmd><teq>== </teq><tblk>h, v, d, zb</tblk><br>
+ <tcmd>Output Interval </tcmd><teq>==
+</teq><tblk>&lt;&lt;NC_OUTPUT_INTERVAL&gt;&gt;</tblk><tgrn>  ! Output at 300 or 900 s as a function of Scenario</tgrn><br>  <tcmd>Output
+Statistics </tcmd><teq>== </teq><tblk>max</tblk><br>  <tcmd>Output
+Statistics dt </tcmd><teq>== </teq><tblk>1</tblk><br> <tcmd>End
+Output</tcmd></p>
+<p>The Set Variable functionality available in TUFLOW FV 2025.0.0 can be used
+in combination with the assignment batch/shell script
+environment variables (Introduced in TUFLOW FV 2023.1). For example:</p>
+<pre><code>REM Example batch file that uses the environment variable IWL to set initial water level
+set EXE=C:\Program Files\TUFLOWFV\TUFLOWFV.exe
+set OMP_NUM_THREADS=4
+set IWL=2.0
+
+%EXE% Env_Var_Example.fvc</code></pre>
+<p>Within the .fvc file the environment variable value is returned via the $ syntax. For example:</p>
+<p><tcmd> Initial Water Level </tcmd> <teq>==</teq> <tblk>$IWL</tblk><br></p>
+<p>achieves the same outcome as the variable syntax shown below.</p>
+<p><tcmd>Set Variable INITIAL_WL<teq> ==</teq> <tblk> 2.0 </tblk><br>
+<tcmd> Initial Water Level </tcmd> <teq>==</teq>
+<tblk>&lt;&lt;INITIAL_WL&gt;&gt;</tblk></p>
+</div>
+<div id="SimManagmentExamples-2" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> Simulation Management Example Models<a href="SimManagment-1.html#SimManagmentExamples-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>TUFLOW FV’s <a href="https://fvwiki.tuflow.com/TUFLOW_FV_Example_Models">Example Model</a> dataset has been updated with ten new examples models to allow you to test and interact with the new event, scenario and variable functionality. The models can be run without a TUFLOW FV license.</p>
+<p><img src="images/WQFooter.jpg" width="100%" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="HD-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": false,
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

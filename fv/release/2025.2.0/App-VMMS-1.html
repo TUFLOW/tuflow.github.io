@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Appendix A Vertical Mixing Model Science | TUFLOW FV Release Notes Release Candidate 2025.2</title>
+  <meta name="description" content="TUFLOW FV 2025.2.0-rc Release Notes" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Appendix A Vertical Mixing Model Science | TUFLOW FV Release Notes Release Candidate 2025.2" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/1024in300px_Blue-01.svg" />
+  <meta property="og:description" content="TUFLOW FV 2025.2.0-rc Release Notes" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Appendix A Vertical Mixing Model Science | TUFLOW FV Release Notes Release Candidate 2025.2" />
+  
+  <meta name="twitter:description" content="TUFLOW FV 2025.2.0-rc Release Notes" />
+  <meta name="twitter:image" content="/images/1024in300px_Blue-01.svg" />
+
+<meta name="author" content="RELEASE CANDIDATE      These are interim release notes that accompany the TUFLOW FV 2025.2.0-rc.1 release candidate. The information contained within this interim version may vary from the subsequent final version. " />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="LicensingInstallation-1.html"/>
+<link rel="next" href="App-VMMB-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#document-updates-and-important-notices"><i class="fa fa-check"></i>Document Updates and Important Notices</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#using-the-release-notes-and-user-manuals"><i class="fa fa-check"></i>Using the Release Notes and User Manuals</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#changes-to-tuflow-fv-version-numbering"><i class="fa fa-check"></i>Changes to TUFLOW FV Version Numbering</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="SimManagment-1.html"><a href="SimManagment-1.html"><i class="fa fa-check"></i><b>1</b> Simulation Management</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentFeatures-2"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentNomenclature-2"><i class="fa fa-check"></i><b>1.2</b> Nomenclature</a></li>
+<li class="chapter" data-level="1.3" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentEvents-2"><i class="fa fa-check"></i><b>1.3</b> Events</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentTEF-3"><i class="fa fa-check"></i><b>1.3.1</b> TUFLOW Event File</a></li>
+<li class="chapter" data-level="1.3.2" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentRunningEvents-3"><i class="fa fa-check"></i><b>1.3.2</b> Running Events</a></li>
+<li class="chapter" data-level="1.3.3" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentEventExamples-3"><i class="fa fa-check"></i><b>1.3.3</b> Event Examples</a></li>
+<li class="chapter" data-level="1.3.4" data-path="SimManagment-1.html"><a href="SimManagment-1.html#additional-functionality"><i class="fa fa-check"></i><b>1.3.4</b> Additional Functionality</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentScenarios-2"><i class="fa fa-check"></i><b>1.4</b> Scenarios</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentRunningScenarios-3"><i class="fa fa-check"></i><b>1.4.1</b> Running Scenarios</a></li>
+<li class="chapter" data-level="1.4.2" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentScenarioExamples-3"><i class="fa fa-check"></i><b>1.4.2</b> Scenario Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentVariables-2"><i class="fa fa-check"></i><b>1.5</b> Variables</a></li>
+<li class="chapter" data-level="1.6" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentExamples-2"><i class="fa fa-check"></i><b>1.6</b> Simulation Management Example Models</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="HD-1.html"><a href="HD-1.html"><i class="fa fa-check"></i><b>2</b> Hydrodynamic Engine Updates and Enhancements</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="HD-1.html"><a href="HD-1.html#HDBCHeaders-2"><i class="fa fa-check"></i><b>2.1</b> BC Headers</a></li>
+<li class="chapter" data-level="2.2" data-path="HD-1.html"><a href="HD-1.html#HDGIS-2"><i class="fa fa-check"></i><b>2.2</b> GIS Integration Enhancements</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="HD-1.html"><a href="HD-1.html#HDGISTIN-3"><i class="fa fa-check"></i><b>2.2.1</b> TIN Bathymetry Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="HD-1.html"><a href="HD-1.html#HDStructures-2"><i class="fa fa-check"></i><b>2.3</b> Hydraulic Structure Updates</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="HD-1.html"><a href="HD-1.html#HDCulvertHeighWidthContraction-3"><i class="fa fa-check"></i><b>2.3.1</b> Default Culvert Height And Width Contraction Coefficients</a></li>
+<li class="chapter" data-level="2.3.2" data-path="HD-1.html"><a href="HD-1.html#HDCulvertEntExLoss-3"><i class="fa fa-check"></i><b>2.3.2</b> Default Culvert Entry and Exit Loss Coefficients</a></li>
+<li class="chapter" data-level="2.3.3" data-path="HD-1.html"><a href="HD-1.html#HDCulvertInvertChecking-3"><i class="fa fa-check"></i><b>2.3.3</b> Improved Culvert Invert Checking</a></li>
+<li class="chapter" data-level="2.3.7" data-path="HD-1.html"><a href="HD-1.html#HDTriggerRule-3"><i class="fa fa-check"></i><b>2.3.7</b> Control Block Trigger Rule Fix</a></li>
+<li class="chapter" data-level="2.3.8" data-path="HD-1.html"><a href="HD-1.html#HDPSLSF-3"><i class="fa fa-check"></i><b>2.3.8</b> Porous Structure Linked Structure Fixes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="HD-1.html"><a href="HD-1.html#HDMassBalance-2"><i class="fa fa-check"></i><b>2.4</b> Mass Balance</a></li>
+<li class="chapter" data-level="2.5" data-path="HD-1.html"><a href="HD-1.html#HDMinorEnhancements-2"><i class="fa fa-check"></i><b>2.5</b> Minor Enhancements and Fixes</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="HD-1.html"><a href="HD-1.html#HDExTurbScaling-3"><i class="fa fa-check"></i><b>2.5.1</b> External Turbulence Scaling</a></li>
+<li class="chapter" data-level="2.5.2" data-path="HD-1.html"><a href="HD-1.html#HDDVProduct-3"><i class="fa fa-check"></i><b>2.5.2</b> Depth Velocity Product Output Parameter</a></li>
+<li class="chapter" data-level="2.5.3" data-path="HD-1.html"><a href="HD-1.html#HDPointOutputParameters-3"><i class="fa fa-check"></i><b>2.5.3</b> Additional Point Output Parameters Supported</a></li>
+<li class="chapter" data-level="2.5.4" data-path="HD-1.html"><a href="HD-1.html#HDBCOverlap-3"><i class="fa fa-check"></i><b>2.5.4</b> Improved Boundary Nodestring Overlap Checking</a></li>
+<li class="chapter" data-level="2.5.5" data-path="HD-1.html"><a href="HD-1.html#HDGPUErrorFix-3"><i class="fa fa-check"></i><b>2.5.5</b> GPU 3D Drying Z Layer Message Fix</a></li>
+<li class="chapter" data-level="2.5.6" data-path="HD-1.html"><a href="HD-1.html#HDDuplicateFluxFile-3"><i class="fa fa-check"></i><b>2.5.6</b> Duplicate Flux File Fix</a></li>
+<li class="chapter" data-level="2.5.7" data-path="HD-1.html"><a href="HD-1.html#HDDepthAverageTURBZ-3"><i class="fa fa-check"></i><b>2.5.7</b> Turbulence Map Output Fix</a></li>
+<li class="chapter" data-level="2.5.8" data-path="HD-1.html"><a href="HD-1.html#HDFluxOutputHeader-3"><i class="fa fa-check"></i><b>2.5.8</b> Flux Output Header Fix</a></li>
+<li class="chapter" data-level="2.5.9" data-path="HD-1.html"><a href="HD-1.html#HD2dmOutputFix-3"><i class="fa fa-check"></i><b>2.5.9</b> Structured Mesh Check File Fix</a></li>
+<li class="chapter" data-level="2.5.14" data-path="HD-1.html"><a href="HD-1.html#HDUMUNC-3"><i class="fa fa-check"></i><b>2.5.14</b> Unstructured Mesh Unused Nodes Check</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="VMM-1.html"><a href="VMM-1.html"><i class="fa fa-check"></i><b>3</b> Internal Vertical Mixing Model</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="VMM-1.html"><a href="VMM-1.html#VMM-Intr-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="VMM-1.html"><a href="VMM-1.html#VMM-KEVMM-2"><i class="fa fa-check"></i><b>3.2</b> <em>k-ε</em> Vertical Mixing Model</a></li>
+<li class="chapter" data-level="3.3" data-path="VMM-1.html"><a href="VMM-1.html#VMM-KOVMM-2"><i class="fa fa-check"></i><b>3.3</b> <em>k-ω</em> Vertical Mixing Model</a></li>
+<li class="chapter" data-level="3.4" data-path="VMM-1.html"><a href="VMM-1.html#VMM-UVSFF-2"><i class="fa fa-check"></i><b>3.4</b> Unstratified vs. Stratified Flow Fields</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="VMM-1.html"><a href="VMM-1.html#VMM-UVSFF-SOM-3"><i class="fa fa-check"></i><b>3.4.1</b> Second Order Model</a></li>
+<li class="chapter" data-level="3.4.2" data-path="VMM-1.html"><a href="VMM-1.html#VMM-UVSFF-LL-3"><i class="fa fa-check"></i><b>3.4.2</b> Lengthscale Limiter</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="VMM-1.html"><a href="VMM-1.html#VMM-IWMM-2"><i class="fa fa-check"></i><b>3.5</b> Internal Wave Mixing Model</a></li>
+<li class="chapter" data-level="3.6" data-path="VMM-1.html"><a href="VMM-1.html#VMM-Refe-2"><i class="fa fa-check"></i><b>3.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="AD-1.html"><a href="AD-1.html"><i class="fa fa-check"></i><b>4</b> Advection Dispersion Module</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="AD-1.html"><a href="AD-1.html#ADMinorEnhancements-2"><i class="fa fa-check"></i><b>4.1</b> Minor Enhancements and Fixes</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="AD-1.html"><a href="AD-1.html#ADOBCF-2"><i class="fa fa-check"></i><b>4.1.1</b> Fully Specified Grid Boundary Fix</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="AD-1.html"><a href="AD-1.html#ADMassBalance-2"><i class="fa fa-check"></i><b>4.2</b> Mass Balance</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ST-1.html"><a href="ST-1.html"><i class="fa fa-check"></i><b>5</b> Sediment Transport Module</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ST-1.html"><a href="ST-1.html#STMassBalance-2"><i class="fa fa-check"></i><b>5.1</b> Mass Balance</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="WQ-1.html"><a href="WQ-1.html"><i class="fa fa-check"></i><b>6</b> Water Quality Module</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="WQ-1.html"><a href="WQ-1.html#WQMassBalance-2"><i class="fa fa-check"></i><b>6.1</b> Mass Balance</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="PT-1.html"><a href="PT-1.html"><i class="fa fa-check"></i><b>7</b> Particle Tracking Module</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="PT-1.html"><a href="PT-1.html#PTMinorEnhancements-2"><i class="fa fa-check"></i><b>7.1</b> Minor Enhancements and Fixes</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="PT-1.html"><a href="PT-1.html#PTMultipleGroupFix-3"><i class="fa fa-check"></i><b>7.1.1</b> Multiple Particle Groups Fix</a></li>
+<li class="chapter" data-level="7.1.2" data-path="PT-1.html"><a href="PT-1.html#PTSCPPF-3"><i class="fa fa-check"></i><b>7.1.2</b> Spherical Coordinate Particle Position Fix</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="Tools-1.html"><a href="Tools-1.html"><i class="fa fa-check"></i><b>8</b> Visualisation and Model Development Tools</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="Tools-1.html"><a href="Tools-1.html#xmdf-and-netcdf-file-locking-hdf5-compatibility-issues"><i class="fa fa-check"></i><b>8.1</b> XMDF and NetCDF File Locking (HDF5 Compatibility Issues)</a></li>
+<li class="chapter" data-level="8.2" data-path="Tools-1.html"><a href="Tools-1.html#ToolsGetTools-2"><i class="fa fa-check"></i><b>8.2</b> TUFLOW FV Boundary Condition Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="Support-1.html"><a href="Support-1.html"><i class="fa fa-check"></i><b>9</b> User Manuals, Tutorials and Supporting Materials</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="Support-1.html"><a href="Support-1.html#SupportTutorialModels-2"><i class="fa fa-check"></i><b>9.1</b> Updated Tutorial Models</a></li>
+<li class="chapter" data-level="9.2" data-path="Support-1.html"><a href="Support-1.html#SupportExampleModels-2"><i class="fa fa-check"></i><b>9.2</b> New Example Models</a></li>
+<li class="chapter" data-level="9.3" data-path="Support-1.html"><a href="Support-1.html#SupportTUFLOWFVWiki-2"><i class="fa fa-check"></i><b>9.3</b> TUFLOW FV Wiki Updates</a></li>
+<li class="chapter" data-level="9.4" data-path="Support-1.html"><a href="Support-1.html#SupportUserManuals-2"><i class="fa fa-check"></i><b>9.4</b> User Manuals</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="LicensingInstallation-1.html"><a href="LicensingInstallation-1.html"><i class="fa fa-check"></i><b>10</b> Licensing</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html"><i class="fa fa-check"></i><b>A</b> Vertical Mixing Model Science</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#App-VMMS-KEMS-2"><i class="fa fa-check"></i><b>A.1</b> K-Epsilon Model Science</a></li>
+<li class="chapter" data-level="A.2" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#App-VMMS-KOMS-2"><i class="fa fa-check"></i><b>A.2</b> K-Omega Model Science</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#tab-C3ModelParameters"><i class="fa fa-check"></i><b>A.2.1</b> Table: Model Parameters C<sub>3</sub> for <em>k</em>-ε and <em>k</em>-ω Models</a></li>
+</ul></li>
+<li class="chapter" data-level="A.3" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#App-VMMS-SOMS-2"><i class="fa fa-check"></i><b>A.3</b> Second Order Model Science</a>
+<ul>
+<li class="chapter" data-level="A.3.1" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#tab-SOParameterGroups"><i class="fa fa-check"></i><b>A.3.1</b> Table: Empirical Parameters Group in Second-Order Turbulence Model</a></li>
+</ul></li>
+<li class="chapter" data-level="A.4" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#App-VMMS-Refe-2"><i class="fa fa-check"></i><b>A.4</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html"><i class="fa fa-check"></i><b>B</b> Vertical Mixing Model Benchmarking</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#App-VMMB-Over-2"><i class="fa fa-check"></i><b>B.1</b> Overview</a></li>
+<li class="chapter" data-level="B.2" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#App-VMMB-OCF-2"><i class="fa fa-check"></i><b>B.2</b> Open Channel Flow</a></li>
+<li class="chapter" data-level="B.3" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#App-VMMB-WC-2"><i class="fa fa-check"></i><b>B.3</b> Wind Circulation</a></li>
+<li class="chapter" data-level="B.4" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#App-VMMB-EOWML-2"><i class="fa fa-check"></i><b>B.4</b> Entrainment Of Wind Mixed Layer</a>
+<ul>
+<li class="chapter" data-level="B.4.1" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#wind-entrainment-with-coriolis-forcing"><i class="fa fa-check"></i><b>B.4.1</b> Wind Entrainment With Coriolis Forcing</a></li>
+</ul></li>
+<li class="chapter" data-level="B.5" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#App-VMMB-Refe-2"><i class="fa fa-check"></i><b>B.5</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(0,85,129);"><bmtpink>TUFLOW FV Release Notes Release Candidate 2025.2</bmtpink></h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="App-VMMS-1" class="section level1 hasAnchor newbox1" number="11">
+<h1><span class="header-section-number">Appendix A</span> Vertical Mixing Model Science<a href="App-VMMS-1.html#App-VMMS-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p class="wmark before">
+</p>
+<div id="App-VMMS-KEMS-2" class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">A.1</span> K-Epsilon Model Science<a href="App-VMMS-1.html#App-VMMS-KEMS-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <em>k-ε</em> turbulence model solves transport equations for the turbulent kinetic energy <span class="math inline">\(k\)</span> (units: m<span class="math inline">\(^2\)</span>/s<span class="math inline">\(^2\)</span>) and the dissipation rate of turbulent kinetic energy <span class="math inline">\(\varepsilon\)</span> (units: m<span class="math inline">\(^2\)</span>/s<span class="math inline">\(^3\)</span>):</p>
+<p><span class="math display">\[
+\frac{\partial}{\partial t} (\rho k) + \frac{\partial}{\partial x_i} (\rho k u_i) =
+\frac{\partial}{\partial x_j} \left( \rho \frac{\nu_t}{\sigma_k} \frac{\partial k}{\partial x_j} \right)
++ P_k + P_b - \rho \varepsilon
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial}{\partial t} (\rho \varepsilon) + \frac{\partial}{\partial x_i} (\rho \varepsilon u_i) =
+\frac{\partial}{\partial x_j} \left( \rho \frac{\nu_t}{\sigma_\varepsilon} \frac{\partial \varepsilon}{\partial x_j} \right)
++ \frac{\varepsilon}{k} \left( C_{1\varepsilon} P_k + C_{3\varepsilon} P_b \right)
+- C_{2\varepsilon} \rho \frac{\varepsilon^2}{k}
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(t\)</span> is time (s)<br />
+</li>
+<li><span class="math inline">\(x_i\)</span> are the coordinates in the three Cartesian directions (m)<br />
+</li>
+<li><span class="math inline">\(\rho\)</span> is the density of water (kg/m<span class="math inline">\(^3\)</span>)<br />
+</li>
+<li><span class="math inline">\(u_i\)</span> are the mean velocity components in each Cartesian direction (m/s)<br />
+</li>
+<li><span class="math inline">\(\nu_t\)</span> is the turbulent (eddy) viscosity (m<span class="math inline">\(^2\)</span>/s)<br />
+</li>
+<li><span class="math inline">\(P_k\)</span> and <span class="math inline">\(P_b\)</span> are the production terms of turbulent kinetic energy<br />
+</li>
+<li><span class="math inline">\(C_{1\varepsilon}, C_{2\varepsilon}, C_{3\varepsilon}, \sigma_k, \sigma_\varepsilon\)</span> are model coefficients</li>
+</ul>
+<p>From <span class="math inline">\(k\)</span> and <span class="math inline">\(\varepsilon\)</span>, the vertical eddy viscosity <span class="math inline">\(\nu_t\)</span> is calculated as:</p>
+<p><span class="math display">\[
+\nu_t = C_\mu \frac{k^2}{\varepsilon}
+\]</span></p>
+<p>where <span class="math inline">\(C_\mu\)</span> is a model coefficient (default value: 0.09). The quantity <span class="math inline">\(\nu_t\)</span> is then used to close the bulk momentum equations.</p>
+<p>The production term <span class="math inline">\(P_k\)</span> is defined as:</p>
+<p><span class="math display">\[
+P_k = \rho \nu_t S^2
+\]</span></p>
+<p>where <span class="math inline">\(S\)</span> is the magnitude of the mean rate of strain tensor:</p>
+<p><span class="math display">\[
+S = \sqrt{2 S_{ij} S_{ij}}
+\]</span></p>
+<p>The production due to buoyancy is estimated as:</p>
+<p><span class="math display">\[
+P_b = \rho \nu_h N^2
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(\nu_h\)</span> is the turbulent eddy diffusivity for heat (m<span class="math inline">\(^2\)</span>/s), calculated as <span class="math inline">\(\nu_t / \text{Pr}_t\)</span></li>
+<li><span class="math inline">\(\text{Pr}_t\)</span> is the turbulent Prandtl number (default = 0.74)</li>
+<li><span class="math inline">\(N^2\)</span> is the Brunt–Väisälä frequency squared (s<span class="math inline">\(^{-2}\)</span>):</li>
+</ul>
+<p><span class="math display">\[
+N^2 = -\frac{g}{\rho} \frac{d\rho}{dz}
+\]</span></p>
+<p>with:</p>
+<ul>
+<li><span class="math inline">\(g\)</span> as the gravitational acceleration (m/s<span class="math inline">\(^2\)</span>)</li>
+<li><span class="math inline">\(z\)</span> as the vertical coordinate (m)</li>
+</ul>
+<p>The following default parameters are used based on Rodi (1984):</p>
+<p><span class="math display">\[
+\sigma_k = 1.0, \quad \sigma_\varepsilon = 1.3, \quad
+C_{1\varepsilon} = 1.44, \quad C_{2\varepsilon} = 1.92
+\]</span></p>
+<p>Different values of <span class="math inline">\(C_{3\varepsilon}\)</span> can be used depending on the stratification:</p>
+<p><span class="math display">\[
+C_{3\varepsilon} =
+\begin{cases}
+C_{3\varepsilon-} = 0 &amp; \text{for } N^2 &lt; 0 \quad \text{(stable stratification)} \\
+C_{3\varepsilon+} = 1 &amp; \text{for } N^2 \geq 0 \quad \text{(unstable stratification)}
+\end{cases}
+\]</span></p>
+<p>By defining a negative <span class="math inline">\(C_{3\varepsilon-}\)</span> value using the <tcmd>Vertical Mixing Model Parameters</tcmd> command, the buoyancy production term <span class="math inline">\(P_b\)</span> contributes to dissipation of turbulence under stable stratification.</p>
+</div>
+<div id="App-VMMS-KOMS-2" class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">A.2</span> K-Omega Model Science<a href="App-VMMS-1.html#App-VMMS-KOMS-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <em>k-ω</em> turbulence model solves two transport equations for:</p>
+<ul>
+<li>Turbulent kinetic energy <span class="math inline">\(k\)</span> (units: m<span class="math inline">\(^2\)</span>/s<span class="math inline">\(^2\)</span>)</li>
+<li>Rate of the inverse turbulent time scale <span class="math inline">\(\omega\)</span> (units: s<span class="math inline">\(^{-1}\)</span>)</li>
+</ul>
+<p><span class="math display">\[
+\frac{\partial}{\partial t} (\rho k) + \frac{\partial}{\partial x_i} (\rho k u_i) =
+\frac{\partial}{\partial x_j} \left( \rho \frac{\nu_t}{\sigma_k} \frac{\partial k}{\partial x_j} \right)
++ P_k + P_b - \rho \varepsilon
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial}{\partial t} (\rho \omega) + \frac{\partial}{\partial x_i} (\rho \omega u_i) =
+\frac{\partial}{\partial x_j} \left( \rho \frac{\nu_t}{\sigma_\omega} \frac{\partial \omega}{\partial x_j} \right)
++ \frac{\omega}{k} \left( \alpha P_k + C_{3\omega} P_b \right)
+- \beta \rho \omega^2
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><p><span class="math inline">\(t\)</span>: Time (s)<br />
+</p></li>
+<li><p><span class="math inline">\(x_i\)</span>: Cartesian coordinates (m)<br />
+</p></li>
+<li><p><span class="math inline">\(\rho\)</span>: Density of water (kg/m<span class="math inline">\(^3\)</span>)<br />
+</p></li>
+<li><p><span class="math inline">\(u_i\)</span>: Mean velocity components in each Cartesian direction (m/s)<br />
+</p></li>
+<li><p><span class="math inline">\(\nu_t\)</span>: Turbulent eddy viscosity (m<span class="math inline">\(^2\)</span>/s)<br />
+</p></li>
+<li><p><span class="math inline">\(P_k\)</span>, <span class="math inline">\(P_b\)</span>: Production terms of turbulent kinetic energy (see Appendix <a href="App-VMMS-1.html#App-VMMS-KEMS-2">A.1</a>)</p></li>
+<li><p><span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>, <span class="math inline">\(C_{3\omega}\)</span>, <span class="math inline">\(\sigma_k\)</span>, <span class="math inline">\(\sigma_\omega\)</span>: Model coefficients</p></li>
+</ul>
+<p>From <span class="math inline">\(k\)</span> and <span class="math inline">\(\omega\)</span>, the vertical eddy viscosity <span class="math inline">\(\nu_t\)</span> is computed as:</p>
+<p><span class="math display">\[
+\nu_t = \frac{k}{\omega}
+\]</span></p>
+<p>This quantity <span class="math inline">\(\nu_t\)</span> is then used to close the bulk momentum equations. The relationship between the dissipation rate <span class="math inline">\(\varepsilon\)</span> and the inverse turbulent time scale <span class="math inline">\(\omega\)</span> is given by:</p>
+<p><span class="math display">\[
+\varepsilon = C_\mu k \omega
+\]</span></p>
+<p>where <span class="math inline">\(C_\mu\)</span> is a model coefficient (default = 0.09).</p>
+<p>The default values of the model coefficients are taken from Wilcox (1988):</p>
+<p><span class="math display">\[
+\alpha = \frac{5}{9}, \quad \beta = \frac{3}{40}, \quad \sigma_k = 2, \quad \sigma_\omega = 2
+\]</span></p>
+<p>The default values for <span class="math inline">\(C_{3\omega}\)</span> are zero for both stable and unstable stratification:</p>
+<p><span class="math display">\[
+C_{3\omega} =
+\begin{cases}
+C_{3\omega-} = 0 &amp; \text{for } N^2 &lt; 0 \quad \text{(stable stratification)} \\
+C_{3\omega+} = 0 &amp; \text{for } N^2 \geq 0 \quad \text{(unstable stratification)}
+\end{cases}
+\]</span></p>
+<p>A negative value for <span class="math inline">\(C_{3\omega-}\)</span> can be defined using the <tcmd>Vertical Mixing Model Parameters</tcmd> command. This allows the buoyancy production term to act as a sink, dissipating turbulence under stable stratification.</p>
+<p>Umlauf and Burchard (2005) summarise the recommended values of <span class="math inline">\(C_{3\varepsilon}\)</span> and <span class="math inline">\(C_{3\omega}\)</span> for <em>k-ε</em> and <em>k-ω</em> models as a function of the steady-state Richardson number. These are provided in Table <a href="App-VMMS-1.html#tab-C3ModelParameters">A.2.1</a>.</p>
+<div id="tab-C3ModelParameters" class="section level3 hasAnchor" number="11.2.1">
+<h3><span class="header-section-number">A.2.1</span> Table: Model Parameters C<sub>3</sub> for <em>k</em>-ε and <em>k</em>-ω Models<a href="App-VMMS-1.html#tab-C3ModelParameters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Publications</th>
+      <th rowspan="2">Steady-State Richardson Number</th>
+      <th colspan="2">k-ε Model</th>
+      <th colspan="2">k-ω Model</th>
+    </tr>
+    <tr>
+      <th>C<sub>(3ε+)</sub></th>
+      <th>C<sub>(3ε−)</sub></th>
+      <th>C<sub>(3ω+)</sub></th>
+      <th>C<sub>(3ω−)</sub></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3">Gibson and Launder (1978)</td>
+      <td>0.20</td><td>1.0</td><td>-0.596</td><td>0.0</td><td>-0.623</td>
+    </tr>
+    <tr>
+      <td>0.25</td><td>1.0</td><td>-0.370</td><td>0.0</td><td>-0.492</td>
+    </tr>
+    <tr>
+      <td>0.30</td><td>1.0</td><td>-0.234</td><td>0.0</td><td>-0.413</td>
+    </tr>
+    <tr>
+      <td rowspan="3">Cheng et al. (2002)</td>
+      <td>0.20</td><td>1.0</td><td>-1.064</td><td>0.0</td><td>-0.894</td>
+    </tr>
+    <tr>
+      <td>0.25</td><td>1.0</td><td>-0.744</td><td>0.0</td><td>-0.709</td>
+    </tr>
+    <tr>
+      <td>0.30</td><td>1.0</td><td>-0.545</td><td>0.0</td><td>-0.593</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div id="App-VMMS-SOMS-2" class="section level2 hasAnchor" number="11.3">
+<h2><span class="header-section-number">A.3</span> Second Order Model Science<a href="App-VMMS-1.html#App-VMMS-SOMS-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The simplified second-order turbulence closure formulation of Umlauf and Burchard (2005) is:</p>
+<p><span class="math display">\[
+\nu_t = C_\mu(\alpha_M, \alpha_N) \frac{k}{\varepsilon}, \quad
+\nu_h = C_\mu&#39;(\alpha_M, \alpha_N) \frac{k}{\varepsilon}
+\]</span>
+<span class="math display">\[
+\alpha_M = \tau^2 S^2, \quad \alpha_N = \tau^2 N^2, \quad \tau = \frac{k}{\varepsilon}
+\]</span></p>
+<p>The stability functions are written as:</p>
+<p><span class="math display">\[
+C_\mu(\alpha_M, \alpha_N) = \frac{n_0 + n_1 \alpha_N + n_2 \alpha_M}
+{d_0 + d_1 \alpha_N + d_2 \alpha_M + d_3 \alpha_N \alpha_M + d_4 \alpha_N^2 + d_5 \alpha_M^2}
+\]</span></p>
+<p><span class="math display">\[
+C_\mu&#39;(\alpha_M, \alpha_N) = \frac{n_{b0} + n_{b1} \alpha_N + n_{b2} \alpha_M}
+{d_0 + d_1 \alpha_N + d_2 \alpha_M + d_3 \alpha_N \alpha_M + d_4 \alpha_N^2 + d_5 \alpha_M^2}
+\]</span></p>
+<p>The model parameters <span class="math inline">\(d_X\)</span> and <span class="math inline">\(n_X\)</span> are defined as:</p>
+<p><span class="math display">\[
+\begin{aligned}
+d_0 &amp;= 36N^3 N_b^2 \\\\
+d_1 &amp;= 84a_5 a_{b3} N^2 N_b + 36N^3 N_b \\\\
+d_2 &amp;= 9(a_{b2}^2 - a_{b1}^2) N^3 + 12(a_2^2 - 3a_3^2) N N_b^2 \\\\
+d_3 &amp;= 12a_5 a_{b3}(a_2 a_{b1} - 3a_3 a_{b2})N + 12a_5 a_{b3}(a_3^2 - a_3^2) N_b + 12a_{b5}(3a_3^2 - a_3^2) N N_b \\\\
+d_4 &amp;= 48a_5^2 a_{b3}^2 N + 36a_5 a_{b3} a_{b5} N^2 \\\\
+d_5 &amp;= 3(a_2^2 - 3a_3^2)(a_{b1}^2 - a_{b2}^2) N \\\\
+n_0 &amp;= 36a_1 N^2 N_b^2 \\\\
+n_1 &amp;= -12a_5 a_{b3}(a_{b1} + a_{b2}) N^2 + 8a_5 a_{b3}(6a_1 - a_2 - 3a_3) N N_b + 36a_1 a_{b5} N^2 N_b \\\\
+n_2 &amp;= 9a_1(a_{b2}^2 - a_{b1}^2) N^2 \\\\
+n_{b0} &amp;= 12a_{b3}^2 N^3 N_b \\\\
+n_{b1} &amp;= 12a_5 a_{b3}^2 N^2 \\\\
+n_{b2} &amp;= 9a_1 a_{b3}(a_{b1} - a_{b2}) N^2 + [6a_1(a_2 - 3a_3) - 4(a_2^2 - 3a_3^2)] a_{b3} N N_b
+\end{aligned}
+\]</span></p>
+<p>The parameters <span class="math inline">\(N\)</span>, <span class="math inline">\(N_b\)</span>, and the coefficients <span class="math inline">\(a_X\)</span> used in the equations above are defined as:</p>
+<p><span class="math display">\[
+\begin{aligned}
+N &amp;= \frac{c_1}{2}, \quad N_b = c_{b1} \\\\
+a_1 &amp;= \frac{2}{3} - \frac{1}{2} c_2, \quad a_2 = 1 - \frac{1}{2} c_3, \quad a_3 = 1 - \frac{1}{2} c_4 \\\\
+a_4 &amp;= \frac{1}{2} c_5 = 0, \quad a_5 = \frac{1}{2} - \frac{1}{2} c_6 \\\\
+a_{b1} &amp;= 1 - c_{b2}, \quad a_{b2} = 1 - c_{b3}, \quad a_{b3} = 2(1 - c_{b4}) \\\\
+a_{b4} &amp;= 2(1 - c_{b5}), \quad a_{b5} = 2 c_{bb}(1 - c_{b5})
+\end{aligned}
+\]</span></p>
+<p>The empirical parameters <span class="math inline">\(a_X\)</span> can be chosen from Table <a href="App-VMMS-1.html#tab-SOParameterGroups">A.3.1</a>.</p>
+<div id="tab-SOParameterGroups" class="section level3 hasAnchor" number="11.3.1">
+<h3><span class="header-section-number">A.3.1</span> Table: Empirical Parameters Group in Second-Order Turbulence Model<a href="App-VMMS-1.html#tab-SOParameterGroups" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>GL78</th>
+      <th>MY86</th>
+      <th>KC94</th>
+      <th>LDOR96</th>
+      <th>CHCD01A</th>
+      <th>CHCD01B</th>
+      <th>CCH02</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>c<sub>1</sub></td><td>3.6000</td><td>6.0000</td><td>6.0000</td><td>3.0000</td><td>5.0000</td><td>5.0000</td><td>5.0000</td></tr>
+    <tr><td>c<sub>2</sub></td><td>0.8000</td><td>0.3200</td><td>0.3200</td><td>0.8000</td><td>0.8000</td><td>0.6983</td><td>0.7983</td></tr>
+    <tr><td>c<sub>3</sub></td><td>1.2000</td><td>0.0000</td><td>0.0000</td><td>2.0000</td><td>1.9680</td><td>1.9664</td><td>1.9680</td></tr>
+    <tr><td>c<sub>4</sub></td><td>1.2000</td><td>0.0000</td><td>0.0000</td><td>1.1180</td><td>1.1360</td><td>1.0940</td><td>1.1360</td></tr>
+    <tr><td>c<sub>5</sub></td><td>0.0000</td><td>0.0000</td><td>0.0000</td><td>0.0000</td><td>0.0000</td><td>0.0000</td><td>0.0000</td></tr>
+    <tr><td>c<sub>6</sub></td><td>0.5000</td><td>0.0000</td><td>0.0000</td><td>0.5000</td><td>0.4000</td><td>0.4950</td><td>0.5000</td></tr>
+    <tr><td>c<sub>b1</sub></td><td>3.0000</td><td>3.7280</td><td>3.7280</td><td>3.0000</td><td>5.9500</td><td>5.6000</td><td>5.5200</td></tr>
+    <tr><td>c<sub>b2</sub></td><td>0.3333</td><td>0.0000</td><td>0.7000</td><td>0.3333</td><td>0.6000</td><td>0.6000</td><td>0.2134</td></tr>
+    <tr><td>c<sub>b3</sub></td><td>0.3333</td><td>0.0000</td><td>0.7000</td><td>0.3333</td><td>1.0000</td><td>1.0000</td><td>0.3570</td></tr>
+    <tr><td>c<sub>b4</sub></td><td>0.0000</td><td>0.0000</td><td>0.0000</td><td>0.0000</td><td>0.0000</td><td>0.0000</td><td>0.0000</td></tr>
+    <tr><td>c<sub>b5</sub></td><td>0.3333</td><td>0.0000</td><td>0.2000</td><td>0.3333</td><td>0.3333</td><td>0.3333</td><td>0.3333</td></tr>
+    <tr><td>c<sub>bb</sub></td><td>0.8000</td><td>0.6102</td><td>0.6102</td><td>0.8000</td><td>0.7200</td><td>0.4770</td><td>0.8200</td></tr>
+    <tr><td>Publication</td><td>Gibson and Launder (1978)</td><td>Mellor and Yamada (1982)</td><td>Kantha and Clayson (1994)</td><td>Luyten et al. (1996)</td><td>Canuto et al. (2001), version A</td><td>Canuto et al. (2001), version B</td><td>Cheng et al. (2002)</td></tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div id="App-VMMS-Refe-2" class="section level2 hasAnchor" number="11.4">
+<h2><span class="header-section-number">A.4</span> References<a href="App-VMMS-1.html#App-VMMS-Refe-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>References are provided in Section <a href="VMM-1.html#VMM-Refe-2">3.6</a>.</p>
+</div>
+</div>
+<p><img src="images/WQFooter.jpg" width="100%" /></p>
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="LicensingInstallation-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="App-VMMB-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": false,
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
