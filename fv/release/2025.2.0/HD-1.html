@@ -493,10 +493,10 @@ ERROR: Culvert downstream invert is less than ground elevation, ID 1</code></pre
 <div id="HDMassBalance-2" class="section level2 hasAnchor newbox3" number="2.4">
 <h2><span class="header-section-number">2.4</span> Mass Balance<a href="HD-1.html#HDMassBalance-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Users can now specify an additional output type <tblk>massbalance</tblk> that generates a suite of csv files that report timeseries of all time-accumulated volume and mass fluxes within a model domain, as related to all simulated quantities, other than temperature. One csv file is generated for each simulated quantity’s volume or mass balance, and so is intentionally self contained. This allows users to complete their own mass balance analyses on a per-simulated-quantity basis, without additional post processing or reference to any other output files.</p>
-<p>Each output csv file is named <tblk>&lt;fvc_name&gt;_MASSBALANCE_&lt;quantity_name&gt;.csv</tblk>, so for example the csv file for the salinity mass balance of simulation River_001.fvc would be named <tblk>River_001_MASSBALANCE_SALINITY.csv</tblk>, and written to the nominated results folder. Each csv file has several columns, each reporting a timeseries of mass or accumulated flux, and these columns vary between simulated quantities. The following columns are reported as the first five columns for all simulated quantities:</p>
+<p>Each output csv file is named <tblk>&lt;fvc_name&gt;_MASSBALANCE_&lt;quantity_name&gt;.csv</tblk>. For example the csv file for the salinity mass balance of simulation River_001.fvc would be named <tblk>River_001_MASSBALANCE_SALINITY.csv</tblk>, and written to the nominated results folder. Each csv file has several columns, each reporting a timeseries of mass or accumulated flux, and these columns vary between simulated quantities. The following columns are reported as the first five columns for all simulated quantities:</p>
 <ol style="list-style-type: decimal">
 <li>Time</li>
-<li>Total instantaneous volume or mass of quantity, as computed from TUFLOW FV state variables (which is the same as the <tblk>mass</tblk> output):</li>
+<li>Total instantaneous volume or mass of quantity, as computed from TUFLOW FV state variables (which is the same as the <tblk>mass</tblk> output)</li>
 <li>Accumulated fluxes across all QC and QC_POLY boundaries, summed to a single timeseries</li>
 <li>Accumulated fluxes across all Q boundaries, summed to a single timeseries. This does not include internal nodestring fluxes</li>
 <li>Accumulated fluxes across all WL, QN and WLS boundaries, summed to a single timeseries. This does not include internal nodestring fluxes</li>
@@ -504,7 +504,7 @@ ERROR: Culvert downstream invert is less than ground elevation, ID 1</code></pre
 <p>Following these columns, a series of bespoke accumulated fluxes are reported, and these depend on the quantity reported. After these bespoke accumulated fluxes, the following four columns are reported for all simulated quantities:</p>
 <ul>
 <li>Summed accumulated fluxes for the reported quantity, including boundary (columns 3 - 5 above) and all bespoke fluxes, with sign (direction) preserved</li>
-<li>Instantaneous flux-based volume or mass at time <span class="math inline">\(t\)</span>, as computed from summing the volume or mass at time <span class="math inline">\(t-1\)</span> and time <span class="math inline">\(t\)</span> fluxes. This provides an alternative estimate of instantaneous volume or mass that is then compared with the volume or mass reported in column 2, and this comparison reported in the next column</li>
+<li>Instantaneous flux-based volume or mass at time <span class="math inline">\(t\)</span>, as computed from summing the volume or mass at time <span class="math inline">\(t-1\)</span> and time <span class="math inline">\(t\)</span> fluxes. This provides an alternative estimate of instantaneous volume or mass that is then compared with the volume or mass reported in column 2. This comparison is reported in the next column</li>
 <li>Percentage error between the instantaneous volume or mass reported in column 2 and the corresponding flux-based estimate reported in the previous column. For further information on the percentage error calculation refer to the <a href="https://docs.tuflow.com/fv/wqm/manual/2025.2/AppMBalCalcs.html#AppMBalCalcs">TUFLOW FV Water Quality User Manual</a> mass balance model appendix</li>
 <li>The number of times the quantity reported has been ‘turned over’ since the beginning of the simulation. This is computed by summing the accumulated absolute values of all fluxes and dividing that sum by the original volume or mass. It is not intended to be an exact quantity to be used for flushing or similar analyses, but rather, to be interpreted as a quantity that provides an indication of the rapidity at which a quantity is cycled through the model domain. For example, a turnover value of 300 for VOLUME at the end of a one month simulation indicates that the modelled domain is dynamic and that water is cycled relatively quickly through the system. Conversely, a turnover value of 0.3 indicates the reverse - the simulated quantity is relatively stable and potentially stagnant.</li>
 </ul>
@@ -664,7 +664,7 @@ The percentage error of the different between <b>FV_VOL</b> and <b>MF_VOL</b>. C
 <b>MF_TURNOVERS</b>
 </td>
 <td style="text-align:left;width: 80%; ">
-See explanatory text above. Always a positive quantity.
+See explanatory text (Section <a href="HD-1.html#HDMassBalance-2">2.4</a>). Always a positive quantity.
 </td>
 <td style="text-align:left;width: 10%; ">
 No units
