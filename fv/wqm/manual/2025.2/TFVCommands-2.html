@@ -529,9 +529,9 @@
 <li>The cell dry depth value (default = 1.0e-06 m) corresponds to the water depth below which a cell is dropped completely from hydrodynamic (TUFLOW FV) computations (subject to the status of surrounding cells) and is therefore considered to be ‘dry’. Cells that have dried in a given time step are given a stat value of 0 in all TUFLOW FV results files, so this stat field acts as a mask to determine which cells are wet and dry when using post processing tools and or scripts. Dry cells are not contoured in QGIS or SMS when viewed, but appear as transparent. If set to a negative value the cell dry depth is set to zero.</li>
 <li>The cell wet depth value (default = 1.0e-02 m) corresponds to the water depth below which a cell’s momentum is set to zero in order to avoid unphysical velocities at very low depths. The cell is not considered to be dry and therefore has a stat value of -1. If this value is less than or equal to the cell dry depth, it is set to the cell dry depth.</li>
 </ul>
-<p>Given this, it is therefore recommended that across these commands and/or defaults, a user ensures that the following holds (as it does for the default values noted above):</p>
+<p>Given this, it is therefore recommended that across these commands a user ensures that the following holds:</p>
 <p><span class="math display" id="eq:equ-wet-dry-depth">\[\begin{equation}
-  \text{cell dry depth} \lt \text{cell wet depth} \lt \text{cell water quality depth}
+  \text{cell dry depth} &lt; \text{cell wet depth} &lt; \text{cell water quality depth}
     \tag{4.3}
 \end{equation}\]</span></p>
 <p>If, for example, cell water quality depth is set to a value less than cell dry depth, then water quality calculations will be attempted on cells that TUFLOW FV considers to be dry, which is to be avoided. If a situation arose where it was absolutely necessary, then cell water quality depth could be set to a value less than cell wet depth (but still greater than cell dry depth), but this is not recommended. To summarise, and if the recommended relative magnitudes of depths presented in Equation <a href="TFVCommands-2.html#eq:equ-wet-dry-depth">(4.3)</a> is adopted, then the following applies:</p>
