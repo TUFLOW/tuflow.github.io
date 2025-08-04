@@ -1276,10 +1276,14 @@ If the input is not found in the control file, it will search through any child 
 <p class="rubric">Examples</p>
 <p>The example below finds an input and then checks if the input is still present after
 creating a run state instance of the control file.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># Assume cf is an instance of ControlFile that has been loaded</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;2d_code&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">run_cf</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s1">&#39;-s1 EXG -s2 5m&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">run_inp</span> <span class="o">=</span> <span class="n">run_cf</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">control_file</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># Assume the control file has been loaded</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">code_inp</span> <span class="o">=</span> <span class="n">control_file</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;2d_code&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run_control_file</span> <span class="o">=</span> <span class="n">control_file</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s1">&#39;-s1 EXG -s2 5m&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">run_inp</span> <span class="o">=</span> <span class="n">run_control_file</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="n">code_inp</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Input found: </span><span class="si">{</span><span class="n">run_inp</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Input not found in run state control file.&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
