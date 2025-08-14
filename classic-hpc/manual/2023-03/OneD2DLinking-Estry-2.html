@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.3 TUFLOW 1D (ESTRY) to TUFLOW 2D Linking | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </title>
+  <meta name="description" content="TUFLOW Classic/HPC User Manual 2025" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.3 TUFLOW 1D (ESTRY) to TUFLOW 2D Linking | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.3 TUFLOW 1D (ESTRY) to TUFLOW 2D Linking | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  
+  <meta name="twitter:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+<meta name="author" content="RELEASE CANDIDATE     This is an interim manual that accompanies the TUFLOW Classic/HPC 2025.2.0-rc.1 release candidate executable. The information contained within this interim version may vary from the subsequent final version." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="OneD2dLinking-2.html"/>
+<link rel="next" href="OneD2DLinkingSWMM-2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/TUFLOW_2025.2_release-candidate.png"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this Manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#commands"><i class="fa fa-check"></i>Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#about-this-manual"><i class="fa fa-check"></i>About this Manual</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#glossary-and-notation"><i class="fa fa-check"></i>Glossary and Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="DomainLinking-1.html"><a href="DomainLinking-1.html"><i class="fa fa-check"></i><b>1</b> Combining Domains and Solvers</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Linked-1D2D-Models-Intro-2.html"><a href="Linked-1D2D-Models-Intro-2.html"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html"><i class="fa fa-check"></i><b>1.2</b> 1D and 2D Domain Linking Theory</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#HXBoundary-3"><i class="fa fa-check"></i><b>1.2.1</b> HX 2D Head Boundary</a></li>
+<li class="chapter" data-level="1.2.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundary-3"><i class="fa fa-check"></i><b>1.2.2</b> SX 2D Flow Boundaries</a>
+<ul>
+<li class="chapter" data-level="1.2.2.1" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundarySW-4"><i class="fa fa-check"></i><b>1.2.2.1</b> SX 2D Flow Boundary to Surface Water</a></li>
+<li class="chapter" data-level="1.2.2.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundaryGW-4"><i class="fa fa-check"></i><b>1.2.2.2</b> SX 2D Flow Boundary to Groundwater</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html"><i class="fa fa-check"></i><b>1.3</b> TUFLOW 1D (ESTRY) to TUFLOW 2D Linking</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYChannel-3"><i class="fa fa-check"></i><b>1.3.1</b> 1D Open Channel and 2D Domain Linking</a></li>
+<li class="chapter" data-level="1.3.2" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYCulverts-3"><i class="fa fa-check"></i><b>1.3.2</b> 1D Structures Embedded within 2D Domains</a></li>
+<li class="chapter" data-level="1.3.3" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYPipeNetwork-3"><i class="fa fa-check"></i><b>1.3.3</b> 1D Pipe Network Pits linked to 2D Domains</a></li>
+<li class="chapter" data-level="1.3.4" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#VirtualPits-3"><i class="fa fa-check"></i><b>1.3.4</b> Virtual Pits linked to 2D Domains</a></li>
+<li class="chapter" data-level="1.3.5" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#GroundwaterLinked-3"><i class="fa fa-check"></i><b>1.3.5</b> TUFLOW 1D (ESTRY) linked to Groundwater</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html"><i class="fa fa-check"></i><b>1.4</b> SWMM to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMCulverts-5"><i class="fa fa-check"></i><b>1.4.1</b> 1D Culvert Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.2" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMPipeNetwork-3"><i class="fa fa-check"></i><b>1.4.2</b> 1D Pipe Network Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.3" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DGWConnections-3"><i class="fa fa-check"></i><b>1.4.3</b> Groundwater Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.4" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DLinkingSWMM1D-3"><i class="fa fa-check"></i><b>1.4.4</b> SWMM to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html"><i class="fa fa-check"></i><b>1.5</b> Flood Modeller to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html#oneD2DFMLinking2D-3"><i class="fa fa-check"></i><b>1.5.1</b> Flood Modeller 1D to TUFLOW 2D Linking</a></li>
+<li class="chapter" data-level="1.5.2" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html#oneD2DFMLinking1D-3"><i class="fa fa-check"></i><b>1.5.2</b> Flood Modeller 1D to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="oneD2D12D-2.html"><a href="oneD2D12D-2.html"><i class="fa fa-check"></i><b>1.6</b> 12D-DDA to TUFLOW Linking</a></li>
+<li class="chapter" data-level="1.7" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html"><i class="fa fa-check"></i><b>1.7</b> Multiple 2D Domains</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html#TwoD2DLinkingQDT-3"><i class="fa fa-check"></i><b>1.7.1</b> Classic’s M2D Feature versus HPC Quadtree</a></li>
+<li class="chapter" data-level="1.7.2" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html#TwoD2DLinkingM2D-3"><i class="fa fa-check"></i><b>1.7.2</b> TUFLOW Classic’s Multiple 2D Domains</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/WQFooter.jpg" style="width:246px;height:10px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(226,1,119);">TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<p class="wmark before"></p>
+<div id="OneD2DLinking-Estry-2" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> TUFLOW 1D (ESTRY) to TUFLOW 2D Linking<a href="OneD2DLinking-Estry-2.html#OneD2DLinking-Estry-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Linked TUFLOW 1D and 2D domain models use 2D HX and 2D SX boundary types connected to 1D nodes (1d_nwk layer) using CN lines or points in the 2d_bc layer, as described in Section <a href="#TwoDBoundaries-2"><strong>??</strong></a>. The recommended approach for HX and SX connections are summarised in the following sections.</p>
+<div id="OneD2DESTRYChannel-3" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> 1D Open Channel and 2D Domain Linking<a href="OneD2DLinking-Estry-2.html#OneD2DESTRYChannel-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>2D_bc HX boundaries are preferred for transitioning between 1D domains and 2D domains (shown in Figure <a href="OneD2dLinking-2.html#fig:fig-HXExternalBoundaryConnection">1.5</a>) or when nesting a 1D open channel network within a 2D domain (shown in Figure <a href="OneD2dLinking-2.html#fig:fig-HXSchematicPlanView">1.2</a>).</p>
+<p>An example of these HX connections is provided in <a href="https://wiki.tuflow.com/Tutorial_M11">TUFLOW Tutorial Module 11</a>. The <a href="https://wiki.tuflow.com/TUFLOW_1D2D_Boundary_Configuration_Guidance">TUFLOW Wiki 1D2D Boundary Configuration Guidance</a> also includes useful guidance on how to stabilise problematic 1D/2D TUFLOW HPC HX connections.</p>
+</div>
+<div id="OneD2DESTRYCulverts-3" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> 1D Structures Embedded within 2D Domains<a href="OneD2DLinking-Estry-2.html#OneD2DESTRYCulverts-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>2D_bc SX boundaries are preferred for inserting 1D culverts inside a 2D domain. For example, a 1D culvert underneath a road embankment, as shown in Figure <a href="OneD2dLinking-2.html#fig:fig-SXSchematicCrossDrainageStructure">1.6</a>.</p>
+<p>An example of these SX connections is provided in <a href="https://wiki.tuflow.com/Tutorial_M03">TUFLOW Tutorial Module 3</a>. The <a href="https://wiki.tuflow.com/TUFLOW_1D2D_Boundary_Configuration_Guidance">TUFLOW Wiki 1D2D Boundary Configuration Guidance</a> also includes useful guidance how to stabilise problematic 1D/2D SX connections.</p>
+</div>
+<div id="OneD2DESTRYPipeNetwork-3" class="section level3 hasAnchor" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> 1D Pipe Network Pits linked to 2D Domains<a href="OneD2DLinking-Estry-2.html#OneD2DESTRYPipeNetwork-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pits/Inlets within an urban drainage environment provide bi-directional connectivity between the urban surface represented by 2D domains and the 1D sub-surface pipe network. They use the SX type linking described in Section <a href="OneD2dLinking-2.html#SXBoundarySW-4">1.2.2.1</a>. To simplify the model setup process the SX connections are automatically created by setting the Conn_1D_2D attribute for the pit/inlet point object to “SX” in the 1d_pit or 1d_nwk layer. The type of pit is defined using the ‘Type’ attribute:</p>
+<ul>
+<li>“C” pits use zero length circular culverts to calculate the flow transferred between the 1D network and 2D domain.<br />
+</li>
+<li>“R” pits use zero length box culverts to calculate the flow transferred between the 1D network and 2D domain.<br />
+</li>
+<li>“W” pits use the weir equation to calculate the flow transferred between the 1D network and 2D domain.<br />
+</li>
+<li>“Q” pits use a user-specified Depth-Discharge curve to transfer flow between the 2D domain and the 1D domain, based on the 2D water depth.</li>
+</ul>
+<p>Section <a href="#Pits-3"><strong>??</strong></a> contains information about the specification of pit parameters. A pipe network model example is provided in <a href="https://wiki.tuflow.com/Tutorial_Introduction">TUFLOW Tutorial Module 5</a>.</p>
+</div>
+<div id="VirtualPits-3" class="section level3 hasAnchor" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> Virtual Pits linked to 2D Domains<a href="OneD2DLinking-Estry-2.html#VirtualPits-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Compared to the above-mentioned approach, virtual pits are an alternative way to model pits/inlets where the sub-surface pipe network is not being modelled. The flow entering a virtual pit can either be discharged back into the model further downstream or permanently extracted from the model. There are three main approaches to using virtual pits:</p>
+<ul>
+<li>Virtual Pit Inlets (Type ‘VPI’) only are used to extract flow from the model. One examples would be where there is no or insufficient data on the pipe network. Another example is where the pipe network flow discharges to a river (assuming the level in the river does not affect the flow into the pits) and no pit surcharging back onto the 2D domain occurs.<br />
+</li>
+<li>VPIs are used in with Virtual Pipe Outlets (VPOs), which allow the flow into VPIs to be discharged back onto the model. VPIs can be allocated to specific VPOs via a common network ID. VPOs can have a limiting outlet flow. Once the VPO flow reaches the limit, the excess flow is surcharged back through VPIs, which can be prioritised as to which ones surcharge first. By default, the routing of flow between VPIs and VPOs on the same network is instantaneous (i.e. no lag). However from the 2023-03-AB build, it is possible to apply a lag or shift to the flows from the inlet to the outlet by using the 1d_pit Lag_Approach and Lag_Value attributes.<br />
+</li>
+<li>Flows from VPIs can be connected to 1D channel nodes to drain flow from the 2D surface and reintroduce them to the 1D domain further downstream. This is a useful approach to modelling the major sub-surface drainage system as a pipe network and the minor system as VPIs feeding into the major system.</li>
+</ul>
+<p>Section <a href="#Virtual-Pipes-2"><strong>??</strong></a> contains more information about virtual pits. Models using these model configurations are provided in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#1D_Pipe_Network_.2F_2D_Floodplain_Modelling">1D Pipe Network / 2D Floodplain Modelling Example Model Dataset</a> on the TUFLOW Wiki.</p>
+<p>As previously mentioned, pits, virtual pits and nodes can be automatically connected to 2D domains using the 1d_nwk Conn_1D_2D attribute (see Table <a href="#tab:tab-PitsAttributeDescriptions"><strong>??</strong></a> and Table <a href="#tab:tab-PitsModelNetwork"><strong>??</strong></a>). If Conn_1D_2D is set to “SX”, TUFLOW automatically connects the upstream end of the pit channel or node to the 2D domain.</p>
+<ul>
+<li>For this automated 1D-2D SX connection to establish, it is a requirement that the 2D cell must be active (2d_code, Code = 1). If no active 2D cells are found from any 2D domain, a <a href="https://wiki.tuflow.com/TUFLOW_Message_2122">WARNING 2122</a> or <a href="https://wiki.tuflow.com/TUFLOW_Message_2123">2123</a> is issued.<br />
+</li>
+<li>The command <a href="#ecfPitDefault2DConnection">Pit Default 2D Connection</a> can be used to set the global default value for the 1d_nwk Conn_1D_2D attribute.<br />
+</li>
+<li>By default, TUFLOW will connect the 1D pit/virtual pit/node to one or more 2D cells at pit connections. The number of 2D cells selected is a function of the flow width of the pit inlet (including the effects of the Number_of and Width_or_Dia 1d_nwk attributes), or the total flow width of the channels connected to the node. The total width of the 2D cells selected is always more than the pit inlet width or width of channels. For example, a width of 3.6 m on a 2 m grid selects two cells. The advantage of selecting more than one 2D cell is to provide enhanced stability at the 1D/2D connection when the 1D flow width exceeds the 2D cell size. The number of 2D connection cells is limited to 10 per pit inlet.</li>
+<li>The 1d_nwk Conn_No attribute can be used to change the number of 2D cells connected as follows:
+<ul>
+<li>A positive value adds that number of 2D cells to the automatic number. In the example above, if Conn_No is set to 1, three (2 + 1) 2D cells are connected. The upper limit is 10 connected cells.<br />
+</li>
+<li>If Conn_No is negative, this ignores the automatic approach and fixes the number of 2D cells connected to the absolute value of Conn_No. For example, a value of -1 would only connect the pit or node to one (1) 2D cell irrespective of the width.<br />
+</li>
+</ul></li>
+<li>If more than one 2D cell is being connected, there are two approaches available for how the 2D cells are selected.
+<ul>
+<li>For pits, the default is the G (on Grade) option that selects the 2nd, 3rd, etc… cells by traversing to the next highest 2D cell that neighbours the 2D cell(s) already selected (this includes diagonal cells, i.e. all 8 cells around a cell are considered). These cells are also automatically lowered to the same height as the first cell so that their ZC value is at or below the pit inlet.<br />
+</li>
+<li>For nodes, the default is the S (Sag) option that selects the 2nd, 3rd, etc… cells by traversing to the next lowest 2D cell. The ZC values of these cells are not changed as they are already at or below the node invert.<br />
+</li>
+</ul></li>
+<li>The above approaches can be changed using the G (Grade) and S (Sag) flags for the 1d_nwk Conn_1D_2D attribute. The G approach is that adopted by default for pits and S for nodes. To override the default approach, specify G or S as appropriate. For example, if the S approach is preferred for a pit that is draining a depression, specify an S flag for the Conn_1D_2D attribute (i.e. “SXS”). Note SX must come first before an optional flag is specified.</li>
+</ul>
+<p>Note, the conventional 1D-2D link approach using 2d_bc SX points, lines or regions can still be used to connect 1D channel ends. This gives the user complete control over the 2D cells selected and may still be preferred in situations where large 1D structures are being connected to 2D cells.</p>
+</div>
+<div id="GroundwaterLinked-3" class="section level3 hasAnchor" number="1.3.5">
+<h3><span class="header-section-number">1.3.5</span> TUFLOW 1D (ESTRY) linked to Groundwater<a href="OneD2DLinking-Estry-2.html#GroundwaterLinked-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>ESTRY can connect directly with groundwater using SX connections as described in Section <a href="OneD2dLinking-2.html#SXBoundaryGW-4">1.2.2.2</a> (see Table <a href="#tab:tab-ConditionsAttribute"><strong>??</strong></a>). Groundwater connections to 1D (ESTRY) often include perforated or slotted pipes to convey flow to or from the 1D network. These are typically modelled using a depth vs discharge relationship implemented in ESTRY as a “M” channel (see Section <a href="#M-Channel-3"><strong>??</strong></a>) or a “Q” channel (see Section <a href="#Q-Channels-3"><strong>??</strong></a>) directly downstream of the connecting node, as shown in Figure <a href="OneD2DLinking-Estry-2.html#fig:fig-SXtoGWESTRY">1.10</a>. The depth vs discharge relationship is often based on the orifice equation (Equation <a href="#eq:equ-orifice-flow">(<strong>??</strong>)</a>) where the coefficient will vary depending on the design of the groundwater to 1D connection.</p>
+<p>Guidance for generating depth vs discharge curves is provided on the <a href="https://wiki.tuflow.com/Groundwater_Modelling_Advice#Groundwater_Linking_to_1D_.28ESTRY_or_SWMM.29">TUFLOW Wiki Groundwater Modelling Advice</a> page.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SXtoGWESTRY"></span>
+<img src="images/SXtoGW_ESTRY.png" alt="**Groundwater Linking to 1D - ESTRY**"  />
+<p class="caption">
+Figure 1.10: <strong>Groundwater Linking to 1D - ESTRY</strong>
+</p>
+</div>
+</center>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="OneD2dLinking-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="OneD2DLinkingSWMM-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": true,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": false,
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

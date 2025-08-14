@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.9 Operational Channels | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </title>
+  <meta name="description" content="TUFLOW Classic/HPC User Manual 2025" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.9 Operational Channels | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.9 Operational Channels | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  
+  <meta name="twitter:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+<meta name="author" content="RELEASE CANDIDATE     This is an interim manual that accompanies the TUFLOW Classic/HPC 2025.2.0-rc.1 release candidate executable. The information contained within this interim version may vary from the subsequent final version." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="Special-Channels-2.html"/>
+<link rel="next" href="Pipes-2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.11.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/TUFLOW_2025.2_release-candidate.png"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this Manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#commands"><i class="fa fa-check"></i>Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#about-this-manual"><i class="fa fa-check"></i>About this Manual</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#glossary-and-notation"><i class="fa fa-check"></i>Glossary and Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html"><i class="fa fa-check"></i><b>1</b> 1D Network Domains - ESTRY</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Scheme-2.html"><a href="Scheme-2.html"><i class="fa fa-check"></i><b>1.1</b> Schematisation</a></li>
+<li class="chapter" data-level="1.2" data-path="SolutionScheme-2.html"><a href="SolutionScheme-2.html"><i class="fa fa-check"></i><b>1.2</b> Solution Scheme</a></li>
+<li class="chapter" data-level="1.3" data-path="OneD-nwk-2.html"><a href="OneD-nwk-2.html"><i class="fa fa-check"></i><b>1.3</b> 1d_nwk Attributes</a></li>
+<li class="chapter" data-level="1.4" data-path="Channel-Intro-2.html"><a href="Channel-Intro-2.html"><i class="fa fa-check"></i><b>1.4</b> Channels Overview</a></li>
+<li class="chapter" data-level="1.5" data-path="Open-Channel-2.html"><a href="Open-Channel-2.html"><i class="fa fa-check"></i><b>1.5</b> Open Channels</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="Open-Channel-2.html"><a href="Open-Channel-2.html#I-channels-3"><i class="fa fa-check"></i><b>1.5.1</b> Inertial Channels</a></li>
+<li class="chapter" data-level="1.5.2" data-path="Open-Channel-2.html"><a href="Open-Channel-2.html#NI-channels-3"><i class="fa fa-check"></i><b>1.5.2</b> Non-Inertial Channels</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="XS-2.html"><a href="XS-2.html"><i class="fa fa-check"></i><b>1.6</b> Cross-Sections</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="XS-2.html"><a href="XS-2.html#XS-flags-3"><i class="fa fa-check"></i><b>1.6.1</b> Type “XZ” Optional Flags</a>
+<ul>
+<li class="chapter" data-level="1.6.1.1" data-path="XS-2.html"><a href="XS-2.html#RR-4"><i class="fa fa-check"></i><b>1.6.1.1</b> Relative Resistance</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6.2" data-path="XS-2.html"><a href="XS-2.html#HW-flags-3"><i class="fa fa-check"></i><b>1.6.2</b> Type “HW” Optional Flags</a>
+<ul>
+<li class="chapter" data-level="1.6.2.1" data-path="XS-2.html"><a href="XS-2.html#HW-A-4"><i class="fa fa-check"></i><b>1.6.2.1</b> Flow Area (A)</a></li>
+<li class="chapter" data-level="1.6.2.2" data-path="XS-2.html"><a href="XS-2.html#HW-P-4"><i class="fa fa-check"></i><b>1.6.2.2</b> Wetted Perimeter (P)</a></li>
+<li class="chapter" data-level="1.6.2.3" data-path="XS-2.html"><a href="XS-2.html#HW-N-4"><i class="fa fa-check"></i><b>1.6.2.3</b> Manning’s n Values (N)</a></li>
+<li class="chapter" data-level="1.6.2.4" data-path="XS-2.html"><a href="XS-2.html#HW-F-4"><i class="fa fa-check"></i><b>1.6.2.4</b> Manning’s n Values (F)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6.3" data-path="XS-2.html"><a href="XS-2.html#Parallel-Channel-3"><i class="fa fa-check"></i><b>1.6.3</b> Parallel Channel Analysis</a></li>
+<li class="chapter" data-level="1.6.4" data-path="XS-2.html"><a href="XS-2.html#Eff-vs-Total-3"><i class="fa fa-check"></i><b>1.6.4</b> Effective Area versus Total Area</a></li>
+<li class="chapter" data-level="1.6.5" data-path="XS-2.html"><a href="XS-2.html#XS-Mid-3"><i class="fa fa-check"></i><b>1.6.5</b> Mid Cross-Sections</a></li>
+<li class="chapter" data-level="1.6.6" data-path="XS-2.html"><a href="XS-2.html#XS-End-3"><i class="fa fa-check"></i><b>1.6.6</b> End Cross-Sections</a></li>
+<li class="chapter" data-level="1.6.7" data-path="XS-2.html"><a href="XS-2.html#Interpolate-XS-3"><i class="fa fa-check"></i><b>1.6.7</b> Interpolated Cross-Section Protocols</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="Structures-2.html"><a href="Structures-2.html"><i class="fa fa-check"></i><b>1.7</b> Structures</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="Structures-2.html"><a href="Structures-2.html#culverts-pipes-3"><i class="fa fa-check"></i><b>1.7.1</b> Culverts and Pipes</a>
+<ul>
+<li class="chapter" data-level="1.7.1.1" data-path="Structures-2.html"><a href="Structures-2.html#Blockage-4"><i class="fa fa-check"></i><b>1.7.1.1</b> Blockage Matrix</a></li>
+<li class="chapter" data-level="1.7.1.2" data-path="Structures-2.html"><a href="Structures-2.html#blockage-limitations-4"><i class="fa fa-check"></i><b>1.7.1.2</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7.2" data-path="Structures-2.html"><a href="Structures-2.html#Bridges-3"><i class="fa fa-check"></i><b>1.7.2</b> Bridges</a>
+<ul>
+<li class="chapter" data-level="1.7.2.1" data-path="Structures-2.html"><a href="Structures-2.html#BridgeIntro-4"><i class="fa fa-check"></i><b>1.7.2.1</b> Bridges Overview</a></li>
+<li class="chapter" data-level="1.7.2.2" data-path="Structures-2.html"><a href="Structures-2.html#XSLoss-4"><i class="fa fa-check"></i><b>1.7.2.2</b> Bridge Cross-Section and Loss Tables</a></li>
+<li class="chapter" data-level="1.7.2.3" data-path="Structures-2.html"><a href="Structures-2.html#B-Bridge-4"><i class="fa fa-check"></i><b>1.7.2.3</b> B Bridge Losses Approach</a></li>
+<li class="chapter" data-level="1.7.2.4" data-path="Structures-2.html"><a href="Structures-2.html#BB-Bridge-4"><i class="fa fa-check"></i><b>1.7.2.4</b> BB Bridge Losses Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7.3" data-path="Structures-2.html"><a href="Structures-2.html#BArch-3"><i class="fa fa-check"></i><b>1.7.3</b> Arch Bridge</a>
+<ul>
+<li class="chapter" data-level="1.7.3.1" data-path="Structures-2.html"><a href="Structures-2.html#BArch-Editor-4"><i class="fa fa-check"></i><b>1.7.3.1</b> Arch Bridge Editor</a></li>
+<li class="chapter" data-level="1.7.3.2" data-path="Structures-2.html"><a href="Structures-2.html#BArch-Min-Blc-4"><i class="fa fa-check"></i><b>1.7.3.2</b> Arch Minimum Blockage</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7.4" data-path="Structures-2.html"><a href="Structures-2.html#Weir-3"><i class="fa fa-check"></i><b>1.7.4</b> Weirs</a>
+<ul>
+<li class="chapter" data-level="1.7.4.1" data-path="Structures-2.html"><a href="Structures-2.html#Weir-Intro-4"><i class="fa fa-check"></i><b>1.7.4.1</b> Weirs Overview</a></li>
+<li class="chapter" data-level="1.7.4.2" data-path="Structures-2.html"><a href="Structures-2.html#W-Weir-4"><i class="fa fa-check"></i><b>1.7.4.2</b> Original Weirs (W)</a></li>
+<li class="chapter" data-level="1.7.4.3" data-path="Structures-2.html"><a href="Structures-2.html#Adv-Weir-4"><i class="fa fa-check"></i><b>1.7.4.3</b> Advanced Weirs (WB, WC, WD, WO, WR, WT, WV, WW)</a></li>
+<li class="chapter" data-level="1.7.4.4" data-path="Structures-2.html"><a href="Structures-2.html#Submerge-4"><i class="fa fa-check"></i><b>1.7.4.4</b> Advanced Weir Submergence Curves</a></li>
+<li class="chapter" data-level="1.7.4.5" data-path="Structures-2.html"><a href="Structures-2.html#Auto-Weir-4"><i class="fa fa-check"></i><b>1.7.4.5</b> Automatically Created Weirs</a></li>
+<li class="chapter" data-level="1.7.4.6" data-path="Structures-2.html"><a href="Structures-2.html#VW-Channel-4"><i class="fa fa-check"></i><b>1.7.4.6</b> VW Channels (Variable Geometry Weir)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7.5" data-path="Structures-2.html"><a href="Structures-2.html#SP-3"><i class="fa fa-check"></i><b>1.7.5</b> Spillways (SP)</a></li>
+<li class="chapter" data-level="1.7.6" data-path="Structures-2.html"><a href="Structures-2.html#SG-3"><i class="fa fa-check"></i><b>1.7.6</b> Sluice Gates (SG)</a></li>
+<li class="chapter" data-level="1.7.7" data-path="Structures-2.html"><a href="Structures-2.html#LossAdjustment-3"><i class="fa fa-check"></i><b>1.7.7</b> Adjustment of Contraction and Expansion Losses</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html"><i class="fa fa-check"></i><b>1.8</b> Special Channels</a>
+<ul>
+<li class="chapter" data-level="1.8.1" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html#M-Channel-3"><i class="fa fa-check"></i><b>1.8.1</b> M Channels (User Defined Flow Matrix)</a></li>
+<li class="chapter" data-level="1.8.2" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html#Q-Channels-3"><i class="fa fa-check"></i><b>1.8.2</b> Q Channels (Upstream Depth-Discharge Relationship)</a></li>
+<li class="chapter" data-level="1.8.3" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html#XConnect-3"><i class="fa fa-check"></i><b>1.8.3</b> X Connectors</a></li>
+<li class="chapter" data-level="1.8.4" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html#Legacy-Channel-3"><i class="fa fa-check"></i><b>1.8.4</b> Legacy Channels</a></li>
+<li class="chapter" data-level="1.8.5" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html#OneD-nwk-3"><i class="fa fa-check"></i><b>1.8.5</b> 1d_nwk Attributes (M, P, Q, SG, SP Channels)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html"><i class="fa fa-check"></i><b>1.9</b> Operational Channels</a>
+<ul>
+<li class="chapter" data-level="1.9.1" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#TOC-Logic-3"><i class="fa fa-check"></i><b>1.9.1</b> .toc File Commands and Logic</a>
+<ul>
+<li class="chapter" data-level="1.9.1.1" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#TOC-Define-4"><i class="fa fa-check"></i><b>1.9.1.1</b> Define Control Command</a></li>
+<li class="chapter" data-level="1.9.1.2" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#UserDef-4"><i class="fa fa-check"></i><b>1.9.1.2</b> User Defined Variables</a></li>
+<li class="chapter" data-level="1.9.1.3" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#Logic-4"><i class="fa fa-check"></i><b>1.9.1.3</b> Logic Rules</a></li>
+<li class="chapter" data-level="1.9.1.4" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#Increment-Operate-4"><i class="fa fa-check"></i><b>1.9.1.4</b> Incremental Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9.2" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#Pumps-3"><i class="fa fa-check"></i><b>1.9.2</b> Pumps (P and PO)</a></li>
+<li class="chapter" data-level="1.9.3" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#QO-3"><i class="fa fa-check"></i><b>1.9.3</b> QO Channels</a></li>
+<li class="chapter" data-level="1.9.4" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#RO-3"><i class="fa fa-check"></i><b>1.9.4</b> Gated Drowned Rectangular Culverts (RO)</a></li>
+<li class="chapter" data-level="1.9.5" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#SG-SGO-3"><i class="fa fa-check"></i><b>1.9.5</b> Sluice Gates (SG and SGO)</a></li>
+<li class="chapter" data-level="1.9.6" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#SPO-3"><i class="fa fa-check"></i><b>1.9.6</b> Spillways with Gates (SPO)</a></li>
+<li class="chapter" data-level="1.9.7" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#Weirs-Operational-3"><i class="fa fa-check"></i><b>1.9.7</b> Weirs (WBO, WCO, WDO, WOO, WRO, WTO)</a></li>
+<li class="chapter" data-level="1.9.8" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#PFDF-3"><i class="fa fa-check"></i><b>1.9.8</b> Piping and Dam Failure</a>
+<ul>
+<li class="chapter" data-level="1.9.8.1" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#PF-4"><i class="fa fa-check"></i><b>1.9.8.1</b> Piping Failure (PF)</a></li>
+<li class="chapter" data-level="1.9.8.2" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#DF-4"><i class="fa fa-check"></i><b>1.9.8.2</b> Dam Failure (DF)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.10" data-path="Pipes-2.html"><a href="Pipes-2.html"><i class="fa fa-check"></i><b>1.10</b> Pipe Networks</a>
+<ul>
+<li class="chapter" data-level="1.10.1" data-path="Pipes-2.html"><a href="Pipes-2.html#Pipes-3"><i class="fa fa-check"></i><b>1.10.1</b> Pipes</a></li>
+<li class="chapter" data-level="1.10.2" data-path="Pipes-2.html"><a href="Pipes-2.html#Pits-3"><i class="fa fa-check"></i><b>1.10.2</b> Pits</a>
+<ul>
+<li class="chapter" data-level="1.10.2.1" data-path="Pipes-2.html"><a href="Pipes-2.html#OneD-pit-nwk-4"><i class="fa fa-check"></i><b>1.10.2.1</b> 1d_nwk Pits</a></li>
+<li class="chapter" data-level="1.10.2.2" data-path="Pipes-2.html"><a href="Pipes-2.html#OneD-pit-4"><i class="fa fa-check"></i><b>1.10.2.2</b> 1d_pit Pits</a></li>
+<li class="chapter" data-level="1.10.2.3" data-path="Pipes-2.html"><a href="Pipes-2.html#Conn-Pits-Nds-4"><i class="fa fa-check"></i><b>1.10.2.3</b> Connecting Pits and Nodes to 2D Domains</a></li>
+</ul></li>
+<li class="chapter" data-level="1.10.3" data-path="Pipes-2.html"><a href="Pipes-2.html#DD-Database-3"><i class="fa fa-check"></i><b>1.10.3</b> Pit Inlet and Depth/Stage vs Discharge Databases</a>
+<ul>
+<li class="chapter" data-level="1.10.3.1" data-path="Pipes-2.html"><a href="Pipes-2.html#Xfall-4"><i class="fa fa-check"></i><b>1.10.3.1</b> Road Crossfall Options</a></li>
+</ul></li>
+<li class="chapter" data-level="1.10.4" data-path="Pipes-2.html"><a href="Pipes-2.html#Manholes-3"><i class="fa fa-check"></i><b>1.10.4</b> Manholes</a>
+<ul>
+<li class="chapter" data-level="1.10.4.1" data-path="Pipes-2.html"><a href="Pipes-2.html#Auto-MH-4"><i class="fa fa-check"></i><b>1.10.4.1</b> Automatically Assigned Manholes</a></li>
+<li class="chapter" data-level="1.10.4.2" data-path="Pipes-2.html"><a href="Pipes-2.html#OneD-mh-4"><i class="fa fa-check"></i><b>1.10.4.2</b> Manually Assigned Manholes (1d_mh Layer)</a></li>
+<li class="chapter" data-level="1.10.4.3" data-path="Pipes-2.html"><a href="Pipes-2.html#mh-direction-4"><i class="fa fa-check"></i><b>1.10.4.3</b> Digitising Culverts Connected to Manholes</a></li>
+<li class="chapter" data-level="1.10.4.4" data-path="Pipes-2.html"><a href="Pipes-2.html#Engelund-4"><i class="fa fa-check"></i><b>1.10.4.4</b> Engelund Manhole Loss Approach</a></li>
+<li class="chapter" data-level="1.10.4.5" data-path="Pipes-2.html"><a href="Pipes-2.html#FixedLoss-4"><i class="fa fa-check"></i><b>1.10.4.5</b> Fixed Manhole Loss Approach</a></li>
+<li class="chapter" data-level="1.10.4.6" data-path="Pipes-2.html"><a href="Pipes-2.html#JunctionLoss-4"><i class="fa fa-check"></i><b>1.10.4.6</b> Discussion on Approaches to Modelling Pipe Junction Losses</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.11" data-path="Virtual-Pipes-2.html"><a href="Virtual-Pipes-2.html"><i class="fa fa-check"></i><b>1.11</b> Virtual Pipes</a></li>
+<li class="chapter" data-level="1.12" data-path="Nodes-2.html"><a href="Nodes-2.html"><i class="fa fa-check"></i><b>1.12</b> Nodes</a>
+<ul>
+<li class="chapter" data-level="1.12.1" data-path="Nodes-2.html"><a href="Nodes-2.html#Auto-Node-3"><i class="fa fa-check"></i><b>1.12.1</b> Automatically Defined Nodes</a>
+<ul>
+<li class="chapter" data-level="1.12.1.1" data-path="Nodes-2.html"><a href="Nodes-2.html#AutoStorageWidths-4"><i class="fa fa-check"></i><b>1.12.1.1</b> Storage Calculated Automatically from Channel Widths</a></li>
+<li class="chapter" data-level="1.12.1.2" data-path="Nodes-2.html"><a href="Nodes-2.html#AutoStorageANA-4"><i class="fa fa-check"></i><b>1.12.1.2</b> Additional Storage Added from Len_or_ANA Attribute</a></li>
+</ul></li>
+<li class="chapter" data-level="1.12.2" data-path="Nodes-2.html"><a href="Nodes-2.html#Manual-Node-3"><i class="fa fa-check"></i><b>1.12.2</b> Manually Defined Nodes</a>
+<ul>
+<li class="chapter" data-level="1.12.2.1" data-path="Nodes-2.html"><a href="Nodes-2.html#NA-Table-4"><i class="fa fa-check"></i><b>1.12.2.1</b> Storage Nodes (User Defined NA Tables)</a></li>
+<li class="chapter" data-level="1.12.2.2" data-path="Nodes-2.html"><a href="Nodes-2.html#channel-invert-4"><i class="fa fa-check"></i><b>1.12.2.2</b> Using Nodes to Define Channel Inverts</a></li>
+<li class="chapter" data-level="1.12.2.3" data-path="Nodes-2.html"><a href="Nodes-2.html#Nd-Auto-Conn-4"><i class="fa fa-check"></i><b>1.12.2.3</b> Automatically Connecting Nodes to 2D domains</a></li>
+</ul></li>
+<li class="chapter" data-level="1.12.3" data-path="Nodes-2.html"><a href="Nodes-2.html#Obvert-3"><i class="fa fa-check"></i><b>1.12.3</b> Storage Above Top of Channels</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/WQFooter.jpg" style="width:246px;height:10px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(226,1,119);">TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<p class="wmark before"></p>
+<div id="OperationalChannels-2" class="section level2 hasAnchor" number="1.9">
+<h2><span class="header-section-number">1.9</span> Operational Channels<a href="OperationalChannels-2.html#OperationalChannels-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Gated rectangular culverts, pumps, sluice gates, gated spillways, weirs and Q channels can be operated using logical scripts. An “O” Type flag is required within the 1d_nwk layer for structures that are to be operated using an operating control definition. For example, an operated pump would have a Type attribute of “PO” or “OP”.</p>
+<p>Operating rules are contained within a .toc file (<strong><u>T</u></strong>UFLOW <strong><u>O</u></strong>perations <strong><u>C</u></strong>ontrol) with each set of rules contained within a control definition. More than one structure/device can use the same control definition. The .toc file is referenced using <a href="#ecfReadOperatingControlsFile">Read Operating Controls File</a> via the .ecf file, or via the .tcf file within a <a href="#tcfStart1DDomain">Start 1D Domain</a> block or by preceding the command with “1D”.</p>
+<p>The operating rules for a control can only occur within a .toc file. More than one .toc file can be set up and accessed should there be a need to break the control definitions into several files (for example, all pump controls could be placed in one file and sluice gate controls in another).</p>
+<p>Operational structure time-series data are output to the _1d_O.csv file. The file reports the time varying status of the structure and the resulting flow rate. Values of user defined variables and other information are also output to this file. This is discussed in greater detail within Section <a href="#TS-GIS-3"><strong>??</strong></a>.</p>
+<div id="TOC-Logic-3" class="section level3 hasAnchor" number="1.9.1">
+<h3><span class="header-section-number">1.9.1</span> .toc File Commands and Logic<a href="OperationalChannels-2.html#TOC-Logic-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="TOC-Define-4" class="section level4 hasAnchor" number="1.9.1.1">
+<h4><span class="header-section-number">1.9.1.1</span> Define Control Command<a href="OperationalChannels-2.html#TOC-Define-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A .toc file can only contain <a href="#tocDefineControl">Define Control</a> and <a href="#tocEndDefine">End Define</a> blocks.</p>
+<p>Each <a href="#tocDefineControl">Define Control</a> must include a keyword indicating the type of structure/device as per below:</p>
+<p><tcmd>Define [ Culvert | Pump | Q Channel | Sluice | Spillway | Weir ] Control </tcmd><teq>==</teq><tblk> &lt;control_id&gt;</tblk><br />
+ …<br />
+<tcmd>End Define</tcmd></p>
+<p>Where <tblk>&lt;control_id&gt;</tblk> is a unique control definition name, noting that more than one structure can refer to the same operational control definition. For example, several pumps of different capacities may utilise the same operational control logic. The 1d_nwk Inlet_Type attribute is used to link a control definition with the structure.</p>
+<p>Within the control definition, commands specific to the type of structure/device can be used to adjust the structure/device’s operation. The commands available for each type of control are described below.</p>
+<p>Each <a href="#tocDefineControl">Define Control</a> block consists of three sections:</p>
+<ol style="list-style-type: decimal">
+<li>The default settings for the control’s commands. These are usually placed at the top of the definition and prior to the logical rules. These default settings are used at the start of the
+simulation/operation and during the operation unless changed by the logical rules.<br />
+</li>
+<li>User defined variables as described further below.<br />
+</li>
+<li>One or more logical rules as described further below.</li>
+</ol>
+<p>An example of a definition control with the three sections is provided below.</p>
+<center>
+<img src="images/image30.png"
+style="width:7.87in;height:4.65in" />
+</center>
+</div>
+<div id="UserDef-4" class="section level4 hasAnchor" number="1.9.1.2">
+<h4><span class="header-section-number">1.9.1.2</span> User Defined Variables<a href="OperationalChannels-2.html#UserDef-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>If a line in the control definition cannot be processed as one of the commands described above, and it is not within an If…End If block, it is treated as a variable definition using the syntax:</p>
+<p><tcmd>&lt;variable&gt; </tcmd><teq>==</teq><tblk> &lt;variable_value&gt;</tblk></p>
+<p>Where <tcmd>&lt;variable&gt;</tcmd> is the variable name, while <tblk>&lt;variable_value&gt;</tblk> must conform to one of the options in Table <a href="OperationalChannels-2.html#tab:tab-ValueTypes">1.20</a>. Any characters can be used for the variable name, but it is recommended to use only letters, numbers and underscores and to avoid spaces. Note that variables can be redefined at any point within the control definition. Also note that these variables only apply to the control. For global variables, use the <a href="#tcfSetVariable">Set Variable</a> feature.</p>
+<table>
+<caption>
+<span id="tab:tab-ValueTypes">Table 1.20: </span><strong>Variable Value Types</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Variable Value
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+constant
+</td>
+<td style="text-align:left;">
+Sets the variable to the value of &lt;constant&gt;. Must be a number. </constant>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Time of Model
+</td>
+<td style="text-align:left;">
+Sets the variable to the simulation time in hours.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Time in 24H
+</td>
+<td style="text-align:left;">
+Sets the variable to the simulation time in hours on a 24-hour clock (i.e. will always be between 0 and 24 hours). A simulation time of zero is equivalent to midnight.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Time Stamp
+</td>
+<td style="text-align:left;">
+Sets the variable to the current simulation time and keep the variable constant until the variable is changed by a repeat execution of “Time Stamp”.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Day of Week
+</td>
+<td style="text-align:left;">
+Sets the variable to the day of the week where Sunday is 1 and Saturday is 7. The keywords “Sun”, “Mon”, “Tue”, “Wed”, “Thu”, “Fri” and “Sat” can also be used when using the variable in a logic rule.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Period No Change
+</td>
+<td style="text-align:left;">
+Sets the variable to the time in hours since there was last a change in operation.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+H1D &lt;node_id&gt; </node_id>
+</td>
+<td style="text-align:left;">
+Sets the variable to the water level at the 1D node named &lt;node_id&gt;. </node_id>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Q1D &lt;channel_id&gt; </channel_id>
+</td>
+<td style="text-align:left;">
+Sets the variable to the flow in the 1D channel named &lt;channel_id&gt;. </channel_id>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+H2D &lt;x&gt;,&lt;y&gt; </y></x>
+</td>
+<td style="text-align:left;">
+Sets the variable to the water level at the 2D cell located at the XY coordinates &lt;x&gt;,&lt;y&gt; </y></x>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+H2D &lt;2d_po_ID&gt;
+</td>
+<td style="text-align:left;">
+Sets the variable to the water level at the 2D plot output location given by the plot output ID.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HU
+</td>
+<td style="text-align:left;">
+Sets the variable to the 1D water level at the upstream node of the channel, based on the digitised direction of the channel.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HD
+</td>
+<td style="text-align:left;">
+Sets the variable to the 1D water level at the downstream node of the channel based on the digitised direction of the channel.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dHUD
+</td>
+<td style="text-align:left;">
+Sets the variable to the difference in water level between the upstream and downstream nodes based on the digitised direction of the channel. Will be negative if flow is in opposite direction to digitised direction.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+H1
+</td>
+<td style="text-align:left;">
+Sets the variable to the upstream water level of the channel based on the flow direction.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+H2
+</td>
+<td style="text-align:left;">
+Sets the variable to the downstream water level of the channel based on the flow direction.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dH12
+</td>
+<td style="text-align:left;">
+Sets the variable to the difference in water level between the upstream and downstream nodes based on the flow direction of the channel. Will always be positive.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+YU
+</td>
+<td style="text-align:left;">
+Sets the variable to the depth above the structure invert of the upstream node based on the digitised direction of the channel.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+YD
+</td>
+<td style="text-align:left;">
+Sets the variable to the depth above the structure invert of the downstream node based on the digitised direction of the channel.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Y1
+</td>
+<td style="text-align:left;">
+Sets the variable to the upstream depth relative to the structure invert based on the flow direction.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Y2
+</td>
+<td style="text-align:left;">
+Sets the variable to the downstream depth relative to the structure invert based on the flow direction.
+</td>
+</tr>
+</tbody>
+</table>
+<p>The 2020-10 release introduced a feature to allow operational control channels to refer to the status/variables from other operational control channels. This makes coordinated operations possible between multiple operational structures. The supported status/variables include:</p>
+<ul>
+<li>“Period No Change” returns the time in hours since there was a change in operation in another operational channel.<br />
+</li>
+<li>“Status” returns the operational status keywords in text format for different types of operational channels. The full list of keywords is summarised in Table <a href="OperationalChannels-2.html#tab:tab-StatusVariable">1.21</a>. A working example of this feature is provided in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#1D_Operating_Structures">1D Operating Structures Example Model Dataset</a> on the TUFLOW Wiki.</li>
+<li>“Operational Variables” returns the numeric values of operational variables from other operational channels, such as “Gate Height”, “Weir Width”, etc. The full list of keywords is summarised in Table <a href="OperationalChannels-2.html#tab:tab-OperationalVariables">1.22</a>.</li>
+</ul>
+<p>The operational control channel ID (1d_nwk attribute) must be added at the end of user defined variable commands listed above to refer to the “Period of No Change”, “Status” or “Operational Variable” from other operational channels, e.g.:</p>
+<p><tcmd>&lt;variable&gt; </tcmd><teq>==</teq><tblk> Weir Height &lt;channel_ID&gt;</tblk></p>
+<table>
+<caption>
+<span id="tab:tab-StatusVariable">Table 1.21: </span><strong>Keywords Returned by “Status” Variable</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Operational Channels
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Status Strings
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Pumps (PO)
+</td>
+<td style="text-align:left;">
+“Off”, “Dry”, “Below Soffit”, “Starting”, “Stopping”, “Constant”, “Pump Curve”
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gated Drowned Rectangular Culverts (RO)<br />
+Sluice Gates (SGO)<br />
+Spillways with Gates (SPO)<br />
+Weirs (WBO, WCO, WDO, WOO, WRO, WTO)<br />
+Dam failure (DF)<br />
+Pipe failure (PF)
+</td>
+<td style="text-align:left;">
+“Opening”, “Closing”, “Steady”, “Closed”, “Fully Open”
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>
+<span id="tab:tab-OperationalVariables">Table 1.22: </span><strong>Values Returned by ‘Operational Variables’.</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Operational Channels
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Operational Variables
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Pumps (PO)
+</td>
+<td style="text-align:left;">
+Pump Flow
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Q channel (QO)
+</td>
+<td style="text-align:left;">
+Q Opening, Q Fully Open
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gated Drowned Rectangular Culverts (RO)
+</td>
+<td style="text-align:left;">
+Gate Height, Gate Width
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sluice Gates (SGO)
+</td>
+<td style="text-align:left;">
+Gate Opening
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Spillways with Gates (SPO)
+</td>
+<td style="text-align:left;">
+Gate Opening
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Weirs (WBO, WCO, WDO, WOO, WRO, WTO)
+</td>
+<td style="text-align:left;">
+Weir Height, Weir Width
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dam failure (DF)
+</td>
+<td style="text-align:left;">
+Breach Depth, Top Width
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pipe failure (PF)
+</td>
+<td style="text-align:left;">
+Orifice Height, Orifice Width
+</td>
+</tr>
+</tbody>
+</table>
+<p>In the example below, the model has an operational sluice gate (“SGate1”) and an operational pump (“Pump1”). Pump1 calls the “status” of SGate1 and operates only if SGate1’s status is “Closed”.</p>
+<center>
+<img src="images/image31.png"
+style="width:6.29931in;height:2.76806in" />
+</center>
+</div>
+<div id="Logic-4" class="section level4 hasAnchor" number="1.9.1.3">
+<h4><span class="header-section-number">1.9.1.3</span> Logic Rules<a href="OperationalChannels-2.html#Logic-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The logic rules consist of using If…End If blocks using the construct below.</p>
+<p><tcmd>If &lt;condition_1&gt; [ [ and | or ] &lt;condition_2&gt; ] [ [ and | or ] &lt;condition_3&gt; ]…</tcmd><br />
+ <tblk>…enter one or more commands or variable definition lines</tblk><br />
+<tcmd>[ Else If &lt;condition_1&gt; [ [ and | or ] &lt;condition_2&gt; ] [ [and | or ] &lt;condition_3&gt; ]…</tcmd><br />
+ <tblk>…enter one or more commands or variable definition lines</tblk><br />
+<tcmd>[ Else If…repeat as needed]</tcmd><br />
+ <tblk>…enter one or more commands or variable definition lines</tblk><br />
+<tcmd>[ Else</tcmd><br />
+ <tblk>…enter one or more commands or variable definition lines</tblk><br />
+<tcmd>End If</tcmd></p>
+<p><tcmd>&lt;condition_1&gt;</tcmd> must be a conditional operation that includes one of the symbols “=”, “&gt;”, “&gt;=”, “&lt;” or “&lt;=”. The left and right sides of the condition must be a single value or a variable name. Optionally the variable may be operated on by the following:</p>
+<ul>
+<li>A “+”, “-“, “*” or “/” and a constant value. For example, a condition could be “x + 2 &lt; 3”; or<br />
+</li>
+<li>Specifying “HIGHER” or “LOWER” to compare the current value of the variable to its value at the start of the current period of no change in operation. For example, “x == LOWER” will be true if the current value of ‘x’ is less than its value at the last time there was a change in operation.</li>
+</ul>
+<p>If more than one condition is to be applied, the conditions must be separated by either an “and” or “or”. &lt;condition_2&gt;, &lt;condition_3&gt;, etc. have the same format as for &lt;condition_1&gt; above.</p>
+<p>If…End If blocks can be nested inside other If…End If blocks. Indenting is strongly recommended to make the control file easier to read.</p>
+</div>
+<div id="Increment-Operate-4" class="section level4 hasAnchor" number="1.9.1.4">
+<h4><span class="header-section-number">1.9.1.4</span> Incremental Operators<a href="OperationalChannels-2.html#Increment-Operate-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>For the majority of the parameters / variables within a control block these can be manipulated using simple arithmetic. For example, within a control block, rather than opening a gate to a set opening height or percentage it is possible to open by a set amount:</p>
+<ul>
+<li><tcmd>Gate Opening %</tcmd><teq> == </teq><tblk>50</tblk> will open the gate to 50% open<br />
+</li>
+<li><tcmd>Gate Opening %</tcmd><teq> == </teq><tblk>++ 10</tblk> will open the gate by 10% from its previous position</li>
+</ul>
+<p>Four incremental / arithmetic operators are available, these are:</p>
+<ul>
+<li>++ increment up<br />
+</li>
+<li>-- increment down<br />
+</li>
+<li>** multiply<br />
+</li>
+<li>// divide</li>
+</ul>
+<p>These can be used with or without the percentage operator. <tcmd>Gate Opening %</tcmd><teq> == </teq><tblk>++ 10</tblk> will open a gated structure by 10%, <tcmd>Gate Opening</tcmd><teq> == </teq><tblk>++ 1.0</tblk> will open a gated structure by a height of 1m.</p>
+<p>The example below shows the control definition for a pump that operates between 6am and 6pm Monday to Friday and 10am and 4pm on the weekends.</p>
+<center>
+<img src="images/image30.png"
+style="width:6.29931in;height:3.7217in" />
+</center>
+<p>The example below shows the control definitions for a gravity released discharge to a power station (modelled as a pump) and the gated discharge through the reservoir (courtesy of Natural Resources Department, Wales).</p>
+<center>
+<img src="images/image32.png"
+style="width:6.29931in;height:6.19836in" />
+</center>
+</div>
+</div>
+<div id="Pumps-3" class="section level3 hasAnchor" number="1.9.2">
+<h3><span class="header-section-number">1.9.2</span> Pumps (P and PO)<a href="OperationalChannels-2.html#Pumps-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pumps can be modelled as a “P” or “PO” type channel. In non-operational mode (P channel), the pump flow is interpolated from a head discharge curve in the <a href="#ecfDepthDischargeDatabase">Depth Discharge Database</a> defined via a head difference versus flow relationship – see Section <a href="Pipes-2.html#DD-Database-3">1.10.3</a>. In operational mode, PO, the pump flow can be varied using functions such as: switching on and off over a start-up and shutdown period; and changing the pump capacity and/or discharge curve according to time, day of the week, hydraulic conditions and other variables. Pumps do not contribute to any model storage.</p>
+<p>In the 1d_nwk layer, the following attributes can be used to set up the pump (also see Table <a href="Special-Channels-2.html#tab:tab-SpecialAttributeDescriptions">1.19</a>).</p>
+<ul>
+<li>ID = Unique Channel ID.<br />
+</li>
+<li>Type = “P” or “PO”.<br />
+</li>
+<li>US_Invert = Intake elevation of the pump.<br />
+</li>
+<li>DS_Invert = Outlet elevation of the receptor.<br />
+</li>
+<li>Inlet_Type = For non-operated (P) pumps the pump discharge curve in the <a href="#ecfDepthDischargeDatabase">Depth Discharge Database</a>. This curve is a head difference versus discharge curve, and for a pump this curve would usually have greater flows for smaller head differences. If the head difference is negative (i.e. the receptor water level is below the intake water level) the discharge used is that for a zero head difference. For operational (PO) pumps Inlet_Type refers to the Pump operational control definition (see <a href="#tocDefineControl">Define Control</a>).<br />
+</li>
+<li>Width_or_Dia = Diameter of the pump’s outlet pipe/hose. Used to trigger dry conditions (see below) and for calculating the velocity.<br />
+</li>
+<li>Height_or_WF = For PO pumps the initial operating pump capacity for fixed (constant) flow pumps (subject to not being overridden by an operational control command).<br />
+</li>
+<li>Number_of = Number of (identical) pumps represented by the channel.</li>
+</ul>
+<p>P and PO pumps are simulated as dry (zero flow) if the upstream (intake) node is dry or the upstream water level is below the intake elevation plus the output pipe diameter (i.e. the upstream (intake) water level is below the intake soffit, which equals the US_Invert + Width_or_Dia).</p>
+<p>P pumps always produce a flow in the direction the P channel is digitised based on that interpolated from the pump discharge curve; the exception being when dry as described above.</p>
+<p>PO pumps are typically operated on a time basis or based on hydraulic conditions elsewhere in the model. Operational control commands specific to the <a href="#tocDefineControl">Define Pump Control</a> command are provided below. Subject to not being overridden by an operational control command, PO pumps are assumed to be OFF at the start of the simulation.</p>
+<ul>
+<li><a href="#tocPumpOperation">Pump Operation</a> turns the pump on or off.<br />
+</li>
+<li><a href="#tocPeriodStartupShutdown">Period Startup/Shutdown</a> sets the time taken to start the pump up or shut it down.<br />
+</li>
+<li><a href="#tocPumpCapacity">Pump Capacity</a> sets the flow capacity of the pump. It is possible to set a constant flow rate or a head-discharge curve referenced within the <a href="#ecfDepthDischargeDatabase">Depth Discharge Database</a>.<br />
+</li>
+<li><a href="#tocPumpNumber">Pump Number</a> sets the number of pumps in parallel.</li>
+</ul>
+<p>The operational status of each pump is reported over time in the _O.csv output (see Section <a href="#TS-GIS-3"><strong>??</strong></a>). Possible status conditions include:</p>
+<ul>
+<li>“Off” is the pump is switched off.<br />
+</li>
+<li>“Dry” if the upstream (intake) node is dry.<br />
+</li>
+<li>“Below Soffit” if the upstream (intake) water level is below the intake soffit.<br />
+</li>
+<li>“Starting” and “Stopping” indicate the pump is starting up or stopping within <a href="#tocPeriodStartupShutdown">Period Startup/Shutdown</a>.<br />
+</li>
+<li>“Constant” indicates the pump has reached full flow capacity after starting up and is operating at its constant (fixed) flow rate, or “Pump Curve”, which indicates the pump is operating at a flow rate based on interpolating into its head discharge curve.</li>
+</ul>
+<p>Models using pumps are provided in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#1D_Operating_Structures">1D Operating Structures Example Model Dataset</a> on the TUFLOW Wiki.</p>
+</div>
+<div id="QO-3" class="section level3 hasAnchor" number="1.9.3">
+<h3><span class="header-section-number">1.9.3</span> QO Channels<a href="OperationalChannels-2.html#QO-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For QO channels, depth discharge curves for different structure openings are used to vary and control the discharge. The relationships are contained in a csv file in a similar format as used for M channels (see Section <a href="Special-Channels-2.html#M-Channel-3">1.8.1</a>). The vertical axis is the depth above the channel’s invert and the horizontal axis is the percentage opening as shown in the example below. In the example, Column A contains the depth above invert values and Row 2 the % opening values. Note that the value in cell A2 is a flow multiplier. If this value is empty, negative or set to zero (0), a multiplier of one (1) is used. The flow through the channel is interpolated from this table at each timestep based on the structure’s opening and upstream depth above the invert.</p>
+<center>
+<img src="images/image33.png"
+style="width:5.22332in;height:2.53018in" />
+</center>
+<p>In the 1d_nwk layer, the following attributes can be used to set up a QO channel.</p>
+<ul>
+<li>ID = Unique Channel ID.<br />
+</li>
+<li>Type = “QO”.<br />
+</li>
+<li>US_Invert = Elevation corresponding to zero depth in the depth-discharge curve.<br />
+</li>
+<li>Inlet_Type = Contains both the control_ID and the link to the csv file containing the matrix of flows for different openings and upstream water level as per discussion above. For example, “DS_Gate | QChannel.csv”.
+<ul>
+<li>The default field width for the inlet_type attribute is 12 characters, this may need to be increased to allow longer names to be used. Instructions on how to change the GIS layer attribute type in ArcMap, QGIS and MapInfo are provided on the TUFLOW Wiki as per the links below:
+<ul>
+<li><a href="https://wiki.tuflow.com/Arc_Change_Attribute_Type">ArcMap</a><br />
+</li>
+<li><a href="https://wiki.tuflow.com/MI_Change_Attribute_Type">MapInfo</a><br />
+</li>
+<li><a href="https://wiki.tuflow.com/QGIS_Change_Attribute_Type">QGIS</a><br />
+</li>
+</ul></li>
+</ul></li>
+<li>Width_or_Dia = Not used other than to estimate the velocity and contribute to nodal storage.</li>
+</ul>
+<p>The following commands are specific to the <a href="#tocDefineControl">Define Q Channel Control</a> command used for QO channels.</p>
+<ul>
+<li><a href="#tocGateSpeed">Gate Speed</a> sets the speed the gate moves.<br />
+</li>
+<li><a href="#tocPeriodOpeningClosing">Period Opening/Closing</a> sets the time taken to transition from zero to 100% opening or vice versa.<br />
+</li>
+<li><a href="#tocGateOpening">Gate Opening</a> sets the position of the opening to be operated towards. This can be specified incrementally or as an absolute value.</li>
+<li><a href="#tocDischargeCurveType">Discharge Curve Type</a> sets how the depth/head discharge curves are calculated.</li>
+</ul>
+<p>An example of the GIS attributes and .toc commands for a QO channel are provided below.</p>
+<center>
+<img src="images/image34.png"
+style="width:2.78102in;height:3.8414in" /><img src="images/image35.png"
+style="width:2.83856in;height:2.7224in" />
+</center>
+</div>
+<div id="RO-3" class="section level3 hasAnchor" number="1.9.4">
+<h3><span class="header-section-number">1.9.4</span> Gated Drowned Rectangular Culverts (RO)<a href="OperationalChannels-2.html#RO-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Rectangular culverts with a gate on the exit can be operated using the .toc commands below for a <a href="#tocDefineControl">Define Culvert Control</a> block. The command is applicable for operated rectangular (RO) culverts only, and uses the equation below as implemented into TUFLOW for a project based in Florida. The equation below is for US Customary Units, but RO culverts can be used in metric or US Customary units. Note that the equation is for submerged culverts only, and the user must ensure that the culvert is drowned at all times.</p>
+<center>
+<img src="images/image36.png"
+style="width:3.85246in;height:4.1771in" />
+</center>
+<ul>
+<li><a href="#tocGateType">Gate Type</a> sets the type of gate arrangement.<br />
+</li>
+<li><a href="#tocGateSpeed">Gate Speed</a> sets the speed at which the gate moves.<br />
+</li>
+<li><a href="#tocPeriodOpeningClosing">Period Opening/Closing</a> sets the time taken to fully open a closed gate or to fully close an open gate.</li>
+<li><a href="#tocGateHeightFullyOpen">Gate Height Fully Open</a> sets the height (not elevation) of the gate when fully open above the gate’s seat for vertically moving gates. If not set, the 1d_nwk “Height” attribute is used.<br />
+</li>
+<li><a href="#tocGateWidthFullyOpen">Gate Width Fully Open</a> sets the width of the gate(s) when fully open for horizontally moving gates. If not set, the 1d_nwk “Width_or_Dia” attribute is used.<br />
+</li>
+<li><a href="#tocGateOpening">Gate Opening</a> sets the position the gate is to be operated towards. This can be specified incrementally or as an absolute value.<br />
+</li>
+<li><a href="#tocCd">Cd</a> sets the discharge coefficient <em>C<sub>d</sub></em> in the equation above.</li>
+</ul>
+</div>
+<div id="SG-SGO-3" class="section level3 hasAnchor" number="1.9.5">
+<h3><span class="header-section-number">1.9.5</span> Sluice Gates (SG and SGO)<a href="OperationalChannels-2.html#SG-SGO-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Sluice gates can be operated using the .toc commands further below for a <a href="#tocDefineControl">Define Sluice Control</a> block. The approach to calculating the flow through the gate is based on that documented in the HEC-RAS 4.0 Reference Manual as described below. For non-operated sluice gates (SG) the gate is assumed to be in a fixed position based on the 1d_nwk Height_or_WF attribute value.</p>
+<p>For a free-flowing sluice gate (i.e. upstream controlled) <em>Q</em> is calculated using:
+<span class="math display" id="eq:equ-US-controlled">\[\begin{equation}
+Q = C_{d}WB\sqrt{2gH_{1}}
+\tag{1.16}
+\end{equation}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(Q = \ \)</span>Discharge<br />
+</li>
+<li><span class="math inline">\(C_{d} = \ \)</span>Discharge coefficient upstream controlled flow (default = 0.6)<br />
+</li>
+<li><span class="math inline">\(W = \ \)</span>Width<br />
+</li>
+<li><span class="math inline">\(B = \ \)</span>Height of gate opening above crest level<br />
+</li>
+<li><span class="math inline">\(H_{1} = \ \)</span>Upstream energy level – Crest level</li>
+</ul>
+<p>For downstream controlled flow:</p>
+<p><span class="math display" id="eq:equ-DS-controlled">\[\begin{equation}
+Q = C_{s}WB\sqrt{2g\mathrm{\Delta}H}
+\tag{1.17}
+\end{equation}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(C_{s} = \ \)</span>Submerged discharge coefficient (default = 0.8)<br />
+</li>
+<li><span class="math inline">\(\mathrm{\Delta}H = \ \)</span>Upstream energy level – Downstream level</li>
+</ul>
+<p>For the transition between upstream controlled and full submergence downstream controlled flow:</p>
+<p><span class="math display" id="eq:equ-transition">\[\begin{equation}
+Q = C_{d}WB\sqrt{2g3\mathrm{\Delta}H}
+\tag{1.18}
+\end{equation}\]</span></p>
+<p>The transition between downstream and upstream controlled flow equations is based on the degree of submergence calculated as the tailwater depth above the spill crest divided by the upstream energy depth. For a ratio below 0.67 upstream controlled flow applies, above 0.8 downstream controlled flow and in between the transition equation applies.</p>
+<p>Note that by default the energy level is used for calculating <em>H<sub>1</sub></em> and <span class="math inline">\(\mathrm{\Delta}H\)</span>, however, this can be changed as follows:</p>
+<ul>
+<li>Setting the global default to water surface level using <tcmd><a href="#ecfStructureFlowLevels">Structure Flow Levels</a></tcmd><teq> == </teq><tblk>WATER</tblk> or by using the “H” flag for the Type attribute (see Table <a href="Channel-Intro-2.html#tab:tab-LineTypesOptionalFlags">1.2</a>).</li>
+<li>Setting the global default to energy at the upstream node and water level at the downstream node using <tcmd><a href="#ecfStructureFlowLevels">Structure Flow Levels</a></tcmd><teq> == </teq><tblk>ENERGY UPSTREAM</tblk> or by using the “EH” flag for the Type attribute (see Table <a href="Channel-Intro-2.html#tab:tab-LineTypesOptionalFlags">1.2</a>). This option was introduced in the 2023-03-AC build.</li>
+</ul>
+<p>When the flow is not in contact with the gate one of the following options apply:</p>
+<ul>
+<li>One of the advanced weir types (see Section <a href="Structures-2.html#Adv-Weir-4">1.7.4.3</a>) can be specified for the sill by adding the weir type to the 1d_nwk Type attribute (e.g. “SGWB” or “SG WB” are accepted). The weir equation for the weir type is applied when the gate is not controlling the flow. It is recommended that one of the rectangular weir shapes is used (i.e. WB, WD, WO or WR).<br />
+</li>
+<li>If no weir is associated with the SG channel, the flow is calculated using a zero length rectangular culvert channel with adjusted entrance and exit losses as per a zero length culvert. Note the total of the entrance and exit losses is defined by the ‘Form_Loss’ attribute (see Table <a href="Special-Channels-2.html#tab:tab-SpecialAttributeDescriptions">1.19</a>), where 1/3 and 2/3 of the ‘Form_Loss’ value are assigned as entrance and exit losses, respectively (typically 0.5 and 1.0).</li>
+</ul>
+<p>In the 1d_nwk layer, the following attributes can be used to set up the SG or SGO channel.</p>
+<ul>
+<li>ID = Unique Channel ID.<br />
+</li>
+<li>Type = “SG” or “SGO”.<br />
+</li>
+<li>US_Invert and DS_Invert: The higher value is used for the sill crest.<br />
+</li>
+<li>Width_or_Dia = Width of the gate.<br />
+</li>
+<li>Height_or_WF = The height above the sill crest of the gate when fully opened (subject to not being overridden by an operational control command).<br />
+</li>
+<li>Number_of = Number of (identical) parallel gates.</li>
+</ul>
+<p>The following commands can be used within the <a href="#tocDefineControl">Define Sluice
+Control</a> block.</p>
+<ul>
+<li><a href="#tocGateSpeed">Gate Speed</a> sets the speed the gate moves.<br />
+</li>
+<li><a href="#tocPeriodOpeningClosing">Period Opening/Closing</a> sets the time taken to fully open a closed gate or to fully close an open gate.<br />
+</li>
+<li><a href="#tocGateHeightFullyOpen">Gate Height Fully Open</a> sets the height (not elevation) of the gate when fully open above the gate’s seat for vertically moving gates. If not set, the 1d_nwk “Height” attribute is used.<br />
+</li>
+<li><a href="#tocGateOpening">Gate Opening</a> sets the position the gate is to be operated towards. This can be specified incrementally or as an absolute value.<br />
+</li>
+<li><a href="#tocCdGate">Cd Gate</a> sets the discharge coefficient of the gate, <em>C<sub>d</sub></em>.<br />
+</li>
+<li><a href="#tocCdGateSubmerged">Cd Gate Submerged</a> sets the submerged discharge coefficient, <em>C<sub>s</sub></em>.</li>
+</ul>
+<p>A working example of a model containing a sluice gate is provided in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#1D_Structures">1D Structures Example Model Dataset</a> on the TUFLOW Wiki.</p>
+</div>
+<div id="SPO-3" class="section level3 hasAnchor" number="1.9.6">
+<h3><span class="header-section-number">1.9.6</span> Spillways with Gates (SPO)<a href="OperationalChannels-2.html#SPO-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Gated spillways can be operated using the approach documented in the USACE Hydraulic Design Criteria Sheet 312 <span class="citation">(<a href="Nodes-2.html#ref-USACE1977">USACE, 1977</a>)</span> for Vertical Lift Gates on Spillways.</p>
+<p>For flow over the spillway unaffected by a gate the following equation applies:</p>
+<p><span class="math display" id="eq:equ-spillway">\[\begin{equation}
+Q = {\frac{2}{3}C}_{d}WH\sqrt{2gH}
+\tag{1.19}
+\end{equation}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(Q = \ \)</span>Discharge<br />
+</li>
+<li><span class="math inline">\(C_{d} = \ \)</span>Discharge coefficient (default = 0.75)<br />
+</li>
+<li><span class="math inline">\(W = \ \)</span>Width of the spillway (rectangular cross-section assumed)<br />
+</li>
+<li><span class="math inline">\(H = \ \)</span>Upstream energy level – Crest level</li>
+</ul>
+<p><strong>NOTE: <em>C<sub>d</sub></em> prior to the 2016-03 release was based on</strong> <span class="math inline">\(\mathbf{Q =}\mathbf{C}_{\mathbf{d}}\mathbf{WH}\sqrt{\mathbf{2}\mathbf{gH}}\)</span> <strong>(as per Sheet 312), with a default <em>C<sub>d</sub></em> value of 0.5. As of the 2016-03 release, SPO channels now use the same formula as SP and weir channels and use a default value of 0.75.</strong></p>
+<p>The ratio of the gated discharge to the ungated discharge is derived as:</p>
+<p><span class="math display" id="eq:equ-ungated-discharge">\[\begin{equation}
+\frac{Q_{G}}{Q} = \frac{C_{G}}{C_{d}}\left( \frac{H_{2}^{\frac{3}{2}} - H_{1}^{\frac{3}{2}}}{H^{\frac{3}{2}}} \right)
+\tag{1.20}
+\end{equation}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(C_{G}\)</span> = Discharge coefficient (default = <span class="math inline">\(C_{d}\)</span>)<br />
+</li>
+<li><span class="math inline">\(H_{1}\)</span> and <span class="math inline">\(H_{2}\)</span> = See diagram below from Sheet 312</li>
+</ul>
+<p>If <em>Q<sub>G</sub></em> is less than <em>Q</em>, <em>Q<sub>G</sub></em> is used for the flow through the structure. The structure is also tested for submergence using the same setting as for Ogee Weirs (see Section <a href="Structures-2.html#Submerge-4">1.7.4.4</a>).</p>
+<center>
+<img src="images/image37.png" style="width:6.29931in;height:3.10903in" />
+</center>
+<p>Note that by default the energy level is used for calculating <em>H<sub>1</sub></em> and <span class="math inline">\(\mathrm{\Delta}H\)</span>, however, this can be changed as follows:</p>
+<ul>
+<li>Setting the global default to water surface level, using <tcmd><a href="#ecfStructureFlowLevels">Structure Flow Levels</a></tcmd><teq> == </teq><tblk>WATER</tblk>, or by using the “H” flag for the Type attribute (see Table <a href="Channel-Intro-2.html#tab:tab-LineTypesOptionalFlags">1.2</a>).</li>
+<li>Setting the global default to energy at the upstream node and water level at the downstream node, using <tcmd><a href="#ecfStructureFlowLevels">Structure Flow Levels</a></tcmd><teq> == </teq><tblk>ENERGY UPSTREAM</tblk>, or by using the “EH” flag for the Type attribute (see Table <a href="Channel-Intro-2.html#tab:tab-LineTypesOptionalFlags">1.2</a>). This option was introduced in the 2023-03-AC build.</li>
+</ul>
+<p>In the 1d_nwk layer, the following attributes can be used to set up a SPO channel. Note that the 1d_nwk values can be overridden by their equivalent operational control command.</p>
+<ul>
+<li>ID = Unique Channel ID.<br />
+</li>
+<li>Type = “SPO”.<br />
+</li>
+<li>US_Invert = Spillway crest level.<br />
+</li>
+<li>DS_Invert = Gate seat level (see GATE SEAT EL in diagram from Sheet 312). If DS_Invert is higher than US_Invert <a href="https://wiki.tuflow.com/TUFLOW_Message_1050">ERROR 1050</a> results.<br />
+</li>
+<li>Width_or_Dia = Width of the gate.<br />
+</li>
+<li>Height_or_WF = The height of the gate above the gate seat when fully opened.<br />
+</li>
+<li>Number_of = Number of (identical) parallel spillways.</li>
+</ul>
+<p>The following section lists commands specific to the <a href="#tocDefineControl">Define Spillway Control</a> commands.</p>
+<ul>
+<li><a href="#tocGateSpeed">Gate Speed</a>: sets the speed the gate moves.</li>
+<li><a href="#tocPeriodOpeningClosing">Period Opening/Closing</a>: sets the time taken to fully open a closed gate or to fully close an open gate.</li>
+<li><a href="#tocGateHeightFullyOpen">Gate Height Fully Open</a>: sets the height (not elevation) of the gate when fully open above the gate’s seat for vertically moving gates. If not set, the 1d_nwk “Height” attribute is used.</li>
+<li><a href="#tocGateSeatVerticalOffset">Gate Seat Vertical Offset</a>: sets the difference in height between the spillway crest and the seat of the gate (i.e. the CREST EL minus GATE SEAT EL in the diagram above from Sheet 312).</li>
+<li><a href="#tocGateOpening">Gate Opening</a>: sets the position the gate is to be operated towards. This can be specified incrementally or as an absolute value. This value is G<sub>O</sub> in the diagram above from Sheet 312.</li>
+<li><a href="#tocCdSpillway">Cd Spillway</a>: sets the discharge coefficient of the spillway, <em>C<sub>d</sub></em>. Default value is 0.75.</li>
+<li><a href="#tocCdGate">Cd Gate</a>: sets the discharge coefficient of the gate, <em>C<sub>G</sub></em>. By default assumed to be the same as <a href="#tocCdSpillway">Cd Spillway</a> see Sheet 312.</li>
+</ul>
+<p>Models using spillways with gates are provided in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#1D_Operating_Structures">1D Operating Structures Example Model Dataset</a> on the TUFLOW Wiki.</p>
+</div>
+<div id="Weirs-Operational-3" class="section level3 hasAnchor" number="1.9.7">
+<h3><span class="header-section-number">1.9.7</span> Weirs (WBO, WCO, WDO, WOO, WRO, WTO)<a href="OperationalChannels-2.html#Weirs-Operational-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Weirs can be operated to simulate structures such as fabri (inflatable) dams for the WB, WC, WD, WO, WR and WT weir types.</p>
+<p>In addition to the 1d_nwk attributes for non-operated weirs (see Section <a href="Structures-2.html#Adv-Weir-4">1.7.4.3</a>) the following criteria is used to set the limiting dimensions via the 1d_nwk attributes as follows:</p>
+<ul>
+<li>Width_or_Dia = The width of the weir when fully open, or if the width remains unchanged throughout.<br />
+</li>
+<li>Height_or_WF = The maximum height the weir can be raised above the weir invert during operation. The weir invert level is defined by the maximum of the US_Invert and DS_Invert attributes and represents the elevation of the weir when fully lowered. Note that for operational weirs the Height_or_WF attribute cannot be used to set the Weir Calibration Factor, for which a value of 1.0 is used. For example, if we wish to operate a weir up to an elevation of 15m for a structure with 1d_nwk attributes US_Invert = 9.9m and DS_Invert = 10m the following would apply:
+<ul>
+<li>The weir invert would be at an elevation of 10m (which corresponds to a weir height of zero (0) m).<br />
+</li>
+<li>The Height_of_WF attribute would be 5m (i.e. a height of 5m above the weir invert).</li>
+</ul></li>
+</ul>
+<p>The following are the commands specific to <a href="#tocDefineControl">Define Weir Control</a> blocks for operating weirs.</p>
+<ul>
+<li><a href="#tocWeirHeight">Weir Height</a>: sets the height above the weir crest to operate towards.<br />
+</li>
+<li><a href="#tocWeirWidth">Weir Width</a>: sets the width of the weir to operate towards.<br />
+</li>
+<li><a href="#tocWeirHeightSpeed">Weir Height Speed</a>: sets the speed of the weir in the vertical.<br />
+</li>
+<li><a href="#tocWeirWidthSpeed">Weir Width Speed</a>: sets the speed of the weir in the horizontal.<br />
+</li>
+<li>The generic commands <a href="#tocOperation">Operation</a> and <a href="#tocPeriodOpeningClosing">Period Opening/Closing</a> also apply.<br />
+</li>
+<li>Cf sets the weir calibration factor (default = 1.0). Note the “Height_or_WF” attribute is used to define the height of the operational weir above the crest level. This .toc command was added in the 2020-10 release to specify the weir calibration factor (<em>C<sub>f</sub></em>) for an operational weir.</li>
+</ul>
+<p>Note the default values of <a href="#tocWeirHeight">Weir Height</a> and <a href="#tocWeirWidth">Weir Width</a> are both zero (0). To set the initial position of the weir, specify these commands before the if logic block in the .toc file.</p>
+<p>The 2023-03-AB build introduced three new commands, based on Section 9.11 of <span class="citation">USBR (<a href="Nodes-2.html#ref-USBR1987">1987</a>)</span>, which includes an allowance for side or horizontal flow contraction caused by piers and abutments that contract the flow and reduces the flow width over the weir (<span class="math inline">\(W\)</span>) to an effective flow width (<span class="math inline">\(W&#39;\)</span>) using:</p>
+<p><span class="math display" id="eq:equ-piers-on-weirs">\[\begin{equation}
+W&#39; = W - 2(NK_{p} + K_{a})H_{e}
+\tag{1.21}
+\end{equation}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(H_{e}\)</span> = Upstream energy or water level (see <a href="#ecfStructureFlowLevels">Structure Flow Levels</a> command).</li>
+<li><span class="math inline">\(N\)</span> = Number of piers.</li>
+<li><span class="math inline">\(K_{p}\)</span> = Pier contraction coefficient.</li>
+<li><span class="math inline">\(K_{a}\)</span> = Abutment contraction coefficient.</li>
+</ul>
+<p>The new .toc file commands to specify the parameters are:</p>
+<ul>
+<li><a href="#tocNumberofPiers">Number of Piers</a>: Sets the number of piers over a weir (the default is zero, 2023-03-AB build and onwards).</li>
+<li><a href="#tocKp">Kp</a>: Sets the pier contraction coefficient (the default is zero, 2023-03-AB build and onwards).</li>
+<li><a href="#tocKa">Ka</a>: Sets the abutment contraction coefficient (the default is zero, 2023-03-AB build and onwards).</li>
+</ul>
+<p>Section 9.11 of <span class="citation">USBR (<a href="Nodes-2.html#ref-USBR1987">1987</a>)</span> recommends the following values for the pier contraction coefficient <span class="math inline">\(K_{p}\)</span>:</p>
+<ul>
+<li>Square-nosed piers with corners rounded on a radius equal to about 0.1 of the pier thickness: <span class="math inline">\(K_{p}\)</span> = 0.02</li>
+<li>Round-nosed piers: <span class="math inline">\(K_{p}\)</span> = 0.01</li>
+<li>Pointed-nose piers: <span class="math inline">\(K_{p}\)</span> = 0.0</li>
+</ul>
+<p>The recommended values for the abutment contraction coefficient <span class="math inline">\(K_{a}\)</span> depends on the shape of the abutment, the design head (<span class="math inline">\(H_{0}\)</span>) and the radius of abutment rounding:</p>
+<ul>
+<li>Square abutments with headwall at 90° to direction of flow: <span class="math inline">\(K_{a}\)</span> = 0.20</li>
+<li>Rounded abutments with headwall at 90° to direction of flow, when 0.15<span class="math inline">\(H_{0}\)</span> ≤ <span class="math inline">\(r\)</span> ≤ 0.5<span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(K_{a}\)</span> = 0.10<br />
+</li>
+<li>Rounded abutments where <span class="math inline">\(r\)</span> &gt; 0.5<span class="math inline">\(H_{0}\)</span>, and headwall is placed not more than 45° to direction of flow: <span class="math inline">\(K_{a}\)</span> = 0.0</li>
+</ul>
+<p>Note that in the relationship above, the effective flow width (<span class="math inline">\(W&#39;\)</span>) reduces linearly as the upstream head (<span class="math inline">\(H_{e}\)</span>) increases. The ratio of contraction calculated by this equation is usually small relative to the actual width of weir (<span class="math inline">\(W\)</span>). But to avoid unreasonable contraction ratios, a lower limit of 0.6<span class="math inline">\(W\)</span> is applied.</p>
+</div>
+<div id="PFDF-3" class="section level3 hasAnchor" number="1.9.8">
+<h3><span class="header-section-number">1.9.8</span> Piping and Dam Failure<a href="OperationalChannels-2.html#PFDF-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The 2020-10-AB build introduced two new operational channels for piping and dam failure:</p>
+<ol style="list-style-type: decimal">
+<li>“PF” type: can be used to model the pipe failure process, as discussed in Section <a href="OperationalChannels-2.html#PF-4">1.9.8.1</a>; and</li>
+<li>“DF” type: can be used to model a dam/levee break, as discussed in Section <a href="OperationalChannels-2.html#DF-4">1.9.8.2</a>.</li>
+</ol>
+<p>In the 1d_nwk layer, the attributes in Table <a href="OperationalChannels-2.html#tab:tab-FailureAttributeDescriptions">1.23</a> can be used to set up the channel parameters.</p>
+<p>Models using piping and dam failure are provided in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Dynamic_Topography_Updates">Dynamic Topography Options Example Model Dataset</a> on the TUFLOW Wiki.</p>
+<table>
+<caption>
+<span id="tab:tab-FailureAttributeDescriptions">Table 1.23: </span><strong>Piping &amp; Dam Failure Channels: 1D Model Network (1d_nwk) Attribute Descriptions</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+No. 
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Default GIS Attribute Name
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+ID
+</td>
+<td style="text-align:left;">
+Unique identifier up to 12 characters in length. It may contain any character except for quotes and commas and cannot be blank. As a rule, spaces and special characters (e.g. “\”) should be avoided, although they are accepted.
+</td>
+<td style="text-align:left;">
+Char(12)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+Type
+</td>
+<td style="text-align:left;">
+<p>“PF”: Piping Failure</p>
+“DF”: Dam Failure
+</td>
+<td style="text-align:left;">
+Char(4)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Ignore
+</td>
+<td style="text-align:left;">
+If a “T”, “t”, “Y” or “y” is specified, the object will be ignored (T for True and Y for Yes). Any other entry, including a blank field, will treat the object as active.
+</td>
+<td style="text-align:left;">
+Char(1)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+UCS
+</td>
+<td style="text-align:left;">
+Not used.
+</td>
+<td style="text-align:left;">
+Char(1)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+Len_or_ANA
+</td>
+<td style="text-align:left;">
+Not used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+n_nF_Cd
+</td>
+<td style="text-align:left;">
+Not used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+US_Invert
+</td>
+<td style="text-align:left;">
+<p>“PF”: Inlet elevation of the piping.</p>
+“DF”: Elevation of the dam crest level before failure.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+DS_Invert
+</td>
+<td style="text-align:left;">
+<p>“PF”: Outlet elevation of the piping.</p>
+“DF”: Not Used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+Form_Loss
+</td>
+<td style="text-align:left;">
+Not used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+pBlockage
+</td>
+<td style="text-align:left;">
+Not used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+Inlet_Type
+</td>
+<td style="text-align:left;">
+<p>“PF”: Refers to the Piping Failure operational control definition in .toc file.</p>
+“DF”: Refers to the Dam Failure operational control definition in .toc file.
+</td>
+<td style="text-align:left;">
+Char(256)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:left;">
+Conn_1D_2D
+</td>
+<td style="text-align:left;">
+Not used.
+</td>
+<td style="text-align:left;">
+Char(4)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+Conn_No
+</td>
+<td style="text-align:left;">
+Not used.
+</td>
+<td style="text-align:left;">
+Integer
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:left;">
+Width_or_Dia
+</td>
+<td style="text-align:left;">
+<p>“PF”: Width of the piping orifice when fully breached.</p>
+“DF”: Top width of the dam failure channel.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:left;">
+Height_or_WF
+</td>
+<td style="text-align:left;">
+<p>“PF”: Height of the piping orifice when fully breached.</p>
+“DF”: Weir coefficient C<sub>d</sub> of the intact part.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:left;">
+Number_of
+</td>
+<td style="text-align:left;">
+Not used.
+</td>
+<td style="text-align:left;">
+Integer
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:left;">
+HConF_or_WC
+</td>
+<td style="text-align:left;">
+Not used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:left;">
+WConF_or_WEx
+</td>
+<td style="text-align:left;">
+Not used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+EntryC_or_WSa
+</td>
+<td style="text-align:left;">
+Not used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:left;">
+ExitC_or_WSb
+</td>
+<td style="text-align:left;">
+Not used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+</tbody>
+</table>
+<div id="PF-4" class="section level4 hasAnchor" number="1.9.8.1">
+<h4><span class="header-section-number">1.9.8.1</span> Piping Failure (PF)<a href="OperationalChannels-2.html#PF-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Dam/levee breaks can be initiated by flow overtopping, or by internal erosion (often called “piping” or “piping failure”) when water seeps through the embankment forming a tiny flow path. This “pipe failure” process can be modelled using a “PF” type 1D operational channel. In the 1d_nwk layer, the attributes in Table <a href="OperationalChannels-2.html#tab:tab-FailureAttributeDescriptions">1.23</a> can be used to set up the channel parameters.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image38"></span>
+<img src="images/image38.png" alt="**Schematisation of 1D Piping Failure**" width="60%" />
+<p class="caption">
+Figure 1.12: <strong>Schematisation of 1D Piping Failure</strong>
+</p>
+</div>
+<p>Operational control commands (.toc file) specific to the Piping Failure
+channel are provided below:</p>
+<ul>
+<li><a href="#tocPeriodFailure">Period Failure</a>: sets the time taken to reach the full size of piping failure.<br />
+</li>
+<li><a href="#tocOrificeWidthFullyOpen">Orifice Width Fully Open</a>: sets the width or the diameter of the piping orifice when fully breached. If omitted,
+the value set by the 1d_nwk Width_or_Dia attribute is used.<br />
+</li>
+<li><a href="#tocOrificeHeightFullyOpen">Orifice Height Fully Open</a>: sets the height of the piping orifice when fully breached. If omitted, the
+value set by the 1d_nwk Height_or_WF attribute is used.<br />
+</li>
+<li><a href="#tocPeriodCollapse">Period Collapse</a>: sets the time taken to ‘shut down’ the piping failure channel after it reaches the full extent due
+to the channel collapsing.<br />
+</li>
+<li><a href="#tocOrificeOpening">Orifice Opening</a>: sets the piping failure status.<br />
+</li>
+<li><a href="#tocCd">Cd</a>: sets the discharge coefficient in the orifice flow equation below.</li>
+</ul>
+<p>The flow rate through a piping failure channel is calculated using the orifice flow equation as provided below. Note that zero flow is assumed should the upstream water level fall below the orifice obvert, i.e. no partial flow of the orifice is assumed to occur.</p>
+<p><span class="math display" id="eq:equ-orifice-flow">\[\begin{equation}
+Q = C_{d}A\sqrt{2g\left( H_{up} - H_{down} \right)}
+\tag{1.22}
+\end{equation}\]</span></p>
+<p>Where</p>
+<ul>
+<li><span class="math inline">\(C_{d}\)</span> is the discharge coefficient set by <a href="#tocCd">Cd</a> command<br />
+</li>
+<li><span class="math inline">\(A\)</span> is the cross-sectional area of the orifice<br />
+</li>
+<li><span class="math inline">\(H_{up}\)</span> is the upstream water level<br />
+</li>
+<li><span class="math inline">\(H_{down}\)</span> is the higher of the downstream obvert or downstream water level</li>
+</ul>
+<p>It is assumed the orifice shape is rectangular, and the orifice size increases linearly with time. The expansion of the orifice is assumed to be centrally around the upstream and downstream inverts.</p>
+<p>An example of a .toc file <a href="#tocDefineControl">Define Pipe Failure Control</a> block is provided below:</p>
+<center>
+<img src="images/image39.png"
+style="width:6.29931in;height:2.73403in" />
+</center>
+<p>Models using the piping failure functionality are provided in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Dynamic_Topography_Updates">Dynamic Topography Options Example Model Dataset</a> on the TUFLOW Wiki.</p>
+</div>
+<div id="DF-4" class="section level4 hasAnchor" number="1.9.8.2">
+<h4><span class="header-section-number">1.9.8.2</span> Dam Failure (DF)<a href="OperationalChannels-2.html#DF-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The dam failure “DF” type 1D operational channel can be used to model dam/levee breaks in 1D. This channel can commence independently, or be triggered by a 1D pipe failure using “PF” type trigger. The flow rate is calculated based on the advanced weir flow equation (Section <a href="Structures-2.html#Adv-Weir-4">1.7.4.3</a>). Either a rectangular or trapezoidal cross-section can be applied, and the opening size is assumed to increase linearly with time. In the 1d_nwk layer, the attributes in Table <a href="OperationalChannels-2.html#tab:tab-FailureAttributeDescriptions">1.23</a> can be used to set up the channel parameters.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image40"></span>
+<img src="images/image40.png" alt="**Schematisation of 1D Dam Failure**" width="60%" />
+<p class="caption">
+Figure 1.13: <strong>Schematisation of 1D Dam Failure</strong>
+</p>
+</div>
+<p>Operational control commands specific to the Dam Failure channel are provided below:</p>
+<ul>
+<li><a href="#tocPeriodFailure">Period Failure</a>: sets the time taken to reach the full size of the dam failure.<br />
+</li>
+<li><a href="#tocTopWidthFullyBreached">Top Width Fully Breached</a>: Same as the “Height_or_WF” attribute.<br />
+</li>
+<li><a href="#tocDepthFullyBreached">Depth Fully Breached</a>: Same as the “Width_or_Dia” attribute.<br />
+</li>
+<li><a href="#tocSideSlopeDegree">Side Slope (degree)</a>: Sets the angle of the side slopes. This is used for calculating the bottom width and flow area.<br />
+</li>
+<li><a href="#tocPeriodCollapse">Period Collapse</a>: Defines the time taken to form the dam breach opening at the start of the dam break.<br />
+</li>
+<li><a href="#tocDepthCollapse">Depth Collapse</a>: defines the depth of the dam crest collapse during <a href="#tocPeriodCollapse">Period Collapse</a> at the beginning of the dam break.<br />
+</li>
+<li><a href="#tocBreachOpening">Breach Opening</a>: Sets the dam failure status.</li>
+</ul>
+<p>During any period of the dam failure, the Side Slope is set as constant. If the bottom width calculated from the width, depth and the side slope becomes negative, a V shaped cross-section is assumed based on the width and the side slope. A DF channel can be subject to one of the following three flow phases, depending on the upstream water level and state of the breach:</p>
+<ul>
+<li><p>Flow overtopping above the crest level can occur before the dam break. At this stage, all the water is flowing through the “Intact” section of the dam crest.</p>
+<center>
+<p><img src="images/image41.png" style="width:3.93701in;height:1.91038in" /></p>
+</center></li>
+<li><p>After the dam break commences, the water can flow through both the “Intact” section of the dam crest (provided the upstream water level is greater than the invert of the intact section), and the “failed” section. The total flow is reported in the .eof file and the _1d_Q.csv output file, while the flow rate for each section is reported separately in the _1d_O.csv output file.</p>
+<center>
+<p><img src="images/image42.png" style="width:3.94028in;height:2.22708in" /></p>
+</center></li>
+<li><p>Once the maximum breach width is reached or there is no flow over any remaining intact sections, the flow is confined entirely within the “Failed” section.</p>
+<center>
+<p><img src="images/image43.png" style="width:3.94028in;height:1.76042in" /></p>
+</center></li>
+</ul>
+<p>The flow calculation through a 1D dam break channel is computed for both the intact and failed sections, with the user able to set the weir flow equation parameters separately for both sections as per the table below.</p>
+<table>
+<caption>
+<span id="tab:tab-WeirFlowTOCCommands">Table 1.24: </span><strong>.toc Commands to Set Weir Flow Equation Parameters in DF Channel</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+“Intact” Section
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+“Failed” Section
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="#tocWeirTypeIntact">Weir Type Intact</a>
+</td>
+<td style="text-align:left;">
+<a href="#tocWeirTypeFailed">Weir Type Failed</a>
+</td>
+<td style="text-align:left;">
+Sets the weir channel type using the flags in Table <a href="Structures-2.html#tab:tab-WeirTypes">1.15</a>. If this command is not specified, the defaults are “WB” for the Intact section and “WW” for the failed section. Note that the “Side Slope” is not considered in the cross-section calculation for non-WW type weirs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="#tocCdIntact">Cd Intact</a>
+</td>
+<td style="text-align:left;">
+<a href="#tocCdFailed">Cd Failed</a>
+</td>
+<td style="text-align:left;">
+Sets the weir coefficient, <em>C<sub>d</sub></em>, in its dimensionless form.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="#tocCfIntact">Cf Intact</a>
+</td>
+<td style="text-align:left;">
+<a href="#tocCfFailed">Cf Failed</a>
+</td>
+<td style="text-align:left;">
+Sets the weir coefficient adjustment factor <em>C<sub>f</sub></em>.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="#tocExIntact">Ex Intact</a>
+</td>
+<td style="text-align:left;">
+<a href="#tocExFailed">Ex Failed</a>
+</td>
+<td style="text-align:left;">
+Sets the weir flow equation exponent <em>E<sub>x</sub></em>.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="#tocSaIntact">Sa Intact</a>
+</td>
+<td style="text-align:left;">
+<a href="#tocSaFailed">Sa Failed</a>
+</td>
+<td style="text-align:left;">
+Sets the submergence factor “a” exponent in the Villemonte Equation for calculating the weir submergence factor <em>C<sub>sf</sub></em>.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="#tocSbIntact">Sb Intact</a>
+</td>
+<td style="text-align:left;">
+<a href="#tocSbFailed">Sb Failed</a>
+</td>
+<td style="text-align:left;">
+Sets the submergence factor “b” exponent in the Villemonte Equation for calculating the weir submergence factor <em>C<sub>sf</sub></em>.
+</td>
+</tr>
+</tbody>
+</table>
+<p>An example of a <a href="#tocDefineControl">Define Dam Failure Control</a> block is provided below:</p>
+<center>
+<img src="images/image44.png" style="width:6.29931in;height:4.04236in"
+alt="Text Description automatically generated" />
+</center>
+<p>Models using the dam failure functionality are provided in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Dynamic_Topography_Updates">Dynamic Topography Options Example Model Dataset</a> on the TUFLOW Wiki.</p>
+<p>The <span class="citation">USBR (<a href="Nodes-2.html#ref-USBR1987">1987</a>)</span> approach to include an allowance for side or horizontal flow contraction caused by piers and abutments can be optionally applied for the “Intact” part of a DF channel (see Section <a href="OperationalChannels-2.html#Weirs-Operational-3">1.9.7</a>). The 2023-03-AB build introduced the following three new commands:</p>
+<ul>
+<li><a href="#tocNumberofPiers">Number of Piers</a>: Sets the number of piers over the weir (the default is zero, 2023-03-AB build and onwards).</li>
+<li><a href="#tocKpIntact">Kp Intact</a>: Sets the pier contraction coefficient (the default is zero, 2023-03-AB build and onwards).</li>
+<li><a href="#tocKaIntact">Ka Intact</a>: Sets the abutment contraction coefficient (the default is zero, 2023-03-AB build and onwards).</li>
+</ul>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="Special-Channels-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="Pipes-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": true,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": false,
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

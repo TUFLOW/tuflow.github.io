@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.4 SWMM to TUFLOW Linking | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </title>
+  <meta name="description" content="TUFLOW Classic/HPC User Manual 2025" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.4 SWMM to TUFLOW Linking | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.4 SWMM to TUFLOW Linking | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  
+  <meta name="twitter:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+<meta name="author" content="RELEASE CANDIDATE     This is an interim manual that accompanies the TUFLOW Classic/HPC 2025.2.0-rc.1 release candidate executable. The information contained within this interim version may vary from the subsequent final version." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="OneD2DLinking-Estry-2.html"/>
+<link rel="next" href="OneD2DLinkingFM-2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/TUFLOW_2025.2_release-candidate.png"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this Manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#commands"><i class="fa fa-check"></i>Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#about-this-manual"><i class="fa fa-check"></i>About this Manual</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#glossary-and-notation"><i class="fa fa-check"></i>Glossary and Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="DomainLinking-1.html"><a href="DomainLinking-1.html"><i class="fa fa-check"></i><b>1</b> Combining Domains and Solvers</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Linked-1D2D-Models-Intro-2.html"><a href="Linked-1D2D-Models-Intro-2.html"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html"><i class="fa fa-check"></i><b>1.2</b> 1D and 2D Domain Linking Theory</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#HXBoundary-3"><i class="fa fa-check"></i><b>1.2.1</b> HX 2D Head Boundary</a></li>
+<li class="chapter" data-level="1.2.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundary-3"><i class="fa fa-check"></i><b>1.2.2</b> SX 2D Flow Boundaries</a>
+<ul>
+<li class="chapter" data-level="1.2.2.1" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundarySW-4"><i class="fa fa-check"></i><b>1.2.2.1</b> SX 2D Flow Boundary to Surface Water</a></li>
+<li class="chapter" data-level="1.2.2.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundaryGW-4"><i class="fa fa-check"></i><b>1.2.2.2</b> SX 2D Flow Boundary to Groundwater</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html"><i class="fa fa-check"></i><b>1.3</b> TUFLOW 1D (ESTRY) to TUFLOW 2D Linking</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYChannel-3"><i class="fa fa-check"></i><b>1.3.1</b> 1D Open Channel and 2D Domain Linking</a></li>
+<li class="chapter" data-level="1.3.2" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYCulverts-3"><i class="fa fa-check"></i><b>1.3.2</b> 1D Structures Embedded within 2D Domains</a></li>
+<li class="chapter" data-level="1.3.3" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYPipeNetwork-3"><i class="fa fa-check"></i><b>1.3.3</b> 1D Pipe Network Pits linked to 2D Domains</a></li>
+<li class="chapter" data-level="1.3.4" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#VirtualPits-3"><i class="fa fa-check"></i><b>1.3.4</b> Virtual Pits linked to 2D Domains</a></li>
+<li class="chapter" data-level="1.3.5" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#GroundwaterLinked-3"><i class="fa fa-check"></i><b>1.3.5</b> TUFLOW 1D (ESTRY) linked to Groundwater</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html"><i class="fa fa-check"></i><b>1.4</b> SWMM to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMCulverts-5"><i class="fa fa-check"></i><b>1.4.1</b> 1D Culvert Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.2" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMPipeNetwork-3"><i class="fa fa-check"></i><b>1.4.2</b> 1D Pipe Network Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.3" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DGWConnections-3"><i class="fa fa-check"></i><b>1.4.3</b> Groundwater Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.4" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DLinkingSWMM1D-3"><i class="fa fa-check"></i><b>1.4.4</b> SWMM to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html"><i class="fa fa-check"></i><b>1.5</b> Flood Modeller to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html#oneD2DFMLinking2D-3"><i class="fa fa-check"></i><b>1.5.1</b> Flood Modeller 1D to TUFLOW 2D Linking</a></li>
+<li class="chapter" data-level="1.5.2" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html#oneD2DFMLinking1D-3"><i class="fa fa-check"></i><b>1.5.2</b> Flood Modeller 1D to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="oneD2D12D-2.html"><a href="oneD2D12D-2.html"><i class="fa fa-check"></i><b>1.6</b> 12D-DDA to TUFLOW Linking</a></li>
+<li class="chapter" data-level="1.7" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html"><i class="fa fa-check"></i><b>1.7</b> Multiple 2D Domains</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html#TwoD2DLinkingQDT-3"><i class="fa fa-check"></i><b>1.7.1</b> Classic’s M2D Feature versus HPC Quadtree</a></li>
+<li class="chapter" data-level="1.7.2" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html#TwoD2DLinkingM2D-3"><i class="fa fa-check"></i><b>1.7.2</b> TUFLOW Classic’s Multiple 2D Domains</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/WQFooter.jpg" style="width:246px;height:10px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(226,1,119);">TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<p class="wmark before"></p>
+<div id="OneD2DLinkingSWMM-2" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> SWMM to TUFLOW Linking<a href="OneD2DLinkingSWMM-2.html#OneD2DLinkingSWMM-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>New in the 2023-03-AD release, TUFLOW’s 1D linking and solver options have been expanded to support the EPA Storm Water Management Model (SWMM), see Chapter <a href="#OneD-SWMM-1"><strong>??</strong></a>. The SWMM engine (version 5) has been integrated into the TUFLOW executable as a 2D and 1D dynamically linked 1D solver. SWMM version 5 input (.inp) files can be directly input to TUFLOW.</p>
+<p>In TUFLOW-SWMM there are three categories of connections between SWMM 1D and TUFLOW:</p>
+<ul>
+<li>Direct Connections: These apply to inlets/outlets associate with culverts passing through an embankment (modelled in 2D), or also open outlets from a pipe network.<br />
+</li>
+<li>Storm-Drain Inlets: These apply to surface pits/inlets for capturing overland flow into a pipe network. Geometry information associated with the storm-drain inlet is used to determine the discharge that should flow from the 2D domain into the 1D SWMM pipe network.<br />
+</li>
+<li>SWMM 1D connection to TUFLOW 1D (ESTRY) that allows 1D domains to be a combination of ESTRY and SWMM.</li>
+</ul>
+<div id="OneD2DSWMMCulverts-5" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> 1D Culvert Connections to 2D Domains<a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMCulverts-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This type of connection is used for cross-drainage such as culverts through an embankment. Due to limitations within SWMM, HX connections are used at the Nodes–Storage object (upstream side) and SX connections are applied at the Nodes–Outfalls object (downstream). This configuration is presented in Figure <a href="OneD2DLinkingSWMM-2.html#fig:fig-1D2DSWMMCulvert">1.11</a>.</p>
+<p>Where a Nodes–Storage point is connected to the 2D domain using an inlet or HX connection, TUFLOW will compute the discharge that should be transferred between the 1D and 2D domain. If the water level in the 2D domain is higher than the 1D (potentially ponded) water level, then flow will be transferred from the 2D domain to the 1D. The discharge rate will depend on the difference in water levels.</p>
+<p>A TUFLOW-SWMM culvert model is provided in the <a href="https://wiki.tuflow.com/TUFLOW_SWMM_Tutorial_M01">TUFLOW-SWMM Tutorial Module 1</a>.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-1D2DSWMMCulvert"></span>
+<img src="images/1D2DSWMMCulvert.png" alt="**SWMM 1D Connection: Culvert**" width="70%" />
+<p class="caption">
+Figure 1.11: <strong>SWMM 1D Connection: Culvert</strong>
+</p>
+</div>
+</center>
+</div>
+<div id="OneD2DSWMMPipeNetwork-3" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> 1D Pipe Network Connections to 2D Domains<a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMPipeNetwork-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>SX type linking described in Section <a href="OneD2dLinking-2.html#SXBoundarySW-4">1.2.2.1</a> is recommended for pipe network storm-drain inlets. For a TUFLOW-SWMM model, storm-drain inlets can be defined in one of two ways, either:</p>
+<ol style="list-style-type: decimal">
+<li>Fully defined in a SWMM input (.inp) file format: In this form, all table items listed below (Streets, Conduits, Inlets, and Inlet Usage) are required. In addition, a “2d_bc” layer is required to provide the connectivity between the 1D inlets and the 2D domain.
+<ul>
+<li>Streets: SWMM uses the street cross-section information in this table to help compute storm drain inlet discharges, particularly for on-grade inlets.<br />
+</li>
+<li>Conduits (Streets): The conduits table is used to define streets for overland runoff and the slope is used in the storm drain inlet discharges. This table is not used directly when running a TUFLOW-SWMM model because the overland flows are calculated within TUFLOW.<br />
+</li>
+<li>Inlets: This table defines inlet configurations that describe how to determine inlet discharges. Inlets can be defined based on type and shape such as grates, curbs, and combination, or through curves that describe the relationship between depth and inlet discharge or approach flow and inlet discharge. The inlets table defines these parameters. The same inlet configuration can be used in multiple pit locations within the model.<br />
+</li>
+<li>Inlet Usage: This table identifies the placement of inlets including the street conduit, inlet (configuration), the node receiving the flow, and local parameters including blockage, size of local gutter depressions, and specification of on-grade, on-sag placement, or automatic placement.<br />
+</li>
+</ul></li>
+<li>Defined using a SWMM input (.inp) file with a “swmm_inlet_usage” GIS layer: In this form TUFLOW creates a GIS layer to assist in the 1D-2D specification. <strong>Due to reduced data requirements and model build workflow efficiency the combined SWMM input (.inp) file / “swmm_inlet_usage” GIS layer format is the recommended approach.</strong> Using this format:
+<ul>
+<li>Table <a href="OneD2DLinkingSWMM-2.html#tab:tab-SWMMinletusage">1.1</a> lists the attributes associated with the swmm_inlet_usage GIS layer.<br />
+</li>
+<li>Automatic inlet connections between the 1D network and 2D domain can be implemented via the “Conn1D_2D” attribute field (instead of manual specification of SX connection cells within a “2d_bc” GIS layer).</li>
+<li>SWMM 5 “Inlet Usage” tables are not used, and Conduits (Streets) are not required. However, Streets and Inlet tables must be defined in the SWMM input (.inp) file.</li>
+<li>2d_bc SX lines may be used to manually define connections associated with on-grade inlets. This gives the user complete control over the 2D cells selected for the on-grade flow calculations.</li>
+<li>The conventional 1D-2D link approach using 2d_bc CN lines and SX lines can be used (instead of the automated methods) should greater control be required over the selected 2D cells for the 1D-2D on-grade inlet connections.</li>
+<li>The conventional 1D-2D link approach using 2d_bc HX lines and SX points, lines or regions is required to connect 1D channel ends where “direct” connection to the 2D is desired.</li>
+</ul></li>
+</ol>
+<p>An example model configuration is shown in Figure <a href="OneD2DLinkingSWMM-2.html#fig:fig-1D2DSWMMPipeNetwork">1.12</a>, and example TUFLOW-SWMM pipe network models are also provided in <a href="https://wiki.tuflow.com/TUFLOW_SWMM_Tutorial_Introduction">TUFLOW-SWMM Tutorial Modules 2, 3 and 4</a>.</p>
+<p>Whether inlet usage details are defined in SWMM or in a separate GIS layer, the inlet discharges are computed within TUFLOW using EPA SWMM 5.2 code before being passed to the SWMM engine for the 1D solution computations. This approach has been selected to leverage the 2D domain hydraulic calculations.</p>
+<p>If the pressure head in the 1D domain exceeds the 2D water level, the 1D domain will overflow (surcharge) into the 2D domain. The approach used to compute the surcharge discharge depends on the inlet setup and whether or not the SWMM node ponds.</p>
+<ol style="list-style-type: decimal">
+<li>If the node allows ponding (ponding &gt; 0) (recommended configuration):
+<ul>
+<li>The surcharge discharge is based on the depth vs flow curve for custom inlets or from the orifice equation for other inlet types, plus any additional discharge from the use of the <a href="#tscfMaximumInletPondedDepth">Maximum Inlet Ponded Depth</a> command.<br />
+</li>
+<li>The coefficient used for inlet surcharging can be specified with the <a href="#tscfInletSurchargeOrificeCoefficient">Inlet Surcharge Orifice Coefficient</a> command.<br />
+</li>
+<li>The discharge for custom curves is applied directly in reverse. For example, a 1D water level 0.3 feet above the 2D water level will produce the equal, though opposite, discharge as a 2D water level 0.3 feet above the 1D water level (or ground elevation).</li>
+</ul></li>
+<li>If the node does not allow ponding (ponding = 0):
+<ul>
+<li>Any volume that exceeds the maximum nodal water level (YMax) plus any surcharge depth (YSur) is reported as flooding by SWMM, which no longer tracks it. The water is passed directly from the SWMM engine to the TUFLOW 2D cells. Although possible, this approach is not recommended because it prevents the 1D network from utilising the full pressure head in its flow calculations.</li>
+</ul></li>
+</ol>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-1D2DSWMMPipeNetwork"></span>
+<img src="images/1D2DSWMMPipeNetwork_001.png" alt="**SWMM 1D Connection: Pipe Network**" width="70%" />
+<p class="caption">
+Figure 1.12: <strong>SWMM 1D Connection: Pipe Network</strong>
+</p>
+</div>
+</center>
+<table>
+<caption>
+<span id="tab:tab-SWMMinletusage">Table 1.1: </span><strong>SWMM Inlet Usage (swmm_iu) Attribute Descriptions</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+No. 
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Default GIS Attribute Name
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;width: 5%; ">
+1
+</td>
+<td style="text-align:left;width: 10%; ">
+Inlet
+</td>
+<td style="text-align:left;width: 30%; ">
+The name of the inlet defined in the SWMM inp file “INLETS” section
+</td>
+<td style="text-align:left;width: 10%; ">
+Char (100)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+2
+</td>
+<td style="text-align:left;width: 10%; ">
+StreetXSEC
+</td>
+<td style="text-align:left;width: 30%; ">
+The name of the street cross-section that must be included in the SWMM SWMM inp file “Streets” section.
+</td>
+<td style="text-align:left;width: 10%; ">
+Char (100)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+3
+</td>
+<td style="text-align:left;width: 10%; ">
+Elevation
+</td>
+<td style="text-align:left;width: 30%; ">
+The elevation of the inlet. If a value of –99999 is entered, the elevation will be based on the 2D cell’s elevation.  
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+4
+</td>
+<td style="text-align:left;width: 10%; ">
+SlopePct_Long
+</td>
+<td style="text-align:left;width: 30%; ">
+The longitudinal slope of the street near the inlet.
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+5
+</td>
+<td style="text-align:left;width: 10%; ">
+Number
+</td>
+<td style="text-align:left;width: 30%; ">
+The number of inlets in series at the location (generally 1).
+</td>
+<td style="text-align:left;width: 10%; ">
+Integer
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+6
+</td>
+<td style="text-align:left;width: 10%; ">
+CloggedPct
+</td>
+<td style="text-align:left;width: 30%; ">
+The percentage that the inlet is blocked (defaults to 0.0).
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+7
+</td>
+<td style="text-align:left;width: 10%; ">
+Qmax
+</td>
+<td style="text-align:left;width: 30%; ">
+The maximum discharge through the inlet (default is 0 which does not enforce a maximum).
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+8
+</td>
+<td style="text-align:left;width: 10%; ">
+aLocal
+</td>
+<td style="text-align:left;width: 30%; ">
+The depth of a local depression at the inlet (default 0.0).
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+9
+</td>
+<td style="text-align:left;width: 10%; ">
+wLocal
+</td>
+<td style="text-align:left;width: 30%; ">
+The width of a local depression at the inlet (default 0.0).
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+10
+</td>
+<td style="text-align:left;width: 10%; ">
+Placement
+</td>
+<td style="text-align:left;width: 30%; ">
+Specifies whether the inlet should be treated as a sag or on-grade. Options are ON_GRADE, ON_SAG, or AUTOMATIC. AUTOMATIC (the default) will switch between ON_GRADE and ON_SAG depending upon the flow conditions at the inlet.
+</td>
+<td style="text-align:left;width: 10%; ">
+Char(10)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+11
+</td>
+<td style="text-align:left;width: 10%; ">
+Conn1D_2D
+</td>
+<td style="text-align:left;width: 30%; ">
+<p>Used to specify a “SX” connection and any additional flags such as “SXZ” or “SXG” that automatically creates a 2D SX cell and connection at the 2D cell within which the SWMM node occurs. This negates the need to create SX objects in a 2d_bc layer.</p>
+<p>Flags:</p>
+<ul>
+<li>“L” – sets the ZU and ZV elevations to be the same as the ZC value only if they are lower. This can improve instabilities where the ZU and ZV values are significantly lower in elevation and can cause a sudden increase in transfer of water to/from the cell when the cell wets.</li>
+<li>“Z” – Adjust the ZC elevation at each cell at/along/within the 2D SX object to below the 1D node bed elevation where ZC is higher. The ZC elevation is set to the Cell Wet/Dry Depth below the 1D node bed. An error occurs if the minimum ZC elevation plus the Cell Wet/Dry Depth at/along a SX object is not below the connected 1D node bed. Also see the SX ZC Check command that permits the user to define a maximum change in ZC elevation. It is not recommended to use the Z flag without first checking that the reason for the discrepancy in elevations between 1D and 2D domains is realistic.</li>
+</ul>
+By default, if more than one 2D cell is automatically connected, nodes are assumed to be connected using the Sag (S) approach. To override the default approach, specify “SXG” for an on-grade connection.
+</td>
+<td style="text-align:left;width: 10%; ">
+Char (10)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 5%; ">
+12
+</td>
+<td style="text-align:left;width: 10%; ">
+Conn_Width
+</td>
+<td style="text-align:left;width: 30%; ">
+<p>If “SX” is specified for Conn1D_2D, this field controls the number of 2D cells connected as follows. Note this approach is slightly different than is used by TUFLOW-ESTRY models.</p>
+<ul>
+<li>A positive value indicates the flow width that should be used to compute the number of 2D cells to connect to. TUFLOW will choose the nearest cells that are collectively as wide or wider than the specified flow width.</li>
+<li>If negative, the number of cells selected is the absolute value of the number specified. For example, a value of –1 would connect the inlet to a single 2D cell.
+</td>
+<td style="text-align:left;width: 10%; ">
+Float
+</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+</div>
+<div id="OneD2DGWConnections-3" class="section level3 hasAnchor" number="1.4.3">
+<h3><span class="header-section-number">1.4.3</span> Groundwater Connections to 2D Domains<a href="OneD2DLinkingSWMM-2.html#OneD2DGWConnections-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A SWMM 1D model can connect to TUFLOW groundwater layers as described in Section <a href="OneD2dLinking-2.html#SXBoundaryGW-4">1.2.2.2</a>. For groundwater to 1D connections (1D draining groundwater), an inlet is required to represent the connectivity (see Table <a href="#tab:tab-ConditionsAttribute"><strong>??</strong></a>), as shown in Figure <a href="OneD2DLinkingSWMM-2.html#fig:fig-SXtoGWSWMM">1.13</a>. This inlet is typically a generic inlet (see Table <a href="#tab:tab-SWMM-Input-Inlets"><strong>??</strong></a>) which uses a depth vs discharge relationship to define the flow. If water is being pumped into the groundwater system (e.g. an intentional recharge situation), an inlet is not required.</p>
+<p>Guidance for generating depth vs discharge curves is provided on the <a href="https://wiki.tuflow.com/Groundwater_Modelling_Advice#Groundwater_Linking_to_1D_.28ESTRY_or_SWMM.29">TUFLOW Wiki Groundwater Modelling Advice</a> page.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SXtoGWSWMM"></span>
+<img src="images/SXtoGW_SWMM.png" alt="**Groundwater linking to 1D - SWMM**"  />
+<p class="caption">
+Figure 1.13: <strong>Groundwater linking to 1D - SWMM</strong>
+</p>
+</div>
+</center>
+</div>
+<div id="OneD2DLinkingSWMM1D-3" class="section level3 hasAnchor" number="1.4.4">
+<h3><span class="header-section-number">1.4.4</span> SWMM to TUFLOW 1D (ESTRY) Linking<a href="OneD2DLinkingSWMM-2.html#OneD2DLinkingSWMM1D-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>SWMM can be linked to TUFLOW 1D (ESTRY) allowing the modeller to use the different solvers and their benefits across the 1D domains of a model. Also, note that full support for 1D open channel modelling using SWMM is not yet available, but can be readily modelled using TUFLOW 1D. A typical combined scenario would be 1D open channel modelling using TUFLOW 1D dynamically linked to a SWMM pipe network. Combined SWMM 1D-TUFLOW 1D configurations can be dynamically linked to TUFLOW 2D using the approaches outlined in the previous sections.</p>
+<p>SWMM and TUFLOW 1D nodes will be considered linked if:</p>
+<ol style="list-style-type: decimal">
+<li>A TUFLOW 1D node in a 1d_nwk layer, and a SWMM node layer are snapped to each other, and<br />
+</li>
+<li>The TUFLOW 1D node has a 1d_nwk Conn_1D_2D attribute of either “X1DH” or “X1DQ”.
+<ul>
+<li>A “X1DH” link means a SWMM 1D water level is being applied at the TUFLOW 1D node (i.e. SWMM sends TUFLOW 1D a water level and TUFLOW 1D sends back a +/- flow to SWMM). This is applicable at SWMM Nodes–Junctions and Nodes–Storage locations.<br />
+</li>
+<li>A “X1DQ” link means a SWMM inflow/outflow is being applied at the TUFLOW 1D node (i.e. SWMM sends TUFLOW 1D a +/- flow and TUFLOW 1D sends back a water level). This is applicable at SWMM Nodes–Outfalls locations.</li>
+</ul></li>
+</ol>
+<p>Note:</p>
+<ul>
+<li>The upstream and downstream inverts for the TUFLOW 1D node linked to SWMM should be set to -99999 unless the node is also being used to set the inverts of channels snapped to it.<br />
+</li>
+<li>SWMM cannot be connected to TUFLOW 1D and TUFLOW 2D from the same SWMM node. Only a single linkage is supported from a single SWMM node. This limitation is highlighted in the zoomed inset of Figure <a href="OneD2DLinkingSWMM-2.html#fig:fig-1D1DSWMMTUFLOWConnection">1.14</a>. In this example the SWMM Link–Conduit is only linked to TUFLOW 1D, it is not connected to TUFLOW 2D via CN and HX lines. The connection of TUFLOW 2D is associated with the TUFLOW 1D open channels, offset from SWMM by a single short TUFLOW 1D channel length.</li>
+</ul>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-1D1DSWMMTUFLOWConnection"></span>
+<img src="images/1D1DSWMMTUFLOWLink.png" alt="**SWMM 1D / TUFLOW 1D Connection**" width="70%" />
+<p class="caption">
+Figure 1.14: <strong>SWMM 1D / TUFLOW 1D Connection</strong>
+</p>
+</div>
+</center>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="OneD2DLinking-Estry-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="OneD2DLinkingFM-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": true,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": false,
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
