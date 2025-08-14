@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.1 Solvers | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </title>
+  <meta name="description" content="TUFLOW Classic/HPC User Manual 2025" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.1 Solvers | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.1 Solvers | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  
+  <meta name="twitter:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+<meta name="author" content="RELEASE CANDIDATE     This is an interim manual that accompanies the TUFLOW Classic/HPC 2025.2.0-rc.1 release candidate executable. The information contained within this interim version may vary from the subsequent final version." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="TwoD-Domains-1.html"/>
+<link rel="next" href="Common-2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.11.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/TUFLOW_2025.2_release-candidate.png"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this Manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#commands"><i class="fa fa-check"></i>Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#about-this-manual"><i class="fa fa-check"></i>About this Manual</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#glossary-and-notation"><i class="fa fa-check"></i>Glossary and Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html"><i class="fa fa-check"></i><b>1</b> 2D Domains</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Solvers-2.html"><a href="Solvers-2.html"><i class="fa fa-check"></i><b>1.1</b> Solvers</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="Solvers-2.html"><a href="Solvers-2.html#HPCTwoDSolver-3"><i class="fa fa-check"></i><b>1.1.1</b> TUFLOW HPC 2D Solver</a></li>
+<li class="chapter" data-level="1.1.2" data-path="Solvers-2.html"><a href="Solvers-2.html#CLATwoDSolver-3"><i class="fa fa-check"></i><b>1.1.2</b> TUFLOW Classic 2D Solver</a></li>
+<li class="chapter" data-level="1.1.3" data-path="Solvers-2.html"><a href="Solvers-2.html#Schematisation-3"><i class="fa fa-check"></i><b>1.1.3</b> Cell Schematisation</a>
+<ul>
+<li class="chapter" data-level="1.1.3.1" data-path="Solvers-2.html"><a href="Solvers-2.html#computational-points-4"><i class="fa fa-check"></i><b>1.1.3.1</b> Computational Points</a></li>
+</ul></li>
+<li class="chapter" data-level="1.1.4" data-path="Solvers-2.html"><a href="Solvers-2.html#turbulence-overview"><i class="fa fa-check"></i><b>1.1.4</b> Turbulence</a>
+<ul>
+<li class="chapter" data-level="1.1.4.1" data-path="Solvers-2.html"><a href="Solvers-2.html#Dry-Wall-4"><i class="fa fa-check"></i><b>1.1.4.1</b> Dry Wall Treatment</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="Common-2.html"><a href="Common-2.html"><i class="fa fa-check"></i><b>1.2</b> Common Functionality</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="Common-2.html"><a href="Common-2.html#Domain-3"><i class="fa fa-check"></i><b>1.2.1</b> Defining the Domain</a></li>
+<li class="chapter" data-level="1.2.2" data-path="Common-2.html"><a href="Common-2.html#CellCodes-3"><i class="fa fa-check"></i><b>1.2.2</b> Active / Inactive Cells</a></li>
+<li class="chapter" data-level="1.2.3" data-path="Common-2.html"><a href="Common-2.html#layering-3"><i class="fa fa-check"></i><b>1.2.3</b> Data Layering</a></li>
+<li class="chapter" data-level="1.2.4" data-path="Common-2.html"><a href="Common-2.html#SamplingData-3"><i class="fa fa-check"></i><b>1.2.4</b> Sampling of Data Sets</a>
+<ul>
+<li class="chapter" data-level="1.2.4.1" data-path="Common-2.html"><a href="Common-2.html#traditional-sampling-4"><i class="fa fa-check"></i><b>1.2.4.1</b> Traditional Sampling Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.5" data-path="Common-2.html"><a href="Common-2.html#elevations-3"><i class="fa fa-check"></i><b>1.2.5</b> Elevations</a>
+<ul>
+<li class="chapter" data-level="1.2.5.1" data-path="Common-2.html"><a href="Common-2.html#DEMGrids-3"><i class="fa fa-check"></i><b>1.2.5.1</b> Direct Reading of DEM Grids</a></li>
+<li class="chapter" data-level="1.2.5.2" data-path="Common-2.html"><a href="Common-2.html#zsh-4"><i class="fa fa-check"></i><b>1.2.5.2</b> Z Shape Layers (2d_zsh)</a></li>
+<li class="chapter" data-level="1.2.5.3" data-path="Common-2.html"><a href="Common-2.html#vzsh-4"><i class="fa fa-check"></i><b>1.2.5.3</b> Variable Z Shape Layer (2d_vzsh)</a></li>
+<li class="chapter" data-level="1.2.5.4" data-path="Common-2.html"><a href="Common-2.html#ztin-4"><i class="fa fa-check"></i><b>1.2.5.4</b> 3D TIN Layers (2d_ztin)</a></li>
+<li class="chapter" data-level="1.2.5.5" data-path="Common-2.html"><a href="Common-2.html#zln-4"><i class="fa fa-check"></i><b>1.2.5.5</b> 3D Breakline Layers (2d_zln)</a></li>
+<li class="chapter" data-level="1.2.5.6" data-path="Common-2.html"><a href="Common-2.html#zpt-4"><i class="fa fa-check"></i><b>1.2.5.6</b> Zpt Layers (2d_zpt)</a></li>
+<li class="chapter" data-level="1.2.5.7" data-path="Common-2.html"><a href="Common-2.html#using-multiple-and-points-4"><i class="fa fa-check"></i><b>1.2.5.7</b> Using Multiple Layers and Points Layers</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.6" data-path="Common-2.html"><a href="Common-2.html#Materials-2"><i class="fa fa-check"></i><b>1.2.6</b> Land Use (Materials)</a>
+<ul>
+<li class="chapter" data-level="1.2.6.1" data-path="Common-2.html"><a href="Common-2.html#Bed-Resistance-4"><i class="fa fa-check"></i><b>1.2.6.1</b> Bed Resistance</a></li>
+<li class="chapter" data-level="1.2.6.2" data-path="Common-2.html"><a href="Common-2.html#log-law-4"><i class="fa fa-check"></i><b>1.2.6.2</b> Log Law Depth Varying Bed Resistance</a></li>
+<li class="chapter" data-level="1.2.6.3" data-path="Common-2.html"><a href="Common-2.html#Materials-File-4"><i class="fa fa-check"></i><b>1.2.6.3</b> Materials File</a></li>
+<li class="chapter" data-level="1.2.6.4" data-path="Common-2.html"><a href="Common-2.html#Rainfall-Losses-4"><i class="fa fa-check"></i><b>1.2.6.4</b> Rainfall Losses</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.7" data-path="Common-2.html"><a href="Common-2.html#Infiltration-2"><i class="fa fa-check"></i><b>1.2.7</b> Infiltration</a>
+<ul>
+<li class="chapter" data-level="1.2.7.1" data-path="Common-2.html"><a href="Common-2.html#infiltration-layer-4"><i class="fa fa-check"></i><b>1.2.7.1</b> Infiltration Layer</a></li>
+<li class="chapter" data-level="1.2.7.2" data-path="Common-2.html"><a href="Common-2.html#tsoilf-4"><i class="fa fa-check"></i><b>1.2.7.2</b> Soils File (.tsoilf)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.8" data-path="Common-2.html"><a href="Common-2.html#HydraulicStructures-3"><i class="fa fa-check"></i><b>1.2.8</b> Hydraulic Structures</a>
+<ul>
+<li class="chapter" data-level="1.2.8.1" data-path="Common-2.html"><a href="Common-2.html#HydraulicStructuresIntro-4"><i class="fa fa-check"></i><b>1.2.8.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2.8.2" data-path="Common-2.html"><a href="Common-2.html#bg-layer-4"><i class="fa fa-check"></i><b>1.2.8.2</b> 2D Bridge Structures (2d_bg)</a></li>
+<li class="chapter" data-level="1.2.8.3" data-path="Common-2.html"><a href="Common-2.html#lfcsh-4"><i class="fa fa-check"></i><b>1.2.8.3</b> Layered Flow Constrictions (2d_lfcsh Layers)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.9" data-path="Common-2.html"><a href="Common-2.html#cell-mods-3"><i class="fa fa-check"></i><b>1.2.9</b> Cell Modification</a>
+<ul>
+<li class="chapter" data-level="1.2.9.1" data-path="Common-2.html"><a href="Common-2.html#srf-3"><i class="fa fa-check"></i><b>1.2.9.1</b> Storage Reduction (2d_srf)</a></li>
+<li class="chapter" data-level="1.2.9.2" data-path="Common-2.html"><a href="Common-2.html#CWF-4"><i class="fa fa-check"></i><b>1.2.9.2</b> Cell Width Factor (2d_cwf)</a></li>
+<li class="chapter" data-level="1.2.9.3" data-path="Common-2.html"><a href="Common-2.html#flc-4"><i class="fa fa-check"></i><b>1.2.9.3</b> Form Loss Coefficient (2d_flc)</a></li>
+<li class="chapter" data-level="1.2.9.4" data-path="Common-2.html"><a href="Common-2.html#mod-conveyance-4"><i class="fa fa-check"></i><b>1.2.9.4</b> Modify Conveyance</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.10" data-path="Common-2.html"><a href="Common-2.html#urban-areas-3"><i class="fa fa-check"></i><b>1.2.10</b> Modelling Urban Areas</a>
+<ul>
+<li class="chapter" data-level="1.2.10.1" data-path="Common-2.html"><a href="Common-2.html#buildings-4"><i class="fa fa-check"></i><b>1.2.10.1</b> Buildings</a></li>
+<li class="chapter" data-level="1.2.10.2" data-path="Common-2.html"><a href="Common-2.html#roads-4"><i class="fa fa-check"></i><b>1.2.10.2</b> Roads</a></li>
+<li class="chapter" data-level="1.2.10.3" data-path="Common-2.html"><a href="Common-2.html#fences-4"><i class="fa fa-check"></i><b>1.2.10.3</b> Fences and Walls</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html"><i class="fa fa-check"></i><b>1.3</b> TUFLOW HPC Specific</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#Quadtree-3"><i class="fa fa-check"></i><b>1.3.1</b> Quadtree</a>
+<ul>
+<li class="chapter" data-level="1.3.1.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#qcf-commands-4"><i class="fa fa-check"></i><b>1.3.1.1</b> Quadtree .tcf Commands</a></li>
+<li class="chapter" data-level="1.3.1.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#qcf-mandatory-4"><i class="fa fa-check"></i><b>1.3.1.2</b> Quadtree Control File (.qcf) – Mandatory Commands</a></li>
+<li class="chapter" data-level="1.3.1.3" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#qcf-optional-4"><i class="fa fa-check"></i><b>1.3.1.3</b> Quadtree Control File (.qcf) – Optional Commands</a></li>
+<li class="chapter" data-level="1.3.1.4" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#QDT-mesh-4"><i class="fa fa-check"></i><b>1.3.1.4</b> Defining Grid Refinement Polygons</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-Turbulence-3"><i class="fa fa-check"></i><b>1.3.2</b> HPC Turbulence</a>
+<ul>
+<li class="chapter" data-level="1.3.2.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-Turbulence-4"><i class="fa fa-check"></i><b>1.3.2.1</b> Overview</a></li>
+<li class="chapter" data-level="1.3.2.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#Constant-4"><i class="fa fa-check"></i><b>1.3.2.2</b> Constant Eddy Viscosity</a></li>
+<li class="chapter" data-level="1.3.2.3" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#Smagorinsky-4"><i class="fa fa-check"></i><b>1.3.2.3</b> Smagorinsky Approach</a></li>
+<li class="chapter" data-level="1.3.2.4" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#Wu-4"><i class="fa fa-check"></i><b>1.3.2.4</b> Wu Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.3" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#SGS-3"><i class="fa fa-check"></i><b>1.3.3</b> Sub-Grid Sampling (SGS)</a>
+<ul>
+<li class="chapter" data-level="1.3.3.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#SGS-commands-4"><i class="fa fa-check"></i><b>1.3.3.1</b> SGS Methodology and Commands</a></li>
+<li class="chapter" data-level="1.3.3.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#SGS-output-4"><i class="fa fa-check"></i><b>1.3.3.2</b> SGS Output Options</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.4" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-US-Controlled-3"><i class="fa fa-check"></i><b>1.3.4</b> 2D Upstream Controlled Flow (Weirs and Supercritical Flow)</a></li>
+<li class="chapter" data-level="1.3.5" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-Infiltration-GW"><i class="fa fa-check"></i><b>1.3.5</b> Infiltration and Groundwater Flow</a>
+<ul>
+<li class="chapter" data-level="1.3.5.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-Infiltration-4"><i class="fa fa-check"></i><b>1.3.5.1</b> Infiltration</a></li>
+<li class="chapter" data-level="1.3.5.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-Groundwater-3"><i class="fa fa-check"></i><b>1.3.5.2</b> Groundwater Flow</a></li>
+<li class="chapter" data-level="1.3.5.3" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-tsoilf-5"><i class="fa fa-check"></i><b>1.3.5.3</b> HPC Soils File (.tsoilf)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.6" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#NN-3"><i class="fa fa-check"></i><b>1.3.6</b> Non-Newtonian Flow</a>
+<ul>
+<li class="chapter" data-level="1.3.6.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#Implementation-4"><i class="fa fa-check"></i><b>1.3.6.1</b> Implementation</a></li>
+<li class="chapter" data-level="1.3.6.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#NN-Mix-4"><i class="fa fa-check"></i><b>1.3.6.2</b> Non-Newtonian Mixing</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.7" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-Unsupported-3"><i class="fa fa-check"></i><b>1.3.7</b> Unsupported Features in TUFLOW HPC</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html"><i class="fa fa-check"></i><b>1.4</b> TUFLOW Classic Specific</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-Turbulence-3"><i class="fa fa-check"></i><b>1.4.1</b> Classic Turbulence</a>
+<ul>
+<li class="chapter" data-level="1.4.1.1" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-Constant-4"><i class="fa fa-check"></i><b>1.4.1.1</b> Constant</a></li>
+<li class="chapter" data-level="1.4.1.2" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-Smagorinsky-4"><i class="fa fa-check"></i><b>1.4.1.2</b> Smagorinsky</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4.2" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-US-Controlled-3"><i class="fa fa-check"></i><b>1.4.2</b> 2D Upstream Controlled Flow (Weirs and Supercritical Flow)</a></li>
+<li class="chapter" data-level="1.4.3" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-mat-3"><i class="fa fa-check"></i><b>1.4.3</b> Land Use (Materials)</a></li>
+<li class="chapter" data-level="1.4.4" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-2D2D-3"><i class="fa fa-check"></i><b>1.4.4</b> Multiple 2D Domain</a></li>
+<li class="chapter" data-level="1.4.5" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-Coriolis-3"><i class="fa fa-check"></i><b>1.4.5</b> Coriolis Term</a></li>
+<li class="chapter" data-level="1.4.6" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#LegacyStructs-3"><i class="fa fa-check"></i><b>1.4.6</b> Legacy Structures</a>
+<ul>
+<li class="chapter" data-level="1.4.6.1" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-FC-4"><i class="fa fa-check"></i><b>1.4.6.1</b> 2D Flow Constrictions (2d_fcsh and 2d_fc)</a></li>
+<li class="chapter" data-level="1.4.6.2" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#EnergyLoss-fc-fcsh-4"><i class="fa fa-check"></i><b>1.4.6.2</b> Applying Form (Energy) Loss in 2D FC and FCSH Layers</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4.7" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-Unsupported-3"><i class="fa fa-check"></i><b>1.4.7</b> Unsupported Features in TUFLOW Classic</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/WQFooter.jpg" style="width:246px;height:10px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(226,1,119);">TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<p class="wmark before"></p>
+<div id="Solvers-2" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Solvers<a href="Solvers-2.html#Solvers-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>TUFLOW solves the depth averaged 2D Shallow Water Equations (SWE). The SWE are the equations of fluid motion used for modelling long waves such as floods, urban stormwater inundation, dam failure hydraulics, ocean tides and storm surges. They are derived using the assumption of vertically uniform horizontal velocity and negligible vertical acceleration (i.e. a hydrostatic pressure distribution). These assumptions are valid where the wave length is much greater than the depth of water. In the case of the ocean tide, the wavelength is long, and even at the deepest parts of the ocean the SWE are applicable.</p>
+<p>For the original TUFLOW Classic solver, the mass continuity and momentum conservation equations are available in the <a href="https://downloads.tuflow.com/_archive/TUFLOW/Releases/2018-03/TUFLOW%20Manual.2018-03.pdf#page=221">Section 6.3 of 2018 TUFLOW Manual</a>. For TUFLOW HPC, the 2D SWE are described by the following partial differential equations of mass continuity and momentum conservation, in the X and Y directions for an in-plane Cartesian coordinate frame of reference. The equations are:</p>
+<p>2D Continuity:</p>
+<p><span class="math display" id="eq:equ-2DContinuity-1">\[\begin{equation}
+\frac{\partial h}{\partial t} + \frac{\partial(hu)}{\partial x} + \frac{\partial(hv)}{\partial y} = S
+\tag{1.1}
+\end{equation}\]</span></p>
+<p>X Momentum:</p>
+<p><span class="math display" id="eq:equ-x-momentum">\[\begin{equation}
+\frac{\partial (hu)}{\partial t}
++ \frac{\partial (huu)}{\partial x} + \frac{\partial (hvu)}{\partial y}
+- \frac{\partial \left( h \nu_t \frac{\partial u}{\partial x} \right)}{\partial x} - \frac{\partial \left( h \nu_t \frac{\partial u}{\partial y} \right)}{\partial y}
++ gh\frac{\partial (z + h)}{\partial x}
++ (\frac{gn^2}{h^{4/3}} + \frac{k}{2 \mathrm{\Delta}x})h\sqrt{u^2+v^2}u
+= S_u
+- \frac{h}{\rho}\frac{\partial P_a}{\partial x}
++ \frac{\tau_{x,wind}}{\rho}
+\tag{1.2}
+\end{equation}\]</span></p>
+<p>Y Momentum:</p>
+<p><span class="math display" id="eq:equ-y-momentum">\[\begin{equation}
+\frac{\partial (hv)}{\partial t}
++ \frac{\partial (huv)}{\partial x} + \frac{\partial (hvv)}{\partial y}
+- \frac{\partial \left( h \nu_t \frac{\partial v}{\partial x} \right)}{\partial x} - \frac{\partial \left( h \nu_t \frac{\partial v}{\partial y} \right)}{\partial y}
++ gh\frac{\partial (z + h)}{\partial y}
++ (\frac{gn^2}{h^{4/3}} + \frac{k}{2 \mathrm{\Delta}y})h\sqrt{u^2+v^2}v
+= S_v
+- \frac{h}{\rho}\frac{\partial P_a}{\partial y}
++ \frac{\tau_{y,wind}}{\rho}
+\tag{1.3}
+\end{equation}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(h\)</span> = Depth of water</li>
+<li><span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> = Depth averaged velocity components in X and Y directions</li>
+<li><span class="math inline">\(t\)</span> = Time</li>
+<li><span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> = Distance in X and Y directions</li>
+<li><span class="math inline">\(z\)</span> = Bed elevation</li>
+<li><span class="math inline">\(n\)</span> = Manning’s bed friction coefficient</li>
+<li><span class="math inline">\(k\)</span> = Energy loss coefficient, used for local energy losses</li>
+<li><span class="math inline">\(\mathrm{\Delta}x\)</span> and <span class="math inline">\(\mathrm{\Delta}y\)</span> = 2D cell size</li>
+<li><span class="math inline">\(\nu_t\)</span> = Turbulent kinematic viscosity</li>
+<li><span class="math inline">\(P_a\)</span> = Atmospheric pressure</li>
+<li><span class="math inline">\(\rho\)</span> = Density of water</li>
+<li><span class="math inline">\(S\)</span> = Areal volume source (volume per unit time per unit area), used for rain and infiltration</li>
+<li><span class="math inline">\(S_u\)</span> and <span class="math inline">\(S_v\)</span> = Areal momentum source terms (force per unit area per unit fluid density), used for local energy losses</li>
+</ul>
+<p>The terms of the SWE can be attributed to different physical phenomena. These are:</p>
+<ul>
+<li>Propagation of the wave due to gravitational forces.<br />
+</li>
+<li>Transport of momentum by advection.<br />
+</li>
+<li>Horizontal diffusion of momentum or sub-grid scale turbulence (see Section <a href="Solvers-2.html#turbulence-overview">1.1.4</a>).<br />
+</li>
+<li>External forces such as bed friction, rotation of the earth, wind, wave radiation stresses, and barometric pressure.</li>
+</ul>
+<p>For further discussion relating to the SWE, please see Section <a href="#FluidFlowPhysicalTerms-3"><strong>??</strong></a>.</p>
+<p>TUFLOW Classic and TUFLOW HPC use different solution schemes to solve the SWE. Both approaches are discussed in the following sections.</p>
+<div id="HPCTwoDSolver-3" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> TUFLOW HPC 2D Solver<a href="Solvers-2.html#HPCTwoDSolver-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>TUFLOW HPC is an explicit solver using a finite volume method. It computes the volume flow across cell boundaries. Volume cannot leave one cell without being placed in its neighbour. As a result, 2D volume is conserved and 2D mass error is 0%. The transfer of momentum across cell boundaries is computed in the same way and once external forces are considered (bed slope, bottom friction, and wet perimeters of non-uniform depth) momentum is conserved.</p>
+<p>The explicit finite volume scheme applies the conservation of mass over the cell for calculating the rate of change of cell depth. In Figure <a href="Solvers-2.html#fig:fig-image59">1.1</a>, the cell centre (for the cell in question) is given the notation cc, while the surrounding neighbours are given the notation n1..n4. The u velocity at the left and right faces are notated u1 and u2, and the v velocities at the bottom and top faces are notated v3 and v4. The cell width and
+height are Δx and Δy respectively.</p>
+<p>TUFLOW HPC uses an automatic adaptive timestep to achieve unconditional stability, as mentioned in Section <a href="#TUFLOWHPCTimestep-3"><strong>??</strong></a>. It solves the 2D SWE on a uniform Cartesian grid. Water depth/level is calculated at the cell centres, and velocity components at the cell mid-sides or faces in the same manner as TUFLOW Classic.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image59"></span>
+<img src="images/image59.png" alt="TUFLOW HPC 2D SWE Finite Volume Scheme Approach"  />
+<p class="caption">
+Figure 1.1: TUFLOW HPC 2D SWE Finite Volume Scheme Approach
+</p>
+</div>
+<p>The time rate of change for the cell averaged depth is shown in Equation <a href="Solvers-2.html#eq:equ-cell-avg-depth">(1.4)</a>.</p>
+<p><span class="math display" id="eq:equ-cell-avg-depth">\[\begin{equation}
+\frac{A\partial h}{\partial t} = \Phi_{1} - \Phi_{2} + \Phi_{3} - \Phi_{4} + S_{Q}
+\tag{1.4}
+\end{equation}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(A\)</span> = cell area</li>
+<li><span class="math inline">\(h\)</span> = depth</li>
+<li><span class="math inline">\(t\)</span> = time</li>
+<li><span class="math inline">\(\Phi_{1}\)</span> to <span class="math inline">\(\Phi_{4}\)</span> = the four face fluxes</li>
+<li><span class="math inline">\(S_Q\)</span> = sources (rain and infiltration)</li>
+</ul>
+<p>The volume fluxes across the four cell sides and the net volume from source boundaries determine the rate of volume change and the change in depth. Source boundaries include SA, ST and RF boundaries, soil infiltration, evaporation, and any flow linkages to 1D elements via SX links. By computing the face fluxes for all model faces, and referencing these when computing the depth derivative for each cell, volume conservation is guaranteed to numerical precision. At “Head” boundaries, the above equation does not apply. Rather, the defined head (level) is directly used to calculate the water volume and associated depth in the cell.</p>
+<p>The calculation of the cell side volume fluxes is available in either 1st or 2nd order spatially. For the 1st order scheme, this uses depth of the upstream cell (often referred to as upwinding), bounded to be greater than or equal to 0, and less than or equal to the surface elevation of the upstream cell less the bed elevation at the cell side mid-point. For the 2nd order scheme the depth at the face is computed as the average of the two cell averaged depths, however, this method in its simplest form is not total variation diminishing (TVD) and is known to be unstable. A hybrid method is implemented in which the depth at the cell face transitions from interpolated depth to the upstream depth (1st order upwinding) when the solution shows short scale reversal or upstream controlled supercritical flow.</p>
+<p>The solution of the cell side fluxes includes the inertia and sub-grid scale turbulence (eddy or kinematic turbulent viscosity) term. Turbulence is detailed further in Section <a href="Solvers-2.html#turbulence-overview">1.1.4</a>. The cell side fluxes may also be factored down by flow constriction factors where sub-grid-scale obstructions exist.
+<!-- PAR to EFC have removed the below and included a link to the turbulence section.
+
+removed text:
+The same options for the eddy viscosity coefficient calculation in Classic
+(constant, Smagorinsky or a combination of constant and Smagorinsky) are
+available, and the default values for both schemes are presently set the
+same. BMT are doing further research in this area, as there is some
+dependency on cell size for this term (refer to @CollecuttSyme2017).  
+--></p>
+<p>Due to the explicit scheme, the calculation of flux for one cell face may be performed independently of the other faces, and likewise the summation of flux for each cell volume may be performed independently of the other cell volumes. Applying the same algorithm to millions of data elements is well suited to modern multi-core CPUs,and particularly suited to GPU hardware acceleration.</p>
+<p>The 1st order approach can experience numerical diffusion, like all 1st order schemes, and does not resolve strongly two-dimensional hydraulics (e.g. flow expansion downstream of a constriction) as well as a 2nd order solution. The 2nd order solution demonstrates no discernible numerical diffusion, and resolves complex 2D hydraulics, including hydraulic jumps as demonstrated using the UK EA Benchmark Flume Test 6A <span class="citation">Collecutt &amp; Syme (<a href="CLASpecific-2.html#ref-CollecuttSyme2017">2017</a>)</span>.<!-- PAR to EWC can we include the reference here--><!--done--> <!-- PAR added next sentence--> When running HPC solver the 2nd order spatial scheme is the default and recommended approach.</p>
+<p>For further details on the scheme, refer to <span class="citation">Collecutt &amp; Syme (<a href="CLASpecific-2.html#ref-CollecuttSyme2017">2017</a>)</span>. Note that at the time this paper was written, the scheme utilised cell centre definitions for velocity, which was prone to a zero-energy ‘checker-board’ mode in the solution. Subsequent to the paper, cell mid-side points were adopted for the definition of u and v velocities which has eliminated the checker-board mode with only very minor changes to the results.</p>
+</div>
+<div id="CLATwoDSolver-3" class="section level3 hasAnchor" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> TUFLOW Classic 2D Solver<a href="Solvers-2.html#CLATwoDSolver-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The scheme is unlike the TUFLOW HPC solution in that it solves the same shallow water equations implicitly using matrices, allowing much larger timesteps (hence why it is important to monitor mass error in implicit schemes such as TUFLOW Classic to check that the solution is converging).</p>
+<p>An Alternating Direction Semi-Implicit (ADI) finite difference method is used for TUFLOW Classic’s computational procedure. It was originally based on the work of <span class="citation">Stelling (<a href="CLASpecific-2.html#ref-Stelling1984">1984</a>)</span>. The method involves two stages per timestep, each having two steps, giving four steps overall. Two of the steps sweeps through the model domain solving tri-diagonal matrices, hence the “semi-implicit”. Due to the implicit solution, TUFLOW Classic is not suited to being parallelised for multi-core CPUs or for GPU acceleration.</p>
+<p>Step 1 solves the momentum equation in the Y-direction for the Y-velocities. The equation is solved using a predictor/corrector method, which involves two sweeps. For the first sweep, the calculation proceeds column by column in the Y-direction. If the signs of all velocities in the X-direction are the same the second sweep is not necessary, otherwise the calculation is repeated sweeping in the opposite direction.</p>
+<p>The second step of Stage 1 solves for the water levels and X-direction velocities by solving the equations of mass continuity and of momentum in the X-direction. Tri-diagonal equations are generated and solved across the 2D domain by substituting the momentum equation into the mass equation and eliminating the X-velocity. The water levels are calculated and back substituted into the momentum equation to calculate the X-velocities. This process is repeated for a recommended two iterations. Testing on a number of models showed there to be little benefit in using more than two iterations unless there are rapid changes in the hydraulic conditions per timestep as may occur with modelling inundation from a dam break.</p>
+<p>Stage 2 proceeds in a similar manner to Stage 1 with the first step using the X-direction momentum equation and the second step using the mass equation and the Y-direction momentum equation.</p>
+<p>The solution as formulated by Stelling has been enhanced and improved to provide much more robust wetting and drying of elements, upstream controlled flow regimes (e.g. supercritical flow and upstream controlled weir flow), modifications to cells to model structure obverts (e.g. bridge decks) and additional energy losses due to fine-scale features such as bridge piers.</p>
+<p>TUFLOW Classic solves the 2D SWE on the same uniform Cartesian grid as used by TUFLOW HPC. Water depth/level is calculated at the cell centres, and velocity components at the cell mid-sides or faces.</p>
+</div>
+<div id="Schematisation-3" class="section level3 hasAnchor" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> Cell Schematisation<a href="Solvers-2.html#Schematisation-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>TUFLOW 2D models discretise the real world as a grid of connected square cells. A fixed grid 2D domain is defined by a bounding rectangle in the same manner a computer screen or digital photo is made up of a grid of pixels.</p>
+<p>The physical properties (i.e. ground elevations, surface roughness, etc) of a 2D cell are defined as a minimum at the cell’s centre, mid-sides and corners as described in Section <a href="Common-2.html#Domain-3">1.2.1</a>. High resolution topographic detail for the cell’s storage and conveyance across the cell sides (faces) can be incorporated by using the Sub-Grid Sampling (SGS) feature available in TUFLOW HPC, as documented in Section <a href="HPC-specific-2.html#SGS-3">1.3.3</a>. SGS has substantial accuracy benefits. It enables the use of much larger cell sizes without loss of hydraulic conveyance accuracy. It also results in less output sensitivity to the grid orientation.</p>
+<!-- EFC to PAR: I don't think the below belongs here 
+PAR to EFC: agree
+
+TUFLOW Classic allows multiple 2D fixed grid domains or differing orientation and cell size within the one model. The bounding rectangle of a 2D domain can be at any orientation to optimise the computer memory (RAM) footprint, however, with RAM rarely being a constraint many models are typically orientated north-south.
+
+A quadtree grid is a grid of 2D square cells all at the same orientation with the base cell size being the parent or largest cell size. Cells can be decreased in size by dividing the base cell size into four equal square cells, with these smaller cells able to be further reduced in size to four smaller cells and so on. As cell referencing can no longer be on a simple row-column arrangement of a fixed grid 2D domain, a quadtree grid has a data structure more akin to a fully-flexible mesh. Whilst, more information needs to be stored per cell for a quadtree grid compared to fixed grid, memory is not defined by the size of the bounding rectangle, but by the number of active 2D cells. If there is a significant area of inactive 2D cells within the bounding rectangle of the quadtree grid the memory footprint can be considerably smaller than a fixed grid model.
+-->
+<div id="computational-points-4" class="section level4 hasAnchor" number="1.1.3.1">
+<h4><span class="header-section-number">1.1.3.1</span> Computational Points<a href="Solvers-2.html#computational-points-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To fully understand how TUFLOW functions, understanding of the computational role of the 2D cell and its four sides (also referred to as faces) is important. In the following sections, these model components are referred to as the ZC, ZU, ZV and ZH points, as shown in Figure <a href="Solvers-2.html#fig:fig-image56">1.2</a>. The description of these points are:</p>
+<!-- EFC, the row column reference info is probably no longer that relevant, whilst read row col <data> is still supported for Classic and HPC fixed grid, this doesn't support SGS or quadtree.  Maybe the information on row column referencing can be moved to the appendix / commands section where this Read RowCol functionality is described-->
+<!-- EFC: removed row/col-->
+<!-- PAR to EFC, the lowest elevation is an SGS thing,should we keep this to non SGS as we haven't introduced yet?-->
+<!-- EFC to PAR: have commented out the SGS comments-->
+<ul>
+<li>ZC – the cell centre with ZC being the elevation used computationally within the cell. <!--For non SGS models this is assumed to be a flat square represented by the ZC elevation.--></li>
+<li>ZU – middle of the cell side of the Y-axis face with ZU being the elevation used computationally along the cell side. <!--For non SGS models this is assumed to be a rectangular channel defined the the ZU elevation.--></li>
+<li>ZV – middle of the cell side of the X-axis face with ZV being the elevation used computationally along the cell side. <!--For non SGS models this is assumed to be a rectangular channel defined the the ZV elevation.--></li>
+<li>ZH – corner of the cell. The ZH point plays no role in the computational hydraulics but is used for some output formats that require output at the cell corners.</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image56"></span>
+<img src="images/image56.png" alt="Location of Zpts and Computation Points"  />
+<p class="caption">
+Figure 1.2: Location of Zpts and Computation Points
+</p>
+</div>
+<!--EFC to PAR: does your comment about SGS from above remain here? SGS is mentioned in C point but not U/V-->
+<div id="ZCPoint-5" class="section level5 hasAnchor" number="1.1.3.1.1">
+<h5><span class="header-section-number">1.1.3.1.1</span> ZC Point<a href="Solvers-2.html#ZCPoint-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The cell centre or ZC point:</p>
+<ul>
+<li>Defines the location where water levels are computed based on mass balance equation. Simply put, the net volume of water entering (or leaving) the cell across the four cell sides (or faces) must equal the change in volume of the cell over a timestep.<br />
+</li>
+<li>The volume of a cell can either be simply based on the depth of water multiplied by the cell area or, if Sub-Grid Sampling (SGS) (Section <a href="HPC-specific-2.html#SGS-3">1.3.3</a>) has been applied, a curve of volume versus depth.<br />
+</li>
+<li>The ZC value is typically the elevation at the cell centre or, if using SGS, elevations are sampled across the cell, as outlined in Section <a href="HPC-specific-2.html#SGS-3">1.3.3</a>. The ZC value plus the <a href="#tcfCellWetDryDepth">Cell Wet/Dry Depth</a> is the water surface elevation that controls when a cell becomes wet or dry (note that cell sides can also wet and dry).<br />
+</li>
+<li>The ZC value also determines the bed slope when testing for the upstream controlled flow regime in TUFLOW Classic (see Section <a href="CLASpecific-2.html#CLA-US-Controlled-3">1.4.2</a>) and TUFLOW HPC (Section <a href="HPC-specific-2.html#HPC-US-Controlled-3">1.3.4</a>).</li>
+</ul>
+</div>
+<div id="ZUZVPoints-5" class="section level5 hasAnchor" number="1.1.3.1.2">
+<h5><span class="header-section-number">1.1.3.1.2</span> ZU and ZV Points<a href="Solvers-2.html#ZUZVPoints-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The cell sides or faces:</p>
+<ul>
+<li>Control how water is conveyed from one cell to another using the momentum equation, or when upstream controlled flow occurs, the relevant flow equation (eg. weir equation).</li>
+<li>Are deactivated if the whole of the cell has dried based on the ZC elevation as described above.<br />
+</li>
+<li>Can wet and dry when the whole cell is wet (see <a href="#tcfCellWetDryDepth">Cell Wet/Dry Depth</a>). This allows for the modelling of “thin” obstructions such as fences and thin embankments relative to the cell size (e.g. a concrete levee).</li>
+<li>Surface roughness information (e.g. Manning’s n) is inspected at the ZU and ZV points. See <a href="#tcfBedResistanceCellSides">Bed Resistance Cell Sides</a></li>
+</ul>
+</div>
+<div id="ZHPoint-5" class="section level5 hasAnchor" number="1.1.3.1.3">
+<h5><span class="header-section-number">1.1.3.1.3</span> ZH Point<a href="Solvers-2.html#ZHPoint-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The cell corners:</p>
+<ul>
+<li>Play no role in the computational hydraulic calculations.<br />
+</li>
+<li>Are used by the more common map output formats to map results due to mesh based outputs requiring elevations and results at the element (cell) vertices.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="turbulence-overview" class="section level3 hasAnchor" number="1.1.4">
+<h3><span class="header-section-number">1.1.4</span> Turbulence<a href="Solvers-2.html#turbulence-overview" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Turbulence within rivers plays a significant role in determining the mean flow velocity field and is integral to the overall energy loss mechanism. During a significant flood event, the majority of the flow is carried within, or near to, the river or open channel system (the primary flow path), and the water levels on the surrounding floodplains are principally determined by the energy losses along this flow path. Manning’s equation is accurate for straight or slowly varying channels but does not calculate energy losses due to sudden changes in flow direction or velocity, and it does not capture super-elevation at bends. To automatically and accurately capture these additional energy losses, a scheme must be physics based with a turbulence closure model. The turbulence closure model must be thoroughly bench-marked against appropriate test cases at a range of resolution scales. It is important that the turbulence closure model is cell size and timestep independent (i.e. the turbulence closure model parameters do not need to be adjusted if cell size or timestep changes). <span class="citation">Collecutt et al. (<a href="CLASpecific-2.html#ref-Collecutt2020">2020</a>)</span> provides benchmarking of the TUFLOW turbulence schemes.</p>
+<p>There are three approaches available to model losses associated with turbulence when using TUFLOW HPC, these are discussed in Section <a href="HPC-specific-2.html#HPC-Turbulence-3">1.3.2</a>. The default scheme for TUFLOW HPC is the Wu approach (Section <a href="HPC-specific-2.html#Wu-4">1.3.2.4</a>). There are two approaches available to model turbulence when using TUFLOW Classic, these are discussed in Section <a href="CLASpecific-2.html#CLA-Turbulence-3">1.4.1</a>. The default scheme for TUFLOW Classic is a hybrid approach that includes elements of both the Constant and Smagorinsky approaches (Section <a href="CLASpecific-2.html#CLA-Smagorinsky-4">1.4.1.2</a>).</p>
+<!-- EFC to PAR: does this belong here? should it go under solvers? Does the dry wall section in the HPC turbulence section belong here instead?-->
+<!-- PAR to EFC: move cell schemetisation and turbulence overview to solver section
+HPC and CLA use the same dry wall. move that section into here
+-->
+<!-- EFC has done-->
+<div id="Dry-Wall-4" class="section level4 hasAnchor" number="1.1.4.1">
+<h4><span class="header-section-number">1.1.4.1</span> Dry Wall Treatment<a href="Solvers-2.html#Dry-Wall-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>All of TUFLOW’s viscosity approaches feature an enhanced treatment of the viscosity term at dry boundaries. The enhanced boundary treatment corrects for unrealistic flow separation that would otherwise occur at the wet/dry interface. Figure <a href="Solvers-2.html#fig:fig-image61">1.3</a> presents an example of a benchmark model test with and without the enhanced boundary treatment. The top image is the result without the enhanced boundary treatment. Non-physical flow separation is observed along the oblique wet/dry boundary. The enhanced approach is shown in the bottom image. It does not suffer from the flow separation, and the velocity increases gradually from left to right as the water depth gradually shallows (the model has a horizontal bed). The correct water surface slope is produced when compared with theory.</p>
+<p>All of the viscosity approaches are cell-centred. This guarantees symmetry is achieved in hydraulic results when using a symmetrical model.</p>
+<p>The top image in Figure <a href="Solvers-2.html#fig:fig-image61">1.3</a> shows flow separation along a dry oblique boundary without enhanced treatment of viscosity term. The bottom image shows a correct velocity distribution using enhanced treatment of viscosity term at dry boundaries.</p>
+<img src="images/image60.png" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image61"></span>
+<img src="images/image61.png" alt=" Effect of Enhanced Dry Boundary Viscosity Term Treatment"  />
+<p class="caption">
+Figure 1.3:  Effect of Enhanced Dry Boundary Viscosity Term Treatment
+</p>
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="TwoD-Domains-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="Common-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": true,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": false,
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

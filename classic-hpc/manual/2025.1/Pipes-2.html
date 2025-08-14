@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.10 Pipe Networks | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </title>
+  <meta name="description" content="TUFLOW Classic/HPC User Manual 2025" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.10 Pipe Networks | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.10 Pipe Networks | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  
+  <meta name="twitter:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+<meta name="author" content="RELEASE CANDIDATE     This is an interim manual that accompanies the TUFLOW Classic/HPC 2025.2.0-rc.1 release candidate executable. The information contained within this interim version may vary from the subsequent final version." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="OperationalChannels-2.html"/>
+<link rel="next" href="Virtual-Pipes-2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.11.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/TUFLOW_2025.2_release-candidate.png"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this Manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#commands"><i class="fa fa-check"></i>Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#about-this-manual"><i class="fa fa-check"></i>About this Manual</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#glossary-and-notation"><i class="fa fa-check"></i>Glossary and Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html"><i class="fa fa-check"></i><b>1</b> 1D Network Domains - ESTRY</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Scheme-2.html"><a href="Scheme-2.html"><i class="fa fa-check"></i><b>1.1</b> Schematisation</a></li>
+<li class="chapter" data-level="1.2" data-path="SolutionScheme-2.html"><a href="SolutionScheme-2.html"><i class="fa fa-check"></i><b>1.2</b> Solution Scheme</a></li>
+<li class="chapter" data-level="1.3" data-path="OneD-nwk-2.html"><a href="OneD-nwk-2.html"><i class="fa fa-check"></i><b>1.3</b> 1d_nwk Attributes</a></li>
+<li class="chapter" data-level="1.4" data-path="Channel-Intro-2.html"><a href="Channel-Intro-2.html"><i class="fa fa-check"></i><b>1.4</b> Channels Overview</a></li>
+<li class="chapter" data-level="1.5" data-path="Open-Channel-2.html"><a href="Open-Channel-2.html"><i class="fa fa-check"></i><b>1.5</b> Open Channels</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="Open-Channel-2.html"><a href="Open-Channel-2.html#I-channels-3"><i class="fa fa-check"></i><b>1.5.1</b> Inertial Channels</a></li>
+<li class="chapter" data-level="1.5.2" data-path="Open-Channel-2.html"><a href="Open-Channel-2.html#NI-channels-3"><i class="fa fa-check"></i><b>1.5.2</b> Non-Inertial Channels</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="XS-2.html"><a href="XS-2.html"><i class="fa fa-check"></i><b>1.6</b> Cross-Sections</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="XS-2.html"><a href="XS-2.html#XS-flags-3"><i class="fa fa-check"></i><b>1.6.1</b> Type “XZ” Optional Flags</a>
+<ul>
+<li class="chapter" data-level="1.6.1.1" data-path="XS-2.html"><a href="XS-2.html#RR-4"><i class="fa fa-check"></i><b>1.6.1.1</b> Relative Resistance</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6.2" data-path="XS-2.html"><a href="XS-2.html#HW-flags-3"><i class="fa fa-check"></i><b>1.6.2</b> Type “HW” Optional Flags</a>
+<ul>
+<li class="chapter" data-level="1.6.2.1" data-path="XS-2.html"><a href="XS-2.html#HW-A-4"><i class="fa fa-check"></i><b>1.6.2.1</b> Flow Area (A)</a></li>
+<li class="chapter" data-level="1.6.2.2" data-path="XS-2.html"><a href="XS-2.html#HW-P-4"><i class="fa fa-check"></i><b>1.6.2.2</b> Wetted Perimeter (P)</a></li>
+<li class="chapter" data-level="1.6.2.3" data-path="XS-2.html"><a href="XS-2.html#HW-N-4"><i class="fa fa-check"></i><b>1.6.2.3</b> Manning’s n Values (N)</a></li>
+<li class="chapter" data-level="1.6.2.4" data-path="XS-2.html"><a href="XS-2.html#HW-F-4"><i class="fa fa-check"></i><b>1.6.2.4</b> Manning’s n Values (F)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6.3" data-path="XS-2.html"><a href="XS-2.html#Parallel-Channel-3"><i class="fa fa-check"></i><b>1.6.3</b> Parallel Channel Analysis</a></li>
+<li class="chapter" data-level="1.6.4" data-path="XS-2.html"><a href="XS-2.html#Eff-vs-Total-3"><i class="fa fa-check"></i><b>1.6.4</b> Effective Area versus Total Area</a></li>
+<li class="chapter" data-level="1.6.5" data-path="XS-2.html"><a href="XS-2.html#XS-Mid-3"><i class="fa fa-check"></i><b>1.6.5</b> Mid Cross-Sections</a></li>
+<li class="chapter" data-level="1.6.6" data-path="XS-2.html"><a href="XS-2.html#XS-End-3"><i class="fa fa-check"></i><b>1.6.6</b> End Cross-Sections</a></li>
+<li class="chapter" data-level="1.6.7" data-path="XS-2.html"><a href="XS-2.html#Interpolate-XS-3"><i class="fa fa-check"></i><b>1.6.7</b> Interpolated Cross-Section Protocols</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="Structures-2.html"><a href="Structures-2.html"><i class="fa fa-check"></i><b>1.7</b> Structures</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="Structures-2.html"><a href="Structures-2.html#culverts-pipes-3"><i class="fa fa-check"></i><b>1.7.1</b> Culverts and Pipes</a>
+<ul>
+<li class="chapter" data-level="1.7.1.1" data-path="Structures-2.html"><a href="Structures-2.html#Blockage-4"><i class="fa fa-check"></i><b>1.7.1.1</b> Blockage Matrix</a></li>
+<li class="chapter" data-level="1.7.1.2" data-path="Structures-2.html"><a href="Structures-2.html#blockage-limitations-4"><i class="fa fa-check"></i><b>1.7.1.2</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7.2" data-path="Structures-2.html"><a href="Structures-2.html#Bridges-3"><i class="fa fa-check"></i><b>1.7.2</b> Bridges</a>
+<ul>
+<li class="chapter" data-level="1.7.2.1" data-path="Structures-2.html"><a href="Structures-2.html#BridgeIntro-4"><i class="fa fa-check"></i><b>1.7.2.1</b> Bridges Overview</a></li>
+<li class="chapter" data-level="1.7.2.2" data-path="Structures-2.html"><a href="Structures-2.html#XSLoss-4"><i class="fa fa-check"></i><b>1.7.2.2</b> Bridge Cross-Section and Loss Tables</a></li>
+<li class="chapter" data-level="1.7.2.3" data-path="Structures-2.html"><a href="Structures-2.html#B-Bridge-4"><i class="fa fa-check"></i><b>1.7.2.3</b> B Bridge Losses Approach</a></li>
+<li class="chapter" data-level="1.7.2.4" data-path="Structures-2.html"><a href="Structures-2.html#BB-Bridge-4"><i class="fa fa-check"></i><b>1.7.2.4</b> BB Bridge Losses Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7.3" data-path="Structures-2.html"><a href="Structures-2.html#BArch-3"><i class="fa fa-check"></i><b>1.7.3</b> Arch Bridge</a>
+<ul>
+<li class="chapter" data-level="1.7.3.1" data-path="Structures-2.html"><a href="Structures-2.html#BArch-Editor-4"><i class="fa fa-check"></i><b>1.7.3.1</b> Arch Bridge Editor</a></li>
+<li class="chapter" data-level="1.7.3.2" data-path="Structures-2.html"><a href="Structures-2.html#BArch-Min-Blc-4"><i class="fa fa-check"></i><b>1.7.3.2</b> Arch Minimum Blockage</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7.4" data-path="Structures-2.html"><a href="Structures-2.html#Weir-3"><i class="fa fa-check"></i><b>1.7.4</b> Weirs</a>
+<ul>
+<li class="chapter" data-level="1.7.4.1" data-path="Structures-2.html"><a href="Structures-2.html#Weir-Intro-4"><i class="fa fa-check"></i><b>1.7.4.1</b> Weirs Overview</a></li>
+<li class="chapter" data-level="1.7.4.2" data-path="Structures-2.html"><a href="Structures-2.html#W-Weir-4"><i class="fa fa-check"></i><b>1.7.4.2</b> Original Weirs (W)</a></li>
+<li class="chapter" data-level="1.7.4.3" data-path="Structures-2.html"><a href="Structures-2.html#Adv-Weir-4"><i class="fa fa-check"></i><b>1.7.4.3</b> Advanced Weirs (WB, WC, WD, WO, WR, WT, WV, WW)</a></li>
+<li class="chapter" data-level="1.7.4.4" data-path="Structures-2.html"><a href="Structures-2.html#Submerge-4"><i class="fa fa-check"></i><b>1.7.4.4</b> Advanced Weir Submergence Curves</a></li>
+<li class="chapter" data-level="1.7.4.5" data-path="Structures-2.html"><a href="Structures-2.html#Auto-Weir-4"><i class="fa fa-check"></i><b>1.7.4.5</b> Automatically Created Weirs</a></li>
+<li class="chapter" data-level="1.7.4.6" data-path="Structures-2.html"><a href="Structures-2.html#VW-Channel-4"><i class="fa fa-check"></i><b>1.7.4.6</b> VW Channels (Variable Geometry Weir)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7.5" data-path="Structures-2.html"><a href="Structures-2.html#SP-3"><i class="fa fa-check"></i><b>1.7.5</b> Spillways (SP)</a></li>
+<li class="chapter" data-level="1.7.6" data-path="Structures-2.html"><a href="Structures-2.html#SG-3"><i class="fa fa-check"></i><b>1.7.6</b> Sluice Gates (SG)</a></li>
+<li class="chapter" data-level="1.7.7" data-path="Structures-2.html"><a href="Structures-2.html#LossAdjustment-3"><i class="fa fa-check"></i><b>1.7.7</b> Adjustment of Contraction and Expansion Losses</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html"><i class="fa fa-check"></i><b>1.8</b> Special Channels</a>
+<ul>
+<li class="chapter" data-level="1.8.1" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html#M-Channel-3"><i class="fa fa-check"></i><b>1.8.1</b> M Channels (User Defined Flow Matrix)</a></li>
+<li class="chapter" data-level="1.8.2" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html#Q-Channels-3"><i class="fa fa-check"></i><b>1.8.2</b> Q Channels (Upstream Depth-Discharge Relationship)</a></li>
+<li class="chapter" data-level="1.8.3" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html#XConnect-3"><i class="fa fa-check"></i><b>1.8.3</b> X Connectors</a></li>
+<li class="chapter" data-level="1.8.4" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html#Legacy-Channel-3"><i class="fa fa-check"></i><b>1.8.4</b> Legacy Channels</a></li>
+<li class="chapter" data-level="1.8.5" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html#OneD-nwk-3"><i class="fa fa-check"></i><b>1.8.5</b> 1d_nwk Attributes (M, P, Q, SG, SP Channels)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html"><i class="fa fa-check"></i><b>1.9</b> Operational Channels</a>
+<ul>
+<li class="chapter" data-level="1.9.1" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#TOC-Logic-3"><i class="fa fa-check"></i><b>1.9.1</b> .toc File Commands and Logic</a>
+<ul>
+<li class="chapter" data-level="1.9.1.1" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#TOC-Define-4"><i class="fa fa-check"></i><b>1.9.1.1</b> Define Control Command</a></li>
+<li class="chapter" data-level="1.9.1.2" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#UserDef-4"><i class="fa fa-check"></i><b>1.9.1.2</b> User Defined Variables</a></li>
+<li class="chapter" data-level="1.9.1.3" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#Logic-4"><i class="fa fa-check"></i><b>1.9.1.3</b> Logic Rules</a></li>
+<li class="chapter" data-level="1.9.1.4" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#Increment-Operate-4"><i class="fa fa-check"></i><b>1.9.1.4</b> Incremental Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9.2" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#Pumps-3"><i class="fa fa-check"></i><b>1.9.2</b> Pumps (P and PO)</a></li>
+<li class="chapter" data-level="1.9.3" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#QO-3"><i class="fa fa-check"></i><b>1.9.3</b> QO Channels</a></li>
+<li class="chapter" data-level="1.9.4" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#RO-3"><i class="fa fa-check"></i><b>1.9.4</b> Gated Drowned Rectangular Culverts (RO)</a></li>
+<li class="chapter" data-level="1.9.5" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#SG-SGO-3"><i class="fa fa-check"></i><b>1.9.5</b> Sluice Gates (SG and SGO)</a></li>
+<li class="chapter" data-level="1.9.6" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#SPO-3"><i class="fa fa-check"></i><b>1.9.6</b> Spillways with Gates (SPO)</a></li>
+<li class="chapter" data-level="1.9.7" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#Weirs-Operational-3"><i class="fa fa-check"></i><b>1.9.7</b> Weirs (WBO, WCO, WDO, WOO, WRO, WTO)</a></li>
+<li class="chapter" data-level="1.9.8" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#PFDF-3"><i class="fa fa-check"></i><b>1.9.8</b> Piping and Dam Failure</a>
+<ul>
+<li class="chapter" data-level="1.9.8.1" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#PF-4"><i class="fa fa-check"></i><b>1.9.8.1</b> Piping Failure (PF)</a></li>
+<li class="chapter" data-level="1.9.8.2" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#DF-4"><i class="fa fa-check"></i><b>1.9.8.2</b> Dam Failure (DF)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.10" data-path="Pipes-2.html"><a href="Pipes-2.html"><i class="fa fa-check"></i><b>1.10</b> Pipe Networks</a>
+<ul>
+<li class="chapter" data-level="1.10.1" data-path="Pipes-2.html"><a href="Pipes-2.html#Pipes-3"><i class="fa fa-check"></i><b>1.10.1</b> Pipes</a></li>
+<li class="chapter" data-level="1.10.2" data-path="Pipes-2.html"><a href="Pipes-2.html#Pits-3"><i class="fa fa-check"></i><b>1.10.2</b> Pits</a>
+<ul>
+<li class="chapter" data-level="1.10.2.1" data-path="Pipes-2.html"><a href="Pipes-2.html#OneD-pit-nwk-4"><i class="fa fa-check"></i><b>1.10.2.1</b> 1d_nwk Pits</a></li>
+<li class="chapter" data-level="1.10.2.2" data-path="Pipes-2.html"><a href="Pipes-2.html#OneD-pit-4"><i class="fa fa-check"></i><b>1.10.2.2</b> 1d_pit Pits</a></li>
+<li class="chapter" data-level="1.10.2.3" data-path="Pipes-2.html"><a href="Pipes-2.html#Conn-Pits-Nds-4"><i class="fa fa-check"></i><b>1.10.2.3</b> Connecting Pits and Nodes to 2D Domains</a></li>
+</ul></li>
+<li class="chapter" data-level="1.10.3" data-path="Pipes-2.html"><a href="Pipes-2.html#DD-Database-3"><i class="fa fa-check"></i><b>1.10.3</b> Pit Inlet and Depth/Stage vs Discharge Databases</a>
+<ul>
+<li class="chapter" data-level="1.10.3.1" data-path="Pipes-2.html"><a href="Pipes-2.html#Xfall-4"><i class="fa fa-check"></i><b>1.10.3.1</b> Road Crossfall Options</a></li>
+</ul></li>
+<li class="chapter" data-level="1.10.4" data-path="Pipes-2.html"><a href="Pipes-2.html#Manholes-3"><i class="fa fa-check"></i><b>1.10.4</b> Manholes</a>
+<ul>
+<li class="chapter" data-level="1.10.4.1" data-path="Pipes-2.html"><a href="Pipes-2.html#Auto-MH-4"><i class="fa fa-check"></i><b>1.10.4.1</b> Automatically Assigned Manholes</a></li>
+<li class="chapter" data-level="1.10.4.2" data-path="Pipes-2.html"><a href="Pipes-2.html#OneD-mh-4"><i class="fa fa-check"></i><b>1.10.4.2</b> Manually Assigned Manholes (1d_mh Layer)</a></li>
+<li class="chapter" data-level="1.10.4.3" data-path="Pipes-2.html"><a href="Pipes-2.html#mh-direction-4"><i class="fa fa-check"></i><b>1.10.4.3</b> Digitising Culverts Connected to Manholes</a></li>
+<li class="chapter" data-level="1.10.4.4" data-path="Pipes-2.html"><a href="Pipes-2.html#Engelund-4"><i class="fa fa-check"></i><b>1.10.4.4</b> Engelund Manhole Loss Approach</a></li>
+<li class="chapter" data-level="1.10.4.5" data-path="Pipes-2.html"><a href="Pipes-2.html#FixedLoss-4"><i class="fa fa-check"></i><b>1.10.4.5</b> Fixed Manhole Loss Approach</a></li>
+<li class="chapter" data-level="1.10.4.6" data-path="Pipes-2.html"><a href="Pipes-2.html#JunctionLoss-4"><i class="fa fa-check"></i><b>1.10.4.6</b> Discussion on Approaches to Modelling Pipe Junction Losses</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.11" data-path="Virtual-Pipes-2.html"><a href="Virtual-Pipes-2.html"><i class="fa fa-check"></i><b>1.11</b> Virtual Pipes</a></li>
+<li class="chapter" data-level="1.12" data-path="Nodes-2.html"><a href="Nodes-2.html"><i class="fa fa-check"></i><b>1.12</b> Nodes</a>
+<ul>
+<li class="chapter" data-level="1.12.1" data-path="Nodes-2.html"><a href="Nodes-2.html#Auto-Node-3"><i class="fa fa-check"></i><b>1.12.1</b> Automatically Defined Nodes</a>
+<ul>
+<li class="chapter" data-level="1.12.1.1" data-path="Nodes-2.html"><a href="Nodes-2.html#AutoStorageWidths-4"><i class="fa fa-check"></i><b>1.12.1.1</b> Storage Calculated Automatically from Channel Widths</a></li>
+<li class="chapter" data-level="1.12.1.2" data-path="Nodes-2.html"><a href="Nodes-2.html#AutoStorageANA-4"><i class="fa fa-check"></i><b>1.12.1.2</b> Additional Storage Added from Len_or_ANA Attribute</a></li>
+</ul></li>
+<li class="chapter" data-level="1.12.2" data-path="Nodes-2.html"><a href="Nodes-2.html#Manual-Node-3"><i class="fa fa-check"></i><b>1.12.2</b> Manually Defined Nodes</a>
+<ul>
+<li class="chapter" data-level="1.12.2.1" data-path="Nodes-2.html"><a href="Nodes-2.html#NA-Table-4"><i class="fa fa-check"></i><b>1.12.2.1</b> Storage Nodes (User Defined NA Tables)</a></li>
+<li class="chapter" data-level="1.12.2.2" data-path="Nodes-2.html"><a href="Nodes-2.html#channel-invert-4"><i class="fa fa-check"></i><b>1.12.2.2</b> Using Nodes to Define Channel Inverts</a></li>
+<li class="chapter" data-level="1.12.2.3" data-path="Nodes-2.html"><a href="Nodes-2.html#Nd-Auto-Conn-4"><i class="fa fa-check"></i><b>1.12.2.3</b> Automatically Connecting Nodes to 2D domains</a></li>
+</ul></li>
+<li class="chapter" data-level="1.12.3" data-path="Nodes-2.html"><a href="Nodes-2.html#Obvert-3"><i class="fa fa-check"></i><b>1.12.3</b> Storage Above Top of Channels</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/WQFooter.jpg" style="width:246px;height:10px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(226,1,119);">TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<p class="wmark before"></p>
+<div id="Pipes-2" class="section level2 hasAnchor" number="1.10">
+<h2><span class="header-section-number">1.10</span> Pipe Networks<a href="Pipes-2.html#Pipes-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Pipe networks can be modelled using two different approaches, or a combination of these approaches:</p>
+<ol style="list-style-type: decimal">
+<li>Detailed modelling by defining the physical features of the pipe network using 1d_nwk channels to represent pipes, 1d_pit or 1d_nwk nodes to represent pits, and 1d_mh nodes to represent manholes, as discussed within this Section.<br />
+</li>
+<li>An approximate approach termed Virtual Pipes is also available if the pipe details are unknown though inlet and outlet information is available. A Virtual Pipe network can be modelled using 1d_pit or 1d_nwk nodes to represent inlets and outlets between which flow is instantaneously transferred or exits the model (i.e. no physical routing is calculated). Virtual pipes are discussed in Section <a href="Virtual-Pipes-2.html#Virtual-Pipes-2">1.11</a>.</li>
+</ol>
+<p>Complete 1D pipe networks and Virtual pipe pits can coexist in the same model. From the 2020-10 release and onwards, in TUFLOW HPC, virtual pipe outputs can connect to, and discharge into, the upstream or downstream end of a channel.</p>
+<p>TUFLOW 1D produces a true HGL, with all losses accounted for. Different methods are available to quantify the losses at junctions and manholes, with the default setting being the Englehund approach, which automatically adjusts losses every timestep according to the expansion/contraction of flow, and changes in pipe direction, slope, inverts, etc.</p>
+<p>Note that care should be taken in interpreting the HGL profile as the water level output currently only supports one level, which is the level in the manhole chamber (ie. after expansion losses into the chamber have been accounted for, or after a free-overfalling pipe outlet discharges into the manhole). Especially where upstream controlled flow regimes occur (eg. free outflow), the profile may appear to intersect the pipe invert profile.</p>
+<div id="Pipes-3" class="section level3 hasAnchor" number="1.10.1">
+<h3><span class="header-section-number">1.10.1</span> Pipes<a href="Pipes-2.html#Pipes-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Culverts within a pipe network are created by digitising lines within one or more 1d_nwk GIS layers and assigning a type C, R or I (refer to Section <a href="Structures-2.html#culverts-pipes-3">1.7.1</a>). The culverts are considered linked when the channel ends are snapped to one another or they are connected by a connector (“X” channel). Connectivity between the underground pipe with the surface above is defined using pits (see Section <a href="Pipes-2.html#Pits-3">1.10.2</a>). Pipe junctions are referred to as manholes in TUFLOW terminology and can occur with or without pits (see Section <a href="Pipes-2.html#Manholes-3">1.10.4</a>). TUFLOW includes a range of energy dissipation options at junctions. These are also discussed in Section <a href="Pipes-2.html#Manholes-3">1.10.4</a>.</p>
+</div>
+<div id="Pits-3" class="section level3 hasAnchor" number="1.10.2">
+<h3><span class="header-section-number">1.10.2</span> Pits<a href="Pipes-2.html#Pits-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pits are used for two purposes.</p>
+<ol style="list-style-type: decimal">
+<li>In pipe network models (Section <a href="Pipes-2.html#Pipes-3">1.10.1</a>), pits transfer water between the 2D domain on the surface and a 1D pipe network
+underground.<br />
+</li>
+<li>In virtual pipe networks (Section <a href="Virtual-Pipes-2.html#Virtual-Pipes-2">1.11</a>), pits define inlet and outlet locations.</li>
+</ol>
+<p>Pits are defined by digitising points within one or more 1d_pit or 1d_nwk layers. Of these two alternatives the 1d_pit layer is the most efficient option. It excludes superfluous attributes included in the 1d_nwk format that are required for other uses (such as 1D pipe or open channel details). Both options are described in the following sections.</p>
+<p>The following notes apply to pits:</p>
+<ul>
+<li>For pits connected to a channel start or end (usually a pipe), either by snapping or via an “X” channel, or are within the <a href="#ecfPitSearchDistance">Pit Search Distance</a>, the pit calculations are carried out by ESTRY and it is assumed a pipe network is being modelled.
+<ul>
+<li>Under this scenario TUFLOW/ESTRY will automatically create a short channel called a “pit channel” to connect the 2D domain (surface) to the underground 1D pipe network. The pit channel is computationally “zero length” and does not contribute to any storage in the system (noting that the Len_or_ANA attribute is used to specify the surface area or storage of the pit chamber).<br />
+</li>
+<li>The pit inlet capacities curves are specified in a <a href="#ecfPitInletDatabase">Pit Inlet Database</a> (see Section <a href="Pipes-2.html#DD-Database-3">1.10.3</a>) for “Q” type pits in Table <a href="Pipes-2.html#tab:tab-PitsModelNetwork">1.25</a>.<br />
+</li>
+</ul></li>
+<li>Unconnected pits, (i.e. pits not snapped/connected to a channel end or within the <a href="#ecfPitSearchDistance">Pit Search Distance</a> of a channel end), or VPI and VPO pits, are used for virtual pipe modelling and the following logic applies:
+<ul>
+<li>The virtual pipe pit inlet capacity curves are specified in a <a href="#ecfPitInletDatabase">Pit Inlet Database</a> (see Section <a href="Pipes-2.html#DD-Database-3">1.10.3</a>) for a “VPI” or “Q” type pit in Table <a href="Pipes-2.html#tab:tab-PitsAttributeDescriptions">1.26</a>.<br />
+</li>
+<li>VPI and VPO type pits are always treated as disconnected (i.e. virtual pipe inlets or outlets), even if snapped or within a <a href="#ecfPitSearchDistance">Pit Search Distance</a>.
+<ul>
+<li>For Classic, all unconnected pits and VPI pits are treated as being connected to a virtual pipe. The pit’s discharge is extracted from the model on the assumption there are no backwater or surcharging effects at that pit. For example, free flow into the ocean. Note: VPO pits are not supported in Classic and will show zero flow.<br />
+</li>
+<li>For HPC, all VPI and VPO discharges are calculated by the HPC solver as per the virtual pipe feature. For all other unconnected pits, their discharges are calculated by the TUFLOW 1D solver (ESTRY) in the same manner as for Classic above.<br />
+</li>
+</ul></li>
+</ul></li>
+<li>A <a href="https://wiki.tuflow.com/TUFLOW_Message_1626">CHECK 1626</a> message is issued for unconnected pits (excluding VPI and VPO pits), alerting the modeller to the possibility of a pit possibly
+being inadvertently not snapped or within the <a href="#ecfPitSearchDistance">Pit Search Distance</a>. If all the pits should be connected (excluding VPI and VPO pits), the user can specify the .ecf command <a href="#tcfPitNo1DConnection">Pit No 1D Connection</a> to force an <a href="https://wiki.tuflow.com/TUFLOW_Message_1626">ERROR 1626</a> in the case of a pit not being connected by snapping or within the
+<a href="#ecfPitSearchDistance">Pit Search Distance</a>.<br />
+</li>
+<li>If a pit cannot be connected to an overland 2D domain (because, for example, it does not fall on an active cell), a WARNING is issued and the pit channel will remain unconnected.</li>
+<li>In the various 1D output and the 1d_nwk check files, the pit channels that are snapped to a channel end are displayed as a small channel orientated in the north-south axis, not a node (point). The display length of the channel is, by default, set to 10 m, however, this can be changed using <a href="#ecfPitChannelOffset">Pit Channel Offset</a>. For pits connected using <a href="#ecfPitSearchDistance">Pit Search Distance</a>, the pit is displayed as extending from its connected node.<br />
+</li>
+<li>Flow through unconnected pits will appear in the mass balance reporting as follows:
+<ul>
+<li>Within the _MB2D.csv or _HPC.csv “As SX V In” and “Es SX V Out” SX in and out flow columns.<br />
+</li>
+<li>For unconnected pits calculated by ESTRY the discharge exiting the model is included in the _MB1d.csv or _MB.csv “H Vol Out” column.<br />
+</li>
+<li>For HPC VPI and VPO pits the volumes exiting or entering the model are included in the SX Volumes.<br />
+</li>
+</ul></li>
+<li>The downstream node of an unconnected pit channel will have a boundary type “V” in the .eof file as shown below.<br />
+
+<center>
+<img src="images/image51.jpeg" style="width:4.71875in;height:1.29167in"
+alt="image003" />
+</center></li>
+<li>For an unconnected pit, which must have an ID, the upstream and downstream nodes are assigned .1 and .2 extensions respectively.<br />
+</li>
+<li>If a connected pit’s node ID is left blank the pit channel ID is given a “.P” extension based on the pit node’s automatically assigned ID (see Section <a href="Nodes-2.html#Nodes-2">1.12</a>). The upstream (ground) node ID of the pit channel is given the pit channel’s ID with a “.0” extension.<br />
+</li>
+<li><a href="#ecfMinimumNAPit">Minimum NA Pit</a> sets the minimum NA (Nodal Area) of the upstream (ground) nodes for all pit channels. This command was introduced to differentiate upstream pit channel nodes from the <a href="#ecfMinimumNA">Minimum NA</a> setting.</li>
+</ul>
+<div id="OneD-pit-nwk-4" class="section level4 hasAnchor" number="1.10.2.1">
+<h4><span class="header-section-number">1.10.2.1</span> 1d_nwk Pits<a href="Pipes-2.html#OneD-pit-nwk-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Pits are created by digitising points within one or more 1d_nwk GIS layers and setting the “Type” attribute to C, Q, R or W (refer to Table <a href="Nodes-2.html#tab:tab-PointObjectTypes">1.30</a>). Table <a href="Pipes-2.html#tab:tab-PitsModelNetwork">1.25</a> describes the 1d_nwk attributes required for pits defined in the 1d_nwk format.</p>
+<table>
+<caption>
+<span id="tab:tab-PitsModelNetwork">Table 1.25: </span><strong>Pits: 1D Model Network (1d_nwk) Attribute Descriptions</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+No. 
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Default GIS Attribute Name
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+ID
+</td>
+<td style="text-align:left;">
+<p>Unique identifier up to 12 characters in length. For pits connected to a 1d_nwk channel, either by being snapped or connected using <a href="#ecfPitSearchDistance">Pit Search Distance</a>, if ID is blank the pit channel’s ID is automatically assigned based on one of the connecting channel IDs. For pits not connected to a channel, ID cannot be blank and must be unique.</p>
+ID may contain any character except for quotes and commas. As a general rule, spaces and special characters (e.g. “\”) should be avoided, although they are accepted. The same ID can be used for a channel and a node, but no two nodes and no two channels can have the same ID.
+</td>
+<td style="text-align:left;">
+Char(12)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+Type
+</td>
+<td style="text-align:left;">
+Used to specify a Pit Channel as one of C, Q, R or W as per Table <a href="Nodes-2.html#tab:tab-PointObjectTypes">1.30</a>.
+</td>
+<td style="text-align:left;">
+Char(4)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Ignore
+</td>
+<td style="text-align:left;">
+If a “T”, “t”, “Y” or “y” is specified, the object will be ignored (T for True and Y for Yes). Any other entry, including a blank field, will treat the object as active.
+</td>
+<td style="text-align:left;">
+Char(1)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+UCS<br />
+(Use Channel Storage at nodes).
+</td>
+<td style="text-align:left;">
+Not used.
+</td>
+<td style="text-align:left;">
+Char(1)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+Len_or_ANA
+</td>
+<td style="text-align:left;">
+<p>Adds the value specified as additional nodal area (surface area in m2). If no nodal area data exists for the node, either via the UCS attribute from the connected 1d_nwk channels, or via a NA table, TUFLOW automatically creates an NA table of constant surface area.</p>
+If a negative value is specified, this value is used as a multiplier of the node storage. For example, a value of -1.5 increases the nodal storage table (NA table) by 50% (or to reduce storage use a value between -1 and 0). Increasing storage can be useful to stabilise problematic 1D nodes, provided that the added storage does not adversely distort the results. This multiplication is applied after any effect of <a href="#ecfMinimumChannelStorageLength">Minimum Channel Storage Length</a>. <a href="#ecfMinimumNA">Minimum NA</a> is applied after the multiplication.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+n_nF_Cd
+</td>
+<td style="text-align:left;">
+Not used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+US_Invert
+</td>
+<td style="text-align:left;">
+<p>Used to specify the ground elevation of the pit. This is used to set the upstream and downstream elevation of the pit channel. If set to -99999, the ground elevation is set to the ZC elevation of the 2D cell that the pit falls within, or the lowest elevation sampled if using SGS (provided there is a 2D SX connection – see Conn_1D_2D attribute below).</p>
+If Conn_1D_2D is set to “SXL”, US_Invert is used as the amount by which to lower the 2D cell and the pit channel invert is set to this level.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+DS_Invert
+</td>
+<td style="text-align:left;">
+The bottom elevation of the pit. Can also be used to set the upstream and downstream inverts of connected channels – see discussion for US_Invert for channels above. If set to -99999, not used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+Form_Loss
+</td>
+<td style="text-align:left;">
+The Form_Loss value is applied as an energy loss to all outgoing culverts (i.e. culverts that are digitised as leaving the pit/node), so the Form_Loss value should be based on the outgoing pipe velocity (e.g. the K values). Note, it may be necessary to zero or reduce the Entry_Loss and/or Exit_Loss attributes of culverts connected to the pit/node so that duplication of losses does not occur. This loss coefficient is not adjusted according to the approach and departure velocities as documented in Section <a href="Structures-2.html#LossAdjustment-3">1.7.7</a>.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+pBlockage
+</td>
+<td style="text-align:left;">
+The percentage blockage (%) of the pits. Reduces the flow capacity through the pit by the specified amount.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+Inlet_Type
+</td>
+<td style="text-align:left;">
+For Q pit channels, the name of a pit inlet type in the <a href="#ecfPitInletDatabase">Pit Inlet Database</a> (see Section <a href="Pipes-2.html#DD-Database-3">1.10.3</a>). Otherwise not used.
+</td>
+<td style="text-align:left;">
+Char(256)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:left;">
+Conn_1D_2D
+</td>
+<td style="text-align:left;">
+<p>Used to specify a “SX” flag that automatically creates a 2D SX cell and 1D/2D connection where the 1D pit occurs. This negates the need to create SX objects in a 2d_bc layer.</p>
+<p>The following options/changes are available:</p>
+<ul>
+<li>“SX” can also be used to automatically connect 1D nodes as well as pits to the 2D domain.<br />
+</li>
+<li>“SXL” can be specified to connect the 1D pit to the 2D domain and lower the 2D cell by the amount of the US_Invert attribute. The invert of the pit channel is set to the lowered 2D cell level. This is useful to help trap the water into the pit as it flows overland in the 2D domain. This feature works well in combination with the <a href="#tbcReadGISSA">Read GIS SA PITS</a> option. If using the SGS functionality (Section <a href="#SGS-3"><strong>??</strong></a>), the “L” flag lowers the minumum cell elevation by the amount of the US_Invert attribute, but retains the original cell volume versus depth curve. The lowered cell can be made flat as per the traditional sampling (non-SGS) approach, using the <a href="#tcfSGSSXZFlagApproach">SGS SX Z Flag Approach</a> command. However, if the underlying DEM has good representation of the pit inlet elevation, it is not recommended to use the “L” flag.</li>
+<li>By default, if more than one 2D cell is automatically connected, pits are assumed to be connected using the Grade (G) approach and nodes the Sag (S) approach (see Section <a href="Pipes-2.html#Conn-Pits-Nds-4">1.10.2.3</a>). To override these default approaches, specify either “SXG” or “SXS”.</li>
+</ul>
+<a href="#ecfPitDefault2DConnection">Pit Default 2D Connection</a> can be used to set a global default value for Conn_1D_2D, and up to four characters is now accepted. “NO” can also be used to not connect the node or pit to a 2D domain.
+</td>
+<td style="text-align:left;">
+Char(4)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+Conn_No
+</td>
+<td style="text-align:left;">
+<p>If “SX” is specified for Conn_1D_2D, can be used to control the number of 2D cells connected. See Section <a href="Pipes-2.html#Conn-Pits-Nds-4">1.10.2.3</a> for a discussion on how the 2D cells are selected.</p>
+<ul>
+<li><p>A positive value increases the number of automatically selected 2D cells by the value of Conn_No.<br />
+</p></li>
+<li><p>If negative, this ignores the automatic approach and fixes the number of 2D cells connected to the absolute value of Conn_No. For example, a value of -1 would only connect the pit or node to one (1) 2D cell irrespective of the connection width.</p>
+</td>
+<td style="text-align:left;">
+<p>Integer</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+<p>14</p>
+</td>
+<td style="text-align:left;">
+<p>Width_or_Dia</p>
+</td>
+<td style="text-align:left;">
+<p><b>C, R, W Pit Type:</b><br />
+For C pits, sets the diameter of the pit inlet cross-section in the vertical plane. For R and W pits, sets the width of the pit inlet section in the vertical plane.</p>
+<p><b>Q Pit Type:</b><br />
+Used as a multiplier of the flow derived from the depth-discharge curve. For example, if Width_or_Dia equals 2, the flow is doubled. If set to zero (0), a value of 1.0 is used (i.e. the discharge curve remains unchanged).</p>
+</td>
+<td style="text-align:left;">
+<p>Float</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+<p>15</p>
+</td>
+<td style="text-align:left;">
+<p>Height_or_WF</p>
+</td>
+<td style="text-align:left;">
+<p>Sets the height of an R pit inlet channel. Not used for other pit types.</p>
+</td>
+<td style="text-align:left;">
+<p>Float</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+<p>16</p>
+</td>
+<td style="text-align:left;">
+<p>Number_of</p>
+</td>
+<td style="text-align:left;">
+<p><b>C, R, W Pit Type:</b><br />
+Sets the number of pits (of same dimension) within the one pit channel.</p></li>
+</ul>
+<b>Q Pit Type:</b><br />
+Used as a multiplier of the flow derived from the depth-discharge curve. For example, if Number_of equals 3, this assumes there are three pits lumped together and the flow is tripled. If set to zero (0) a value of 1 is used (i.e. a single inlet pit is assumed). Multiplies the flow only, additional storage defined by the Len_or_ANA attribute is not multiplied. Where a pit is connected to a manhole, increasing the Number_of attribute will not increase the number of manholes, or its dimensions; the pits remain connected to only one manhole.
+</td>
+<td style="text-align:left;">
+Integer
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:left;">
+HConF_or_WC
+</td>
+<td style="text-align:left;">
+<b>R Pit Type:</b> Sets the height contraction coefficient, otherwise not used for other pit types. Usually 0.6 for square edged entrances to 0.8 for rounded edges. If value exceeds 1.0 or is less than or equal to zero, it is set to 0.6.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:left;">
+WConF_or_WEx
+</td>
+<td style="text-align:left;">
+<b>C, R Pit Type:</b> Sets the width contraction coefficient, otherwise not used for other pit types. Usually 0.9 for sharp edges to 1.0 for rounded edges for R culverts. Normally set to 1.0 for C pits. If value exceeds 1.0 or is less than or equal to zero, it is set to 1.0 for C and 0.9 for R pits.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+EntryC_or_WSa
+</td>
+<td style="text-align:left;">
+<b>C, R Pit Type:</b> Sets the entry loss coefficient, otherwise not used for other pit types.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:left;">
+ExitC_or_WSb
+</td>
+<td style="text-align:left;">
+<b>C, R Pit Type:</b> Sets the exit loss coefficient, otherwise not used for other pit types.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="OneD-pit-4" class="section level4 hasAnchor" number="1.10.2.2">
+<h4><span class="header-section-number">1.10.2.2</span> 1d_pit Pits<a href="Pipes-2.html#OneD-pit-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The 1d_pit layer can be used for all types of pits in Classic and HPC, whether connected to a 1d_nwk or a virtual pipe system. Table <a href="Pipes-2.html#tab:tab-PitsAttributeDescriptions">1.26</a> presents the attributes associated with 1d_pit GIS layer. The 1d_pits attribute table excludes superfluous attributes included in the 1d_nwk format that are required for other uses (e.g. pipes and open channels).</p>
+<p>Models using 1d_pit pits are provided in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#1D_Pipe_Network_.2F_2D_Floodplain_Modelling">1D Pipe Network / 2D Floodplain Modelling Example Model Dataset</a> on the TUFLOW Wiki.</p>
+<table>
+<caption>
+<span id="tab:tab-PitsAttributeDescriptions">Table 1.26: </span><strong>Pits: 1D Model Network (1d_pit) Attribute Descriptions</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+No. 
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Default GIS Attribute Name
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+ID
+</td>
+<td style="text-align:left;">
+<p>Unique identifier up to 12 characters in length. For pits that connect to a 1d_nwk channel, either by being snapped or connected using <a href="#ecfPitSearchDistance">Pit Search Distance</a>, if ID is blank the pit channel’s ID is automatically assigned based on one of the connecting channel IDs.</p>
+<p>Note VPI and VPO pits are never connected to a 1d_nwk channel, and they always require unique IDs. For any pit not connected to a channel, ID cannot be blank and must be a unique (channel) ID.</p>
+ID may contain any character except for quotes and commas. Generally, spaces and special characters (e.g. “\”) should be avoided, although they are accepted. The same ID can be used for a pit (which is converted to a channel) and a node, but no two nodes and no two channels can have the same ID.
+</td>
+<td style="text-align:left;">
+Char (12)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+Type
+</td>
+<td style="text-align:left;">
+<p>“VPI” or “I” (Virtual Pipe Inlet):<br />
+VPI pits are Q pits treated as being disconnected from all 1d_nwk channels (even if they are snapped to a channel). For the HPC solver VPIs can optionally be associated with a VPO (Virtual Pipe Outlet) to discharge flow back into the 2D domain. For the Classic 2D solver as of Build 2018-03-AA, all VPI pit discharges are irretrievably extracted from the 2D domain. Prior to Build 2018-03-AA a VPI pit could only be denoted as “I” and would not extract or surcharge virtual pipe flow unless there was an outlet (“O”) pit with the same VP_Network_ID. As of Build 2018-03-AA if there is no VPO pit with the same VP_Network_ID the VPI pit discharge is extracted from the 2D domain. “VPI” is the preferred notation.</p>
+<p>“VPO” or “O” (Virtual Pipe Outlet):<br />
+HPC 2D solver only (not used by the Classic 2D solver). VPOs are treated as being disconnected from all 1d_nwk channels (even if they are snapped to a channel). They act as a discharge of the total or proportion of VPI inflows on the same VP_Network_ID back into the 2D domain. Prior to Build 2018-03-AA a VPO pit could only be denoted as “O”, however, “VPO” is now the preferred notation. More than one VPO pit can exist for the same VP_Network_ID.</p>
+“C”, “Q”, “R” and “W”:<br />
+As of Build 2018-03-AA, the standard C, Q, R and W pits can be specified via a 1d_pit layer, and can be connected, or disconnected, to a 1d_nwk. If a C, Q, R or W pit is not connected to a 1d_nwk channel, either by snapping or using <a href="#ecfPitSearchDistance">Pit Search Distance</a>, the discharge through the pit is permanently extracted from the 2D domain. Alternatively, unconnected C, Q, R or W pits can be treated as an ERROR. For C, R and W pits, the default width, contraction and weir coefficients are used – to vary from these use a 1d_nwk layer for the pits.
+</td>
+<td style="text-align:left;">
+Char (4)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+VP_Network_ID
+</td>
+<td style="text-align:left;">
+VP_Network ID (as an integer) used to determine which outlet(s) the flow into the inlet pits discharges from (if any). Separate or independent networks should have a different network ID. VP_Network_ID should be a positive integer as some negative integer numbers are reserved for special purposes.
+</td>
+<td style="text-align:left;">
+(Positive)<br />
+Integer
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Inlet_Type
+</td>
+<td style="text-align:left;">
+For a VPI or Q pit, the name of a pit inlet type in the <a href="#ecfPitInletDatabase">Pit Inlet Database</a> (see Section <a href="Pipes-2.html#Pits-3">1.10.2</a>). Not used for other pits.
+</td>
+<td style="text-align:left;">
+Char (32)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+VP_Sur_Index
+</td>
+<td style="text-align:left;">
+<p>Only used for VPI pits if using the HPC solver (not used by the Classic solver). If the total flow into the VPIs on the same VP_Network_ID exceeds the maximum outflow capacity of the VPOs of that VP_Network_ID (see Qmax below), one or more of the VPI flow rates must be modified. The surcharge index is used to determine how VPI flows are adjusted. The VPIs with the lowest surcharge index are given priority.</p>
+<p>When the total inflow of all VPIs exceeds the total capacity of all VPOs for a VP_Network_ID, the VPI inflow with the lowest surcharge index is reduced. If this VPI’s inflow is reduced to zero, this VPI is permitted to become an outlet (i.e. surcharge) with the flow rate up to but not exceeding its maximum outflow (see QMax below). If the total inflow of all remaining VPIs exceeds the maximum outflow plus the maximum outflow of this VPI, then the VPI with the next highest surcharge index is adjusted using the same methodology. To prevent a VPI from surcharging, set QMax to zero.</p>
+<p>For example, the ground level at the VPI could be used for the surcharge index, in which case the lowest VPIs surcharge first. However, if you have reliable data for the order in which they tend to surcharge this could be used. The virtual pipe network is flow conserving, but not necessarily energy conserving. The highest VPI could be incorrectly specified with the lowest surcharge index in which case water would be flowing uphill!</p>
+<p>VPI for the Classic solver: Not used.</p>
+VPO, C, Q and W: Not used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+VP_QMax
+</td>
+<td style="text-align:left;">
+<p>VPI and VPO if using the HPC solver:<br />
+For VPOs the maximum flow that can discharge back into the 2D domain. For VPIs the maximum surcharge capacity or flow back on to the 2D domain. To prevent a VPI from surcharging enter a QMax of 0.0 (zero).</p>
+<p>If the total flow capacity (sum of QMax values for VPOs on the same VP_Network_ID) of the VPOs is reached, the inflow to VPIs is restricted and/or surcharged at the VPIs using VP_Sur_Index value above.</p>
+<p>R pits: Sets the height of the pit section in the vertical plane.</p>
+<p>VPI and VPO for the Classic solver: Not used.</p>
+C, Q and W: Not used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+Width
+</td>
+<td style="text-align:left;">
+<p>For C pits the diameter of the pit inlet cross-section in the vertical plane. For R and W pits, the width of the pit inlet section in the vertical plane.</p>
+<p>For Q and VPI pits the multiplier of width in Pit Inlet Database.</p>
+For all pits the width is also used to determine the number of 2D cells to connect.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+Conn_2D
+</td>
+<td style="text-align:left;">
+<p>Used to control the connection type. For pits this field must be blank or set to “SX”. If set to blank, is treated as a SX connection.</p>
+Other options may be provided in the future.
+</td>
+<td style="text-align:left;">
+Char (8)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+Conn_No
+</td>
+<td style="text-align:left;">
+<p>Overwrite the automatically determined number of connected 2D cells (see Width attribute above).</p>
+<ul>
+<li>A positive value increases the number of automatically selected 2D cells by the value of Conn_No.<br />
+</li>
+<li>If negative, this ignores the automatic approach and fixes the number of 2D cells connected to the absolute value of Conn_No. For example, a value of -1 would only connect the pit or node to one (1) 2D cell irrespective of the width.
+</td>
+<td style="text-align:left;">
+Integer
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+pBlockage
+</td>
+<td style="text-align:left;">
+The percentage blockage (%) of the pits. Reduces the flow capacity through the pit by the specified amount. For VPI and VPO pits this feature was introduced for Build 2016-03-AB, and for C, Q, R and W pits it was introduced for Build 2018-03-AA. Prior to these builds the pBlockage attribute was reserved and not used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+Number_of
+</td>
+<td style="text-align:left;">
+Number of (same type of) pits represented by the pit channel. This optional attribute was introduced for Build 2018-03-AA.</li>
+</ul>
+This value will also affect the width value used to determine how many 2D cells to connect to. For example, a value of 2 will double the connection width.
+</td>
+<td style="text-align:left;">
+Integer
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:left;">
+Lag_Approach
+</td>
+<td style="text-align:left;">
+<p>Sets the lag approach, as described in Section <a href="Virtual-Pipes-2.html#Virtual-Pipes-2">1.11</a>:</p>
+<ul>
+<li>“None” or Blank - no lag is applied.</li>
+<li>“Shift” - Shift method applied.</li>
+<li>“Decay” - Decay method applied.</li>
+</ul>
+This optional attribute was introduced for Build 2023-03-AB.
+</td>
+<td style="text-align:left;">
+Char (8)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+Lag_Value
+</td>
+<td style="text-align:left;">
+Lag value in hours. This optional attribute was introduced for Build 2023-03-AB.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="Conn-Pits-Nds-4" class="section level4 hasAnchor" number="1.10.2.3">
+<h4><span class="header-section-number">1.10.2.3</span> Connecting Pits and Nodes to 2D Domains<a href="Pipes-2.html#Conn-Pits-Nds-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Both pits and nodes can be automatically connected to 2D domains using the 1d_nwk Conn_1D_2D attribute (see Table <a href="Pipes-2.html#tab:tab-PitsAttributeDescriptions">1.26</a> and Table <a href="Pipes-2.html#tab:tab-PitsModelNetwork">1.25</a>). If Conn_1D_2D is set to “SX”, TUFLOW automatically connects the upstream end of the pit channel or node to the 2D domain. The 2D cell must be active (Code = 1). If no active 2D cells are found a <a href="https://wiki.tuflow.com/TUFLOW_Message_2122">WARNING 2122</a> or <a href="https://wiki.tuflow.com/TUFLOW_Message_2123">2123</a> is issued. For Classic M2D models <a href="https://wiki.tuflow.com/TUFLOW_Message_2037">WARNING 2037</a> is given if there is overlapping 2D domains and more than one 2D cell is active.</p>
+<p>The command <a href="#ecfPitDefault2DConnection">Pit Default 2D Connection</a> can be used to set the global default value for the 1d_nwk Conn_1D_2D attribute.</p>
+<p>By default TUFLOW will connect the 1D pit channel or node to one or more 2D cells at pit connections. The number of 2D cells selected is a function of the flow (connection) width of the pit inlet (including the effects of the Number_of and Width_or_Dia 1d_nwk attributes), or the total flow width of the channels connected to the node. The total width of the 2D cells selected is always more than the pit inlet width or width of channels. For example, a width of 3.6m on a 2m grid selects two cells. The advantage of selecting more than one 2D cell is to provide enhanced stability at the 1D/2D connection when the 1D flow width exceeds the 2D cell size. The number of 2D connection cells is limited to 10 per pit inlet.</p>
+<p>The 1d_nwk Conn_No attribute can be used to change the number of 2D cells connected as follows.</p>
+<ul>
+<li>A positive value adds that number of 2D cells to the automatic number. In the example above, if Conn_No is set to 1, three (2 + 1) 2D cells are connected. The upper limit is 10 connected cells.<br />
+</li>
+<li>If Conn_No is negative, this ignores the automatic approach and fixes the number of 2D cells connected to the absolute value of Conn_No. For example, a value of -1 would only connect the pit or node to one (1) 2D cell irrespective of the connection width.</li>
+</ul>
+<p>If more than one 2D cell is being connected, there are two approaches available for how the 2D cells are selected.</p>
+<ul>
+<li>For pits, the default is the G (on Grade) option that selects the 2nd, 3rd, etc… cells by traversing to the next highest 2D cell that neighbours the 2D cell(s) already selected (this includes diagonal cells, i.e. all 8 cells around a cell are considered). These cells are also automatically lowered to the same height as the first cell so that their ZC value is at or below the pit inlet.</li>
+<li>For nodes, the default is the S (Sag) option that selects the 2nd, 3rd, etc… cells by traversing to the next lowest 2D cell. The ZC values of these cells are not changed as they are already at or below the node invert.<br />
+</li>
+<li>The above approaches can be changed using the G (Grade) and S (Sag) flags for the 1d_nwk Conn_1D_2D attribute. The G approach is that adopted by default for pits and S for nodes. To override the default approach, specify G or S as appropriate. For example, if the S approach is preferred for a pit that is draining a depression, specify an S flag for the Conn_1D_2D attribute (i.e. “SXS”). Note SX must come first before an optional flag is specified.<br />
+</li>
+<li>Note: If <a href="#tcfDefaults">Defaults</a> <teq>==</teq><tblk> PRE 2008-08</tblk> is specified, the original approach of only selecting one 2D cell is used, irrespective of the Conn_1D_2D and Conn_No values.</li>
+<li>If using SGS, the on Grade and Sag approaches are applied based on the minimum SGS elevations of the cells.</li>
+</ul>
+<p>Note that the conventional approach of using 2d_bc SX points or lines can still be used to connect 1D channel ends. This gives the user complete control over which 2D cells are selected and is often preferred in situations where large 1D structures are being connected to 2D cells.</p>
+</div>
+</div>
+<div id="DD-Database-3" class="section level3 hasAnchor" number="1.10.3">
+<h3><span class="header-section-number">1.10.3</span> Pit Inlet and Depth/Stage vs Discharge Databases<a href="Pipes-2.html#DD-Database-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pit channels can be specified as a Q Type, where flow through the pit is controlled by a depth-discharge curve defined within the <a href="#ecfPitInletDatabase">Pit Inlet Database</a>. The database is similar to the <a href="#tcfBCDatabase">BC Database</a> and is described below. The alternative naming convention <a href="#ecfDepthDischargeDatabase">Depth Discharge Database</a> performs the exact same function and can be used instead of <a href="#ecfPitInletDatabase">Pit Inlet Database</a>. Only a single Depth Discharge or Pit Inlet Database should be used.</p>
+<p>The database is a .csv file usually set up and managed in a Microsoft Excel spreadsheet. The database file sources depth-discharge curves in other .csv files that are also usually set up and managed within the same Excel spreadsheet. The TUFLOW Microsoft Excel macro can be used to export these csv files from the parent spreadsheet. It is available to download at no cost from
+<a href="https://www.tuflow.com/downloads/#utilities">www.tuflow.com</a>. The format of the Pit Inlet Database is described in Table <a href="Pipes-2.html#tab:tab-DatabaseFormat">1.27</a>.</p>
+<table>
+<caption>
+<span id="tab:tab-DatabaseFormat">Table 1.27: </span><strong>Pit Inlet Database Format</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Column No. 
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Contains the pit inlet type as referenced by the 1d_nwk Inlet_Type attribute (see Table <a href="Pipes-2.html#tab:tab-PitsModelNetwork">1.25</a>).
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+Contains the name of the source .csv file that contains the depth-discharge curve.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+The heading label of the column containing depth within the source .csv file.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+The heading label of the column containing flow within the source .csv file.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+The pit inlet’s nominated full flow area in m<sup>2</sup> . Note that the flow area is only used to output a velocity for the pit channel (i.e. it does not have any influence over the hydraulic calculations).
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+<p>The pit inlet’s nominated flow width in m. The width is used for the automatic selection of 2D cells when connecting to a 2D domain (see Section <a href="Pipes-2.html#Conn-Pits-Nds-4">1.10.2.3</a>) and for extending the depth discharge curve.</p>
+Note: When width is set in 1d_nwk or 1d_pit layer for Q and VPI pits the width will multiply width in the Pit Inlet Database.
+</td>
+</tr>
+</tbody>
+</table>
+<p>Figure <a href="Pipes-2.html#fig:fig-image53">1.14</a> shows an example of a <a href="#ecfPitInletDatabase">Pit Inlet Database</a> .csv file. For the example, if the 1d_nwk Inlet_Type attribute is set to “M”, TUFLOW searches the first column (Name) until it finds “M” as highlighted in green in the image below. The source .csv file, pit_inlet_curves.csv is opened and the occurrence of the labels “Depth” (shaded yellow) and “Type M” (orange) on the same line in pit_inlet_curves.csv are searched for. The numeric values for these two columns, as shown in the second image below in yellow and orange, are read and applied as the depth-discharge relationship for the Q pit channel.</p>
+<center>
+<img src="images/image52.png" width="80%" style="display: block; margin: auto;" />
+</center>
+<!-- EFC to update figure if someone gives spreadsheet-->
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image53"></span>
+<img src="images/image53.png" alt="**Example of Pit Inlet Database**" width="80%" />
+<p class="caption">
+Figure 1.14: <strong>Example of Pit Inlet Database</strong>
+</p>
+</div>
+</center>
+<p>The depth-discharge curve is applied and extrapolated as follows:</p>
+<ul>
+<li>The first coordinate on the curve must be 0, 0 (i.e. zero flow at zero depth).</li>
+<li>The depth and flow must be in metres and m<sup>3</sup>/s or feet and ft<sup>3</sup>/s if using <tcmd><a href="#tcfUnits">Units</a></tcmd><teq> == </teq><tblk> US Customary</tblk>.</li>
+<li>The depth and flow data entries should be specified as positive values.</li>
+<li>The depth value used to derive the discharge through the pit channel is taken as the water level in the 2D domain less the pit invert (usually the ground/2D level). If the downstream water level of the pit channel rises above the pit invert, the depth value used for deriving the pit channel flow is the difference in water level. This provides a smooth transition from upstream controlled flow to drowned flow. If the pit channel starts to be surcharged (i.e. flow is reversed), the flow is extracted from the depth-discharge curve using the downstream water level less the upstream water level (pit invert if dry) as the depth value, and is applied as a negative discharge so that flow surcharges from the pipe network onto the 2D domain.</li>
+<li>If required the curve is extrapolated. An “effective” flow width of the pit inlet is calculated that gives the same flow at the top of the curve as would orifice flow. The orifice flow equation is then used to extend the curve indefinitely, using the equation:</li>
+</ul>
+<p><span class="math display" id="eq:equ-orifice-flow">\[\begin{equation}
+Q = 0.6\frac{2}{3}y_{top}w_{effective}\ \sqrt{2g(y - 0.6\ \frac{2}{3}\ y_{top)}}
+\tag{1.22}
+\end{equation}\]</span></p>
+<p>Table <a href="Pipes-2.html#tab:tab-PitFlowRegimes">1.28</a> presents the different Q pit flow regimes. These are output to the .eof file next to the velocity and flow values, and to the _TSF and _TSL output layers (see Sections <a href="#EOF-2"><strong>??</strong></a> and <a href="#TS-GIS-3"><strong>??</strong></a>).</p>
+<p>Models using <a href="#ecfPitInletDatabase">Pit Inlet Database</a> are provided in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#1D_Pipe_Network_.2F_2D_Floodplain_Modelling">1D Pipe Network / 2D Floodplain Modelling Example Model Dataset</a> on the TUFLOW Wiki.</p>
+<table>
+<caption>
+<span id="tab:tab-PitFlowRegimes">Table 1.28: </span><strong>Q Pit Flow Regime Flags</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Regime
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+The depth-discharge point is within the bounds of the Q pit curve provided.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+The depth is over (exceeds) the highest depth in the Q pit curve and the extrapolated orifice flow equation is being used.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+Reverse (negative) flow is occurring.
+</td>
+</tr>
+</tbody>
+</table>
+<div id="Xfall-4" class="section level4 hasAnchor" number="1.10.3.1">
+<h4><span class="header-section-number">1.10.3.1</span> Road Crossfall Options<a href="Pipes-2.html#Xfall-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The command <a href="#ecfPitDefaultRoadCrossfall">Pit Default Road Crossfall</a> increases the depth at Q pits based on the crossfall slope of the road cross-section. This approach aims to account for changes in ground elevation that occur at a finer scale than the 2D cell resolution. TUFLOW calculates the water depth that is used by the <a href="#ecfPitInletDatabase">Pit Inlet Database</a> using an adjacent side triangle depth approach, instead of the actual cell flow depth. This is shown in Figure <a href="Pipes-2.html#fig:fig-image54">1.15</a>. The resulting triangle has the same area as the vertical flow area in the 2D cell the pit is connected to (i.e. the triangle’s area is the depth in the 2D cell times the width of the cell).</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-image54"></span>
+<img src="images/image54a.png" alt="**Road Crossfall Option**" width="80%" />
+<p class="caption">
+Figure 1.15: <strong>Road Crossfall Option</strong>
+</p>
+</div>
+</center>
+<p>Use of this command can improve the ability to capture water from 2D cells into pits feeding the pipe network. Especially for larger cell sizes, the shallow depth that can occur in the cell can be unrepresentative of the depth at the entrance to the pit, and restricting the amount of flow entering the pit. The larger depth using an equivalent triangle will push more water into the pit providing a more realistic representation of the pit’s capture.</p>
+<p><strong>Note: If using the Sub-Grid Sampling (SGS), and the underlying DEM has good representation of the road cross-profile, this feature is not needed and should not be used.</strong></p>
+</div>
+</div>
+<div id="Manholes-3" class="section level3 hasAnchor" number="1.10.4">
+<h3><span class="header-section-number">1.10.4</span> Manholes<a href="Pipes-2.html#Manholes-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Manholes are used at pipe junctions for maintenance access and where there is a change in pipe configuration and/or inlet pit flow entry. Flow energy is dissipated due to:</p>
+<ul>
+<li>Expansion/contraction of flow within the manhole chamber and outlet culverts, see Figure <a href="Pipes-2.html#fig:fig-manhole-entry-exit-losses">1.16</a>.<br />
+</li>
+<li>Change in direction of the culverts (e.g. at a bend), see Figure <a href="Pipes-2.html#fig:fig-manhole-bend-losses">1.17</a>.<br />
+</li>
+<li>Change in height and/or invert level of the adjoining culverts, see Figure <a href="Pipes-2.html#fig:fig-manhole-drop-losses">1.18</a>.</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-manhole-entry-exit-losses"></span>
+<img src="images/manhole_entry_exit_losses.png" alt="**Flow Expansion/Contraction at a Manhole**" width="30%" />
+<p class="caption">
+Figure 1.16: <strong>Flow Expansion/Contraction at a Manhole</strong>
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-manhole-bend-losses"></span>
+<img src="images/manhole_bent_losses.png" alt="**Change in Flow Direction at a Manhole**" width="30%" />
+<p class="caption">
+Figure 1.17: <strong>Change in Flow Direction at a Manhole</strong>
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-manhole-drop-losses"></span>
+<img src="images/manhole_drop_losses.png" alt="**Change in Inlet/Outlet Height at a Manhole**" width="30%" />
+<p class="caption">
+Figure 1.18: <strong>Change in Inlet/Outlet Height at a Manhole</strong>
+</p>
+</div>
+<p>The presence of a manhole will override the exit loss of any culvert discharging into the manhole and the entrance loss of any culvert taking flow out of the manhole. The corresponding Entry_Loss and Exit_Loss attributes of the culverts in the 1d_nwk layer are not used (see Section <a href="Pipes-2.html#Engelund-4">1.10.4.4</a> and the notes on these attributes in Table <a href="Structures-2.html#tab:tab-CulvertsAttributeDescriptions">1.5</a> for more information).</p>
+<p>There are three different types of manholes:</p>
+<ul>
+<li>“C” for circular chambers.<br />
+</li>
+<li>“R” for rectangular chambers.<br />
+</li>
+<li>“J” for culvert junctions without a chamber.</li>
+</ul>
+<p>And three different energy loss approaches:</p>
+<ul>
+<li>“NO” no special manhole losses (the standard entry/exit losses of the connected culverts apply).<br />
+</li>
+<li>“EN” for the Engelund loss approach (this is the default approach).<br />
+</li>
+<li>“FX” for the Fixed loss approach.</li>
+</ul>
+<p>The manhole loss approach can be selected globally using the command, <a href="#ecfManholeDefaultLossApproach">Manhole Default Loss Approach</a>.</p>
+<p>The manhole types, loss methods and dimensions are output in the <a href="https://wiki.tuflow.com/Check_Files_1d_mhc">_mhc_check</a> file.</p>
+<div id="Auto-MH-4" class="section level4 hasAnchor" number="1.10.4.1">
+<h4><span class="header-section-number">1.10.4.1</span> Automatically Assigned Manholes<a href="Pipes-2.html#Auto-MH-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>By default, manholes are automatically created at all culvert junctions (nodes) where the following conditions are met.</p>
+<ul>
+<li>There is at least one incoming and one outgoing culvert – a culvert is a C, I or R channel.<br />
+</li>
+<li>There are no open channels connected (i.e. no bridges, weirs or any other channel that is not a culvert/pipe).<br />
+</li>
+<li>Pit channels can be connected, but are not included in any of the calculations for determining manhole energy losses. Note, however, that the connection of a pit to a manhole (or multiple pits via the Number_of 1d_nwk pits attribute) may influence the default Engelund losses indirectly via the introduction of additional flow to the pipe network.</li>
+</ul>
+<p>Three different approaches to the sizing of automatic manholes and the application of losses are available through the .ecf command <a href="#ecfManholeApproach">Manhole Approach</a>. The current default is Method C. This is the preferred approach unless backward compatibility is required for legacy reasons. Further details on Methods A and B may be found by referring to the 2018 Manual, Release Notes of previous TUFLOW builds, or by contacting <a href="mailto:support@tuflow.com" class="email">support@tuflow.com</a>.</p>
+<p>The type of manhole assigned is set using <a href="#ecfManholeDefaultType">Manhole Default Type</a>. If <a href="#ecfManholeDefaultType">Manhole Default Type</a> is not specified the default is to assign a C, R or J types based on the size and configuration of culverts connected to the manhole (see <a href="#ecfManholeDefaultType">Manhole Default Type</a> for more information).</p>
+<p>The minimum diameter/width of a manhole chamber is controlled by <a href="#ecfManholeMinimumDimension">Manhole Minimum Dimension</a>, and the default side clearance and clearance between culverts is set using <a href="#ecfManholeDefaultSideClearance">Manhole Default Side Clearance</a>.</p>
+<p>The default energy loss approach is controlled by <a href="#ecfManholeDefaultLossApproach">Manhole Default Loss Approach</a>.</p>
+</div>
+<div id="OneD-mh-4" class="section level4 hasAnchor" number="1.10.4.2">
+<h4><span class="header-section-number">1.10.4.2</span> Manually Assigned Manholes (1d_mh Layer)<a href="Pipes-2.html#OneD-mh-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Manholes are manually assigned at channel ends (nodes) using a 1d_mh layer and <a href="#ecfReadGISManhole">Read GIS Manhole</a>. Any number of 1d_mh layers can be specified. The attributes of a 1d_mh layer are described below in Table <a href="Pipes-2.html#tab:tab-Manhole">1.29</a>.</p>
+<p><strong>A manhole in a 1d_mh layer will override any automatically created manhole. If a manually specified manhole occurs at the same location more than once, the last occurrence will prevail (i.e. the last manhole at a node will override any previously specified manholes at the same node).</strong></p>
+<p>To remove an automatically created manhole, digitise a point at the node in a 1d_mh layer and set the Loss_Approach to “NO” (i.e. no manhole energy losses). Note that culvert inlet/outlet losses will apply instead in accordance with Section <a href="Structures-2.html#culverts-pipes-3">1.7.1</a>.</p>
+<p>Models using manually assigned manholes are provided in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#1D_Pipe_Network_.2F_2D_Floodplain_Modelling">1D Pipe Network / 2D Floodplain Modelling Example Model Dataset</a> on the TUFLOW Wiki.</p>
+<table>
+<caption>
+<span id="tab:tab-Manhole">Table 1.29: </span><strong>1D Manhole (1d_mh) Attribute Descriptions</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+No. 
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Default GIS Attribute Name
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+ID
+</td>
+<td style="text-align:left;">
+Unique identifier up to 12 characters in length (see ID for 1d_nwk layers). The ID is used to label the node that is created at the location of the manhole. If left blank, then the ID will be automatically assigned according to the rules for an automatically created node as discussed in Section <a href="Nodes-2.html#Nodes-2">1.12</a>.
+</td>
+<td style="text-align:left;">
+Char(12)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+Type
+</td>
+<td style="text-align:left;">
+<p>“C” for circular shaped chamber.</p>
+<p>“J” for a junction, but no manhole chamber.</p>
+<p>“R” for rectangular shaped.</p>
+If left blank, the global default type set by <a href="#ecfManholeDefaultType">Manhole Default Type</a> is used.
+</td>
+<td style="text-align:left;">
+Char(4)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Loss_Approach
+</td>
+<td style="text-align:left;">
+<p>“NO” for no manhole loss approach (the standard entry/exit losses of the connected culverts apply).</p>
+<p>“EN” for the Engelund loss approach.</p>
+<p>“FX” for the Fixed loss approach.</p>
+If left blank, the global default type set by <a href="#ecfManholeDefaultLossApproach">Manhole Default Loss Approach</a> is used.
+</td>
+<td style="text-align:left;">
+Char(4)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Ignore
+</td>
+<td style="text-align:left;">
+If set to true (i.e. “T”), the manhole is ignored and makes no contribution to the final network. Otherwise set to “F”.
+</td>
+<td style="text-align:left;">
+Char(1)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+Invert_Level
+</td>
+<td style="text-align:left;">
+The bottom or bed elevation of the manhole. This attribute is also used to set the upstream and downstream inverts of connected culverts if the culverts have not been assigned an invert. If set to -99999, not used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+Flow_Width
+</td>
+<td style="text-align:left;">
+The flow width in metres of the manhole (i.e. the width of the manhole perpendicular to the dominant direction of flow). For a C manhole this would be the diameter. Used to calculate the manhole flow area and velocity through the manhole.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+Flow_Length
+</td>
+<td style="text-align:left;">
+The flow length in metres of the manhole (i.e. the length of the manhole in the dominant direction of flow). For a C manhole this attribute is not used and the diameter (Flow_Width attribute) is used. Only used to calculate the storage of the node at the manhole.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+ANA
+</td>
+<td style="text-align:left;">
+Additional storage surface area in m<sup>2</sup> for the node at the manhole.<br />
+Usually set to zero.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+K_fixed
+</td>
+<td style="text-align:left;">
+Fixed component of the calculated manhole loss coefficient. If using the Fixed approach, this is the only coefficient applied.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+Km
+</td>
+<td style="text-align:left;">
+<p>Manhole exit coefficient used by the Engelund approach.</p>
+If set to zero (0), for C manholes the <a href="#ecfManholeDefaultCExitCoefficient">Manhole Default C Exit Coefficient</a> is applied, and for R manholes <a href="#ecfManholeDefaultRExitCoefficient">Manhole Default R Exit Coefficient</a> is used.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+K_Bend_Max
+</td>
+<td style="text-align:left;">
+<p>The upper limit of the combination of K<sub>Ɵ</sub> and K<sub>drop</sub> in the Engelund approach.</p>
+If set to zero (0), <a href="#ecfManholeKMaximumBendDrop">Manhole K Maximum Bend/Drop</a> is applied.
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:left;">
+C_reserved
+</td>
+<td style="text-align:left;">
+Reserved for future use – leave blank.
+</td>
+<td style="text-align:left;">
+Char(12)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+N1_reserved
+</td>
+<td style="text-align:left;">
+Reserved for future use – leave as zero (0).
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:left;">
+N2_reserved
+</td>
+<td style="text-align:left;">
+Reserved for future use – leave as zero (0).
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:left;">
+N3_reserved
+</td>
+<td style="text-align:left;">
+Reserved for future use – leave as zero (0).
+</td>
+<td style="text-align:left;">
+Float
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="mh-direction-4" class="section level4 hasAnchor" number="1.10.4.3">
+<h4><span class="header-section-number">1.10.4.3</span> Digitising Culverts Connected to Manholes<a href="Pipes-2.html#mh-direction-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>During the simulation, a culvert is determined to be an inlet or outlet culvert based on the <strong>flow direction</strong>, not the digitised direction of the 1d_nwk object. If reverse flow occurs this is taken into account in determining the appropriate loss coefficients. However, the pre-processing of the model assumes that the culverts have been digitised in the predominant direction of flow. A variety of checks are made such as whether both an inlet and an outlet culvert are connected to a manhole, and ERRORs or WARNINGs and CHECKs are issued if there is an incompatibility. It is strongly recommended that the culverts are digitised consistently in the downstream direction (i.e. from upstream to downstream).</p>
+</div>
+<div id="Engelund-4" class="section level4 hasAnchor" number="1.10.4.4">
+<h4><span class="header-section-number">1.10.4.4</span> Engelund Manhole Loss Approach<a href="Pipes-2.html#Engelund-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The Engelund energy loss approach at manholes is based on the work of F.A. Engelund, and used by the MOUSE software <span class="citation">(<a href="Nodes-2.html#ref-DHI2009">DHI, 2009</a>)</span>. The adopted approach has been further enhanced through advice from, and discussions with, staff from Technical Services Branch of the Gold Coast City Council, Queensland, Australia. This is the default manhole loss approach.</p>
+<p>The Engelund approach provides an automatic method for determining the energy loss coefficients presented below. Of note is that the coefficients are recalculated every timestep, and vary depending on the flow distribution between inlet and outlet culverts and the depth of water within the manhole. The calculated values are output to the _TSL layer so they can be reviewed/checked over time.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-manhole-HGL"></span>
+<img src="images/manhole_HGL.png" alt="**Engelund Energy Loss Approach at Manholes**" width="60%" />
+<p class="caption">
+Figure 1.19: <strong>Engelund Energy Loss Approach at Manholes</strong>
+</p>
+</div>
+</center>
+<ul>
+<li>K<sub>entry</sub> covers the expansion of flow within the manhole at the outlet of an inlet culvert. The coefficient overrides the exit loss of the inlet culvert. Its time varying value is shown as the third value for inlet culvert in the _TSL output layer.<br />
+</li>
+<li>K<sub>Ɵ</sub> represents the losses due to a change in direction (i.e. a bend) between inlet and outlet culverts. K<sub>Ɵ</sub> is based on the angle of the digitised lines of the culverts. For the inlet culvert the last two vertices of the line are used and for the outlet culvert the first two vertices. If the culvert line is digitised so that it has an unrepresentative first/last segment angle (this may occur where two parallel culverts have been digitised apart to make it easier to visualise), a 1d_nwk connector (X Type) can be used to connect the start/end of the culvert to the node, so that the first/last segment is a correct representation of the culvert angle relative to the other culverts. Refer to Section <a href="Special-Channels-2.html#XConnect-3">1.8.3</a> for further information.<br />
+</li>
+<li>K<sub>drop</sub> is the loss coefficient due to a change in invert level and culvert height between inlet and outlet culverts.<br />
+</li>
+<li>K<sub>Ɵ</sub> and K<sub>drop</sub> are added and applied as an energy loss for each outlet culvert. The calculated value is reported as the middle value for outlet culverts in the _TSL output layer. Any Form_Loss value assigned to the outlet culvert via the 1d_nwk layer is also applied and will also be included in the _TSL middle value.<br />
+</li>
+<li>K<sub>exit</sub> covers the contraction from the manhole and re-expansion of flow within the entrance of an outlet culvert. It overrides the entrance loss of the outlet culvert and is the first value for outlet culverts in the _TSL output layer.<br />
+</li>
+<li>K<sub>m</sub> is the manhole exit coefficient used to calculate K<sub>exit</sub>. The default value for K<sub>m</sub> is dependent on whether the manhole is of a C or R type, and is set using <a href="#ecfManholeDefaultCExitCoefficient">Manhole Default C Exit Coefficient</a> or <a href="#ecfManholeDefaultRExitCoefficient">Manhole Default R Exit Coefficient</a>.</li>
+</ul>
+<p>The equations used for the Engelund loss approach are provided below.</p>
+<p><span class="math display" id="eq:equ-engelund-1">\[\begin{equation}
+V_m = \frac{Q_{om}}{A_m}
+\tag{1.23}
+\end{equation}\]</span>
+<span class="math display" id="eq:equ-engelund-2">\[\begin{equation}
+Q_f = min\left( \frac{Q_{p}}{Q_{om}},1.0 \right)
+\tag{1.24}
+\end{equation}\]</span>
+<span class="math display" id="eq:equ-engelund-3">\[\begin{equation}
+{A^{&#39;}}_{m} = \frac{W_{m}y_{m}Q_{om}}{Q_{im}}
+\tag{1.25}
+\end{equation}\]</span>
+<span class="math display" id="eq:equ-engelund-4">\[\begin{equation}
+K_{entry} = \left\lbrack 1 - min\left( \frac{V_{m}}{V_{p}},1 \right) \right\rbrack^{2} \:\:\: \text{(applied as an exit loss on the inlet culvert)}
+\tag{1.26}
+\end{equation}\]</span>
+<span class="math display" id="eq:equ-engelund-5">\[\begin{equation}
+K_{\theta} = \sum_{inletpipes}^{}\left\lbrack Q_{f}\min\left( \frac{\theta^{2}}{90^{2}},\ 4\right)\right\rbrack
+\tag{1.27}
+\end{equation}\]</span>
+<span class="math display" id="eq:equ-engelund-6">\[\begin{equation}
+K_{drop} = \sum_{inletpipes}^{}\left\lbrack \min\left( \max\left( \frac{Q_{f}(h_{o} - h_{i})(h_{o} + y_{o} - h_{i} - y_{i})}{y_{o}y_{i}},0 \right),2 \right) \right\rbrack
+\tag{1.28}
+\end{equation}\]</span>
+<span class="math display" id="eq:equ-engelund-7">\[\begin{equation}
+K_{exit} = K_{m}\left[ 1 - min\left( \frac{A_{p}}{{A^{&#39;}}_{m}},1 \right) \right] \:\:\: \text{(applied as inlet loss on the outlet culvert)}
+\tag{1.29}
+\end{equation}\]</span>
+<span class="math display" id="eq:equ-engelund-8">\[\begin{equation}
+K_{outlet\ pipe} = \min\left( K_{\theta} + K_{drop},K_{Bend\_Max} \right) + K_{b} + K_{f} \:\:\: \text{(applied as loss using outlet culvert velocity)}
+\tag{1.30}
+\end{equation}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(Q_{p}\)</span> = Flow in culvert<br />
+</li>
+<li><span class="math inline">\(Q_{im}\)</span> = Total flow in to manhole<br />
+</li>
+<li><span class="math inline">\(Q_{om}\)</span> = Total flow out of manhole<br />
+</li>
+<li><span class="math inline">\(y_{i}\)</span> = Height of inlet culvert<br />
+</li>
+<li><span class="math inline">\(y_{o}\)</span> = Height of outlet culvert<br />
+</li>
+<li><span class="math inline">\(h_{i}\)</span> = Inlet culvert invert<br />
+</li>
+<li><span class="math inline">\(h_{o}\)</span> = Outlet culvert invert<br />
+</li>
+<li><span class="math inline">\(\theta\)</span> = Angle in degrees of inlet culvert relative to outlet culvert<br />
+</li>
+<li>(<span class="math inline">\(\theta = 0{^\circ}\)</span> when the culverts are in line, <span class="math inline">\(\theta = 90{^\circ}\)</span> when the outlet culvert is at right angles)<br />
+</li>
+<li><span class="math inline">\(Q_{p}\)</span> = Flow in outlet culvert<br />
+</li>
+<li><span class="math inline">\(W_{m}\)</span> = Flow width in manhole = 1d_mh width attribute<br />
+</li>
+<li><span class="math inline">\(y_{m}\)</span> = Depth of water in manhole<br />
+</li>
+<li><span class="math inline">\(A_{m}\)</span> = Flow area in manhole<br />
+</li>
+<li><span class="math inline">\(A_{m}^{&#39;}\)</span> = Effective flow area in manhole<br />
+</li>
+<li><span class="math inline">\(A_{p}\)</span> = Flow area of culvert<br />
+</li>
+<li><span class="math inline">\(K_{m}\)</span> = Km 1d_mh attribute<br />
+</li>
+<li><span class="math inline">\(K_{b}\)</span> = Bend loss coefficient (1d_nwk Form_Loss attribute)<br />
+</li>
+<li><span class="math inline">\(K_{f}\)</span> = Fixed loss (1d_mh K_Fixed attribute)<br />
+</li>
+<li><span class="math inline">\(K_{Bend\_ Max}\)</span> = Upper limit to sum of <span class="math inline">\(K_{\theta}\)</span> and <span class="math inline">\(K_{drop}\)</span> (1d_mh K_Bend_Max attribute)</li>
+</ul>
+</div>
+<div id="FixedLoss-4" class="section level4 hasAnchor" number="1.10.4.5">
+<h4><span class="header-section-number">1.10.4.5</span> Fixed Manhole Loss Approach<a href="Pipes-2.html#FixedLoss-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The Fixed loss approach applies the 1d_mh K_fixed coefficient as an energy loss on the outlet culvert(s). This is in accordance with publications that quote K values for different manholes based on the velocity in the outlet culvert.</p>
+<p>The energy loss is applied as an inlet loss to the outlet culvert if K_fixed is 0.5 or less. If K_fixed exceeds 0.5, 0.5 is applied as an inlet loss, and the remainder is applied as a form or bend loss. The inlet loss component is shown as the first value in the _TSL output layer, and any remainder as the second (middle) value. Any Form_Loss value assigned to the outlet culvert via the 1d_nwk layer is also applied and will be included in the _TSL middle value.</p>
+<p>By default, K_fixed is set to zero. To assign a K_fixed value to any manhole using the Fixed loss approach will require using a 1d_mh layer.</p>
+<p>Note that K_fixed is also used by the Engelund loss approach as an additional (calibration) energy loss if required.</p>
+</div>
+<div id="JunctionLoss-4" class="section level4 hasAnchor" number="1.10.4.6">
+<h4><span class="header-section-number">1.10.4.6</span> Discussion on Approaches to Modelling Pipe Junction Losses<a href="Pipes-2.html#JunctionLoss-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The approach taken to modelling junctions and manhole losses affects the pipe network’s energy losses and overland flood levels, especially if a large proportion of the flow is within the pipe network. As a general guide, the following approaches available in TUFLOW will produce the following outcomes:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Ideal Scenario:</strong> If you are fortunate to have the details and budget to include manholes using 1d_mh layers, this will produce the most reliable results. Either the Engelund approach or application of fixed losses based on guidance within the literature, or a combination of these, is recommended. However, in the absence of manhole details, one of the following approaches, or a combination, needs to be adopted.<br />
+</li>
+<li><strong>Least Conservative</strong> (flatter hydraulic grade lines along pipes with lower flood levels overall): No manholes (<a href="#ecfManholesatAllCulvertJunctions">Manholes at All Culvert Junctions</a> is set to “OFF” and no 1d_mh layers are specified) and adjustment of structure losses (the default) applies. In this case there will be minor losses at pipe junctions, because the <a href="#ecfStructureLosses">Structure Losses</a> by default will adjust the entrance and exit losses at pipe connections down according to the approach/departure velocities (see equations in Section <a href="Structures-2.html#LossAdjustment-3">1.7.7</a>). As the velocities are usually similar from one pipe to the next the entrance and exit losses are reduced downwards, often close to zero (as would be expected for a junction of two pipes with no manhole, no change in direction and no change in invert level).<br />
+</li>
+<li><strong>Middle Ground:</strong> Automatically create and size manholes and apply the Engelund approach (the default setting). The automatic creation of manholes may be slightly conservative as a manhole (including junctions) is created at every closed node (a closed node occurs where only culverts/pipes and pits are connected). If there are many short pipes in the network an excess of manholes may result in causing greater energy losses. However, if single very long culvert channels are used to represent lengths of same sized pipes, any manholes along the long pipes will not be modelled and losses will be underestimated. In this case it is generally good practice to split the long culvert channels into several channels (this will also produce an improved hydraulic grade line along the pipe).<br />
+</li>
+<li><strong>Most Conservative</strong> (steeper hydraulic grade lines along pipes with higher flood levels overall): No manholes (<a href="#ecfManholesatAllCulvertJunctions">Manholes at All Culvert Junctions</a> set to “OFF” and no 1d_mh layers specified); fixed structure losses on all culverts (<a href="#ecfStructureLosses">Structure Losses</a> set to “FIX” is specified or 1d_nwk “F” flag is used); and the entrance and exit loss coefficients are not adjusted. For example if 0.5 and 1.0 are used, this will apply the full (e.g. 0.5 and 1.0) entrance and exit loss coefficients at the pipe junctions. It typically produces the greatest energy losses along pipe networks, and produces higher flood levels in upper areas.</li>
+</ol>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="OperationalChannels-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="Virtual-Pipes-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": true,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": false,
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
