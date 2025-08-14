@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.6 12D-DDA to TUFLOW Linking | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </title>
+  <meta name="description" content="TUFLOW Classic/HPC User Manual 2025" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.6 12D-DDA to TUFLOW Linking | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.6 12D-DDA to TUFLOW Linking | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  
+  <meta name="twitter:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+<meta name="author" content="RELEASE CANDIDATE     This is an interim manual that accompanies the TUFLOW Classic/HPC 2025.2.0-rc.1 release candidate executable. The information contained within this interim version may vary from the subsequent final version." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="OneD2DLinkingFM-2.html"/>
+<link rel="next" href="TwoD2DLinking-2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/TUFLOW_2025.2_release-candidate.png"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this Manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#commands"><i class="fa fa-check"></i>Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#about-this-manual"><i class="fa fa-check"></i>About this Manual</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#glossary-and-notation"><i class="fa fa-check"></i>Glossary and Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="DomainLinking-1.html"><a href="DomainLinking-1.html"><i class="fa fa-check"></i><b>1</b> Combining Domains and Solvers</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Linked-1D2D-Models-Intro-2.html"><a href="Linked-1D2D-Models-Intro-2.html"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html"><i class="fa fa-check"></i><b>1.2</b> 1D and 2D Domain Linking Theory</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#HXBoundary-3"><i class="fa fa-check"></i><b>1.2.1</b> HX 2D Head Boundary</a></li>
+<li class="chapter" data-level="1.2.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundary-3"><i class="fa fa-check"></i><b>1.2.2</b> SX 2D Flow Boundaries</a>
+<ul>
+<li class="chapter" data-level="1.2.2.1" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundarySW-4"><i class="fa fa-check"></i><b>1.2.2.1</b> SX 2D Flow Boundary to Surface Water</a></li>
+<li class="chapter" data-level="1.2.2.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundaryGW-4"><i class="fa fa-check"></i><b>1.2.2.2</b> SX 2D Flow Boundary to Groundwater</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html"><i class="fa fa-check"></i><b>1.3</b> TUFLOW 1D (ESTRY) to TUFLOW 2D Linking</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYChannel-3"><i class="fa fa-check"></i><b>1.3.1</b> 1D Open Channel and 2D Domain Linking</a></li>
+<li class="chapter" data-level="1.3.2" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYCulverts-3"><i class="fa fa-check"></i><b>1.3.2</b> 1D Structures Embedded within 2D Domains</a></li>
+<li class="chapter" data-level="1.3.3" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYPipeNetwork-3"><i class="fa fa-check"></i><b>1.3.3</b> 1D Pipe Network Pits linked to 2D Domains</a></li>
+<li class="chapter" data-level="1.3.4" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#VirtualPits-3"><i class="fa fa-check"></i><b>1.3.4</b> Virtual Pits linked to 2D Domains</a></li>
+<li class="chapter" data-level="1.3.5" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#GroundwaterLinked-3"><i class="fa fa-check"></i><b>1.3.5</b> TUFLOW 1D (ESTRY) linked to Groundwater</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html"><i class="fa fa-check"></i><b>1.4</b> SWMM to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMCulverts-5"><i class="fa fa-check"></i><b>1.4.1</b> 1D Culvert Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.2" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMPipeNetwork-3"><i class="fa fa-check"></i><b>1.4.2</b> 1D Pipe Network Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.3" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DGWConnections-3"><i class="fa fa-check"></i><b>1.4.3</b> Groundwater Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.4" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DLinkingSWMM1D-3"><i class="fa fa-check"></i><b>1.4.4</b> SWMM to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html"><i class="fa fa-check"></i><b>1.5</b> Flood Modeller to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html#oneD2DFMLinking2D-3"><i class="fa fa-check"></i><b>1.5.1</b> Flood Modeller 1D to TUFLOW 2D Linking</a></li>
+<li class="chapter" data-level="1.5.2" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html#oneD2DFMLinking1D-3"><i class="fa fa-check"></i><b>1.5.2</b> Flood Modeller 1D to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="oneD2D12D-2.html"><a href="oneD2D12D-2.html"><i class="fa fa-check"></i><b>1.6</b> 12D-DDA to TUFLOW Linking</a></li>
+<li class="chapter" data-level="1.7" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html"><i class="fa fa-check"></i><b>1.7</b> Multiple 2D Domains</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html#TwoD2DLinkingQDT-3"><i class="fa fa-check"></i><b>1.7.1</b> Classic’s M2D Feature versus HPC Quadtree</a></li>
+<li class="chapter" data-level="1.7.2" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html#TwoD2DLinkingM2D-3"><i class="fa fa-check"></i><b>1.7.2</b> TUFLOW Classic’s Multiple 2D Domains</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/WQFooter.jpg" style="width:246px;height:10px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(226,1,119);">TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<p class="wmark before"></p>
+<div id="oneD2D12D-2" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> 12D-DDA to TUFLOW Linking<a href="oneD2D12D-2.html#oneD2D12D-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>12D Dynamic Drainage Analysis (DDA) is developed by 12D Solutions based on the USA EPA-SWMM solver. 12D have developed a TUFLOW interface within their own <a href="https://www.12d.com/product/12d_model_tuflow.html">12D GUI</a> that offers GUI functionality for 1D and 2D modelling tasks. The interface provides users with the ability to build models and view result entirely within its GUI. Alternatively, existing TUFLOW files created in a GIS form can be imported and used in the 12D environment.</p>
+<p>A TUFLOW engine licence, either purchased directly from <a href="https://www.12d.com/sales/australia.html">12D Solutions</a> or from <a href="mailto:sales@tuflow.com">TUFLOW</a> is required to use TUFLOW with 12D-DDA. If purchased from TUFLOW, the 12D modules, such as the TCF Interface Module and 12D-DDA Drainage Integration (Linking) Module, will need to be purchased from 12D Solutions.</p>
+<p>For information detailing how to complete TUFLOW modelling using the 12D GUI, and linking TUFLOW 2D’s solvers with 12D-DDA, please contact <a href="https://www.12d.com/sales/australia.html">12D Solutions</a>.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="OneD2DLinkingFM-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="TwoD2DLinking-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": true,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": false,
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

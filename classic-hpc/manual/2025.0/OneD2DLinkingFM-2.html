@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.5 Flood Modeller to TUFLOW Linking | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </title>
+  <meta name="description" content="TUFLOW Classic/HPC User Manual 2025" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.5 Flood Modeller to TUFLOW Linking | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.5 Flood Modeller to TUFLOW Linking | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  
+  <meta name="twitter:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+<meta name="author" content="RELEASE CANDIDATE     This is an interim manual that accompanies the TUFLOW Classic/HPC 2025.2.0-rc.1 release candidate executable. The information contained within this interim version may vary from the subsequent final version." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="OneD2DLinkingSWMM-2.html"/>
+<link rel="next" href="oneD2D12D-2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/TUFLOW_2025.2_release-candidate.png"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this Manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#commands"><i class="fa fa-check"></i>Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#about-this-manual"><i class="fa fa-check"></i>About this Manual</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#glossary-and-notation"><i class="fa fa-check"></i>Glossary and Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="DomainLinking-1.html"><a href="DomainLinking-1.html"><i class="fa fa-check"></i><b>1</b> Combining Domains and Solvers</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Linked-1D2D-Models-Intro-2.html"><a href="Linked-1D2D-Models-Intro-2.html"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html"><i class="fa fa-check"></i><b>1.2</b> 1D and 2D Domain Linking Theory</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#HXBoundary-3"><i class="fa fa-check"></i><b>1.2.1</b> HX 2D Head Boundary</a></li>
+<li class="chapter" data-level="1.2.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundary-3"><i class="fa fa-check"></i><b>1.2.2</b> SX 2D Flow Boundaries</a>
+<ul>
+<li class="chapter" data-level="1.2.2.1" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundarySW-4"><i class="fa fa-check"></i><b>1.2.2.1</b> SX 2D Flow Boundary to Surface Water</a></li>
+<li class="chapter" data-level="1.2.2.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundaryGW-4"><i class="fa fa-check"></i><b>1.2.2.2</b> SX 2D Flow Boundary to Groundwater</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html"><i class="fa fa-check"></i><b>1.3</b> TUFLOW 1D (ESTRY) to TUFLOW 2D Linking</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYChannel-3"><i class="fa fa-check"></i><b>1.3.1</b> 1D Open Channel and 2D Domain Linking</a></li>
+<li class="chapter" data-level="1.3.2" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYCulverts-3"><i class="fa fa-check"></i><b>1.3.2</b> 1D Structures Embedded within 2D Domains</a></li>
+<li class="chapter" data-level="1.3.3" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYPipeNetwork-3"><i class="fa fa-check"></i><b>1.3.3</b> 1D Pipe Network Pits linked to 2D Domains</a></li>
+<li class="chapter" data-level="1.3.4" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#VirtualPits-3"><i class="fa fa-check"></i><b>1.3.4</b> Virtual Pits linked to 2D Domains</a></li>
+<li class="chapter" data-level="1.3.5" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#GroundwaterLinked-3"><i class="fa fa-check"></i><b>1.3.5</b> TUFLOW 1D (ESTRY) linked to Groundwater</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html"><i class="fa fa-check"></i><b>1.4</b> SWMM to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMCulverts-5"><i class="fa fa-check"></i><b>1.4.1</b> 1D Culvert Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.2" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMPipeNetwork-3"><i class="fa fa-check"></i><b>1.4.2</b> 1D Pipe Network Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.3" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DGWConnections-3"><i class="fa fa-check"></i><b>1.4.3</b> Groundwater Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.4" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DLinkingSWMM1D-3"><i class="fa fa-check"></i><b>1.4.4</b> SWMM to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html"><i class="fa fa-check"></i><b>1.5</b> Flood Modeller to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html#oneD2DFMLinking2D-3"><i class="fa fa-check"></i><b>1.5.1</b> Flood Modeller 1D to TUFLOW 2D Linking</a></li>
+<li class="chapter" data-level="1.5.2" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html#oneD2DFMLinking1D-3"><i class="fa fa-check"></i><b>1.5.2</b> Flood Modeller 1D to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="oneD2D12D-2.html"><a href="oneD2D12D-2.html"><i class="fa fa-check"></i><b>1.6</b> 12D-DDA to TUFLOW Linking</a></li>
+<li class="chapter" data-level="1.7" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html"><i class="fa fa-check"></i><b>1.7</b> Multiple 2D Domains</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html#TwoD2DLinkingQDT-3"><i class="fa fa-check"></i><b>1.7.1</b> Classic’s M2D Feature versus HPC Quadtree</a></li>
+<li class="chapter" data-level="1.7.2" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html#TwoD2DLinkingM2D-3"><i class="fa fa-check"></i><b>1.7.2</b> TUFLOW Classic’s Multiple 2D Domains</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/WQFooter.jpg" style="width:246px;height:10px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(226,1,119);">TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<p class="wmark before"></p>
+<div id="OneD2DLinkingFM-2" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Flood Modeller to TUFLOW Linking<a href="OneD2DLinkingFM-2.html#OneD2DLinkingFM-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>TUFLOW 2D domains can be dynamically linked to Flood Modeller (previously known as ISIS). Flood Modeller can also link to TUFLOW 1D (previously known as ISIS-TUFLOW-PIPE or ISIS-ESTRY).</p>
+<p>Unlike TUFLOW 1D or SWMM, Flood Modeller is not included in the TUFLOW executable download. It must be installed and configured to support the linking to TUFLOW. The <a href="https://www.floodmodeller.com/tuflow">TUFLOW Link</a> must be purchased from Jacobs and an appropriate software version used. It is recommended that TUFLOW 2020-10-AD or later is used in conjunction with Flood Modeller Version 5 or later. Figure <a href="OneD2DLinkingFM-2.html#fig:fig-FMTUFLOWVersionCompatability">1.15</a> provides the compatibility between Flood Modeller and TUFLOW for versions prior to Flood Modeller 6 and TUFLOW 2020-10-AE. Post these releases, all TUFLOW Classic and TUFLOW HPC (including Quadtree) functionality is supported and compatible with Flood Modeller. Versions prior to Flood Modeller 4.5 will support TUFLOW Classic only. Regardless of the TUFLOW 2D solver (i.e. Classic or HPC), the linking mechanism is the same.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-FMTUFLOWVersionCompatability"></span>
+<img src="images/FM_TUFLOW_Version_Compatability.png" alt="**Compatibility of Recent Flood Modeller and TUFLOW versions**" width="80%" />
+<p class="caption">
+Figure 1.15: <strong>Compatibility of Recent Flood Modeller and TUFLOW versions</strong>
+</p>
+</div>
+</center>
+<div id="oneD2DFMLinking2D-3" class="section level3 hasAnchor" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Flood Modeller 1D to TUFLOW 2D Linking<a href="OneD2DLinkingFM-2.html#oneD2DFMLinking2D-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To link Flood Modeller’s 1D scheme to TUFLOW 2D, a TUFLOW 1d_x1d GIS layer defining the locations of the Flood Modeller 1D nodes is required. The 1d_x1d layer can either be created by the user or by the Flood Modeller interface.</p>
+<p>For linking 1D Flood Modeller to TUFLOW 2D, the TUFLOW 1d_x1d layer requires only one attribute, namely a string 12 characters long that contains the unique IDs of the Flood Modeller 1D nodes/sections. Any other attributes are presently ignored. Creation of this layer manually is possible through exporting a text or csv file containing the Node ID and XY coordinates of the nodes, provided the Flood Modeller co-ordinates are in the same projection as the TUFLOW model. <strong>Note, the IDs are case sensitive (because Flood Modeller IDs are case sensitive).</strong></p>
+<p>In the .tcf file, use either the <a href="#tcfReadGISX1DNodes">Read GIS X1D Nodes</a> or <a href="#tcfReadGISX1DNetwork">Read GIS X1D Network</a> command to read the 1d_x1d layer, as shown in the example below:</p>
+<p><tcmd><a href="#tcfReadGISX1DNetwork">Read GIS X1D Network</a></tcmd><teq> == </teq><tblk>..\model\gis\1d_x1d_FM_nodes.shp</tblk></p>
+<p>The digitising of channels (lines) within a 1d_x1d GIS layer is optional and is only necessary if the model uses 1D Water Level Lines to display map outputs in the 1D domain (refer to Section <a href="#OneDMap-3"><strong>??</strong></a> for further details). If GIS layer(s) are provided including channels, they are also read into the .tcf file using the command <a href="#tcfReadGISX1DNetwork">Read GIS X1D Network</a>, and should be used with <a href="#tcfReadGISX1DWLL">Read GIS X1D WLL</a>.</p>
+<p>The example below shows the use of these commands (with the nodes and channels in separate files):</p>
+<p><tcmd><a href="#tcfReadGISX1DNodes">Read GIS X1D Nodes</a></tcmd><teq> == </teq><tblk>..\Model\gis\1d_x1d_FM_nodes.shp</tblk><br />
+<tcmd><a href="#tcfReadGISX1DNetwork">Read GIS X1D Network</a></tcmd><teq> == </teq><tblk>..\Model\gis\1d_x1d_FM_channels.shp</tblk><br />
+<tcmd><a href="#tcfReadGISX1DWLL">Read GIS X1D WLL</a></tcmd><teq> == </teq><tblk>..\Model\gis\1d_x1d_FM_wlls.shp</tblk></p>
+<p>Note, legacy models may include reference to ISIS in the above commands. For example, “X1D” in <a href="#tcfReadGISX1DNetwork">Read GIS X1D Network</a> can be substituted with “ISIS” (i.e. <a href="#tcfReadGISX1DNetwork">Read GIS ISIS Network</a>).</p>
+<p>Connections (CN) in the 2d_bc layer are snapped to the nodes in the 1d_x1d layer in the same manner as a TUFLOW 1D 1d_nwk layer.</p>
+<p>The following restrictions apply when connecting Flood Modeller nodes to TUFLOW 2D:</p>
+<ul>
+<li>HX lines should only be connected to Flood Modeller RIVER units. Flood Modeller INTERPOLATE and REPLICATE units are also permitted. This requires that the Flood Modeller unit between consecutive connections along a HX line is always a RIVER unit. If this is not the case, an “<a href="https://wiki.tuflow.com/TUFLOW_Message_2043">ERROR 2043</a> - 2D HX cell has been assigned to a non-RIVER unit” occurs. Where a non-RIVER unit occurs (e.g. at a structure), the HX line needs to be broken.<br />
+</li>
+<li>Special Flood Modeller units may be required for some HX and SX connections (refer to the <a href="https://help.floodmodeller.com/docs/how-to-select-the-tuflow-link-type-to-use">Flood Modeller documentation</a>).</li>
+</ul>
+<p>It is not necessary for all Flood Modeller RIVER units between the upstream and downstream ends of the HX line to be connected. Nodes/Sections may be intentionally or accidentally omitted as with TUFLOW 1D nodes. Please note that this is not recommended because by missing or omitting nodes the 1D water level water surface gradient that is applied along the HX lines will not be correctly represented.</p>
+<p>TUFLOW checks whether the ZC elevation of a HX cell lies above the bed of the 1D nodes and that the ZC elevation of a SX cell lies below the 1D node bed, and if not, an error occurs (see Section <a href="OneD2dLinking-2.html#HXBoundary-3">1.2.1</a> and Section <a href="OneD2dLinking-2.html#SXBoundary-3">1.2.2</a>).</p>
+<p>Use the <a href="https://wiki.tuflow.com/Check_Files_1d_x1d_nodes">_x1d_nodes_check</a> file to cross-check the external 1D nodes/sections that were read by TUFLOW, and the associated information passed from the 1D scheme. Also use the <a href="https://wiki.tuflow.com/Check_Files_1d_to_2d_bc">_1d_to_2d_check</a> file to cross-check the correct HX and SX cells are connected to the correct channels (units). The HX cells in the <a href="https://wiki.tuflow.com/Check_Files_1d_to_2d_bc">_1d_to_2d_check</a> layer can be colour coded using the “Primary_no” attribute to identify the external 1D channel (unit) that the flow in/out across the HX cells is associated with. For Flood Modeller, by default HX cells are assigned to the upstream end of a river unit as a lateral flow as per Flood Modeller conventions.</p>
+<p>Note, the start and end simulation times and the timestep are controlled by Flood Modellers GUI input fields, and any <a href="#tcfStartTime">Start Time</a>, <a href="#tcfEndTime">End Time</a> and <a href="#tcfTimestep">Timestep</a> commands are ignored in the .tcf file. It is best practice to remove (or comment out) these commands. Within the Flood Modeller GUI, the Flood Modeller 1D timestep can differ from the TUFLOW timestep. It is recommended that the Flood Modeller timestep be set as an integer divisor of the TUFLOW timestep.</p>
+<p>No TUFLOW 1D .ecf file is required, and the TUFLOW 1D <a href="#tcfESTRYControlFile">ESTRY Control File</a> command should not be specified unless there are also TUFLOW 1D domain(s) in addition to the external scheme 1D domain(s). Flood Modeller nodes can be directly linked to TUFLOW 1D nodes allowing models to have a combination of Flood Modeller 1D and TUFLOW 1D (ESTRY) - refer to Section <a href="OneD2DLinkingFM-2.html#oneD2DFMLinking1D-3">1.5.2</a>. An example model demonstrating both ‘SX’ and ‘HX’ type links between Flood Modeller and TUFLOW is available <a href="https://gitlab.com/tuflow-user-group/third-party-tools/other/flood-modeller-tuflow-linked-examples">here</a>.</p>
+<p>Note that Flood Modeller HX links may benefit from assigning a Form Loss Coefficient (typically 0.1 to 0.5 in value) to HX lines using the 2d_bc “a” attribute. For HX lines running along the riverbanks, especially those with high overtopping velocities, improved stability and representation of the energy losses associated with the water peeling off from the river to the floodplain or vice versa can be achieved.</p>
+<p>For model review purposes, the .tcf command <a href="#tcfWriteX1DCheckFiles">Write X1D Check Files</a> writes out check_x1D_H_to_2D.csv and check_2D_Q_to_x1D.csv files. These contain the water levels and flows sent to the 2D to/from Flood Modeller.</p>
+<p>Example models demonstrating TUFLOW / Flood Modeller linking are available from the <a href="https://gitlab.com/tuflow-user-group/third-party-tools/other/flood-modeller-tuflow-linked-examples">TUFLOW Gitlab User Group</a>. Detailed documentation for the example models is available from the <a href="https://wiki.tuflow.com/TUFLOW_1D_Flood_Modeller_Connectivity">TUFLOW Wiki 1D Flood Modeller Connectivity</a>. A TUFLOW / Flood Modeller linked model is provided in <a href="https://wiki.tuflow.com/Flood_Modeller_Tutorial_Module01">TUFLOW / Flood Modeller Tutorial Module 1</a>.</p>
+</div>
+<div id="oneD2DFMLinking1D-3" class="section level3 hasAnchor" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Flood Modeller 1D to TUFLOW 1D (ESTRY) Linking<a href="OneD2DLinkingFM-2.html#oneD2DFMLinking1D-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>TUFLOW 1D (ESTRY) domains can be dynamically linked with Flood Modeller. The most common reason this is carried out is to utilise TUFLOW 1D’s powerful pipe network features (see Section <a href="#Pipes-2"><strong>??</strong></a>).</p>
+<p>Flood Modeller and TUFLOW 1D (ESTRY) nodes will be considered linked if:</p>
+<ol style="list-style-type: decimal">
+<li>A TUFLOW 1D node in a 1d_nwk layer, and a Flood Modeller node in a <a href="#tcfReadGISX1DNodes">Read GIS X1D Nodes</a> or <a href="#tcfReadGISX1DNetwork">Read GIS X1D Network</a> layer are snapped.
+<ul>
+<li>Note, legacy models may include reference to ISIS in the command. For example, “X1D” in <a href="#tcfReadGISX1DNodes">Read GIS X1D Nodes</a> can be substituted with “ISIS” (i.e. <a href="#tcfReadGISX1DNodes">Read GIS ISIS Nodes</a>).<br />
+</li>
+</ul></li>
+<li>The TUFLOW 1D node connection method is defined using the TUFLOW 1D 1d_nwk Conn_1D_2D attribute. If the Conn_1D_2D field is blank, a “X1DH” type is assumed - this is the default approach. Alternatively, a value of “X1DH” or “X1DQ” can be manually specified.
+<ul>
+<li>A “X1DH” link means a Flood Modeller 1D water level is applied at the TUFLOW 1D node (i.e. Flood Modeller sends TUFLOW 1D a water level and TUFLOW 1D sends back a +/- flow to Flood Modeller).</li>
+<li>A “X1DQ” link means a Flood Modeller inflow/outflow is being applied at the TUFLOW 1D node (i.e. Flood Modeller sends TUFLOW 1D a +/- flow and TUFLOW 1D sends back a water level).</li>
+<li>If the end of the TUFLOW 1D channel and the snapped Flood Modeller / TUFLOW 1D nodes are not in the same location a TUFLOW 1D 1d_nwk connector “X” channel type can be used to connect the end of the linked TUFLOW 1D channel to the TUFLOW 1D node snapped to the Flood Modeller node.<br />
+</li>
+<li>Note that the upstream and downstream inverts for the TUFLOW 1D node linked to Flood Modeller should be set to -99999 unless the node is also being used to set the inverts of channels snapped to it.</li>
+<li>As a general rule, a TUFLOW 1D X1DH (the default) would be used for most Flood Modeller TUFLOW 1D links. An X1DQ might be more appropriate where a Flood Modeller model stops and flows into a TUFLOW 1D model.</li>
+</ul></li>
+</ol>
+<p>Generally, a TUFLOW 1D timestep will be smaller than the Flood Modeller timestep. In these cases, the total volume is accumulated over all TUFLOW 1D timesteps within a Flood Modeller timestep, and applied to the Flood Modeller model as a discharge by dividing the volume by the Flood Modeller timestep.</p>
+<p>When running a TUFLOW 1D Flood Modeller linked model, the mass balance output _MB1D.csv file includes four new columns (which are not present if the 1D-1D linking is not used):</p>
+<ul>
+<li>X1DH V In: The volume of water in via a X1DH link.<br />
+</li>
+<li>X1DH V Out: The volume of water out via a X1DH link.<br />
+</li>
+<li>X1DQ V In: The volume of water in via a X1DQ link.<br />
+</li>
+<li>X1DQ V Out: The volume of water out via a X1DQ link.</li>
+</ul>
+<p>Also, for model review purposes, the type or existence of a connection can be checked following a simulation by viewing the Conn_1D_2D attribute in the <a href="https://wiki.tuflow.com/Check_Files_1d_nwk_N">_nwk_N_check</a> layer. The _messages GIS layer also contains <a href="https://wiki.tuflow.com/TUFLOW_Message_1393">CHECK 1393</a> messages at each TUFLOW 1D node linked to a Flood Modeller node.</p>
+<p>Example models demonstrating TUFLOW Flood Modeller linking are available from the <a href="https://gitlab.com/tuflow-user-group/third-party-tools/other/flood-modeller-tuflow-linked-examples">TUFLOW Gitlab User Group</a>. Detailed documentation for the example models is available from the <a href="https://wiki.tuflow.com/TUFLOW_1D_Flood_Modeller_Connectivity">TUFLOW Wiki 1D Flood Modeller Connectivity</a>. A TUFLOW 1D Flood Modeller linked model is also provided in <a href="https://wiki.tuflow.com/Flood_Modeller_Tutorial_Module02">TUFLOW / Flood Modeller Tutorial Module 2</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="OneD2DLinkingSWMM-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="oneD2D12D-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": true,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": false,
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

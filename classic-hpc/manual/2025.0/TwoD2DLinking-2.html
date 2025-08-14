@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.7 Multiple 2D Domains | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </title>
+  <meta name="description" content="TUFLOW Classic/HPC User Manual 2025" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.7 Multiple 2D Domains | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.7 Multiple 2D Domains | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  
+  <meta name="twitter:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+<meta name="author" content="RELEASE CANDIDATE     This is an interim manual that accompanies the TUFLOW Classic/HPC 2025.2.0-rc.1 release candidate executable. The information contained within this interim version may vary from the subsequent final version." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="oneD2D12D-2.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/TUFLOW_2025.2_release-candidate.png"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this Manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#commands"><i class="fa fa-check"></i>Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#about-this-manual"><i class="fa fa-check"></i>About this Manual</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#glossary-and-notation"><i class="fa fa-check"></i>Glossary and Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="DomainLinking-1.html"><a href="DomainLinking-1.html"><i class="fa fa-check"></i><b>1</b> Combining Domains and Solvers</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Linked-1D2D-Models-Intro-2.html"><a href="Linked-1D2D-Models-Intro-2.html"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html"><i class="fa fa-check"></i><b>1.2</b> 1D and 2D Domain Linking Theory</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#HXBoundary-3"><i class="fa fa-check"></i><b>1.2.1</b> HX 2D Head Boundary</a></li>
+<li class="chapter" data-level="1.2.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundary-3"><i class="fa fa-check"></i><b>1.2.2</b> SX 2D Flow Boundaries</a>
+<ul>
+<li class="chapter" data-level="1.2.2.1" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundarySW-4"><i class="fa fa-check"></i><b>1.2.2.1</b> SX 2D Flow Boundary to Surface Water</a></li>
+<li class="chapter" data-level="1.2.2.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundaryGW-4"><i class="fa fa-check"></i><b>1.2.2.2</b> SX 2D Flow Boundary to Groundwater</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html"><i class="fa fa-check"></i><b>1.3</b> TUFLOW 1D (ESTRY) to TUFLOW 2D Linking</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYChannel-3"><i class="fa fa-check"></i><b>1.3.1</b> 1D Open Channel and 2D Domain Linking</a></li>
+<li class="chapter" data-level="1.3.2" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYCulverts-3"><i class="fa fa-check"></i><b>1.3.2</b> 1D Structures Embedded within 2D Domains</a></li>
+<li class="chapter" data-level="1.3.3" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYPipeNetwork-3"><i class="fa fa-check"></i><b>1.3.3</b> 1D Pipe Network Pits linked to 2D Domains</a></li>
+<li class="chapter" data-level="1.3.4" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#VirtualPits-3"><i class="fa fa-check"></i><b>1.3.4</b> Virtual Pits linked to 2D Domains</a></li>
+<li class="chapter" data-level="1.3.5" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#GroundwaterLinked-3"><i class="fa fa-check"></i><b>1.3.5</b> TUFLOW 1D (ESTRY) linked to Groundwater</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html"><i class="fa fa-check"></i><b>1.4</b> SWMM to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMCulverts-5"><i class="fa fa-check"></i><b>1.4.1</b> 1D Culvert Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.2" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMPipeNetwork-3"><i class="fa fa-check"></i><b>1.4.2</b> 1D Pipe Network Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.3" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DGWConnections-3"><i class="fa fa-check"></i><b>1.4.3</b> Groundwater Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.4" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DLinkingSWMM1D-3"><i class="fa fa-check"></i><b>1.4.4</b> SWMM to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html"><i class="fa fa-check"></i><b>1.5</b> Flood Modeller to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html#oneD2DFMLinking2D-3"><i class="fa fa-check"></i><b>1.5.1</b> Flood Modeller 1D to TUFLOW 2D Linking</a></li>
+<li class="chapter" data-level="1.5.2" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html#oneD2DFMLinking1D-3"><i class="fa fa-check"></i><b>1.5.2</b> Flood Modeller 1D to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="oneD2D12D-2.html"><a href="oneD2D12D-2.html"><i class="fa fa-check"></i><b>1.6</b> 12D-DDA to TUFLOW Linking</a></li>
+<li class="chapter" data-level="1.7" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html"><i class="fa fa-check"></i><b>1.7</b> Multiple 2D Domains</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html#TwoD2DLinkingQDT-3"><i class="fa fa-check"></i><b>1.7.1</b> Classic’s M2D Feature versus HPC Quadtree</a></li>
+<li class="chapter" data-level="1.7.2" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html#TwoD2DLinkingM2D-3"><i class="fa fa-check"></i><b>1.7.2</b> TUFLOW Classic’s Multiple 2D Domains</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/WQFooter.jpg" style="width:246px;height:10px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(226,1,119);">TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<p class="wmark before"></p>
+<div id="TwoD2DLinking-2" class="section level2 hasAnchor" number="1.7">
+<h2><span class="header-section-number">1.7</span> Multiple 2D Domains<a href="TwoD2DLinking-2.html#TwoD2DLinking-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The Multiple 2D Domain Module license provides access to TUFLOW HPC’s Quadtree and TUFLOW Classic’s Multiple 2D Domain (M2D) features. Both of these features allow the 2D cell resolution (cell sizes) to vary across the model. However, they are very different in their hydraulic solution and construct as described below.</p>
+<div id="TwoD2DLinkingQDT-3" class="section level3 hasAnchor" number="1.7.1">
+<h3><span class="header-section-number">1.7.1</span> Classic’s M2D Feature versus HPC Quadtree<a href="TwoD2DLinking-2.html#TwoD2DLinkingQDT-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>TUFLOW HPC only supports one 2D domain, however, the 2D cell size can be varied within the domain using the quadtree grid feature. In contrast, TUFLOW Classic’s M2D feature allows different 2D domains of different cell size/orientation to be linked together via hidden 1D nodes and HX lines.</li>
+<li>For a HPC quadtree grid, the numerical solution remains a full 2D solution without loss of accuracy, undesirable numerical artefacts or wave reflections when transitioning from one cell size to another. For Classic’s M2D feature, there is a loss of accuracy, particularly where the flow is complex/circulating and the assumptions associated with momentum and the linear water level profile associated with HX lines are influential.</li>
+<li>TUFLOW HPC Quadtree grids are set up by the modeller using a largely automated approach. Definition of 2D cell resolution regions is all that’s required. By comparison, TUFLOW Classic M2D requires manual definition of each 2D domain and the linkage between domains using 2D-2D links.</li>
+</ul>
+<p>Please contact <a href="mailto:sales@tuflow.com" class="email">sales@tuflow.com</a> if you wish to use these features, but do not have the M2D/Quadtree Module enabled on your licence.</p>
+<!-- EFC (WJS) - I've commented out below text as not needed/duplicated in Ch 7
+### TUFLOW HPC Quadtree {#TwoD2DLinkingQDT-3}
+
+The Quadtree grid refinement functionality allows the user to vary the 2D cell resolution within a TUFLOW HPC model. Quadtree refinement allows for recursive division of square TUFLOW cells into four smaller square cells. Up to 9 levels of cell size refinement are currently permitted. All cells for all levels of refinement share a common orientation. The quadtree grid concept is presented in Figure \@ref(fig:fig-HPCQTGridIntro)
+
+<center>
+<div class="figure" style="text-align: center">
+<img src="images/1D2DHPCQTMesh.png" alt="**TUFLOW HPC Quadtree Grid Concept**" width="70%" />
+<p class="caption">(\#fig:fig-HPCQTGridIntro)**TUFLOW HPC Quadtree Grid Concept**</p>
+</div>
+</center>
+
+TUFLOW HPC Quadtree grid refinement is activated when a Quadtree Control File is specified, using the TCF command '[Quadtree Control File](#tcfQuadtreeControlFile)'. The nesting level (i.e. levels of grid refinement) is defined using the Quadtree Control File (QCF) GIS file reference command 
+'[Read GIS Nesting](#qcfReadGISNesting)'. Within the GIS Nesting layer (2d_qnl), the nest level attribute must be in the range 1 to 9. A value of 1 value represents the most coarse resolution, and is also referred to as the "Base Cell Size" value. A value of 2 indicates the cell size within the polygon would be at Level 2 (i.e. half the base cell size). 3 would be cells at ¼ of the base cell size, 4 for 1/8th and so on up to a maximum of 9 (1/256th). For numerical precision reasons, the maximum nesting level of 9 (or 1/256) of the base cell size has been adopted. Note, if it is defined, there should only be a maximum of one Level 1 polygon included in the 2d_qnl layer, but for all other nest levels there is no limit on the number of polygons. 
+
+It is a requirement that each 2D cell face can have a maximum of 2 adjoining cell faces. When refining grid areas, if a nesting level polygon does not sit within another polygon of the next higher level, such as if a Level 4 polygon is defined within a Level 1 or Level 2 polygon, intermediate areas of refinement are automatically generated by TUFLOW. This Quadtree grid behaviour is shown at the road intersection in Figure \@ref(fig:fig-HPCQTGridAuto). Alternatively if a refinement polygon sits within a polygon of the next higher level (e.g. a Level 3 polygon is defined within a Level 2), no automatic refinement is required or occurs, as shown in Figure \@ref(fig:fig-HPCQTGridManual).
+
+<center>
+<div class="figure" style="text-align: center">
+<img src="images/1D2DHPCQTMesh_Auto.png" alt="**TUFLOW HPC Quadtree Grid - Automatic Refinement**" width="70%" />
+<p class="caption">(\#fig:fig-HPCQTGridAuto)**TUFLOW HPC Quadtree Grid - Automatic Refinement**</p>
+</div>
+</center>
+
+<center>
+<div class="figure" style="text-align: center">
+<img src="images/1D2DHPCQTMesh_Manual.png" alt="**TUFLOW HPC Quadtree Grid - Manual Refinement **" width="70%" />
+<p class="caption">(\#fig:fig-HPCQTGridManual)**TUFLOW HPC Quadtree Grid - Manual Refinement **</p>
+</div>
+</center>
+-->
+<p>Due to the workflow efficient nature of its implementation, superior stability, numerical accuracy and preservation of inertia, TUFLOW HPC Quadtree has superseded TUFLOW Classic’s Multiple 2D Domain (M2D) feature as the recommended approach for models that require varied 2D cell sizes within a single model.</p>
+<p>For a complete description of the 2D TUFLOW HPC Quadtree solution and associated commands, please refer to Section <a href="#Quadtree-3"><strong>??</strong></a>.</p>
+<p>An example TUFLOW HPC Quadtree model is available in <a href="https://wiki.tuflow.com/Tutorial_Introduction">TUFLOW Tutorial Module 7</a>. A video demonstration the implementation of this multiple 2D Domain feature is also available in the <a href="https://www.tuflow.com/library/videos/#howtoquadtree">TUFLOW Library</a>.</p>
+</div>
+<div id="TwoD2DLinkingM2D-3" class="section level3 hasAnchor" number="1.7.2">
+<h3><span class="header-section-number">1.7.2</span> TUFLOW Classic’s Multiple 2D Domains<a href="TwoD2DLinking-2.html#TwoD2DLinkingM2D-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When using TUFLOW Classic with the M2D feature, any number of 2D domains of different cell size and orientation can be combined to form one model. The 2D domains can be linked via 1D domains or directly to each other. For example, a 1D domain of a river system may have several 2D domains embedded to represent several towns where a more detailed analysis is required. Alternatively, direct 2D to 2D linking can be achieved by using the 2d_bc 2D link type (see Section <a href="#TwoDBoundaries-2"><strong>??</strong></a>). Examples of these model configurations are shown in Figure <a href="TwoD2DLinking-2.html#fig:fig-MultipleDomainModellinkedvia1DDomain">1.16</a> and Figure <a href="TwoD2DLinking-2.html#fig:fig-MultipleDomainModellinkedvia2DLink">1.17</a>.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-MultipleDomainModellinkedvia1DDomain"></span>
+<img src="images/image142.png" alt="**Schematic of a Multiple Domain Model linked via a 1D Domain**" width="80%" />
+<p class="caption">
+Figure 1.16: <strong>Schematic of a Multiple Domain Model linked via a 1D Domain</strong>
+</p>
+</div>
+</center>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-MultipleDomainModellinkedvia2DLink"></span>
+<img src="images/image143.png" alt="**Schematic of a Multiple 2D Domain Model using the 2d_bc “2D” Link**" width="80%" />
+<p class="caption">
+Figure 1.17: <strong>Schematic of a Multiple 2D Domain Model using the 2d_bc “2D” Link</strong>
+</p>
+</div>
+</center>
+<p>To specify more than one 2D domain use <a href="#tcfStart2DDomain">Start 2D
+Domain</a> and <a href="#tcfEnd2DDomain">End 2D Domain</a> in the .tcf file to start and end blocks of commands applicable for each 2D domain. The <a href="#tcfESTRYControlFile">ESTRY Control File</a> and <a href="#tcfBCDatabase">BC Database</a> commands are independent of the 2D domain block. As such they are typically not included within the 2D domain block.</p>
+<p>The mandatory .tcf commands that occur within a 2D domain block are:</p>
+<table>
+<colgroup>
+<col style="width: 49%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>
+<a href="#tcfGeometryControlFile">Geometry Control File</a><br />
+<a href="#tcfBCControlFile">BC Control File</a>
+</th>
+<th>
+<a href="#tcfTimestep">Timestep</a>
+</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>Optional commands that can be used are:</p>
+<table>
+<colgroup>
+<col style="width: 49%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>
+<a href="#tcfCellWetDryDepth">Cell Wet/Dry Depth</a><br />
+<a href="#tcfInstabilityWaterLevel">Instability Water Level</a><br />
+<a href="#tcfReadGISFC">Read GIS FC</a><br />
+<a href="#tcfReadGISGLO">Read GIS GLO</a>
+</th>
+<th>
+<a href="#tcfReadGISIWL">Read GIS IWL</a><br />
+<a href="#tcfReadRowColIWL">Read RowCol IWL</a><br />
+<a href="#tcfReadGISLP">Read GIS LP</a><br />
+<a href="#tcfReadGISPO">Read GIS PO</a>
+</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p><strong>Note that specifying one of the above commands outside a Start/End 2D Domain block does not apply that command to all 2D domains.</strong> For example, specifying <a href="#tcfCellWetDryDepth">Cell Wet/Dry Depth</a> outside a lock will not set the <a href="#tcfCellWetDryDepth">Cell Wet/Dry Depth</a> value to all 2D domains, and causes ERROR 2107 to occur.</p>
+<p>An example of using 2D domain blocks is given below:</p>
+<tcmd><a href="#tcfStart2DDomain">Start 2D Domain</a></tcmd><teq> == </teq><tblk>East_Domain</tblk><br>
+<ol>
+<tcmd><a href="#tcfGeometryControlFile">Geometry Control File</a></tcmd><teq> == </teq><tblk>..\model\east_domain.tgc</tblk><br>
+<tcmd><a href="#tcfBCControlFile">BC Control File</a></tcmd><teq> == </teq><tblk>..\model\east_domain.tbc</tblk><br>
+<tcmd><a href="#tcfTimestep">Timestep</a></tcmd><teq> == </teq><tblk>10</tblk><br>
+</ol>
+<p><tcmd><a href="#tcfEnd2DDomain">End 2D Domain</a></tcmd><br></p>
+<tcmd><a href="#tcfStart2DDomain">Start 2D Domain</a></tcmd><teq> == </teq><tblk>West_Domain</tblk><br>
+<ol>
+<tcmd><a href="#tcfGeometryControlFile">Geometry Control File</a></tcmd><teq> == </teq><tblk>..\model\west_domain.tgc</tblk><br>
+<tcmd><a href="#tcfBCControlFile">BC Control File</a></tcmd><teq> == </teq><tblk>..\model\west_domain.tbc</tblk><br>
+<tcmd><a href="#tcfTimestep">Timestep</a></tcmd><teq> == </teq><tblk>5</tblk><br>
+</ol>
+<p><tcmd><a href="#tcfEnd2DDomain">End 2D Domain</a></tcmd></p>
+<p><tcmd><a href="#tcfBCDatabase">BC Database</a></tcmd><teq> == </teq><tblk>..\bc_dbase\bcdbase_Q100_2hr_001.csv</tblk><br>
+<tcmd><a href="#tcfESTRYControlFile">ESTRY Control File</a></tcmd><teq> == </teq><tblk>..\model\1D_domain.ecf</tblk><br>
+<tcmd><a href="#tcfReadMaterialsFile">Read Materials File</a></tcmd><teq> == </teq><tblk>..\model\n_values.tmf</tblk><br>
+<tcmd><a href="#tcfStartTime">Start Time</a></tcmd><teq> == </teq><tblk>0</tblk><br>
+<tcmd><a href="#tcfEndTime">End Time</a></tcmd><teq> == </teq><tblk>12</tblk></p>
+<p>Multiple 2D domain models use the 2d_bc “2D” link type (see Table <a href="#tab:tab-twoDBoundary"><strong>??</strong></a> and Table <a href="#tab:tab-ConditionsAttribute"><strong>??</strong></a>) as the boundary cells that transfer flow between the neighbouring domains. The link type creates hidden 1D nodes at each vertex along the 2D link line and also at a regular interval, as defined by the “d” attribute (see Table <a href="#tab:tab-ConditionsAttribute"><strong>??</strong></a>). The hidden 1D nodes act as storage that convey the water from one 2D domain to the other.</p>
+<p>The water levels along the 2d_bc 2D link line are linearly interpolated using the water levels in the hidden 1D nodes. If the water level profile in reality is not close to linear between vertices, strange flow patterns may occur which can lead to model instability or unrealistic results. As such, appropriate resolution of the hidden 1D nodes is an important feature of multiple 2D domain models.</p>
+<p>The .tcf command <a href="#tcfReveal1DNodes">Reveal 1D Nodes</a> can be used to view the hidden 1D nodes. The hidden nodes will be written to the nwk_N check layer, as shown in Figure <a href="TwoD2DLinking-2.html#fig:fig-Multiple2DDomainModelLinkCheckFiles">1.18</a> . For multiple domain models using the 2d_bc “2D” link, note that this GIS layer must be read into the .tbc files of <strong>both</strong> 2D domains. The 2D link can then be checked by viewing the <a href="https://wiki.tuflow.com/Check_Files_2d_to_2d_bc">_2d_to_2d_check</a> layer which displays the 2D cells used to link the two domains together. These features, and their check files are shown in Figure <a href="TwoD2DLinking-2.html#fig:fig-Multiple2DDomainModelLinkCheckFiles">1.18</a>.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-Multiple2DDomainModelLinkCheckFiles"></span>
+<img src="images/image144.png" alt="**Multiple 2D Domain Model “2D” Link Check Files**" width="50%" />
+<p class="caption">
+Figure 1.18: <strong>Multiple 2D Domain Model “2D” Link Check Files</strong>
+</p>
+</div>
+</center>
+<p>The following guidance is recommended when defining the location and orientation of the 2d_bc “2D” link.</p>
+<ul>
+<li>2D link lines will be most stable if digitised perpendicular to the dominant flow direction in high conveyance locations (e.g. rivers and creeks).<br />
+</li>
+<li>Orientation of the 2D link lines is less critical in low conveyance regions, such as floodplain storage areas (i.e. perpendicular orientation is not a necessity). High resolution definition of the hidden 1D nodes may be required. If used, the automated hidden 1D nodes distance attribute “d” should not be set finer than three times the larger cell size.</li>
+</ul>
+<p>If the extents of the 2D domains overlap, it will be necessary to deactivate the overlapping cells in the other domain. Using the example above, the active area for the ‘West Domain’ will need to be deactivated in the .tgc file of the ‘East Domain’ and vice versa. The <a href="#tgcReadGISCode">Read GIS Code Invert</a> command is useful for this process as it allows for the same GIS layer to be used to active/deactivate cells.</p>
+<p>A unique model <a href="#tcfTimestep">Timestep</a> is recommended for each 2D domain. The timestep should be defined so that it conforms to the Courant stability criteria for each domain, as discussed in Section <a href="#TUFLOWClassicTimestep-3"><strong>??</strong></a>. The timesteps of all 2D and 1D domains should be an integer multiple of one another.</p>
+<p>A TUFLOW Classic Multiple 2D Domain model is available in <a href="https://wiki.tuflow.com/Tutorial_Model_Archive">TUFLOW Tutorial Module 9 Archive</a>.</p>
+<p><img src="images/WQFooter.jpg" width="100%" /></p>
+
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="1" line-spacing="2">
+<div id="ref-Nair2003" class="csl-entry">
+Ansar M. and Nair S. (2003). <em>Flow Computations at STA-1 West Gated Spillways</em>. South Florida Water Management District.
+</div>
+<div id="ref-AEMI2017" class="csl-entry">
+Australian Emergency Management Institute. (2017). <em>Managing the Floodplain: A Guide to Best Practice in Flood Risk Management in Australia</em>. Australian Institute for Disaster Resilience. <a href="https://knowledge.aidr.org.au/media/3518/adr-guideline-7-3.pdf">https://knowledge.aidr.org.au/media/3518/adr-guideline-7-3.pdf</a>
+</div>
+<div id="ref-Austroads1994" class="csl-entry">
+Austroads. (1994). <em>Waterway Design - a Guide to the Hydraulic Design of Bridges, Culverts and Floodways</em>. <a href="https://austroads.gov.au/">https://austroads.gov.au/</a>
+</div>
+<div id="ref-Austroads2018" class="csl-entry">
+Austroads. (2018). <em>Guide to Bridge Technology Part 8, Hydraulic Design of Waterway Structures</em>. <a href="https://austroads.gov.au/">https://austroads.gov.au/</a>
+</div>
+<div id="ref-BabisterBarton2012" class="csl-entry">
+Babister, M., &amp; Barton, C. (2012). <em>Two Dimensional Modelling in Urban and Rural Floodplains Stage 1 &amp; 2 Report</em>. <a href="https://arr.ga.gov.au/__data/assets/pdf_file/0019/40573/ARR_Project15_TwoDimensional_Modelling_DraftReport.pdf">https://arr.ga.gov.au/__data/assets/pdf_file/0019/40573/ARR_Project15_TwoDimensional_Modelling_DraftReport.pdf</a>
+</div>
+<div id="ref-Barton2001" class="csl-entry">
+Barton, C. (2001). <em>Flow Through an Abrupt Constriction – 2D Hydrodynamic Model Performance and Influence of Spatial Resolution</em> (C. Barton, Ed.) [M.Eng.Sc Master Thesis]. <a href="https://tuflow.com/media/4983/2001-flow-through-an-abrupt-constriction-2d-hydrodynamic-performance-and-influence-of-spatial-resolution-barton-thesis.pdf">https://tuflow.com/media/4983/2001-flow-through-an-abrupt-constriction-2d-hydrodynamic-performance-and-influence-of-spatial-resolution-barton-thesis.pdf</a>
+</div>
+<div id="ref-BenhamRogencamp2003" class="csl-entry">
+Benham, S., &amp; Rogencamp, G. (2003). Appliction of 2D Flood Models with 1D Drainage Elements. <em>NSW FMA Conference</em>. <a href="https://?">?</a>
+</div>
+<div id="ref-Bos1976" class="csl-entry">
+Bos, M. (1976). <em>Discharge Measurement Structures</em> (Publication No. 161). Delft Hydraulic Laboratory. <a href="https://www.samsamwater.com/library/pub20.pdf">https://www.samsamwater.com/library/pub20.pdf</a>
+</div>
+<div id="ref-Bos1989" class="csl-entry">
+Bos, M. (1989). <em>Discharge Measurement Structures</em> (3rd revised edition.). International Institute for Land Reclamation; Improvement. <a href="https://www.samsamwater.com/library/pub20.pdf">https://www.samsamwater.com/library/pub20.pdf</a>
+</div>
+<div id="ref-Boyte2014" class="csl-entry">
+Boyte, C. (2014). <em>The Application of Direct Rainfall Models as Hydrologic Models Incorporating Hydraulic Resistance at Shallow Depths</em> [B.Eng Thesis]. <a href="https://tuflow.com/media/5009/2014-the-application-of-direct-rainfall-models-as-hydrologic-models-incorporating-hydraulic-resistance-at-shallow-depths-boyte-thesis.pdf">https://tuflow.com/media/5009/2014-the-application-of-direct-rainfall-models-as-hydrologic-models-incorporating-hydraulic-resistance-at-shallow-depths-boyte-thesis.pdf</a>
+</div>
+<div id="ref-Bradley1978" class="csl-entry">
+Bradley, J. (1978). <em>Hydraulics of Bridge Waterways</em> (HDS 1, FIWA). Bridge Division. <a href="https://www.fhwa.dot.gov/engineering/hydraulics/pubs/hds1.pdf">https://www.fhwa.dot.gov/engineering/hydraulics/pubs/hds1.pdf</a>
+</div>
+<div id="ref-UrbanGuide2009" class="csl-entry">
+CIWEM. (2009). <em>Integrated Urban Drainage Modelling Guide</em>. CIWEM.
+</div>
+<div id="ref-BridgeDeckAfflux" class="csl-entry">
+Collecutt, G., Baeumer, U., Gao, S., &amp; Syme, W. (2022). Bridge Deck Afflux Modelling – Benchmarking of CFD and SWE Codes to Real-World Data. <em>Hydrology &amp; Water Resources Symposium</em>. <a href="https://tuflow.com/media/7554/2022-bridge-deck-afflux-modelling-benchmarking-of-cfd-and-swe-codes-to-real-world-data-collecutt-et-al-hwrs.pdf">https://tuflow.com/media/7554/2022-bridge-deck-afflux-modelling-benchmarking-of-cfd-and-swe-codes-to-real-world-data-collecutt-et-al-hwrs.pdf</a>
+</div>
+<div id="ref-Collecutt2020" class="csl-entry">
+Collecutt, G., Gao, S., &amp; Syme, W. (2020). Mesh-Size Insensitive Turbulence Modelling for the 2D Shallow Water Equations. <em>River Flow 2020</em>, pp. 1–9. <a href="https://tuflow.com/media/5023/2020-mesh-size-insensitive-turbulence-modelling-for-the-2d-shallow-water-equations-collecutt-et-al-iahr-river-flow-delft.pdf">https://tuflow.com/media/5023/2020-mesh-size-insensitive-turbulence-modelling-for-the-2d-shallow-water-equations-collecutt-et-al-iahr-river-flow-delft.pdf</a>
+</div>
+<div id="ref-CollecuttSyme2017" class="csl-entry">
+Collecutt, G., &amp; Syme, B. (2017). Experimental Benchmarking of Mesh Size and Time-Step Convergence for a 1st and 2nd Order SWE Finite Volume Scheme. <em>Proceedings of the 37th IAHR World Congress</em>. <a href="https://downloads.tuflow.com/_archive/Publications/07-31-1369.pdf">https://downloads.tuflow.com/_archive/Publications/07-31-1369.pdf</a>
+</div>
+<div id="ref-CoxShard2010" class="csl-entry">
+Cox, R., Shard, T., &amp; Blacka, M. (2010). <em>Australian Rainfall and Runoff Revision Project 10: Appropriate Safety Criteria for People</em>. Austalian Institute of Engineers. <a href="https://arr.ga.gov.au/__data/assets/pdf_file/0006/40578/ARR_Project_10_Stage1_report_Final.pdf">https://arr.ga.gov.au/__data/assets/pdf_file/0006/40578/ARR_Project_10_Stage1_report_Final.pdf</a>
+</div>
+<div id="ref-CSIRO2000" class="csl-entry">
+CSIRO. (2000). <em>Floodplain Management in Australia Best Practice Principles and Guidelines</em>. CSIRO Publishing.
+</div>
+<div id="ref-DEFRA2006" class="csl-entry">
+DEFRA. (2006a). <em>DEFRA r&amp;d Outputs: Flood Risks to People Phase Two Draft FD2321/TR1 and TR2</em>. DEFRA. <a href="https://assets.publishing.service.gov.uk/media/602bbc3de90e07055f646148/Flood_risks_to_people_-_Phase_2_Guidance_Document_Technical_report.pdf">https://assets.publishing.service.gov.uk/media/602bbc3de90e07055f646148/Flood_risks_to_people_-_Phase_2_Guidance_Document_Technical_report.pdf</a>
+</div>
+<div id="ref-DEFRA2006b" class="csl-entry">
+DEFRA. (2006b). <em>Flood Risks to People Phase 2 FD2321/TR1 the Flood Risks to People Methodology</em>. DEFRA. <a href="https://assets.publishing.service.gov.uk/media/602bbc768fa8f50383c41f80/Flood_risks_to_people_-_Phase_2_The_flood_risks_to_people_methodology_technical_report.pdf">https://assets.publishing.service.gov.uk/media/602bbc768fa8f50383c41f80/Flood_risks_to_people_-_Phase_2_The_flood_risks_to_people_methodology_technical_report.pdf</a>
+</div>
+<div id="ref-DHI2009" class="csl-entry">
+DHI. (2009). <em>MOUSE PIPE FLOW – Reference Manual</em>. Danish Hydraulic Institute. <a href="https://manuals.mikepoweredbydhi.help/2017/Cities/MOUSEPipeFlowReference.pdf">https://manuals.mikepoweredbydhi.help/2017/Cities/MOUSEPipeFlowReference.pdf</a>
+</div>
+<div id="ref-InundationStudy2004" class="csl-entry">
+Environment Agency. (2004). <em>Tidal Thames Embayment Inundation Study</em>. EA, Halcrow, TUFLOW.
+</div>
+<div id="ref-UKFloodRisks2006" class="csl-entry">
+Environment Agency. (2006). <em>UK FD2321 Technical Report - Flood Risks to People: Phase 2 Project Record</em>. UK Government; <a href="https://assets.publishing.service.gov.uk/media/602bbb768fa8f50386a7f8aa/Flood_risks_to_people_-_Phase_2_Project_Record.pdf" class="uri">https://assets.publishing.service.gov.uk/media/602bbb768fa8f50386a7f8aa/Flood_risks_to_people_-_Phase_2_Project_Record.pdf</a>.
+</div>
+<div id="ref-UKExplanatoryNote2008" class="csl-entry">
+Environment Agency. (2008). <em>Explanatory Note for FD2320 and FD2321 Project Record</em>. <a href="https://assets.publishing.service.gov.uk/media/602bbdcfe90e070561b31432/Explanatory_note_for_FD2320_and_FD2321_project_record.pdf" class="uri">https://assets.publishing.service.gov.uk/media/602bbdcfe90e070561b31432/Explanatory_note_for_FD2320_and_FD2321_project_record.pdf</a>.
+</div>
+<div id="ref-EAGuide2010" class="csl-entry">
+Environment Agency. (2010). <em>The Fluvial Design Guide</em>. Environment Agency.
+</div>
+<div id="ref-Falconer2005" class="csl-entry">
+Falconer, R. A., Lin, B., &amp; Kashefipour, S. M. (2005). Modelling Water Quality Processes in Estuaries. In P. B. Bates, S. N. Lane, &amp; R. I. Furguson (Eds.), <em>Computational fluid dynamics: Applications in environmental hydraulics</em>. John Wiley; Sons.
+</div>
+<div id="ref-Fringer2005" class="csl-entry">
+Fringer, O. B., Armfield, S. W., &amp; Street, R. L. (2005). Reducing Numerical Diffusion in Interfacial Gravity Wave Simulations. <em>International Journal for Numerical Methods in Fluids</em>, <em>49</em>, 301–329.
+</div>
+<div id="ref-Endof1DOpenChannel" class="csl-entry">
+Gao, S., Ryan, P., Syme, W., &amp; Collecutt, G. (2022). The End of the 1D Open Channel Cross-Section? <em>Hydrology &amp; Water Resources Symposium</em>. <a href="https://tuflow.com/media/7547/2022-the-end-of-the-1d-open-channel-cross-section-gao-et-al-hwrs.pdf">https://tuflow.com/media/7547/2022-the-end-of-the-1d-open-channel-cross-section-gao-et-al-hwrs.pdf</a>
+</div>
+<div id="ref-GHD2012" class="csl-entry">
+GHD. (2012). <em>MBRC Storm Tide Management Study</em>.
+</div>
+<div id="ref-HamiltonFloodMapping" class="csl-entry">
+Hamilton City Council. (2012). <em>Flood Mapping</em>. <a href="https://hamilton.govt.nz/property-rates-and-building/district-plan/flood-mapping/" class="uri">https://hamilton.govt.nz/property-rates-and-building/district-plan/flood-mapping/</a>.
+</div>
+<div id="ref-Henderson1966" class="csl-entry">
+Henderson, F. (1966). <em>Open Channel Flow</em>. Macmillan.
+</div>
+<div id="ref-Holland1980" class="csl-entry">
+Holland, G. J. (1980). An Analytic Model of the Wind and Pressure Profiles in Hurricanes. <em>Monthly Weather Review</em>, <em>108</em>(8), 1212–1218. <a href="https://doi.org/10.1175/1520-0493(1980)108%3C1212:AAMOTW%3E2.0.CO;2">https://doi.org/10.1175/1520-0493(1980)108&lt;1212:AAMOTW&gt;2.0.CO;2</a>
+</div>
+<div id="ref-HRWallingford1988" class="csl-entry">
+HR Wallingford. (1988). <em>Afflux at Arch Bridges</em>. <a href="https://eprints.hrwallingford.com/219/1/SR182-Afflux-arch-bridges-HRWallingford.pdf">https://eprints.hrwallingford.com/219/1/SR182-Afflux-arch-bridges-HRWallingford.pdf</a>
+</div>
+<div id="ref-Huxley2004" class="csl-entry">
+Huxley, C. (2004). <em>TUFLOW Testing and Validation</em> (B. ENG. Christopher Dylan Huxley, Ed.) [Thesis]. <a href="https://www.tuflow.com/media/4989/2004-tuflow-testing-and-validation-huxley.pdf">https://www.tuflow.com/media/4989/2004-tuflow-testing-and-validation-huxley.pdf</a>
+</div>
+<div id="ref-Huxley2022" class="csl-entry">
+Huxley, C., Syme, W., Ryan, P., &amp; Collecutt, G. (2022). Hydraulic Modelling 2D Cell Size Result Convergence – Comparing the Performance of Different Shallow Water Equation Solution Schemes. <em>Hydrology and Water Resources Symposium, Engineers Australia</em>. <a href="https://www.tuflow.com/media/7555/2022-hydraulic-modelling-2d-cell-size-result-convergence-huxley-et-al-hwrs.pdf">https://www.tuflow.com/media/7555/2022-hydraulic-modelling-2d-cell-size-result-convergence-huxley-et-al-hwrs.pdf</a>
+</div>
+<div id="ref-Kitts2020" class="csl-entry">
+Kitts, D., Syme, W., Gao, S., Collecutt, G., &amp; Ryan, P. (2020). Mesh Orientation and Cell Size Sensitivity in 2D SWE Solvers. <em>IAHR River Flow Conference</em>. <a href="https://tuflow.com/media/5022/2020-mesh-orientation-and-cell-size-sensitivity-in-2d-swe-solvers-kitts-et-al-iahr-river-flow-delft.pdf">https://tuflow.com/media/5022/2020-mesh-orientation-and-cell-size-sensitivity-in-2d-swe-solvers-kitts-et-al-iahr-river-flow-delft.pdf</a>
+</div>
+<div id="ref-Leonard1991" class="csl-entry">
+Leonard, B. P. (1991). The ULTIMATE Conservative Difference Scheme Applied to Unsteady One-Dimensional Advection. <em>Computer Methods in Applied Mechanics and Engineering</em>, <em>88</em>(1), 17–74.
+</div>
+<div id="ref-Leonard1993" class="csl-entry">
+Leonard, B. P., MacVean, M. K., &amp; Lock, A. P. (1993). <em>Positivity-Preserving Numerical Schemes for Multidimensional Advection</em> (No. 93N27091). <span>NASA Centre for Aerospace Information</span>.
+</div>
+<div id="ref-LeonardNiknafs1991" class="csl-entry">
+Leonard, B. P., &amp; Niknafs, H. S. (1991). <em>Cost-Effective Accurate Coarse-Grid Method for Highly Convective Multidimensional Unsteady Flows</em> (No. 91N21075). <span>NASA Centre for Aerospace Information</span>.
+</div>
+<div id="ref-MBRC2015" class="csl-entry">
+MBRC. (2015). <em>Flood and Coastal Hazard Evaluation Report</em>. Moreton Bay Regional Council. <a href="https://www.moretonbay.qld.gov.au/files/assets/public/v/1/services/building-development/mbrc-plan/background-studies/flood-and-coastal-hazard-evaluation-report-june-2015.pdf">https://www.moretonbay.qld.gov.au/files/assets/public/v/1/services/building-development/mbrc-plan/background-studies/flood-and-coastal-hazard-evaluation-report-june-2015.pdf</a>
+</div>
+<div id="ref-mcdonnell_bryant_2021_5484299" class="csl-entry">
+McDonnell, B., Wu, J. X., Ratliff, K., Mullapudi, A., &amp; Tryby, M. (2021). <em>Open Water Analytics Stormwater Management Model</em> (Version 5.1.13). Zenodo. <a href="https://doi.org/10.5281/zenodo.5484299">https://doi.org/10.5281/zenodo.5484299</a>
+</div>
+<div id="ref-MW2016" class="csl-entry">
+Melbourne Water. (2016). <em>Flood Mapping Projects Guidelines and Technical Specifications</em> (Version 1).
+</div>
+<div id="ref-IAHRManual1994" class="csl-entry">
+Miller, D. (1994). <em>Discharge Characteristics IAHR Hydraulic Structures Design Manual</em> (No. No.8; pp. 249 pages). Hydraulic Design Considerations, Balkema Publ.
+</div>
+<div id="ref-MorrisonSmith1978" class="csl-entry">
+Morrison, W., &amp; Smith, P. (1978). <em>A Practical Application of a Network Model Numerical Simulation of Fluid Motion</em>. North Holland Publishing Company.
+</div>
+<div id="ref-EnvAgency2013" class="csl-entry">
+Neelz, S., &amp; Pender, G. (2013). <em>Benchmarking the Latest Generation of 2D Hydaulic Modeling Packages</em>. Environment Agency. <a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/290884/scho0510bsno-e-e.pdf">https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/290884/scho0510bsno-e-e.pdf</a>
+</div>
+<div id="ref-NSWGManual2005" class="csl-entry">
+NSW Goverment. (2005a). <em>Floodplain Development Manual: The Management of Flood Liable Land</em> (pp. 149 pages). Department of Infrastructure, Planning; Natural Resources (NSW Government). <a href="https://nswdpe.intersearch.com.au/nswdpejspui/handle/1/2051">https://nswdpe.intersearch.com.au/nswdpejspui/handle/1/2051</a>
+</div>
+<div id="ref-NSWManual2005" class="csl-entry">
+NSW Goverment. (2005b). <em>Floodplain Management Manual</em>. NSW Department of Land; Water Conservation (NSW Government).
+</div>
+<div id="ref-OllettSyme2016" class="csl-entry">
+Ollett, P., &amp; Syme, B. (2016). <em>ARR blockage: Numerical implementation and three case studies</em>. <a href="http://www.hydralinc.com/wp-content/uploads/Ollett-Syme-2016-ARR-Blockage.pdf">http://www.hydralinc.com/wp-content/uploads/Ollett-Syme-2016-ARR-Blockage.pdf</a>
+</div>
+<div id="ref-PortMacquarieFloodPolicy2018" class="csl-entry">
+Port Macquarie-Hastings Council. (2018). <em>PORT MACQUARIE-HASTINGS COUNCIL FLOOD POLICY</em>. <a href="https://www.pmhc.nsw.gov.au/files/assets/public/v/1/document-files/your-council/publications/policies/port-macquarie-hastings-council-flood-adopted-2018-12-12.pdf" class="uri">https://www.pmhc.nsw.gov.au/files/assets/public/v/1/document-files/your-council/publications/policies/port-macquarie-hastings-council-flood-adopted-2018-12-12.pdf</a>.
+</div>
+<div id="ref-QG2001" class="csl-entry">
+Queensland Government. (2001). <em>Queensland Climate Change and Community Vulnerability to Tropical Cyclones - Ocean Hazrds Assessment</em>. <a href="https://www.systemsengineeringaustralia.com.au/download/Ocean_Hazards_Assess_Stage1A_revised.pdf">https://www.systemsengineeringaustralia.com.au/download/Ocean_Hazards_Assess_Stage1A_revised.pdf</a>
+</div>
+<div id="ref-QRAResilientFloodplains2018" class="csl-entry">
+Queensland Reconstruction Authority. (2012). <em>Planning for Stronger, More Resilient Fl Oodplains: Part 2</em>. <a href="https://www.qra.qld.gov.au/sites/default/files/2018-10/resilient-floodplains-part2-full_0.pdf" class="uri">https://www.qra.qld.gov.au/sites/default/files/2018-10/resilient-floodplains-part2-full_0.pdf</a>.
+</div>
+<div id="ref-RawlsMiller1983" class="csl-entry">
+Rawls, W., Brakesiek, J., &amp; Miller, N. (1983). Green-Ampt Infiltration Parameters from Soils Data. <em>Journal of Hydraulic Engineering</em>, <em>vol 109</em>, 62–71.
+</div>
+<div id="ref-Ryan2022" class="csl-entry">
+Ryan, P., Syme, W., Gao, S., &amp; Collecutt, G. (2022). Irect Rainfall Hydraulic Model Validation. <em>Hydrology &amp; Water Resources Symposium</em>. <a href="https://www.tuflow.com/media/7545/2022-direct-rainfall-hydraulic-model-validation-ryan-et-al-hwrs.pdf">https://www.tuflow.com/media/7545/2022-direct-rainfall-hydraulic-model-validation-ryan-et-al-hwrs.pdf</a>
+</div>
+<div id="ref-Schaap2002" class="csl-entry">
+Schaap, M. G. (2002). <em>Rosetta: A Computer Program for Estimating Soil Hydraulic Parameters with Hierarchical Pedotransfer Functions</em>. University of Arizona. <a href="https://cales.arizona.edu/research/rosetta/download/rosetta.pdf">https://cales.arizona.edu/research/rosetta/download/rosetta.pdf</a>
+</div>
+<div id="ref-Stelling1984" class="csl-entry">
+Stelling, G. (1984). <em>On the Construction of Computational Methods for Shallow Water Flow Problems</em>. Rijkswaterstaat Communications.
+</div>
+<div id="ref-Syme1991" class="csl-entry">
+Syme, W. (1991). <em>Dynamically Linked Two Dimensional / One-Dimensional Hydrodynamic Modelling Program for Rivers, Estuaries and Coastal Waters</em> (W. Syme, Ed.) [M.Eng.Sc(100% Research) Thesis]. Dept of Civil Engineering. <a href="https://tuflow.com/media/4982/1991-tuflow-dynamically-linked-2d-and-1d-hydrodynamic-modelling-syme-thesis.pdf">https://tuflow.com/media/4982/1991-tuflow-dynamically-linked-2d-and-1d-hydrodynamic-modelling-syme-thesis.pdf</a>
+</div>
+<div id="ref-Syme2001a" class="csl-entry">
+Syme, W. (2001a). Modelling of Bends and Hydraulic Structures in a Two-Dimensional Scheme. <em>The Institution of Engineers, Australia Conference on Hydraulics in Civil Engineering</em>. <a href="https://tuflow.com/media/4984/2001-modelling-of-bends-and-hydraulic-structures-in-a-2d-scheme-syme.pdf">https://tuflow.com/media/4984/2001-modelling-of-bends-and-hydraulic-structures-in-a-2d-scheme-syme.pdf</a>
+</div>
+<div id="ref-Syme2001b" class="csl-entry">
+Syme, W. (2001b). TUFLOW – Two &amp; One-Dimensional Unsteady FLOW Software for Rivers, Estuaries and Coastal Waters. <em>The Institution of Engineers, Australia 2D Seminar</em>. <a href="https://tuflow.com/media/4985/2001-tuflow-two-and-one-dimensional-unsteady-flow-software-for-rivers-estuaries-and-coastal-waters-syme.pdf">https://tuflow.com/media/4985/2001-tuflow-two-and-one-dimensional-unsteady-flow-software-for-rivers-estuaries-and-coastal-waters-syme.pdf</a>
+</div>
+<div id="ref-Syme2008" class="csl-entry">
+Syme, W. (2008). Flooding in Urban Areas - 2D Modelling Approaches for Buildings and Fences. <em>Engineers Australia, 9th National COnference on Hydraulics in Water Enginnering</em>. <a href="https://tuflow.com/media/4997/2008-flooding-in-urban-areas-2d-modelling-approaches-for-buildings-and-fences-syme-hwe-aus.pdf">https://tuflow.com/media/4997/2008-flooding-in-urban-areas-2d-modelling-approaches-for-buildings-and-fences-syme-hwe-aus.pdf</a>
+</div>
+<div id="ref-SymeNielsen1998" class="csl-entry">
+Syme, W., Nielsen, C., &amp; Charteris, A. (1998). Comparison of Two-Dimensional Hydrodynamic Modelling Systems Part One - Flow Through a Constriction. <em>International Conference on Hydraulics in Civil Engineering</em>.
+</div>
+<div id="ref-TUFLOWManual2018" class="csl-entry">
+TUFLOW. (2018). <em>TUFLOW Classic/HPC User Manual Build 2018-03-AD</em>. <a href="https://downloads.tuflow.com/TUFLOW/Releases/2018-03/TUFLOW%20Manual.2018-03-AD.pdf">https://downloads.tuflow.com/TUFLOW/Releases/2018-03/TUFLOW%20Manual.2018-03-AD.pdf</a>
+</div>
+<div id="ref-TUFLOWRN2020" class="csl-entry">
+TUFLOW. (2020). <em>TUFLOW Classic and HPC 2020-01 and 2020-10 Release Notes</em>. <a href="https://downloads.tuflow.com/TUFLOW/Releases/2020-10/TUFLOW%20Release%20Notes.2020-10-AF.pdf">https://downloads.tuflow.com/TUFLOW/Releases/2020-10/TUFLOW%20Release%20Notes.2020-10-AF.pdf</a>
+</div>
+<div id="ref-TullisRobinson2008" class="csl-entry">
+Tullis, B., &amp; Robinson, S. (2008). Quantifying Culvert Exit Loss. <em>Journal of Irrigation and Drainage Engineering</em>, <em>Vol. 134</em>(No. 2), pp. 263–266.
+</div>
+<div id="ref-USACE1977" class="csl-entry">
+USACE. (1977). <em>Hydraulic Design Criteria-Sheets 312</em>. US Army Corp of Engineers. <a href="https://apps.dtic.mil/sti/tr/pdf/ADA092238.pdf">https://apps.dtic.mil/sti/tr/pdf/ADA092238.pdf</a>
+</div>
+<div id="ref-USACE1987" class="csl-entry">
+USACE. (1987). <em>Hydraulic Design Criteria-Sheets 111-1 to 111-14</em>. US Army Corp of Engineers. <a href="https://apps.dtic.mil/sti/tr/pdf/ADA092237.pdf">https://apps.dtic.mil/sti/tr/pdf/ADA092237.pdf</a>
+</div>
+<div id="ref-USBR1987" class="csl-entry">
+USBR. (1987). <em>Design of Small Dams</em> [Technology &amp; Engineering]. U.S. Dept. of the Interior, Bureau of Reclamation, 1987-. <a href="https://www.usbr.gov/tsc/techreferences/mands/mands-pdfs/SmallDams.pdf">https://www.usbr.gov/tsc/techreferences/mands/mands-pdfs/SmallDams.pdf</a>
+</div>
+<div id="ref-USDA1986" class="csl-entry">
+USDA. (1986). <em>Urban Hydrology for Small Watersheds Technical Release 55 (TR-55)</em>. <a href="https://nationalstormwater.com/wp-content/uploads/2020/07/Urban-Hydrology-for-Small-Watersheds-TR-55.pdf">https://nationalstormwater.com/wp-content/uploads/2020/07/Urban-Hydrology-for-Small-Watersheds-TR-55.pdf</a>
+</div>
+<div id="ref-vanGenuchten1980" class="csl-entry">
+Van Genuchten, M. Th. (1980). A Closed-Form Equation for Predicting the Hydraulic Conductivity of Unsaturated Soils. <em>Soil Science Society of America Journal</em>, <em>44</em>(5), 892–898.
+</div>
+<div id="ref-WeeksBarthelmess2009" class="csl-entry">
+Weeks, W., Barthelmess, A., Rigby, E., Witheridge, G., &amp; Adamson, R. (2009). <em>Australian Rainfall and Runoff Revision Project 11: Blockage of Hydraulic Structures</em>. Austalian Institute of Engineers. <a href="https://arr.ga.gov.au/__data/assets/pdf_file/0010/40510/ARR_Project_11_Stage1_report_Final.pdf">https://arr.ga.gov.au/__data/assets/pdf_file/0010/40510/ARR_Project_11_Stage1_report_Final.pdf</a>
+</div>
+<div id="ref-WeeksWitheridge2013" class="csl-entry">
+Weeks, W., Witheridge, G., Rigby, E., Barthelmess, A., &amp; O’Loughlin, G. (2013). <em>Australian Rainfall and Runoff Revision Project 11: Blockage of Hydraulic Structures</em>. Austalian Institute of Engineers. <a href="https://arr.ga.gov.au/__data/assets/pdf_file/0008/40499/ARR_Project_11_Stage2_report_Final.pdf">https://arr.ga.gov.au/__data/assets/pdf_file/0008/40499/ARR_Project_11_Stage2_report_Final.pdf</a>
+</div>
+<div id="ref-Witheridge2009" class="csl-entry">
+Witheridge, G. (2009). <em>Hydraulic Analysis of the Debris Blockage of Culvert Inlets</em>. Catchments &amp; Creek Pty Ltd.
+</div>
+<div id="ref-Wu1980" class="csl-entry">
+Wu, J. (1980). Wind-Stress Coefficients over Sea Surface Near Neutral Conditions—a Revisit. <em>Journal of Physical Oceanography</em>, <em>Vol. 10</em>(5), pp. 727–740. <a href="https://doi.org/10.1175/1520-0485(1980)010%3C0727:WSCOSS%3E2.0.CO;2">https://doi.org/10.1175/1520-0485(1980)010&lt;0727:WSCOSS&gt;2.0.CO;2</a>
+</div>
+<div id="ref-Wu1982" class="csl-entry">
+Wu, J. (1982). Wind-Stress Coefficients over Sea Surface from Breeze to Hurricane. <em>Journal of Geophysical Research</em>, <em>Vol. 87</em>(C12), pp. 9704–9706. https://doi.org/<a href="https://doi.org/10.1029/JC087iC12p09704">https://doi.org/10.1029/JC087iC12p09704</a>
+</div>
+<div id="ref-Wu2005" class="csl-entry">
+Wu, W., Shields Jr., F. D., Bennett, S. J., &amp; Wang, S. S. Y. (2005). A Depth-Averaged Two-Dimensional Model for Flow, Sediment Transport, and Bed Topography in Curved Channels with Riparian Vegetation. <em>Water Resources Research</em>, <em>41</em>(3). <a href="https://doi.org/10.1029/2004WR003730">https://doi.org/10.1029/2004WR003730</a>
+</div>
+<div id="ref-Wu2000" class="csl-entry">
+Wu, &amp; Falconer, R. A. (2000). A Mass Conservative 3-d Numerical Model for Predicting Solute Fluxes in Estuarine Waters. <em>Advances in Water Resources</em>, <em>23</em>(5), 531–543.
+</div>
+</div>
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="oneD2D12D-2.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": true,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": false,
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

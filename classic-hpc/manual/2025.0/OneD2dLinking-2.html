@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.2 1D and 2D Domain Linking Theory | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </title>
+  <meta name="description" content="TUFLOW Classic/HPC User Manual 2025" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.2 1D and 2D Domain Linking Theory | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.2 1D and 2D Domain Linking Theory | TUFLOW Classic/HPC User Manual Release Candidate 2025.2 " />
+  
+  <meta name="twitter:description" content="TUFLOW Classic/HPC User Manual 2025" />
+  
+
+<meta name="author" content="RELEASE CANDIDATE     This is an interim manual that accompanies the TUFLOW Classic/HPC 2025.2.0-rc.1 release candidate executable. The information contained within this interim version may vary from the subsequent final version." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="Linked-1D2D-Models-Intro-2.html"/>
+<link rel="next" href="OneD2DLinking-Estry-2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/TUFLOW_2025.2_release-candidate.png"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this Manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#commands"><i class="fa fa-check"></i>Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#about-this-manual"><i class="fa fa-check"></i>About this Manual</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#glossary-and-notation"><i class="fa fa-check"></i>Glossary and Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="DomainLinking-1.html"><a href="DomainLinking-1.html"><i class="fa fa-check"></i><b>1</b> Combining Domains and Solvers</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Linked-1D2D-Models-Intro-2.html"><a href="Linked-1D2D-Models-Intro-2.html"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html"><i class="fa fa-check"></i><b>1.2</b> 1D and 2D Domain Linking Theory</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#HXBoundary-3"><i class="fa fa-check"></i><b>1.2.1</b> HX 2D Head Boundary</a></li>
+<li class="chapter" data-level="1.2.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundary-3"><i class="fa fa-check"></i><b>1.2.2</b> SX 2D Flow Boundaries</a>
+<ul>
+<li class="chapter" data-level="1.2.2.1" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundarySW-4"><i class="fa fa-check"></i><b>1.2.2.1</b> SX 2D Flow Boundary to Surface Water</a></li>
+<li class="chapter" data-level="1.2.2.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundaryGW-4"><i class="fa fa-check"></i><b>1.2.2.2</b> SX 2D Flow Boundary to Groundwater</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html"><i class="fa fa-check"></i><b>1.3</b> TUFLOW 1D (ESTRY) to TUFLOW 2D Linking</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYChannel-3"><i class="fa fa-check"></i><b>1.3.1</b> 1D Open Channel and 2D Domain Linking</a></li>
+<li class="chapter" data-level="1.3.2" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYCulverts-3"><i class="fa fa-check"></i><b>1.3.2</b> 1D Structures Embedded within 2D Domains</a></li>
+<li class="chapter" data-level="1.3.3" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYPipeNetwork-3"><i class="fa fa-check"></i><b>1.3.3</b> 1D Pipe Network Pits linked to 2D Domains</a></li>
+<li class="chapter" data-level="1.3.4" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#VirtualPits-3"><i class="fa fa-check"></i><b>1.3.4</b> Virtual Pits linked to 2D Domains</a></li>
+<li class="chapter" data-level="1.3.5" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#GroundwaterLinked-3"><i class="fa fa-check"></i><b>1.3.5</b> TUFLOW 1D (ESTRY) linked to Groundwater</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html"><i class="fa fa-check"></i><b>1.4</b> SWMM to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMCulverts-5"><i class="fa fa-check"></i><b>1.4.1</b> 1D Culvert Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.2" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMPipeNetwork-3"><i class="fa fa-check"></i><b>1.4.2</b> 1D Pipe Network Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.3" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DGWConnections-3"><i class="fa fa-check"></i><b>1.4.3</b> Groundwater Connections to 2D Domains</a></li>
+<li class="chapter" data-level="1.4.4" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DLinkingSWMM1D-3"><i class="fa fa-check"></i><b>1.4.4</b> SWMM to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html"><i class="fa fa-check"></i><b>1.5</b> Flood Modeller to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html#oneD2DFMLinking2D-3"><i class="fa fa-check"></i><b>1.5.1</b> Flood Modeller 1D to TUFLOW 2D Linking</a></li>
+<li class="chapter" data-level="1.5.2" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html#oneD2DFMLinking1D-3"><i class="fa fa-check"></i><b>1.5.2</b> Flood Modeller 1D to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="oneD2D12D-2.html"><a href="oneD2D12D-2.html"><i class="fa fa-check"></i><b>1.6</b> 12D-DDA to TUFLOW Linking</a></li>
+<li class="chapter" data-level="1.7" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html"><i class="fa fa-check"></i><b>1.7</b> Multiple 2D Domains</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html#TwoD2DLinkingQDT-3"><i class="fa fa-check"></i><b>1.7.1</b> Classic’s M2D Feature versus HPC Quadtree</a></li>
+<li class="chapter" data-level="1.7.2" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html#TwoD2DLinkingM2D-3"><i class="fa fa-check"></i><b>1.7.2</b> TUFLOW Classic’s Multiple 2D Domains</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2025.2/"><img src="images/WQFooter.jpg" style="width:246px;height:10px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(226,1,119);">TUFLOW Classic/HPC User Manual Release Candidate 2025.2 </h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<p class="wmark before"></p>
+<div id="OneD2dLinking-2" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> 1D and 2D Domain Linking Theory<a href="OneD2dLinking-2.html#OneD2dLinking-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>TUFLOW 1D and 2D domains can be linked in a variety of ways. Common configurations, as shown in Figure <a href="OneD2dLinking-2.html#fig:fig-1D-2DLinkingConfigurations">1.1</a>, include:</p>
+<ul>
+<li>1D culverts through 2D embankments.<br />
+</li>
+<li>1D pipe networks underneath the 2D domain.<br />
+</li>
+<li>Nesting of a 1D open channel (e.g. creek or river) through a 2D domain.<br />
+</li>
+<li>Connection of a broader 1D network catchment model to a high resolution 2D domain.</li>
+</ul>
+<center>
+<div class="figure"><span style="display:block;" id="fig:fig-1D-2DLinkingConfigurations"></span>
+<img src="images/1D2DLinkingConfigurations.png" alt="**1D/2D Linking Configurations**" width="100%" />
+<p class="caption">
+Figure 1.1: <strong>1D/2D Linking Configurations</strong>
+</p>
+</div>
+</center>
+<p>There are two types of 1D/2D linking options available:</p>
+<ol style="list-style-type: decimal">
+<li>Head (water level) boundaries to the 2D cells (HX); and<br />
+</li>
+<li>Source boundaries to the 2D cells (SX).</li>
+</ol>
+<p>These are described in the sections below.</p>
+<div id="HXBoundary-3" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> HX 2D Head Boundary<a href="OneD2dLinking-2.html#HXBoundary-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The HX terminology is derived from a <strong>H</strong>ead boundary being applied to the 2D cell using data from an e<strong>X</strong>ternal 1D scheme. This type of connection can be used to connect TUFLOW 2D with the 1D schemes of ESTRY (TUFLOW 1D), SWMM, Flood Modeller and XPSWMM. HX lines are typically used along riverbanks to define the 1D-2D exchange when 1D is used for in-channel representation, linked to the floodplain in 2D (commonly referred to as, 1D nested open channel modelling).</p>
+<p>For 1D nested open channel modelling, the HX cells are defined using HX lines, connected to 1D nodes (i.e. the start and end of 1D channel lines) via connection (CN) lines. HX and CN line type objects are defined in the 2d_bc format layer. The 2d_bc layer is often renamed with the prefix 2d_hx should the modeller choose to store the HX lines in their own layer(s). The CN lines are snapped to the 1D nodes and vertices along the HX line.</p>
+<p>The open channel area modelled by 1D must be deactivated from the 2D domain (2d_code: code = 0) otherwise the flow down the open channel will be duplicated in both the 1D and 2D domains. These model features are presented in Figure <a href="OneD2dLinking-2.html#fig:fig-HXSchematicPlanView">1.2</a>.</p>
+<p>When TUFLOW carries out the hydraulic calculations, water level information at the 1D nodes is transferred to the HX line vertices that are connected to the 1D nodes via the CN lines. Along the HX lines, between the connected vertices, the water levels are linearly interpolated.</p>
+<p>A HX line must have a CN line connected to each of its ends, along with any connections from intermediate 1D nodes to HX line vertices. Not every HX vertex has to have a 1D node connected. However, should a 1D node not be connected, the water level from that 1D node will not contribute to setting the water level profile along the HX line and undesirable results may occur.</p>
+<p>If a single 1D node is connected to both ends of a HX line, the water levels in the 2D cells along the HX line will all be the same thereby producing a horizontal water level profile along the HX line. This approach is typically used for upstream boundaries into a 2D domain, and the line must be roughly digitised perpendicular to the flow (alternatively use a 2D QT boundary which automates this set up).</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HXSchematicPlanView"></span>
+<img src="images/1D2DHXWaterLevel_001.png" alt="**HX Connection: Nested 1D Open Channel – Plan View**" width="100%" />
+<p class="caption">
+Figure 1.2: <strong>HX Connection: Nested 1D Open Channel – Plan View</strong>
+</p>
+</div>
+</center>
+<p>Flow can either enter or leave HX cells. The volume of water entering or leaving the cells is added or subtracted from the connected 1D nodes to conserve mass. The HX link preserves momentum in the sense that the velocity field is assumed to be undisturbed across the link, however, the solution across the HX line is not a complete 2D solution as the velocity field on the inactive side of the HX line is assumed, not calculated. The 2D velocity direction is not influenced by the direction of the linked 1D channel.</p>
+<p>Because of the momentum preservation, the HX link approach produces a superior 1D-2D linking performance where complex flow behaviour occurs (e.g. river/floodplain interactions) than using a flow source approach such as applying a weir flow equation across the link. Figure <a href="OneD2dLinking-2.html#fig:fig-HXFlowPatterns">1.3</a> shows an example of the preservation of momentum across HX lines (shown in light purple) as water flows across a meander where the main channel is represented in 1D.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HXFlowPatterns"></span>
+<img src="images/1D-2D%20flow%20patterns%20at%20meanders.100dpi.jpg" alt="**HX Connection: Example of Momentum Preservation across HX Lines**" width="100%" />
+<p class="caption">
+Figure 1.3: <strong>HX Connection: Example of Momentum Preservation across HX Lines</strong>
+</p>
+</div>
+</center>
+<p>The elevations of 1D-2D boundary cells determine when water can transfer between the 1D and 2D. Water level is calculated at the cell centres in the 2D engine (see Section <a href="#Schematisation-3"><strong>??</strong></a>), once the water level in the 1D node exceeds the elevation in the HX cell, water can enter or leave the cell. As such, an accurate definition of the 2D HX cell centre elevations is important. If a levee aligns with the HX line, a 2d_zsh thick breakline is recommended along the levee to ensure that the 1D-2D boundary cell elevations are consistent with the levee or spill crest.</p>
+<p>In the four panels of Figure <a href="OneD2dLinking-2.html#fig:fig-HXSchematicSectionView">1.4</a>, the 2D HX connection is shown in section view at four differing water level stages:</p>
+<ul>
+<li>Panel 1: In bank flow: the water level in the 1D section is below the 2D cell elevation and no flow is occurring across the 1D-2D connection.<br />
+</li>
+<li>Panel 2: Spill into the floodplain: the water level in the 1D section is above the 2D cell elevation along the left bank (but not the right bank). In this case, water is spilling from the 1D channel into the 2D floodplain on the left bank.<br />
+</li>
+<li>Panel 3: Flow from floodplain: the water level in the 1D is below the water levels on the 2D floodplains and water will drain from the 2D domain into the 1D channel, which typical occurs during a flood recession.<br />
+</li>
+<li>Panel 4: Perched floodplain: the flow is still moving from the 2D into the 1D on the left bank, however, on the right bank, the water level in the floodplain is below the 2D HX cell elevation and no flow is occurring (the water is perched).</li>
+</ul>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HXSchematicSectionView"></span>
+<img src="images/1D2DHXWaterLevelSectionView.png" alt="**HX Connection: Nested 1D Open Channel – Section View**" width="100%" />
+<p class="caption">
+Figure 1.4: <strong>HX Connection: Nested 1D Open Channel – Section View</strong>
+</p>
+</div>
+</center>
+<p>In addition to 1D-2D connections associated with nested 1D open channel / 2D floodplain situations, HX connections are also used to connect a 2D domain embedded within a broader 1D network representing the upstream and/or downstream river sections further afield. In Figure <a href="OneD2dLinking-2.html#fig:fig-HXExternalBoundaryConnection">1.5</a>, HX lines are shown along the upstream inflow to the 2D Domain as purple lines, the CN lines are shown in green. The CN lines are snapped to the 1D node at the end of the 1D network and the two vertices at either end of the HX line.</p>
+<p>The water level at the 1D node is uniformly applied to the HX cells wherever the water level exceeds the cell ZC elevation. As the water level applied along the HX line will be horizontal the HX line must be digitised roughly perpendicular to the expected flow direction. Should the line not be perpendicular, circulatory flows maybe generated, so check that the flow patterns along HX lines appear to be reasonable.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-HXExternalBoundaryConnection"></span>
+<img src="images/1D2DHXExternalLink_001.png" alt="**HX Connection: External 1D Network Boundary Connection**" width="100%" />
+<p class="caption">
+Figure 1.5: <strong>HX Connection: External 1D Network Boundary Connection</strong>
+</p>
+</div>
+</center>
+<p>Note that for all HX links, the cell centre elevation (ZC) at a HX cell must be above the 1D bed level (interpolated between connected 1D nodes) otherwise an artificial flow across the link will be produced. To enforce this, TUFLOW produces an error message during the model initialisation, and terminates the simulation, if the interpolated 1D node elevation exceeds the 2D HX cell centre elevation (ZC). The ERROR message(s) are geo-referenced to easily identify the HX cells that lie below the 1D bed profile.</p>
+</div>
+<div id="SXBoundary-3" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> SX 2D Flow Boundaries<a href="OneD2dLinking-2.html#SXBoundary-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The SX terminology is derived from a <strong>S</strong>ource boundary being applied to the 2D cell using data from an e<strong>X</strong>ternal 1D scheme. This type of connection can be used to connect TUFLOW 2D with the 1D schemes of TUFLOW 1D (ESTRY), Flood Modeller, SWMM and XPSWMM. SX connections are typically used to transfer flow between 1D and 2D for 1D structures and at pits/drains/gully traps that capture water into the pipe network. Unique to SWMM, when using it as the 1D solver, an SX connection is only required at the downstream end of a 1D culvert (it uses a HX link at the upstream end due to limitations of the SWMM software). SX can be connected to the surface water (see Section <a href="OneD2dLinking-2.html#SXBoundarySW-4">1.2.2.1</a>) or to the groundwater (see Section <a href="OneD2dLinking-2.html#SXBoundaryGW-4">1.2.2.2</a>).</p>
+<p>At SX connections, the water level at the 1D node is reset every timestep as the average water level along the 2D SX cell(s). Conversely, the flow into or out of the 1D element feeds into the 2D SX cell(s) as a flow of water with the water level at the 2D cells computed as part of the 2D SWE solution. As the water level at the 1D node is set based on the water level in the SX cells, the storage in the 1D node is not used computationally in the 1D. Where there is an SX connection to 2D cell(s) from a 1D node, the average 1D node storage is distributed across the connected 2D SX cells.</p>
+<p>SX objects are digitised in the 2d_bc layer and have the type set to “SX”. They can either be a point (a single SX cell), line (multiple SX cells) or region object (multiple SX cells). When using the SX line and region objects, these are joined to the 1D nodes with a single CN type object, also in the 2d_bc layer, as shown in Figure <a href="OneD2dLinking-2.html#fig:fig-SXSchematicCrossDrainageStructure">1.6</a>. The (2d_bc) SX point, line and region objects are shown in purple, the (2d_bc) CN lines are shown in green, and the cells selected for the SX 1D-2D connection are highlighted in white.</p>
+<ul>
+<li>When using an SX point, the point object needs to snap to the 1d network (1d_nwk) at the nodes (end of the culvert). A single 2D cell is selected for the 1D-2D SX connection.<br />
+</li>
+<li>When using an SX line, a connection line snaps to the SX line and the 1d network (1d_nwk) node. Multiple 2D cells are selected for the 1D-2D SX connection. If the line does not select any 2D cells a single 2D cell is selected based on the line’s mid-point.</li>
+<li>When using an SX region, a connection line snaps to a vertex of the SX region and 1d network (1d_nwk) node. Multiple 2D cells are selected for the 1D-2D SX connection based on whether the 2D cell centre falls within the region. If the region does not select any 2D cells a single 2D cell is selected based on the region’s centroid.</li>
+</ul>
+<div id="SXBoundarySW-4" class="section level4 hasAnchor" number="1.2.2.1">
+<h4><span class="header-section-number">1.2.2.1</span> SX 2D Flow Boundary to Surface Water<a href="OneD2dLinking-2.html#SXBoundarySW-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The flow onto the SX cells is treated as a source flow, i.e. it can be positive or negative in magnitude but has no directional component. If there is more than one SX cell connected, the flow is, by default, proportioned via the depths in the 2D SX cells. The <a href="#tcfSXFlowDistributionCutoffDepth">SX Flow Distribution Cutoff Depth</a> command can be used to control the depth of water below which an SX cell does not receive flows from the connected 1D element.</p>
+<p><strong>Note that when connecting an SX connection for a 1D structure it is important to ensure that the width of connected SX cells at the structure invert (and higher levels for irregular shaped structures) is equal or more than the width of the 1D structure. This check should take into account whether any of the 2D SX cells are dry at the level being checked. If the width of water flow across the SX cells is less than the flow width of the 1D structure, the 2D SX cells become the constriction and instabilities or unrealistic flow patterns may result.</strong></p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SXSchematicCrossDrainageStructure"></span>
+<img src="images/1D2DSXConfigurations_001.png" alt="**SX Connection Options**" width="100%" />
+<p class="caption">
+Figure 1.6: <strong>SX Connection Options</strong>
+</p>
+</div>
+</center>
+<p>The lowest 2D SX cell (based on the ZC, cell centre, elevation) must be below the 1D bed level (invert) otherwise mass can be artificially generated. TUFLOW produces an ERROR message during the model initialisation and a simulation will not run if a 1D node elevation falls below the lowest 2D ZC SX cell elevation.</p>
+<p>In addition to culverts through embankments, SX connections are used to connect 1D pipe network inlets (pits) to the ground surface, which is modelled in 2D. An example is presented in Figure <a href="OneD2dLinking-2.html#fig:fig-SXSchematicPipeNetworkPlan">1.7</a> and Figure <a href="OneD2dLinking-2.html#fig:fig-SXSchematicPipeNetwork">1.8</a>. The SX connections are used to transfer flow between the 1D pit/pipe network and the 2D domain. To make the workflow more efficient, pit SX connections can be simply defined using one the pit attributes in a 1d_nwk or 1d_pit layer, thereby removing the need to have a 2d_bc layer - see Section <a href="#Pits-3"><strong>??</strong></a>.</p>
+<p>A model using the SX to surface water functionality is provided in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#1D_Structures">1D Structures Example Model Dataset</a> on the TUFLOW Wiki.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SXSchematicPipeNetworkPlan"></span>
+<img src="images/1D2DSXPipeNetwork_001.png" alt="**SX Connection: Pipe Network – Plan View**" width="100%" />
+<p class="caption">
+Figure 1.7: <strong>SX Connection: Pipe Network – Plan View</strong>
+</p>
+</div>
+</center>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SXSchematicPipeNetwork"></span>
+<img src="images/image140.jpeg" alt="**SX Connection: Pipe Network -Section View**" width="100%" />
+<p class="caption">
+Figure 1.8: <strong>SX Connection: Pipe Network -Section View</strong>
+</p>
+</div>
+</center>
+</div>
+<div id="SXBoundaryGW-4" class="section level4 hasAnchor" number="1.2.2.2">
+<h4><span class="header-section-number">1.2.2.2</span> SX 2D Flow Boundary to Groundwater<a href="OneD2dLinking-2.html#SXBoundaryGW-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Groundwater connections to 1D elements are useful for representing modelling situations where water infiltrates into or is extracted from the soil other than the default connection to the 2D surface water. These situations can arise in green infrastructure systems, which may incorporate intentionally infiltrating water into the groundwater, draining water from the groundwater or both. For example, retention basins designed to enhance infiltration through natural or artificial soils and to slowly drain stored groundwater to reduce water levels ahead of future rainfall events. Water seepage into the groundwater can be modelled in 1D or 2D, but drains are modelled in 1D.</p>
+<p>To define a groundwater connected in a 1D network, a “SX” boundary is used in the 2d_bc GIS layer, with the “GW[1 - 9]” flag specifying the connection to a groundwater layer (see Table <a href="#tab:tab-ConditionsAttribute"><strong>??</strong></a>). The connected groundwater layer number follows the “GW” flag. For example, “GW2” would be the flag for a connection with groundwater layer 2. The direction of flow and discharge are determined using the same principles as a SX connection to surface water (see Section <a href="OneD2dLinking-2.html#SXBoundarySW-4">1.2.2.1</a>), except that the 2D water level is replaced by the groundwater pressure level. As such, the 1D node is assigned a water level equivalent to the groundwater pressure level.</p>
+<p>In most cases, groundwater to SX connections have some connection mechanism that must be represented in the model to control how much flow is transferred. For example, the flow through slotted or perforated pipes commonly used in detention basins to drain water from the soil can often be approximated using the orifice equation (Equation <a href="#eq:equ-orifice-flow">(<strong>??</strong>)</a>) but manufacturers may have other defined relationships for how much water is extracted for a given pressure level.</p>
+<p>The depth vs discharge relationship used to define these flows is based on the pressure head in the groundwater layer and the connection attributes (slotted pipe width or size and number of holes in perforated pipe and pipe lengths). The same relationship is used for ESTRY and SWMM but applied differently due to connectivity requirements for the engines:</p>
+<ul>
+<li>ESTRY: A separate inlet or pit is not required. Instead, a “Q” or “M” channel is typically used with the groundwater pressure level vs discharge relationship to represent the interchange between groundwater and 1D. See Section <a href="OneD2DLinking-Estry-2.html#GroundwaterLinked-3">1.3.5</a>.</li>
+<li>SWMM: An inlet is required at the 1D node (either a junction or a storage node). This inlet is typically a generic inlet (see Table <a href="#tab:tab-SWMM-Input-Inlets"><strong>??</strong></a>) using a groundwater pressure level vs discharge relationship. See Section <a href="OneD2DLinkingSWMM-2.html#OneD2DGWConnections-3">1.4.3</a>.</li>
+</ul>
+<p>Guidance for generating depth vs discharge curves is provided on the <a href="https://wiki.tuflow.com/Groundwater_Modelling_Advice#Groundwater_Linking_to_1D_.28ESTRY_or_SWMM.29">TUFLOW Wiki Groundwater Modelling Advice</a> page.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-SXtoGWSWMMESTRY"></span>
+<img src="images/SXtoGWESTRYSWMM.png" alt="**SX 2D Flow Boundary to Groundwater: ESTRY and SWMM**"  />
+<p class="caption">
+Figure 1.9: <strong>SX 2D Flow Boundary to Groundwater: ESTRY and SWMM</strong>
+</p>
+</div>
+</center>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="Linked-1D2D-Models-Intro-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="OneD2DLinking-Estry-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": true,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": false,
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
