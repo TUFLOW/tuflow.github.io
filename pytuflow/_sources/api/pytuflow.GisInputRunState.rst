@@ -19,7 +19,9 @@
    
       ~GisInputRunState.context
       ~GisInputRunState.file_scope
+      ~GisInputRunState.is_end_block
       ~GisInputRunState.is_match
+      ~GisInputRunState.is_start_block
    
    
 

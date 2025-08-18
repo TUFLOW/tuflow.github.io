@@ -33,6 +33,10 @@
    .. autosummary::
       :toctree:
    
+      ~NCGrid.ATTRIBUTE_TYPES
+      ~NCGrid.DOMAIN_TYPES
+      ~NCGrid.GEOMETRY_TYPES
+      ~NCGrid.ID_COLUMNS
       ~NCGrid.time_units
       ~NCGrid.name
       ~NCGrid.reference_time

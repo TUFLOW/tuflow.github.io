@@ -18,7 +18,6 @@
       :nosignatures:
    
       ~SettingInput.context
-      ~SettingInput.figure_out_file_scopes
       ~SettingInput.file_scope
       ~SettingInput.is_end_block
       ~SettingInput.is_match

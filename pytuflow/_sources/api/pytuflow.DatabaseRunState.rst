@@ -31,11 +31,11 @@
    
       ~DatabaseRunState.TUFLOW_TYPE
       ~DatabaseRunState.df
+      ~DatabaseRunState.fpath
       ~DatabaseRunState.scope
       ~DatabaseRunState.tcf
       ~DatabaseRunState.bs
       ~DatabaseRunState.parent
-      ~DatabaseRunState.fpath
       ~DatabaseRunState.config
       ~DatabaseRunState.loaded
       ~DatabaseRunState.ctx

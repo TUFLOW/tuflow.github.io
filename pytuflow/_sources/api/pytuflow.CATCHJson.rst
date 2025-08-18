@@ -33,6 +33,10 @@
    .. autosummary::
       :toctree:
    
+      ~CATCHJson.ATTRIBUTE_TYPES
+      ~CATCHJson.DOMAIN_TYPES
+      ~CATCHJson.GEOMETRY_TYPES
+      ~CATCHJson.ID_COLUMNS
       ~CATCHJson.name
       ~CATCHJson.reference_time
    

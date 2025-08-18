@@ -18,6 +18,7 @@
       :nosignatures:
    
       ~PitInletDatabase.context
+      ~PitInletDatabase.entry_class
       ~PitInletDatabase.record_change
       ~PitInletDatabase.undo
       ~PitInletDatabase.value
@@ -44,9 +45,9 @@
       ~PitInletDatabase.VALUE_INDEX
       ~PitInletDatabase.df
       ~PitInletDatabase.dirty
+      ~PitInletDatabase.fpath
       ~PitInletDatabase.scope
       ~PitInletDatabase.tcf
-      ~PitInletDatabase.fpath
       ~PitInletDatabase.parent
       ~PitInletDatabase.config
       ~PitInletDatabase.altered_inputs

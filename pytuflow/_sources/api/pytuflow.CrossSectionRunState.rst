@@ -31,6 +31,7 @@
    
       ~CrossSectionRunState.TUFLOW_TYPE
       ~CrossSectionRunState.df
+      ~CrossSectionRunState.fpath
       ~CrossSectionRunState.scope
       ~CrossSectionRunState.tcf
       ~CrossSectionRunState.parent

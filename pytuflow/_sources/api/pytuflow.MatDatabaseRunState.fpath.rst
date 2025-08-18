@@ -3,4 +3,4 @@ pytuflow.MatDatabaseRunState.fpath
 
 .. currentmodule:: pytuflow
 
-.. autoattribute:: MatDatabaseRunState.fpath
+.. autoproperty:: MatDatabaseRunState.fpath

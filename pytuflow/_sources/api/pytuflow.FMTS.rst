@@ -35,13 +35,18 @@
    .. autosummary::
       :toctree:
    
+      ~FMTS.ATTRIBUTE_TYPES
+      ~FMTS.DOMAIN_TYPES
+      ~FMTS.GEOMETRY_TYPES
+      ~FMTS.ID_COLUMNS
       ~FMTS.dat_fpath
       ~FMTS.gxy_fpath
       ~FMTS.fpath
       ~FMTS.units
-      ~FMTS.name
-      ~FMTS.reference_time
+      ~FMTS.oned_objs
       ~FMTS.node_count
       ~FMTS.channel_count
+      ~FMTS.name
+      ~FMTS.reference_time
    
    

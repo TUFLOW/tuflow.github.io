@@ -3,4 +3,4 @@ pytuflow.CrossSectionDatabase.fpath
 
 .. currentmodule:: pytuflow
 
-.. autoattribute:: CrossSectionDatabase.fpath
+.. autoproperty:: CrossSectionDatabase.fpath

@@ -18,7 +18,6 @@
       :nosignatures:
    
       ~GisInput.context
-      ~GisInput.figure_out_file_scopes
       ~GisInput.file_scope
       ~GisInput.is_end_block
       ~GisInput.is_match

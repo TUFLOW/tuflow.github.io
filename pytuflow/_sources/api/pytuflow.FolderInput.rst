@@ -18,7 +18,6 @@
       :nosignatures:
    
       ~FolderInput.context
-      ~FolderInput.figure_out_file_scopes
       ~FolderInput.file_scope
       ~FolderInput.is_end_block
       ~FolderInput.is_match

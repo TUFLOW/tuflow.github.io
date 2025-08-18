@@ -33,6 +33,10 @@
    .. autosummary::
       :toctree:
    
+      ~DAT.ATTRIBUTE_TYPES
+      ~DAT.DOMAIN_TYPES
+      ~DAT.GEOMETRY_TYPES
+      ~DAT.ID_COLUMNS
       ~DAT.name
       ~DAT.reference_time
    

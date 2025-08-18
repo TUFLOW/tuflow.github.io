@@ -35,6 +35,10 @@
    .. autosummary::
       :toctree:
    
+      ~FVBCTide.ATTRIBUTE_TYPES
+      ~FVBCTide.DOMAIN_TYPES
+      ~FVBCTide.GEOMETRY_TYPES
+      ~FVBCTide.ID_COLUMNS
       ~FVBCTide.nc_fpath
       ~FVBCTide.node_string_gis_fpath
       ~FVBCTide.use_local_time

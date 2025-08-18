@@ -18,7 +18,6 @@
       :nosignatures:
    
       ~GridInput.context
-      ~GridInput.figure_out_file_scopes
       ~GridInput.file_scope
       ~GridInput.is_end_block
       ~GridInput.is_match

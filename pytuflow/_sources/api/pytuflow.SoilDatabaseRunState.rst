@@ -31,11 +31,11 @@
    
       ~SoilDatabaseRunState.TUFLOW_TYPE
       ~SoilDatabaseRunState.df
+      ~SoilDatabaseRunState.fpath
       ~SoilDatabaseRunState.scope
       ~SoilDatabaseRunState.tcf
       ~SoilDatabaseRunState.bs
       ~SoilDatabaseRunState.parent
-      ~SoilDatabaseRunState.fpath
       ~SoilDatabaseRunState.config
       ~SoilDatabaseRunState.loaded
       ~SoilDatabaseRunState.ctx

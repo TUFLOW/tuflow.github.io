@@ -18,6 +18,7 @@
       :nosignatures:
    
       ~MatDatabase.context
+      ~MatDatabase.entry_class
       ~MatDatabase.record_change
       ~MatDatabase.undo
       ~MatDatabase.value
@@ -41,9 +42,9 @@
       ~MatDatabase.VALUE_INDEX
       ~MatDatabase.df
       ~MatDatabase.dirty
+      ~MatDatabase.fpath
       ~MatDatabase.scope
       ~MatDatabase.tcf
-      ~MatDatabase.fpath
       ~MatDatabase.parent
       ~MatDatabase.config
       ~MatDatabase.altered_inputs

@@ -18,7 +18,6 @@
       :nosignatures:
    
       ~DatabaseInput.context
-      ~DatabaseInput.figure_out_file_scopes
       ~DatabaseInput.file_scope
       ~DatabaseInput.is_end_block
       ~DatabaseInput.is_match

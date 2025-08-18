@@ -41,9 +41,9 @@
       ~RainfallDatabase.VALUE_INDEX
       ~RainfallDatabase.df
       ~RainfallDatabase.dirty
+      ~RainfallDatabase.fpath
       ~RainfallDatabase.scope
       ~RainfallDatabase.tcf
-      ~RainfallDatabase.fpath
       ~RainfallDatabase.parent
       ~RainfallDatabase.config
       ~RainfallDatabase.altered_inputs

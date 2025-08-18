@@ -17,6 +17,7 @@
       :toctree:
       :nosignatures:
    
+      ~GPKG2D.connect
       ~GPKG2D.curtain
       ~GPKG2D.data_types
       ~GPKG2D.ids
@@ -35,11 +36,17 @@
    .. autosummary::
       :toctree:
    
+      ~GPKG2D.ATTRIBUTE_TYPES
+      ~GPKG2D.DOMAIN_TYPES
+      ~GPKG2D.GEOMETRY_TYPES
+      ~GPKG2D.ID_COLUMNS
       ~GPKG2D.fpath
       ~GPKG2D.units
       ~GPKG2D.format_version
       ~GPKG2D.name
       ~GPKG2D.reference_time
+      ~GPKG2D.po_objs
+      ~GPKG2D.rl_objs
       ~GPKG2D.po_point_count
       ~GPKG2D.po_line_count
       ~GPKG2D.po_poly_count

@@ -18,7 +18,6 @@
       :nosignatures:
    
       ~TinInput.context
-      ~TinInput.figure_out_file_scopes
       ~TinInput.file_scope
       ~TinInput.is_end_block
       ~TinInput.is_match

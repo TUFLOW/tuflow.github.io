@@ -17,6 +17,7 @@
       :toctree:
       :nosignatures:
    
+      ~GPKG1D.connect
       ~GPKG1D.curtain
       ~GPKG1D.data_types
       ~GPKG1D.ids
@@ -35,12 +36,17 @@
    .. autosummary::
       :toctree:
    
+      ~GPKG1D.ATTRIBUTE_TYPES
+      ~GPKG1D.DOMAIN_TYPES
+      ~GPKG1D.GEOMETRY_TYPES
+      ~GPKG1D.ID_COLUMNS
       ~GPKG1D.format_version
       ~GPKG1D.fpath
       ~GPKG1D.units
-      ~GPKG1D.name
-      ~GPKG1D.reference_time
+      ~GPKG1D.oned_objs
       ~GPKG1D.node_count
       ~GPKG1D.channel_count
+      ~GPKG1D.name
+      ~GPKG1D.reference_time
    
    

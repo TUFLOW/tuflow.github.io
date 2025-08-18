@@ -33,6 +33,10 @@
    .. autosummary::
       :toctree:
    
+      ~XMDF.ATTRIBUTE_TYPES
+      ~XMDF.DOMAIN_TYPES
+      ~XMDF.GEOMETRY_TYPES
+      ~XMDF.ID_COLUMNS
       ~XMDF.name
       ~XMDF.reference_time
    

@@ -41,9 +41,9 @@
       ~SoilDatabase.VALUE_INDEX
       ~SoilDatabase.df
       ~SoilDatabase.dirty
+      ~SoilDatabase.fpath
       ~SoilDatabase.scope
       ~SoilDatabase.tcf
-      ~SoilDatabase.fpath
       ~SoilDatabase.parent
       ~SoilDatabase.config
       ~SoilDatabase.altered_inputs

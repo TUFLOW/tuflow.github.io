@@ -3,4 +3,4 @@ pytuflow.SoilDatabaseRunState.fpath
 
 .. currentmodule:: pytuflow
 
-.. autoattribute:: SoilDatabaseRunState.fpath
+.. autoproperty:: SoilDatabaseRunState.fpath

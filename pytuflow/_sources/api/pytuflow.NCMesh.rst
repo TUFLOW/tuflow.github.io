@@ -33,6 +33,10 @@
    .. autosummary::
       :toctree:
    
+      ~NCMesh.ATTRIBUTE_TYPES
+      ~NCMesh.DOMAIN_TYPES
+      ~NCMesh.GEOMETRY_TYPES
+      ~NCMesh.ID_COLUMNS
       ~NCMesh.name
       ~NCMesh.reference_time
    

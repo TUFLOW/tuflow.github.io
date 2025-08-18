@@ -19,7 +19,9 @@
    
       ~InputRunState.context
       ~InputRunState.file_scope
+      ~InputRunState.is_end_block
       ~InputRunState.is_match
+      ~InputRunState.is_start_block
    
    
 

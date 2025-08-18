@@ -18,7 +18,6 @@
       :nosignatures:
    
       ~CommentInput.context
-      ~CommentInput.figure_out_file_scopes
       ~CommentInput.file_scope
       ~CommentInput.is_end_block
       ~CommentInput.is_match

@@ -31,11 +31,11 @@
    
       ~MatDatabaseRunState.TUFLOW_TYPE
       ~MatDatabaseRunState.df
+      ~MatDatabaseRunState.fpath
       ~MatDatabaseRunState.scope
       ~MatDatabaseRunState.tcf
       ~MatDatabaseRunState.bs
       ~MatDatabaseRunState.parent
-      ~MatDatabaseRunState.fpath
       ~MatDatabaseRunState.config
       ~MatDatabaseRunState.loaded
       ~MatDatabaseRunState.ctx

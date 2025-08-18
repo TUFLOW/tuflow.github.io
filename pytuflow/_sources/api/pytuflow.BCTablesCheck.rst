@@ -35,6 +35,10 @@
    .. autosummary::
       :toctree:
    
+      ~BCTablesCheck.ATTRIBUTE_TYPES
+      ~BCTablesCheck.DOMAIN_TYPES
+      ~BCTablesCheck.GEOMETRY_TYPES
+      ~BCTablesCheck.ID_COLUMNS
       ~BCTablesCheck.fpath
       ~BCTablesCheck.tcf
       ~BCTablesCheck.provider

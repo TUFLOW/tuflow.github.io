@@ -18,6 +18,7 @@
       :nosignatures:
    
       ~BCDatabase.context
+      ~BCDatabase.entry_class
       ~BCDatabase.record_change
       ~BCDatabase.undo
       ~BCDatabase.value
@@ -44,9 +45,9 @@
       ~BCDatabase.VALUE_INDEX
       ~BCDatabase.df
       ~BCDatabase.dirty
+      ~BCDatabase.fpath
       ~BCDatabase.scope
       ~BCDatabase.tcf
-      ~BCDatabase.fpath
       ~BCDatabase.parent
       ~BCDatabase.config
       ~BCDatabase.altered_inputs

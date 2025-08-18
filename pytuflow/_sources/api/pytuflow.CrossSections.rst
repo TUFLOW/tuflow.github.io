@@ -34,6 +34,10 @@
    .. autosummary::
       :toctree:
    
+      ~CrossSections.ATTRIBUTE_TYPES
+      ~CrossSections.DOMAIN_TYPES
+      ~CrossSections.GEOMETRY_TYPES
+      ~CrossSections.ID_COLUMNS
       ~CrossSections.fpath
       ~CrossSections.cross_sections
       ~CrossSections.objs

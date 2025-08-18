@@ -35,11 +35,16 @@
    .. autosummary::
       :toctree:
    
+      ~INFO.ATTRIBUTE_TYPES
+      ~INFO.DOMAIN_TYPES
+      ~INFO.GEOMETRY_TYPES
+      ~INFO.ID_COLUMNS
       ~INFO.fpath
       ~INFO.units
-      ~INFO.name
-      ~INFO.reference_time
+      ~INFO.oned_objs
       ~INFO.node_count
       ~INFO.channel_count
+      ~INFO.name
+      ~INFO.reference_time
    
    

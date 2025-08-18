@@ -34,6 +34,10 @@
    .. autosummary::
       :toctree:
    
+      ~HydTablesCheck.ATTRIBUTE_TYPES
+      ~HydTablesCheck.DOMAIN_TYPES
+      ~HydTablesCheck.GEOMETRY_TYPES
+      ~HydTablesCheck.ID_COLUMNS
       ~HydTablesCheck.fpath
       ~HydTablesCheck.tcf
       ~HydTablesCheck.cross_section_count

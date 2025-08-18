@@ -18,7 +18,7 @@
       :nosignatures:
    
       ~CrossSectionDatabase.context
-      ~CrossSectionDatabase.figure_out_file_scopes
+      ~CrossSectionDatabase.entry_class
       ~CrossSectionDatabase.record_change
       ~CrossSectionDatabase.undo
       ~CrossSectionDatabase.value
@@ -41,9 +41,9 @@
       ~CrossSectionDatabase.df
       ~CrossSectionDatabase.dirty
       ~CrossSectionDatabase.driver
+      ~CrossSectionDatabase.fpath
       ~CrossSectionDatabase.scope
       ~CrossSectionDatabase.tcf
-      ~CrossSectionDatabase.fpath
       ~CrossSectionDatabase.parent
       ~CrossSectionDatabase.config
       ~CrossSectionDatabase.altered_inputs
