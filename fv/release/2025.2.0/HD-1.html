@@ -199,7 +199,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.7" data-path="HD-1.html"><a href="HD-1.html#HDDepthAverageTURBZ-3"><i class="fa fa-check"></i><b>2.5.7</b> Turbulence Map Output Fix</a></li>
 <li class="chapter" data-level="2.5.8" data-path="HD-1.html"><a href="HD-1.html#HDFluxOutputHeader-3"><i class="fa fa-check"></i><b>2.5.8</b> Flux Output Header Fix</a></li>
 <li class="chapter" data-level="2.5.9" data-path="HD-1.html"><a href="HD-1.html#HD2dmOutputFix-3"><i class="fa fa-check"></i><b>2.5.9</b> Structured Mesh Check File Fix</a></li>
-<li class="chapter" data-level="2.5.14" data-path="HD-1.html"><a href="HD-1.html#HDUMUNC-3"><i class="fa fa-check"></i><b>2.5.14</b> Unstructured Mesh Unused Nodes Check</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="VMM-1.html"><a href="VMM-1.html"><i class="fa fa-check"></i><b>3</b> Internal Vertical Mixing Model</a>
@@ -1028,23 +1027,15 @@ Figure 2.5: Flux Header Fix
 <p>Fixes an issue with log file creation when a tab character follows the <tcmd>Log Dir</tcmd> command. If a tab was present following the Log Dir command TUFLOW FV would previously exit with the error:</p>
 <p><code>ERROR: Could not create directory:</code></p>
 </div>
-<div id="HDCTCFMO-3" class="section level3 hasAnchor" number="2.5.11">
-<h3><span class="header-section-number">2.5.11</span> Changes to Cell Face Map Outputs<a href="HD-1.html#HDCTCFMO-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>For consistency with other map output parameters, the following output and parameters are now cell-centred whereas they were previously output on z-faces.</p>
-<ul>
-<li>PAR</li>
-<li>TURBZ (TURBZ_TKE, TURBZ_EPS, TURBZ_L, TURBZ_SPFSQ, TURBZ_BVFSQ, TURBZ_NUM, TURBZ_NUH, TURBZ_NUS)</li>
-</ul>
-</div>
-<div id="HDGPU3DMEF-3" class="section level3 hasAnchor" number="2.5.12">
-<h3><span class="header-section-number">2.5.12</span> GPU 3D Memory Error Fix<a href="HD-1.html#HDGPU3DMEF-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="HDGPU3DMEF-3" class="section level3 hasAnchor" number="2.5.11">
+<h3><span class="header-section-number">2.5.11</span> GPU 3D Memory Error Fix<a href="HD-1.html#HDGPU3DMEF-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A memory allocation fix has been included that affected a small subset of 3D models running on GPU. Model set-ups subject to the issue would crash in the first iteration with the error: “NaN value detected in cell”. This issue did not affect simulations run on CPU hardware.</p>
 </div>
-<div id="HDISLM-3" class="section level3 hasAnchor" number="2.5.13">
-<h3><span class="header-section-number">2.5.13</span> Improved Stability Limit Messages<a href="HD-1.html#HDISLM-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="HDISLM-3" class="section level3 hasAnchor" number="2.5.12">
+<h3><span class="header-section-number">2.5.12</span> Improved Stability Limit Messages<a href="HD-1.html#HDISLM-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Error messages have been improved for water surface elevation or velocity magnitude limit exceedances when using the <tcmd>Stability Limits </tcmd> <teq>==</teq> <tblk></tblk> command as described in the below sub-sections.</p>
-<div id="messages-on-cpu-hardware" class="section level4 hasAnchor" number="2.5.13.1">
-<h4><span class="header-section-number">2.5.13.1</span> Messages On CPU Hardware<a href="HD-1.html#messages-on-cpu-hardware" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="messages-on-cpu-hardware" class="section level4 hasAnchor" number="2.5.12.1">
+<h4><span class="header-section-number">2.5.12.1</span> Messages On CPU Hardware<a href="HD-1.html#messages-on-cpu-hardware" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>Water Level</strong></p>
 <p>If the model exceeds the water level stability limit:</p>
 <p>Previously:</p>
@@ -1068,8 +1059,8 @@ If the model exceeds the velocity stability limit:</p>
 <li>Metric Units 3D Model: <em>Velocity has exceeded stability limit …. m/s at 2D cell … (3D cell … - vertical layer …)</em></li>
 </ul>
 </div>
-<div id="messages-on-gpu-hardware" class="section level4 hasAnchor" number="2.5.13.2">
-<h4><span class="header-section-number">2.5.13.2</span> Messages On GPU Hardware<a href="HD-1.html#messages-on-gpu-hardware" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="messages-on-gpu-hardware" class="section level4 hasAnchor" number="2.5.12.2">
+<h4><span class="header-section-number">2.5.12.2</span> Messages On GPU Hardware<a href="HD-1.html#messages-on-gpu-hardware" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>Water Level And Velocity</strong></p>
 <p>Previously:</p>
 <ul>
@@ -1082,7 +1073,16 @@ If the model exceeds the velocity stability limit:</p>
 </div>
 </div>
 </div>
-<div id="HDUMUNC-3" class="section level3 hasAnchor newbox3" number="2.5.14">
+<div class="newbox3">
+<div id="HDCTCFMO-3" class="section level3 hasAnchor" number="2.5.13">
+<h3><span class="header-section-number">2.5.13</span> Changes to Cell Face Map Outputs<a href="HD-1.html#HDCTCFMO-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For consistency with other map output parameters, the following output and parameters are now cell-centred whereas they were previously output on z-faces.</p>
+<ul>
+<li>PAR</li>
+<li>TURBZ (TURBZ_TKE, TURBZ_EPS, TURBZ_L, TURBZ_SPFSQ, TURBZ_BVFSQ, TURBZ_NUM, TURBZ_NUH, TURBZ_NUS)</li>
+</ul>
+</div>
+<div id="HDUMUNC-3" class="section level3 hasAnchor" number="2.5.14">
 <h3><span class="header-section-number">2.5.14</span> Unstructured Mesh Unused Nodes Check<a href="HD-1.html#HDUMUNC-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A check has been added to identify and report unused nodes in the unstructured mesh when reading a <code>.2dm</code> file via the <tcmd>Geometry 2D</tcmd> command. If unused nodes are found, TUFLOW FV will terminate with an error. For example:</p>
 <p><em>2 unused .2dm nodes found - remove disjoint nodes in mesh.</em></p>
@@ -1092,6 +1092,7 @@ If the model exceeds the velocity stability limit:</p>
 <li>Unused node IDs and their location are written to the model messages GIS layer in the log folder.</li>
 </ul>
 <p>Unused nodes can be readily removed in Aquaveo SMS via the ‘Select Disjoint’ tool in the <a href="https://www.xmswiki.com/wiki/SMS:2D_Mesh_Nodes_Menu">2D Mesh Nodes</a> menu.</p>
+</div>
 </div>
 <p><img src="images/WQFooter.jpg" width="100%" /></p>
 
