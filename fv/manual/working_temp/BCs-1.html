@@ -1,0 +1,2733 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 8 Boundary And Initial Conditions | TUFLOW FV User Manual</title>
+  <meta name="description" content="Section 8 Boundary And Initial Conditions | TUFLOW FV User Manual" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 8 Boundary And Initial Conditions | TUFLOW FV User Manual" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/1024in300px_Blue-01.svg" />
+  <meta property="og:description" content="Section 8 Boundary And Initial Conditions | TUFLOW FV User Manual" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 8 Boundary And Initial Conditions | TUFLOW FV User Manual" />
+  
+  <meta name="twitter:description" content="Section 8 Boundary And Initial Conditions | TUFLOW FV User Manual" />
+  <meta name="twitter:image" content="/images/1024in300px_Blue-01.svg" />
+
+<meta name="author" content="" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="AD-1.html"/>
+<link rel="next" href="ST-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet" />
+<script src="libs/vis-9.1.0/vis-network.min.js"></script>
+<script src="libs/visNetwork-binding-2.1.2/visNetwork.js"></script>
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#about-this-manual"><i class="fa fa-check"></i>About this manual</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#tables"><i class="fa fa-check"></i>Tables</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#commands"><i class="fa fa-check"></i>Commands</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#parameter-notation"><i class="fa fa-check"></i>Parameter notation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#feedback"><i class="fa fa-check"></i>Feedback</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="Intro-1.html"><a href="Intro-1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Intro-1.html"><a href="Intro-1.html#Intro-TP-2"><i class="fa fa-check"></i><b>1.1</b> TUFLOW Products</a></li>
+<li class="chapter" data-level="1.2" data-path="Intro-1.html"><a href="Intro-1.html#Intro-TFV-2"><i class="fa fa-check"></i><b>1.2</b> TUFLOW FV</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="Intro-1.html"><a href="Intro-1.html#Intro-TFV-FMFVS-3"><i class="fa fa-check"></i><b>1.2.1</b> Flexible Mesh Finite Volume Solver</a></li>
+<li class="chapter" data-level="1.2.2" data-path="Intro-1.html"><a href="Intro-1.html#d-2d-and-3d-hydrodynamics"><i class="fa fa-check"></i><b>1.2.2</b> 1D, 2D and 3D Hydrodynamics</a></li>
+<li class="chapter" data-level="1.2.3" data-path="Intro-1.html"><a href="Intro-1.html#Intro-TFV-AD-3"><i class="fa fa-check"></i><b>1.2.3</b> Advection Dispersion/Diffusion</a></li>
+<li class="chapter" data-level="1.2.4" data-path="Intro-1.html"><a href="Intro-1.html#Intro-TFV-ST-3"><i class="fa fa-check"></i><b>1.2.4</b> Sediment Transport</a></li>
+<li class="chapter" data-level="1.2.5" data-path="Intro-1.html"><a href="Intro-1.html#Intro-TFV-WQ-3"><i class="fa fa-check"></i><b>1.2.5</b> Water Quality</a></li>
+<li class="chapter" data-level="1.2.6" data-path="Intro-1.html"><a href="Intro-1.html#Intro-TFV-PT-3"><i class="fa fa-check"></i><b>1.2.6</b> Particle Tracking</a></li>
+<li class="chapter" data-level="1.2.7" data-path="Intro-1.html"><a href="Intro-1.html#Intro-TFV-SWC-3"><i class="fa fa-check"></i><b>1.2.7</b> Spectral Wave Coupling</a></li>
+<li class="chapter" data-level="1.2.8" data-path="Intro-1.html"><a href="Intro-1.html#Intro-TFV-Scie-3"><i class="fa fa-check"></i><b>1.2.8</b> Science</a></li>
+<li class="chapter" data-level="1.2.9" data-path="Intro-1.html"><a href="Intro-1.html#Intro-TFV-BS-3"><i class="fa fa-check"></i><b>1.2.9</b> Benchmarking Studies</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="Intro-1.html"><a href="Intro-1.html#Intro-TW-2"><i class="fa fa-check"></i><b>1.3</b> TUFLOW Webinars</a></li>
+<li class="chapter" data-level="1.4" data-path="Intro-1.html"><a href="Intro-1.html#Intro-ME-2"><i class="fa fa-check"></i><b>1.4</b> Modelling Environment</a></li>
+<li class="chapter" data-level="1.5" data-path="Intro-1.html"><a href="Intro-1.html#Intro-LAR-2"><i class="fa fa-check"></i><b>1.5</b> Limitations and Recommendations</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="Arch-1.html"><a href="Arch-1.html"><i class="fa fa-check"></i><b>2</b> Architecture</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="Arch-1.html"><a href="Arch-1.html#Arch-Cont-2"><i class="fa fa-check"></i><b>2.1</b> Context</a></li>
+<li class="chapter" data-level="2.2" data-path="Arch-1.html"><a href="Arch-1.html#Arch-ST-2"><i class="fa fa-check"></i><b>2.2</b> Simulation Tiers</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="Arch-1.html"><a href="Arch-1.html#Arch-ST-SC-3"><i class="fa fa-check"></i><b>2.2.1</b> Tier 1: Simulation Class</a></li>
+<li class="chapter" data-level="2.2.2" data-path="Arch-1.html"><a href="Arch-1.html#Arch-ST-MC-3"><i class="fa fa-check"></i><b>2.2.2</b> Tier 2: Model Class</a></li>
+<li class="chapter" data-level="2.2.3" data-path="Arch-1.html"><a href="Arch-1.html#Arch-ST-Mode-3"><i class="fa fa-check"></i><b>2.2.3</b> Tier 3: Model Implementations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="GS-1.html"><a href="GS-1.html"><i class="fa fa-check"></i><b>3</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="GS-1.html"><a href="GS-1.html#GS-HTBYFM-2"><i class="fa fa-check"></i><b>3.1</b> How to Build Your First Model</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="GS-1.html"><a href="GS-1.html#GS-HTBYFM-TM-3"><i class="fa fa-check"></i><b>3.1.1</b> Tutorial Models</a></li>
+<li class="chapter" data-level="3.1.2" data-path="GS-1.html"><a href="GS-1.html#GS-HTBYFM-EM-3"><i class="fa fa-check"></i><b>3.1.2</b> Example Models</a></li>
+<li class="chapter" data-level="3.1.3" data-path="GS-1.html"><a href="GS-1.html#GS-HTBYFM-LFDM-3"><i class="fa fa-check"></i><b>3.1.3</b> Licence Free Demo Mode</a></li>
+<li class="chapter" data-level="3.1.4" data-path="GS-1.html"><a href="GS-1.html#GS-HTBYFM-ILTTC-3"><i class="fa fa-check"></i><b>3.1.4</b> Instructor Led TUFLOW Training Courses</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="GS-1.html"><a href="GS-1.html#GS-TTMC-2"><i class="fa fa-check"></i><b>3.2</b> The TUFLOW Modelling Concept</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="GS-1.html"><a href="GS-1.html#GS-TTMC-NPP-3"><i class="fa fa-check"></i><b>3.2.1</b> Notepad++</a></li>
+<li class="chapter" data-level="3.2.2" data-path="GS-1.html"><a href="GS-1.html#GS-TTMC-QGIS-3"><i class="fa fa-check"></i><b>3.2.2</b> QGIS / TUFLOW Viewer</a></li>
+<li class="chapter" data-level="3.2.3" data-path="GS-1.html"><a href="GS-1.html#GS-TTMC-SMS-3"><i class="fa fa-check"></i><b>3.2.3</b> Aquaveo SMS Mesh Generator / TUFLOW FV Graphical User Interface</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="GS-1.html"><a href="GS-1.html#GS-IART-2"><i class="fa fa-check"></i><b>3.3</b> Installing and Running TUFLOW</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="GS-1.html"><a href="GS-1.html#GS-IART-TFVDAI-3"><i class="fa fa-check"></i><b>3.3.1</b> TUFLOW FV Downloads and Installation</a></li>
+<li class="chapter" data-level="3.3.2" data-path="GS-1.html"><a href="GS-1.html#GS-IART-Lice-3"><i class="fa fa-check"></i><b>3.3.2</b> Licencing</a></li>
+<li class="chapter" data-level="3.3.3" data-path="GS-1.html"><a href="GS-1.html#GS-IART-PS-3"><i class="fa fa-check"></i><b>3.3.3</b> Performing Simulations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="GS-1.html"><a href="GS-1.html#GS-FFTAFN-TAT-3"><i class="fa fa-check"></i><b>3.4</b> Tips and Tricks</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="CF-1.html"><a href="CF-1.html"><i class="fa fa-check"></i><b>4</b> Folders, Control Files and Data Layers</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="CF-1.html"><a href="CF-1.html#CF-Intr-2"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="CF-1.html"><a href="CF-1.html#CF-FS-2"><i class="fa fa-check"></i><b>4.2</b> Folder Structure</a></li>
+<li class="chapter" data-level="4.3" data-path="CF-1.html"><a href="CF-1.html#CF-CF-2"><i class="fa fa-check"></i><b>4.3</b> Control Files</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="CF-1.html"><a href="CF-1.html#CF-CF-FVC-3"><i class="fa fa-check"></i><b>4.3.1</b> FVC</a></li>
+<li class="chapter" data-level="4.3.2" data-path="CF-1.html"><a href="CF-1.html#CF-CF-TEF-3"><i class="fa fa-check"></i><b>4.3.2</b> TEF</a></li>
+<li class="chapter" data-level="4.3.3" data-path="CF-1.html"><a href="CF-1.html#CF-CF-FVSED-3"><i class="fa fa-check"></i><b>4.3.3</b> FVSED</a></li>
+<li class="chapter" data-level="4.3.4" data-path="CF-1.html"><a href="CF-1.html#CF-CF-FVWQ-3"><i class="fa fa-check"></i><b>4.3.4</b> FVWQ</a></li>
+<li class="chapter" data-level="4.3.5" data-path="CF-1.html"><a href="CF-1.html#CF-CF-FVPTM-3"><i class="fa fa-check"></i><b>4.3.5</b> FVPTM</a></li>
+<li class="chapter" data-level="4.3.6" data-path="CF-1.html"><a href="CF-1.html#CF-CF-IF-3"><i class="fa fa-check"></i><b>4.3.6</b> Include File</a></li>
+<li class="chapter" data-level="4.3.7" data-path="CF-1.html"><a href="CF-1.html#CF-CF-RAN-3"><i class="fa fa-check"></i><b>4.3.7</b> Rules and Notation</a></li>
+<li class="chapter" data-level="4.3.8" data-path="CF-1.html"><a href="CF-1.html#CF-CF-FP-3"><i class="fa fa-check"></i><b>4.3.8</b> File Paths</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="CF-1.html"><a href="CF-1.html#CF-IF-2"><i class="fa fa-check"></i><b>4.4</b> Input Files</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="CF-1.html"><a href="CF-1.html#CF-IF-Over-3"><i class="fa fa-check"></i><b>4.4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.4.2" data-path="CF-1.html"><a href="CF-1.html#CF-IF-ICSVF-3"><i class="fa fa-check"></i><b>4.4.2</b> Input CSV Files</a></li>
+<li class="chapter" data-level="4.4.3" data-path="CF-1.html"><a href="CF-1.html#CF-IF-IGISL-3"><i class="fa fa-check"></i><b>4.4.3</b> Input GIS Layers</a></li>
+<li class="chapter" data-level="4.4.4" data-path="CF-1.html"><a href="CF-1.html#CF-IF-INCF-3"><i class="fa fa-check"></i><b>4.4.4</b> Input NetCDF Files</a></li>
+<li class="chapter" data-level="4.4.5" data-path="CF-1.html"><a href="CF-1.html#CF-IF-IMF-3"><i class="fa fa-check"></i><b>4.4.5</b> Input Mesh Files</a></li>
+<li class="chapter" data-level="4.4.6" data-path="CF-1.html"><a href="CF-1.html#CF-IF-IRS-3"><i class="fa fa-check"></i><b>4.4.6</b> Input Restart Files</a></li>
+<li class="chapter" data-level="4.4.7" data-path="CF-1.html"><a href="CF-1.html#CF-IF-ITF-3"><i class="fa fa-check"></i><b>4.4.7</b> Input Transport File</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="CF-1.html"><a href="CF-1.html#CF-LID-2"><i class="fa fa-check"></i><b>4.5</b> Layering Input Data</a></li>
+<li class="chapter" data-level="4.6" data-path="CF-1.html"><a href="CF-1.html#CF-OF-2"><i class="fa fa-check"></i><b>4.6</b> Output Files</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="CF-1.html"><a href="CF-1.html#CF-OF-OCSVF-3"><i class="fa fa-check"></i><b>4.6.1</b> Output CSV Files</a></li>
+<li class="chapter" data-level="4.6.2" data-path="CF-1.html"><a href="CF-1.html#CF-OF-OGISF-3"><i class="fa fa-check"></i><b>4.6.2</b> Output GIS Files</a></li>
+<li class="chapter" data-level="4.6.3" data-path="CF-1.html"><a href="CF-1.html#CF-OF-ONCF-3"><i class="fa fa-check"></i><b>4.6.3</b> Output NetCDF Files</a></li>
+<li class="chapter" data-level="4.6.4" data-path="CF-1.html"><a href="CF-1.html#CF-OF-OTPC-3"><i class="fa fa-check"></i><b>4.6.4</b> Output TUFLOW Plot Control</a></li>
+<li class="chapter" data-level="4.6.5" data-path="CF-1.html"><a href="CF-1.html#CF-OF-OSL-3"><i class="fa fa-check"></i><b>4.6.5</b> Output Structure Logging</a></li>
+<li class="chapter" data-level="4.6.6" data-path="CF-1.html"><a href="CF-1.html#CF-OF-OSMSDF-3"><i class="fa fa-check"></i><b>4.6.6</b> Output SMS Data Files</a></li>
+<li class="chapter" data-level="4.6.7" data-path="CF-1.html"><a href="CF-1.html#CF-OF-OLF-3"><i class="fa fa-check"></i><b>4.6.7</b> Output Log File</a></li>
+<li class="chapter" data-level="4.6.8" data-path="CF-1.html"><a href="CF-1.html#CF-OF-ORS-3"><i class="fa fa-check"></i><b>4.6.8</b> Output Restart Files</a></li>
+<li class="chapter" data-level="4.6.9" data-path="CF-1.html"><a href="CF-1.html#CF-OF-OTF-3"><i class="fa fa-check"></i><b>4.6.9</b> Output Transport File</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="HD2D-1.html"><a href="HD2D-1.html"><i class="fa fa-check"></i><b>5</b> Model Construction: 2D HD Simulation Class</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-Over-2"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-MI-2"><i class="fa fa-check"></i><b>5.2</b> Model Initialisation</a></li>
+<li class="chapter" data-level="5.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-CRF-2"><i class="fa fa-check"></i><b>5.3</b> Coordinate Reference Frame</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-CRF-CS-3"><i class="fa fa-check"></i><b>5.3.1</b> Command Status</a></li>
+<li class="chapter" data-level="5.3.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-CRF-Desc-3"><i class="fa fa-check"></i><b>5.3.2</b> Description</a></li>
+<li class="chapter" data-level="5.3.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-CRF-Exam-3"><i class="fa fa-check"></i><b>5.3.3</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-SO-2"><i class="fa fa-check"></i><b>5.4</b> Spatial Order</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-SO-CS-3"><i class="fa fa-check"></i><b>5.4.1</b> Command Status</a></li>
+<li class="chapter" data-level="5.4.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-SO-Desc-3"><i class="fa fa-check"></i><b>5.4.2</b> Description</a></li>
+<li class="chapter" data-level="5.4.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-SO-Exam-3"><i class="fa fa-check"></i><b>5.4.3</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-Hard-2"><i class="fa fa-check"></i><b>5.5</b> Hardware</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-Hard-CS-3"><i class="fa fa-check"></i><b>5.5.1</b> Command Status</a></li>
+<li class="chapter" data-level="5.5.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-Hard-Desc-3"><i class="fa fa-check"></i><b>5.5.2</b> Description</a></li>
+<li class="chapter" data-level="5.5.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-Hard-Exam-3"><i class="fa fa-check"></i><b>5.5.3</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-STS-2"><i class="fa fa-check"></i><b>5.6</b> Simulation Time Settings</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-STS-CS-3"><i class="fa fa-check"></i><b>5.6.1</b> Command Status</a></li>
+<li class="chapter" data-level="5.6.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-STT-Desc-3"><i class="fa fa-check"></i><b>5.6.2</b> Description</a></li>
+<li class="chapter" data-level="5.6.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-STS-Exam-3"><i class="fa fa-check"></i><b>5.6.3</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-NC-2"><i class="fa fa-check"></i><b>5.7</b> Numerical Controls</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-NC-CS-3"><i class="fa fa-check"></i><b>5.7.1</b> Command Status</a></li>
+<li class="chapter" data-level="5.7.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-NC-CT-3"><i class="fa fa-check"></i><b>5.7.2</b> Computational Timestep</a></li>
+<li class="chapter" data-level="5.7.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-NC-WAD-3"><i class="fa fa-check"></i><b>5.7.3</b> Wetting And Drying</a></li>
+<li class="chapter" data-level="5.7.4" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-NC-SL-3"><i class="fa fa-check"></i><b>5.7.4</b> Stability Limits</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-BDM-2"><i class="fa fa-check"></i><b>5.8</b> Bottom Drag Model</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-BDM-CS-3"><i class="fa fa-check"></i><b>5.8.1</b> Command Status</a></li>
+<li class="chapter" data-level="5.8.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-BDM-Desc-3"><i class="fa fa-check"></i><b>5.8.2</b> Description</a></li>
+<li class="chapter" data-level="5.8.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-BDM-Exam-3"><i class="fa fa-check"></i><b>5.8.3</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-HMM-2"><i class="fa fa-check"></i><b>5.9</b> Horizontal Momentum Mixing</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-HMM-CS-3"><i class="fa fa-check"></i><b>5.9.1</b> Command Status</a></li>
+<li class="chapter" data-level="5.9.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-HMM-Desc-3"><i class="fa fa-check"></i><b>5.9.2</b> Description</a></li>
+<li class="chapter" data-level="5.9.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-HMM-Exam-3"><i class="fa fa-check"></i><b>5.9.3</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-CM-2"><i class="fa fa-check"></i><b>5.10</b> Computational Mesh</a>
+<ul>
+<li class="chapter" data-level="5.10.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-CM-CS-3"><i class="fa fa-check"></i><b>5.10.1</b> Command Status</a></li>
+<li class="chapter" data-level="5.10.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-CM-Unst-3"><i class="fa fa-check"></i><b>5.10.2</b> Unstructured</a></li>
+<li class="chapter" data-level="5.10.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-CM-Stru-3"><i class="fa fa-check"></i><b>5.10.3</b> Structured</a></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-Bath-2"><i class="fa fa-check"></i><b>5.11</b> Bathymetry</a>
+<ul>
+<li class="chapter" data-level="5.11.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-Bath-CS-3"><i class="fa fa-check"></i><b>5.11.1</b> Command Status</a></li>
+<li class="chapter" data-level="5.11.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-Bath-Desc-3"><i class="fa fa-check"></i><b>5.11.2</b> Description</a></li>
+<li class="chapter" data-level="5.11.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-Bath-Exam-3"><i class="fa fa-check"></i><b>5.11.3</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5.12" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-Mate-2"><i class="fa fa-check"></i><b>5.12</b> Materials</a>
+<ul>
+<li class="chapter" data-level="5.12.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-Mate-SC-3"><i class="fa fa-check"></i><b>5.12.1</b> Spatialy Constant</a></li>
+<li class="chapter" data-level="5.12.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-Mate-SV-3"><i class="fa fa-check"></i><b>5.12.2</b> Spatialy Variable</a></li>
+<li class="chapter" data-level="5.12.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-Mate-Prop-3"><i class="fa fa-check"></i><b>5.12.3</b> Material Properties</a></li>
+</ul></li>
+<li class="chapter" data-level="5.13" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-IC-2"><i class="fa fa-check"></i><b>5.13</b> Initial Conditions</a>
+<ul>
+<li class="chapter" data-level="5.13.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-IC-SC-3"><i class="fa fa-check"></i><b>5.13.1</b> Spatially Constant</a></li>
+<li class="chapter" data-level="5.13.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-IC-SV-3"><i class="fa fa-check"></i><b>5.13.2</b> Spatially Variable</a></li>
+<li class="chapter" data-level="5.13.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-IC-RF-3"><i class="fa fa-check"></i><b>5.13.3</b> Restart File</a></li>
+</ul></li>
+<li class="chapter" data-level="5.14" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-BC-2"><i class="fa fa-check"></i><b>5.14</b> Boundary Conditions</a>
+<ul>
+<li class="chapter" data-level="5.14.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-BC-SC-3"><i class="fa fa-check"></i><b>5.14.1</b> Spatially Constant</a></li>
+<li class="chapter" data-level="5.14.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-BC-SV-3"><i class="fa fa-check"></i><b>5.14.2</b> Spatially Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="5.15" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-HS-2"><i class="fa fa-check"></i><b>5.15</b> Hydraulic Structures</a>
+<ul>
+<li class="chapter" data-level="5.15.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-HS-CT-3"><i class="fa fa-check"></i><b>5.15.1</b> Connection Type</a></li>
+</ul></li>
+<li class="chapter" data-level="5.16" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-MO-2"><i class="fa fa-check"></i><b>5.16</b> Model Outputs</a>
+<ul>
+<li class="chapter" data-level="5.16.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-MO-Poin-3"><i class="fa fa-check"></i><b>5.16.1</b> Point</a></li>
+<li class="chapter" data-level="5.16.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-MO-Line-3"><i class="fa fa-check"></i><b>5.16.2</b> Line</a></li>
+<li class="chapter" data-level="5.16.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-MO-Glob-3"><i class="fa fa-check"></i><b>5.16.3</b> Global</a></li>
+<li class="chapter" data-level="5.16.4" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2D-MO-Log-3"><i class="fa fa-check"></i><b>5.16.4</b> Log Files And Diagnostics</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="HD3D-1.html"><a href="HD3D-1.html"><i class="fa fa-check"></i><b>6</b> Model Construction: 3D HD Simulation Class</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3D-Over-2"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3D-SO-2"><i class="fa fa-check"></i><b>6.2</b> Spatial Order</a></li>
+<li class="chapter" data-level="6.3" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3D-VMM-2"><i class="fa fa-check"></i><b>6.3</b> Vertical Momentum Mixing</a></li>
+<li class="chapter" data-level="6.4" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3D-CM-2"><i class="fa fa-check"></i><b>6.4</b> Computational Mesh</a></li>
+<li class="chapter" data-level="6.5" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3D-IC-2"><i class="fa fa-check"></i><b>6.5</b> Initial Conditions</a></li>
+<li class="chapter" data-level="6.6" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3D-BC-2"><i class="fa fa-check"></i><b>6.6</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="6.7" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3D-HS-2"><i class="fa fa-check"></i><b>6.7</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="6.8" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3D-MO-2"><i class="fa fa-check"></i><b>6.8</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="AD-1.html"><a href="AD-1.html"><i class="fa fa-check"></i><b>7</b> Model Construction: AD Simulation Class</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="AD-1.html"><a href="AD-1.html#AD-Over-2"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="AD-1.html"><a href="AD-1.html#AD-TempM-2"><i class="fa fa-check"></i><b>7.2</b> Temperature Model</a></li>
+<li class="chapter" data-level="7.3" data-path="AD-1.html"><a href="AD-1.html#AD-TraceM-2"><i class="fa fa-check"></i><b>7.3</b> Tracer Model</a></li>
+<li class="chapter" data-level="7.4" data-path="AD-1.html"><a href="AD-1.html#AD-SMM-2"><i class="fa fa-check"></i><b>7.4</b> Scalar Mixing Model</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="AD-1.html"><a href="AD-1.html#AD-SMM-Hori-3"><i class="fa fa-check"></i><b>7.4.1</b> Horizontal</a></li>
+<li class="chapter" data-level="7.4.2" data-path="AD-1.html"><a href="AD-1.html#AD-SMM-Vert-3"><i class="fa fa-check"></i><b>7.4.2</b> Vertical</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="AD-1.html"><a href="AD-1.html#AD-AHE-2"><i class="fa fa-check"></i><b>7.5</b> Atmospheric Heat Exchange</a></li>
+<li class="chapter" data-level="7.6" data-path="AD-1.html"><a href="AD-1.html#AD-SRM-2"><i class="fa fa-check"></i><b>7.6</b> Shortwave Radiation Model</a></li>
+<li class="chapter" data-level="7.7" data-path="AD-1.html"><a href="AD-1.html#AD-LRM-2"><i class="fa fa-check"></i><b>7.7</b> Longwave Radiation Model</a></li>
+<li class="chapter" data-level="7.8" data-path="AD-1.html"><a href="AD-1.html#AD-LHM-2"><i class="fa fa-check"></i><b>7.8</b> Latent Heat Model</a></li>
+<li class="chapter" data-level="7.9" data-path="AD-1.html"><a href="AD-1.html#AD-IC-2"><i class="fa fa-check"></i><b>7.9</b> Initial Conditions</a></li>
+<li class="chapter" data-level="7.10" data-path="AD-1.html"><a href="AD-1.html#AD-BC-2"><i class="fa fa-check"></i><b>7.10</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="7.11" data-path="AD-1.html"><a href="AD-1.html#AD-HS-2"><i class="fa fa-check"></i><b>7.11</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="7.12" data-path="AD-1.html"><a href="AD-1.html#AD-MO-2"><i class="fa fa-check"></i><b>7.12</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="BCs-1.html"><a href="BCs-1.html"><i class="fa fa-check"></i><b>8</b> Boundary And Initial Conditions</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="BCs-1.html"><a href="BCs-1.html#BCsIntro-2"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="BCs-1.html"><a href="BCs-1.html#BCsAssigningBCLocations-2"><i class="fa fa-check"></i><b>8.2</b> Assigning Boundary Locations</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="BCs-1.html"><a href="BCs-1.html#BCsLocationCells-3"><i class="fa fa-check"></i><b>8.2.1</b> Point</a></li>
+<li class="chapter" data-level="8.2.2" data-path="BCs-1.html"><a href="BCs-1.html#BCsLocationPolygons-3"><i class="fa fa-check"></i><b>8.2.2</b> Polygon</a></li>
+<li class="chapter" data-level="8.2.3" data-path="BCs-1.html"><a href="BCs-1.html#BCsLocationNodestrings-3"><i class="fa fa-check"></i><b>8.2.3</b> Nodestring</a></li>
+<li class="chapter" data-level="8.2.4" data-path="BCs-1.html"><a href="BCs-1.html#BCsLocationPath-3"><i class="fa fa-check"></i><b>8.2.4</b> Path</a></li>
+<li class="chapter" data-level="8.2.5" data-path="BCs-1.html"><a href="BCs-1.html#BCsLocationGlobal-3"><i class="fa fa-check"></i><b>8.2.5</b> Global</a></li>
+<li class="chapter" data-level="8.2.6" data-path="BCs-1.html"><a href="BCs-1.html#BCsLocationGrid-3"><i class="fa fa-check"></i><b>8.2.6</b> Grid</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="BCs-1.html"><a href="BCs-1.html#BCsSpatialAndTemporalVariability"><i class="fa fa-check"></i><b>8.3</b> Boundary Condition Spatial and Temporal Variability</a></li>
+<li class="chapter" data-level="8.4" data-path="BCs-1.html"><a href="BCs-1.html#BCsBCBlock-2"><i class="fa fa-check"></i><b>8.4</b> Boundary Control Block</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="BCs-1.html"><a href="BCs-1.html#BCsHeader-3"><i class="fa fa-check"></i><b>8.4.1</b> Selecting Data Variables</a></li>
+<li class="chapter" data-level="8.4.2" data-path="BCs-1.html"><a href="BCs-1.html#BCsDefault-3"><i class="fa fa-check"></i><b>8.4.2</b> Boundary Condition Defaults</a></li>
+<li class="chapter" data-level="8.4.3" data-path="BCs-1.html"><a href="BCs-1.html#BCsScaleOffset-3"><i class="fa fa-check"></i><b>8.4.3</b> Scaling And Offsetting Boundary Values</a></li>
+<li class="chapter" data-level="8.4.4" data-path="BCs-1.html"><a href="BCs-1.html#BCsTime-3"><i class="fa fa-check"></i><b>8.4.4</b> Boundary Condition Time Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="BCs-1.html"><a href="BCs-1.html#BCsTypes-2"><i class="fa fa-check"></i><b>8.5</b> Boundary Condition Types</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="BCs-1.html"><a href="BCs-1.html#BCsWaterLevels-3"><i class="fa fa-check"></i><b>8.5.1</b> Water Level</a></li>
+<li class="chapter" data-level="8.5.2" data-path="BCs-1.html"><a href="BCs-1.html#BCsInflows-3"><i class="fa fa-check"></i><b>8.5.2</b> Inflow</a></li>
+<li class="chapter" data-level="8.5.3" data-path="BCs-1.html"><a href="BCs-1.html#BCsStageDischarge-3"><i class="fa fa-check"></i><b>8.5.3</b> Stage Discharge</a></li>
+<li class="chapter" data-level="8.5.4" data-path="BCs-1.html"><a href="BCs-1.html#BCsOcean-3"><i class="fa fa-check"></i><b>8.5.4</b> Ocean Circulation Model</a></li>
+<li class="chapter" data-level="8.5.5" data-path="BCs-1.html"><a href="BCs-1.html#BCsAtmos-3"><i class="fa fa-check"></i><b>8.5.5</b> Atmospheric</a></li>
+<li class="chapter" data-level="8.5.6" data-path="BCs-1.html"><a href="BCs-1.html#BCHolland-3"><i class="fa fa-check"></i><b>8.5.6</b> Parametric Tropical Cyclone</a></li>
+<li class="chapter" data-level="8.5.7" data-path="BCs-1.html"><a href="BCs-1.html#BCsWave-3"><i class="fa fa-check"></i><b>8.5.7</b> Spectral Wave Boundaries</a></li>
+<li class="chapter" data-level="8.5.8" data-path="BCs-1.html"><a href="BCs-1.html#BCsRainfallInfiltration-3"><i class="fa fa-check"></i><b>8.5.8</b> Direct Rainfall And Infiltration</a></li>
+<li class="chapter" data-level="8.5.9" data-path="BCs-1.html"><a href="BCs-1.html#BCsMass-3"><i class="fa fa-check"></i><b>8.5.9</b> Mass</a></li>
+<li class="chapter" data-level="8.5.10" data-path="BCs-1.html"><a href="BCs-1.html#BCsBedMass-3"><i class="fa fa-check"></i><b>8.5.10</b> Bed Mass</a></li>
+<li class="chapter" data-level="8.5.11" data-path="BCs-1.html"><a href="BCs-1.html#BCsForce-3"><i class="fa fa-check"></i><b>8.5.11</b> Force</a></li>
+<li class="chapter" data-level="8.5.12" data-path="BCs-1.html"><a href="BCs-1.html#BCsTKE-3"><i class="fa fa-check"></i><b>8.5.12</b> Turbulent Kinetic Energy</a></li>
+<li class="chapter" data-level="8.5.13" data-path="BCs-1.html"><a href="BCs-1.html#BCsMisc-3"><i class="fa fa-check"></i><b>8.5.13</b> Misc?</a></li>
+<li class="chapter" data-level="8.5.14" data-path="BCs-1.html"><a href="BCs-1.html#BCsScalar-3"><i class="fa fa-check"></i><b>8.5.14</b> Scalar Concentration</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="BCs-1.html"><a href="BCs-1.html#BCsInputData-2"><i class="fa fa-check"></i><b>8.6</b> Input Data For Boundary Conditions</a></li>
+<li class="chapter" data-level="8.7" data-path="BCs-1.html"><a href="BCs-1.html#BCsSclars-2"><i class="fa fa-check"></i><b>8.7</b> Assigning Salinity, Temperature, Tracer, And Water Quality Boundaries</a></li>
+<li class="chapter" data-level="8.8" data-path="BCs-1.html"><a href="BCs-1.html#BCs3D-2"><i class="fa fa-check"></i><b>8.8</b> 3D Boundary Considerations</a></li>
+<li class="chapter" data-level="8.9" data-path="BCs-1.html"><a href="BCs-1.html#BCsInitialConditions-2"><i class="fa fa-check"></i><b>8.9</b> Initial Conditions</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ST-1.html"><a href="ST-1.html"><i class="fa fa-check"></i><b>9</b> Model Construction: ST Simulation Class</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ST-1.html"><a href="ST-1.html#ST-Over-2"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="ST-1.html"><a href="ST-1.html#ST-SM-2"><i class="fa fa-check"></i><b>9.2</b> Sediment Model</a></li>
+<li class="chapter" data-level="9.3" data-path="ST-1.html"><a href="ST-1.html#ST-SC-2"><i class="fa fa-check"></i><b>9.3</b> Sediment Configuration</a></li>
+<li class="chapter" data-level="9.4" data-path="ST-1.html"><a href="ST-1.html#ST-IC-2"><i class="fa fa-check"></i><b>9.4</b> Initial Conditions</a></li>
+<li class="chapter" data-level="9.5" data-path="ST-1.html"><a href="ST-1.html#ST-BC-2"><i class="fa fa-check"></i><b>9.5</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="9.6" data-path="ST-1.html"><a href="ST-1.html#ST-HS-2"><i class="fa fa-check"></i><b>9.6</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="9.7" data-path="ST-1.html"><a href="ST-1.html#ST-MO-2"><i class="fa fa-check"></i><b>9.7</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="WQ-1.html"><a href="WQ-1.html"><i class="fa fa-check"></i><b>10</b> Model Construction: WQ Simulation Class</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="WQ-1.html"><a href="WQ-1.html#WQ-Over-2"><i class="fa fa-check"></i><b>10.1</b> Overview</a></li>
+<li class="chapter" data-level="10.2" data-path="WQ-1.html"><a href="WQ-1.html#WQ-WQM-2"><i class="fa fa-check"></i><b>10.2</b> Water Quality Model</a></li>
+<li class="chapter" data-level="10.3" data-path="WQ-1.html"><a href="WQ-1.html#WQ-WQC-2"><i class="fa fa-check"></i><b>10.3</b> Water Quality Configuration</a></li>
+<li class="chapter" data-level="10.4" data-path="WQ-1.html"><a href="WQ-1.html#WQ-IC-2"><i class="fa fa-check"></i><b>10.4</b> Initial Conditions</a></li>
+<li class="chapter" data-level="10.5" data-path="WQ-1.html"><a href="WQ-1.html#WQ-BC-2"><i class="fa fa-check"></i><b>10.5</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="10.6" data-path="WQ-1.html"><a href="WQ-1.html#WQ-HS-2"><i class="fa fa-check"></i><b>10.6</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="10.7" data-path="WQ-1.html"><a href="WQ-1.html#WQ-MO-2"><i class="fa fa-check"></i><b>10.7</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="PT-1.html"><a href="PT-1.html"><i class="fa fa-check"></i><b>11</b> Model Construction: PT Simulation Class</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="PT-1.html"><a href="PT-1.html#PT-Over-2"><i class="fa fa-check"></i><b>11.1</b> Overview</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="Hardware-1.html"><a href="Hardware-1.html"><i class="fa fa-check"></i><b>12</b> Hardware And Operating System</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="Hardware-1.html"><a href="Hardware-1.html#Hardware-2"><i class="fa fa-check"></i><b>12.1</b> Context</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html"><i class="fa fa-check"></i><b>13</b> Managing And Starting Simulations</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#RunningSimulationsIntro-2"><i class="fa fa-check"></i><b>13.1</b> Introduction</a></li>
+<li class="chapter" data-level="13.2" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#FileNaming-2"><i class="fa fa-check"></i><b>13.2</b> File Naming</a></li>
+<li class="chapter" data-level="13.3" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#SimulationManagement-2"><i class="fa fa-check"></i><b>13.3</b> Simulation Management</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#TimeOutputControls-3"><i class="fa fa-check"></i><b>13.3.1</b> Time and Output Controls</a></li>
+<li class="chapter" data-level="13.3.2" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#Events-3"><i class="fa fa-check"></i><b>13.3.2</b> Events</a></li>
+<li class="chapter" data-level="13.3.3" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#Scenarios-3"><i class="fa fa-check"></i><b>13.3.3</b> Scenarios</a></li>
+<li class="chapter" data-level="13.3.4" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#Variables-3"><i class="fa fa-check"></i><b>13.3.4</b> Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#TUFLOWExecDownload-2"><i class="fa fa-check"></i><b>13.4</b> TUFLOW Executable Download</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#InstallOverview-3"><i class="fa fa-check"></i><b>13.4.1</b> Overview and Where to Install</a></li>
+<li class="chapter" data-level="13.4.2" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#iSPdSP-3"><i class="fa fa-check"></i><b>13.4.2</b> Single and Double Precision</a></li>
+<li class="chapter" data-level="13.4.3" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#CustomingTUFLOW-3"><i class="fa fa-check"></i><b>13.4.3</b> Customising TUFLOW using TUFLOW_USER_DEFINED.dll</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#RunningSims-2"><i class="fa fa-check"></i><b>13.5</b> Running Simulations</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#DongleTypesandSetup-3"><i class="fa fa-check"></i><b>13.5.1</b> Dongle Types and Setup</a></li>
+<li class="chapter" data-level="13.5.2" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#StartingaSim-3"><i class="fa fa-check"></i><b>13.5.2</b> Starting a Simulation</a></li>
+<li class="chapter" data-level="13.5.3" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#RunningHPC-3"><i class="fa fa-check"></i><b>13.5.3</b> Running TUFLOW HPC</a></li>
+<li class="chapter" data-level="13.5.4" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#SMSSimulations-3"><i class="fa fa-check"></i><b>13.5.4</b> Using TUFLOW FV with SMS</a></li>
+<li class="chapter" data-level="13.5.5" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#OptimisingSims-3"><i class="fa fa-check"></i><b>13.5.5</b> Optimising Startup and Run Times</a></li>
+<li class="chapter" data-level="13.5.6" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#AutoTerminateOptions-3"><i class="fa fa-check"></i><b>13.5.6</b> Auto Terminate (Simulation End) Options</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#ResultsReplication-3"><i class="fa fa-check"></i><b>13.6</b> Reproducibility of Results</a>
+<ul>
+<li class="chapter" data-level="13.6.1" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#ResultsReplicationClassic-3"><i class="fa fa-check"></i><b>13.6.1</b> TUFLOW Classic (CPU only)</a></li>
+<li class="chapter" data-level="13.6.2" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#ResultsReplicationHPCCPU-3"><i class="fa fa-check"></i><b>13.6.2</b> TUFLOW HPC (incl. Quadtree) on CPU</a></li>
+<li class="chapter" data-level="13.6.3" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#ResultsReplicationHPCGPU-3"><i class="fa fa-check"></i><b>13.6.3</b> TUFLOW HPC (incl. Quadtree) on GPU</a></li>
+<li class="chapter" data-level="13.6.4" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#ResultsReplicationHPCMultiThread-3"><i class="fa fa-check"></i><b>13.6.4</b> TUFLOW HPC (incl. Quadtree) on multiple GPUs / CPU threads</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="ChecksAndLogs-1.html"><a href="ChecksAndLogs-1.html"><i class="fa fa-check"></i><b>14</b> Checks And Logs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="ChecksAndLogs-1.html"><a href="ChecksAndLogs-1.html#ChecksAndLogs-2"><i class="fa fa-check"></i><b>14.1</b> Context</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="ViewingOutputs-1.html"><a href="ViewingOutputs-1.html"><i class="fa fa-check"></i><b>15</b> Viewing Outputs</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="ViewingOutputs-1.html"><a href="ViewingOutputs-1.html#ViewingOutputs-2"><i class="fa fa-check"></i><b>15.1</b> Context</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="QAAndTroubleshooting-1.html"><a href="QAAndTroubleshooting-1.html"><i class="fa fa-check"></i><b>16</b> QA And Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="QAAndTroubleshooting-1.html"><a href="QAAndTroubleshooting-1.html#QAAndTroubleshooting-2"><i class="fa fa-check"></i><b>16.1</b> Context</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="AppCommands.html"><a href="AppCommands.html"><i class="fa fa-check"></i><b>A</b> Commands</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="AppCommands.html"><a href="AppCommands.html#Appcmdsyn"><i class="fa fa-check"></i><b>A.1</b> Command syntax</a></li>
+<li class="chapter" data-level="A.2" data-path="AppCommands.html"><a href="AppCommands.html#Appargmtsyn"><i class="fa fa-check"></i><b>A.2</b> Argument syntax</a></li>
+<li class="chapter" data-level="A.3" data-path="AppCommands.html"><a href="AppCommands.html#Appcmds"><i class="fa fa-check"></i><b>A.3</b> Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="AppParams.html"><a href="AppParams.html"><i class="fa fa-check"></i><b>B</b> Parameters</a></li>
+<li class="chapter" data-level="C" data-path="AppFiles.html"><a href="AppFiles.html"><i class="fa fa-check"></i><b>C</b> Files and Data Fields</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="AppFiles.html"><a href="AppFiles.html#AppOutputsSurfConc"><i class="fa fa-check"></i><b>C.1</b> Surface water concentrations</a></li>
+<li class="chapter" data-level="C.2" data-path="AppFiles.html"><a href="AppFiles.html#AppOutputsGWConc"><i class="fa fa-check"></i><b>C.2</b> Groundwater concentrations</a></li>
+<li class="chapter" data-level="C.3" data-path="AppFiles.html"><a href="AppFiles.html#AppOutputsDryMass"><i class="fa fa-check"></i><b>C.3</b> Dry mass</a></li>
+<li class="chapter" data-level="C.4" data-path="AppFiles.html"><a href="AppFiles.html#AppOutputsNetMass"><i class="fa fa-check"></i><b>C.4</b> Net mass</a></li>
+<li class="chapter" data-level="C.5" data-path="AppFiles.html"><a href="AppFiles.html#AppOutputsOther"><i class="fa fa-check"></i><b>C.5</b> Other outputs</a>
+<ul>
+<li class="chapter" data-level="C.5.1" data-path="AppFiles.html"><a href="AppFiles.html#AppOutputsOtherMB"><i class="fa fa-check"></i><b>C.5.1</b> Mass balance</a></li>
+<li class="chapter" data-level="C.5.2" data-path="AppFiles.html"><a href="AppFiles.html#AppOutputsOtherRP"><i class="fa fa-check"></i><b>C.5.2</b> Receiving polygon</a></li>
+<li class="chapter" data-level="C.5.3" data-path="AppFiles.html"><a href="AppFiles.html#AppOutputsOtherFV"><i class="fa fa-check"></i><b>C.5.3</b> TUFLOW FV boundaries</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="AppProc-GE-2.html"><a href="AppProc-GE-2.html"><i class="fa fa-check"></i><b>D</b> Processes: Governing Equations And Numerical Scheme</a>
+<ul>
+<li class="chapter" data-level="D.1" data-path="AppProc-GE-2.html"><a href="AppProc-GE-2.html#AppProc-GE-Cont-2"><i class="fa fa-check"></i><b>D.1</b> Context</a></li>
+<li class="chapter" data-level="D.2" data-path="AppProc-GE-2.html"><a href="AppProc-GE-2.html#AppProc-GE-GE-2"><i class="fa fa-check"></i><b>D.2</b> Governing Equations</a></li>
+<li class="chapter" data-level="D.3" data-path="AppProc-GE-2.html"><a href="AppProc-GE-2.html#scalar-conservation-equations"><i class="fa fa-check"></i><b>D.3</b> Scalar Conservation Equations</a></li>
+<li class="chapter" data-level="D.4" data-path="AppProc-GE-2.html"><a href="AppProc-GE-2.html#AppProc-GE-CT-2"><i class="fa fa-check"></i><b>D.4</b> Cell Topology</a></li>
+<li class="chapter" data-level="D.5" data-path="AppProc-GE-2.html"><a href="AppProc-GE-2.html#AppProc-GE-SN-2"><i class="fa fa-check"></i><b>D.5</b> Numerical Scheme</a>
+<ul>
+<li class="chapter" data-level="D.5.1" data-path="AppProc-GE-2.html"><a href="AppProc-GE-2.html#discrete-system"><i class="fa fa-check"></i><b>D.5.1</b> Discrete System</a></li>
+<li class="chapter" data-level="D.5.2" data-path="AppProc-GE-2.html"><a href="AppProc-GE-2.html#mode-splitting"><i class="fa fa-check"></i><b>D.5.2</b> Mode Splitting</a></li>
+<li class="chapter" data-level="D.5.3" data-path="AppProc-GE-2.html"><a href="AppProc-GE-2.html#flux-terms"><i class="fa fa-check"></i><b>D.5.3</b> Flux Terms</a></li>
+<li class="chapter" data-level="D.5.4" data-path="AppProc-GE-2.html"><a href="AppProc-GE-2.html#time-integration"><i class="fa fa-check"></i><b>D.5.4</b> Time Integration</a></li>
+<li class="chapter" data-level="D.5.5" data-path="AppProc-GE-2.html"><a href="AppProc-GE-2.html#wetting-and-drying"><i class="fa fa-check"></i><b>D.5.5</b> Wetting and Drying</a></li>
+<li class="chapter" data-level="D.5.6" data-path="AppProc-GE-2.html"><a href="AppProc-GE-2.html#source-terms"><i class="fa fa-check"></i><b>D.5.6</b> Source Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="D.6" data-path="AppProc-GE-2.html"><a href="AppProc-GE-2.html#atmospheric-heat-exchange"><i class="fa fa-check"></i><b>D.6</b> Atmospheric Heat Exchange</a></li>
+<li class="chapter" data-level="D.7" data-path="AppProc-GE-2.html"><a href="AppProc-GE-2.html#references"><i class="fa fa-check"></i><b>D.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="App2DHD-1.html"><a href="App2DHD-1.html"><i class="fa fa-check"></i><b>E</b> Processes: 2D HD Simulation Class</a>
+<ul>
+<li class="chapter" data-level="E.1" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-Cont-2"><i class="fa fa-check"></i><b>E.1</b> Context</a></li>
+<li class="chapter" data-level="E.2" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-MI-2"><i class="fa fa-check"></i><b>E.2</b> Model Initialisation</a></li>
+<li class="chapter" data-level="E.3" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-CRF-2"><i class="fa fa-check"></i><b>E.3</b> Coordinate Reference Frame</a>
+<ul>
+<li class="chapter" data-level="E.3.1" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-CRF-Cont-3"><i class="fa fa-check"></i><b>E.3.1</b> Context</a></li>
+<li class="chapter" data-level="E.3.2" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-CRF-Scie-3"><i class="fa fa-check"></i><b>E.3.2</b> Science</a></li>
+<li class="chapter" data-level="E.3.3" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-CRF-GUG-3"><i class="fa fa-check"></i><b>E.3.3</b> General Usage Guidance</a></li>
+</ul></li>
+<li class="chapter" data-level="E.4" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-SO-2"><i class="fa fa-check"></i><b>E.4</b> Spatial Order</a>
+<ul>
+<li class="chapter" data-level="E.4.1" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-SO-Cont-3"><i class="fa fa-check"></i><b>E.4.1</b> Context</a></li>
+<li class="chapter" data-level="E.4.2" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-SO-Scie-3"><i class="fa fa-check"></i><b>E.4.2</b> Science</a></li>
+<li class="chapter" data-level="E.4.3" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-SO-GUG-3"><i class="fa fa-check"></i><b>E.4.3</b> General Usage Guidance</a></li>
+</ul></li>
+<li class="chapter" data-level="E.5" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-Hard-2"><i class="fa fa-check"></i><b>E.5</b> Hardware</a>
+<ul>
+<li class="chapter" data-level="E.5.1" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-Hard-Cont-3"><i class="fa fa-check"></i><b>E.5.1</b> Context</a></li>
+<li class="chapter" data-level="E.5.2" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-Hard-Scie-3"><i class="fa fa-check"></i><b>E.5.2</b> Science</a></li>
+<li class="chapter" data-level="E.5.3" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-Hard-GUG-3"><i class="fa fa-check"></i><b>E.5.3</b> General Usage Guidance</a></li>
+</ul></li>
+<li class="chapter" data-level="E.6" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-TS-2"><i class="fa fa-check"></i><b>E.6</b> Time Settings</a></li>
+<li class="chapter" data-level="E.7" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-NC-2"><i class="fa fa-check"></i><b>E.7</b> Numerical Controls</a>
+<ul>
+<li class="chapter" data-level="E.7.1" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-NC-CT-3"><i class="fa fa-check"></i><b>E.7.1</b> Computational Timestep</a></li>
+<li class="chapter" data-level="E.7.2" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-NC-WAD-3"><i class="fa fa-check"></i><b>E.7.2</b> Wetting And Drying</a></li>
+<li class="chapter" data-level="E.7.3" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-NC-SL-3"><i class="fa fa-check"></i><b>E.7.3</b> Stability Limits</a></li>
+</ul></li>
+<li class="chapter" data-level="E.8" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-BDM-2"><i class="fa fa-check"></i><b>E.8</b> Bottom Drag Model</a>
+<ul>
+<li class="chapter" data-level="E.8.1" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-BDM-Mann-3"><i class="fa fa-check"></i><b>E.8.1</b> Manning</a></li>
+<li class="chapter" data-level="E.8.2" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-BDM-ks-3"><i class="fa fa-check"></i><b>E.8.2</b> ks</a></li>
+</ul></li>
+<li class="chapter" data-level="E.9" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-MMM-2"><i class="fa fa-check"></i><b>E.9</b> Momentum Mixing Model</a>
+<ul>
+<li class="chapter" data-level="E.9.1" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-MMM-Cont-3"><i class="fa fa-check"></i><b>E.9.1</b> Context</a></li>
+<li class="chapter" data-level="E.9.2" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-MMM-Scie-3"><i class="fa fa-check"></i><b>E.9.2</b> Science</a></li>
+<li class="chapter" data-level="E.9.3" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-MMM-GUG-3"><i class="fa fa-check"></i><b>E.9.3</b> General Usage Guidance</a></li>
+</ul></li>
+<li class="chapter" data-level="E.10" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-CM-2"><i class="fa fa-check"></i><b>E.10</b> Computational Mesh</a>
+<ul>
+<li class="chapter" data-level="E.10.1" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-CM-Cont-3"><i class="fa fa-check"></i><b>E.10.1</b> Context</a></li>
+<li class="chapter" data-level="E.10.2" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-CM-Scie-3"><i class="fa fa-check"></i><b>E.10.2</b> Science</a></li>
+<li class="chapter" data-level="E.10.3" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-CM-GUG-3"><i class="fa fa-check"></i><b>E.10.3</b> General Usage Guidance</a></li>
+</ul></li>
+<li class="chapter" data-level="E.11" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-Bath-2"><i class="fa fa-check"></i><b>E.11</b> Bathymetry</a>
+<ul>
+<li class="chapter" data-level="E.11.1" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-Bath-Cont-3"><i class="fa fa-check"></i><b>E.11.1</b> Context</a></li>
+<li class="chapter" data-level="E.11.2" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-Bath-Scie-3"><i class="fa fa-check"></i><b>E.11.2</b> Science</a></li>
+<li class="chapter" data-level="E.11.3" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-Bath-GUG-3"><i class="fa fa-check"></i><b>E.11.3</b> General Usage Guidance</a></li>
+</ul></li>
+<li class="chapter" data-level="E.12" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-Mate-2"><i class="fa fa-check"></i><b>E.12</b> Materials</a></li>
+<li class="chapter" data-level="E.13" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-IC-2"><i class="fa fa-check"></i><b>E.13</b> Initial Conditions</a></li>
+<li class="chapter" data-level="E.14" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-BC-2"><i class="fa fa-check"></i><b>E.14</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="E.15" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-HS-2"><i class="fa fa-check"></i><b>E.15</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="E.16" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-MO-2"><i class="fa fa-check"></i><b>E.16</b> Model Outputs</a></li>
+<li class="chapter" data-level="E.17" data-path="App2DHD-1.html"><a href="App2DHD-1.html#App2DHD-Refe-2"><i class="fa fa-check"></i><b>E.17</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="F" data-path="App3DHD-1.html"><a href="App3DHD-1.html"><i class="fa fa-check"></i><b>F</b> Processes: 3D HD Simulation Class</a>
+<ul>
+<li class="chapter" data-level="F.1" data-path="App3DHD-1.html"><a href="App3DHD-1.html#App3DHD-Cont-2"><i class="fa fa-check"></i><b>F.1</b> Context</a></li>
+<li class="chapter" data-level="F.2" data-path="App3DHD-1.html"><a href="App3DHD-1.html#App3DHD-SO-2"><i class="fa fa-check"></i><b>F.2</b> Spatial Order</a></li>
+<li class="chapter" data-level="F.3" data-path="App3DHD-1.html"><a href="App3DHD-1.html#App3DHD-VMM-2"><i class="fa fa-check"></i><b>F.3</b> Vertical Mixing Model</a></li>
+<li class="chapter" data-level="F.4" data-path="App3DHD-1.html"><a href="App3DHD-1.html#App3DHD-CM-2"><i class="fa fa-check"></i><b>F.4</b> Computational Mesh</a></li>
+<li class="chapter" data-level="F.5" data-path="App3DHD-1.html"><a href="App3DHD-1.html#App3DHD-IC-2"><i class="fa fa-check"></i><b>F.5</b> Initial Conditions</a></li>
+<li class="chapter" data-level="F.6" data-path="App3DHD-1.html"><a href="App3DHD-1.html#App3DHD-BC-2"><i class="fa fa-check"></i><b>F.6</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="F.7" data-path="App3DHD-1.html"><a href="App3DHD-1.html#App3DHD-HS-2"><i class="fa fa-check"></i><b>F.7</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="F.8" data-path="App3DHD-1.html"><a href="App3DHD-1.html#App3DHD-MO-2"><i class="fa fa-check"></i><b>F.8</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="G" data-path="AppAD-1.html"><a href="AppAD-1.html"><i class="fa fa-check"></i><b>G</b> Processes: AD Simulation Class</a>
+<ul>
+<li class="chapter" data-level="G.1" data-path="AppAD-1.html"><a href="AppAD-1.html#AppAD-Cont-2"><i class="fa fa-check"></i><b>G.1</b> Context</a></li>
+<li class="chapter" data-level="G.2" data-path="AppAD-1.html"><a href="AppAD-1.html#AppAD-SM-2"><i class="fa fa-check"></i><b>G.2</b> Salinity Model</a></li>
+<li class="chapter" data-level="G.3" data-path="AppAD-1.html"><a href="AppAD-1.html#AppAD-TempM-2"><i class="fa fa-check"></i><b>G.3</b> Temperature Model</a></li>
+<li class="chapter" data-level="G.4" data-path="AppAD-1.html"><a href="AppAD-1.html#AppAD-TraceM-2"><i class="fa fa-check"></i><b>G.4</b> Tracer Model</a></li>
+<li class="chapter" data-level="G.5" data-path="AppAD-1.html"><a href="AppAD-1.html#AppAD-SMM-2"><i class="fa fa-check"></i><b>G.5</b> Scalar Mixing Model</a></li>
+<li class="chapter" data-level="G.6" data-path="AppAD-1.html"><a href="AppAD-1.html#AppAD-AHE-2"><i class="fa fa-check"></i><b>G.6</b> Atmospheric Heat Exchange</a>
+<ul>
+<li class="chapter" data-level="G.6.1" data-path="AppAD-1.html"><a href="AppAD-1.html#AppAD-AHE-Cont-3"><i class="fa fa-check"></i><b>G.6.1</b> Context</a></li>
+<li class="chapter" data-level="G.6.2" data-path="AppAD-1.html"><a href="AppAD-1.html#AppAD-AHE-SRM-3"><i class="fa fa-check"></i><b>G.6.2</b> Shortwave Radiation Model</a></li>
+<li class="chapter" data-level="G.6.3" data-path="AppAD-1.html"><a href="AppAD-1.html#AppAD-AHE-LRM-3"><i class="fa fa-check"></i><b>G.6.3</b> Longwave Radiation Model</a></li>
+<li class="chapter" data-level="G.6.4" data-path="AppAD-1.html"><a href="AppAD-1.html#AppAD-AHE-LHM-3"><i class="fa fa-check"></i><b>G.6.4</b> Latent Heat Model</a></li>
+</ul></li>
+<li class="chapter" data-level="G.7" data-path="AppAD-1.html"><a href="AppAD-1.html#AppAD-IC-2"><i class="fa fa-check"></i><b>G.7</b> Initial Conditions</a></li>
+<li class="chapter" data-level="G.8" data-path="AppAD-1.html"><a href="AppAD-1.html#AppAD-BC-2"><i class="fa fa-check"></i><b>G.8</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="G.9" data-path="AppAD-1.html"><a href="AppAD-1.html#AppAD-HS"><i class="fa fa-check"></i><b>G.9</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="G.10" data-path="AppAD-1.html"><a href="AppAD-1.html#AppAD-MO-2"><i class="fa fa-check"></i><b>G.10</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="H" data-path="AppST-1.html"><a href="AppST-1.html"><i class="fa fa-check"></i><b>H</b> Processes: ST Simulation Class</a>
+<ul>
+<li class="chapter" data-level="H.1" data-path="AppST-1.html"><a href="AppST-1.html#AppST-Cont-2"><i class="fa fa-check"></i><b>H.1</b> Context</a></li>
+<li class="chapter" data-level="H.2" data-path="AppST-1.html"><a href="AppST-1.html#AppST-SM-2"><i class="fa fa-check"></i><b>H.2</b> Sediment Model</a></li>
+<li class="chapter" data-level="H.3" data-path="AppST-1.html"><a href="AppST-1.html#AppST-BRM-2"><i class="fa fa-check"></i><b>H.3</b> Bottom Drag Model</a></li>
+<li class="chapter" data-level="H.4" data-path="AppST-1.html"><a href="AppST-1.html#AppST-Bath-2"><i class="fa fa-check"></i><b>H.4</b> Bathymetry</a></li>
+<li class="chapter" data-level="H.5" data-path="AppST-1.html"><a href="AppST-1.html#AppST-SC-2"><i class="fa fa-check"></i><b>H.5</b> Sediment Configuration</a></li>
+<li class="chapter" data-level="H.6" data-path="AppST-1.html"><a href="AppST-1.html#AppST-IC-2"><i class="fa fa-check"></i><b>H.6</b> Initial Conditions</a></li>
+<li class="chapter" data-level="H.7" data-path="AppST-1.html"><a href="AppST-1.html#AppST-BC-2"><i class="fa fa-check"></i><b>H.7</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="H.8" data-path="AppST-1.html"><a href="AppST-1.html#AppST-HS-2"><i class="fa fa-check"></i><b>H.8</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="H.9" data-path="AppST-1.html"><a href="AppST-1.html#AppST-MO-2"><i class="fa fa-check"></i><b>H.9</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="I" data-path="AppWQ-1.html"><a href="AppWQ-1.html"><i class="fa fa-check"></i><b>I</b> Processes: WQ Simulation Class</a>
+<ul>
+<li class="chapter" data-level="I.1" data-path="AppWQ-1.html"><a href="AppWQ-1.html#AppWQ-Cont-2"><i class="fa fa-check"></i><b>I.1</b> Context</a></li>
+<li class="chapter" data-level="I.2" data-path="AppWQ-1.html"><a href="AppWQ-1.html#AppWQ-WQM-2"><i class="fa fa-check"></i><b>I.2</b> Water Quality Model</a></li>
+<li class="chapter" data-level="I.3" data-path="AppWQ-1.html"><a href="AppWQ-1.html#AppWQ-WQC-2"><i class="fa fa-check"></i><b>I.3</b> Water Quality Configuration</a></li>
+<li class="chapter" data-level="I.4" data-path="AppWQ-1.html"><a href="AppWQ-1.html#AppWQ-IC-2"><i class="fa fa-check"></i><b>I.4</b> Initial Conditions</a></li>
+<li class="chapter" data-level="I.5" data-path="AppWQ-1.html"><a href="AppWQ-1.html#AppWQ-BC-2"><i class="fa fa-check"></i><b>I.5</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="I.6" data-path="AppWQ-1.html"><a href="AppWQ-1.html#AppWQ-HS-2"><i class="fa fa-check"></i><b>I.6</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="I.7" data-path="AppWQ-1.html"><a href="AppWQ-1.html#AppWQ-MO-2"><i class="fa fa-check"></i><b>I.7</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="J" data-path="AppPT-1.html"><a href="AppPT-1.html"><i class="fa fa-check"></i><b>J</b> Processes: PT Simulation Class</a>
+<ul>
+<li class="chapter" data-level="J.1" data-path="AppPT-1.html"><a href="AppPT-1.html#AppPT-Cont-2"><i class="fa fa-check"></i><b>J.1</b> Context</a></li>
+<li class="chapter" data-level="J.2" data-path="AppPT-1.html"><a href="AppPT-1.html#AppPT-PTC-2"><i class="fa fa-check"></i><b>J.2</b> Particle Tracking Configuration</a></li>
+<li class="chapter" data-level="J.3" data-path="AppPT-1.html"><a href="AppPT-1.html#AppPT-IC-2"><i class="fa fa-check"></i><b>J.3</b> Initial Conditions</a></li>
+<li class="chapter" data-level="J.4" data-path="AppPT-1.html"><a href="AppPT-1.html#AppPT-BC-2"><i class="fa fa-check"></i><b>J.4</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="J.5" data-path="AppPT-1.html"><a href="AppPT-1.html#AppPT-HS-2"><i class="fa fa-check"></i><b>J.5</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="J.6" data-path="AppPT-1.html"><a href="AppPT-1.html#AppPT-MO-2"><i class="fa fa-check"></i><b>J.6</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="K" data-path="AppDemoModelResCont-2.html"><a href="AppDemoModelResCont-2.html"><i class="fa fa-check"></i><b>K</b> Application under version control</a>
+<ul>
+<li class="chapter" data-level="K.1" data-path="AppDemoModelResCont-2.html"><a href="AppDemoModelResCont-2.html#AppDemoModelResContCtxt-3"><i class="fa fa-check"></i><b>K.1</b> Context</a></li>
+<li class="chapter" data-level="K.2" data-path="AppDemoModelResCont-2.html"><a href="AppDemoModelResCont-2.html#AppDemoModelResContUC-3"><i class="fa fa-check"></i><b>K.2</b> Use case</a></li>
+<li class="chapter" data-level="K.3" data-path="AppDemoModelResCont-2.html"><a href="AppDemoModelResCont-2.html#AppDemoModelResContWF-3"><i class="fa fa-check"></i><b>K.3</b> Possible workflow #1</a></li>
+<li class="chapter" data-level="K.4" data-path="AppDemoModelResCont-2.html"><a href="AppDemoModelResCont-2.html#AppDemoModelResContWF2-3"><i class="fa fa-check"></i><b>K.4</b> Possible workflow #2</a></li>
+</ul></li>
+<li class="chapter" data-level="L" data-path="App-FFE-1.html"><a href="App-FFE-1.html"><i class="fa fa-check"></i><b>L</b> File Format Examples</a>
+<ul>
+<li class="chapter" data-level="L.1" data-path="App-FFE-1.html"><a href="App-FFE-1.html#App-FFE-Cont-2"><i class="fa fa-check"></i><b>L.1</b> Context</a></li>
+<li class="chapter" data-level="L.2" data-path="App-FFE-1.html"><a href="App-FFE-1.html#App-FFE-IFFE-2"><i class="fa fa-check"></i><b>L.2</b> Input File Format Examples</a>
+<ul>
+<li class="chapter" data-level="L.2.1" data-path="App-FFE-1.html"><a href="App-FFE-1.html#App-FFE-IFFE-2DHD-3"><i class="fa fa-check"></i><b>L.2.1</b> 2D HD Simulation Class</a></li>
+<li class="chapter" data-level="L.2.2" data-path="App-FFE-1.html"><a href="App-FFE-1.html#App-FFE-IFFE-3DHD-3"><i class="fa fa-check"></i><b>L.2.2</b> 3D HD Simulation Class</a></li>
+<li class="chapter" data-level="L.2.3" data-path="App-FFE-1.html"><a href="App-FFE-1.html#App-FFE-IFFE-AD-3"><i class="fa fa-check"></i><b>L.2.3</b> AD Simulation Class</a></li>
+<li class="chapter" data-level="L.2.4" data-path="App-FFE-1.html"><a href="App-FFE-1.html#App-FFE-IFFE-ST-3"><i class="fa fa-check"></i><b>L.2.4</b> ST Simulation Class</a></li>
+<li class="chapter" data-level="L.2.5" data-path="App-FFE-1.html"><a href="App-FFE-1.html#App-FFE-IFFE-WQ-3"><i class="fa fa-check"></i><b>L.2.5</b> WQ Simulation Class</a></li>
+<li class="chapter" data-level="L.2.6" data-path="App-FFE-1.html"><a href="App-FFE-1.html#App-FFE-IFFE-PT-3"><i class="fa fa-check"></i><b>L.2.6</b> PT Simulation Class</a></li>
+</ul></li>
+<li class="chapter" data-level="L.3" data-path="App-FFE-1.html"><a href="App-FFE-1.html#App-FFE-OFFE-2"><i class="fa fa-check"></i><b>L.3</b> Output File Format Examples</a></li>
+<li class="chapter" data-level="L.4" data-path="App-FFE-1.html"><a href="App-FFE-1.html#App-FFE-LFF-2"><i class="fa fa-check"></i><b>L.4</b> Legacy File Formats</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(0,85,129);">TUFLOW FV User Manual</h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="BCs-1" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Section 8</span> Boundary And Initial Conditions<a href="BCs-1.html#BCs-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="BCsIntro-2" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Introduction<a href="BCs-1.html#BCsIntro-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section provides a comprehensive guide to defining and implementing boundary and initial conditions within TUFLOW FV. It covers the assignment of boundary locations, handling spatial and temporal variability, configuring boundary control blocks, and selecting appropriate boundary condition types. Additionally, guidance is provided on preparing and formatting input data for boundary conditions, ensuring a smooth integration into your modeling workflow.</p>
+<p>By understanding and correctly applying the boundary condition options in TUFLOW FV, users can effectively simulate a wide range of physical processes, from tidal forcing and river inflows to temperature and salinity gradients in complex aquatic environments.</p>
+</div>
+<div id="BCsAssigningBCLocations-2" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Assigning Boundary Locations<a href="BCs-1.html#BCsAssigningBCLocations-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>TUFLOW FV offers flexibility in how boundary conditions can be spatially applied, accommodating the methods outlined in Table
+<a href="BCs-1.html#tab:tab-BoundaryLocations">8.1</a>.</p>
+<table>
+<caption>
+<span id="tab:tab-BoundaryLocations">Table 8.1: </span><strong>Boundary Location Types</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Location Type
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Boundary Condition Application
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Example
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Point
+</td>
+<td style="text-align:left;">
+Single model cell
+</td>
+<td style="text-align:left;">
+Typically used for localised forcing such as point inflows or flow extractions
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Polygon
+</td>
+<td style="text-align:left;">
+Groups of cells via polygon selection
+</td>
+<td style="text-align:left;">
+Useful for spatially distributed forcing over specific user-defined regions
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nodestring
+</td>
+<td style="text-align:left;">
+Cell faces or cells via model nodestrings
+</td>
+<td style="text-align:left;">
+Used to represent linear features such as open boundaries and inflow/outflow regions
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Path
+</td>
+<td style="text-align:left;">
+Individual model cells along a pre-specified path
+</td>
+<td style="text-align:left;">
+Typically used for assigning inflows, masses, forces of turbulence to items that move during a simulation. For example a dredge hopper, tug boat or ship
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+Globally to all model cells
+</td>
+<td style="text-align:left;">
+Suitable for uniform forcing such as rainfall, evaporation and other meterological conditions over a small model domain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grid
+</td>
+<td style="text-align:left;">
+Selected model cells via a 2D or 3D grid
+</td>
+<td style="text-align:left;">
+Useful for assigning spatailly and temporally varying boundary conditions such as meterological and oceanographic grids, or diffusers/outfalls
+</td>
+</tr>
+</tbody>
+</table>
+<div id="BCsLocationCells-3" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Point<a href="BCs-1.html#BCsLocationCells-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Individual cells for boundary assignment are specified using GIS <em>point</em> 2d_sa layers in combination with the <tcmd>Read GIS SA</tcmd> command. The 2d_sa layer includes a single name attribute to uniquely identify boundary locations. For example:</p>
+<pre><code>Read GIS SA == ..\model\gis\2d_sa_UrbanCatch_001_P.shp</code></pre>
+<p>Figure <a href="BCs-1.html#fig:fig-QC-Point">8.1</a> illustrates catchment inflows to a coastal estuary, applied using the GIS layer 2d_sa_UrbanCatch_001_P.shp. This layer includes seven point locations designated for assigning catchment inflow to the estuary.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-QC-Point"></span>
+<img src="images/QC_Point.png" alt="Read GIS SA Points" width="80%" />
+<p class="caption">
+Figure 8.1: Read GIS SA Points
+</p>
+</div>
+</center>
+</div>
+<div id="BCsLocationPolygons-3" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Polygon<a href="BCs-1.html#BCsLocationPolygons-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Groups of cells are assigned boundary conditions using a combination of GIS <em>region</em> 2d_sa layers and the <tcmd>Read GIS SA</tcmd> command. The 2d_sa layer includes a single name attribute to uniquely identify boundary locations as follows:</p>
+<pre><code>Read GIS SA == ..\model\gis\2d_sa_UrbanCatch_001_R.shp
+</code></pre>
+<p>Figure <a href="BCs-1.html#fig:fig-QC-Poly">8.2</a> illustrates the use of inflow polygons to distribute local catchment runoff across multiple model cells. The example shows two polygons from the layer 2d_sa_UrbanCatch_001_R.shp: Park Treatment, which selects ten model cells, and Carpark, which selects six model cells. The flow is distributed among the selected cells, weighted according to their respective cell areas.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-QC-Poly"></span>
+<img src="images/QC_Poly.png" alt="Read GIS SA Polygons" width="80%" />
+<p class="caption">
+Figure 8.2: Read GIS SA Polygons
+</p>
+</div>
+</center>
+</div>
+<div id="BCsLocationNodestrings-3" class="section level3 hasAnchor" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> Nodestring<a href="BCs-1.html#BCsLocationNodestrings-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<pre><code>Read GIS Nodestring == ..\model\gis\2d_ns_Ocean_001_L.shp</code></pre>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-Nodestring-Example"></span>
+<img src="images/Nodestring_Example.png" alt="Nodestring Defining Offshore Astronomical Tide Boundary Location" width="80%" />
+<p class="caption">
+Figure 8.3: Nodestring Defining Offshore Astronomical Tide Boundary Location
+</p>
+</div>
+</center>
+</div>
+<div id="BCsLocationPath-3" class="section level3 hasAnchor" number="8.2.4">
+<h3><span class="header-section-number">8.2.4</span> Path<a href="BCs-1.html#BCsLocationPath-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<pre><code>! QCM moving cell inflow
+BC == QCM, ..\bc_dbase\QCM_004.csv                                                  ! Cell inflow
+   BC Header == Time, X, Y, Flow, Salinity, Temperature, Tracer                     !  Columns to read from Time, X coordinate (decimal degrees), Y coordinate (decimal degrees), Flow (m^3/s), Salinity (ppt), Temperature (degrees C), Tracer 1 (units/m^3)                   
+End BC
+</code></pre>
+<pre><code>Time,X,Y,Flow,Salinity,Temperature,Tracer
+01/05/2011 23:00:00,159.07365,-31.35875,0.00,35.0,25.0,100.0
+02/05/2011 00:00:00,159.07365,-31.35875,10.0,35.0,25.0,100.0
+02/05/2011 03:00:00,159.07438,-31.36102,10.0,35.0,25.0,100.0
+02/05/2011 06:00:00,159.07569,-31.36364,10.0,35.0,25.0,100.0
+02/05/2011 09:00:00,159.07668,-31.36633,10.0,35.0,25.0,100.0
+02/05/2011 12:00:00,159.07864,-31.36915,10.0,35.0,25.0,100.0
+02/05/2011 15:00:00,159.08048,-31.37086,10.0,35.0,25.0,100.0
+02/05/2011 18:00:00,159.08219,-31.37145,10.0,35.0,25.0,100.0
+02/05/2011 21:00:00,159.08468,-31.37361,10.0,35.0,25.0,100.0
+03/05/2011 00:00:00,159.08632,-31.37420,10.0,35.0,25.0,100.0</code></pre>
+<p>CSV File of locations over time.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-Moving-Boundary"></span>
+<img src="images/Moving_Boundary.gif" alt="Example Moving Boundary Condition With Tracer Concentration Discharge" width="80%" />
+<p class="caption">
+Figure 8.4: Example Moving Boundary Condition With Tracer Concentration Discharge
+</p>
+</div>
+</center>
+</div>
+<div id="BCsLocationGlobal-3" class="section level3 hasAnchor" number="8.2.5">
+<h3><span class="header-section-number">8.2.5</span> Global<a href="BCs-1.html#BCsLocationGlobal-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Globally assigned boundary conditions apply a spatially constant condition to all model cells. No GIS or spatial input is required.</p>
+</div>
+<div id="BCsLocationGrid-3" class="section level3 hasAnchor" number="8.2.6">
+<h3><span class="header-section-number">8.2.6</span> Grid<a href="BCs-1.html#BCsLocationGrid-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Grid definitions specify the structure of the grid used to apply gridded boundary condition types. These definitions establish an interpolation mapping from the grid to cell centers or boundary nodestrings, depending on the requirements. It is important to note that for 3D grids, the grid definition file method is the only available option. This method also supports 2D grids for defining gridded boundary conditions.</p>
+<p>Two grid definition types are available:</p>
+<ol style="list-style-type: decimal">
+<li>Via an existing NetCDF file</li>
+<li>User (manually) defined</li>
+</ol>
+<div id="BCsLocationNetCDFGridDef-4" class="section level4 hasAnchor" number="8.2.6.1">
+<h4><span class="header-section-number">8.2.6.1</span> NetCDF Grid Definition Block<a href="BCs-1.html#BCsLocationNetCDFGridDef-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>Grid Definition File == merge/HYCOM_20230101_20230201_001.nc
+  Grid Definition Variables == longitude, latitude, depth
+  Grid Definition Label == ocean
+  Boundary Gridmap == 1
+End Grid</code></pre>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-Grid-Definition-Example"></span>
+<img src="images/Grid_Definition_Example.png" alt="Example of Ocean Circulation Model Gridded Boundary Condition" width="80%" />
+<p class="caption">
+Figure 8.5: Example of Ocean Circulation Model Gridded Boundary Condition
+</p>
+</div>
+</center>
+</div>
+<div id="BCsLocationUserGridDef-4" class="section level4 hasAnchor" number="8.2.6.2">
+<h4><span class="header-section-number">8.2.6.2</span> User Specified Grid Definition Block<a href="BCs-1.html#BCsLocationUserGridDef-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+<div id="BCsLocationGridDefBlock-4" class="section level4 hasAnchor" number="8.2.6.3">
+<h4><span class="header-section-number">8.2.6.3</span> Grid Definition Block Commands<a href="BCs-1.html#BCsLocationGridDefBlock-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<table>
+<caption>
+<span id="tab:tab-GridDefinitionBlock">Table 8.2: </span><strong>Grid Definition Block Commands</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Command
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Options
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Grid Definition File
+</td>
+<td style="text-align:left;">
+File Name
+</td>
+<td style="text-align:left;">
+Specifies the NetCDF file containing coordinates for defining the grid used in gridded boundary condition types.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grid Definition
+</td>
+<td style="text-align:left;">
+X_Origin, Y_Origin, Grid_Rotation, Distance_X, Distance_Y, Cell_Size_X, Cell_Size_Y
+</td>
+<td style="text-align:left;">
+A user defined grid of coordinates used for gridded boundary condtion types. An alternative option to the Grid Definition File.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grid Definition Label
+</td>
+<td style="text-align:left;">
+Label
+</td>
+<td style="text-align:left;">
+Assigns a name to the grid, allowing it to be referenced by multiple boundary conditions.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grid Definition Variables
+</td>
+<td style="text-align:left;">
+X_Variable, Y_Variable, Z_Variable
+</td>
+<td style="text-align:left;">
+If using the Grid Definition File option, this command specifies which variables should be read from the NetCDF to create the grid. If the inputs are only required on a 2D grid (e.g. wind) then the Z_Variable can be omitted
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vertical Coordinate Type
+</td>
+<td style="text-align:left;">
+{ Elevation } | Depth | Sigma | Height
+</td>
+<td style="text-align:left;">
+Vertical coordinate convention
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cell Gridmap
+</td>
+<td style="text-align:left;">
+{1} | 0
+</td>
+<td style="text-align:left;">
+If set to 0, TUFLOW FV will not calculate the interpolation weightings of the cells in the model for this gridded boundary condition (may be more efficient for grids that are only going to be applied to the boundaries and not internal model domain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Boundary Gridmap
+</td>
+<td style="text-align:left;">
+1 | {0}
+</td>
+<td style="text-align:left;">
+Set to 1 to calculate interpolate boundary condtions from the grid onto the boundary nodestrings
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Supress Coverage Warnings
+</td>
+<td style="text-align:left;">
+1 | {0}
+</td>
+<td style="text-align:left;">
+If set to 1 suppresses warnings if the grid does not cover the entire TUFLOW FV domain. It may be more efficient in situations that the grid only needs to cover a small number of the cells in the model
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+End Grid
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+‘Complete’ the grid block opened by the Grid Definition File command.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="BCsSpatialAndTemporalVariability" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Boundary Condition Spatial and Temporal Variability<a href="BCs-1.html#BCsSpatialAndTemporalVariability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Boundaries may be:</p>
+<ul>
+<li>Constant in both space and time</li>
+<li>Constant in time but spatially variable</li>
+<li>Constant in space but temporally variable</li>
+<li>Variable in both space and time</li>
+<li>Constant in time and space but variable with depth (3D simulations)</li>
+<li>Constant in time, but variable in space and with depth (3D
+simulations)</li>
+<li>Constant in space, but variable in time and with depth (3D
+simulations)</li>
+<li>Variable in space, time and with depth (3D simulations)</li>
+<li>Able to move during the simulation on a user specified path, for
+example a dredge hopper</li>
+</ul>
+</div>
+<div id="BCsBCBlock-2" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Boundary Control Block<a href="BCs-1.html#BCsBCBlock-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Boundary conditions are defined in the simulation control file within a boundary condition block, requiring a unique block definition for each input to the model (type and location). TUFLOW FV offers a wide variety of boundary condition types. Basic hydrodynamic boundary condition types are summarised in Table 15 2. Advanced boundary conditions types used during advection dispersion, 3D, sediment transport/morphology and water quality modelling are listed in Table 15 3. The tables list the boundary condition type ID, its description, method of application to the model, boundary condition data file format and the default column headers for the input file.</p>
+<p>When defining a boundary condition block the first line is used to specify the input type, the location and reference file that contains the relevant boundary condition data. Where boundary conditions inputs vary from default values these details are specified within the boundary condition block.</p>
+<p>When developing complex models with many boundary conditions, Include files are recommended to manage/categorise data inputs. Some example boundary condition blocks are shown below. Worked examples are available via the TUFLOW FV tutorial models on the TUFLOW FV Wiki: <a href="http://fvwiki.tuflow.com" class="uri">http://fvwiki.tuflow.com</a>.</p>
+<div id="BCsHeader-3" class="section level3 hasAnchor" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> Selecting Data Variables<a href="BCs-1.html#BCsHeader-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Default header names and BC Default Include new BC Header gaffe</p>
+</div>
+<div id="BCsDefault-3" class="section level3 hasAnchor" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> Boundary Condition Defaults<a href="BCs-1.html#BCsDefault-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="BCsScaleOffset-3" class="section level3 hasAnchor" number="8.4.3">
+<h3><span class="header-section-number">8.4.3</span> Scaling And Offsetting Boundary Values<a href="BCs-1.html#BCsScaleOffset-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="BCsTime-3" class="section level3 hasAnchor" number="8.4.4">
+<h3><span class="header-section-number">8.4.4</span> Boundary Condition Time Commands<a href="BCs-1.html#BCsTime-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+</div>
+<div id="BCsTypes-2" class="section level2 hasAnchor" number="8.5">
+<h2><span class="header-section-number">8.5</span> Boundary Condition Types<a href="BCs-1.html#BCsTypes-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Core boundary condition types available within TUFLOW FV include:</p>
+<ul>
+<li>Water level</li>
+<li>Flows</li>
+<li>Stage Discharge</li>
+<li>Salinity, Temperature, Sediment, Tracers, and Water Quality
+Constituents</li>
+<li>Atmospheric/Meteorological</li>
+<li>Direct Rainfall/Infiltration</li>
+<li>Oceanic (Global Ocean Circulation Models)</li>
+<li>Spectral Wave</li>
+<li>Mass</li>
+<li>Bed Mass</li>
+<li>Force</li>
+<li>Turbulence</li>
+</ul>
+<p>At top of section: Linking those to the example models page</p>
+<p>MJS comments, sections should have:</p>
+<ul>
+<li>One table for each BC or meaningful BC group</li>
+<li>Example code blocks</li>
+<li>Units</li>
+<li>Point to tutes and example models for specific things like GetAtmos only</li>
+</ul>
+<p>MJS Need to discuss the following BCs and how they vary in time, depth and space…
+Note the below all vary with time….
+CONSTANT - Doesn’t vary with space of depth
+PROF - Varies with depth but not space at a cell, polygon or nodestring (is that correct re. spatial optins? )
+CURT - Varies with space and depth on a nodestring
+GRID - Varies with space and (depth) on a user defined 2D or (3D grid)</p>
+<div id="BCsWaterLevels-3" class="section level3 hasAnchor" number="8.5.1">
+<h3><span class="header-section-number">8.5.1</span> Water Level<a href="BCs-1.html#BCsWaterLevels-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<caption>
+<span id="tab:tab-BCWaterLevels">Table 8.3: </span><strong>Water Level Boundary Conditions</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Type
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+SubType Behaviour
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Location
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC File Format
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Default Headers
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Units
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+WL
+</td>
+<td style="text-align:left;">
+???
+</td>
+<td style="text-align:left;">
+Time varying, spatially constant water level
+</td>
+<td style="text-align:left;">
+Nodestring
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, WL
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+WL: m
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WLS
+</td>
+<td style="text-align:left;">
+???
+</td>
+<td style="text-align:left;">
+Time varying, spatially varying water level between two points
+</td>
+<td style="text-align:left;">
+Nodestring
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, WL_A, WL_B
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+WL_A: m<br>
+WL_B: m
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WL_CURT
+</td>
+<td style="text-align:left;">
+???
+</td>
+<td style="text-align:left;">
+Time varying, sloping water surface level as a function of nodestring chainage
+</td>
+<td style="text-align:left;">
+Nodestring
+</td>
+<td style="text-align:left;">
+NetCDF
+</td>
+<td style="text-align:left;">
+TIME, CHAINAGE, ELEVATION, WL
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+CHAINAGE: m<br>
+ELEVATION: m<br>
+WL: m
+</td>
+</tr>
+</tbody>
+</table>
+<p>Outline the various sub-types here also. Awaiting feedback from IAT…..</p>
+<pre><code>BC == WL, Ocean, Tide_20230101_20240101.csv
+  BC Header == Time_UTC, Tide_mMSL
+  Includes MSLP == 0
+End BC </code></pre>
+<pre><code>BC == WLS, Ocean, Tide_20230101_20240101.csv
+  BC Header == Time_UTC, Tide_A_mMSL, Tide_B_mMSL
+  Includes MSLP == 0
+End BC</code></pre>
+<pre><code>BC == WL_CURT, Eastern_Boundary, GoC_Tide_20100301_20100501_AEST.nc
+  BC Header == local_time, nsEastern_Boundary_chainage, dummy, nsEastern_Boundary_wl
+  BC Update dt == 60.
+  BC Time Units == days
+  BC Default == NaN
+  Includes MSLP == 0
+End BC</code></pre>
+</div>
+<div id="BCsInflows-3" class="section level3 hasAnchor" number="8.5.2">
+<h3><span class="header-section-number">8.5.2</span> Inflow<a href="BCs-1.html#BCsInflows-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<caption>
+<span id="tab:tab-BCFlows">Table 8.4: </span><strong>Inflow Boundary Conditions</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Type
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+SubType
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Location
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC File Format
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Default Headers
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Units
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Q
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Specified flow rate boundary with momentum terms. Uniform distribution.
+</td>
+<td style="text-align:left;">
+Nodestring
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, Q
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+Q: m<sup>3</sup>/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Q
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Specified flow rate boundary. Treated as a cell source term with a wall at the nodestring. Uniform distribution. This sub-type may be specified to constrain scalar mass inflow into 3D models, where sub-type 1/3 may allow simultaneous inflow and outflow at different depths.
+</td>
+<td style="text-align:left;">
+Nodestring
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, Q
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+Q: m<sup>3</sup>/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Q
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Specified flow rate boundary with momentum terms. H<sup>1.5</sup> flow distribution
+</td>
+<td style="text-align:left;">
+Nodestring
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, Q
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+Q: m<sup>3</sup>/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Q
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Treated as a cell source term with a wall at the nodestring. H<sup>1.5</sup> flow distribution. This sub-type may be specified to constrain scalar mass inflow into 3D models, where sub-type 1/3 may allow simultaneous inflow and outflow at different depths.
+</td>
+<td style="text-align:left;">
+Nodestring
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, Q
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+Q: m<sup>3</sup>/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+QC
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Specified flow boundary at a single cell. Tracer outflows defined by model concentration at the cell.
+</td>
+<td style="text-align:left;">
+Point (single cell)
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, Q
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+Q: m<sup>3</sup>/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+QC
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Specified flow boundary at a single cell. Tracer outflows defined by boundary condition time series concentration
+</td>
+<td style="text-align:left;">
+Point (single cell)
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, Q
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+Q: m<sup>3</sup>/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+QC_POLY
+</td>
+<td style="text-align:left;">
+1???
+</td>
+<td style="text-align:left;">
+Specified flow boundary at a single cell or group of cells selected by a polygon. Tracer outflows defined by model concentration at the cell.
+</td>
+<td style="text-align:left;">
+Polygon
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, Q
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+Q: m<sup>3</sup>/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+QC_POLY
+</td>
+<td style="text-align:left;">
+2???
+</td>
+<td style="text-align:left;">
+Specified flow boundary at a single cell or group of cells selected by a polygon. Tracer outflows defined by boundary condition time series concentration
+</td>
+<td style="text-align:left;">
+Polygon
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, Q
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+Q: m<sup>3</sup>/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+QG
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Global flow applied at all cells. Tracer outflows defined by model concentration at the cell.
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, Q
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+Q: m/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+QG
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Global flow applied at all cells. Tracer outflows defined by boundary condition time series concentration
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, Q
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+Q: m/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+QC_GRID
+</td>
+<td style="text-align:left;">
+???
+</td>
+<td style="text-align:left;">
+Specified flow boundary weighted over a 2D or 3D Grid Definition File Block
+</td>
+<td style="text-align:left;">
+Grid
+</td>
+<td style="text-align:left;">
+NetCDF
+</td>
+<td style="text-align:left;">
+TIME, WEIGHT, Q
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+WEIGHT: Weighting rom 0.0-1.0. Used in combination with cell volume to scale flow into cells within the grid extent<br>
+Q: m<sup>3</sup>/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+QCM
+</td>
+<td style="text-align:left;">
+???
+</td>
+<td style="text-align:left;">
+Moving specified flow rate boundary. Cell inflows along a defined X, Y path
+</td>
+<td style="text-align:left;">
+Cells along a user-specified X, Y path. Cells are automatically selected based on the path.
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, X, Y, Q
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+X: X coordinate in meters or degrees for cartesian or spherical models respectively
+Y: Y coordinate in meters or degrees for cartesian or spherical models respectively
+Q: m<sup>3</sup>/s
+</td>
+</tr>
+</tbody>
+</table>
+<pre><code>Read GIS Nodestring == ..\model\gis\2d_ns_MyInflows_001_L.shp
+BC == Q, Mary, ..\bc_dbase\M01_002.csv
+    BC Header == time_hr, MaryRiver
+    Sub-Type == 4
+    BC Offset == 0.0
+    BC Scale == 1.0
+    BC Default == 0.0
+End BC</code></pre>
+<pre><code>Read GIS SA == ..\model\gis\2d_sa_MyInflows_001_P.shp
+BC == QC, C2, ..\bc_dbase\M01_002.csv
+    BC Header == time_hr, C2
+    Sub-Type == 4
+    BC Offset == 0.0
+    BC Scale == 1.0
+    BC Default == 0.0
+End BC</code></pre>
+<pre><code>Read GIS SA == ..\model\gis\2d_sa_MyInflows_001_R.shp
+BC == QC_POLY, Trib, ..\bc_dbase\M01_002.csv
+    BC Header == time_hr, Tributary
+    Sub-Type == 4
+    BC Offset == 0.0
+    BC Scale == 1.0
+    BC Default == 0.0
+End BC</code></pre>
+<p>! MJS maybe add QC_GRID later under advanced BCs?</p>
+<pre><code>BC == QCM, ..\bc_dbase\M01_Tugboat_001.csv
+    BC Header == time_hr, X, Y, Tug
+End BC</code></pre>
+</div>
+<div id="BCsStageDischarge-3" class="section level3 hasAnchor" number="8.5.3">
+<h3><span class="header-section-number">8.5.3</span> Stage Discharge<a href="BCs-1.html#BCsStageDischarge-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<caption>
+<span id="tab:tab-BCStageDischarge">Table 8.5: </span><strong>Stage vs. Discharge Boundary Conditions</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Type
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+SubType
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Location
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC File Format
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Default Headers
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Units
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+HQ
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Stage vs. discharge relationship. User-specified Q vs. H curve.
+</td>
+<td style="text-align:left;">
+Nodestring
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+Q, H
+</td>
+<td style="text-align:left;">
+Q: m<sup>3</sup>/s
+H: m
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+QN
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Stage vs. discharge relationship. Automatically generated based on user-specified friction slope.
+</td>
+<td style="text-align:left;">
+Nodestring
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Slope (Rise m/Run m)
+</td>
+</tr>
+</tbody>
+</table>
+<pre><code>Read GIS Nodestring == ..\model\gis\2d_ns_MyInflows_001_L.shp
+BC == HQ, Downstream, ..\bc_dbase\HQ.csv
+End BC
+! MJS Show curve</code></pre>
+<pre><code>Read GIS Nodestring == ..\model\gis\2d_ns_MyInflows_001_L.shp
+BC == QN, Downstream, 0.01
+End BC</code></pre>
+</div>
+<div id="BCsOcean-3" class="section level3 hasAnchor" number="8.5.4">
+<h3><span class="header-section-number">8.5.4</span> Ocean Circulation Model<a href="BCs-1.html#BCsOcean-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>3D ocean circulation models, such as HYCOM can be used to fully specify open boundary conditions using level, current velocity components and any requisite scalars such as salinity and temperature. The OBC_GRID boundary type is commonly used to nest a TUFLOW FV model within a coarser scale ocean model, using a combination of 3D open boundaries and initial conditions derived from the parent model.</p>
+<p>Just add OBC_GRID as OBC, OBC_PROF and OBC_CURT are all edge cases??? Maybe add edge cases to summary at the end?</p>
+<table>
+<caption>
+<span id="tab:tab-BCOBCGrid">Table 8.6: </span><strong>Ocean Boundary Circulation Model</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Type
+</th>
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+SubType Behaviour
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Location
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC File Format
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Default Headers
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Units
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+OBC_GRID
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Water level is specified, velocity is calculated internally based on a radiation condition.
+</td>
+<td style="text-align:left;">
+Grid
+</td>
+<td style="text-align:left;">
+NetCDF
+</td>
+<td style="text-align:left;">
+TIME, SSH, U, V
+</td>
+<td style="text-align:left;">
+TIME: Defined by BC Time Units since BC Reference Time<br>
+SSH: m<br>
+U: m/s<br>
+V: m/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+Incoming wave height is specified and ghost cell properties are calculated by superimposing outgoing wave form.
+</td>
+<td style="text-align:left;">
+Grid
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Velocity is specified, water level is calculated internally based on a radiation condition.
+</td>
+<td style="text-align:left;">
+Grid
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Both water level and velocity are specified. Note that any changes between the OBC condition and the TUFLOW FV model may result in waves reflecting off this boundary due to the overspecification.
+</td>
+<td style="text-align:left;">
+Grid
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+Apply water levels as incremental. The change in water level is added to any existing water level BC. This sub-type can be useful for including tidal forcing on top of a previously specified OBC specifying the non-tidal water levels and/or currents.
+</td>
+<td style="text-align:left;">
+Grid
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+Water level is specified, velocity is specified but barotropically relaxed based on the internal model conditions (by applying a barotropic Flather condition). This sub-type will be preferred where boundary forcing is from an Ocean General Circulation Model (e.g. HYCOM).
+</td>
+<td style="text-align:left;">
+Grid
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<pre><code>! TUFLOW FV FVC File for Ocean Dataset
+! Written by `get_ocean`
+
+! Netcdf start time: 2010-03-01 00:00
+! Netcdf end time: 2010-04-30 21:00
+! Netcdf x-limits: 135.0400, 142.9600
+! Netcdf y-limits: -18.9600, -7.0400
+
+Grid Definition File == ..\bc_dbase\GoC_HYCOM_20100326_20100402_AEST.nc
+  Grid Definition Variables == longitude, latitude, depth
+  Grid Definition Label == ocean
+  Boundary Gridmap == 1
+End Grid
+
+BC == OBC_GRID, ocean, ..\bc_dbase\GoC_HYCOM_20100326_20100402_AEST.nc
+  BC Nodestrings == Eastern_Boundary, Western_Boundary  ! Please supply open boundary ns list
+  Sub-Type == 6
+  BC Header == local_time, surf_el, water_u, water_v, salinity, water_temp
+  BC Update dt == 900.
+  BC Time Units == hours
+  BC Reference Time == 01/01/1990 00:00
+  BC Offset == -0.65, 0.0, 0.0, 0.0, 0.0   ! Replace -0.5 with relevant surf-el offset
+  BC Default == NaN
+  Vertical Coordinate Type == depth
+End BC</code></pre>
+</div>
+<div id="BCsAtmos-3" class="section level3 hasAnchor" number="8.5.5">
+<h3><span class="header-section-number">8.5.5</span> Atmospheric<a href="BCs-1.html#BCsAtmos-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<caption>
+<span id="tab:tab-BCMet">Table 8.7: </span><strong>Atmospheric Boundary Conditions</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Type
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Location
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC File Format
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Default Headers
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Units
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+AIR_TEMP
+</td>
+<td style="text-align:left;">
+Air Temperature
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, AIR_TEMP
+</td>
+<td style="text-align:left;">
+Degrees Centigrade
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIR_TEMP_GRID
+</td>
+<td style="text-align:left;">
+Air Temperature
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+NetCDF
+</td>
+<td style="text-align:left;">
+TIME, AIR_TEMP
+</td>
+<td style="text-align:left;">
+Degrees Centigrade
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CLOUD
+</td>
+<td style="text-align:left;">
+Cloud cover
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, CLOUD
+</td>
+<td style="text-align:left;">
+Cloud fraction – 0.0 = clear, 1.0 = full cloud cover
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CLOUD_GRID
+</td>
+<td style="text-align:left;">
+Cloud cover
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+NetCDF
+</td>
+<td style="text-align:left;">
+TIME, CLOUD
+</td>
+<td style="text-align:left;">
+Cloud fraction – 0.0 = clear, 1.0 = full cloud cover
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LW_NET
+</td>
+<td style="text-align:left;">
+Net longwave radiation
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, LW_NET
+</td>
+<td style="text-align:left;">
+W/m<sup>2</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LW_NET_GRID
+</td>
+<td style="text-align:left;">
+Net longwave radiation
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+NetCDF
+</td>
+<td style="text-align:left;">
+TIME, LW_NET
+</td>
+<td style="text-align:left;">
+W/m<sup>2</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LW_RAD
+</td>
+<td style="text-align:left;">
+Downward longwave radiation
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, LW_RAD
+</td>
+<td style="text-align:left;">
+W/m<sup>2</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LW_RAD_GRID
+</td>
+<td style="text-align:left;">
+Downward longwave radiation
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+NetCDF
+</td>
+<td style="text-align:left;">
+TIME, LW_RAD
+</td>
+<td style="text-align:left;">
+W/m<sup>2</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MSLP_GRID
+</td>
+<td style="text-align:left;">
+Mean sea level pressure field.* MJS there is no MSLP CSV option. Would be good to add, to allow for BC water level adjustment, or for use in lakes etc. Recommended to use a Grid though as this allows for spatial varation.
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+NetCDF
+</td>
+<td style="text-align:left;">
+TIME, MSLP
+</td>
+<td style="text-align:left;">
+hPa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PRECIP
+</td>
+<td style="text-align:left;">
+Precipitation
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, PRECIP
+</td>
+<td style="text-align:left;">
+m/day
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PRECIP_GRID
+</td>
+<td style="text-align:left;">
+Precipitation
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+NetCDF
+</td>
+<td style="text-align:left;">
+TIME, PRECIP
+</td>
+<td style="text-align:left;">
+m/day
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+REL_HUM
+</td>
+<td style="text-align:left;">
+Relative humidity
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, REL_HUM
+</td>
+<td style="text-align:left;">
+%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+REL_HUM_GRID
+</td>
+<td style="text-align:left;">
+Relative humidity
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+NetCDF
+</td>
+<td style="text-align:left;">
+TIME, REL_HUM
+</td>
+<td style="text-align:left;">
+%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SURF_TEMP
+</td>
+<td style="text-align:left;">
+Water Surface Temperature
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, SURF_TEMP
+</td>
+<td style="text-align:left;">
+Degrees Centigrade
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SURF_TEMP_GRID
+</td>
+<td style="text-align:left;">
+Water Surface Temperature
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+NetCDF
+</td>
+<td style="text-align:left;">
+TIME, SURF_TEMP
+</td>
+<td style="text-align:left;">
+Degrees Centigrade
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SW_RAD
+</td>
+<td style="text-align:left;">
+Downward shortwave radiation
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, SW_RAD
+</td>
+<td style="text-align:left;">
+W/m<sup>2</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SW_RAD_GRID
+</td>
+<td style="text-align:left;">
+Downward shortwave radiation
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+NetCDF
+</td>
+<td style="text-align:left;">
+TIME, SW_RAD
+</td>
+<td style="text-align:left;">
+W/m<sup>2</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W10
+</td>
+<td style="text-align:left;">
+10min, 10m mean wind speed
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+CSV
+</td>
+<td style="text-align:left;">
+TIME, W10_X, W10_Y
+</td>
+<td style="text-align:left;">
+m/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W10_GRID
+</td>
+<td style="text-align:left;">
+s
+</td>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:left;">
+NetCDF
+</td>
+<td style="text-align:left;">
+TIME, W10_X, W10_Y
+</td>
+<td style="text-align:left;">
+m/s
+</td>
+</tr>
+</tbody>
+</table>
+<pre><code>! TUFLOW FV FVC File for Atmospheric Dataset
+! Written by `get_atmos`
+
+! Netcdf start time: 2010-03-01 00:00
+! Netcdf end time: 2010-05-31 23:00
+! Netcdf x-limits: 135.0000, 143.0000
+! Netcdf y-limits: -19.0000, -7.0000
+
+Grid Definition File == GoC_ERA5_20100301_20100531_AEST.nc
+  Grid Definition Variables == longitude, latitude
+  Grid Definition Label == atmos
+End Grid
+
+BC == W10_GRID, atmos, GoC_ERA5_20100301_20100531_AEST.nc
+  BC Header == local_time, uwnd10m, vwnd10m
+  BC Update dt == 3600.
+  BC Time Units == hours
+  BC Reference Time == 01/01/1990 00:00
+  BC Default == NaN
+End BC
+
+BC == MSLP_GRID, atmos, GoC_ERA5_20100301_20100531_AEST.nc
+  BC Header == local_time, mslp
+  BC Update dt == 3600.
+  BC Time Units == hours
+  BC Reference Time == 01/01/1990 00:00
+  BC Default == NaN
+  BC Scale == 0.01
+End BC
+
+BC == LW_RAD_GRID, atmos, GoC_ERA5_20100301_20100531_AEST.nc
+  BC Header == local_time, downward_longwave
+  BC Update dt == 3600.
+  BC Time Units == hours
+  BC Reference Time == 01/01/1990 00:00
+  BC Default == NaN
+End BC
+
+BC == SW_RAD_GRID, atmos, GoC_ERA5_20100301_20100531_AEST.nc
+  BC Header == local_time, downward_shortwave
+  BC Update dt == 3600.
+  BC Time Units == hours
+  BC Reference Time == 01/01/1990 00:00
+  BC Default == NaN
+End BC
+
+BC == AIR_TEMP_GRID, atmos, GoC_ERA5_20100301_20100531_AEST.nc
+  BC Header == local_time, air_temp_2m
+  BC Update dt == 3600.
+  BC Time Units == hours
+  BC Reference Time == 01/01/1990 00:00
+  BC Default == NaN
+  BC Offset == -273.15
+End BC
+
+BC == PRECIP_GRID, atmos, GoC_ERA5_20100301_20100531_AEST.nc
+  BC Header == local_time, precip_rate
+  BC Update dt == 3600.
+  BC Time Units == hours
+  BC Reference Time == 01/01/1990 00:00
+  BC Default == NaN
+  BC Scale == 0.024
+End BC
+
+BC == REL_HUM_GRID, atmos, GoC_ERA5_20100301_20100531_AEST.nc
+  BC Header == local_time, relhum
+  BC Update dt == 3600.
+  BC Time Units == hours
+  BC Reference Time == 01/01/1990 00:00
+  BC Default == NaN
+End BC</code></pre>
+</div>
+<div id="BCHolland-3" class="section level3 hasAnchor" number="8.5.6">
+<h3><span class="header-section-number">8.5.6</span> Parametric Tropical Cyclone<a href="BCs-1.html#BCHolland-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>CYC_HOLLAND wind, mslp etc. etc.</p>
+</div>
+<div id="BCsWave-3" class="section level3 hasAnchor" number="8.5.7">
+<h3><span class="header-section-number">8.5.7</span> Spectral Wave Boundaries<a href="BCs-1.html#BCsWave-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>TUFLOW FV allows for wave fields to be specified as a spatially and temporally varying boundary condition from a NetCDF file. Wave height/energy (Hsig), peak period (Tps), mean/peak direction (Dir) are required wave field specifications. Optionally, bottom orbital velocity (Ubot), bottom orbital period (Tbot) and wave force (radiation stress gradient) components (Wforce_x, Wforce_y) can also be specified from the NetCDF file.</p>
+<p>TUFLOW FV will pass wave fields to the ST Module (&amp;/or PT Module) Module/s for the purpose of calculating bed shear stress due to the combined action of currents and waves. These wave-current bed shear stresses are then used to calculate sediment/particle transport.
+TUFLOW FV will also optionally calculate mass transport due to wave-induced Stokes drift and where wave force has been specified then these terms will be applied to the momentum balance. These terms can be important for resolving surfzone circulation, including “undertow” and longshore currents.</p>
+<p>Wave source terms are applied as gridded boundary conditions via TUFLOW FV’s BC block. There are two main BC types for applying wave conditions as follows:
+1. Uncoupled: Gridded wave results are input to TUFLOW FV via a grid (or series of multiple) definition file/s. Uncoupled wave model results are generated by a wave model that has been run prior to, and separate to, the current TUFLOW FV simulation.
+2. Coupled: An external wave model (for example SWAN) is run together with TUFLOW FV. Hydrodyanmic information such as water levels, currents and bed elevation are passed from TUFLOW FV to the wave model, and these influence wave calculations. There is then a feedback whereby waves calculated in the wave model can influence water level and currents. This can be optionally extended to include sediment transport processes, whereby waves and currents can drive sediment transport behaviour and changes in bed morphology.
+For both uncoupled and coupled methods TUFLOW FV currently accepts models with regular topology. i.e. the same number of cells in the x and y direction. Irregular mesh wave models are not yet supported.</p>
+<p>For one-way coupling wave outputs are applied using a grid definition file as follows:</p>
+<pre><code>! Grid definition
+Grid Definition File == ..\..\SWAN\Wave_Results.nc
+  Grid Definition Variables == xp, yp
+  Grid Definition Label == A
+End Grid
+
+! Gridded Wave BCs from SWAN
+BC == WAVE, A, ..\..\SWAN\Wave_Results.nc
+  BC Header == time, hsig, tpsmoo, dir, ubot, tmbot, wforce_x, wforce_y, depth
+  BC Reference Time == 01/01/1990 00:00
+  BC Update dt == 3600.
+  BC Time Units == hours
+End BC</code></pre>
+<p>Multiple wave BCs are supported and can be specified in increasing priority order. For further examples refer Section 15.5.3.2. The variable order expected by TUFLOW FV including a short description of each variable is provided in Table 14 1.</p>
+<table>
+<caption>
+<span id="tab:tab-BCWave">Table 8.8: </span><strong>Spectral Wave Boundary Conditions</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+BC Variable
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Details
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Units
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+TIME
+</td>
+<td style="text-align:left;">
+Time vector
+</td>
+<td style="text-align:left;">
+Boundary condition time vector in bc time units relative to bc reference time.
+(Mantatory, No Default)
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HSIG
+</td>
+<td style="text-align:left;">
+Significant wave height
+</td>
+<td style="text-align:left;">
+Significant wave height
+(Mandatory, Default == 0.)
+</td>
+<td style="text-align:left;">
+m
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TPS
+</td>
+<td style="text-align:left;">
+Smoothed peak wave period
+</td>
+<td style="text-align:left;">
+Smoothed peak wave period
+(Mandatory, Default == 0.1)
+</td>
+<td style="text-align:left;">
+s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DIR
+</td>
+<td style="text-align:left;">
+Mean wave direction
+</td>
+<td style="text-align:left;">
+Mean wave direction.
+</td>
+<td style="text-align:left;">
+Degrees. Cartesian convention (i.e. direction wave are heading to in degrees, axis positive anti-clockwise from East).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+UBOT
+</td>
+<td style="text-align:left;">
+The rms-value of the maxima of the orbital velocity near the bottom
+</td>
+<td style="text-align:left;">
+Bottom orbital velocity.
+(Optional, No Default)
+If not specified Ubot is calculated internally by TUFLOW FV using linear wave theory.
+</td>
+<td style="text-align:left;">
+m/s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TMBOT
+</td>
+<td style="text-align:left;">
+The bottom wave period
+</td>
+<td style="text-align:left;">
+Bottom wave period.
+(Optional, Default == TPS)
+</td>
+<td style="text-align:left;">
+s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WFORCE_X
+</td>
+<td style="text-align:left;">
+X wave induced force vector components
+</td>
+<td style="text-align:left;">
+Wave force components
+(Optional, Default == 0.)
+</td>
+<td style="text-align:left;">
+(N/m<sup>2</sup>)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WFORCE_Y
+</td>
+<td style="text-align:left;">
+Y wave induced force vector components
+</td>
+<td style="text-align:left;">
+Wave force components
+(Optional, Default == 0.)
+</td>
+<td style="text-align:left;">
+(N/m<sup>2</sup>)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DEPTH
+</td>
+<td style="text-align:left;">
+Wave model water depth
+</td>
+<td style="text-align:left;">
+Wave model water depth.
+(Optional, No Default)
+At each cell, if the TUFLOW FV cell depth is greater than the wave model DEPTH, then the wave model UBOT is translated down to the deeper depth using a depth correction.
+This feature can be optionally disabled using the Wave depth correction command.
+</td>
+<td style="text-align:left;">
+m
+</td>
+</tr>
+</tbody>
+</table>
+<p>TUFLOW FV is run coupled to external wave models via an external wave API. For further information on using the wave API please contact <a href="mailto:support@tuflow.com" class="email">support@tuflow.com</a>.
+To implement a coupled wave-hydrodynamic model the WAVE_COUPLED bc type is used within a BC block as per the below example. For more information on wave parameters detailed in Section 14-9.</p>
+<p>! Two-way wave coupling with an external SWAN model</p>
+<pre><code>Wave Parameters == 0.35, 0.1                                ! Wave gamma, depth limits
+
+BC == WAVE_COUPLED, ..\..\SWAN\input\MB_002.fvc
+End  BC</code></pre>
+<table>
+<caption>
+<span id="tab:tab-WaveCommands">Table 8.9: </span><strong>Spectral Wave Boundary Commmands</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Command
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Arguments
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Details
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Wave parameters
+</td>
+<td style="text-align:left;">
+<p>Wave gamma, depth limit (m)</p>
+Wave parameters == 0.35, 0.05
+</td>
+<td style="text-align:left;">
+<p>Wave gamma: Maximum ratio of wave height to depth. Typically 0.35 - 0.8</p>
+<p>(Default == 0.35)</p>
+<p>Depth limit: Wave stresses are switched off at cells below this depth.</p>
+(Default == Cell wet depth)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Include Stokes drift
+</td>
+<td style="text-align:left;">
+<p>Integer switch, 1 or 0.</p>
+Include Stokes Drift == 1
+</td>
+<td style="text-align:left;">
+<p>Calculated for depths in deepwater and surfzone, if cells are between these depths the mass transport is interpolated between the deepwater and surfzone mass transport.</p>
+<p>Can be used in combination with the Surfzone Undertow Factor command to help with cross shore transport.</p>
+(Default == 0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Surfzone undertow factor
+</td>
+<td style="text-align:left;">
+<p>Scale factor for increasing or decreasing onshore wave component.</p>
+Surfzone Undertow Factor == 1.
+</td>
+<td style="text-align:left;">
+<p>TUFLOW FV uses the onshore wave component as an input to stokes drift surfzone calculations. The surfzone undertow factor is provided to allow for tuning of the cross shore wave component.</p>
+(Default == 1)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stokes transport factor
+</td>
+<td style="text-align:left;">
+<p>Comma delimited list applied on a constituent basis.</p>
+Stokes Transport Factor == 1., 1., 1. …, 1.
+</td>
+<td style="text-align:left;">
+<p>Scale factor for increasing or decreasing the calculated stokes mass transport.</p>
+<p>If Stokes Drift is enabled, this command allows control on a constituent basis. For example by setting to 0. Stokes drift can be disabled.</p>
+(Default == 1., 1. ….., 1.)
+</td>
+</tr>
+</tbody>
+</table>
+<p>A series of SWAN GIS Tools have been developed within the TUFLOW Viewer Plugin for QGIS that assist in the development of SWAN wave models. The plugin provides a simple interface for the development of SWAN model control files and can be used to:</p>
+<ul>
+<li>Generate and visualise computational grids</li>
+<li>Inspect many Digital Terrain Models (DTM) onto computational grids</li>
+<li>Preprocess wind input grids and TPAR boundary conditions from ERA5 datasets</li>
+<li>Detect and connect nested simulations</li>
+<li>Generate SWAN model control files</li>
+</ul>
+<p>The SWAN GIS tools are also available to run stand alone Python without a GUI.
+For more information, examples and step by step guides on using the plugin please check out the SWAN GIS Tools page on the TUFLOW FV Wiki.</p>
+</div>
+<div id="BCsRainfallInfiltration-3" class="section level3 hasAnchor" number="8.5.8">
+<h3><span class="header-section-number">8.5.8</span> Direct Rainfall And Infiltration<a href="BCs-1.html#BCsRainfallInfiltration-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="BCsMass-3" class="section level3 hasAnchor" number="8.5.9">
+<h3><span class="header-section-number">8.5.9</span> Mass<a href="BCs-1.html#BCsMass-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>FC FC_POLY FC_GRID FCM</p>
+</div>
+<div id="BCsBedMass-3" class="section level3 hasAnchor" number="8.5.10">
+<h3><span class="header-section-number">8.5.10</span> Bed Mass<a href="BCs-1.html#BCsBedMass-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>FB FBM</p>
+</div>
+<div id="BCsForce-3" class="section level3 hasAnchor" number="8.5.11">
+<h3><span class="header-section-number">8.5.11</span> Force<a href="BCs-1.html#BCsForce-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>FORCE FORCE_POLY FORCEM</p>
+</div>
+<div id="BCsTKE-3" class="section level3 hasAnchor" number="8.5.12">
+<h3><span class="header-section-number">8.5.12</span> Turbulent Kinetic Energy<a href="BCs-1.html#BCsTKE-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>TKE TKE_POLY TKEM</p>
+</div>
+<div id="BCsMisc-3" class="section level3 hasAnchor" number="8.5.13">
+<h3><span class="header-section-number">8.5.13</span> Misc?<a href="BCs-1.html#BCsMisc-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>CP RS RNS ZG</p>
+</div>
+<div id="BCsScalar-3" class="section level3 hasAnchor" number="8.5.14">
+<h3><span class="header-section-number">8.5.14</span> Scalar Concentration<a href="BCs-1.html#BCsScalar-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>SCALAR SCALAR_PROF SCALAR_CURT SCALAR_GRID</p>
+</div>
+</div>
+<div id="BCsInputData-2" class="section level2 hasAnchor" number="8.6">
+<h2><span class="header-section-number">8.6</span> Input Data For Boundary Conditions<a href="BCs-1.html#BCsInputData-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Discuss different data types CSV, NetCDF, etc.</p>
+</div>
+<div id="BCsSclars-2" class="section level2 hasAnchor" number="8.7">
+<h2><span class="header-section-number">8.7</span> Assigning Salinity, Temperature, Tracer, And Water Quality Boundaries<a href="BCs-1.html#BCsSclars-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="BCs3D-2" class="section level2 hasAnchor" number="8.8">
+<h2><span class="header-section-number">8.8</span> 3D Boundary Considerations<a href="BCs-1.html#BCs3D-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="BCsInitialConditions-2" class="section level2 hasAnchor" number="8.9">
+<h2><span class="header-section-number">8.9</span> Initial Conditions<a href="BCs-1.html#BCsInitialConditions-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="math inline">\(\newcommand{\blockindent}{\hspace{0.5cm}}\)</span></p>
+<p><img src="images/WQFooter.jpg" width="100%" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="AD-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ST-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": false,
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

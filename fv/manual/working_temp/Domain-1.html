@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Appendix F Model Domain Construction | TUFLOW FV User Manual</title>
+  <meta name="description" content="Appendix F Model Domain Construction | TUFLOW FV User Manual" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Appendix F Model Domain Construction | TUFLOW FV User Manual" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/1024in300px_Blue-01.svg" />
+  <meta property="og:description" content="Appendix F Model Domain Construction | TUFLOW FV User Manual" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Appendix F Model Domain Construction | TUFLOW FV User Manual" />
+  
+  <meta name="twitter:description" content="Appendix F Model Domain Construction | TUFLOW FV User Manual" />
+  <meta name="twitter:image" content="/images/1024in300px_Blue-01.svg" />
+
+<meta name="author" content="" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="AppDemoModelResCont-2.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#about-this-manual"><i class="fa fa-check"></i>About this manual</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#tables"><i class="fa fa-check"></i>Tables</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#commands"><i class="fa fa-check"></i>Commands</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#parameter-notation"><i class="fa fa-check"></i>Parameter notation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#feedback"><i class="fa fa-check"></i>Feedback</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="Intro-1.html"><a href="Intro-1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWProducts-2"><i class="fa fa-check"></i><b>1.1</b> TUFLOW Products</a></li>
+<li class="chapter" data-level="1.2" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFV-2"><i class="fa fa-check"></i><b>1.2</b> TUFLOW FV</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFVOverview-3"><i class="fa fa-check"></i><b>1.2.1</b> TUFLOW’s Flexible Mesh Finite Volume Solver</a></li>
+<li class="chapter" data-level="1.2.2" data-path="Intro-1.html"><a href="Intro-1.html#d-2d-and-3d-hydrodynamics"><i class="fa fa-check"></i><b>1.2.2</b> 1D, 2D and 3D Hydrodynamics</a></li>
+<li class="chapter" data-level="1.2.3" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFAD-3"><i class="fa fa-check"></i><b>1.2.3</b> Advection Dispersion/Diffusion</a></li>
+<li class="chapter" data-level="1.2.4" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFST-3"><i class="fa fa-check"></i><b>1.2.4</b> Sediment Transport</a></li>
+<li class="chapter" data-level="1.2.5" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFVWQ-3"><i class="fa fa-check"></i><b>1.2.5</b> Water Quality</a></li>
+<li class="chapter" data-level="1.2.6" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFVPT-3"><i class="fa fa-check"></i><b>1.2.6</b> Particle Tracking</a></li>
+<li class="chapter" data-level="1.2.7" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFVWaves-3"><i class="fa fa-check"></i><b>1.2.7</b> Spectral Wave Coupling</a></li>
+<li class="chapter" data-level="1.2.8" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFVScience-3"><i class="fa fa-check"></i><b>1.2.8</b> Science</a></li>
+<li class="chapter" data-level="1.2.9" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFVBenchmarking-3"><i class="fa fa-check"></i><b>1.2.9</b> Benchmarking Studies</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWWebinars-2"><i class="fa fa-check"></i><b>1.3</b> TUFLOW Webinars</a></li>
+<li class="chapter" data-level="1.4" data-path="Intro-1.html"><a href="Intro-1.html#ModellingEnvironment-2"><i class="fa fa-check"></i><b>1.4</b> Modelling Environment</a></li>
+<li class="chapter" data-level="1.5" data-path="Intro-1.html"><a href="Intro-1.html#LimitationsandRecommendations-2"><i class="fa fa-check"></i><b>1.5</b> Limitations and Recommendations</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="Arch-1.html"><a href="Arch-1.html"><i class="fa fa-check"></i><b>2</b> Architecture</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="Arch-1.html"><a href="Arch-1.html#ArchContext-2"><i class="fa fa-check"></i><b>2.1</b> Context</a></li>
+<li class="chapter" data-level="2.2" data-path="Arch-1.html"><a href="Arch-1.html#ArchSimClasses-2"><i class="fa fa-check"></i><b>2.2</b> Simulation Classes</a></li>
+<li class="chapter" data-level="2.3" data-path="Arch-1.html"><a href="Arch-1.html#ArchGeneralArrangement-2"><i class="fa fa-check"></i><b>2.3</b> General Arrangement</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="Arch-1.html"><a href="Arch-1.html#ArchSim2DHD-3"><i class="fa fa-check"></i><b>2.3.1</b> 2D Hydrodynamics</a></li>
+<li class="chapter" data-level="2.3.2" data-path="Arch-1.html"><a href="Arch-1.html#ArchSim3DHD-3"><i class="fa fa-check"></i><b>2.3.2</b> 3D Hydrodynamics</a></li>
+<li class="chapter" data-level="2.3.3" data-path="Arch-1.html"><a href="Arch-1.html#ArchSimAD-3"><i class="fa fa-check"></i><b>2.3.3</b> Advection Dispersion/Diffusion</a></li>
+<li class="chapter" data-level="2.3.4" data-path="Arch-1.html"><a href="Arch-1.html#ArchSimST-3"><i class="fa fa-check"></i><b>2.3.4</b> Sediment Transport</a></li>
+<li class="chapter" data-level="2.3.5" data-path="Arch-1.html"><a href="Arch-1.html#ArchSimWQ-3"><i class="fa fa-check"></i><b>2.3.5</b> Water Quality</a></li>
+<li class="chapter" data-level="2.3.6" data-path="Arch-1.html"><a href="Arch-1.html#ArchSimPT-3"><i class="fa fa-check"></i><b>2.3.6</b> Particle Tracking</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html"><i class="fa fa-check"></i><b>3</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#HowtoBuildYourFirstModel-2"><i class="fa fa-check"></i><b>3.1</b> How to Build Your First Model</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#TutorialModels-3"><i class="fa fa-check"></i><b>3.1.1</b> Tutorial Models</a></li>
+<li class="chapter" data-level="3.1.2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#ExampleModels-3"><i class="fa fa-check"></i><b>3.1.2</b> Example Models</a></li>
+<li class="chapter" data-level="3.1.3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#LicenceFreeDemoMode-3"><i class="fa fa-check"></i><b>3.1.3</b> Licence Free Demo Mode</a></li>
+<li class="chapter" data-level="3.1.4" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#InstructorLedTUFLOWTrainingCourses-3"><i class="fa fa-check"></i><b>3.1.4</b> Instructor Led TUFLOW Training Courses</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#TheTUFLOWModellingConcept-2"><i class="fa fa-check"></i><b>3.2</b> The TUFLOW Modelling Concept</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#Notepad-3"><i class="fa fa-check"></i><b>3.2.1</b> Notepad++</a></li>
+<li class="chapter" data-level="3.2.2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#QGISTUFLOWViewer-3"><i class="fa fa-check"></i><b>3.2.2</b> QGIS / TUFLOW Viewer</a></li>
+<li class="chapter" data-level="3.2.3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#QGISSMS-3"><i class="fa fa-check"></i><b>3.2.3</b> Aquaveo SMS Mesh Generator / TUFLOW FV Graphical User Interface</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#InstallingandRunningTUFLOW-2"><i class="fa fa-check"></i><b>3.3</b> Installing and Running TUFLOW</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#TUFLOWDownloadsandInstallation-3"><i class="fa fa-check"></i><b>3.3.1</b> TUFLOW FV Downloads and Installation</a></li>
+<li class="chapter" data-level="3.3.2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#Licencing-3"><i class="fa fa-check"></i><b>3.3.2</b> Licencing</a></li>
+<li class="chapter" data-level="3.3.3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#PerformingSimulations-3"><i class="fa fa-check"></i><b>3.3.3</b> Performing Simulations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#FoldersFileTypesandFileNaming-2"><i class="fa fa-check"></i><b>3.4</b> Folders, File Types and File Naming</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#FolderStructure-3"><i class="fa fa-check"></i><b>3.4.1</b> Folder Structure</a></li>
+<li class="chapter" data-level="3.4.2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#FileTypes-3"><i class="fa fa-check"></i><b>3.4.2</b> File Types</a></li>
+<li class="chapter" data-level="3.4.3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#NamingConventions-3"><i class="fa fa-check"></i><b>3.4.3</b> Naming Conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#TipsandTricks-2"><i class="fa fa-check"></i><b>3.5</b> Tips and Tricks</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html"><i class="fa fa-check"></i><b>4</b> Control Files and Input Layers</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#control-files"><i class="fa fa-check"></i><b>4.2</b> Control Files</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#Notation-3"><i class="fa fa-check"></i><b>4.2.1</b> Rules and Notation</a></li>
+<li class="chapter" data-level="4.2.2" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#FilePath-3"><i class="fa fa-check"></i><b>4.2.2</b> File Paths</a></li>
+<li class="chapter" data-level="4.2.3" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#FVC-3"><i class="fa fa-check"></i><b>4.2.3</b> FVC</a></li>
+<li class="chapter" data-level="4.2.4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#TEF-3"><i class="fa fa-check"></i><b>4.2.4</b> TEF</a></li>
+<li class="chapter" data-level="4.2.5" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#FVSED-3"><i class="fa fa-check"></i><b>4.2.5</b> FVSED</a></li>
+<li class="chapter" data-level="4.2.6" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#FVWQ-3"><i class="fa fa-check"></i><b>4.2.6</b> FVWQ</a></li>
+<li class="chapter" data-level="4.2.7" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#FVPTM-3"><i class="fa fa-check"></i><b>4.2.7</b> FVPTM</a></li>
+<li class="chapter" data-level="4.2.8" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#ReadFile-3"><i class="fa fa-check"></i><b>4.2.8</b> Include File</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GISLayers-2"><i class="fa fa-check"></i><b>4.3</b> Input Layers</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GISFormats-3"><i class="fa fa-check"></i><b>4.3.1</b> Input Formats</a></li>
+<li class="chapter" data-level="4.3.2" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GISCommands-3"><i class="fa fa-check"></i><b>4.3.2</b> GIS Commands</a></li>
+<li class="chapter" data-level="4.3.3" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GRID-3"><i class="fa fa-check"></i><b>4.3.3</b> GRID Commands</a></li>
+<li class="chapter" data-level="4.3.4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#TIN-3"><i class="fa fa-check"></i><b>4.3.4</b> TIN Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#LayeringData-2"><i class="fa fa-check"></i><b>4.4</b> Layering Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="HD2D-1.html"><a href="HD2D-1.html"><i class="fa fa-check"></i><b>5</b> 2D Hydrodynamic Model Construction</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DOverview-2"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DModelInitialisation-2"><i class="fa fa-check"></i><b>5.2</b> Model Initialisation</a></li>
+<li class="chapter" data-level="5.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DDomainConstruction-2"><i class="fa fa-check"></i><b>5.3</b> Model Domain Construction</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DComputationalMesh-3"><i class="fa fa-check"></i><b>5.3.1</b> Computational Mesh</a></li>
+<li class="chapter" data-level="5.3.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DBathymetry-3"><i class="fa fa-check"></i><b>5.3.2</b> Bathymetry</a></li>
+<li class="chapter" data-level="5.3.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DMaterials-3"><i class="fa fa-check"></i><b>5.3.3</b> Spatial Definition of Materials</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DModelConfiguration-2"><i class="fa fa-check"></i><b>5.4</b> Model Configuration</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DCoordinateReferenceFrame-3"><i class="fa fa-check"></i><b>5.4.1</b> Coordinate Reference Frame</a></li>
+<li class="chapter" data-level="5.4.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DSpatialOrder-3"><i class="fa fa-check"></i><b>5.4.2</b> Spatial Order</a></li>
+<li class="chapter" data-level="5.4.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DBedRoughness-3"><i class="fa fa-check"></i><b>5.4.3</b> Bed Roughness</a></li>
+<li class="chapter" data-level="5.4.4" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DSimulationStartEndTimes-3"><i class="fa fa-check"></i><b>5.4.4</b> Simulation Start and End Times</a></li>
+<li class="chapter" data-level="5.4.5" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DWettingDrying-3"><i class="fa fa-check"></i><b>5.4.5</b> Wetting and Drying</a></li>
+<li class="chapter" data-level="5.4.6" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DStabilityLimits-3"><i class="fa fa-check"></i><b>5.4.6</b> Stability Limits</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DComputationalTimestep-2"><i class="fa fa-check"></i><b>5.5</b> Computational Timestep</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DVariableTimestep-3"><i class="fa fa-check"></i><b>5.5.1</b> Variable Timestep</a></li>
+<li class="chapter" data-level="5.5.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DCFL-3"><i class="fa fa-check"></i><b>5.5.2</b> CFL</a></li>
+<li class="chapter" data-level="5.5.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DTimestepLimits-3"><i class="fa fa-check"></i><b>5.5.3</b> Timestep Limits</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DHorizontalMomentumMixing-2"><i class="fa fa-check"></i><b>5.6</b> Horizontal Momentum Mixing</a></li>
+<li class="chapter" data-level="5.7" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DMaterialsBlock-2"><i class="fa fa-check"></i><b>5.7</b> Materials Block</a></li>
+<li class="chapter" data-level="5.8" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DInitialConditions-2"><i class="fa fa-check"></i><b>5.8</b> Initial Conditions</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DInitialConditionTypes-3"><i class="fa fa-check"></i><b>5.8.1</b> Initial Condition Types</a></li>
+<li class="chapter" data-level="5.8.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DRestartFiles-3"><i class="fa fa-check"></i><b>5.8.2</b> Restart Files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DBoundaryConditions-2"><i class="fa fa-check"></i><b>5.9</b> Boundary Conditions</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DAssigningBoundaryLocations-3"><i class="fa fa-check"></i><b>5.9.1</b> Assigning Boundary Locations</a></li>
+<li class="chapter" data-level="5.9.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DBoundaryConditionBlock-3"><i class="fa fa-check"></i><b>5.9.2</b> Boundary Condition Block</a></li>
+<li class="chapter" data-level="5.9.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DBoundaryConditionTypes-3"><i class="fa fa-check"></i><b>5.9.3</b> Boundary Condition Types</a></li>
+<li class="chapter" data-level="5.9.4" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DBoundaryConditionInputData-3"><i class="fa fa-check"></i><b>5.9.4</b> Boundary Condition Input Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DModelOutputs-2"><i class="fa fa-check"></i><b>5.10</b> Model Outputs</a>
+<ul>
+<li class="chapter" data-level="5.10.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DLogs-3"><i class="fa fa-check"></i><b>5.10.1</b> Logs</a></li>
+<li class="chapter" data-level="5.10.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DCheckFiles-3"><i class="fa fa-check"></i><b>5.10.2</b> Check Files</a></li>
+<li class="chapter" data-level="5.10.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DOutputBlocks-3"><i class="fa fa-check"></i><b>5.10.3</b> Output Blocks</a></li>
+<li class="chapter" data-level="5.10.4" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DOutputFormats-3"><i class="fa fa-check"></i><b>5.10.4</b> Output Formats</a></li>
+<li class="chapter" data-level="5.10.5" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DOutputTypes-3"><i class="fa fa-check"></i><b>5.10.5</b> Output Types</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="HD3D-1.html"><a href="HD3D-1.html"><i class="fa fa-check"></i><b>6</b> 3D Hydrodynamic Model Construction</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DOverview-2"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DModelConfiguration-2"><i class="fa fa-check"></i><b>6.2</b> Model Configuration</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DSpatialOrder-3"><i class="fa fa-check"></i><b>6.2.1</b> Spatial Order</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DVerticalMomentumMixing-2"><i class="fa fa-check"></i><b>6.3</b> Vertical Momentum Mixing</a></li>
+<li class="chapter" data-level="6.4" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3D3DGeometry-2"><i class="fa fa-check"></i><b>6.4</b> 3D Geometry</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DVerticalLayering-3"><i class="fa fa-check"></i><b>6.4.1</b> Vertical Layering</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DInitialConditions-2"><i class="fa fa-check"></i><b>6.5</b> Initial Conditions</a></li>
+<li class="chapter" data-level="6.6" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DBoundaryConditions-2"><i class="fa fa-check"></i><b>6.6</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="6.7" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DResultsAndDiagnostics-2"><i class="fa fa-check"></i><b>6.7</b> Results And Diagnostics</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="AD-1.html"><a href="AD-1.html"><i class="fa fa-check"></i><b>7</b> Advection Dispersion/Diffusion Model Construction</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="AD-1.html"><a href="AD-1.html#ADOverview-2"><i class="fa fa-check"></i><b>7.1</b> Overview</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="AD-1.html"><a href="AD-1.html#ADSolutionIncludeStatements-3"><i class="fa fa-check"></i><b>7.1.1</b> Solution Include Statements</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="AD-1.html"><a href="AD-1.html#ADNonTransformativeConstituentConfiguration-2"><i class="fa fa-check"></i><b>7.2</b> Non-Transformative Constituent Configuration</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="AD-1.html"><a href="AD-1.html#ADSalinity-3"><i class="fa fa-check"></i><b>7.2.1</b> Salinity</a></li>
+<li class="chapter" data-level="7.2.2" data-path="AD-1.html"><a href="AD-1.html#ADTemperature-3"><i class="fa fa-check"></i><b>7.2.2</b> Temperature</a></li>
+<li class="chapter" data-level="7.2.3" data-path="AD-1.html"><a href="AD-1.html#ADTracers-3"><i class="fa fa-check"></i><b>7.2.3</b> Tracers</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="AD-1.html"><a href="AD-1.html#ADScalarMixing-2"><i class="fa fa-check"></i><b>7.3</b> Scalar Mixing</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="AD-1.html"><a href="AD-1.html#ADHorizontal-3"><i class="fa fa-check"></i><b>7.3.1</b> Horizontal</a></li>
+<li class="chapter" data-level="7.3.2" data-path="AD-1.html"><a href="AD-1.html#ADVertical-3"><i class="fa fa-check"></i><b>7.3.2</b> Vertical</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="AD-1.html"><a href="AD-1.html#ADAtmosphericHeatExchange-2"><i class="fa fa-check"></i><b>7.4</b> Atmospheric Heat Exchange</a></li>
+<li class="chapter" data-level="7.5" data-path="AD-1.html"><a href="AD-1.html#ADInitialConditions-2"><i class="fa fa-check"></i><b>7.5</b> Initial Conditions</a></li>
+<li class="chapter" data-level="7.6" data-path="AD-1.html"><a href="AD-1.html#ADBoundaryConditions-2"><i class="fa fa-check"></i><b>7.6</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="7.7" data-path="AD-1.html"><a href="AD-1.html#ADResultsAndDiagnostics-2"><i class="fa fa-check"></i><b>7.7</b> Results And Diagnostics</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ST-1.html"><a href="ST-1.html"><i class="fa fa-check"></i><b>8</b> Sediment Transport Model Construction</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="ST-1.html"><a href="ST-1.html#STOverview-2"><i class="fa fa-check"></i><b>8.1</b> Overview</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="ST-1.html"><a href="ST-1.html#STSolutionIncludeStatements-3"><i class="fa fa-check"></i><b>8.1.1</b> Solution Include Statements</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="ST-1.html"><a href="ST-1.html#STSedimentControlFile-2"><i class="fa fa-check"></i><b>8.2</b> Sediment Control File</a></li>
+<li class="chapter" data-level="8.3" data-path="ST-1.html"><a href="ST-1.html#STInitialConditions-2"><i class="fa fa-check"></i><b>8.3</b> Initial Conditions</a></li>
+<li class="chapter" data-level="8.4" data-path="ST-1.html"><a href="ST-1.html#STBoundaryConditions-2"><i class="fa fa-check"></i><b>8.4</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="8.5" data-path="ST-1.html"><a href="ST-1.html#STResultsAndDiagnostics-2"><i class="fa fa-check"></i><b>8.5</b> Results And Diagnostics</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="WQ-1.html"><a href="WQ-1.html"><i class="fa fa-check"></i><b>9</b> Water Quality Model Construction</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="WQ-1.html"><a href="WQ-1.html#WQOverview-2"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="WQ-1.html"><a href="WQ-1.html#WQInitialConditions-2"><i class="fa fa-check"></i><b>9.2</b> Initial Conditions</a></li>
+<li class="chapter" data-level="9.3" data-path="WQ-1.html"><a href="WQ-1.html#WQBoundaryConditions-2"><i class="fa fa-check"></i><b>9.3</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="9.4" data-path="WQ-1.html"><a href="WQ-1.html#WQResultsAndDiagnostics-2"><i class="fa fa-check"></i><b>9.4</b> Results And Diagnostics</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="PT-1.html"><a href="PT-1.html"><i class="fa fa-check"></i><b>10</b> Particle Tracking Model Construction</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="PT-1.html"><a href="PT-1.html#PTOverview-2"><i class="fa fa-check"></i><b>10.1</b> Overview</a></li>
+<li class="chapter" data-level="10.2" data-path="PT-1.html"><a href="PT-1.html#PTResultsAndDiagnostics-2"><i class="fa fa-check"></i><b>10.2</b> Results And Diagnostics</a></li>
+<li class="chapter" data-level="10.3" data-path="PT-1.html"><a href="PT-1.html#PTOfflineMode-2"><i class="fa fa-check"></i><b>10.3</b> Offline Mode</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="Structures-1.html"><a href="Structures-1.html"><i class="fa fa-check"></i><b>11</b> Hydraulic Structures</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="Structures-1.html"><a href="Structures-1.html#StructuresIntro-2"><i class="fa fa-check"></i><b>11.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2" data-path="Structures-1.html"><a href="Structures-1.html#StructuresLocations-2"><i class="fa fa-check"></i><b>11.2</b> Assigning Structure Locations</a></li>
+<li class="chapter" data-level="11.3" data-path="Structures-1.html"><a href="Structures-1.html#StructuresBlock-2"><i class="fa fa-check"></i><b>11.3</b> Structure Block</a></li>
+<li class="chapter" data-level="11.4" data-path="Structures-1.html"><a href="Structures-1.html#StructuresType-2"><i class="fa fa-check"></i><b>11.4</b> Structure Types</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="Structures-1.html"><a href="Structures-1.html#StructuresCulverts-3"><i class="fa fa-check"></i><b>11.4.1</b> Culverts</a></li>
+<li class="chapter" data-level="11.4.2" data-path="Structures-1.html"><a href="Structures-1.html#StructuresWeirs-3"><i class="fa fa-check"></i><b>11.4.2</b> Weirs</a></li>
+<li class="chapter" data-level="11.4.3" data-path="Structures-1.html"><a href="Structures-1.html#StructuresBridgesObstructions-3"><i class="fa fa-check"></i><b>11.4.3</b> Bridges And Obstructions</a></li>
+<li class="chapter" data-level="11.4.4" data-path="Structures-1.html"><a href="Structures-1.html#StructuresTimeseries-3"><i class="fa fa-check"></i><b>11.4.4</b> Timeseries</a></li>
+<li class="chapter" data-level="11.4.5" data-path="Structures-1.html"><a href="Structures-1.html#StructuresMatrix-3"><i class="fa fa-check"></i><b>11.4.5</b> Matrix</a></li>
+<li class="chapter" data-level="11.4.6" data-path="Structures-1.html"><a href="Structures-1.html#StructuresPorous-3"><i class="fa fa-check"></i><b>11.4.6</b> Porous</a></li>
+<li class="chapter" data-level="11.4.7" data-path="Structures-1.html"><a href="Structures-1.html#StructuresWall-3"><i class="fa fa-check"></i><b>11.4.7</b> Wall</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="Structures-1.html"><a href="Structures-1.html#StructuresTreatment-2"><i class="fa fa-check"></i><b>11.5</b> Treatment Devices</a></li>
+<li class="chapter" data-level="11.6" data-path="Structures-1.html"><a href="Structures-1.html#StructuresOperational-2"><i class="fa fa-check"></i><b>11.6</b> Operational Structures</a></li>
+<li class="chapter" data-level="11.7" data-path="Structures-1.html"><a href="Structures-1.html#Structures3D-2"><i class="fa fa-check"></i><b>11.7</b> 3D Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="Hardware-1.html"><a href="Hardware-1.html"><i class="fa fa-check"></i><b>12</b> Hardware And Operating System</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="Hardware-1.html"><a href="Hardware-1.html#Hardware-2"><i class="fa fa-check"></i><b>12.1</b> Context</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html"><i class="fa fa-check"></i><b>13</b> Managing And Starting Simulations</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#RunningSimulationsIntro-2"><i class="fa fa-check"></i><b>13.1</b> Introduction</a></li>
+<li class="chapter" data-level="13.2" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#FileNaming-2"><i class="fa fa-check"></i><b>13.2</b> File Naming</a></li>
+<li class="chapter" data-level="13.3" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#SimulationManagement-2"><i class="fa fa-check"></i><b>13.3</b> Simulation Management</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#TimeOutputControls-3"><i class="fa fa-check"></i><b>13.3.1</b> Time and Output Controls</a></li>
+<li class="chapter" data-level="13.3.2" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#Events-3"><i class="fa fa-check"></i><b>13.3.2</b> Events</a></li>
+<li class="chapter" data-level="13.3.3" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#Scenarios-3"><i class="fa fa-check"></i><b>13.3.3</b> Scenarios</a></li>
+<li class="chapter" data-level="13.3.4" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#Variables-3"><i class="fa fa-check"></i><b>13.3.4</b> Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#TUFLOWExecDownload-2"><i class="fa fa-check"></i><b>13.4</b> TUFLOW Executable Download</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#InstallOverview-3"><i class="fa fa-check"></i><b>13.4.1</b> Overview and Where to Install</a></li>
+<li class="chapter" data-level="13.4.2" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#iSPdSP-3"><i class="fa fa-check"></i><b>13.4.2</b> Single and Double Precision</a></li>
+<li class="chapter" data-level="13.4.3" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#CustomingTUFLOW-3"><i class="fa fa-check"></i><b>13.4.3</b> Customising TUFLOW using TUFLOW_USER_DEFINED.dll</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#RunningSims-2"><i class="fa fa-check"></i><b>13.5</b> Running Simulations</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#DongleTypesandSetup-3"><i class="fa fa-check"></i><b>13.5.1</b> Dongle Types and Setup</a></li>
+<li class="chapter" data-level="13.5.2" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#StartingaSim-3"><i class="fa fa-check"></i><b>13.5.2</b> Starting a Simulation</a></li>
+<li class="chapter" data-level="13.5.3" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#RunningHPC-3"><i class="fa fa-check"></i><b>13.5.3</b> Running TUFLOW HPC</a></li>
+<li class="chapter" data-level="13.5.4" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#SMSSimulations-3"><i class="fa fa-check"></i><b>13.5.4</b> Using TUFLOW FV with SMS</a></li>
+<li class="chapter" data-level="13.5.5" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#OptimisingSims-3"><i class="fa fa-check"></i><b>13.5.5</b> Optimising Startup and Run Times</a></li>
+<li class="chapter" data-level="13.5.6" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#AutoTerminateOptions-3"><i class="fa fa-check"></i><b>13.5.6</b> Auto Terminate (Simulation End) Options</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#ResultsReplication-3"><i class="fa fa-check"></i><b>13.6</b> Reproducibility of Results</a>
+<ul>
+<li class="chapter" data-level="13.6.1" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#ResultsReplicationClassic-3"><i class="fa fa-check"></i><b>13.6.1</b> TUFLOW Classic (CPU only)</a></li>
+<li class="chapter" data-level="13.6.2" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#ResultsReplicationHPCCPU-3"><i class="fa fa-check"></i><b>13.6.2</b> TUFLOW HPC (incl. Quadtree) on CPU</a></li>
+<li class="chapter" data-level="13.6.3" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#ResultsReplicationHPCGPU-3"><i class="fa fa-check"></i><b>13.6.3</b> TUFLOW HPC (incl. Quadtree) on GPU</a></li>
+<li class="chapter" data-level="13.6.4" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#ResultsReplicationHPCMultiThread-3"><i class="fa fa-check"></i><b>13.6.4</b> TUFLOW HPC (incl. Quadtree) on multiple GPUs / CPU threads</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="ChecksAndLogs-1.html"><a href="ChecksAndLogs-1.html"><i class="fa fa-check"></i><b>14</b> Checks And Logs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="ChecksAndLogs-1.html"><a href="ChecksAndLogs-1.html#ChecksAndLogs-2"><i class="fa fa-check"></i><b>14.1</b> Context</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="ViewingOutputs-1.html"><a href="ViewingOutputs-1.html"><i class="fa fa-check"></i><b>15</b> Viewing Outputs</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="ViewingOutputs-1.html"><a href="ViewingOutputs-1.html#ViewingOutputs-2"><i class="fa fa-check"></i><b>15.1</b> Context</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="QAAndTroubleshooting-1.html"><a href="QAAndTroubleshooting-1.html"><i class="fa fa-check"></i><b>16</b> QA And Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="QAAndTroubleshooting-1.html"><a href="QAAndTroubleshooting-1.html#QAAndTroubleshooting-2"><i class="fa fa-check"></i><b>16.1</b> Context</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="AppCommands.html"><a href="AppCommands.html"><i class="fa fa-check"></i><b>A</b> Commands</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="AppCommands.html"><a href="AppCommands.html#Appcmdsyn"><i class="fa fa-check"></i><b>A.1</b> Command syntax</a></li>
+<li class="chapter" data-level="A.2" data-path="AppCommands.html"><a href="AppCommands.html#Appargmtsyn"><i class="fa fa-check"></i><b>A.2</b> Argument syntax</a></li>
+<li class="chapter" data-level="A.3" data-path="AppCommands.html"><a href="AppCommands.html#Appcmds"><i class="fa fa-check"></i><b>A.3</b> Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="AppParams.html"><a href="AppParams.html"><i class="fa fa-check"></i><b>B</b> Parameters</a></li>
+<li class="chapter" data-level="C" data-path="AppOutputs.html"><a href="AppOutputs.html"><i class="fa fa-check"></i><b>C</b> Files and Data Fields</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsSurfConc"><i class="fa fa-check"></i><b>C.1</b> Surface water concentrations</a></li>
+<li class="chapter" data-level="C.2" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsGWConc"><i class="fa fa-check"></i><b>C.2</b> Groundwater concentrations</a></li>
+<li class="chapter" data-level="C.3" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsDryMass"><i class="fa fa-check"></i><b>C.3</b> Dry mass</a></li>
+<li class="chapter" data-level="C.4" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsNetMass"><i class="fa fa-check"></i><b>C.4</b> Net mass</a></li>
+<li class="chapter" data-level="C.5" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsOther"><i class="fa fa-check"></i><b>C.5</b> Other outputs</a>
+<ul>
+<li class="chapter" data-level="C.5.1" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsOtherMB"><i class="fa fa-check"></i><b>C.5.1</b> Mass balance</a></li>
+<li class="chapter" data-level="C.5.2" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsOtherRP"><i class="fa fa-check"></i><b>C.5.2</b> Receiving polygon</a></li>
+<li class="chapter" data-level="C.5.3" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsOtherFV"><i class="fa fa-check"></i><b>C.5.3</b> TUFLOW FV boundaries</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="AppDemoModel.html"><a href="AppDemoModel.html"><i class="fa fa-check"></i><b>D</b> Demonstration Model</a>
+<ul>
+<li class="chapter" data-level="D.1" data-path="AppDemoModel.html"><a href="AppDemoModel.html#AppDemoModelContext-2"><i class="fa fa-check"></i><b>D.1</b> Context</a></li>
+<li class="chapter" data-level="D.2" data-path="AppDemoModel.html"><a href="AppDemoModel.html#AppDemoModelDomain-2"><i class="fa fa-check"></i><b>D.2</b> Domain</a></li>
+<li class="chapter" data-level="D.3" data-path="AppDemoModel.html"><a href="AppDemoModel.html#AppDemoModelModels-2"><i class="fa fa-check"></i><b>D.3</b> Numerical models</a>
+<ul>
+<li class="chapter" data-level="D.3.1" data-path="AppDemoModel.html"><a href="AppDemoModel.html#AppDemoModelModelsHPC-3"><i class="fa fa-check"></i><b>D.3.1</b> TUFLOW HPC</a></li>
+<li class="chapter" data-level="D.3.2" data-path="AppDemoModel.html"><a href="AppDemoModel.html#AppDemoModelModelsPE-3"><i class="fa fa-check"></i><b>D.3.2</b> Pollutant export</a></li>
+<li class="chapter" data-level="D.3.3" data-path="AppDemoModel.html"><a href="AppDemoModel.html#AppDemoModelModelsFV-3"><i class="fa fa-check"></i><b>D.3.3</b> TUFLOW FV</a></li>
+</ul></li>
+<li class="chapter" data-level="D.4" data-path="AppDemoModel.html"><a href="AppDemoModel.html#AppDemoModelSuite-2"><i class="fa fa-check"></i><b>D.4</b> Simulation suite</a></li>
+<li class="chapter" data-level="D.5" data-path="AppDemoModel.html"><a href="AppDemoModel.html#AppDemoModelDLoad-2"><i class="fa fa-check"></i><b>D.5</b> Downloads</a>
+<ul>
+<li class="chapter" data-level="D.5.1" data-path="AppDemoModel.html"><a href="AppDemoModel.html#AppDemoModelBins-3"><i class="fa fa-check"></i><b>D.5.1</b> Binaries</a></li>
+<li class="chapter" data-level="D.5.2" data-path="AppDemoModel.html"><a href="AppDemoModel.html#AppDemoModelFils-3"><i class="fa fa-check"></i><b>D.5.2</b> Simulation files</a></li>
+</ul></li>
+<li class="chapter" data-level="D.6" data-path="AppDemoModel.html"><a href="AppDemoModel.html#AppDemoModelExe-2"><i class="fa fa-check"></i><b>D.6</b> Execution</a></li>
+<li class="chapter" data-level="D.7" data-path="AppDemoModel.html"><a href="AppDemoModel.html#AppDemoModelResInt-2"><i class="fa fa-check"></i><b>D.7</b> Results interrogation</a>
+<ul>
+<li class="chapter" data-level="D.7.1" data-path="AppDemoModel.html"><a href="AppDemoModel.html#AppDemoModelJSON-2"><i class="fa fa-check"></i><b>D.7.1</b> Example json file creation</a></li>
+<li class="chapter" data-level="D.7.2" data-path="AppDemoModel.html"><a href="AppDemoModel.html#AppDemoModelres-2"><i class="fa fa-check"></i><b>D.7.2</b> Example results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="AppDemoModelResCont-2.html"><a href="AppDemoModelResCont-2.html"><i class="fa fa-check"></i><b>E</b> Application under version control</a>
+<ul>
+<li class="chapter" data-level="E.1" data-path="AppDemoModelResCont-2.html"><a href="AppDemoModelResCont-2.html#AppDemoModelResContCtxt-3"><i class="fa fa-check"></i><b>E.1</b> Context</a></li>
+<li class="chapter" data-level="E.2" data-path="AppDemoModelResCont-2.html"><a href="AppDemoModelResCont-2.html#AppDemoModelResContUC-3"><i class="fa fa-check"></i><b>E.2</b> Use case</a></li>
+<li class="chapter" data-level="E.3" data-path="AppDemoModelResCont-2.html"><a href="AppDemoModelResCont-2.html#AppDemoModelResContWF-3"><i class="fa fa-check"></i><b>E.3</b> Possible workflow #1</a></li>
+<li class="chapter" data-level="E.4" data-path="AppDemoModelResCont-2.html"><a href="AppDemoModelResCont-2.html#AppDemoModelResContWF2-3"><i class="fa fa-check"></i><b>E.4</b> Possible workflow #2</a></li>
+</ul></li>
+<li class="chapter" data-level="F" data-path="Domain-1.html"><a href="Domain-1.html"><i class="fa fa-check"></i><b>F</b> Model Domain Construction</a>
+<ul>
+<li class="chapter" data-level="F.1" data-path="Domain-1.html"><a href="Domain-1.html#DomainIntro-2"><i class="fa fa-check"></i><b>F.1</b> Introduction</a></li>
+<li class="chapter" data-level="F.2" data-path="Domain-1.html"><a href="Domain-1.html#DomainGISIntegration-2"><i class="fa fa-check"></i><b>F.2</b> GIS Integration</a></li>
+<li class="chapter" data-level="F.3" data-path="Domain-1.html"><a href="Domain-1.html#DomainMesh-2"><i class="fa fa-check"></i><b>F.3</b> Computational Mesh</a>
+<ul>
+<li class="chapter" data-level="F.3.1" data-path="Domain-1.html"><a href="Domain-1.html#DomainMeshUnstructured-3"><i class="fa fa-check"></i><b>F.3.1</b> Unstructured</a></li>
+<li class="chapter" data-level="F.3.2" data-path="Domain-1.html"><a href="Domain-1.html#DomainMeshStructured-3"><i class="fa fa-check"></i><b>F.3.2</b> Structured</a></li>
+</ul></li>
+<li class="chapter" data-level="F.4" data-path="Domain-1.html"><a href="Domain-1.html#DomainBathyAndTopo-2"><i class="fa fa-check"></i><b>F.4</b> Model Bathymetry And Topography</a>
+<ul>
+<li class="chapter" data-level="F.4.1" data-path="Domain-1.html"><a href="Domain-1.html#DomainBathyAndTopo2dm-3"><i class="fa fa-check"></i><b>F.4.1</b> Direct Mesh Read (.2dm File)</a></li>
+<li class="chapter" data-level="F.4.2" data-path="Domain-1.html"><a href="Domain-1.html#DomainBathyAndTopoZBUpdates-3"><i class="fa fa-check"></i><b>F.4.2</b> Cell ZB Update Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="F.5" data-path="Domain-1.html"><a href="Domain-1.html#DomainBoundaryLocations-2"><i class="fa fa-check"></i><b>F.5</b> Model Boundary Locations</a></li>
+<li class="chapter" data-level="F.6" data-path="Domain-1.html"><a href="Domain-1.html#DomainMat-2"><i class="fa fa-check"></i><b>F.6</b> Model Materials</a>
+<ul>
+<li class="chapter" data-level="F.6.1" data-path="Domain-1.html"><a href="Domain-1.html#DomainMatBedResistance-3"><i class="fa fa-check"></i><b>F.6.1</b> Bed Resistance</a></li>
+<li class="chapter" data-level="F.6.2" data-path="Domain-1.html"><a href="Domain-1.html#DomainMatBedElevationLimits-3"><i class="fa fa-check"></i><b>F.6.2</b> Bed Elevation Limits</a></li>
+<li class="chapter" data-level="F.6.3" data-path="Domain-1.html"><a href="Domain-1.html#DomainMatActiveInactive-3"><i class="fa fa-check"></i><b>F.6.3</b> Active/Inactive Areas</a></li>
+<li class="chapter" data-level="F.6.4" data-path="Domain-1.html"><a href="Domain-1.html#DomainMatMomentumMixing-3"><i class="fa fa-check"></i><b>F.6.4</b> Local Horizontal Momentum Mixing</a></li>
+<li class="chapter" data-level="F.6.5" data-path="Domain-1.html"><a href="Domain-1.html#DomainMatScalarMixing-3"><i class="fa fa-check"></i><b>F.6.5</b> Local Horizontal Scalar Mixing</a></li>
+<li class="chapter" data-level="F.6.6" data-path="Domain-1.html"><a href="Domain-1.html#DomainMatSpatialReconstruction-3"><i class="fa fa-check"></i><b>F.6.6</b> Local Spatial Reconstruction</a></li>
+</ul></li>
+<li class="chapter" data-level="F.7" data-path="Domain-1.html"><a href="Domain-1.html#Domain3DConsiderations-2"><i class="fa fa-check"></i><b>F.7</b> Geometry For 3D Modelling</a>
+<ul>
+<li class="chapter" data-level="F.7.1" data-path="Domain-1.html"><a href="Domain-1.html#DomainVerticalMeshTopology-3"><i class="fa fa-check"></i><b>F.7.1</b> Vertical Mesh Topology</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(0,85,129);">TUFLOW FV User Manual</h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="Domain-1" class="section level1 hasAnchor" number="22">
+<h1><span class="header-section-number">Appendix F</span> Model Domain Construction<a href="Domain-1.html#Domain-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="DomainIntro-2" class="section level2 hasAnchor" number="22.1">
+<h2><span class="header-section-number">F.1</span> Introduction<a href="Domain-1.html#DomainIntro-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section provides the steps required to build a TUFLOW FV Control File…MJS</p>
+<p><span class="math inline">\(\newcommand{\blockindent}{\hspace{0.5cm}}\)</span></p>
+</div>
+<div id="DomainGISIntegration-2" class="section level2 hasAnchor" number="22.2">
+<h2><span class="header-section-number">F.2</span> GIS Integration<a href="Domain-1.html#DomainGISIntegration-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Reinforce using GIS integration - the model domain build is light on here re. GIS. It’s currently only about meshes</p>
+</div>
+<div id="DomainMesh-2" class="section level2 hasAnchor" number="22.3">
+<h2><span class="header-section-number">F.3</span> Computational Mesh<a href="Domain-1.html#DomainMesh-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Blah</p>
+<div id="DomainMeshUnstructured-3" class="section level3 hasAnchor" number="22.3.1">
+<h3><span class="header-section-number">F.3.1</span> Unstructured<a href="Domain-1.html#DomainMeshUnstructured-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The most common is unstructred and these unlock the power of TUFLOW FV’s scheme. These meshes are comprised of quads and/or tris and are referred to as unstructured (i.e not regular grids). Unstructured mesh geometries can be created using any suitable mesh generation tool. Historically, Aquaveo SMS Generic Mesh Module has been used for building meshes. As a result, the TUFLOW FV mesh file format is the SMS mesh file format. As of 2019, there is also the Rising Water Software GIS-Mesher option for generating (.2dm) meshes. As TUFLOW FV does not generate its own flexible mesh, one of these packages is required for your model development. For more information on both meshers please refer to the following website links:
+• Aquaveo SMS
+• Rising Water Software GIS Mesher
+Links our into resources about:
+• What is in a 2dm file
+• Mesh construction tutes
+• Mesh construction best practise
+<a href="https://fvwiki.tuflow.com/Meshing_Tutorial" class="uri">https://fvwiki.tuflow.com/Meshing_Tutorial</a></p>
+</div>
+<div id="DomainMeshStructured-3" class="section level3 hasAnchor" number="22.3.2">
+<h3><span class="header-section-number">F.3.2</span> Structured<a href="Domain-1.html#DomainMeshStructured-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+</div>
+<div id="DomainBathyAndTopo-2" class="section level2 hasAnchor" number="22.4">
+<h2><span class="header-section-number">F.4</span> Model Bathymetry And Topography<a href="Domain-1.html#DomainBathyAndTopo-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>MEB Comment Right place??? but reword…</p>
+<p>The .2dm mesh forms the base layer for model development in TUFLOW FV. However, rather than contain all the bathymetric information in this one file, TUFLOW FV has a series of commands that assist with building the model. The commands are applied in sequential order; therefore, it is possible to override previous information with new data to modify the model in selected areas. This is very useful where a base dataset exists, over which areas need to be modified to represent other scenarios such as a proposed development. This eliminates or minimises data duplication and provides better traceability of input layers / datasets.
+The commands can occur in any order (if it is a logical one). If an unrecognisable command occurs, TUFLOW FV stops and displays the unrecognisable text.
+Notes &amp; Tips:
+1 Elevations and materials are always read from the .2dm file first, regardless of the order of where the Read Geometry 2d == command is in the .fvc. There can currently only be one mesh file (.2dm) per model.
+2 Commands can be repeated any number of times.
+3 Commands are executed in the order they occur. If the data for a cell is supplied more than once, the last data that is read in the fvc is used (i.e. the latter data for a cell overrides any previous data for that cell).
+4 The new GIS commands whilst recommended over legacy commands such as Cell Elevation File ==, Elevation Polyline File ==, Cell Elevation Polygon == etc. will still be read in sequential order when combined with these command types. For example, cells intersected by the CSV-derived elevation polylines in the file ‘Shipping_Channel.CSV’ below will be read into the model following the Read GRID Zpts == command. The command Read GIS Z Line == will overwrite any ‘Shipping_Channel.CSV’ or grid elevations with those provided in my_road_001_L.shp and my_road_001_P.shp at cells where the datasets overlap.</p>
+<p>! Geometry Specification with Updates
+Geometry 2D == .._Port_Development_001.2dm
+Read GRID Zpts == .._Config.txt
+Nodestring Polyline File == .._Channel.csv
+Read GIS Z Line == .._road_001_L.shp | .._road_001.P.shp</p>
+<p>5 Use the Write Check Files == command (refer Section 17.10) to cross-check and carry out quality control checks on the final mesh ZB and Material inputs.</p>
+<div id="DomainBathyAndTopo2dm-3" class="section level3 hasAnchor" number="22.4.1">
+<h3><span class="header-section-number">F.4.1</span> Direct Mesh Read (.2dm File)<a href="Domain-1.html#DomainBathyAndTopo2dm-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The .2dm file defines the base elevations within the model using the Geometry 2d command. The .2dm format supports elevations only at the nodes or corners of each cell. When TUFLOW FV reads the mesh geometry file cell centred bed elevations are interpolated from the .2dm node locations. In many instances, this interpolation is not an issue. However, there may be instances where this is not preferred.</p>
+<p>MJS add comments above cell centre overwrite commands.</p>
+</div>
+<div id="DomainBathyAndTopoZBUpdates-3" class="section level3 hasAnchor" number="22.4.2">
+<h3><span class="header-section-number">F.4.2</span> Cell ZB Update Commands<a href="Domain-1.html#DomainBathyAndTopoZBUpdates-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Set Zpts
+Read GRID Zpts
+Read TIN Zpts
+Read GIS Z Line
+Cell Elevation File</p>
+<p>-Legacy Commands-
+Not recommended for use
+Cell Elevation Polyline File
+Cell Elevation Polygon File</p>
+</div>
+</div>
+<div id="DomainBoundaryLocations-2" class="section level2 hasAnchor" number="22.5">
+<h2><span class="header-section-number">F.5</span> Model Boundary Locations<a href="Domain-1.html#DomainBoundaryLocations-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Nodestings can be assigned directly during mesh creation (refer Figure 8 6) or via external nodestings set in the .fvc file and processed on model initialisation. For external nodestrings, the Read GIS Nodestring command provides an alternative to the previous .CSV file method Nodestring Polyline File. In the example below, both open water level and flow boundary locations are specified in the GIS layer “2d_ns_Open_Boundaries_001_L.shp”. This layer is being used to apply open boundary nodestrings. The layer 2d_ns_Flux_Lines_001_L.shp has been separated for data management purposes and is reporting fluxes within the model.
+Nodestrings input by the Read GIS Nodestring == command are additive to those existing in the .2dm or already specified in previous Read GIS Nodestring or Nodestring Polyline File commands.
+The Read GIS Nodestring == command requires that all nodestring ID’s in the model are unique. This includes any that have been specified in the .2dm or nodestring polyline file. If nodestrings with identical IDs are input then TUFLOW FV will generate an error and inputswill need to be reassigned . Importantly, these IDs are character strings (even if they are specified as integer IDs) wih a maximum length of 100 characters, and can be specified as such via any of the nodestring input methods. This allows for meaningful names (rather than integer IDs) to be used to call nodestrings. An example BC block specification is as follows, with the nodestring ID being “Upstream” (without the inverted commas).
+BC == Q, Upstream, .._dbase<em>01.csv
+BC Header == time, flow
+BC Default == 10
+Sub-Type == 4
+End BC
+Model outputs such as the 2d_ns check file and flux outputs have been upgraded to support string names.
+String IDs can contain spaces, are case insensitive, and can contain special characters except for tabs. Although supported, it is recommended to avoid using spaces and special characters. If multiple words are required to define IDs it is recommended to adopt one of the following common conventions:
+• Use underscores ’</em>’ or the so-called snake_case
+• Or hyphens ‘-‘
+• Use camelCase or PascalCase
+There is no correct method, other than aiming for consistency with the adopted naming approach. Duplicate nodestring IDs are not supported. If a duplicate ID is encountered TUFLOW FV will error with a message identifying the duplicate.
+To utilise the new string naming features a new set of empty template GIS files needs to be generated using the 2023 release. This can be output at model setup time using the Write GIS Empty Files == command.
+For backward compatibility, existing models with integer IDs are passed as a string. (i.e. 1 as ‘1’) and the model should run with no additional changes required by the user.
+TUFLOW FV supports nodestring names specified directly within the 2dm mesh input. These need to be set on the NS lines of the 2dm. If a string is found following the 2dm integer in a NS specification line, TUFLOW FV will ignore the integer and read the string. For example, in the below image TUFLOW FV will read the first NS line (2dm line 45337) as ‘Upstream’ and ignore the integer value 1.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-2dm-Nodestring-Names"></span>
+<img src="images/2dm_Nodestring_Names.png" alt="Bathymetric Data" width="50%" />
+<p class="caption">
+Figure F.1: Bathymetric Data
+</p>
+</div>
+</center>
+<p>The required attributes when using a 2d_ns input layer is provided in Table 8 1.</p>
+<table>
+<caption>
+<span id="tab:tab-GISNodestring">Table F.1: </span><strong>GIS Nodestring (2d_ns) Attributes </strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+No. 
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Default GIS Attribute Name
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+ID
+</td>
+<td style="text-align:left;">
+Unique string name for each nodestring
+</td>
+<td style="text-align:left;">
+Char
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+Type
+</td>
+<td style="text-align:left;">
+<p>Either set to ‘BD’ or left blank.</p>
+<p>If set to ‘BD’ this will use TUFLOW FV’s boundary algorithms to snap the nodestring along the outer edge of the model, as required for open boundary conditions. The ‘BD’ type should not be used for internal nodestrings such as those used to monitor flow or to define hydraulic structure locations.</p>
+Leaving the field blank will snap the nodestring to the closest cell faces at cells that the polyline intersects.
+</td>
+<td style="text-align:left;">
+Char
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="DomainMat-2" class="section level2 hasAnchor" number="22.6">
+<h2><span class="header-section-number">F.6</span> Model Materials<a href="Domain-1.html#DomainMat-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Material layers are used to differentiate sections of the model domain. Materials layers can be used to spatially vary a range of bed properties including:
+• Bed resistance (bottom roughness)
+• Active/inactive areas
+• Horizontal and vertical eddy viscosity
+• Bed elevation limits
+• Spatial reconstruction
+The recommended approach is to assign a unique material to represent a different landuse or bed characteristic. GIS layers of land-use or vegetation often make excellent material layers. Examples of different materials are main river channel, river banks, floodplain, sea grass meadows, buildings, sand banks, mangroves, etc.
+Materials can either be assigned during mesh development using your preferred mesh generator (Aquaveo SMS or the GIS Mesher) or assigned/modified following mesh development directly by TUFLOW FV using the Set Mat and Read GIS Mat commands.
+Prior to the 2019 TUFLOW FV Release the only way to assign materials was directly via the .2dm file. While this method is still available, the preferred approach is to digitise one or more 2d_mat materials layers (see Table 8 4) and assign materials within a Material Block. This approach allows the easy adjustment of surface characteristics, for example modifying bed resistance during model calibration or sensitivity testing.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-GIS-Materials"></span>
+<img src="images/GIS_Materials.png" alt="Materials Specification using 2d_mat GIS Layers" width="50%" />
+<p class="caption">
+Figure F.2: Materials Specification using 2d_mat GIS Layers
+</p>
+</div>
+</center>
+<p>In creating the base 2d_mat layer, it is good practice to not digitise the most common or the most difficult to digitise material and use the following data layering of commands in the .fvc:
+• Use Set Mat to set the most common material to all cells in the domain.
+• Use Read GIS Mat to allocate the remaining material values.
+The Read GIS Mat command may be used as many times as required to further modify the materials in parts of a 2D domain. Each subsequent dataset will overwrite the preceding assigned material value, as described. i.e. layers called lower down the input file will be read in preference to those above them where to two layers overlap.</p>
+<table>
+<caption>
+<span id="tab:tab-Materials">Table F.2: </span><strong>2D Material (2d_mat) Attribute Description </strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+No. 
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Default GIS Attribute Name
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Description
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Material
+</td>
+<td style="text-align:left;">
+The material integer ID value referenced within a Materials Block.
+</td>
+<td style="text-align:left;">
+Integer
+</td>
+</tr>
+</tbody>
+</table>
+<div id="DomainMatBedResistance-3" class="section level3 hasAnchor" number="22.6.1">
+<h3><span class="header-section-number">F.6.1</span> Bed Resistance<a href="Domain-1.html#DomainMatBedResistance-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Bed resistance formulation can be set to Manning’s n or a log-law velocity profile using the Bottom Drag Model command in the .fvc file. The bottom roughness command within a material block will apply the bottom roughness to that material. The bottom drag model cannot be changed between materials.
+The example below presents a global bottom roughness that is modified for three of the materials.
+Bottom drag model == ks
+Global bottom roughness == 0.10
+Material == 10
+Bottom roughness == 0.05
+End material
+Material == 2
+Bottom roughness == 0.15
+End material
+Material == 8
+Bottom roughness == 0.05
+End material</p>
+</div>
+<div id="DomainMatBedElevationLimits-3" class="section level3 hasAnchor" number="22.6.2">
+<h3><span class="header-section-number">F.6.2</span> Bed Elevation Limits<a href="Domain-1.html#DomainMatBedElevationLimits-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The bed elevation limits allow the user to truncate the bathymetry in a given region to a minimum or maximum level. This is commonly used to sensitivity test limits, or to enforce wet elements where coarse mesh resolution has resulted in spurious wetting/drying areas.
+This example shows three materials set to different limits. Material 1 is trimmed so that any elevations below datum level -10m are set to -10m, without limiting higher levels. Material 2 is entirely set to +5m. Material 3 is trimmed to the same minimum level as material 1, but with an upper limit of -2m which might be below the tidal minimum, ensuring wet cells.
+Material == 1
+Bed Elevation Limits == -10, 9999
+End Material
+Material == 2
+Bed Elevation Limits == 5, 5
+End Material
+Material == 3
+Bed Elevation Limits == -10, -2
+End Material</p>
+</div>
+<div id="DomainMatActiveInactive-3" class="section level3 hasAnchor" number="22.6.3">
+<h3><span class="header-section-number">F.6.3</span> Active/Inactive Areas<a href="Domain-1.html#DomainMatActiveInactive-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The inactive flag allows users to switch the cells with a given material ID off for the purposes of the hydrodynamic calculations. The cells are still tracked within the model and are output, though are set to be permanently dry. This is commonly used for impact assessments when switching off certain cells to simulate an area of development or can be used to switch of large sections of a model to conduct further testing on a model subset.
+Note: Inactive materials can only be set for materials specified within the .2dm mesh. External materials and GIS materials are not supported.
+The below example shows how to switch a single material to inactive, the default status for all cells is active.
+Material == 10
+Inactive == 1
+End material</p>
+</div>
+<div id="DomainMatMomentumMixing-3" class="section level3 hasAnchor" number="22.6.4">
+<h3><span class="header-section-number">F.6.4</span> Local Horizontal Momentum Mixing<a href="Domain-1.html#DomainMatMomentumMixing-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The horizontal eddy viscosity command can be used to adjust the material specific eddy viscosity parameters. The specifics of this command are dependent on the adopted momentum mixing model. This command can be used to increase or decrease the momentum mixing in a particular area.
+This is usually done to smooth instabilities in regions of the model that are not near the area of interest (such as the corners of offshore boundaries). Users should take care with using this command without a suitable understanding of the physical relevance of adjusting the momentum mixing spatially.
+The below example shows a global horizontal eddy viscosity being set for a Smagorinsky momentum mixing model, with the Smagorinsky parameter being altered for two different materials.
+Momentum Mixing Model == Smagorinsky
+Global Horizontal Eddy Viscosity == 0.5
+Material == 10
+Horizontal Eddy Viscosity == 0.2
+End Material
+Material == 11
+Horizontal Eddy Viscosity == 1.0
+End Material</p>
+<p>The horizontal eddy viscosity limits command allows the user to specify a minimum and maximum eddy viscosity that changes by region. This can be used to set a limit in a particular area to control the momentum mixing. This can be used in conjunction with or instead of the material horizontal eddy viscosity to increase or decrease the viscosity to smooth potential instabilities. The vertical eddy viscosity limits command is used to control the vertical turbulence i.e. to increase/decrease the effective vertical turbulence if there is insufficient or too much vertical momentum mixing.
+The below example below shows the turbulence being set to a minimum level of mixing in the cells with the material ID of 10.
+Momentum Mixing Model == Smagorinsky
+Global Horiztonal Eddy Viscosity == 0.2
+Global Horizontal Eddy Viscosity Limits == 0.0, 99999.
+Global Vertical Eddy Viscosity Limits == 1.0e-04, 99999.</p>
+<p>Material == 10
+Horizontal Eddy Viscosity Limits == 100., 99999.
+Vertical Eddy Viscosity Limits == 100., 99999.
+End Material</p>
+</div>
+<div id="DomainMatScalarMixing-3" class="section level3 hasAnchor" number="22.6.5">
+<h3><span class="header-section-number">F.6.5</span> Local Horizontal Scalar Mixing<a href="Domain-1.html#DomainMatScalarMixing-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The horizontal scalar diffusivity command can be used to adjust the material specific scalar diffusivity parameters. The specifics of this command vary for different scalar mixing models. This command can be used to increase or decrease the scalar diffusion in a particular area.
+This is usually done to smooth instabilities in regions of the model that are not near the area of interest (such as the corners of offshore boundaries). Users should take care with using this command without a suitable understanding of the physical relevance of adjusting the momentum mixing spatially.
+The following example shows a global horizontal scalar diffusivity being set for a Smagorinsky scalar mixing model, with the Smagorinsky parameter being altered for two different materials.
+Scalar Mixing Model == Smagorinsky
+Global Horizontal Scalar Diffusivity == 0.2
+Material == 10
+Horiztonal Scalar Diffusivity == 25
+End Material</p>
+<p>Cut out 3D stuff:
+The horizontal scalar diffusivity limits or Vertical Scalar Diffusivity Limits command allows the user to specify a minimum and maximum scalar diffusivity that changes by region. This can be used to set a limit in a particular area to control the scalar diffusion. This can be used in conjunction with or instead of the material horizontal scalar diffusivity command to increase or decrease the mixing of scalar constituents. Vertical Scalar Diffusivity Limits can be used to control the vertical diffusion i.e. to increase/decrease the effective vertical mixing if there is insufficient or too much vertical diffusion occurring in sections of your model.
+The example below shows the diffusivity being set to a minimum level of mixing in the cells with the material ID of 10.
+Scalar Mixing Model == Smagorinsky
+Global Horizontal Scalar Diffusivity == 0.2
+Global Horizontal Scalar Diffusivity Limits == 1.0, 99999.
+Global Vertical Scalar Diffusivity == 1.0e-06, 99999.
+Material == 10
+Horiztonal Scalar Diffusivity Limits == 100, 99999.
+Vertical Scalar Diffusivity Limits == 100, 99999.
+End Material</p>
+</div>
+<div id="DomainMatSpatialReconstruction-3" class="section level3 hasAnchor" number="22.6.6">
+<h3><span class="header-section-number">F.6.6</span> Local Spatial Reconstruction<a href="Domain-1.html#DomainMatSpatialReconstruction-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The spatial reconstruction command can be used to revert an area to first-order calculations where the model is otherwise a second-order model. If a first-order model is being used, then this flag will have no effect. Second order models can be prescribed using the spatial order command.
+This is commonly used near offshore boundary conditions to reduce the computational overhead, or to reduce instabilities if second order computations are not otherwise used there.
+The following example shows three materials, with the first one (material ID 10) being set back to first-order.
+Bottom Drag Model == ks
+Global Bottom Roughness == 0.10
+Spatial Order == 2,2</p>
+<p>Material == 10
+Bottom Roughness == 0.05
+Spatial Reconstruction == 0
+End Material</p>
+<p>Material == 2
+Bottom Roughness == 0.15
+End Material</p>
+<p>Material == 8
+Bottom Roughness == 0.05
+End Material</p>
+</div>
+</div>
+<div id="Domain3DConsiderations-2" class="section level2 hasAnchor" number="22.7">
+<h2><span class="header-section-number">F.7</span> Geometry For 3D Modelling<a href="Domain-1.html#Domain3DConsiderations-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="DomainVerticalMeshTopology-3" class="section level3 hasAnchor" number="22.7.1">
+<h3><span class="header-section-number">F.7.1</span> Vertical Mesh Topology<a href="Domain-1.html#DomainVerticalMeshTopology-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+Designing your vertical layer discretisation and the coordinate scheme for your problem can often be one of the most important factors when undertaking 3D modelling. 3D simulations can be performed within TUFLOW FV using either sigma-coordinate or z-coordinate via the Vertical Mesh Type command. A third hybrid option, using a combination of sigma and z-coordinates is also available using a combination of the Vertical Mesh Type and Surface Sigma Layers commands. Figure 9 1 provides an example of each discretisation type and Table 9 1 provides an overview of the compatible commands for each coordinate type. Notably, each coordinate scheme has its strengths and weaknesses depending on the problem you are trying to solve. The sections below provide a brief overview and guidance on the use of each scheme.
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-Vertical-Mesh-Topology"></span>
+<img src="images/Vertical_Mesh_Topology.svg" alt="3D Model Vertical Discretisation Options" width="80%" />
+<p class="caption">
+Figure F.3: 3D Model Vertical Discretisation Options
+</p>
+</div>
+</center>
+<table>
+<caption>
+<span id="tab:tab-GeometryLayerOptions3D">Table F.3: </span><strong>3D Geometry Layer Options</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Z Coordinate Type
+</th>
+<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
+Relevant Commands
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Sigma
+</td>
+<td style="text-align:left;">
+<p>Vertical Mesh Type == Sigma</p>
+<p>Layer Face File == <layer interface levels></p>
+Cell 3D Depth == <threshold depth> </threshold></layer>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Z
+</td>
+<td style="text-align:left;">
+<p>Vertical Mesh Type == Z</p>
+<p>Layer Face File == <layer interface levels></p>
+<p>Cell 3D Depth == <threshold depth></p>
+Min Bottom Layer Thickness == <dzmin> </dzmin></threshold></layer>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hybrid Z-Sigma
+</td>
+<td style="text-align:left;">
+<p>Vertical Mesh Type == Z</p>
+<p>Layer Face File == &lt; layer interface levels (.CSV)&gt;</p>
+<p>Surface Sigma Layers == &lt; Nsigma&gt;</p>
+<p>Cell 3D Depth == &lt; threshold depth (m)&gt;</p>
+Min Bottom Layer Thickness == &lt; dzmin (m)&gt;
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note: The assignment of z coordinates can be checked via the IDX3 attribute of the _mesh_check_R file (refer Table 17 5).
+Sigma Coordinates
+Using sigma coordinates, layers follow the bed profile with the spacing specified as a percentage of the water depth via the Layer Face File. This layering is completed consistently for each cell throughout the model domain, regardless of the water depth. For example, a model with five equal sigma layers in 100m of depth will have 5 layers, each 20m thick. The same model in 1m of depth will have 5 layers, 0.2 m thick. Although this example assumes an even distribution of sigma layers, the user is free to distribute layers as they see fit. Optionally, to improve stability in areas of shallow flow or wetting and drying that are likely to be well mixed, a Cell 3D Depth threshold value can be applied, such that vertical fluxes between layers are switched off below these depths and the solution scheme effectively becomes 2D (depth-averaged). Compatible commands when using a sigma coordinate approach are provided in Table 9 1.
+Sigma layering is useful at providing high resolution layering typically near surface or near bed to capture boundary layer problems with a low computational overhead. i.e. bed following layers can be stacked tightly near the bed and water surface but left relatively sparse through mid-depths to avoid unnecessary 3D cells. If using bed morphology coupling in 3D, then it is a software requirement to use sigma layering.
+Limitations associated with the sigma coordinate scheme can occur in regions of highly sloping bathymetry. In these regions, sigma schemes can be prone to horizontal pressure gradient errors if horizontal grid cell resolutions are not well resolved. Additionally, in regions where thermal stratification is prevalent near the surface, i.e. lakes, a z coordinate or z-sigma hybrid may be more accurate at resolving a stratified water column.
+Z Coordinates
+Z coordinate layers are set at a series of fixed elevations using the Layer Face File in combination with the Vertical Mesh Type command. TUFLOW FV does not allow a z-layer to be switched off due to the water level dropping below its lower limit. Therefore, when using a Z coordinates scheme, it is important that the highest elevation within the Layer Face File remains wet, i.e it’s not at an elevation subject to wetting and drying.
+The z coordinate approach can provide fine consistent resolution throughout the domain independent of water depth, which can be particularly useful if trying to model strong stratification in the upper layers of the water column. On the flipside, if the study area contains sloping bathymetry it can be challenging to efficiently provide high resolution near the bed (for example if near bed sediment processes are important) without including redundant high resolution in other parts of the model.
+In areas of sloping bathymetry, z coordinates can result in thin layers close to the bed, that in turn can potentially lead to numerical instabilities. To avoid these issues TUFLOW FV offers the option to set a Min Bottom Layer Thickness that prevents a thin bottom layer from being generated when using the for z coordinate or z-sigma hybrid schemes.
+Compatible commands when using a z coordinate approach are provided in Table 9 1
+Hybrid Z-Sigma Coordinates
+The hybrid z-sigma layering method defines a series of Surface Sigma Layers overlayed on a z scheme at depth. Surface Sigma Layers are evenly distributed sigma layers that reside between the water level surface and the topmost Z elevation specified in the Layer Face File. The z-coordinate component of the hybrid scheme is discussed in the Z coordinates section above.
+This method provides flexibility and stability in areas of wetting and drying not available via a z only coordinate system whilst providing the potential for high resolution near-surface exchange and gradient capturing. Compatible commands when using a z-sigma coordinate approach are provided in Table 9 1
+ 
+An example excerpt using the hybrid z-sigma coordinate approach is provided in Figure 9 2. Using this example, a z-coordinate system is used below -3m (m in the project vertical datum). To avoid instabilities here the user has assumed that at all times, and at all cells, the model does not dry out below -3m. Below -3m there are 9 vertical layers between -3m and -16m and a single vertical layer below -16m terminating at the bed. At each cell location, if any layer faces are below the bathymetry they are ignored during the simulation. To avoid ‘skinny’ vertical layers truncated by the bathymetry (if the ZB at a cell is between two layer faces) then the user has used a Min Bottom Layer Thickness cell threshold 0.5 m. This means that we should not have any bottom layers in our 3D solution at the bed less than 0.5m.
+Four equally distributed sigma layers are specified between -3m and the water surface, noting that these layers may stretch and contract in response to changes in water level as the simulation progresses. In regions of wetting and drying a Cell 3D Depth threshold is applied to disable 3D calculation in well mixed regions of the coastal zone, in our model case tidal mudflats adjacent to the main estuary channel.</p>
+<p>!____________________________________________________
+! 3D Geometry Commands
+Vertical Mesh Type == z
+Layer Faces == ..\3D_Z_Layers_003.csv
+Surface Sigma Layers == 4
+Min Bottom Layer Thickness == 0.5
+Cell 3D Depth == 1.0</p>
+<p><img src="images/WQFooter.jpg" width="100%" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="AppDemoModelResCont-2.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": false,
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Appendix I Processes: WQ Simulation Class | TUFLOW FV User Manual</title>
+  <meta name="description" content="Appendix I Processes: WQ Simulation Class | TUFLOW FV User Manual" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Appendix I Processes: WQ Simulation Class | TUFLOW FV User Manual" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/1024in300px_Blue-01.svg" />
+  <meta property="og:description" content="Appendix I Processes: WQ Simulation Class | TUFLOW FV User Manual" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Appendix I Processes: WQ Simulation Class | TUFLOW FV User Manual" />
+  
+  <meta name="twitter:description" content="Appendix I Processes: WQ Simulation Class | TUFLOW FV User Manual" />
+  <meta name="twitter:image" content="/images/1024in300px_Blue-01.svg" />
+
+<meta name="author" content="" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="AppProcST-1.html"/>
+<link rel="next" href="AppProcPT-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#about-this-manual"><i class="fa fa-check"></i>About this manual</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#tables"><i class="fa fa-check"></i>Tables</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#commands"><i class="fa fa-check"></i>Commands</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#parameter-notation"><i class="fa fa-check"></i>Parameter notation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#feedback"><i class="fa fa-check"></i>Feedback</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="Intro-1.html"><a href="Intro-1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWProducts-2"><i class="fa fa-check"></i><b>1.1</b> TUFLOW Products</a></li>
+<li class="chapter" data-level="1.2" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFV-2"><i class="fa fa-check"></i><b>1.2</b> TUFLOW FV</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFVOverview-3"><i class="fa fa-check"></i><b>1.2.1</b> TUFLOW’s Flexible Mesh Finite Volume Solver</a></li>
+<li class="chapter" data-level="1.2.2" data-path="Intro-1.html"><a href="Intro-1.html#d-2d-and-3d-hydrodynamics"><i class="fa fa-check"></i><b>1.2.2</b> 1D, 2D and 3D Hydrodynamics</a></li>
+<li class="chapter" data-level="1.2.3" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFAD-3"><i class="fa fa-check"></i><b>1.2.3</b> Advection Dispersion/Diffusion</a></li>
+<li class="chapter" data-level="1.2.4" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFST-3"><i class="fa fa-check"></i><b>1.2.4</b> Sediment Transport</a></li>
+<li class="chapter" data-level="1.2.5" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFVWQ-3"><i class="fa fa-check"></i><b>1.2.5</b> Water Quality</a></li>
+<li class="chapter" data-level="1.2.6" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFVPT-3"><i class="fa fa-check"></i><b>1.2.6</b> Particle Tracking</a></li>
+<li class="chapter" data-level="1.2.7" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFVWaves-3"><i class="fa fa-check"></i><b>1.2.7</b> Spectral Wave Coupling</a></li>
+<li class="chapter" data-level="1.2.8" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFVScience-3"><i class="fa fa-check"></i><b>1.2.8</b> Science</a></li>
+<li class="chapter" data-level="1.2.9" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWFVBenchmarking-3"><i class="fa fa-check"></i><b>1.2.9</b> Benchmarking Studies</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="Intro-1.html"><a href="Intro-1.html#TUFLOWWebinars-2"><i class="fa fa-check"></i><b>1.3</b> TUFLOW Webinars</a></li>
+<li class="chapter" data-level="1.4" data-path="Intro-1.html"><a href="Intro-1.html#ModellingEnvironment-2"><i class="fa fa-check"></i><b>1.4</b> Modelling Environment</a></li>
+<li class="chapter" data-level="1.5" data-path="Intro-1.html"><a href="Intro-1.html#LimitationsandRecommendations-2"><i class="fa fa-check"></i><b>1.5</b> Limitations and Recommendations</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="Arch-1.html"><a href="Arch-1.html"><i class="fa fa-check"></i><b>2</b> Architecture</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="Arch-1.html"><a href="Arch-1.html#ArchContext-2"><i class="fa fa-check"></i><b>2.1</b> Context</a></li>
+<li class="chapter" data-level="2.2" data-path="Arch-1.html"><a href="Arch-1.html#SimulationTiers-2"><i class="fa fa-check"></i><b>2.2</b> Simulation Tiers</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="Arch-1.html"><a href="Arch-1.html#ArchSimulationClass-3"><i class="fa fa-check"></i><b>2.2.1</b> Tier 1: Simulation Class</a></li>
+<li class="chapter" data-level="2.2.2" data-path="Arch-1.html"><a href="Arch-1.html#ArchModelClass-3"><i class="fa fa-check"></i><b>2.2.2</b> Tier 2: Model Class</a></li>
+<li class="chapter" data-level="2.2.3" data-path="Arch-1.html"><a href="Arch-1.html#ArchModelInstances-3"><i class="fa fa-check"></i><b>2.2.3</b> Tier 3: Model Instances</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html"><i class="fa fa-check"></i><b>3</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#HowtoBuildYourFirstModel-2"><i class="fa fa-check"></i><b>3.1</b> How to Build Your First Model</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#TutorialModels-3"><i class="fa fa-check"></i><b>3.1.1</b> Tutorial Models</a></li>
+<li class="chapter" data-level="3.1.2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#ExampleModels-3"><i class="fa fa-check"></i><b>3.1.2</b> Example Models</a></li>
+<li class="chapter" data-level="3.1.3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#LicenceFreeDemoMode-3"><i class="fa fa-check"></i><b>3.1.3</b> Licence Free Demo Mode</a></li>
+<li class="chapter" data-level="3.1.4" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#InstructorLedTUFLOWTrainingCourses-3"><i class="fa fa-check"></i><b>3.1.4</b> Instructor Led TUFLOW Training Courses</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#TheTUFLOWModellingConcept-2"><i class="fa fa-check"></i><b>3.2</b> The TUFLOW Modelling Concept</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#Notepad-3"><i class="fa fa-check"></i><b>3.2.1</b> Notepad++</a></li>
+<li class="chapter" data-level="3.2.2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#QGISTUFLOWViewer-3"><i class="fa fa-check"></i><b>3.2.2</b> QGIS / TUFLOW Viewer</a></li>
+<li class="chapter" data-level="3.2.3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#QGISSMS-3"><i class="fa fa-check"></i><b>3.2.3</b> Aquaveo SMS Mesh Generator / TUFLOW FV Graphical User Interface</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#InstallingandRunningTUFLOW-2"><i class="fa fa-check"></i><b>3.3</b> Installing and Running TUFLOW</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#TUFLOWDownloadsandInstallation-3"><i class="fa fa-check"></i><b>3.3.1</b> TUFLOW FV Downloads and Installation</a></li>
+<li class="chapter" data-level="3.3.2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#Licencing-3"><i class="fa fa-check"></i><b>3.3.2</b> Licencing</a></li>
+<li class="chapter" data-level="3.3.3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#PerformingSimulations-3"><i class="fa fa-check"></i><b>3.3.3</b> Performing Simulations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#FoldersFileTypesandFileNaming-2"><i class="fa fa-check"></i><b>3.4</b> Folders, File Types and File Naming</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#FolderStructure-3"><i class="fa fa-check"></i><b>3.4.1</b> Folder Structure</a></li>
+<li class="chapter" data-level="3.4.2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#FileTypes-3"><i class="fa fa-check"></i><b>3.4.2</b> File Types</a></li>
+<li class="chapter" data-level="3.4.3" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#NamingConventions-3"><i class="fa fa-check"></i><b>3.4.3</b> Naming Conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html#TipsandTricks-2"><i class="fa fa-check"></i><b>3.5</b> Tips and Tricks</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html"><i class="fa fa-check"></i><b>4</b> Control Files and Input Layers</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#control-files"><i class="fa fa-check"></i><b>4.2</b> Control Files</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#Notation-3"><i class="fa fa-check"></i><b>4.2.1</b> Rules and Notation</a></li>
+<li class="chapter" data-level="4.2.2" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#FilePath-3"><i class="fa fa-check"></i><b>4.2.2</b> File Paths</a></li>
+<li class="chapter" data-level="4.2.3" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#FVC-3"><i class="fa fa-check"></i><b>4.2.3</b> FVC</a></li>
+<li class="chapter" data-level="4.2.4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#TEF-3"><i class="fa fa-check"></i><b>4.2.4</b> TEF</a></li>
+<li class="chapter" data-level="4.2.5" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#FVSED-3"><i class="fa fa-check"></i><b>4.2.5</b> FVSED</a></li>
+<li class="chapter" data-level="4.2.6" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#FVWQ-3"><i class="fa fa-check"></i><b>4.2.6</b> FVWQ</a></li>
+<li class="chapter" data-level="4.2.7" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#FVPTM-3"><i class="fa fa-check"></i><b>4.2.7</b> FVPTM</a></li>
+<li class="chapter" data-level="4.2.8" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#ReadFile-3"><i class="fa fa-check"></i><b>4.2.8</b> Include File</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GISLayers-2"><i class="fa fa-check"></i><b>4.3</b> Input Layers</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GISFormats-3"><i class="fa fa-check"></i><b>4.3.1</b> Input Formats</a></li>
+<li class="chapter" data-level="4.3.2" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GISCommands-3"><i class="fa fa-check"></i><b>4.3.2</b> GIS Commands</a></li>
+<li class="chapter" data-level="4.3.3" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#GRID-3"><i class="fa fa-check"></i><b>4.3.3</b> GRID Commands</a></li>
+<li class="chapter" data-level="4.3.4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#TIN-3"><i class="fa fa-check"></i><b>4.3.4</b> TIN Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html#LayeringData-2"><i class="fa fa-check"></i><b>4.4</b> Layering Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="HD2D-1.html"><a href="HD2D-1.html"><i class="fa fa-check"></i><b>5</b> Model Construction: 2D HD Simulation Class</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DOverview-2"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DModelInitialisation-2"><i class="fa fa-check"></i><b>5.2</b> Model Initialisation</a></li>
+<li class="chapter" data-level="5.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DModelConfiguration-2"><i class="fa fa-check"></i><b>5.3</b> Model Configuration</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DCoordinateReferenceFrame-3"><i class="fa fa-check"></i><b>5.3.1</b> Coordinate Reference Frame</a></li>
+<li class="chapter" data-level="5.3.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DSpatialOrder-3"><i class="fa fa-check"></i><b>5.3.2</b> Spatial Order</a></li>
+<li class="chapter" data-level="5.3.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DTimeCommands-3"><i class="fa fa-check"></i><b>5.3.3</b> Time Commands</a></li>
+<li class="chapter" data-level="5.3.4" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DComputationalTimestep-3"><i class="fa fa-check"></i><b>5.3.4</b> Computational Timestep</a></li>
+<li class="chapter" data-level="5.3.5" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DWettingDrying-3"><i class="fa fa-check"></i><b>5.3.5</b> Wetting and Drying</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DBottomDragModel-2"><i class="fa fa-check"></i><b>5.4</b> Bottom Drag Model</a></li>
+<li class="chapter" data-level="5.5" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DHorizontalMomentumMixing-2"><i class="fa fa-check"></i><b>5.5</b> Horizontal Momentum Mixing</a></li>
+<li class="chapter" data-level="5.6" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DMeshAndBathy-2"><i class="fa fa-check"></i><b>5.6</b> Computational Mesh And Bathymetry</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DComputationalMesh-3"><i class="fa fa-check"></i><b>5.6.1</b> Computational Mesh</a></li>
+<li class="chapter" data-level="5.6.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DBathymetry-3"><i class="fa fa-check"></i><b>5.6.2</b> Bathymetry</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DMaterials-2"><i class="fa fa-check"></i><b>5.7</b> Materials</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DMaterialsSpatial-3"><i class="fa fa-check"></i><b>5.7.1</b> Spatial Definition of Materials</a></li>
+<li class="chapter" data-level="5.7.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DMaterialProperties-3"><i class="fa fa-check"></i><b>5.7.2</b> Material Properties</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DInitialConditions-2"><i class="fa fa-check"></i><b>5.8</b> Initial Conditions</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DInitialConditionTypes-3"><i class="fa fa-check"></i><b>5.8.1</b> Initial Condition Types</a></li>
+<li class="chapter" data-level="5.8.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DRestartFiles-3"><i class="fa fa-check"></i><b>5.8.2</b> Restart Files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DBoundaryConditions-2"><i class="fa fa-check"></i><b>5.9</b> Boundary Conditions</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DAssigningBoundaryLocations-3"><i class="fa fa-check"></i><b>5.9.1</b> Assigning Boundary Locations</a></li>
+<li class="chapter" data-level="5.9.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DBoundaryConditionBlock-3"><i class="fa fa-check"></i><b>5.9.2</b> Boundary Condition Block</a></li>
+<li class="chapter" data-level="5.9.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DBoundaryConditionTypes-3"><i class="fa fa-check"></i><b>5.9.3</b> Boundary Condition Types</a></li>
+<li class="chapter" data-level="5.9.4" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DBoundaryConditionInputData-3"><i class="fa fa-check"></i><b>5.9.4</b> Boundary Condition Input Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DHydraulicStrutures-2"><i class="fa fa-check"></i><b>5.10</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="5.11" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DModelOutputs-2"><i class="fa fa-check"></i><b>5.11</b> Model Outputs</a>
+<ul>
+<li class="chapter" data-level="5.11.1" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DLogs-3"><i class="fa fa-check"></i><b>5.11.1</b> Logs</a></li>
+<li class="chapter" data-level="5.11.2" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DCheckFiles-3"><i class="fa fa-check"></i><b>5.11.2</b> Check Files</a></li>
+<li class="chapter" data-level="5.11.3" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DOutputBlocks-3"><i class="fa fa-check"></i><b>5.11.3</b> Output Blocks</a></li>
+<li class="chapter" data-level="5.11.4" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DOutputFormats-3"><i class="fa fa-check"></i><b>5.11.4</b> Output Formats</a></li>
+<li class="chapter" data-level="5.11.5" data-path="HD2D-1.html"><a href="HD2D-1.html#HD2DOutputTypes-3"><i class="fa fa-check"></i><b>5.11.5</b> Output Types</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="HD3D-1.html"><a href="HD3D-1.html"><i class="fa fa-check"></i><b>6</b> Model Construction: 3D HD Simulation Class</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DOverview-2"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DModelConfiguration-2"><i class="fa fa-check"></i><b>6.2</b> Model Configuration</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DSpatialOrder-3"><i class="fa fa-check"></i><b>6.2.1</b> Spatial Order</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DVerticalMomentumMixing-2"><i class="fa fa-check"></i><b>6.3</b> Vertical Momentum Mixing</a></li>
+<li class="chapter" data-level="6.4" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DMeshAndBathy-2"><i class="fa fa-check"></i><b>6.4</b> Computational Mesh And Bathymetry</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DVerticalLayering-3"><i class="fa fa-check"></i><b>6.4.1</b> Vertical Layering</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DInitialConditions-2"><i class="fa fa-check"></i><b>6.5</b> Initial Conditions</a></li>
+<li class="chapter" data-level="6.6" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DBoundaryConditions-2"><i class="fa fa-check"></i><b>6.6</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="6.7" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DHydraulicStructures-2"><i class="fa fa-check"></i><b>6.7</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="6.8" data-path="HD3D-1.html"><a href="HD3D-1.html#HD3DModelOutputs-2"><i class="fa fa-check"></i><b>6.8</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="AD-1.html"><a href="AD-1.html"><i class="fa fa-check"></i><b>7</b> Model Construction: AD Simulation Class</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="AD-1.html"><a href="AD-1.html#ADOverview-2"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="AD-1.html"><a href="AD-1.html#ADTracerModel-2"><i class="fa fa-check"></i><b>7.2</b> Tracer Model</a></li>
+<li class="chapter" data-level="7.3" data-path="AD-1.html"><a href="AD-1.html#ADScalarMixingModel-2"><i class="fa fa-check"></i><b>7.3</b> Scalar Mixing Model</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="AD-1.html"><a href="AD-1.html#ADHorizontalScalarMixing-3"><i class="fa fa-check"></i><b>7.3.1</b> Horizontal</a></li>
+<li class="chapter" data-level="7.3.2" data-path="AD-1.html"><a href="AD-1.html#ADVerticalScalarMixing-3"><i class="fa fa-check"></i><b>7.3.2</b> Vertical</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="AD-1.html"><a href="AD-1.html#ADAtmosphericHeatExchange-2"><i class="fa fa-check"></i><b>7.4</b> Atmospheric Heat Exchange</a></li>
+<li class="chapter" data-level="7.5" data-path="AD-1.html"><a href="AD-1.html#ADInitialConditions-2"><i class="fa fa-check"></i><b>7.5</b> Initial Conditions</a></li>
+<li class="chapter" data-level="7.6" data-path="AD-1.html"><a href="AD-1.html#ADBoundaryConditions-2"><i class="fa fa-check"></i><b>7.6</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="7.7" data-path="AD-1.html"><a href="AD-1.html#ADHydraulicStructures-2"><i class="fa fa-check"></i><b>7.7</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="7.8" data-path="AD-1.html"><a href="AD-1.html#ADModelOutputs-2"><i class="fa fa-check"></i><b>7.8</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ST-1.html"><a href="ST-1.html"><i class="fa fa-check"></i><b>8</b> Model Construction: ST Simulation Class</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="ST-1.html"><a href="ST-1.html#STOverview-2"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="WQ-1.html"><a href="WQ-1.html"><i class="fa fa-check"></i><b>9</b> Model Construction: WQ Simulation Class</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="WQ-1.html"><a href="WQ-1.html#WQOverview-2"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="PT-1.html"><a href="PT-1.html"><i class="fa fa-check"></i><b>10</b> Model Construction: PT Simulation Class</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="PT-1.html"><a href="PT-1.html#PTOverview-2"><i class="fa fa-check"></i><b>10.1</b> Overview</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="Hardware-1.html"><a href="Hardware-1.html"><i class="fa fa-check"></i><b>11</b> Hardware And Operating System</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="Hardware-1.html"><a href="Hardware-1.html#Hardware-2"><i class="fa fa-check"></i><b>11.1</b> Context</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html"><i class="fa fa-check"></i><b>12</b> Managing And Starting Simulations</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#RunningSimulationsIntro-2"><i class="fa fa-check"></i><b>12.1</b> Introduction</a></li>
+<li class="chapter" data-level="12.2" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#FileNaming-2"><i class="fa fa-check"></i><b>12.2</b> File Naming</a></li>
+<li class="chapter" data-level="12.3" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#SimulationManagement-2"><i class="fa fa-check"></i><b>12.3</b> Simulation Management</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#TimeOutputControls-3"><i class="fa fa-check"></i><b>12.3.1</b> Time and Output Controls</a></li>
+<li class="chapter" data-level="12.3.2" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#Events-3"><i class="fa fa-check"></i><b>12.3.2</b> Events</a></li>
+<li class="chapter" data-level="12.3.3" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#Scenarios-3"><i class="fa fa-check"></i><b>12.3.3</b> Scenarios</a></li>
+<li class="chapter" data-level="12.3.4" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#Variables-3"><i class="fa fa-check"></i><b>12.3.4</b> Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#TUFLOWExecDownload-2"><i class="fa fa-check"></i><b>12.4</b> TUFLOW Executable Download</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#InstallOverview-3"><i class="fa fa-check"></i><b>12.4.1</b> Overview and Where to Install</a></li>
+<li class="chapter" data-level="12.4.2" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#iSPdSP-3"><i class="fa fa-check"></i><b>12.4.2</b> Single and Double Precision</a></li>
+<li class="chapter" data-level="12.4.3" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#CustomingTUFLOW-3"><i class="fa fa-check"></i><b>12.4.3</b> Customising TUFLOW using TUFLOW_USER_DEFINED.dll</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#RunningSims-2"><i class="fa fa-check"></i><b>12.5</b> Running Simulations</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#DongleTypesandSetup-3"><i class="fa fa-check"></i><b>12.5.1</b> Dongle Types and Setup</a></li>
+<li class="chapter" data-level="12.5.2" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#StartingaSim-3"><i class="fa fa-check"></i><b>12.5.2</b> Starting a Simulation</a></li>
+<li class="chapter" data-level="12.5.3" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#RunningHPC-3"><i class="fa fa-check"></i><b>12.5.3</b> Running TUFLOW HPC</a></li>
+<li class="chapter" data-level="12.5.4" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#SMSSimulations-3"><i class="fa fa-check"></i><b>12.5.4</b> Using TUFLOW FV with SMS</a></li>
+<li class="chapter" data-level="12.5.5" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#OptimisingSims-3"><i class="fa fa-check"></i><b>12.5.5</b> Optimising Startup and Run Times</a></li>
+<li class="chapter" data-level="12.5.6" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#AutoTerminateOptions-3"><i class="fa fa-check"></i><b>12.5.6</b> Auto Terminate (Simulation End) Options</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#ResultsReplication-3"><i class="fa fa-check"></i><b>12.6</b> Reproducibility of Results</a>
+<ul>
+<li class="chapter" data-level="12.6.1" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#ResultsReplicationClassic-3"><i class="fa fa-check"></i><b>12.6.1</b> TUFLOW Classic (CPU only)</a></li>
+<li class="chapter" data-level="12.6.2" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#ResultsReplicationHPCCPU-3"><i class="fa fa-check"></i><b>12.6.2</b> TUFLOW HPC (incl. Quadtree) on CPU</a></li>
+<li class="chapter" data-level="12.6.3" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#ResultsReplicationHPCGPU-3"><i class="fa fa-check"></i><b>12.6.3</b> TUFLOW HPC (incl. Quadtree) on GPU</a></li>
+<li class="chapter" data-level="12.6.4" data-path="ManagingSimulations-1.html"><a href="ManagingSimulations-1.html#ResultsReplicationHPCMultiThread-3"><i class="fa fa-check"></i><b>12.6.4</b> TUFLOW HPC (incl. Quadtree) on multiple GPUs / CPU threads</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="ChecksAndLogs-1.html"><a href="ChecksAndLogs-1.html"><i class="fa fa-check"></i><b>13</b> Checks And Logs</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="ChecksAndLogs-1.html"><a href="ChecksAndLogs-1.html#ChecksAndLogs-2"><i class="fa fa-check"></i><b>13.1</b> Context</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="ViewingOutputs-1.html"><a href="ViewingOutputs-1.html"><i class="fa fa-check"></i><b>14</b> Viewing Outputs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="ViewingOutputs-1.html"><a href="ViewingOutputs-1.html#ViewingOutputs-2"><i class="fa fa-check"></i><b>14.1</b> Context</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="QAAndTroubleshooting-1.html"><a href="QAAndTroubleshooting-1.html"><i class="fa fa-check"></i><b>15</b> QA And Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="QAAndTroubleshooting-1.html"><a href="QAAndTroubleshooting-1.html#QAAndTroubleshooting-2"><i class="fa fa-check"></i><b>15.1</b> Context</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="AppCommands.html"><a href="AppCommands.html"><i class="fa fa-check"></i><b>A</b> Commands</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="AppCommands.html"><a href="AppCommands.html#Appcmdsyn"><i class="fa fa-check"></i><b>A.1</b> Command syntax</a></li>
+<li class="chapter" data-level="A.2" data-path="AppCommands.html"><a href="AppCommands.html#Appargmtsyn"><i class="fa fa-check"></i><b>A.2</b> Argument syntax</a></li>
+<li class="chapter" data-level="A.3" data-path="AppCommands.html"><a href="AppCommands.html#Appcmds"><i class="fa fa-check"></i><b>A.3</b> Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="AppParams.html"><a href="AppParams.html"><i class="fa fa-check"></i><b>B</b> Parameters</a></li>
+<li class="chapter" data-level="C" data-path="AppOutputs.html"><a href="AppOutputs.html"><i class="fa fa-check"></i><b>C</b> Files and Data Fields</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsSurfConc"><i class="fa fa-check"></i><b>C.1</b> Surface water concentrations</a></li>
+<li class="chapter" data-level="C.2" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsGWConc"><i class="fa fa-check"></i><b>C.2</b> Groundwater concentrations</a></li>
+<li class="chapter" data-level="C.3" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsDryMass"><i class="fa fa-check"></i><b>C.3</b> Dry mass</a></li>
+<li class="chapter" data-level="C.4" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsNetMass"><i class="fa fa-check"></i><b>C.4</b> Net mass</a></li>
+<li class="chapter" data-level="C.5" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsOther"><i class="fa fa-check"></i><b>C.5</b> Other outputs</a>
+<ul>
+<li class="chapter" data-level="C.5.1" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsOtherMB"><i class="fa fa-check"></i><b>C.5.1</b> Mass balance</a></li>
+<li class="chapter" data-level="C.5.2" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsOtherRP"><i class="fa fa-check"></i><b>C.5.2</b> Receiving polygon</a></li>
+<li class="chapter" data-level="C.5.3" data-path="AppOutputs.html"><a href="AppOutputs.html#AppOutputsOtherFV"><i class="fa fa-check"></i><b>C.5.3</b> TUFLOW FV boundaries</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="AppTUFLOWFVEngine-2.html"><a href="AppTUFLOWFVEngine-2.html"><i class="fa fa-check"></i><b>D</b> Processes: TUFLOW FV Computational Engine</a>
+<ul>
+<li class="chapter" data-level="D.1" data-path="AppTUFLOWFVEngine-2.html"><a href="AppTUFLOWFVEngine-2.html#AppSolver-3"><i class="fa fa-check"></i><b>D.1</b> Context</a></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html"><i class="fa fa-check"></i><b>E</b> Processes: 2D HD Simulation Class</a>
+<ul>
+<li class="chapter" data-level="E.1" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDCont-2"><i class="fa fa-check"></i><b>E.1</b> Context</a></li>
+<li class="chapter" data-level="E.2" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDMC-2"><i class="fa fa-check"></i><b>E.2</b> Model Configuration</a>
+<ul>
+<li class="chapter" data-level="E.2.1" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDMCSO-3"><i class="fa fa-check"></i><b>E.2.1</b> Spatial Order</a></li>
+<li class="chapter" data-level="E.2.2" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDMCHard-3"><i class="fa fa-check"></i><b>E.2.2</b> Hardware</a></li>
+<li class="chapter" data-level="E.2.3" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDMCCRS-3"><i class="fa fa-check"></i><b>E.2.3</b> Coordinate Reference System</a></li>
+<li class="chapter" data-level="E.2.4" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDMCTATC-3"><i class="fa fa-check"></i><b>E.2.4</b> Time And Timestep Commands</a></li>
+<li class="chapter" data-level="E.2.5" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDMCWAD-3"><i class="fa fa-check"></i><b>E.2.5</b> Wetting And Drying</a></li>
+</ul></li>
+<li class="chapter" data-level="E.3" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDBDM-2"><i class="fa fa-check"></i><b>E.3</b> Bottom Drag Model</a>
+<ul>
+<li class="chapter" data-level="E.3.1" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDBDMMann-3"><i class="fa fa-check"></i><b>E.3.1</b> Manning</a></li>
+<li class="chapter" data-level="E.3.2" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDBDMks-3"><i class="fa fa-check"></i><b>E.3.2</b> ks</a></li>
+</ul></li>
+<li class="chapter" data-level="E.4" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDMMM-2"><i class="fa fa-check"></i><b>E.4</b> Momentum Mixing Model</a>
+<ul>
+<li class="chapter" data-level="E.4.1" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDMMMNone-3"><i class="fa fa-check"></i><b>E.4.1</b> None</a></li>
+<li class="chapter" data-level="E.4.2" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDMMMCons-3"><i class="fa fa-check"></i><b>E.4.2</b> Constant</a></li>
+<li class="chapter" data-level="E.4.3" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDMMMSmag-3"><i class="fa fa-check"></i><b>E.4.3</b> Smagorinsky</a></li>
+<li class="chapter" data-level="E.4.4" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDMMMWu-3"><i class="fa fa-check"></i><b>E.4.4</b> Wu</a></li>
+</ul></li>
+<li class="chapter" data-level="E.5" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDCMAB-2"><i class="fa fa-check"></i><b>E.5</b> Computational Mesh And Bathymetry</a></li>
+<li class="chapter" data-level="E.6" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDMats-2"><i class="fa fa-check"></i><b>E.6</b> Materials</a></li>
+<li class="chapter" data-level="E.7" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDIC-2"><i class="fa fa-check"></i><b>E.7</b> Initial Conditions</a></li>
+<li class="chapter" data-level="E.8" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDBC-2"><i class="fa fa-check"></i><b>E.8</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="E.9" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDHS-2"><i class="fa fa-check"></i><b>E.9</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="E.10" data-path="AppProc2DHD-1.html"><a href="AppProc2DHD-1.html#AppProc2DHDMO-2"><i class="fa fa-check"></i><b>E.10</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="F" data-path="AppProc3DHD-1.html"><a href="AppProc3DHD-1.html"><i class="fa fa-check"></i><b>F</b> Processes: 3D HD Simulation Class</a>
+<ul>
+<li class="chapter" data-level="F.1" data-path="AppProc3DHD-1.html"><a href="AppProc3DHD-1.html#AppProc3DHDCont-2"><i class="fa fa-check"></i><b>F.1</b> Context</a></li>
+<li class="chapter" data-level="F.2" data-path="AppProc3DHD-1.html"><a href="AppProc3DHD-1.html#AppProc3DHDMC-2"><i class="fa fa-check"></i><b>F.2</b> Model Configuration</a></li>
+<li class="chapter" data-level="F.3" data-path="AppProc3DHD-1.html"><a href="AppProc3DHD-1.html#AppProc3DHDVMM-2"><i class="fa fa-check"></i><b>F.3</b> Vertical Mixing Model</a></li>
+<li class="chapter" data-level="F.4" data-path="AppProc3DHD-1.html"><a href="AppProc3DHD-1.html#AppProc3DHDMAB-2"><i class="fa fa-check"></i><b>F.4</b> Computational Mesh And Bathymetry</a></li>
+<li class="chapter" data-level="F.5" data-path="AppProc3DHD-1.html"><a href="AppProc3DHD-1.html#AppProc3DHDIC-2"><i class="fa fa-check"></i><b>F.5</b> Initial Conditions</a></li>
+<li class="chapter" data-level="F.6" data-path="AppProc3DHD-1.html"><a href="AppProc3DHD-1.html#AppProc3DHDBC-2"><i class="fa fa-check"></i><b>F.6</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="F.7" data-path="AppProc3DHD-1.html"><a href="AppProc3DHD-1.html#AppProc3DHDHS-2"><i class="fa fa-check"></i><b>F.7</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="F.8" data-path="AppProc3DHD-1.html"><a href="AppProc3DHD-1.html#AppProc3DHDMO-2"><i class="fa fa-check"></i><b>F.8</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="G" data-path="AppProc-AD-1.html"><a href="AppProc-AD-1.html"><i class="fa fa-check"></i><b>G</b> Processes: AD Simulation Class</a>
+<ul>
+<li class="chapter" data-level="G.1" data-path="AppProc-AD-1.html"><a href="AppProc-AD-1.html#AppProc-AD-Cont-2"><i class="fa fa-check"></i><b>G.1</b> Context</a></li>
+<li class="chapter" data-level="G.2" data-path="AppProc-AD-1.html"><a href="AppProc-AD-1.html#AppProc-AD-MC-2"><i class="fa fa-check"></i><b>G.2</b> Model Configuration</a></li>
+<li class="chapter" data-level="G.3" data-path="AppProc-AD-1.html"><a href="AppProc-AD-1.html#AppProcADTM-2"><i class="fa fa-check"></i><b>G.3</b> Tracer Model</a></li>
+<li class="chapter" data-level="G.4" data-path="AppProc-AD-1.html"><a href="AppProc-AD-1.html#AppProcADSMM-2"><i class="fa fa-check"></i><b>G.4</b> Scalar Mixing Model</a></li>
+<li class="chapter" data-level="G.5" data-path="AppProc-AD-1.html"><a href="AppProc-AD-1.html#AppProcADAHE-2"><i class="fa fa-check"></i><b>G.5</b> Atmospheric Heat Exchange</a></li>
+<li class="chapter" data-level="G.6" data-path="AppProc-AD-1.html"><a href="AppProc-AD-1.html#AppProcADAHECont-2"><i class="fa fa-check"></i><b>G.6</b> Context</a>
+<ul>
+<li class="chapter" data-level="G.6.1" data-path="AppProc-AD-1.html"><a href="AppProc-AD-1.html#AppProcADAHESRM-2"><i class="fa fa-check"></i><b>G.6.1</b> Shortwave Radiation Model</a></li>
+<li class="chapter" data-level="G.6.2" data-path="AppProc-AD-1.html"><a href="AppProc-AD-1.html#AppProcADAHELRM-2"><i class="fa fa-check"></i><b>G.6.2</b> Longwave Radiation Model</a></li>
+<li class="chapter" data-level="G.6.3" data-path="AppProc-AD-1.html"><a href="AppProc-AD-1.html#AppProcADAHELHM-2"><i class="fa fa-check"></i><b>G.6.3</b> Latent Heat Model</a></li>
+</ul></li>
+<li class="chapter" data-level="G.7" data-path="AppProc-AD-1.html"><a href="AppProc-AD-1.html#AppProcADIC-2"><i class="fa fa-check"></i><b>G.7</b> Initial Conditions</a></li>
+<li class="chapter" data-level="G.8" data-path="AppProc-AD-1.html"><a href="AppProc-AD-1.html#AppProcADBC-2"><i class="fa fa-check"></i><b>G.8</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="G.9" data-path="AppProc-AD-1.html"><a href="AppProc-AD-1.html#AppProcADHS"><i class="fa fa-check"></i><b>G.9</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="G.10" data-path="AppProc-AD-1.html"><a href="AppProc-AD-1.html#AppProcADMO-2"><i class="fa fa-check"></i><b>G.10</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="H" data-path="AppProcST-1.html"><a href="AppProcST-1.html"><i class="fa fa-check"></i><b>H</b> Processes: ST Simulation Class</a>
+<ul>
+<li class="chapter" data-level="H.1" data-path="AppProcST-1.html"><a href="AppProcST-1.html#AppProcSTContext-2"><i class="fa fa-check"></i><b>H.1</b> Context</a></li>
+<li class="chapter" data-level="H.2" data-path="AppProcST-1.html"><a href="AppProcST-1.html#AppProcSTMC-2"><i class="fa fa-check"></i><b>H.2</b> Model Configuration</a></li>
+<li class="chapter" data-level="H.3" data-path="AppProcST-1.html"><a href="AppProcST-1.html#AppProcSTBRM-2"><i class="fa fa-check"></i><b>H.3</b> Bottom Drag Model</a></li>
+<li class="chapter" data-level="H.4" data-path="AppProcST-1.html"><a href="AppProcST-1.html#AppProcSTMeshAndBathy-2"><i class="fa fa-check"></i><b>H.4</b> Computational Mesh And Bathymetry</a></li>
+<li class="chapter" data-level="H.5" data-path="AppProcST-1.html"><a href="AppProcST-1.html#AppProcSTSC-2"><i class="fa fa-check"></i><b>H.5</b> Sediment Configuration</a></li>
+<li class="chapter" data-level="H.6" data-path="AppProcST-1.html"><a href="AppProcST-1.html#AppProcSTICs-2"><i class="fa fa-check"></i><b>H.6</b> Initial Conditions</a></li>
+<li class="chapter" data-level="H.7" data-path="AppProcST-1.html"><a href="AppProcST-1.html#AppProcSTBCs-2"><i class="fa fa-check"></i><b>H.7</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="H.8" data-path="AppProcST-1.html"><a href="AppProcST-1.html#AppProcSTStuctures-2"><i class="fa fa-check"></i><b>H.8</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="H.9" data-path="AppProcST-1.html"><a href="AppProcST-1.html#AppProcSTOutputs-2"><i class="fa fa-check"></i><b>H.9</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="I" data-path="AppProcWQ-1.html"><a href="AppProcWQ-1.html"><i class="fa fa-check"></i><b>I</b> Processes: WQ Simulation Class</a>
+<ul>
+<li class="chapter" data-level="I.1" data-path="AppProcWQ-1.html"><a href="AppProcWQ-1.html#AppProcWQContext-2"><i class="fa fa-check"></i><b>I.1</b> Context</a></li>
+<li class="chapter" data-level="I.2" data-path="AppProcWQ-1.html"><a href="AppProcWQ-1.html#AppProcWQMC-2"><i class="fa fa-check"></i><b>I.2</b> Model Configuration</a></li>
+<li class="chapter" data-level="I.3" data-path="AppProcWQ-1.html"><a href="AppProcWQ-1.html#AppProcWQWQC-2"><i class="fa fa-check"></i><b>I.3</b> Water Quality Configuration</a></li>
+<li class="chapter" data-level="I.4" data-path="AppProcWQ-1.html"><a href="AppProcWQ-1.html#AppProcWQICs-2"><i class="fa fa-check"></i><b>I.4</b> Initial Conditions</a></li>
+<li class="chapter" data-level="I.5" data-path="AppProcWQ-1.html"><a href="AppProcWQ-1.html#AppProcWQBCs-2"><i class="fa fa-check"></i><b>I.5</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="I.6" data-path="AppProcWQ-1.html"><a href="AppProcWQ-1.html#AppProcWQStuctures-2"><i class="fa fa-check"></i><b>I.6</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="I.7" data-path="AppProcWQ-1.html"><a href="AppProcWQ-1.html#AppProcWQOutputs-2"><i class="fa fa-check"></i><b>I.7</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="J" data-path="AppProcPT-1.html"><a href="AppProcPT-1.html"><i class="fa fa-check"></i><b>J</b> Processes: PT Simulation Class</a>
+<ul>
+<li class="chapter" data-level="J.1" data-path="AppProcPT-1.html"><a href="AppProcPT-1.html#AppProcPTContext-2"><i class="fa fa-check"></i><b>J.1</b> Context</a></li>
+<li class="chapter" data-level="J.2" data-path="AppProcPT-1.html"><a href="AppProcPT-1.html#AppProcPTMC-2"><i class="fa fa-check"></i><b>J.2</b> Model Configuration</a></li>
+<li class="chapter" data-level="J.3" data-path="AppProcPT-1.html"><a href="AppProcPT-1.html#AppProcPTPTC-2"><i class="fa fa-check"></i><b>J.3</b> Particle Tracking Configuration</a></li>
+<li class="chapter" data-level="J.4" data-path="AppProcPT-1.html"><a href="AppProcPT-1.html#AppProcPTICs-2"><i class="fa fa-check"></i><b>J.4</b> Initial Conditions</a></li>
+<li class="chapter" data-level="J.5" data-path="AppProcPT-1.html"><a href="AppProcPT-1.html#AppProcPTBCs-2"><i class="fa fa-check"></i><b>J.5</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="J.6" data-path="AppProcPT-1.html"><a href="AppProcPT-1.html#AppProcPTStuctures-2"><i class="fa fa-check"></i><b>J.6</b> Hydraulic Structures</a></li>
+<li class="chapter" data-level="J.7" data-path="AppProcPT-1.html"><a href="AppProcPT-1.html#AppProcPTOutputs-2"><i class="fa fa-check"></i><b>J.7</b> Model Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="K" data-path="AppDemoModelResCont-2.html"><a href="AppDemoModelResCont-2.html"><i class="fa fa-check"></i><b>K</b> Application under version control</a>
+<ul>
+<li class="chapter" data-level="K.1" data-path="AppDemoModelResCont-2.html"><a href="AppDemoModelResCont-2.html#AppDemoModelResContCtxt-3"><i class="fa fa-check"></i><b>K.1</b> Context</a></li>
+<li class="chapter" data-level="K.2" data-path="AppDemoModelResCont-2.html"><a href="AppDemoModelResCont-2.html#AppDemoModelResContUC-3"><i class="fa fa-check"></i><b>K.2</b> Use case</a></li>
+<li class="chapter" data-level="K.3" data-path="AppDemoModelResCont-2.html"><a href="AppDemoModelResCont-2.html#AppDemoModelResContWF-3"><i class="fa fa-check"></i><b>K.3</b> Possible workflow #1</a></li>
+<li class="chapter" data-level="K.4" data-path="AppDemoModelResCont-2.html"><a href="AppDemoModelResCont-2.html#AppDemoModelResContWF2-3"><i class="fa fa-check"></i><b>K.4</b> Possible workflow #2</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(0,85,129);">TUFLOW FV User Manual</h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="AppProcWQ-1" class="section level1 hasAnchor" number="24">
+<h1><span class="header-section-number">Appendix I</span> Processes: WQ Simulation Class<a href="AppProcWQ-1.html#AppProcWQ-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="AppProcWQContext-2" class="section level2 hasAnchor" number="24.1">
+<h2><span class="header-section-number">I.1</span> Context<a href="AppProcWQ-1.html#AppProcWQContext-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="AppProcWQMC-2" class="section level2 hasAnchor" number="24.2">
+<h2><span class="header-section-number">I.2</span> Model Configuration<a href="AppProcWQ-1.html#AppProcWQMC-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>placeholder if we need it</p>
+</div>
+<div id="AppProcWQWQC-2" class="section level2 hasAnchor" number="24.3">
+<h2><span class="header-section-number">I.3</span> Water Quality Configuration<a href="AppProcWQ-1.html#AppProcWQWQC-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="AppProcWQICs-2" class="section level2 hasAnchor" number="24.4">
+<h2><span class="header-section-number">I.4</span> Initial Conditions<a href="AppProcWQ-1.html#AppProcWQICs-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="AppProcWQBCs-2" class="section level2 hasAnchor" number="24.5">
+<h2><span class="header-section-number">I.5</span> Boundary Conditions<a href="AppProcWQ-1.html#AppProcWQBCs-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="AppProcWQStuctures-2" class="section level2 hasAnchor" number="24.6">
+<h2><span class="header-section-number">I.6</span> Hydraulic Structures<a href="AppProcWQ-1.html#AppProcWQStuctures-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="AppProcWQOutputs-2" class="section level2 hasAnchor" number="24.7">
+<h2><span class="header-section-number">I.7</span> Model Outputs<a href="AppProcWQ-1.html#AppProcWQOutputs-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="images/WQFooter.jpg" width="100%" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="AppProcST-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="AppProcPT-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": false,
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
