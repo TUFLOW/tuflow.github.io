@@ -19,6 +19,7 @@
    
       ~PitInletDatabase.context
       ~PitInletDatabase.entry_class
+      ~PitInletDatabase.items
       ~PitInletDatabase.record_change
       ~PitInletDatabase.undo
       ~PitInletDatabase.value
@@ -52,6 +53,6 @@
       ~PitInletDatabase.config
       ~PitInletDatabase.altered_inputs
       ~PitInletDatabase.loaded
-      ~PitInletDatabase.entry
+      ~PitInletDatabase.entries
    
    

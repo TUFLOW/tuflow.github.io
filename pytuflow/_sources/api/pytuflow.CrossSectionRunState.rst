@@ -18,6 +18,7 @@
       :nosignatures:
    
       ~CrossSectionRunState.context
+      ~CrossSectionRunState.items
       ~CrossSectionRunState.value
    
    
@@ -37,6 +38,6 @@
       ~CrossSectionRunState.parent
       ~CrossSectionRunState.bs
       ~CrossSectionRunState.ctx
-      ~CrossSectionRunState.entry
+      ~CrossSectionRunState.entries
    
    

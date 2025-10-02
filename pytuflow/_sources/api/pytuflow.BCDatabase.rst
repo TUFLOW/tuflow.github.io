@@ -19,6 +19,7 @@
    
       ~BCDatabase.context
       ~BCDatabase.entry_class
+      ~BCDatabase.items
       ~BCDatabase.record_change
       ~BCDatabase.undo
       ~BCDatabase.value
@@ -52,6 +53,6 @@
       ~BCDatabase.config
       ~BCDatabase.altered_inputs
       ~BCDatabase.loaded
-      ~BCDatabase.entry
+      ~BCDatabase.entries
    
    

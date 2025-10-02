@@ -19,6 +19,7 @@
    
       ~CrossSectionDatabase.context
       ~CrossSectionDatabase.entry_class
+      ~CrossSectionDatabase.items
       ~CrossSectionDatabase.record_change
       ~CrossSectionDatabase.undo
       ~CrossSectionDatabase.value
@@ -48,6 +49,6 @@
       ~CrossSectionDatabase.config
       ~CrossSectionDatabase.altered_inputs
       ~CrossSectionDatabase.loaded
-      ~CrossSectionDatabase.entry
+      ~CrossSectionDatabase.entries
    
    

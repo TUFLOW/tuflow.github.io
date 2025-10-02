@@ -18,6 +18,7 @@
       :nosignatures:
    
       ~RainfallDatabase.context
+      ~RainfallDatabase.items
       ~RainfallDatabase.record_change
       ~RainfallDatabase.undo
       ~RainfallDatabase.value
@@ -48,6 +49,6 @@
       ~RainfallDatabase.config
       ~RainfallDatabase.altered_inputs
       ~RainfallDatabase.loaded
-      ~RainfallDatabase.entry
+      ~RainfallDatabase.entries
    
    

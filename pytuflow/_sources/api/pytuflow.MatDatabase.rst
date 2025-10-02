@@ -19,6 +19,7 @@
    
       ~MatDatabase.context
       ~MatDatabase.entry_class
+      ~MatDatabase.items
       ~MatDatabase.record_change
       ~MatDatabase.undo
       ~MatDatabase.value
@@ -49,6 +50,6 @@
       ~MatDatabase.config
       ~MatDatabase.altered_inputs
       ~MatDatabase.loaded
-      ~MatDatabase.entry
+      ~MatDatabase.entries
    
    

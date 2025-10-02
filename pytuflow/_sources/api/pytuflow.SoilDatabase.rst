@@ -18,6 +18,7 @@
       :nosignatures:
    
       ~SoilDatabase.context
+      ~SoilDatabase.items
       ~SoilDatabase.record_change
       ~SoilDatabase.undo
       ~SoilDatabase.value
@@ -48,6 +49,6 @@
       ~SoilDatabase.config
       ~SoilDatabase.altered_inputs
       ~SoilDatabase.loaded
-      ~SoilDatabase.entry
+      ~SoilDatabase.entries
    
    

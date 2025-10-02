@@ -18,6 +18,7 @@
       :nosignatures:
    
       ~MatDatabaseRunState.context
+      ~MatDatabaseRunState.items
       ~MatDatabaseRunState.value
    
    
@@ -39,6 +40,6 @@
       ~MatDatabaseRunState.config
       ~MatDatabaseRunState.loaded
       ~MatDatabaseRunState.ctx
-      ~MatDatabaseRunState.entry
+      ~MatDatabaseRunState.entries
    
    
