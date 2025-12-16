@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Appendix B Vertical Mixing Model Benchmarking | TUFLOW FV 2025.2.4 Release Notes</title>
+  <meta name="description" content="TUFLOW FV 2025.2.0 Release Notes" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Appendix B Vertical Mixing Model Benchmarking | TUFLOW FV 2025.2.4 Release Notes" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/1024in300px_Blue-01.svg" />
+  <meta property="og:description" content="TUFLOW FV 2025.2.0 Release Notes" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Appendix B Vertical Mixing Model Benchmarking | TUFLOW FV 2025.2.4 Release Notes" />
+  
+  <meta name="twitter:description" content="TUFLOW FV 2025.2.0 Release Notes" />
+  <meta name="twitter:image" content="/images/1024in300px_Blue-01.svg" />
+
+<meta name="author" content="" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="App-VMMS-1.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#document-updates-and-important-notices"><i class="fa fa-check"></i>Document Updates and Important Notices</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#using-the-release-notes-and-user-manuals"><i class="fa fa-check"></i>Using the Release Notes and User Manuals</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#changes-to-tuflow-fv-version-numbering"><i class="fa fa-check"></i>Changes to TUFLOW FV Version Numbering</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="SimManagment-1.html"><a href="SimManagment-1.html"><i class="fa fa-check"></i><b>1</b> Simulation Management</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentFeatures-2"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentNomenclature-2"><i class="fa fa-check"></i><b>1.2</b> Nomenclature</a></li>
+<li class="chapter" data-level="1.3" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentEvents-2"><i class="fa fa-check"></i><b>1.3</b> Events</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentTEF-3"><i class="fa fa-check"></i><b>1.3.1</b> TUFLOW Event File</a></li>
+<li class="chapter" data-level="1.3.2" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentRunningEvents-3"><i class="fa fa-check"></i><b>1.3.2</b> Running Events</a></li>
+<li class="chapter" data-level="1.3.3" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentEventExamples-3"><i class="fa fa-check"></i><b>1.3.3</b> Event Examples</a></li>
+<li class="chapter" data-level="1.3.4" data-path="SimManagment-1.html"><a href="SimManagment-1.html#additional-functionality"><i class="fa fa-check"></i><b>1.3.4</b> Additional Functionality</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentScenarios-2"><i class="fa fa-check"></i><b>1.4</b> Scenarios</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentRunningScenarios-3"><i class="fa fa-check"></i><b>1.4.1</b> Running Scenarios</a></li>
+<li class="chapter" data-level="1.4.2" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentScenarioExamples-3"><i class="fa fa-check"></i><b>1.4.2</b> Scenario Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentVariables-2"><i class="fa fa-check"></i><b>1.5</b> Variables</a></li>
+<li class="chapter" data-level="1.6" data-path="SimManagment-1.html"><a href="SimManagment-1.html#SimManagmentExamples-2"><i class="fa fa-check"></i><b>1.6</b> Simulation Management Example Models</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="HD-1.html"><a href="HD-1.html"><i class="fa fa-check"></i><b>2</b> Hydrodynamic Engine Updates and Enhancements</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="HD-1.html"><a href="HD-1.html#HDBCHeaders-2"><i class="fa fa-check"></i><b>2.1</b> BC Headers</a></li>
+<li class="chapter" data-level="2.2" data-path="HD-1.html"><a href="HD-1.html#HDGIS-2"><i class="fa fa-check"></i><b>2.2</b> GIS Integration Enhancements</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="HD-1.html"><a href="HD-1.html#HDGISTIN-3"><i class="fa fa-check"></i><b>2.2.1</b> TIN Bathymetry Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="HD-1.html"><a href="HD-1.html#HDStructures-2"><i class="fa fa-check"></i><b>2.3</b> Hydraulic Structure Updates</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="HD-1.html"><a href="HD-1.html#HDCulvertHeighWidthContraction-3"><i class="fa fa-check"></i><b>2.3.1</b> Default Culvert Height And Width Contraction Coefficients</a></li>
+<li class="chapter" data-level="2.3.2" data-path="HD-1.html"><a href="HD-1.html#HDCulvertEntExLoss-3"><i class="fa fa-check"></i><b>2.3.2</b> Default Culvert Entry and Exit Loss Coefficients</a></li>
+<li class="chapter" data-level="2.3.3" data-path="HD-1.html"><a href="HD-1.html#HDCulvertInvertChecking-3"><i class="fa fa-check"></i><b>2.3.3</b> Improved Culvert Invert Checking</a></li>
+<li class="chapter" data-level="2.3.7" data-path="HD-1.html"><a href="HD-1.html#HDTriggerRule-3"><i class="fa fa-check"></i><b>2.3.7</b> Control Block Trigger Rule Fix</a></li>
+<li class="chapter" data-level="2.3.8" data-path="HD-1.html"><a href="HD-1.html#HDPSLSF-3"><i class="fa fa-check"></i><b>2.3.8</b> Porous Structure Linked Structure Fixes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="HD-1.html"><a href="HD-1.html#HDMassBalance-2"><i class="fa fa-check"></i><b>2.4</b> Mass Balance</a></li>
+<li class="chapter" data-level="2.4.1" data-path="HD-1.html"><a href="HD-1.html#HDMassBalance-WL_CURT-3"><i class="fa fa-check"></i><b>2.4.1</b> Mass Balance WL_CURT Support</a></li>
+<li class="chapter" data-level="2.5" data-path="HD-1.html"><a href="HD-1.html#HDMinorEnhancements-2"><i class="fa fa-check"></i><b>2.5</b> Minor Enhancements and Fixes</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="HD-1.html"><a href="HD-1.html#HDExTurbScaling-3"><i class="fa fa-check"></i><b>2.5.1</b> External Turbulence Scaling</a></li>
+<li class="chapter" data-level="2.5.2" data-path="HD-1.html"><a href="HD-1.html#HDDVProduct-3"><i class="fa fa-check"></i><b>2.5.2</b> Depth Velocity Product Output Parameter</a></li>
+<li class="chapter" data-level="2.5.3" data-path="HD-1.html"><a href="HD-1.html#HDPointOutputParameters-3"><i class="fa fa-check"></i><b>2.5.3</b> Additional Point Output Parameters Supported</a></li>
+<li class="chapter" data-level="2.5.4" data-path="HD-1.html"><a href="HD-1.html#HDBCOverlap-3"><i class="fa fa-check"></i><b>2.5.4</b> Improved Boundary Nodestring Overlap Checking</a></li>
+<li class="chapter" data-level="2.5.5" data-path="HD-1.html"><a href="HD-1.html#HDGPUErrorFix-3"><i class="fa fa-check"></i><b>2.5.5</b> GPU 3D Drying Z Layer Message Fix</a></li>
+<li class="chapter" data-level="2.5.6" data-path="HD-1.html"><a href="HD-1.html#HDDuplicateFluxFile-3"><i class="fa fa-check"></i><b>2.5.6</b> Duplicate Flux File Fix</a></li>
+<li class="chapter" data-level="2.5.7" data-path="HD-1.html"><a href="HD-1.html#HDDepthAverageTURBZ-3"><i class="fa fa-check"></i><b>2.5.7</b> Turbulence Map Output Fix</a></li>
+<li class="chapter" data-level="2.5.8" data-path="HD-1.html"><a href="HD-1.html#HDFluxOutputHeader-3"><i class="fa fa-check"></i><b>2.5.8</b> Flux Output Header Fix</a></li>
+<li class="chapter" data-level="2.5.9" data-path="HD-1.html"><a href="HD-1.html#HD2dmOutputFix-3"><i class="fa fa-check"></i><b>2.5.9</b> Structured Mesh Check File Fix</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="VMM-1.html"><a href="VMM-1.html"><i class="fa fa-check"></i><b>3</b> Internal Vertical Mixing Model</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="VMM-1.html"><a href="VMM-1.html#VMM-Intr-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="VMM-1.html"><a href="VMM-1.html#VMM-KEVMM-2"><i class="fa fa-check"></i><b>3.2</b> <em>k-ε</em> Vertical Mixing Model</a></li>
+<li class="chapter" data-level="3.3" data-path="VMM-1.html"><a href="VMM-1.html#VMM-KOVMM-2"><i class="fa fa-check"></i><b>3.3</b> <em>k-ω</em> Vertical Mixing Model</a></li>
+<li class="chapter" data-level="3.4" data-path="VMM-1.html"><a href="VMM-1.html#VMM-UVSFF-2"><i class="fa fa-check"></i><b>3.4</b> Unstratified vs. Stratified Flow Fields</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="VMM-1.html"><a href="VMM-1.html#VMM-UVSFF-SOM-3"><i class="fa fa-check"></i><b>3.4.1</b> Second Order Model</a></li>
+<li class="chapter" data-level="3.4.2" data-path="VMM-1.html"><a href="VMM-1.html#VMM-UVSFF-LL-3"><i class="fa fa-check"></i><b>3.4.2</b> Lengthscale Limiter</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="VMM-1.html"><a href="VMM-1.html#VMM-IWMM-2"><i class="fa fa-check"></i><b>3.5</b> Internal Wave Mixing Model</a></li>
+<li class="chapter" data-level="3.6" data-path="VMM-1.html"><a href="VMM-1.html#VMM-Refe-2"><i class="fa fa-check"></i><b>3.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="AD-1.html"><a href="AD-1.html"><i class="fa fa-check"></i><b>4</b> Advection Dispersion Module</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="AD-1.html"><a href="AD-1.html#ADMinorEnhancements-2"><i class="fa fa-check"></i><b>4.1</b> Minor Enhancements and Fixes</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="AD-1.html"><a href="AD-1.html#ADOBCF-2"><i class="fa fa-check"></i><b>4.1.1</b> Fully Specified Grid Boundary Fix</a></li>
+</ul></li>
+<li class="chapter" data-level="4.1.2" data-path="AD-1.html"><a href="AD-1.html#HDDUSTF-3"><i class="fa fa-check"></i><b>4.1.2</b> Destratification Unit Scalar Transport Fix</a></li>
+<li class="chapter" data-level="4.2" data-path="AD-1.html"><a href="AD-1.html#ADMassBalance-2"><i class="fa fa-check"></i><b>4.2</b> Mass Balance</a></li>
+<li class="chapter" data-level="4.2.1" data-path="AD-1.html"><a href="AD-1.html#ADMassBalance-WL_CURT-3"><i class="fa fa-check"></i><b>4.2.1</b> Mass Balance WL_CURT Support</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ST-1.html"><a href="ST-1.html"><i class="fa fa-check"></i><b>5</b> Sediment Transport Module</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ST-1.html"><a href="ST-1.html#STMassBalance-2"><i class="fa fa-check"></i><b>5.1</b> Mass Balance</a></li>
+<li class="chapter" data-level="5.2" data-path="ST-1.html"><a href="ST-1.html#STMassBalance-WL_CURT-3"><i class="fa fa-check"></i><b>5.2</b> Mass Balance WL_CURT Support</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="WQ-1.html"><a href="WQ-1.html"><i class="fa fa-check"></i><b>6</b> Water Quality Module</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="WQ-1.html"><a href="WQ-1.html#WQMassBalance-2"><i class="fa fa-check"></i><b>6.1</b> Mass Balance</a></li>
+<li class="chapter" data-level="6.1.1" data-path="WQ-1.html"><a href="WQ-1.html#WQMassBalance-WL_CURT-3"><i class="fa fa-check"></i><b>6.1.1</b> Mass Balance WL_CURT Support</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="PT-1.html"><a href="PT-1.html"><i class="fa fa-check"></i><b>7</b> Particle Tracking Module</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="PT-1.html"><a href="PT-1.html#PTMinorEnhancements-2"><i class="fa fa-check"></i><b>7.1</b> Minor Enhancements and Fixes</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="PT-1.html"><a href="PT-1.html#PTMultipleGroupFix-3"><i class="fa fa-check"></i><b>7.1.1</b> Multiple Particle Groups Fix</a></li>
+<li class="chapter" data-level="7.1.2" data-path="PT-1.html"><a href="PT-1.html#PTSCPPF-3"><i class="fa fa-check"></i><b>7.1.2</b> Spherical Coordinate Particle Position Fix</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="Tools-1.html"><a href="Tools-1.html"><i class="fa fa-check"></i><b>8</b> Visualisation and Model Development Tools</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="Tools-1.html"><a href="Tools-1.html#xmdf-and-netcdf-file-locking-hdf5-compatibility-issues"><i class="fa fa-check"></i><b>8.1</b> XMDF and NetCDF File Locking (HDF5 Compatibility Issues)</a></li>
+<li class="chapter" data-level="8.2" data-path="Tools-1.html"><a href="Tools-1.html#ToolsGetTools-2"><i class="fa fa-check"></i><b>8.2</b> TUFLOW FV Boundary Condition Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="Support-1.html"><a href="Support-1.html"><i class="fa fa-check"></i><b>9</b> User Manuals, Tutorials and Supporting Materials</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="Support-1.html"><a href="Support-1.html#SupportTutorialModels-2"><i class="fa fa-check"></i><b>9.1</b> Updated Tutorial Models</a></li>
+<li class="chapter" data-level="9.2" data-path="Support-1.html"><a href="Support-1.html#SupportExampleModels-2"><i class="fa fa-check"></i><b>9.2</b> New Example Models</a></li>
+<li class="chapter" data-level="9.3" data-path="Support-1.html"><a href="Support-1.html#SupportTUFLOWFVWiki-2"><i class="fa fa-check"></i><b>9.3</b> TUFLOW FV Wiki Updates</a></li>
+<li class="chapter" data-level="9.4" data-path="Support-1.html"><a href="Support-1.html#SupportUserManuals-2"><i class="fa fa-check"></i><b>9.4</b> User Manuals</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="LicensingInstallation-1.html"><a href="LicensingInstallation-1.html"><i class="fa fa-check"></i><b>10</b> Licensing</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html"><i class="fa fa-check"></i><b>A</b> Vertical Mixing Model Science</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#App-VMMS-KEMS-2"><i class="fa fa-check"></i><b>A.1</b> K-Epsilon Model Science</a></li>
+<li class="chapter" data-level="A.2" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#App-VMMS-KOMS-2"><i class="fa fa-check"></i><b>A.2</b> K-Omega Model Science</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#tab-C3ModelParameters"><i class="fa fa-check"></i><b>A.2.1</b> Table: Model Parameters C<sub>3</sub> for <em>k</em>-ε and <em>k</em>-ω Models</a></li>
+</ul></li>
+<li class="chapter" data-level="A.3" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#App-VMMS-SOMS-2"><i class="fa fa-check"></i><b>A.3</b> Second Order Model Science</a>
+<ul>
+<li class="chapter" data-level="A.3.1" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#tab-SOParameterGroups"><i class="fa fa-check"></i><b>A.3.1</b> Table: Empirical Parameters Group in Second-Order Turbulence Model</a></li>
+</ul></li>
+<li class="chapter" data-level="A.4" data-path="App-VMMS-1.html"><a href="App-VMMS-1.html#App-VMMS-Refe-2"><i class="fa fa-check"></i><b>A.4</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html"><i class="fa fa-check"></i><b>B</b> Vertical Mixing Model Benchmarking</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#App-VMMB-Over-2"><i class="fa fa-check"></i><b>B.1</b> Overview</a></li>
+<li class="chapter" data-level="B.2" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#App-VMMB-OCF-2"><i class="fa fa-check"></i><b>B.2</b> Open Channel Flow</a></li>
+<li class="chapter" data-level="B.3" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#App-VMMB-WC-2"><i class="fa fa-check"></i><b>B.3</b> Wind Circulation</a></li>
+<li class="chapter" data-level="B.4" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#App-VMMB-EOWML-2"><i class="fa fa-check"></i><b>B.4</b> Entrainment Of Wind Mixed Layer</a>
+<ul>
+<li class="chapter" data-level="B.4.1" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#wind-entrainment-with-coriolis-forcing"><i class="fa fa-check"></i><b>B.4.1</b> Wind Entrainment With Coriolis Forcing</a></li>
+</ul></li>
+<li class="chapter" data-level="B.5" data-path="App-VMMB-1.html"><a href="App-VMMB-1.html#App-VMMB-Refe-2"><i class="fa fa-check"></i><b>B.5</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://www.tuflow.com"><img src="images/1024in300px_Blue-01.svg" style="width:246px;height:68px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(0,85,129);">TUFLOW FV 2025.2.4 Release Notes</h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="App-VMMB-1" class="section level1 hasAnchor newbox1" number="12">
+<h1><span class="header-section-number">Appendix B</span> Vertical Mixing Model Benchmarking<a href="App-VMMB-1.html#App-VMMB-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p class="wmark before">
+</p>
+<div id="App-VMMB-Over-2" class="section level2 hasAnchor" number="12.1">
+<h2><span class="header-section-number">B.1</span> Overview<a href="App-VMMB-1.html#App-VMMB-Over-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section presents the results from three foundational benchmark tests that increase in complexity. Results are compared with theoretical solutions where appropriate. The tests are:</p>
+<ol style="list-style-type: decimal">
+<li>Open channel turbulent flow</li>
+<li>Wind induced circulation in a lake</li>
+<li>Deepening of a wind-mixed layer</li>
+</ol>
+<p>The first two tests focus on unstratified flow without the impact of Earth’s rotation, whilst the third test is conducted in stably stratified field, both with and without the action of Coriolis forcing.</p>
+</div>
+<div id="App-VMMB-OCF-2" class="section level2 hasAnchor" number="12.2">
+<h2><span class="header-section-number">B.2</span> Open Channel Flow<a href="App-VMMB-1.html#App-VMMB-OCF-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>An open channel flow represents one of the most fundamental turbulent flow scenarios. In this test, an unstratified flow in a 1000 m long, 50 m wide, and 5 m deep rectangular channel with a uniformly rough surface (Manning’s <em>n</em> = 0.03) was investigated. The bed slope was set at 0.00042 to achieve a uniform flow with a depth-averaged velocity of 2 m/s. The horizontal mesh size was 10 m by 10 m, while the vertical mesh size used in the simulations was 0.25 m (Figure <a href="App-VMMB-1.html#fig:fig-OpenChannelMesh">B.1</a>).</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:fig-OpenChannelMesh"></span>
+<img src="images/Open_Channel_Mesh.svg" alt="Model Mesh - Open Channel Flow Benchmark" width="60%" />
+<p class="caption">
+Figure B.1: Model Mesh - Open Channel Flow Benchmark
+</p>
+</div>
+</center>
+<p>The vertical profile of the velocity follows the Law of the Wall, and the vertical profile of the eddy viscosity <span class="math inline">\(\nu_t\)</span> is expressed by a parabolic function:</p>
+<p><span class="math display">\[
+\nu_t = \kappa h u_* \frac{z}{h} \left(1 - \frac{z}{h} \right)
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\kappa\)</span> is the von Karman constant (0.41)<br />
+</li>
+<li><span class="math inline">\(h\)</span> is the water depth (m)<br />
+</li>
+<li><span class="math inline">\(z\)</span> is the vertical coordinate (m)<br />
+</li>
+<li><span class="math inline">\(u_*\)</span> is the bed shear velocity (m/s), calculated as:</li>
+</ul>
+<p><span class="math display">\[
+u_* = \left( g^{1/2} n \right) h^{-1/6} \bar{U}
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\bar{U}\)</span> is the depth-averaged velocity (<span class="math inline">\(m/s\)</span>)</li>
+<li><span class="math inline">\(g\)</span> is the gravitational acceleration (<span class="math inline">\(m/s^2\)</span>)</li>
+<li><span class="math inline">\(n\)</span> is the Manning’s ‘n’ roughness (<span class="math inline">\(s/m^{1/3}\)</span>)</li>
+</ul>
+<p>Figure <a href="App-VMMB-1.html#fig:fig-OpenChannelProfiles">B.2</a> presents the vertical profiles of the horizontal velocity and <span class="math inline">\(\nu_t\)</span> modelled using the <em>k-ε</em> and <em>k-ω</em> turbulence models with default parameters. The solutions of the two models are similar and agree well with the empirical solutions. The <em>k-ω</em> model predicts a higher maximum eddy viscosity at half-depth compared with the <em>k-ε</em> model.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-OpenChannelProfiles"></span>
+<img src="images/Open_Channel_Vel_Results.svg" alt="Vertical profiles of horizontal velocity (left) and eddy viscosity (right) in a straight open channel simulated by *k-ε* and *k-ω* models" width="40%" /><img src="images/Open_Channel_Visc_Results.svg" alt="Vertical profiles of horizontal velocity (left) and eddy viscosity (right) in a straight open channel simulated by *k-ε* and *k-ω* models" width="40%" />
+<p class="caption">
+Figure B.2: Vertical profiles of horizontal velocity (left) and eddy viscosity (right) in a straight open channel simulated by <em>k-ε</em> and <em>k-ω</em> models
+</p>
+</div>
+</div>
+<div id="App-VMMB-WC-2" class="section level2 hasAnchor" number="12.3">
+<h2><span class="header-section-number">B.3</span> Wind Circulation<a href="App-VMMB-1.html#App-VMMB-WC-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The wind circulation test represents an unstratified flow in a 1000 m long, 10 m deep, flat-bottomed rectangular lake. The flow is driven by a constant surface wind stress in the <em>x</em>-direction. Momentum is entrained into the deeper layer due to shear stress between vertical layers. A bottom current forms in the opposite direction to the wind forcing in accordance with mass conservation.</p>
+<p>The horizontal mesh size was 10 m in the wind direction, with a single cell across the width of the lake. The vertical mesh thickness was set to 0.5 m (Figure <a href="App-VMMB-1.html#fig:fig-WindMesh">B.3</a>). Bed roughness effects were assumed negligible, with a roughness length scale <span class="math inline">\(k_s = 0.05\)</span>.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:fig-WindMesh"></span>
+<img src="images/Wind_Circulation_Mesh.svg" alt="Model Mesh - Wind Circulation Benchmark" width="60%" />
+<p class="caption">
+Figure B.3: Model Mesh - Wind Circulation Benchmark
+</p>
+</div>
+</center>
+<p>The analytical solution for the vertical velocity profile is:</p>
+<p><span class="math display">\[
+U(z) = \frac{u_s}{\kappa} \left[1 + \ln\left(\frac{h - z}{h}\right)\right]
+\]</span></p>
+<p>Where the surface shear velocity <span class="math inline">\(u_s\)</span> is given by:</p>
+<p><span class="math display">\[
+u_s = \left( \frac{\tau_s}{\rho_w} \right)^{1/2}
+\]</span></p>
+<p>And the surface shear stress <span class="math inline">\(\tau_s\)</span> is calculated from:</p>
+<p><span class="math display">\[
+\tau_s = \rho_a C_d W_{10}^2
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(u_s\)</span> is the surface shear velocity (m/s)<br />
+</li>
+<li><span class="math inline">\(\tau_s\)</span> is the surface shear stress (N/m²)<br />
+</li>
+<li><span class="math inline">\(\rho_w\)</span> is the water density (= 1000 kg/m³)<br />
+</li>
+<li><span class="math inline">\(\rho_a\)</span> is the air density (= 1.2 kg/m³)<br />
+</li>
+<li><span class="math inline">\(C_d\)</span> is the wind drag coefficient (0.0013)<br />
+</li>
+<li><span class="math inline">\(W_{10}\)</span> is the wind speed 10 m above the surface (assumed 20 m/s in this test)</li>
+</ul>
+<p>Assuming the vertical profile of the eddy viscosity also follows a parabolic function, the bed shear velocity can be replaced by the surface shear velocity <span class="math inline">\(u_s\)</span> in the parabolic function below:</p>
+<p><span class="math display">\[
+\nu_t = \kappa h u_s \frac{z}{h} \left(1 - \frac{z}{h}\right)
+\]</span></p>
+<p>Figure <a href="App-VMMB-1.html#fig:fig-WindProfiles">B.4</a> presents the vertical profiles of horizontal velocity and <span class="math inline">\(\nu_t\)</span> modelled using the <em>k-ε</em> and <em>k-ω</em> turbulence models with default parameters. The results from both models agree well with empirical solutions, with the <em>k-ω</em> model showing nearly perfect agreement for velocity.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-WindProfiles"></span>
+<img src="images/Wind_Circulation_Vel_Results.svg" alt="Vertical profiles of velocity (left) and eddy viscosity (right) driven by constant wind over a rectangular lake, simulated using *k-ε* and *k-ω* turbulence models" width="40%" /><img src="images/Wind_Circulation_Visc_Results.svg" alt="Vertical profiles of velocity (left) and eddy viscosity (right) driven by constant wind over a rectangular lake, simulated using *k-ε* and *k-ω* turbulence models" width="40%" />
+<p class="caption">
+Figure B.4: Vertical profiles of velocity (left) and eddy viscosity (right) driven by constant wind over a rectangular lake, simulated using <em>k-ε</em> and <em>k-ω</em> turbulence models
+</p>
+</div>
+</div>
+<div id="App-VMMB-EOWML-2" class="section level2 hasAnchor" number="12.4">
+<h2><span class="header-section-number">B.4</span> Entrainment Of Wind Mixed Layer<a href="App-VMMB-1.html#App-VMMB-EOWML-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The previous two tests examined unstratified flow at equilibrium. This test simulates the dynamic entrainment and deepening of a wind-driven surface mixed layer in stably stratified flow. Entrainment is driven by surface wind stress, gradually eroding the stratified fluid below.</p>
+<p>Pollard et al. (1973) proposed a simple model for the deepening of the surface mixed layer. In the absence of the Coriolis force, the evolution of the mixed-layer depth <span class="math inline">\(h_{\text{MLD}}\)</span> is given by:</p>
+<p><span class="math display">\[
+h_{\text{MLD}} = (2 R_{i,b})^{1/4} u_s \sqrt{\frac{t}{N_0}}
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(R_{i,b}\)</span> is the bulk Richardson number<br />
+</li>
+<li><span class="math inline">\(u_s\)</span> is the surface shear velocity (m/s)<br />
+</li>
+<li><span class="math inline">\(t\)</span> is the time since the onset of wind (s)<br />
+</li>
+<li><span class="math inline">\(N_0\)</span> is the initial Brunt–Väisälä frequency (s<span class="math inline">\(^{-1}\)</span>)<br />
+</li>
+<li><span class="math inline">\(\rho_a\)</span> is the air density (1.2 kg/m³)</li>
+</ul>
+<p>The test model consisted of one horizontal cell, 50 m deep, with 50 vertical layers. Zero-gradient boundaries were applied on all sides. A constant surface shear stress of 0.1 N/m² was applied in the x-direction. An inverse water temperature profile was used to set an initial stratification of <span class="math inline">\(N_0 = 0.01 \,\text{s}^{-1}\)</span>.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:fig-WindEntrainMesh"></span>
+<img src="images/Wind_Entrainment_Mesh.svg" alt="Model Mesh - Wind Entrainment Benchmark" width="20%" height="20%" />
+<p class="caption">
+Figure B.5: Model Mesh - Wind Entrainment Benchmark
+</p>
+</div>
+</center>
+<p>Figure <a href="App-VMMB-1.html#fig:fig-WindEntrainKE">B.6</a> and Figure <a href="App-VMMB-1.html#fig:fig-WindEntrainKO">B.7</a> show the development of the surface mixed-layer following wind onset, modelled with the <em>k-ε</em> and <em>k-ω</em> turbulence models, respectively. Dashed lines represent the empirical prediction by Pollard et al. (1973), using <span class="math inline">\(R_{i,b} = 0.6\)</span> as suggested by Price (1979). Both turbulence models in TUFLOW FV reproduce the deepening of the surface mixed layer effectively.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-WindEntrainKE"></span>
+<img src="images/ke_V.png" alt="Hovmöller diagrams of velocity (left) and eddy viscosity (right) over time, simulated by *k-ε* model. Dashed lines show the empirical model by Pollard et al. (1973)" width="40%" /><img src="images/ke_nu.png" alt="Hovmöller diagrams of velocity (left) and eddy viscosity (right) over time, simulated by *k-ε* model. Dashed lines show the empirical model by Pollard et al. (1973)" width="40%" />
+<p class="caption">
+Figure B.6: Hovmöller diagrams of velocity (left) and eddy viscosity (right) over time, simulated by <em>k-ε</em> model. Dashed lines show the empirical model by Pollard et al. (1973)
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-WindEntrainKO"></span>
+<img src="images/ko_V.png" alt="Hovmöller diagrams of velocity (left) and eddy viscosity (right) over time, simulated by *k-ω* model. Dashed lines show the empirical model by Pollard et al. (1973)" width="40%" /><img src="images/ko_nu.png" alt="Hovmöller diagrams of velocity (left) and eddy viscosity (right) over time, simulated by *k-ω* model. Dashed lines show the empirical model by Pollard et al. (1973)" width="40%" />
+<p class="caption">
+Figure B.7: Hovmöller diagrams of velocity (left) and eddy viscosity (right) over time, simulated by <em>k-ω</em> model. Dashed lines show the empirical model by Pollard et al. (1973)
+</p>
+</div>
+<p>Figure <a href="App-VMMB-1.html#fig:fig-WindEntrainKE2nd">B.8</a> and Figure <a href="App-VMMB-1.html#fig:fig-WindEntrainKO2nd">B.9</a> present the same wind entrainment test results, but with the second-order turbulence model (Umlauf and Burchard, 2005) enabled.</p>
+<p>Compared to the results without second-order closure, the eddy viscosity is damped, and the surface mixed-layer develops slightly more slowly. This produces better agreement with the analytical solution of Pollard et al. (1973).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-WindEntrainKE2nd"></span>
+<img src="images/ke_2nd_V.png" alt="Hovmöller diagrams of velocity (left) and eddy viscosity (right) over time, simulated by *k-ε* model with second-order turbulence model. Dashed lines show the empirical model by Pollard et al. (1973)" width="40%" /><img src="images/ke_2nd_nu.png" alt="Hovmöller diagrams of velocity (left) and eddy viscosity (right) over time, simulated by *k-ε* model with second-order turbulence model. Dashed lines show the empirical model by Pollard et al. (1973)" width="40%" />
+<p class="caption">
+Figure B.8: Hovmöller diagrams of velocity (left) and eddy viscosity (right) over time, simulated by <em>k-ε</em> model with second-order turbulence model. Dashed lines show the empirical model by Pollard et al. (1973)
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-WindEntrainKO2nd"></span>
+<img src="images/ko_2nd_V.png" alt="Hovmöller diagrams of velocity (left) and eddy viscosity (right) over time, simulated by *k-ω* model with second-order turbulence model. Dashed lines show the empirical model by Pollard et al. (1973)" width="40%" /><img src="images/ko_2nd_nu.png" alt="Hovmöller diagrams of velocity (left) and eddy viscosity (right) over time, simulated by *k-ω* model with second-order turbulence model. Dashed lines show the empirical model by Pollard et al. (1973)" width="40%" />
+<p class="caption">
+Figure B.9: Hovmöller diagrams of velocity (left) and eddy viscosity (right) over time, simulated by <em>k-ω</em> model with second-order turbulence model. Dashed lines show the empirical model by Pollard et al. (1973)
+</p>
+</div>
+<div id="wind-entrainment-with-coriolis-forcing" class="section level3 hasAnchor" number="12.4.1">
+<h3><span class="header-section-number">B.4.1</span> Wind Entrainment With Coriolis Forcing<a href="App-VMMB-1.html#wind-entrainment-with-coriolis-forcing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The previous simulations were conducted without considering Earth’s rotation. This is valid for small systems (i.e., where characteristic length scales are smaller than the local Rossby radius). However, for larger systems, such as the open ocean away from the equator, the Coriolis force must be considered. It is known to generate features such as Ekman spirals (Figure <a href="App-VMMB-1.html#fig:fig-EkmanSpiral">B.10</a>).</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:fig-EkmanSpiral"></span>
+<img src="images/Ekman_Spiral.svg" alt="Northern Hemisphere Ekman spiral illustrated by Cardin and Olson (2015)" width="30%" />
+<p class="caption">
+Figure B.10: Northern Hemisphere Ekman spiral illustrated by Cardin and Olson (2015)
+</p>
+</div>
+</center>
+<p>When Ekman spirals form, the velocity oscillates with a characteristic period called the inertial period <span class="math inline">\(T_f\)</span>, which is defined by:</p>
+<p><span class="math display">\[
+T_f = \frac{2\pi}{f}, \quad f = 2\Omega \sin\phi
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(f\)</span> is the Coriolis parameter (s<span class="math inline">\(^{-1}\)</span>)<br />
+<span class="math inline">\(\Omega = 7.2921 \times 10^{-5} \,\text{rad/s}\)</span> (Earth’s angular speed)</li>
+<li><span class="math inline">\(\phi\)</span> is the latitude (degrees)</li>
+</ul>
+<p>Pollard et al. (1973) suggest that the surface mixed layer deepens rapidly within the first <span class="math inline">\(0.5T_f\)</span> after wind onset, and the rate of deepening decreases significantly thereafter as Ekman spirals form. The predicted mixed-layer depth at <span class="math inline">\(0.5T_f\)</span> is given by:</p>
+<p><span class="math display">\[
+h_{\text{MLD}} = (8 R_{i,b})^{1/4} \frac{u_s}{\sqrt{N_0 f}}
+\]</span></p>
+<p>An additional test was conducted at a latitude of 45° north, resulting in a Coriolis parameter of:</p>
+<p><span class="math display">\[
+f = 1.03 \times 10^{-4} \,\text{rad/s}
+\]</span></p>
+<p>This corresponds to an inertial period of:</p>
+<p><span class="math display">\[
+T_f = \frac{2\pi}{f} = 16.97 \,\text{hours}
+\]</span></p>
+<p>Figure <a href="App-VMMB-1.html#fig:fig-CoriolisVelXYKE">B.11</a> and Figure <a href="App-VMMB-1.html#fig:fig-CoriolisVelXYKO">B.12</a> present the development of velocities in the x-direction (aligned with the wind) and y-direction (perpendicular to the wind).</p>
+<p>The velocity in the <em>x</em>-direction increased until approximately <span class="math inline">\(0.5T_f\)</span>, then decreased until <span class="math inline">\(T_f\)</span>. After this, the velocity exhibited periodic oscillations with the inertial period of 16.97 hours.</p>
+<p>In the <em>y</em>-direction (toward the equator), a negative velocity developed, which also oscillated with the same period, consistent with the formation of an Ekman spiral.</p>
+<p>As predicted by Pollard et al. (1973), the surface mixed-layer depth increased rapidly until <span class="math inline">\(0.5T_f\)</span>, and then continued to increase, but at a much slower rate. The modelled mixed-layer depth agrees well with the analytical prediction at <span class="math inline">\(0.5T_f\)</span>, shown as white dashed lines in the figures. The continued deepening beyond <span class="math inline">\(0.5T_f\)</span> aligns with the results from Large Eddy Simulations (LES) performed by Ushijima and Yoshikawa (2020).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-CoriolisVelXYKE"></span>
+<img src="images/ke_2nd_Vx_45deg.png" alt="Hovmöller diagrams of velocity in the *x*- (wind direction, top) and *y*- (perpendicular to the wind, bottom) directions, simulated by *k-ε* model with the second-order turbulence model enabled" height="80%" /><img src="images/ke_2nd_Vy_45deg.png" alt="Hovmöller diagrams of velocity in the *x*- (wind direction, top) and *y*- (perpendicular to the wind, bottom) directions, simulated by *k-ε* model with the second-order turbulence model enabled" height="80%" />
+<p class="caption">
+Figure B.11: Hovmöller diagrams of velocity in the <em>x</em>- (wind direction, top) and <em>y</em>- (perpendicular to the wind, bottom) directions, simulated by <em>k-ε</em> model with the second-order turbulence model enabled
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-CoriolisVelXYKO"></span>
+<img src="images/ko_2nd_Vx_45deg.png" alt="Hovmöller diagrams of velocity in the *x*- (wind direction, top) and *y*- (perpendicular to the wind, bottom) directions, simulated by *k-ω* model with the second-order turbulence model enabled" height="80%" /><img src="images/ko_2nd_Vy_45deg.png" alt="Hovmöller diagrams of velocity in the *x*- (wind direction, top) and *y*- (perpendicular to the wind, bottom) directions, simulated by *k-ω* model with the second-order turbulence model enabled" height="80%" />
+<p class="caption">
+Figure B.12: Hovmöller diagrams of velocity in the <em>x</em>- (wind direction, top) and <em>y</em>- (perpendicular to the wind, bottom) directions, simulated by <em>k-ω</em> model with the second-order turbulence model enabled
+</p>
+</div>
+</div>
+</div>
+<div id="App-VMMB-Refe-2" class="section level2 hasAnchor" number="12.5">
+<h2><span class="header-section-number">B.5</span> References<a href="App-VMMB-1.html#App-VMMB-Refe-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>References are provided in Section <a href="VMM-1.html#VMM-Refe-2">3.6</a>.</p>
+</div>
+</div>
+<p><img src="images/WQFooter.jpg" width="100%" /></p>
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="App-VMMS-1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": false,
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["https://downloads.tuflow.com/TUFLOWFV/Manuals/2025.2/ReleaseNotes/TUFLOW_FV_ReleaseNotes.pdf", "pdf"]],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
