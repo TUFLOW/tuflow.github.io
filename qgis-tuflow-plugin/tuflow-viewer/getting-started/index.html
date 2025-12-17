@@ -971,6 +971,7 @@ Users can check for new releases via either the **QGIS Plugin Manager** or the *
 <h3 id="opening-an-xmdf">Opening an XMDF<a class="headerlink" href="#opening-an-xmdf" title="Permanent link">&para;</a></h3>
 <p>The new <strong>TUFLOW Viewer</strong> tries to integrate itself with <strong>QGIS</strong> a lot more closely than the legacy viewer, using native <strong>QGIS</strong> controls where possible and extending <strong>QGIS</strong> functionality behind the scenes where needed. It does this without adding any new widgets or user interfaces (excepting the plot widget) which has the benefit making it feel less like a separate tool and more like a patch to the core QGIS functionality. </p>
 <p>To this end, loading an XMDF result file is as simple as dragging the <code>.xmdf</code> file from Windows File Explorer into <strong>QGIS</strong>. Once opened, the <strong>QGIS temporal controller</strong> is automatically opened and configured and can be used to adjust the output timestep. The active data type can be changed by using the layer properties. It is highly recommended to use the <strong><a href="https://docs.qgis.org/3.44/en/docs/user_manual/introduction/general_tools.html#layer-styling-panel">Styling Panel</a></strong> (rather than the properties dialogue) which can be toggled on and off by pressing <code>F7</code> or <code>Ctrl+3</code> on the keyboard.</p>
+<p>The same is true for other supported mesh formats, for example the <code>.nc</code> NetCDF mesh format. The method for opening is also true for NetCDF grid results written by TUFLOW.</p>
 <figure>
     <img alt="" src="../assets/gifs/quick-start-load-xmdf.gif" width="800" />
     <figcaption>Loading an XMDF</figcaption>
@@ -985,7 +986,7 @@ Users can check for new releases via either the **QGIS Plugin Manager** or the *
 </figure>
 <h4 id="xmdf-section-plotting">XMDF Section Plotting<a class="headerlink" href="#xmdf-section-plotting" title="Permanent link">&para;</a></h4>
 <p>The starting plot type is a time-series plot, but this can be changed by right-clicking the plot tab and selecting the desired plot type from the context menu. Alternatively, a new plot tab can be opened by clicking the <code>+</code> button in the tab strip and selecting the desired plot type from the context menu. </p>
-<p><em>Note, it is important to ensure that the workspace and results are in the correct projection and not incorrectly using a default CRS such as <code>WGS84</code>. The new TUFLOW Viewer will convert spherical distances to metres using the ellipsoidal method if a spherical system is being used. This will cause issues (most likely a blank plot) if the source data is already in a cartesian projection and does not require conversion.</em></p>
+<p><em>Note, it is important to ensure that the workspace and results are in the correct projection and not incorrectly using a default CRS such as <code>WGS84</code>. The new TUFLOW Viewer will convert spherical distances to metres using the ellipsoidal method if a spherical system is being used. This will cause issues (most likely a blank plot) if the source data is already in a Cartesian projection and does not require conversion.</em></p>
 <figure>
     <img alt="" src="../assets/gifs/quick-start-plotting-xmdf-section.gif" width="800" />
     <figcaption>Plotting Sections from an XMDF</figcaption>
@@ -1020,7 +1021,7 @@ Users can check for new releases via either the **QGIS Plugin Manager** or the *
 <h3 id="high-level-differences">High Level Differences<a class="headerlink" href="#high-level-differences" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Removal of the docking widget interface as mentioned above.</li>
-<li>The new viewer is built on top of the <strong><a href="https://docs.tuflow.com/pytuflow/">PyTUFLOW</a></strong> Python library which provides a more robust and efficient method for reading TUFLOW results. Users should notice an improved performance all round, especially when loading and plotting from large ESTRY result files. Large XMDF files are limited, as they were in the <strong>legacy TUFLOW Viewer</strong>, by the performance of the underlying <strong>QGIS</strong> library. Although <strong>PyTUFLOW</strong> will perform better caching of data in the background, so users should still notice an improvement here too when replotting previously plotted locations (e.g. when scrubbing through times on a section plot).</li>
+<li>The new viewer is built on top of the <strong><a href="https://docs.tuflow.com/pytuflow/">PyTUFLOW</a></strong> Python library which provides a more robust and efficient method for reading TUFLOW results. Users should notice an improved performance all round, especially when loading and plotting from large ESTRY result files. Large XMDF files are limited, as they were in the <strong>legacy TUFLOW Viewer</strong>, by the performance of the underlying <strong>QGIS</strong> library. Although <strong>PyTUFLOW</strong> will perform better caching of data in the background, so users should still notice an improvement here too when replotting previously plotted locations (e.g. when scrolling backwards and forward through timesteps on a section plot).</li>
 <li>Each loaded result is tied directly to a specific GIS layer, or set of GIS layers. For example, an XMDF is linked to the mesh layer, and the TPC result is tied to the <strong>_PLOT_</strong> layers that are loaded when the TPC file is opened. Once those layers are removed from <strong>QGIS</strong>, the results are also unloaded, this means that they will no longer be available for plotting. The biggest affect that this might have is when loading multiple TPC results which will load in multiple sets of <strong>_PLOT_</strong> layers. The plot layers may be identical (e.g. when loading in results from different events), however the user must keep all the layers in <strong>QGIS</strong> to keep the results available for plotting. It is still possible to plot the different results by selecting a channel from a single <strong>_PLOT_</strong> layer, as long as the ID is present in the other TPC results.</li>
 </ol>
 <h3 id="specific-differences">Specific Differences<a class="headerlink" href="#specific-differences" title="Permanent link">&para;</a></h3>
@@ -1028,40 +1029,34 @@ Users can check for new releases via either the **QGIS Plugin Manager** or the *
 <h4 id="plotting_1">Plotting<a class="headerlink" href="#plotting_1" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Map output - plot "from map multi":</strong> In the <strong>legacy TUFLOW Viewer</strong>, there was a specific plotting option to add multiple points, or multiple lines, to a single-plot. This is now inherently supported by the <strong>Draw Tool</strong> <img alt="" src="../assets/images/draw.svg#only-light" width="24" /><img alt="" src="../assets/images/draw-night-mapping.svg#only-dark" width="24" /> without any special options required. Each time the user clicks on the map, a new point is added to the plot (or a similar experience with lines when plotting sections). These locations can be redrawn by holding down <code>Ctrl</code> and clicking on the map again. Locations can also be individually toggled or removed via the <strong>Draw Tool</strong> menu.</li>
-<li><strong>Map output - plot from "layer selection":</strong> In the <strong>legacy TUFLOW Viewer</strong>, there was a specific plotting option to plot from points defined in a vector layer. This option can be found under the <strong>Selection Tool</strong> <img alt="" src="../assets/images/mActionSelectRectangle.svg" /> menu as <strong>Extract from map outputs</strong>.<br></li>
-</ol>
-<figure>
-    <img alt="" src="../assets/images/extract-from-map-output.png" width="350" />
-</figure>
-<ol>
+<li><strong>Map output - plot from "layer selection":</strong> In the <strong>legacy TUFLOW Viewer</strong>, there was a specific plotting option to plot from points defined in a vector layer. This option can be found under the <strong>Selection Tool</strong> <img alt="" src="../assets/images/mActionSelectRectangle.svg" /> menu as <strong>Extract from map outputs</strong>.<br>
+    <figure markdown="span">
+        <img alt="" src="../assets/images/extract-from-map-output.png" width="350" />
+    </figure></li>
 <li><strong>Time-series - selecting channels:</strong> The <strong>Selection Tool</strong> <img alt="" src="../assets/images/mActionSelectRectangle.svg" /> must be active before selecting any times-series features to plot from. This has the benefit being able to be toggled off and then the QGIS selection tool can be used for other tasks without interfering what is being plotted.</li>
-<li><strong>Time-series plot - show current time:</strong> This option can be found under the time-series plot context menu. The vertical time indicator line is also interactable and can be dragged to change the current time.<br></li>
-</ol>
-<figure>
+<li><strong>Time-series plot - show current time:</strong> This option can be found under the time-series plot context menu. The vertical time indicator line is also interactable and can be dragged to change the current time.<br>
+    <figure markdown="span">
     <img alt="" src="../assets/images/show-current-time.png" width="350" />
-</figure>
-<ol>
+    </figure></li>
 <li><strong>Time-series plot - use datetime:</strong> This option can be found under the time-series plot context menu.</li>
-<li><strong>Secondary axis:</strong> Plot items can be moved to the secondary axis by right-clicking the item in on the plot and selecting <strong>Move to secondary axis</strong>. They can be moved back to the primary axis in the same way. This works a little differently from the legacy behaviour where the entire result type was moved to the secondary axis. It is now done by specific plot item, so velocity from one location can be on the primary axis, while velocity from another location can be on the secondary axis.<br></li>
-</ol>
-<figure>
-    <img alt="" src="../assets/images/move-to-secondary-axis.png" width="350" />
-</figure>
-<ol>
+<li><strong>Secondary axis:</strong> Plot items can be moved to the secondary axis by right-clicking the item in on the plot and selecting <strong>Move to secondary axis</strong>. They can be moved back to the primary axis in the same way. This works a little differently from the legacy behaviour where the entire result type was moved to the secondary axis. It is now done by specific plot item, so velocity from one location can be on the primary axis, while velocity from another location can be on the secondary axis.<br>
+    <figure markdown="span">
+        <img alt="" src="../assets/images/move-to-secondary-axis.png" width="350" />
+    </figure></li>
 <li><strong>Plot navigation:</strong> Plot navigation (pan and zoom) is always active in the new <strong>TUFLOW Viewer</strong>. Use the left mouse button (or middle mouse button) to pan the plot, use the right mouse button to scale the plot, and use the mouse wheel to zoom. For secondary axes, hold down <code>Shift</code> or <code>Ctrl</code> to pan/zoom the secondary axis. Alternatively for secondary axes, the user can interact with the axis ticks directly to pan/zoom the secondary axis (e.g. left click and drag on the axis ticks on the right-hand side to pan the secondary axis up and down).</li>
 <li><strong>Freezing the axis limits:</strong> If the plot axes are changed by the user (e.g. panning or zooming), the axes will remain fixed to those limits. The auto limit behaviour can be restored by clicking auto button <img alt="" src="../assets/images/pyqtgraph-auto-limits.png" width="24" /> in the bottom left of the plot window. Plot limits can also be manually set by right-clicking the plot window and looking under the <strong>X axis</strong> or <strong>Y axis</strong> sub-menus (not available for the secondary axis yet).</li>
-<li><strong>Exporting data:</strong> The export and copy data options are now found under the plot context menu.<br></li>
+<li><strong>Exporting data:</strong> The export and copy data options are now found under the plot context menu.<br>
+    <figure markdown="span">
+        <img alt="" src="../assets/images/plot-export-menu.png" width="350" />
+    </figure></li>
 </ol>
-<figure>
-    <img alt="" src="../assets/images/plot-export-menu.png" width="350" />
-</figure>
 <h4 id="styling">Styling<a class="headerlink" href="#styling" title="Permanent link">&para;</a></h4>
 <ol>
-<li><strong>Mesh - saving default style:</strong> In the <strong>legacy TUFLOW Viewer</strong>, it was possible to save the current style to be the default style for the given result type. This is still possible and can be found by right-clicking the mesh layer in the <strong>QGIS Layers Panel</strong> and selecting the <strong>TUFLOW Viewer</strong> submenu. The style is cached into a local folder and unlike the legacy viewer, will survive plugin updates.<br></li>
+<li><strong>Mesh - saving default style:</strong> In the <strong>legacy TUFLOW Viewer</strong>, it was possible to save the current style to be the default style for the given result type. This is still possible and can be found by right-clicking the mesh layer in the <strong>QGIS Layers Panel</strong> and selecting the <strong>TUFLOW Viewer</strong> submenu. The style is cached into a local folder and unlike the legacy viewer, will survive plugin updates.<br>
+    <figure markdown="span">
+        <img alt="" src="../assets/images/tuflow-viewer-layer-menu.png" width="500" />
+    </figure></li>
 </ol>
-<figure>
-    <img alt="" src="../assets/images/tuflow-viewer-layer-menu.png" width="500" />
-</figure>
 
 
 
