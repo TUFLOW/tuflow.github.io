@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#roadmap" class="md-skip">
+        <a href="#tuflow-viewer-roadmap" class="md-skip">
           Skip to content
         </a>
       
@@ -653,9 +653,45 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#tuflow-viewer-roadmap" class="md-nav__link">
+  <a href="#export-animation-tool" class="md-nav__link">
     <span class="md-ellipsis">
-      TUFLOW VIEWER ROADMAP
+      Export Animation Tool
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flux-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flux Tool
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plot-customisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plot Customisation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-plot-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Plot Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plot-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plot Statistics
     </span>
   </a>
   
@@ -685,24 +721,36 @@
 
 
 
-<h1 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">&para;</a></h1>
-<p>The flow chart below outlines upcoming areas of development for the TUFLOW Viewer. Dates are indicative only and will be updated as features progress.</p>
-<h2 id="tuflow-viewer-roadmap">TUFLOW VIEWER ROADMAP<a class="headerlink" href="#tuflow-viewer-roadmap" title="Permanent link">&para;</a></h2>
-<p>Current Build
-    ↓
-Improved 1D Visualisation (Mar 2026)
-    ↓
-Plot Window Enhancements (May 2026)
-    ↓
-Mesh Viewing and Editing (Q3 2026)
-    ↓
-Animation Export Tools (Q4 2026)
-    ↓
-GPU and Performance Updates (2027)
-    ↓
-XXX (Future)
-    ↓
-Batch Processing and Automation Tools (TBD)</p>
+<h1 id="tuflow-viewer-roadmap">TUFLOW Viewer Roadmap<a class="headerlink" href="#tuflow-viewer-roadmap" title="Permanent link">&para;</a></h1>
+<p>Although <strong>TUFLOW Viewer V2</strong> already has many of the core functionalities implemented, there are still several features and tools from the <strong>legacy TUFLOW Viewer</strong> that
+have not been ported across yet. The following roadmap outlines the planned features and improvements for future releases of the <strong>TUFLOW Viewer V2</strong> tool. This roadmap is focussed on the features that are currently missing compared to the <strong>legacy TUFLOW Viewer</strong> and does not include all potential new features. This roadmap is subject to change and may be updated as development progresses.</p>
+<p>The order of the features listed below is loosely based on priority, with higher priority features listed first. However, the actual implementation order may vary based on development considerations.</p>
+<h2 id="export-animation-tool">Export Animation Tool<a class="headerlink" href="#export-animation-tool" title="Permanent link">&para;</a></h2>
+<p>This is probably the highest priority feature missing from <strong>TUFLOW Viewer V2</strong> as it is a commonly used tool in the legacy viewer and an important part of a deliverable workflow.</p>
+<p>In the meantime, if you don't require plots on your animation, it is possible to <strong><a href="https://www.youtube.com/watch?v=bIMAJfVjnmg">export an animation</a></strong> in the main map window using the QGIS temporal controller. In the linked video, a GIF is created, however if you prefer an mp4 or other video format, <strong><a href="https://www.ffmpeg.org/">FFmpeg</a></strong> can be used convert image sequences to video files, and is the tool that the <strong>legacy TUFLOW Viewer</strong> used. <strong>FFmpeg</strong> is similar to a TUFLOW utility and can be executed via a batch file. An example batch file command is provided for you to modify:</p>
+<div class="highlight"><pre><span></span><code>ffmpeg.exe -framerate 10 -i animation_export_<span class="nv">%0</span>4d.png -c:v libx264 -pix_fmt yuv420p -movflags +faststart output.mp4
+</code></pre></div>
+<p>Some of the customisable or important parts of the command are explained below:</p>
+<ul>
+<li><code>-framerate 10</code> specifies the frame rate of the output video (10 frames per second in this case).</li>
+<li><code>-i animation_export_%04d.png</code> specifies the input image sequence, where <code>%04d</code> is a placeholder for a four-digit frame number (e.g., <code>0001</code>, <code>0002</code>, etc.). Make sure this matches your exported image filenames as shown below in the <strong>Template</strong> field:<br></li>
+</ul>
+<figure>
+    <img alt="" src="../assets/images/export-animation-dialogue.png" width="400" />
+</figure>
+<ul>
+<li><code>output.mp4</code> is the name of the output video file.</li>
+<li>Another important aspect is to make sure the image width and height are divisible by 2, otherwise <strong>FFmpeg</strong> may throw an error. These settings can be adjusted in the export animation dialogue in <strong>QGIS</strong> (you can see these fields in the above image).</li>
+</ul>
+<h2 id="flux-tool">Flux Tool<a class="headerlink" href="#flux-tool" title="Permanent link">&para;</a></h2>
+<p><strong>TUFLOW Viewer V2</strong> uses <strong>PyTUFLOW</strong> to read and extract data from results, and currently this is not supported in <strong><a href="https://docs.tuflow.com/pytuflow">PyTUFLOW</a></strong>. It is planned to add this support in both <strong>PyTUFLOW</strong> and <strong>TUFLOW Viewer V2</strong>. It is most likely going to be calculated slightly differently where it will use the <code>q</code> map output data type rather than the <code>d</code> and <code>v</code> data types as done in the legacy viewer. The depth and velocity data work OK for flat cells, and is almost guaranteed to be present in most results (which is why it was originally chosen), however as sub-grid sampling has been introduced in TUFLOW, this becomes less accurate. So if you want to use the flux tool in the future, it is recommended to start adding the <code>q</code> map output data type to your models!</p>
+<h2 id="plot-customisation">Plot Customisation<a class="headerlink" href="#plot-customisation" title="Permanent link">&para;</a></h2>
+<p>Currently, there is very little support for plot customisation i.e. legends, axis labels, titles, custom colours etc. Plot customisation is can be quite complex to implement for an interactive and dynamic plotting tool, as settings need to survive plot redraws and updates. It is planned to add some basic customisation options in future releases, with more advanced options to be added later on. </p>
+<p>It is also planned to add the ability to access a given plot via the Python console so that users can customise the plot using <strong><a href="https://pyqtgraph.readthedocs.io/en/latest/">pyqtgraph</a></strong> directly which will allow as much customisation as the library allows.</p>
+<h2 id="user-plot-data">User Plot Data<a class="headerlink" href="#user-plot-data" title="Permanent link">&para;</a></h2>
+<p>This will most likely be implemented in a similar way to the legacy viewer with a few tweaks to make it more in keeping with how the new viewer works. It may also be setup in a way that allows different plot types e.g. bar charts for representing rainfall hyetographs.</p>
+<h2 id="plot-statistics">Plot Statistics<a class="headerlink" href="#plot-statistics" title="Permanent link">&para;</a></h2>
+<p>This is predominately in relation to extracting median and mean plot data for Australian Rainfall &amp; Runoff (ARR) design storms. It may also be designed to extract other statistics from the plot as well.</p>
 
 
 
