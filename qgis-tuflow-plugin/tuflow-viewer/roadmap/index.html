@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://docs.tuflow/qgis-tuflow-plugin/2026.0/tuflow-viewer/roadmap/">
       
       
-        <link rel="prev" href="../general-plot-display-options/">
+        <link rel="prev" href="../loading-results/">
       
       
       
@@ -378,18 +378,6 @@
       
         
       
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
     
     
     
@@ -441,144 +429,6 @@
   
   <span class="md-ellipsis">
     Loading Results
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../plotting-map-outputs/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Plotting Map Outputs
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../plotting-time-series-outputs/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Plotting Time Series Outputs
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../plotting-hydraulic-properties/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Plotting Hydraulic Properties
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../plotting-1d-cross-sections/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Plotting 1D Cross Sections
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../plotting-2d-and-1d-bc-tables/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Plotting 2D and 1D BC Tables
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../general-plot-display-options/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    General Plot Display Options
     
   </span>
   
@@ -722,29 +572,29 @@
 
 
 <h1 id="tuflow-viewer-roadmap">TUFLOW Viewer Roadmap<a class="headerlink" href="#tuflow-viewer-roadmap" title="Permanent link">&para;</a></h1>
-<p>Although <strong>TUFLOW Viewer V2</strong> already has many of the core functionalities implemented, there are still several features and tools from the <strong>legacy TUFLOW Viewer</strong> that
-have not been ported across yet. The following roadmap outlines the planned features and improvements for future releases of the <strong>TUFLOW Viewer V2</strong> tool. This roadmap is focussed on the features that are currently missing compared to the <strong>legacy TUFLOW Viewer</strong> and does not include all potential new features. This roadmap is subject to change and may be updated as development progresses.</p>
+<p>Although the new <strong>TUFLOW Viewer</strong> already has many of the core functionalities implemented, there are still several features and tools from the <strong>legacy TUFLOW Viewer</strong> that
+have not been ported across yet. The following roadmap outlines the planned features and improvements for future releases of the <strong>TUFLOW Viewer</strong> tool. This roadmap is focussed on the features that are currently missing compared to the <strong>legacy TUFLOW Viewer</strong> and does not include all potential new features. This roadmap is subject to change and may be updated as development progresses.</p>
 <p>The order of the features listed below is loosely based on priority, with higher priority features listed first. However, the actual implementation order may vary based on development considerations.</p>
 <h2 id="export-animation-tool">Export Animation Tool<a class="headerlink" href="#export-animation-tool" title="Permanent link">&para;</a></h2>
-<p>This is probably the highest priority feature missing from <strong>TUFLOW Viewer V2</strong> as it is a commonly used tool in the legacy viewer and an important part of a deliverable workflow.</p>
-<p>In the meantime, if you don't require plots on your animation, it is possible to <strong><a href="https://www.youtube.com/watch?v=bIMAJfVjnmg">export an animation</a></strong> in the main map window using the QGIS temporal controller. In the linked video, a GIF is created, however if you prefer a <code>.mp4</code> or other video format, <strong><a href="https://www.ffmpeg.org/">FFmpeg</a></strong> can be used convert image sequences to video files. Indeed, this is how the <strong>legacy TUFLOW Viewer</strong> created animations. <strong>FFmpeg</strong> is similar to a TUFLOW utility and can be executed via a batch file. An example batch file command is provided for you to modify:</p>
+<p>This is probably the highest priority feature missing from the new <strong>TUFLOW Viewer</strong> as it is a commonly used tool in the legacy viewer and an important part of a deliverable workflow.</p>
+<p>In the meantime, if plots are not required for the animation, it is possible to <strong><a href="https://www.youtube.com/watch?v=bIMAJfVjnmg">export an animation</a></strong> in the main map window using the <strong>QGIS</strong> temporal controller. In the linked video, a GIF is created, however if a <code>.mp4</code> or other video format is preferred, <strong><a href="https://www.ffmpeg.org/">FFmpeg</a></strong> can be used convert image sequences to video files. Indeed, this is how the <strong>legacy TUFLOW Viewer</strong> created animations. <strong>FFmpeg</strong> is similar to a TUFLOW utility and can be executed via a batch file. An example batch file command is provided below for modification:</p>
 <div class="highlight"><pre><span></span><code>ffmpeg.exe -framerate 10 -i animation_export_<span class="nv">%0</span>4d.png -c:v libx264 -pix_fmt yuv420p -movflags +faststart output.mp4
 </code></pre></div>
 <p>Some of the customisable or important parts of the command are explained below:</p>
 <ul>
 <li><code>-framerate 10</code> specifies the frame rate of the output video (10 frames per second in this case).</li>
-<li><code>-i animation_export_%04d.png</code> specifies the input image sequence, where <code>%04d</code> is a placeholder for a four-digit frame number (e.g., <code>0001</code>, <code>0002</code>, etc.). Make sure this matches your exported image filenames as shown below in the <strong>Template</strong> field:<br>
+<li><code>-i animation_export_%04d.png</code> specifies the input image sequence, where <code>%04d</code> is a placeholder for a four-digit frame number (e.g., <code>0001</code>, <code>0002</code>, etc.). Make sure this matches the exported image filenames as shown below in the <strong>Template</strong> field:<br>
     <figure markdown="span">
         <img alt="" src="../assets/images/export-animation-dialogue.png" width="400" />
     </figure></li>
 <li><code>output.mp4</code> is the name of the output video file.</li>
-<li>Another important aspect is to make sure the image width and height are divisible by 2, otherwise <strong>FFmpeg</strong> may throw an error. These settings can be adjusted in the export animation dialogue in <strong>QGIS</strong> (you can see these fields in the above image).</li>
+<li>Another important aspect is to make sure the image width and height are divisible by 2, otherwise <strong>FFmpeg</strong> may throw an error. These settings can be adjusted in the export animation dialogue in <strong>QGIS</strong> (this can see these fields in the above image).</li>
 </ul>
 <h2 id="flux-tool">Flux Tool<a class="headerlink" href="#flux-tool" title="Permanent link">&para;</a></h2>
-<p><strong>TUFLOW Viewer V2</strong> uses <strong>PyTUFLOW</strong> to read and extract data from results, and currently this is not supported in <strong><a href="https://docs.tuflow.com/pytuflow">PyTUFLOW</a></strong>. It is planned to add this support in both <strong>PyTUFLOW</strong> and <strong>TUFLOW Viewer V2</strong>. It is most likely going to be calculated slightly differently where it will use the <code>q</code> map output data type rather than the <code>d</code> and <code>v</code> data types as done in the legacy viewer. The depth and velocity data work OK for flat cells, and is almost guaranteed to be present in most results (which is why it was originally chosen), however as sub-grid sampling has been introduced in TUFLOW, this becomes less accurate. So if you want to use the flux tool in the future, it is recommended to start adding the <code>q</code> map output data type to your models!</p>
+<p>The new <strong>TUFLOW Viewer</strong> uses <strong><a href="https://docs.tuflow.com/pytuflow">PyTUFLOW</a></strong> to read and extract data from results, and currently flux is not supported in <strong>PyTUFLOW</strong>. It is planned to add this support in both <strong>PyTUFLOW</strong> and <strong>TUFLOW Viewer</strong>. It is most likely going to be calculated slightly differently where it will use the <code>q</code> map output data type rather than the <code>d</code> and <code>v</code> data types as done in the legacy viewer. The depth and velocity data work OK for flat cells, and is almost guaranteed to be present in most results (which is why it was originally chosen). However, as sub-grid sampling has been introduced in TUFLOW, this becomes less accurate. So, it is recommended to start adding the <code>q</code> map output data type to model outputs!</p>
 <h2 id="plot-customisation">Plot Customisation<a class="headerlink" href="#plot-customisation" title="Permanent link">&para;</a></h2>
 <p>Currently, there is very little support for plot customisation i.e. legends, axis labels, titles, custom colours etc. Plot customisation can be quite complex to implement for an interactive and dynamic plotting tool, as settings need to survive plot redraws and updates. It is planned to add some basic customisation options in future releases, with more advanced options to be added later on. </p>
-<p>It is also planned to add the ability to access a given plot via the Python console so that users can customise the plot using <strong><a href="https://pyqtgraph.readthedocs.io/en/latest/">pyqtgraph</a></strong> directly which will allow the maximum amount of customisation, albeit with some Python knowledge required.</p>
+<p>It is also planned to add the ability to access a given plot via the <strong>Python</strong> console so that users can customise the plot using <strong><a href="https://pyqtgraph.readthedocs.io/en/latest/">pyqtgraph</a></strong> directly. This will allow the maximum amount of customisation, albeit with some <strong>Python</strong> knowledge required.</p>
 <h2 id="user-plot-data">User Plot Data<a class="headerlink" href="#user-plot-data" title="Permanent link">&para;</a></h2>
 <p>This will most likely be implemented in a similar way to the legacy viewer with a few tweaks to make it more in keeping with how the new viewer works. It is also planned to be setup in a way that allows different plot types in the future e.g. bar charts for representing rainfall hyetographs.</p>
 <h2 id="plot-statistics">Plot Statistics<a class="headerlink" href="#plot-statistics" title="Permanent link">&para;</a></h2>
@@ -784,7 +634,7 @@ have not been ported across yet. The following roadmap outlines the planned feat
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../general-plot-display-options/" class="md-footer__link md-footer__link--prev" aria-label="Previous: General Plot Display Options">
+          <a href="../loading-results/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Loading Results">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -794,7 +644,7 @@ have not been ported across yet. The following roadmap outlines the planned feat
                 Previous
               </span>
               <div class="md-ellipsis">
-                General Plot Display Options
+                Loading Results
               </div>
             </div>
           </a>
