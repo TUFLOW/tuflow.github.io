@@ -1,0 +1,193 @@
+﻿/* ============================================================
+   GLOBAL
+   ============================================================ */
+
+/* Hide the site title above the navigation */
+.md-nav__title[for="__drawer"] {
+  display: none !important;
+}
+
+/* ============================================================
+   LIGHT MODE (tuflow-default)
+   ============================================================ */
+[data-md-color-scheme="tuflow-default"] {
+  --md-primary-fg-color:        #D8EFF1;
+  --md-primary-fg-color--light: #D8EFF1;
+  --md-primary-fg-color--dark:  #D8EFF1;
+}
+
+/* Header, nav, and text = corporate blue */
+[data-md-color-scheme="tuflow-default"] .md-header__title,
+[data-md-color-scheme="tuflow-default"] .md-header__topic,
+[data-md-color-scheme="tuflow-default"] .md-nav__title,
+[data-md-color-scheme="tuflow-default"] .md-tabs,
+[data-md-color-scheme="tuflow-default"] .md-tabs__link,
+[data-md-color-scheme="tuflow-default"] .md-tabs__link--active,
+[data-md-color-scheme="tuflow-default"] .md-nav__link {
+  color: #005581 !important;
+}
+
+/* Light mode footer + logo */
+[data-md-color-scheme="tuflow-default"] .md-header__button.md-logo img {
+  content: url("../assets/logo/TUFLOW.png");
+}
+[data-md-color-scheme="tuflow-default"] .md-footer {
+  background-color: #D8EFF1;
+  color: #005581 !important;
+}
+[data-md-color-scheme="tuflow-default"] .md-footer a {
+  color: #005581 !important;
+}
+[data-md-color-scheme="tuflow-default"] .md-footer-meta {
+  background-color: #D8EFF1;
+}
+
+/* Force copyright and footer text to blue */
+[data-md-color-scheme="tuflow-default"] footer.md-footer,
+[data-md-color-scheme="tuflow-default"] footer.md-footer *,
+[data-md-color-scheme="tuflow-default"] .md-footer-meta,
+[data-md-color-scheme="tuflow-default"] .md-footer-meta *,
+[data-md-color-scheme="tuflow-default"] .md-copyright,
+[data-md-color-scheme="tuflow-default"] .md-copyright *,
+[data-md-color-scheme="tuflow-default"] .md-footer a {
+  color: #005581 !important;
+  fill:  #005581 !important;
+}
+
+/* Content buttons (e.g., “Getting Started”) */
+[data-md-color-scheme="tuflow-default"] .md-typeset .md-button,
+[data-md-color-scheme="tuflow-default"] .md-typeset .md-button--primary {
+  color: #005581 !important;
+}
+
+/* ============================================================
+   DARK MODE (slate)
+   ============================================================ */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color:        #0E2841;
+  --md-primary-fg-color--light: #0E2841;
+  --md-primary-fg-color--dark:  #0E2841;
+  --md-typeset-a-color:         #1ABDC9;
+}
+[data-md-color-scheme="slate"] .md-header__button.md-logo img {
+  content: url("../assets/logo/TUFLOW_dark.png");
+}
+[data-md-color-scheme="slate"] .md-footer {
+  background-color: #0E2841;
+  color: #EAF6F7;
+}
+[data-md-color-scheme="slate"] .md-footer-meta {
+  background-color: #0E2841;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+
+/* Home: bold, inherits default colour */
+[data-md-color-scheme="tuflow-default"] .md-nav--primary > .md-nav__list > .md-nav__item:first-child > .md-nav__link,
+[data-md-color-scheme="slate"]         .md-nav--primary > .md-nav__list > .md-nav__item:first-child > .md-nav__link {
+  color: inherit !important;
+  font-weight: 600 !important;
+}
+
+/* Hover: pink (#E20177) in both themes */
+[data-md-color-scheme="tuflow-default"] .md-nav__link:hover,
+[data-md-color-scheme="slate"] .md-nav__link:hover {
+  color: #E20177 !important;
+  text-decoration: none !important;
+}
+
+/* Default: inherit theme colour */
+[data-md-color-scheme="tuflow-default"] .md-nav__link,
+[data-md-color-scheme="slate"] .md-nav__link {
+  color: inherit !important;
+}
+
+/* Active/current page: teal (#1ABDC9) + bold (basic) */
+[data-md-color-scheme="tuflow-default"] .md-nav__link[aria-current="page"],
+[data-md-color-scheme="tuflow-default"] .md-nav__link[aria-current="true"],
+[data-md-color-scheme="slate"]         .md-nav__link[aria-current="page"],
+[data-md-color-scheme="slate"]         .md-nav__link[aria-current="true"] {
+  color: #1ABDC9 !important;
+  font-weight: 600 !important;
+}
+
+/* ============================================================
+   SUN / MOON ICON FLICKER
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  /* Light: sun flicker (warm gold) */
+  [data-md-color-scheme="tuflow-default"] .md-header__button.md-icon svg {
+    animation: tf-flicker-sun 3s ease-in-out infinite;
+    transform-origin: center;
+    filter: drop-shadow(0 0 3px rgba(255, 200, 100, 0.25));
+  }
+  @keyframes tf-flicker-sun {
+    0%, 100% { opacity: 1;    filter: brightness(1) drop-shadow(0 0 3px rgba(255,200,100,0.25)); }
+    40%      { opacity: 0.95; filter: brightness(1.05) drop-shadow(0 0 4px rgba(255,210,130,0.35)); }
+    60%      { opacity: 0.90; filter: brightness(0.95) drop-shadow(0 0 2px rgba(255,190,80,0.20)); }
+    80%      { opacity: 0.97; filter: brightness(1.10) drop-shadow(0 0 5px rgba(255,220,160,0.40)); }
+  }
+
+  /* Dark: moon flicker (cool cyan) */
+  [data-md-color-scheme="slate"] .md-header__button.md-icon svg {
+    animation: tf-flicker-moon 3s ease-in-out infinite;
+    transform-origin: center;
+    filter: drop-shadow(0 0 3px rgba(130, 200, 255, 0.25));
+  }
+  @keyframes tf-flicker-moon {
+    0%, 100% { opacity: 1;    filter: brightness(1) drop-shadow(0 0 3px rgba(130,200,255,0.25)); }
+    40%      { opacity: 0.95; filter: brightness(1.05) drop-shadow(0 0 4px rgba(150,220,255,0.35)); }
+    60%      { opacity: 0.90; filter: brightness(0.95) drop-shadow(0 0 2px rgba(120,190,240,0.20)); }
+    80%      { opacity: 0.97; filter: brightness(1.10) drop-shadow(0 0 5px rgba(180,240,255,0.40)); }
+  }
+}
+
+/* Card links: match body text colour, but stay pink on hover */
+.md-typeset .grid .card a,
+.md-typeset .grid.cards a,
+.md-typeset .grid > * a {
+  color: inherit !important;         /* match current theme text colour */
+  border-bottom: none;               /* optional: cleaner look */
+}
+
+/* Hover: pink in both light and dark themes */
+[data-md-color-scheme="tuflow-default"] .md-typeset .grid .card a:hover,
+[data-md-color-scheme="tuflow-default"] .md-typeset .grid.cards a:hover,
+[data-md-color-scheme="tuflow-default"] .md-typeset .grid > * a:hover,
+[data-md-color-scheme="slate"] .md-typeset .grid .card a:hover,
+[data-md-color-scheme="slate"] .md-typeset .grid.cards a:hover,
+[data-md-color-scheme="slate"] .md-typeset .grid > * a:hover {
+  color: #E20177 !important;         /* your pink accent */
+  text-decoration: underline;        /* subtle hover cue */
+}
+
+
+/* ============================================================
+   FINAL FIX: ensure teal (#1ABDC9) stays on all active nav items
+   ============================================================ */
+
+/* 1) Actual current page (anchors with aria-current) */
+[data-md-color-scheme="tuflow-default"] .md-nav__item > .md-nav__link[aria-current],
+[data-md-color-scheme="slate"]         .md-nav__item > .md-nav__link[aria-current] {
+  color: #1ABDC9 !important;
+  font-weight: 600 !important;
+}
+
+/* 2) Links marked as active by MkDocs Material */
+[data-md-color-scheme="tuflow-default"] .md-nav__item .md-nav__link--active,
+[data-md-color-scheme="slate"]         .md-nav__item .md-nav__link--active {
+  color: #1ABDC9 !important;
+  font-weight: 600 !important;
+}
+
+/* hide images when #only-light and #only-dark IDs are used */
+[data-md-color-scheme="tuflow-default"] img[src$="#only-dark"],
+[data-md-color-scheme="tuflow-default"] img[src$="#gh-dark-mode-only"] {
+  display: none; /* Hide dark images in light mode */
+}
+[data-md-color-scheme="slate"] img[src$="#only-light"],
+[data-md-color-scheme="slate"] img[src$="#gh-light-mode-only"] {
+  display: none; /* Hide light images in dark mode */
+}
