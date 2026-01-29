@@ -1,4 +1,4 @@
-pytuflow.SettingInput.comment
+﻿pytuflow.SettingInput.comment
 =============================
 
 .. currentmodule:: pytuflow

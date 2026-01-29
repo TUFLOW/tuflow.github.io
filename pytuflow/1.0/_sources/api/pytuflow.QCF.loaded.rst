@@ -1,4 +1,4 @@
-pytuflow.QCF.loaded
+﻿pytuflow.QCF.loaded
 ===================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-pytuflow.TOC.loaded
+﻿pytuflow.TOC.loaded
 ===================
 
 .. currentmodule:: pytuflow

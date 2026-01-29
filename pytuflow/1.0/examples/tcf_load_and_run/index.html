@@ -28,8 +28,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=d45342e5" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -38,8 +38,8 @@
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=55b5f74b"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/tcf_load_and_run';</script>
     <link rel="canonical" href="https://docs.tuflow.com/pytuflow/examples/tcf_load_and_run/" />
@@ -1587,7 +1587,7 @@ uses <code class="docutils literal notranslate"><span class="pre">EG00_001.tcf</
 <section id="loading-a-tuflow-control-file-tcf">
 <h2>Loading a TUFLOW Control File (TCF)<a class="headerlink" href="#loading-a-tuflow-control-file-tcf" title="Link to this heading">#</a></h2>
 <p>Loading an existing TUFLOW model can be done very simply using the <a class="reference internal" href="../../api/pytuflow.TCF/" title="pytuflow.TCF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TCF</span></code></a> class.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pytuflow</span> <span class="kn">import</span> <span class="n">TCF</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCF</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG00_001.tcf&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1693,7 +1693,7 @@ that folder:</p>
   │   ├── TUFLOW_iDP_w64.exe
 </pre></div>
 </div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pytuflow</span> <span class="kn">import</span> <span class="n">register_tuflow_binary_folder</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">register_tuflow_binary_folder</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">register_tuflow_binary_folder</span><span class="p">(</span><span class="s1">&#39;/path/to/tuflow/binaries&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1709,7 +1709,7 @@ An empty context is still required even if there are no events or scenarios to r
 <section id="interrogating-the-results">
 <h2>Interrogating the Results<a class="headerlink" href="#interrogating-the-results" title="Link to this heading">#</a></h2>
 <p>With the <code class="docutils literal notranslate"><span class="pre">tcf_run</span></code> instance, we can also get the output folder and output name. With this, we can access the results:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pytuflow</span> <span class="kn">import</span> <span class="n">XMDF</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">XMDF</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">xmdf_path</span> <span class="o">=</span> <span class="n">tcf_run</span><span class="o">.</span><span class="n">output_folder_2d</span><span class="p">()</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">tcf_run</span><span class="o">.</span><span class="n">output_name</span><span class="p">()</span><span class="si">}</span><span class="s1">.xmdf&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">xmdf</span> <span class="o">=</span> <span class="n">XMDF</span><span class="p">(</span><span class="n">xmdf_path</span><span class="p">)</span>
 </pre></div>
@@ -1746,7 +1746,7 @@ if the <code class="docutils literal notranslate"><span class="pre">netCDF4</spa
 </div>
 <p>We added the <code class="docutils literal notranslate"><span class="pre">NC</span></code> map output format to the TCF, so that we could easily query the results in Python using the
 <a class="reference internal" href="../../api/pytuflow.NCGrid/" title="pytuflow.NCGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">NCGrid</span></code></a> class.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pytuflow</span> <span class="kn">import</span> <span class="n">NCGrid</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">NCGrid</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ncgrid_path</span> <span class="o">=</span> <span class="n">tcf_run</span><span class="o">.</span><span class="n">output_folder_2d</span><span class="p">()</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">tcf_run</span><span class="o">.</span><span class="n">output_name</span><span class="p">()</span><span class="si">}</span><span class="s1">.nc&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ncgrid</span> <span class="o">=</span> <span class="n">NCGrid</span><span class="p">(</span><span class="n">ncgrid_path</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nc_grid</span><span class="o">.</span><span class="n">data_types</span><span class="p">()</span>

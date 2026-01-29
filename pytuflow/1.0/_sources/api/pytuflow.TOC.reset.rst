@@ -1,4 +1,4 @@
-pytuflow.TOC.reset
+﻿pytuflow.TOC.reset
 ==================
 
 .. currentmodule:: pytuflow

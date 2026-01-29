@@ -1,4 +1,4 @@
-pytuflow.TinInput.is\_match
+﻿pytuflow.TinInput.is\_match
 ===========================
 
 .. currentmodule:: pytuflow

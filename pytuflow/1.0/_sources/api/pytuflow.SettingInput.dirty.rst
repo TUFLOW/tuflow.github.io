@@ -1,4 +1,4 @@
-pytuflow.SettingInput.dirty
+﻿pytuflow.SettingInput.dirty
 ===========================
 
 .. currentmodule:: pytuflow

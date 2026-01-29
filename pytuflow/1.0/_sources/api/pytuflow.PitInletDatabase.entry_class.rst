@@ -1,4 +1,4 @@
-pytuflow.PitInletDatabase.entry\_class
+﻿pytuflow.PitInletDatabase.entry\_class
 ======================================
 
 .. currentmodule:: pytuflow

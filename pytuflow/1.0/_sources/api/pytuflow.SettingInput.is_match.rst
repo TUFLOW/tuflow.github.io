@@ -1,4 +1,4 @@
-pytuflow.SettingInput.is\_match
+﻿pytuflow.SettingInput.is\_match
 ===============================
 
 .. currentmodule:: pytuflow

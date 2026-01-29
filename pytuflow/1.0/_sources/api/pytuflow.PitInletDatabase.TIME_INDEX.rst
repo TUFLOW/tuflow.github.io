@@ -1,4 +1,4 @@
-pytuflow.PitInletDatabase.TIME\_INDEX
+﻿pytuflow.PitInletDatabase.TIME\_INDEX
 =====================================
 
 .. currentmodule:: pytuflow

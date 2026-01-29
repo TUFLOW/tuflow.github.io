@@ -1,4 +1,4 @@
-pytuflow.SettingInput.TUFLOW\_TYPE
+﻿pytuflow.SettingInput.TUFLOW\_TYPE
 ==================================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-pytuflow.PitInletDatabase.INDEX\_COL
+﻿pytuflow.PitInletDatabase.INDEX\_COL
 ====================================
 
 .. currentmodule:: pytuflow

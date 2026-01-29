@@ -1,4 +1,4 @@
-pytuflow.TGC.loaded
+﻿pytuflow.TGC.loaded
 ===================
 
 .. currentmodule:: pytuflow

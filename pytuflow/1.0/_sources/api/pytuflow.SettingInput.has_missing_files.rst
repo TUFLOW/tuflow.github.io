@@ -1,4 +1,4 @@
-pytuflow.SettingInput.has\_missing\_files
+﻿pytuflow.SettingInput.has\_missing\_files
 =========================================
 
 .. currentmodule:: pytuflow

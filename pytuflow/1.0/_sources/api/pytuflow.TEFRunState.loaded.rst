@@ -1,4 +1,4 @@
-pytuflow.TEFRunState.loaded
+﻿pytuflow.TEFRunState.loaded
 ===========================
 
 .. currentmodule:: pytuflow

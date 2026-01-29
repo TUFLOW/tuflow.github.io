@@ -1,4 +1,4 @@
-pytuflow.TRFC.scope
+﻿pytuflow.TRFC.scope
 ===================
 
 .. currentmodule:: pytuflow

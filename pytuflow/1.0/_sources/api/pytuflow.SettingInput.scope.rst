@@ -1,4 +1,4 @@
-pytuflow.SettingInput.scope
+﻿pytuflow.SettingInput.scope
 ===========================
 
 .. currentmodule:: pytuflow

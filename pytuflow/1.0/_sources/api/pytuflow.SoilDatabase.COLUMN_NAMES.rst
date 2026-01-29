@@ -1,4 +1,4 @@
-pytuflow.SoilDatabase.COLUMN\_NAMES
+﻿pytuflow.SoilDatabase.COLUMN\_NAMES
 ===================================
 
 .. currentmodule:: pytuflow

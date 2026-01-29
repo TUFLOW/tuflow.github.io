@@ -1,4 +1,4 @@
-pytuflow.TinInput.is\_start\_block
+﻿pytuflow.TinInput.is\_start\_block
 ==================================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-pytuflow.TEFRunState.parse\_event\_file
+﻿pytuflow.TEFRunState.parse\_event\_file
 =======================================
 
 .. currentmodule:: pytuflow

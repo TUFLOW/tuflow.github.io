@@ -1,4 +1,4 @@
-pytuflow.TuflowBinaries.load\_reg\_tuflow\_version\_cache
+﻿pytuflow.TuflowBinaries.load\_reg\_tuflow\_version\_cache
 =========================================================
 
 .. currentmodule:: pytuflow

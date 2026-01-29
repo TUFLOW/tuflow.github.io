@@ -1,4 +1,4 @@
-pytuflow.TOC.scope
+﻿pytuflow.TOC.scope
 ==================
 
 .. currentmodule:: pytuflow

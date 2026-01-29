@@ -1,4 +1,4 @@
-pytuflow.TGC.reset
+﻿pytuflow.TGC.reset
 ==================
 
 .. currentmodule:: pytuflow

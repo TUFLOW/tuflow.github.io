@@ -1,4 +1,4 @@
-pytuflow.TinInput.record\_change
+﻿pytuflow.TinInput.record\_change
 ================================
 
 .. currentmodule:: pytuflow

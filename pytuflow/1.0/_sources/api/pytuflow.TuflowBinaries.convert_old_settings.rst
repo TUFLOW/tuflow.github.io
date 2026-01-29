@@ -1,4 +1,4 @@
-pytuflow.TuflowBinaries.convert\_old\_settings
+﻿pytuflow.TuflowBinaries.convert\_old\_settings
 ==============================================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-pytuflow.TEF.write
+﻿pytuflow.TEF.write
 ==================
 
 .. currentmodule:: pytuflow

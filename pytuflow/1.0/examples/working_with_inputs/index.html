@@ -28,8 +28,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=d45342e5" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -38,8 +38,8 @@
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=55b5f74b"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/working_with_inputs';</script>
     <link rel="canonical" href="https://docs.tuflow.com/pytuflow/examples/working_with_inputs/" />
@@ -1597,7 +1597,7 @@ explicitly covered. This page aims to go into a bit more detail about how inputs
 <h3>1. files<a class="headerlink" href="#files" title="Link to this heading">#</a></h3>
 <p>Each input has a <code class="xref py py-attr docutils literal notranslate"><span class="pre">files</span></code> attribute that is a list of all the files that are associated
 with the input.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pytuflow</span> <span class="kn">import</span> <span class="n">TCF</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCF</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG00_001.tcf&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;Read GRID Zpts&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">inp</span><span class="o">.</span><span class="n">files</span><span class="p">:</span>
@@ -1640,7 +1640,7 @@ The <code class="xref py py-attr docutils literal notranslate"><span class="pre"
 for GPKGs, as the layer name is not necessarily the same as the GPKG file name.</p>
 <p>TuflowPath objects also extend the <code class="xref py py-meth docutils literal notranslate"><span class="pre">glob()</span></code> method to allow for globbing of layers in GPKG files.
 The below example uses a GPKG created from <code class="docutils literal notranslate"><span class="pre">EG07_002.tcf</span></code> using the convert TUFLOW model GIS format tool in QGIS.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pytuflow</span> <span class="kn">import</span> <span class="n">TuflowPath</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TuflowPath</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gpkg</span> <span class="o">=</span> <span class="n">TuflowPath</span><span class="p">(</span><span class="s1">&#39;/path/to/EG07_002.gpkg&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">gpkg</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;&gt;&gt; 2d_zsh*&#39;</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
@@ -1653,7 +1653,7 @@ pattern <code class="docutils literal notranslate"><span class="pre">2d_zsh*</sp
 <code class="docutils literal notranslate"><span class="pre">TuflowPath</span></code> objects that represent the layers in the GPKG file.</p>
 <p>TuflowPath also has a couple of useful methods for extracting information from the GIS layer. The first example
 extracts the GIS attributes from the layer without requiring GDAL to be installed.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pytuflow</span> <span class="kn">import</span> <span class="n">TCF</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCF</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG00_001.tcf&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gis_2d_bc</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;2d_bc&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">gis_2d_bc</span><span class="o">.</span><span class="n">gis_attributes</span><span class="p">():</span>
@@ -1698,7 +1698,7 @@ If the attribute evaluates to <code class="docutils literal notranslate"><span c
 </div>
 <p>More than one attribute can be passed into the <code class="docutils literal notranslate"><span class="pre">attrs</span></code> parameter.
 For example, if you wanted to return only missing files from GIS inputs:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pytuflow</span> <span class="kn">import</span> <span class="n">const</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">const</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;has_missing_files&#39;</span><span class="p">,),</span> <span class="p">(</span><span class="s1">&#39;TUFLOW_TYPE&#39;</span><span class="p">,</span> <span class="n">const</span><span class="o">.</span><span class="n">INPUT</span><span class="o">.</span><span class="n">GIS</span><span class="p">)]):</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
 <span class="go">Read GIS Code == gis\2d_code_EG00_001.shp</span>

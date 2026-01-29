@@ -1,4 +1,4 @@
-pytuflow.TEF.reset
+﻿pytuflow.TEF.reset
 ==================
 
 .. currentmodule:: pytuflow

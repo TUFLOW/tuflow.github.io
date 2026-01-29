@@ -1,4 +1,4 @@
-pytuflow.TuflowBinaries.tuflow\_version\_json
+﻿pytuflow.TuflowBinaries.tuflow\_version\_json
 =============================================
 
 .. currentmodule:: pytuflow

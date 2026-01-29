@@ -1,4 +1,4 @@
-pytuflow.TCFRunState.TUFLOW\_TYPE
+﻿pytuflow.TCFRunState.TUFLOW\_TYPE
 =================================
 
 .. currentmodule:: pytuflow

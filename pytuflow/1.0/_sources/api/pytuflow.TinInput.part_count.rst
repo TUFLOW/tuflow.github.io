@@ -1,4 +1,4 @@
-pytuflow.TinInput.part\_count
+﻿pytuflow.TinInput.part\_count
 =============================
 
 .. currentmodule:: pytuflow

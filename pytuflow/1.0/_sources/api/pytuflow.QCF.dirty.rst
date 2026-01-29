@@ -1,4 +1,4 @@
-pytuflow.QCF.dirty
+﻿pytuflow.QCF.dirty
 ==================
 
 .. currentmodule:: pytuflow

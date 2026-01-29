@@ -1,4 +1,4 @@
-pytuflow.TBC.dirty
+﻿pytuflow.TBC.dirty
 ==================
 
 .. currentmodule:: pytuflow

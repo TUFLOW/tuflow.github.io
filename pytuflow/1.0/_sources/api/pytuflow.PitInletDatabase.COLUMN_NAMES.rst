@@ -1,4 +1,4 @@
-pytuflow.PitInletDatabase.COLUMN\_NAMES
+﻿pytuflow.PitInletDatabase.COLUMN\_NAMES
 =======================================
 
 .. currentmodule:: pytuflow

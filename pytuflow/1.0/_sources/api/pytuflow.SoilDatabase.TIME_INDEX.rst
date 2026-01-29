@@ -1,4 +1,4 @@
-pytuflow.SoilDatabase.TIME\_INDEX
+﻿pytuflow.SoilDatabase.TIME\_INDEX
 =================================
 
 .. currentmodule:: pytuflow

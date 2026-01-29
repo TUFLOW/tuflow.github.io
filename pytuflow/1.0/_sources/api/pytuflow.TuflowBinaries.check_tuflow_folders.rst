@@ -1,4 +1,4 @@
-pytuflow.TuflowBinaries.check\_tuflow\_folders
+﻿pytuflow.TuflowBinaries.check\_tuflow\_folders
 ==============================================
 
 .. currentmodule:: pytuflow

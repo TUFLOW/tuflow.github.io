@@ -1,4 +1,4 @@
-pytuflow.TEFRunState.config
+﻿pytuflow.TEFRunState.config
 ===========================
 
 .. currentmodule:: pytuflow

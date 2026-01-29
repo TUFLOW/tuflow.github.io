@@ -1,4 +1,4 @@
-pytuflow.XMDF.ID\_COLUMNS
+﻿pytuflow.XMDF.ID\_COLUMNS
 =========================
 
 .. currentmodule:: pytuflow

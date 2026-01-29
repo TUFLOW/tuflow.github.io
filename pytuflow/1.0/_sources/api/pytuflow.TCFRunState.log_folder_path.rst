@@ -1,4 +1,4 @@
-pytuflow.TCFRunState.log\_folder\_path
+﻿pytuflow.TCFRunState.log\_folder\_path
 ======================================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-pytuflow.TSCF.reset
+﻿pytuflow.TSCF.reset
 ===================
 
 .. currentmodule:: pytuflow

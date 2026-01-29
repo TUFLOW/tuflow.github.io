@@ -1,4 +1,4 @@
-pytuflow.TOC.remove\_input
+﻿pytuflow.TOC.remove\_input
 ==========================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-pytuflow.TBC.altered\_inputs
+﻿pytuflow.TBC.altered\_inputs
 ============================
 
 .. currentmodule:: pytuflow

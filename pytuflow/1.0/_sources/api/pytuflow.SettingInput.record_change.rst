@@ -1,4 +1,4 @@
-pytuflow.SettingInput.record\_change
+﻿pytuflow.SettingInput.record\_change
 ====================================
 
 .. currentmodule:: pytuflow

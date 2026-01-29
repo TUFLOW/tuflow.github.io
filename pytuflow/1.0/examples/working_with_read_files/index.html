@@ -28,8 +28,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=d45342e5" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -38,8 +38,8 @@
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=55b5f74b"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/working_with_read_files';</script>
     <link rel="canonical" href="https://docs.tuflow.com/pytuflow/examples/working_with_read_files/" />
@@ -1619,7 +1619,7 @@ any existing model.</p>
 <h2>1. Create a New Scenario Group<a class="headerlink" href="#create-a-new-scenario-group" title="Link to this heading">#</a></h2>
 <p>The first step is to load <code class="docutils literal notranslate"><span class="pre">EG00_001.tcf</span></code> and save it with a new name that includes a scenario slot for our
 new scenario group.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pytuflow</span> <span class="kn">import</span> <span class="n">TCF</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCF</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG00_001.tcf&#39;</span><span class="p">)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">fpath</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">fpath</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="s1">&#39;EG00_~s1~_001a.tcf&#39;</span><span class="p">)</span>
@@ -1650,7 +1650,7 @@ reference input).</p>
 <p>Next, we need to set the input scope of the new inputs to put them inside a “If Scenario” block.
 To get the “IF” / “Else If” behaviour, we need to make sure to also use negative scope for the inputs.
 This is explained in more detail in the <a class="reference internal" href="../working_with_scenarios/"><span class="std std-ref">Working with Scenarios and Events</span></a> example.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pytuflow</span> <span class="kn">import</span> <span class="n">Scope</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">Scope</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prev_scope</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;Set Variable CELL_SIZE&#39;</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">scope</span> <span class="o">=</span> <span class="n">Scope</span><span class="p">(</span><span class="s1">&#39;Scenario&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">inp</span><span class="o">.</span><span class="n">value</span><span class="si">:</span><span class="s1">04.1f</span><span class="si">}</span><span class="s1">m&#39;</span><span class="p">)</span>

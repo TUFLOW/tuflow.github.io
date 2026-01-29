@@ -1,4 +1,4 @@
-pytuflow.TPC.channel\_count
+﻿pytuflow.TPC.channel\_count
 ===========================
 
 .. currentmodule:: pytuflow

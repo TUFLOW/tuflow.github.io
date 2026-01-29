@@ -1,4 +1,4 @@
-pytuflow.SoilDatabaseRunState.tcf
+﻿pytuflow.SoilDatabaseRunState.tcf
 =================================
 
 .. currentmodule:: pytuflow

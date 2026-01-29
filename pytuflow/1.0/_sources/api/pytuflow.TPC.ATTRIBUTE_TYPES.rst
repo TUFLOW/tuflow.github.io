@@ -1,4 +1,4 @@
-pytuflow.TPC.ATTRIBUTE\_TYPES
+﻿pytuflow.TPC.ATTRIBUTE\_TYPES
 =============================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-pytuflow.QCF.scope
+﻿pytuflow.QCF.scope
 ==================
 
 .. currentmodule:: pytuflow

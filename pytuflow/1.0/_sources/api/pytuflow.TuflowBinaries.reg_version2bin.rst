@@ -1,4 +1,4 @@
-pytuflow.TuflowBinaries.reg\_version2bin
+﻿pytuflow.TuflowBinaries.reg\_version2bin
 ========================================
 
 .. currentmodule:: pytuflow

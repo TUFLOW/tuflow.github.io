@@ -1,4 +1,4 @@
-pytuflow.TGC.TUFLOW\_TYPE
+﻿pytuflow.TGC.TUFLOW\_TYPE
 =========================
 
 .. currentmodule:: pytuflow

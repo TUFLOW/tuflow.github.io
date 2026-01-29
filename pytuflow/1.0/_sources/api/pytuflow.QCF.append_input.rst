@@ -1,4 +1,4 @@
-pytuflow.QCF.append\_input
+﻿pytuflow.QCF.append\_input
 ==========================
 
 .. currentmodule:: pytuflow

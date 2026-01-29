@@ -1,4 +1,4 @@
-pytuflow.TinInput.dirty
+﻿pytuflow.TinInput.dirty
 =======================
 
 .. currentmodule:: pytuflow

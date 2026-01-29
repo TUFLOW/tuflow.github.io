@@ -1,4 +1,4 @@
-pytuflow.TCF.reset
+﻿pytuflow.TCF.reset
 ==================
 
 .. currentmodule:: pytuflow

@@ -28,8 +28,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=d45342e5" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -38,8 +38,8 @@
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=55b5f74b"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/pytuflow.TEFRunState.find_input';</script>
     <link rel="canonical" href="https://docs.tuflow.com/pytuflow/api/pytuflow.TEFRunState.find_input/" />
@@ -1634,7 +1634,7 @@ to be used in the case since using the filter <code class="docutils literal notr
 return instances if the word “format” appears in the command
 (e.g. “GIS Format == …” or “Map Output Format == …”). It will also return the material file if
 searching from the TCF.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">re</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">control_file</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="n">lhs</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;(set|read gis|read grid) mat&#39;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">regex_flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
 <span class="go">[&lt;SettingInput&gt; Set Mat == 1,</span>
 <span class="go"> &lt;GisInput&gt; Read GIS Mat == gisd_mat_Roads_001_R.shp, &lt;GisInput&gt; Read GIS Mat == gisd_mat_Grass_001_R.shp]</span>
@@ -1647,8 +1647,8 @@ when performing any integrity or pre-modelling checks on the model inputs:</p>
 </pre></div>
 </div>
 <p>An example of using the <code class="docutils literal notranslate"><span class="pre">callback</span></code> parameter to find all inputs that use GIS polygon geometry:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">osgeo</span> <span class="kn">import</span> <span class="n">ogr</span> <span class="c1"># this example requires GDAL/OGR to be installed</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pytuflow</span> <span class="kn">import</span> <span class="n">const</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">osgeo</span><span class="w"> </span><span class="kn">import</span> <span class="n">ogr</span> <span class="c1"># this example requires GDAL/OGR to be installed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">const</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">control_file</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="n">callback</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">TUFLOW_TYPE</span> <span class="o">==</span> <span class="n">const</span><span class="o">.</span><span class="n">INPUT</span><span class="o">.</span><span class="n">GIS</span> <span class="ow">and</span> <span class="n">ogr</span><span class="o">.</span><span class="n">wkbPolygon</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">geoms</span><span class="p">)</span>
 </pre></div>
 </div>

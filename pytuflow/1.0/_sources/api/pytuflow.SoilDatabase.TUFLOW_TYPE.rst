@@ -1,4 +1,4 @@
-pytuflow.SoilDatabase.TUFLOW\_TYPE
+﻿pytuflow.SoilDatabase.TUFLOW\_TYPE
 ==================================
 
 .. currentmodule:: pytuflow

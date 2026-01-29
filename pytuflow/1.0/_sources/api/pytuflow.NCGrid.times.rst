@@ -1,4 +1,4 @@
-pytuflow.NCGrid.times
+﻿pytuflow.NCGrid.times
 =====================
 
 .. currentmodule:: pytuflow

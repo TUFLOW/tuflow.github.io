@@ -28,8 +28,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=d45342e5" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -38,8 +38,8 @@
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=55b5f74b"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/working_with_boundary_data';</script>
     <link rel="canonical" href="https://docs.tuflow.com/pytuflow/examples/working_with_boundary_data/" />
@@ -1591,7 +1591,7 @@ how to make edits.</p>
 does not use an event file and does not require any event arguments to run. The entry
 point to the model will be via the <a class="reference internal" href="../../api/pytuflow.TCF/" title="pytuflow.TCF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TCF</span></code></a> class, which is used to load the TUFLOW model.
 The model used in this example is <code class="docutils literal notranslate"><span class="pre">EG00_001.tcf</span></code> from the TUFLOW example models.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pytuflow</span> <span class="kn">import</span> <span class="n">TCF</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCF</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG00_001.tcf&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1635,7 +1635,7 @@ This is a much more common use case, as many real world models will use an event
 uses <code class="docutils literal notranslate"><span class="pre">EG16_~e1~_~e2~_005.tcf</span></code> from the TUFLOW example models, which has multiple events defined in the event file.</p>
 <p>First, let’s load the TCF file, then get the bc_dbase instance and print the DataFrame to see
 what boundaries are defined in the model:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pytuflow</span> <span class="kn">import</span> <span class="n">TCF</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCF</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG16_~e1~_~e2~_005.tcf&#39;</span><span class="p">)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bc_dbase</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">bc_dbase</span><span class="p">()</span>
@@ -1724,7 +1724,7 @@ not necessarily slow, it will be slower than resolving only the boundary databas
 <a class="reference internal" href="../../api/pytuflow.BCDatabase.df/" title="pytuflow.BCDatabase.df"><code class="xref py py-attr docutils literal notranslate"><span class="pre">BCDatabase.df</span></code></a> attribute. For example, we can add a new boundary that might be
 a constant downstream water level boundary with the name <code class="docutils literal notranslate"><span class="pre">&quot;dns_bndry&quot;</span></code> and a has value of <code class="docutils literal notranslate"><span class="pre">0.5m</span></code>. We will add this
 to the previous model we were working with, <code class="docutils literal notranslate"><span class="pre">EG16_~e1~_~e2~_005.tcf</span></code>:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG16_~e1~_~e2~_005.tcf&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bc_dbase</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">bc_dbase</span><span class="p">()</span>
 
