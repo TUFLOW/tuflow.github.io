@@ -7618,6 +7618,71 @@ div.opaque {
   background-color: #27262b;
 }
 
+p.note, blockquote.note {
+  background: rgba(56, 24, 133, 0.05);
+  border-left: 4px solid #7253ed;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 3px 10px rgba(0, 0, 0, 0.08);
+  padding: 0.8rem;
+}
+p.note::before, blockquote.note::before {
+  color: #7253ed;
+  content: "Note";
+  display: block;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  padding-bottom: 0.125rem;
+}
+p.note > .note-title, blockquote.note > .note-title {
+  color: #7253ed;
+  display: block;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  padding-bottom: 0.125rem;
+}
+
+p.note-title, blockquote.note-title {
+  background: rgba(56, 24, 133, 0.05);
+  border-left: 4px solid #7253ed;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 3px 10px rgba(0, 0, 0, 0.08);
+  padding: 0.8rem;
+}
+p.note-title > p:first-child, blockquote.note-title > p:first-child {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #7253ed;
+  display: block;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  padding-bottom: 0.125rem;
+}
+
+blockquote.note {
+  margin-left: 0;
+  margin-right: 0;
+}
+blockquote.note > p:first-child {
+  margin-top: 0;
+}
+blockquote.note > p:last-child {
+  margin-bottom: 0;
+}
+
+blockquote.note-title {
+  margin-left: 0;
+  margin-right: 0;
+}
+blockquote.note-title > p:nth-child(2) {
+  margin-top: 0;
+}
+blockquote.note-title > p:last-child {
+  margin-bottom: 0;
+}
+
 p.tcf-command, blockquote.tcf-command {
   background: rgba(0, 85, 129, 0.05);
   border-left: 4px solid #b9e0f7;
@@ -8398,6 +8463,71 @@ blockquote.release-candidate-title > p:last-child {
   margin-bottom: 0;
 }
 
+p.beta, blockquote.beta {
+  background: rgba(226, 1, 119, 0.2);
+  border-left: 4px solid #E20177;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 3px 10px rgba(0, 0, 0, 0.08);
+  padding: 0.8rem;
+}
+p.beta::before, blockquote.beta::before {
+  color: #E20177;
+  content: "Release Candidate";
+  display: block;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  padding-bottom: 0.125rem;
+}
+p.beta > .beta-title, blockquote.beta > .beta-title {
+  color: #E20177;
+  display: block;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  padding-bottom: 0.125rem;
+}
+
+p.beta-title, blockquote.beta-title {
+  background: rgba(226, 1, 119, 0.2);
+  border-left: 4px solid #E20177;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 3px 10px rgba(0, 0, 0, 0.08);
+  padding: 0.8rem;
+}
+p.beta-title > p:first-child, blockquote.beta-title > p:first-child {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #E20177;
+  display: block;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  padding-bottom: 0.125rem;
+}
+
+blockquote.beta {
+  margin-left: 0;
+  margin-right: 0;
+}
+blockquote.beta > p:first-child {
+  margin-top: 0;
+}
+blockquote.beta > p:last-child {
+  margin-bottom: 0;
+}
+
+blockquote.beta-title {
+  margin-left: 0;
+  margin-right: 0;
+}
+blockquote.beta-title > p:nth-child(2) {
+  margin-top: 0;
+}
+blockquote.beta-title > p:last-child {
+  margin-bottom: 0;
+}
+
 .site-logo {
   width: 200%;
   height: 200%;
@@ -8468,6 +8598,16 @@ figure figcaption {
   font-weight: bold;
   color: #666;
   margin-top: 0.5em;
+}
+
+/* Force all nav sections open */
+.site-nav .nav-list .nav-list {
+  display: block !important;
+}
+
+.site-nav .nav-list-expander {
+  pointer-events: none;
+  display: none;
 }
 
 tcmd {
@@ -8598,6 +8738,42 @@ a .tcmd, a .teq, a .tblk, a .tgrn {
 /* Ensure styles work within blockquotes */
 blockquote .tcmd, blockquote .teq, blockquote .tblk, blockquote .tgrn {
   color: inherit;
+}
+
+/* Green Beta Release label + callout (outlined box) */
+p.beta-release::before,
+blockquote.beta-release::before {
+  content: "Beta Release";
+  display: inline-block;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  color: #1b5e20;
+  padding: 0;
+  margin-bottom: 0.35rem;
+}
+
+blockquote.beta-release {
+  background-color: #e6f4ea;
+  border: 2px solid #2e7d32; /* ← outline around the box */
+  border-left-width: 6px; /* ← stronger left accent */
+  color: #1b5e20;
+}
+
+/* Remove default top margin on first paragraph */
+blockquote.beta-release > p:first-child {
+  margin-top: 0;
+}
+
+blockquote.beta-release p,
+blockquote.beta-release strong,
+blockquote.beta-release a {
+  color: #1b5e20;
+}
+
+/* Bold only expandable parent headings (years like 2025, 2026) */
+.nav-list-item > .nav-list-expander + .nav-list-link {
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=just-the-docs-dark.css.map */
