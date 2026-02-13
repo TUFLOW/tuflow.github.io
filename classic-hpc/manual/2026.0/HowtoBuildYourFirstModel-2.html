@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2.1 How to Build Your First Model | TUFLOW Classic/HPC User Manual Beta Release 2026.0 </title>
+  <meta name="description" content="TUFLOW Classic/HPC User Manual 2026" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2.1 How to Build Your First Model | TUFLOW Classic/HPC User Manual Beta Release 2026.0 " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="TUFLOW Classic/HPC User Manual 2026" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2.1 How to Build Your First Model | TUFLOW Classic/HPC User Manual Beta Release 2026.0 " />
+  
+  <meta name="twitter:description" content="TUFLOW Classic/HPC User Manual 2026" />
+  
+
+<meta name="author" content="BETA RELEASE    This is an interim manual that accompanies the TUFLOW Classic/HPC 2026.0.0-beta.1. The information contained within this interim version may vary from the subsequent final version." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
+<link rel="prev" href="GettingStarted-1.html"/>
+<link rel="next" href="TheTUFLOWModellingConcept-2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.12.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2026.0/"><img src="images/TUFLOW_2026.0_beta-release.png" style="width:246px;height:68px;"></a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#how-to-use-this-manual"><i class="fa fa-check"></i>How to use this Manual</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#navigation"><i class="fa fa-check"></i>Navigation</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#searching"><i class="fa fa-check"></i>Searching</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#commands"><i class="fa fa-check"></i>Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#about-this-manual"><i class="fa fa-check"></i>About this Manual</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#glossary-and-notation"><i class="fa fa-check"></i>Glossary and Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Contents</a>
+<ul>
+<li class="chapter" data-level="" data-path="contents.html"><a href="contents.html#outline"><i class="fa fa-check"></i>Outline</a></li>
+<li class="chapter" data-level="" data-path="contents.html"><a href="contents.html#list-of-figures"><i class="fa fa-check"></i>List of Figures</a></li>
+<li class="chapter" data-level="" data-path="contents.html"><a href="contents.html#list-of-tables"><i class="fa fa-check"></i>List of Tables</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="Introduction-1.html"><a href="Introduction-1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="TUFLOWProducts-2.html"><a href="TUFLOWProducts-2.html"><i class="fa fa-check"></i><b>1.1</b> TUFLOW Products</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="TUFLOWProducts-2.html"><a href="TUFLOWProducts-2.html#TUFLOW-CLA-3"><i class="fa fa-check"></i><b>1.1.1</b> TUFLOW Classic – 2D Semi-Implicit Solver</a></li>
+<li class="chapter" data-level="1.1.2" data-path="TUFLOWProducts-2.html"><a href="TUFLOWProducts-2.html#TUFLOW-HPC-3"><i class="fa fa-check"></i><b>1.1.2</b> TUFLOW HPC – 2D GPU Accelerated Solver</a></li>
+<li class="chapter" data-level="1.1.3" data-path="TUFLOWProducts-2.html"><a href="TUFLOWProducts-2.html#TUFLOW1D-3"><i class="fa fa-check"></i><b>1.1.3</b> TUFLOW 1D (ESTRY) – 1D Solver</a></li>
+<li class="chapter" data-level="1.1.4" data-path="TUFLOWProducts-2.html"><a href="TUFLOWProducts-2.html#SWMM1D-3"><i class="fa fa-check"></i><b>1.1.4</b> EPA SWMM – 1D Solver</a></li>
+<li class="chapter" data-level="1.1.5" data-path="TUFLOWProducts-2.html"><a href="TUFLOWProducts-2.html#AddonModules-3"><i class="fa fa-check"></i><b>1.1.5</b> Add-on Modules</a>
+<ul>
+<li class="chapter" data-level="1.1.5.1" data-path="TUFLOWProducts-2.html"><a href="TUFLOWProducts-2.html#ADModule-4"><i class="fa fa-check"></i><b>1.1.5.1</b> Advection Dispersion (AD) Module</a></li>
+<li class="chapter" data-level="1.1.5.2" data-path="TUFLOWProducts-2.html"><a href="TUFLOWProducts-2.html#TUFLOWCATCH-4"><i class="fa fa-check"></i><b>1.1.5.2</b> TUFLOW CATCH Module</a></li>
+<li class="chapter" data-level="1.1.5.3" data-path="TUFLOWProducts-2.html"><a href="TUFLOWProducts-2.html#GPUHardware-4"><i class="fa fa-check"></i><b>1.1.5.3</b> GPU Hardware (GPU) Module</a></li>
+<li class="chapter" data-level="1.1.5.4" data-path="TUFLOWProducts-2.html"><a href="TUFLOWProducts-2.html#QDTorM2DModule-4"><i class="fa fa-check"></i><b>1.1.5.4</b> Quadtree or Multiple 2D Domain (M2D) Module</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="TUFLOWWebinars-2.html"><a href="TUFLOWWebinars-2.html"><i class="fa fa-check"></i><b>1.2</b> TUFLOW Webinars</a></li>
+<li class="chapter" data-level="1.3" data-path="ModellingEnvironment-2.html"><a href="ModellingEnvironment-2.html"><i class="fa fa-check"></i><b>1.3</b> Modelling Environment</a></li>
+<li class="chapter" data-level="1.4" data-path="LimitationsandRecommendations-2.html"><a href="LimitationsandRecommendations-2.html"><i class="fa fa-check"></i><b>1.4</b> Limitations and Recommendations</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="GettingStarted-1.html"><a href="GettingStarted-1.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="HowtoBuildYourFirstModel-2.html"><a href="HowtoBuildYourFirstModel-2.html"><i class="fa fa-check"></i><b>2.1</b> How to Build Your First Model</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="HowtoBuildYourFirstModel-2.html"><a href="HowtoBuildYourFirstModel-2.html#TutorialModels-3"><i class="fa fa-check"></i><b>2.1.1</b> Tutorial Models</a></li>
+<li class="chapter" data-level="2.1.2" data-path="HowtoBuildYourFirstModel-2.html"><a href="HowtoBuildYourFirstModel-2.html#ExampleModels-3"><i class="fa fa-check"></i><b>2.1.2</b> Example Models</a></li>
+<li class="chapter" data-level="2.1.3" data-path="HowtoBuildYourFirstModel-2.html"><a href="HowtoBuildYourFirstModel-2.html#DemonstrationModels-3"><i class="fa fa-check"></i><b>2.1.3</b> Demonstration Models</a></li>
+<li class="chapter" data-level="2.1.4" data-path="HowtoBuildYourFirstModel-2.html"><a href="HowtoBuildYourFirstModel-2.html#LicenceFreeDemoMode-3"><i class="fa fa-check"></i><b>2.1.4</b> Licence Free Demo Mode</a></li>
+<li class="chapter" data-level="2.1.5" data-path="HowtoBuildYourFirstModel-2.html"><a href="HowtoBuildYourFirstModel-2.html#eLearningModules-3"><i class="fa fa-check"></i><b>2.1.5</b> eLearning Modules</a></li>
+<li class="chapter" data-level="2.1.6" data-path="HowtoBuildYourFirstModel-2.html"><a href="HowtoBuildYourFirstModel-2.html#InstructorLedTUFLOWTrainingCourses-3"><i class="fa fa-check"></i><b>2.1.6</b> Instructor Led TUFLOW Training Courses</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="TheTUFLOWModellingConcept-2.html"><a href="TheTUFLOWModellingConcept-2.html"><i class="fa fa-check"></i><b>2.2</b> The TUFLOW Modelling Concept</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="TheTUFLOWModellingConcept-2.html"><a href="TheTUFLOWModellingConcept-2.html#Notepad-3"><i class="fa fa-check"></i><b>2.2.1</b> Notepad++</a></li>
+<li class="chapter" data-level="2.2.2" data-path="TheTUFLOWModellingConcept-2.html"><a href="TheTUFLOWModellingConcept-2.html#QGISTUFLOWViewer-3"><i class="fa fa-check"></i><b>2.2.2</b> QGIS / TUFLOW Viewer</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="InstallingandRunningTUFLOW-2.html"><a href="InstallingandRunningTUFLOW-2.html"><i class="fa fa-check"></i><b>2.3</b> Installing and Running TUFLOW</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="InstallingandRunningTUFLOW-2.html"><a href="InstallingandRunningTUFLOW-2.html#TUFLOWDownloadsandInstallation-3"><i class="fa fa-check"></i><b>2.3.1</b> TUFLOW Downloads and Installation</a></li>
+<li class="chapter" data-level="2.3.2" data-path="InstallingandRunningTUFLOW-2.html"><a href="InstallingandRunningTUFLOW-2.html#Licencing-3"><i class="fa fa-check"></i><b>2.3.2</b> TUFLOW Licencing</a>
+<ul>
+<li class="chapter" data-level="2.3.2.1" data-path="InstallingandRunningTUFLOW-2.html"><a href="InstallingandRunningTUFLOW-2.html#Licencing-3rd-Party"><i class="fa fa-check"></i><b>2.3.2.1</b> 3rd Party Software Libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3.3" data-path="InstallingandRunningTUFLOW-2.html"><a href="InstallingandRunningTUFLOW-2.html#PerformingSimulations-3"><i class="fa fa-check"></i><b>2.3.3</b> Performing Simulations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="FoldersFileTypesandFileNaming-2.html"><a href="FoldersFileTypesandFileNaming-2.html"><i class="fa fa-check"></i><b>2.4</b> Folders, File Types and File Naming</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="FoldersFileTypesandFileNaming-2.html"><a href="FoldersFileTypesandFileNaming-2.html#FolderStructure-3"><i class="fa fa-check"></i><b>2.4.1</b> Folder Structure</a></li>
+<li class="chapter" data-level="2.4.2" data-path="FoldersFileTypesandFileNaming-2.html"><a href="FoldersFileTypesandFileNaming-2.html#FileTypes-3"><i class="fa fa-check"></i><b>2.4.2</b> File Types</a></li>
+<li class="chapter" data-level="2.4.3" data-path="FoldersFileTypesandFileNaming-2.html"><a href="FoldersFileTypesandFileNaming-2.html#NamingConventions-3"><i class="fa fa-check"></i><b>2.4.3</b> Naming Conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="TipsandTricks-2.html"><a href="TipsandTricks-2.html"><i class="fa fa-check"></i><b>2.5</b> Tips and Tricks</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="Fundamentals-1.html"><a href="Fundamentals-1.html"><i class="fa fa-check"></i><b>3</b> Hydraulic Modelling Fundamentals</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="Schematisation-2.html"><a href="Schematisation-2.html"><i class="fa fa-check"></i><b>3.1</b> Schematisation</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="Schematisation-2.html"><a href="Schematisation-2.html#GeneralGuidance-3"><i class="fa fa-check"></i><b>3.1.1</b> General Guidance</a></li>
+<li class="chapter" data-level="3.1.2" data-path="Schematisation-2.html"><a href="Schematisation-2.html#OneD2Dor3D-3"><i class="fa fa-check"></i><b>3.1.2</b> Model Dimensions: 1D, 2D or 3D?</a>
+<ul>
+<li class="chapter" data-level="3.1.2.1" data-path="Schematisation-2.html"><a href="Schematisation-2.html#OneDimensional-4"><i class="fa fa-check"></i><b>3.1.2.1</b> One Dimensional (1D)</a></li>
+<li class="chapter" data-level="3.1.2.2" data-path="Schematisation-2.html"><a href="Schematisation-2.html#TwoDimensional-4"><i class="fa fa-check"></i><b>3.1.2.2</b> Two Dimensional (2D)</a></li>
+<li class="chapter" data-level="3.1.2.3" data-path="Schematisation-2.html"><a href="Schematisation-2.html#ThreeDimensional-4"><i class="fa fa-check"></i><b>3.1.2.3</b> Three Dimensional (3D)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.1.3" data-path="Schematisation-2.html"><a href="Schematisation-2.html#Coupled1D2D-3"><i class="fa fa-check"></i><b>3.1.3</b> Coupled 1D-2D</a></li>
+<li class="chapter" data-level="3.1.4" data-path="Schematisation-2.html"><a href="Schematisation-2.html#FixedGridorQuadtreeGrid-3"><i class="fa fa-check"></i><b>3.1.4</b> Quadtree Grid</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="ModelResolutionDiscretisation-2.html"><a href="ModelResolutionDiscretisation-2.html"><i class="fa fa-check"></i><b>3.2</b> Model Resolution (Discretisation)</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="ModelResolutionDiscretisation-2.html"><a href="ModelResolutionDiscretisation-2.html#OneDNetworks-3"><i class="fa fa-check"></i><b>3.2.1</b> 1D Networks</a></li>
+<li class="chapter" data-level="3.2.2" data-path="ModelResolutionDiscretisation-2.html"><a href="ModelResolutionDiscretisation-2.html#CellSizes-3"><i class="fa fa-check"></i><b>3.2.2</b> 2D Cell Sizes</a></li>
+<li class="chapter" data-level="3.2.3" data-path="ModelResolutionDiscretisation-2.html"><a href="ModelResolutionDiscretisation-2.html#SubGridSamplingSGS-3"><i class="fa fa-check"></i><b>3.2.3</b> Sub-Grid Sampling (SGS)</a>
+<ul>
+<li class="chapter" data-level="3.2.3.1" data-path="ModelResolutionDiscretisation-2.html"><a href="ModelResolutionDiscretisation-2.html#SGS-benefits-4"><i class="fa fa-check"></i><b>3.2.3.1</b> Benefits of SGS</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2.4" data-path="ModelResolutionDiscretisation-2.html"><a href="ModelResolutionDiscretisation-2.html#CellSizeResultsConvergence-3"><i class="fa fa-check"></i><b>3.2.4</b> Cell Size Results Convergence</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="SolutionAccuracy-2.html"><a href="SolutionAccuracy-2.html"><i class="fa fa-check"></i><b>3.3</b> Solution Accuracy</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="SolutionAccuracy-2.html"><a href="SolutionAccuracy-2.html#FluidFlowPhysicalTerms-3"><i class="fa fa-check"></i><b>3.3.1</b> Fluid Flow Physical Terms</a>
+<ul>
+<li class="chapter" data-level="3.3.1.1" data-path="SolutionAccuracy-2.html"><a href="SolutionAccuracy-2.html#OneDContinuityEquation-4"><i class="fa fa-check"></i><b>3.3.1.1</b> 1D Continuity Equation</a></li>
+<li class="chapter" data-level="3.3.1.2" data-path="SolutionAccuracy-2.html"><a href="SolutionAccuracy-2.html#OneDMomentumEquation-4"><i class="fa fa-check"></i><b>3.3.1.2</b> 1D Momentum Equation</a></li>
+<li class="chapter" data-level="3.3.1.3" data-path="SolutionAccuracy-2.html"><a href="SolutionAccuracy-2.html#TwoDContinuityEquation-4"><i class="fa fa-check"></i><b>3.3.1.3</b> 2D Continuity Equation</a></li>
+<li class="chapter" data-level="3.3.1.4" data-path="SolutionAccuracy-2.html"><a href="SolutionAccuracy-2.html#TwoDMomentumEquation-4"><i class="fa fa-check"></i><b>3.3.1.4</b> 2D Momentum Equation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3.2" data-path="SolutionAccuracy-2.html"><a href="SolutionAccuracy-2.html#FormsoftheEquations-3"><i class="fa fa-check"></i><b>3.3.2</b> Forms of the Equations</a>
+<ul>
+<li class="chapter" data-level="3.3.2.1" data-path="SolutionAccuracy-2.html"><a href="SolutionAccuracy-2.html#DiffusiveWaveEquation-4"><i class="fa fa-check"></i><b>3.3.2.1</b> Diffusive Wave Equation</a></li>
+<li class="chapter" data-level="3.3.2.2" data-path="SolutionAccuracy-2.html"><a href="SolutionAccuracy-2.html#KinematicWaveEquation-4"><i class="fa fa-check"></i><b>3.3.2.2</b> Kinematic Wave Equation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3.3" data-path="SolutionAccuracy-2.html"><a href="SolutionAccuracy-2.html#NumericalAccuracy-3"><i class="fa fa-check"></i><b>3.3.3</b> Numerical Accuracy</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="TimestepBackground-2.html"><a href="TimestepBackground-2.html"><i class="fa fa-check"></i><b>3.4</b> Timestep</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="TimestepBackground-2.html"><a href="TimestepBackground-2.html#FixedVersusAdaptiveTimestepping-3"><i class="fa fa-check"></i><b>3.4.1</b> Fixed versus Adaptive Timestepping</a></li>
+<li class="chapter" data-level="3.4.2" data-path="TimestepBackground-2.html"><a href="TimestepBackground-2.html#OneDDomainsTimestep-3"><i class="fa fa-check"></i><b>3.4.2</b> TUFLOW 1D (ESTRY) and EPA SWMM</a></li>
+<li class="chapter" data-level="3.4.3" data-path="TimestepBackground-2.html"><a href="TimestepBackground-2.html#TUFLOWClassicTimestep-3"><i class="fa fa-check"></i><b>3.4.3</b> TUFLOW Classic 2D</a></li>
+<li class="chapter" data-level="3.4.4" data-path="TimestepBackground-2.html"><a href="TimestepBackground-2.html#TUFLOWHPCTimestep-3"><i class="fa fa-check"></i><b>3.4.4</b> TUFLOW HPC 2D</a>
+<ul>
+<li class="chapter" data-level="3.4.4.1" data-path="TimestepBackground-2.html"><a href="TimestepBackground-2.html#TimesteppingEfficiencyOutput-4"><i class="fa fa-check"></i><b>3.4.4.1</b> Timestep Efficiency Output</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="SimulationTimes-2.html"><a href="SimulationTimes-2.html"><i class="fa fa-check"></i><b>3.5</b> Simulation Times</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ControlFiles-and-Inputs-1.html"><a href="ControlFiles-and-Inputs-1.html"><i class="fa fa-check"></i><b>4</b> Control Files and Input Layers</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html"><i class="fa fa-check"></i><b>4.1</b> Control Files</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#Notation-3"><i class="fa fa-check"></i><b>4.1.1</b> Rules and Notation</a></li>
+<li class="chapter" data-level="4.1.2" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#FilePath-3"><i class="fa fa-check"></i><b>4.1.2</b> File Paths</a></li>
+<li class="chapter" data-level="4.1.3" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#Units-3"><i class="fa fa-check"></i><b>4.1.3</b> Units</a></li>
+<li class="chapter" data-level="4.1.4" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#MathOps-3"><i class="fa fa-check"></i><b>4.1.4</b> Mathematical Operations</a></li>
+<li class="chapter" data-level="4.1.5" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#TCF-3"><i class="fa fa-check"></i><b>4.1.5</b> TCF - TUFLOW Control File</a></li>
+<li class="chapter" data-level="4.1.6" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#ECF-3"><i class="fa fa-check"></i><b>4.1.6</b> ECF - ESTRY Control File</a></li>
+<li class="chapter" data-level="4.1.7" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#TBC-3"><i class="fa fa-check"></i><b>4.1.7</b> TBC - TUFLOW Boundary Control File</a></li>
+<li class="chapter" data-level="4.1.8" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#TGC-3"><i class="fa fa-check"></i><b>4.1.8</b> TGC - TUFLOW Geometry Control File</a></li>
+<li class="chapter" data-level="4.1.9" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#QCF-3"><i class="fa fa-check"></i><b>4.1.9</b> QCF - Quadtree Control File</a></li>
+<li class="chapter" data-level="4.1.10" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#TEF-3"><i class="fa fa-check"></i><b>4.1.10</b> TEF - TUFLOW Event File</a></li>
+<li class="chapter" data-level="4.1.11" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#TOC-3"><i class="fa fa-check"></i><b>4.1.11</b> TOC - TUFLOW Operations Control File</a></li>
+<li class="chapter" data-level="4.1.12" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#TRFC-3"><i class="fa fa-check"></i><b>4.1.12</b> TRFC - TUFLOW Rainfall Control File</a></li>
+<li class="chapter" data-level="4.1.13" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#TESF-3"><i class="fa fa-check"></i><b>4.1.13</b> TESF - TUFLOW External Stress File</a></li>
+<li class="chapter" data-level="4.1.14" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#ADCF-3"><i class="fa fa-check"></i><b>4.1.14</b> ADCF - Advection Dispersion Control File</a></li>
+<li class="chapter" data-level="4.1.15" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#TSCF-3"><i class="fa fa-check"></i><b>4.1.15</b> TSCF - TUFLOW SWMM Control File</a></li>
+<li class="chapter" data-level="4.1.16" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#ReadFile-3"><i class="fa fa-check"></i><b>4.1.16</b> Read File</a></li>
+<li class="chapter" data-level="4.1.17" data-path="ControlFiles-2.html"><a href="ControlFiles-2.html#Override-3"><i class="fa fa-check"></i><b>4.1.17</b> Override Files</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="Databases-2.html"><a href="Databases-2.html"><i class="fa fa-check"></i><b>4.2</b> Databases</a></li>
+<li class="chapter" data-level="4.3" data-path="GISLayers-2.html"><a href="GISLayers-2.html"><i class="fa fa-check"></i><b>4.3</b> Input Layers</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="GISLayers-2.html"><a href="GISLayers-2.html#GISFormats-3"><i class="fa fa-check"></i><b>4.3.1</b> Input Formats</a></li>
+<li class="chapter" data-level="4.3.2" data-path="GISLayers-2.html"><a href="GISLayers-2.html#GISCommands-3"><i class="fa fa-check"></i><b>4.3.2</b> GIS Commands</a>
+<ul>
+<li class="chapter" data-level="4.3.2.1" data-path="GISLayers-2.html"><a href="GISLayers-2.html#Attributes-4"><i class="fa fa-check"></i><b>4.3.2.1</b> GIS Attribute Interpretation</a></li>
+<li class="chapter" data-level="4.3.2.2" data-path="GISLayers-2.html"><a href="GISLayers-2.html#Objects-4"><i class="fa fa-check"></i><b>4.3.2.2</b> GIS Object Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3.3" data-path="GISLayers-2.html"><a href="GISLayers-2.html#GPKG-3"><i class="fa fa-check"></i><b>4.3.3</b> GeoPackage Commands</a>
+<ul>
+<li class="chapter" data-level="4.3.3.1" data-path="GISLayers-2.html"><a href="GISLayers-2.html#GPKG-input-4"><i class="fa fa-check"></i><b>4.3.3.1</b> GPKG Input Commands</a></li>
+<li class="chapter" data-level="4.3.3.2" data-path="GISLayers-2.html"><a href="GISLayers-2.html#GPKG-output-4"><i class="fa fa-check"></i><b>4.3.3.2</b> GPKG Output Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3.4" data-path="GISLayers-2.html"><a href="GISLayers-2.html#GRID-3"><i class="fa fa-check"></i><b>4.3.4</b> Grid Commands</a>
+<ul>
+<li class="chapter" data-level="4.3.4.1" data-path="GISLayers-2.html"><a href="GISLayers-2.html#GDAL-overview-4"><i class="fa fa-check"></i><b>4.3.4.1</b> Geospatial Data Abstraction Library (GDAL)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3.5" data-path="GISLayers-2.html"><a href="GISLayers-2.html#TIN-3"><i class="fa fa-check"></i><b>4.3.5</b> TIN Commands</a></li>
+<li class="chapter" data-level="4.3.6" data-path="GISLayers-2.html"><a href="GISLayers-2.html#RowCol-3"><i class="fa fa-check"></i><b>4.3.6</b> RowCol Commands (Legacy)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="LayeringData-2.html"><a href="LayeringData-2.html"><i class="fa fa-check"></i><b>4.4</b> Layering Data</a></li>
+<li class="chapter" data-level="4.5" data-path="XF-Files-2.html"><a href="XF-Files-2.html"><i class="fa fa-check"></i><b>4.5</b> XF Files</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="OneD-Domains-1.html"><a href="OneD-Domains-1.html"><i class="fa fa-check"></i><b>5</b> 1D Network Domains - ESTRY</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="Scheme-2.html"><a href="Scheme-2.html"><i class="fa fa-check"></i><b>5.1</b> Schematisation</a></li>
+<li class="chapter" data-level="5.2" data-path="SolutionScheme-2.html"><a href="SolutionScheme-2.html"><i class="fa fa-check"></i><b>5.2</b> Solution Scheme</a></li>
+<li class="chapter" data-level="5.3" data-path="OneD-nwk-2.html"><a href="OneD-nwk-2.html"><i class="fa fa-check"></i><b>5.3</b> 1d_nwk Attributes</a></li>
+<li class="chapter" data-level="5.4" data-path="Channel-Intro-2.html"><a href="Channel-Intro-2.html"><i class="fa fa-check"></i><b>5.4</b> Channels Overview</a></li>
+<li class="chapter" data-level="5.5" data-path="Open-Channel-2.html"><a href="Open-Channel-2.html"><i class="fa fa-check"></i><b>5.5</b> Open Channels</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="Open-Channel-2.html"><a href="Open-Channel-2.html#I-channels-3"><i class="fa fa-check"></i><b>5.5.1</b> Inertial Channels</a></li>
+<li class="chapter" data-level="5.5.2" data-path="Open-Channel-2.html"><a href="Open-Channel-2.html#NI-channels-3"><i class="fa fa-check"></i><b>5.5.2</b> Non-Inertial Channels</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="XS-2.html"><a href="XS-2.html"><i class="fa fa-check"></i><b>5.6</b> Cross-Sections</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="XS-2.html"><a href="XS-2.html#XS-flags-3"><i class="fa fa-check"></i><b>5.6.1</b> Type “XZ” Optional Flags</a>
+<ul>
+<li class="chapter" data-level="5.6.1.1" data-path="XS-2.html"><a href="XS-2.html#RR-4"><i class="fa fa-check"></i><b>5.6.1.1</b> Relative Resistance</a>
+<ul>
+<li class="chapter" data-level="5.6.1.1.1" data-path="XS-2.html"><a href="XS-2.html#RR-R-5"><i class="fa fa-check"></i><b>5.6.1.1.1</b> Relative Resistance Factor (R)</a></li>
+<li class="chapter" data-level="5.6.1.1.2" data-path="XS-2.html"><a href="XS-2.html#RR-M-5"><i class="fa fa-check"></i><b>5.6.1.1.2</b> Material Values (M)</a></li>
+<li class="chapter" data-level="5.6.1.1.3" data-path="XS-2.html"><a href="XS-2.html#RR-N-5"><i class="fa fa-check"></i><b>5.6.1.1.3</b> Manning’s n Values (N)</a></li>
+<li class="chapter" data-level="5.6.1.1.4" data-path="XS-2.html"><a href="XS-2.html#RR-P-5"><i class="fa fa-check"></i><b>5.6.1.1.4</b> Position Flag (P)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5.6.2" data-path="XS-2.html"><a href="XS-2.html#HW-flags-3"><i class="fa fa-check"></i><b>5.6.2</b> Type “HW” Optional Flags</a>
+<ul>
+<li class="chapter" data-level="5.6.2.1" data-path="XS-2.html"><a href="XS-2.html#HW-A-4"><i class="fa fa-check"></i><b>5.6.2.1</b> Flow Area (A)</a></li>
+<li class="chapter" data-level="5.6.2.2" data-path="XS-2.html"><a href="XS-2.html#HW-P-4"><i class="fa fa-check"></i><b>5.6.2.2</b> Wetted Perimeter (P)</a></li>
+<li class="chapter" data-level="5.6.2.3" data-path="XS-2.html"><a href="XS-2.html#HW-N-4"><i class="fa fa-check"></i><b>5.6.2.3</b> Manning’s n Values (N)</a></li>
+<li class="chapter" data-level="5.6.2.4" data-path="XS-2.html"><a href="XS-2.html#HW-F-4"><i class="fa fa-check"></i><b>5.6.2.4</b> Manning’s n Values (F)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6.3" data-path="XS-2.html"><a href="XS-2.html#Parallel-Channel-3"><i class="fa fa-check"></i><b>5.6.3</b> Parallel Channel Analysis</a></li>
+<li class="chapter" data-level="5.6.4" data-path="XS-2.html"><a href="XS-2.html#Eff-vs-Total-3"><i class="fa fa-check"></i><b>5.6.4</b> Effective Area versus Total Area</a></li>
+<li class="chapter" data-level="5.6.5" data-path="XS-2.html"><a href="XS-2.html#XS-Mid-3"><i class="fa fa-check"></i><b>5.6.5</b> Mid Cross-Sections</a></li>
+<li class="chapter" data-level="5.6.6" data-path="XS-2.html"><a href="XS-2.html#XS-End-3"><i class="fa fa-check"></i><b>5.6.6</b> End Cross-Sections</a></li>
+<li class="chapter" data-level="5.6.7" data-path="XS-2.html"><a href="XS-2.html#Interpolate-XS-3"><i class="fa fa-check"></i><b>5.6.7</b> Interpolated Cross-Section Protocols</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="Structures-2.html"><a href="Structures-2.html"><i class="fa fa-check"></i><b>5.7</b> Structures</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="Structures-2.html"><a href="Structures-2.html#culverts-pipes-3"><i class="fa fa-check"></i><b>5.7.1</b> Culverts and Pipes</a>
+<ul>
+<li class="chapter" data-level="5.7.1.1" data-path="Structures-2.html"><a href="Structures-2.html#Blockage-4"><i class="fa fa-check"></i><b>5.7.1.1</b> Blockage Matrix</a>
+<ul>
+<li class="chapter" data-level="5.7.1.1.1" data-path="Structures-2.html"><a href="Structures-2.html#ReducedArea-5"><i class="fa fa-check"></i><b>5.7.1.1.1</b> Reduced Area Method</a></li>
+<li class="chapter" data-level="5.7.1.1.2" data-path="Structures-2.html"><a href="Structures-2.html#EnergyLoss-5"><i class="fa fa-check"></i><b>5.7.1.1.2</b> Energy Loss Method</a></li>
+<li class="chapter" data-level="5.7.1.1.3" data-path="Structures-2.html"><a href="Structures-2.html#BlockageCmds-5"><i class="fa fa-check"></i><b>5.7.1.1.3</b> Blockage Matrix Commands</a></li>
+<li class="chapter" data-level="5.7.1.1.4" data-path="Structures-2.html"><a href="Structures-2.html#BlockageImplement-5"><i class="fa fa-check"></i><b>5.7.1.1.4</b> Implementation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7.1.2" data-path="Structures-2.html"><a href="Structures-2.html#blockage-limitations-4"><i class="fa fa-check"></i><b>5.7.1.2</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7.2" data-path="Structures-2.html"><a href="Structures-2.html#Bridges-3"><i class="fa fa-check"></i><b>5.7.2</b> Bridges</a>
+<ul>
+<li class="chapter" data-level="5.7.2.1" data-path="Structures-2.html"><a href="Structures-2.html#BridgeIntro-4"><i class="fa fa-check"></i><b>5.7.2.1</b> Bridges Overview</a></li>
+<li class="chapter" data-level="5.7.2.2" data-path="Structures-2.html"><a href="Structures-2.html#XSLoss-4"><i class="fa fa-check"></i><b>5.7.2.2</b> Bridge Cross-Section and Loss Tables</a></li>
+<li class="chapter" data-level="5.7.2.3" data-path="Structures-2.html"><a href="Structures-2.html#B-Bridge-4"><i class="fa fa-check"></i><b>5.7.2.3</b> B Bridge Losses Approach</a></li>
+<li class="chapter" data-level="5.7.2.4" data-path="Structures-2.html"><a href="Structures-2.html#BB-Bridge-4"><i class="fa fa-check"></i><b>5.7.2.4</b> BB Bridge Losses Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7.3" data-path="Structures-2.html"><a href="Structures-2.html#BArch-3"><i class="fa fa-check"></i><b>5.7.3</b> Arch Bridge</a>
+<ul>
+<li class="chapter" data-level="5.7.3.1" data-path="Structures-2.html"><a href="Structures-2.html#BArch-Editor-4"><i class="fa fa-check"></i><b>5.7.3.1</b> Arch Bridge Editor</a></li>
+<li class="chapter" data-level="5.7.3.2" data-path="Structures-2.html"><a href="Structures-2.html#BArch-Min-Blc-4"><i class="fa fa-check"></i><b>5.7.3.2</b> Arch Minimum Blockage</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7.4" data-path="Structures-2.html"><a href="Structures-2.html#Weir-3"><i class="fa fa-check"></i><b>5.7.4</b> Weirs</a>
+<ul>
+<li class="chapter" data-level="5.7.4.1" data-path="Structures-2.html"><a href="Structures-2.html#Weir-Intro-4"><i class="fa fa-check"></i><b>5.7.4.1</b> Weirs Overview</a></li>
+<li class="chapter" data-level="5.7.4.2" data-path="Structures-2.html"><a href="Structures-2.html#W-Weir-4"><i class="fa fa-check"></i><b>5.7.4.2</b> Original Weirs (W)</a></li>
+<li class="chapter" data-level="5.7.4.3" data-path="Structures-2.html"><a href="Structures-2.html#Adv-Weir-4"><i class="fa fa-check"></i><b>5.7.4.3</b> Advanced Weirs (WB, WC, WD, WO, WR, WT, WV, WW)</a>
+<ul>
+<li class="chapter" data-level="5.7.4.3.1" data-path="Structures-2.html"><a href="Structures-2.html#WO-Weir-5"><i class="fa fa-check"></i><b>5.7.4.3.1</b> Ogee Crest Weir (WO)</a></li>
+<li class="chapter" data-level="5.7.4.3.2" data-path="Structures-2.html"><a href="Structures-2.html#WV-Weir-5"><i class="fa fa-check"></i><b>5.7.4.3.2</b> V-Notch Weir (WV)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7.4.4" data-path="Structures-2.html"><a href="Structures-2.html#Submerge-4"><i class="fa fa-check"></i><b>5.7.4.4</b> Advanced Weir Submergence Curves</a></li>
+<li class="chapter" data-level="5.7.4.5" data-path="Structures-2.html"><a href="Structures-2.html#Auto-Weir-4"><i class="fa fa-check"></i><b>5.7.4.5</b> Automatically Created Weirs</a></li>
+<li class="chapter" data-level="5.7.4.6" data-path="Structures-2.html"><a href="Structures-2.html#VW-Channel-4"><i class="fa fa-check"></i><b>5.7.4.6</b> VW Channels (Variable Geometry Weir)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7.5" data-path="Structures-2.html"><a href="Structures-2.html#SP-3"><i class="fa fa-check"></i><b>5.7.5</b> Spillways (SP)</a></li>
+<li class="chapter" data-level="5.7.6" data-path="Structures-2.html"><a href="Structures-2.html#SG-3"><i class="fa fa-check"></i><b>5.7.6</b> Sluice Gates (SG)</a></li>
+<li class="chapter" data-level="5.7.7" data-path="Structures-2.html"><a href="Structures-2.html#LossAdjustment-3"><i class="fa fa-check"></i><b>5.7.7</b> Adjustment of Contraction and Expansion Losses</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html"><i class="fa fa-check"></i><b>5.8</b> Special Channels</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html#M-Channel-3"><i class="fa fa-check"></i><b>5.8.1</b> M Channels (User Defined Flow Matrix)</a></li>
+<li class="chapter" data-level="5.8.2" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html#Q-Channels-3"><i class="fa fa-check"></i><b>5.8.2</b> Q Channels (Upstream Depth-Discharge Relationship)</a></li>
+<li class="chapter" data-level="5.8.3" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html#XConnect-3"><i class="fa fa-check"></i><b>5.8.3</b> X Connectors</a></li>
+<li class="chapter" data-level="5.8.4" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html#Legacy-Channel-3"><i class="fa fa-check"></i><b>5.8.4</b> Legacy Channels</a></li>
+<li class="chapter" data-level="5.8.5" data-path="Special-Channels-2.html"><a href="Special-Channels-2.html#OneD-nwk-3"><i class="fa fa-check"></i><b>5.8.5</b> 1d_nwk Attributes (M, P, Q, SG, SP Channels)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html"><i class="fa fa-check"></i><b>5.9</b> Operational Channels</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#TOC-Logic-3"><i class="fa fa-check"></i><b>5.9.1</b> .toc File Commands and Logic</a>
+<ul>
+<li class="chapter" data-level="5.9.1.1" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#TOC-Define-4"><i class="fa fa-check"></i><b>5.9.1.1</b> Define Control Command</a></li>
+<li class="chapter" data-level="5.9.1.2" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#UserDef-4"><i class="fa fa-check"></i><b>5.9.1.2</b> User Defined Variables</a></li>
+<li class="chapter" data-level="5.9.1.3" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#Logic-4"><i class="fa fa-check"></i><b>5.9.1.3</b> Logic Rules</a></li>
+<li class="chapter" data-level="5.9.1.4" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#Increment-Operate-4"><i class="fa fa-check"></i><b>5.9.1.4</b> Incremental Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9.2" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#Pumps-3"><i class="fa fa-check"></i><b>5.9.2</b> Pumps (P and PO)</a></li>
+<li class="chapter" data-level="5.9.3" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#QO-3"><i class="fa fa-check"></i><b>5.9.3</b> QO Channels</a></li>
+<li class="chapter" data-level="5.9.4" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#RO-3"><i class="fa fa-check"></i><b>5.9.4</b> Gated Drowned Rectangular Culverts (RO)</a></li>
+<li class="chapter" data-level="5.9.5" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#SG-SGO-3"><i class="fa fa-check"></i><b>5.9.5</b> Sluice Gates (SG and SGO)</a></li>
+<li class="chapter" data-level="5.9.6" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#SPO-3"><i class="fa fa-check"></i><b>5.9.6</b> Spillways with Gates (SPO)</a></li>
+<li class="chapter" data-level="5.9.7" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#Weirs-Operational-3"><i class="fa fa-check"></i><b>5.9.7</b> Weirs (WBO, WCO, WDO, WOO, WRO, WTO)</a></li>
+<li class="chapter" data-level="5.9.8" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#PFDF-3"><i class="fa fa-check"></i><b>5.9.8</b> Piping and Dam Failure</a>
+<ul>
+<li class="chapter" data-level="5.9.8.1" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#PF-4"><i class="fa fa-check"></i><b>5.9.8.1</b> Piping Failure (PF)</a></li>
+<li class="chapter" data-level="5.9.8.2" data-path="OperationalChannels-2.html"><a href="OperationalChannels-2.html#DF-4"><i class="fa fa-check"></i><b>5.9.8.2</b> Dam Failure (DF)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="Pipes-2.html"><a href="Pipes-2.html"><i class="fa fa-check"></i><b>5.10</b> Pipe Networks</a>
+<ul>
+<li class="chapter" data-level="5.10.1" data-path="Pipes-2.html"><a href="Pipes-2.html#Pipes-3"><i class="fa fa-check"></i><b>5.10.1</b> Pipes</a></li>
+<li class="chapter" data-level="5.10.2" data-path="Pipes-2.html"><a href="Pipes-2.html#Pits-3"><i class="fa fa-check"></i><b>5.10.2</b> Pits</a>
+<ul>
+<li class="chapter" data-level="5.10.2.1" data-path="Pipes-2.html"><a href="Pipes-2.html#OneD-pit-nwk-4"><i class="fa fa-check"></i><b>5.10.2.1</b> 1d_nwk Pits</a></li>
+<li class="chapter" data-level="5.10.2.2" data-path="Pipes-2.html"><a href="Pipes-2.html#OneD-pit-4"><i class="fa fa-check"></i><b>5.10.2.2</b> 1d_pit Pits</a></li>
+<li class="chapter" data-level="5.10.2.3" data-path="Pipes-2.html"><a href="Pipes-2.html#Conn-Pits-Nds-4"><i class="fa fa-check"></i><b>5.10.2.3</b> Connecting Pits and Nodes to 2D Domains</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10.3" data-path="Pipes-2.html"><a href="Pipes-2.html#DD-Database-3"><i class="fa fa-check"></i><b>5.10.3</b> Pit Inlet and Depth/Stage vs Discharge Databases</a>
+<ul>
+<li class="chapter" data-level="5.10.3.1" data-path="Pipes-2.html"><a href="Pipes-2.html#Xfall-4"><i class="fa fa-check"></i><b>5.10.3.1</b> Road Crossfall Options</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10.4" data-path="Pipes-2.html"><a href="Pipes-2.html#Manholes-3"><i class="fa fa-check"></i><b>5.10.4</b> Manholes</a>
+<ul>
+<li class="chapter" data-level="5.10.4.1" data-path="Pipes-2.html"><a href="Pipes-2.html#Auto-MH-4"><i class="fa fa-check"></i><b>5.10.4.1</b> Automatically Assigned Manholes</a></li>
+<li class="chapter" data-level="5.10.4.2" data-path="Pipes-2.html"><a href="Pipes-2.html#OneD-mh-4"><i class="fa fa-check"></i><b>5.10.4.2</b> Manually Assigned Manholes (1d_mh Layer)</a></li>
+<li class="chapter" data-level="5.10.4.3" data-path="Pipes-2.html"><a href="Pipes-2.html#mh-direction-4"><i class="fa fa-check"></i><b>5.10.4.3</b> Digitising Culverts Connected to Manholes</a></li>
+<li class="chapter" data-level="5.10.4.4" data-path="Pipes-2.html"><a href="Pipes-2.html#Engelund-4"><i class="fa fa-check"></i><b>5.10.4.4</b> Engelund Manhole Loss Approach</a></li>
+<li class="chapter" data-level="5.10.4.5" data-path="Pipes-2.html"><a href="Pipes-2.html#FixedLoss-4"><i class="fa fa-check"></i><b>5.10.4.5</b> Fixed Manhole Loss Approach</a></li>
+<li class="chapter" data-level="5.10.4.6" data-path="Pipes-2.html"><a href="Pipes-2.html#JunctionLoss-4"><i class="fa fa-check"></i><b>5.10.4.6</b> Discussion on Approaches to Modelling Pipe Junction Losses</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="Virtual-Pipes-2.html"><a href="Virtual-Pipes-2.html"><i class="fa fa-check"></i><b>5.11</b> Virtual Pipes</a></li>
+<li class="chapter" data-level="5.12" data-path="Nodes-2.html"><a href="Nodes-2.html"><i class="fa fa-check"></i><b>5.12</b> Nodes</a>
+<ul>
+<li class="chapter" data-level="5.12.1" data-path="Nodes-2.html"><a href="Nodes-2.html#Auto-Node-3"><i class="fa fa-check"></i><b>5.12.1</b> Automatically Defined Nodes</a>
+<ul>
+<li class="chapter" data-level="5.12.1.1" data-path="Nodes-2.html"><a href="Nodes-2.html#AutoStorageWidths-4"><i class="fa fa-check"></i><b>5.12.1.1</b> Storage Calculated Automatically from Channel Widths</a></li>
+<li class="chapter" data-level="5.12.1.2" data-path="Nodes-2.html"><a href="Nodes-2.html#AutoStorageANA-4"><i class="fa fa-check"></i><b>5.12.1.2</b> Additional Storage Added from Len_or_ANA Attribute</a></li>
+</ul></li>
+<li class="chapter" data-level="5.12.2" data-path="Nodes-2.html"><a href="Nodes-2.html#Manual-Node-3"><i class="fa fa-check"></i><b>5.12.2</b> Manually Defined Nodes</a>
+<ul>
+<li class="chapter" data-level="5.12.2.1" data-path="Nodes-2.html"><a href="Nodes-2.html#NA-Table-4"><i class="fa fa-check"></i><b>5.12.2.1</b> Storage Nodes (User Defined NA Tables)</a></li>
+<li class="chapter" data-level="5.12.2.2" data-path="Nodes-2.html"><a href="Nodes-2.html#channel-invert-4"><i class="fa fa-check"></i><b>5.12.2.2</b> Using Nodes to Define Channel Inverts</a></li>
+<li class="chapter" data-level="5.12.2.3" data-path="Nodes-2.html"><a href="Nodes-2.html#Nd-Auto-Conn-4"><i class="fa fa-check"></i><b>5.12.2.3</b> Automatically Connecting Nodes to 2D domains</a></li>
+</ul></li>
+<li class="chapter" data-level="5.12.3" data-path="Nodes-2.html"><a href="Nodes-2.html#Obvert-3"><i class="fa fa-check"></i><b>5.12.3</b> Storage Above Top of Channels</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="OneD-SWMM-1.html"><a href="OneD-SWMM-1.html"><i class="fa fa-check"></i><b>6</b> 1D Network Domains - EPA SWMM</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="SWMM-Introduction-2.html"><a href="SWMM-Introduction-2.html"><i class="fa fa-check"></i><b>6.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="SWMM-Introduction-2.html"><a href="SWMM-Introduction-2.html#TUFLOW-SWMM-Capabilities-3"><i class="fa fa-check"></i><b>6.1.1</b> TUFLOW-SWMM Capabilities</a></li>
+<li class="chapter" data-level="6.1.2" data-path="SWMM-Introduction-2.html"><a href="SWMM-Introduction-2.html#SWMM-UserResources-3"><i class="fa fa-check"></i><b>6.1.2</b> Additional SWMM User Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="ModelSetup-2.html"><a href="ModelSetup-2.html"><i class="fa fa-check"></i><b>6.2</b> Model Setup</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="ModelSetup-2.html"><a href="ModelSetup-2.html#SwmmModel-3"><i class="fa fa-check"></i><b>6.2.1</b> SWMM Model</a></li>
+<li class="chapter" data-level="6.2.2" data-path="ModelSetup-2.html"><a href="ModelSetup-2.html#T-SWMM-Sims-3"><i class="fa fa-check"></i><b>6.2.2</b> TUFLOW-SWMM Model Simulation</a></li>
+<li class="chapter" data-level="6.2.3" data-path="ModelSetup-2.html"><a href="ModelSetup-2.html#SWMM-ESTRY-Linking-3"><i class="fa fa-check"></i><b>6.2.3</b> Linking SWMM to TUFLOW 2D and ESTRY</a></li>
+<li class="chapter" data-level="6.2.4" data-path="ModelSetup-2.html"><a href="ModelSetup-2.html#SWMMSettings-3"><i class="fa fa-check"></i><b>6.2.4</b> SWMM Simulation Option Settings</a></li>
+<li class="chapter" data-level="6.2.5" data-path="ModelSetup-2.html"><a href="ModelSetup-2.html#SWMM-BCDB-3"><i class="fa fa-check"></i><b>6.2.5</b> Using the TUFLOW BC Database in SWMM</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="SWMMGISTools-2.html"><a href="SWMMGISTools-2.html"><i class="fa fa-check"></i><b>6.3</b> SWMM GIS Tools</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="SWMMGISTools-2.html"><a href="SWMMGISTools-2.html#SWMMGPKGFormat-3"><i class="fa fa-check"></i><b>6.3.1</b> GeoPackage File Format</a>
+<ul>
+<li class="chapter" data-level="6.3.1.1" data-path="SWMMGISTools-2.html"><a href="SWMMGISTools-2.html#SWMMGPKGTables-4"><i class="fa fa-check"></i><b>6.3.1.1</b> GeoPackage File Table Overview</a></li>
+<li class="chapter" data-level="6.3.1.2" data-path="SWMMGISTools-2.html"><a href="SWMMGISTools-2.html#SWMMGPGOptionsTable-4"><i class="fa fa-check"></i><b>6.3.1.2</b> GeoPackage Options Table</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="SWMMOutputs-2.html"><a href="SWMMOutputs-2.html"><i class="fa fa-check"></i><b>6.4</b> SWMM Outputs</a></li>
+<li class="chapter" data-level="6.5" data-path="SWMMInclusionTUFLOW-2.html"><a href="SWMMInclusionTUFLOW-2.html"><i class="fa fa-check"></i><b>6.5</b> SWMM Inclusion in TUFLOW</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="SWMMInclusionTUFLOW-2.html"><a href="SWMMInclusionTUFLOW-2.html#SWMMLibraryVersion-3"><i class="fa fa-check"></i><b>6.5.1</b> SWMM Library Version</a></li>
+<li class="chapter" data-level="6.5.2" data-path="SWMMInclusionTUFLOW-2.html"><a href="SWMMInclusionTUFLOW-2.html#SWMMCode-in-TUFLOW-3"><i class="fa fa-check"></i><b>6.5.2</b> Embedded SWMM Code in TUFLOW</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="TwoD-Domains-1.html"><a href="TwoD-Domains-1.html"><i class="fa fa-check"></i><b>7</b> 2D Domains</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="Solvers-2.html"><a href="Solvers-2.html"><i class="fa fa-check"></i><b>7.1</b> Solvers</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="Solvers-2.html"><a href="Solvers-2.html#HPCTwoDSolver-3"><i class="fa fa-check"></i><b>7.1.1</b> TUFLOW HPC 2D Solver</a></li>
+<li class="chapter" data-level="7.1.2" data-path="Solvers-2.html"><a href="Solvers-2.html#CLATwoDSolver-3"><i class="fa fa-check"></i><b>7.1.2</b> TUFLOW Classic 2D Solver</a></li>
+<li class="chapter" data-level="7.1.3" data-path="Solvers-2.html"><a href="Solvers-2.html#Schematisation-3"><i class="fa fa-check"></i><b>7.1.3</b> Cell Schematisation</a>
+<ul>
+<li class="chapter" data-level="7.1.3.1" data-path="Solvers-2.html"><a href="Solvers-2.html#computational-points-4"><i class="fa fa-check"></i><b>7.1.3.1</b> Computational Points</a>
+<ul>
+<li class="chapter" data-level="7.1.3.1.1" data-path="Solvers-2.html"><a href="Solvers-2.html#ZCPoint-5"><i class="fa fa-check"></i><b>7.1.3.1.1</b> ZC Point</a></li>
+<li class="chapter" data-level="7.1.3.1.2" data-path="Solvers-2.html"><a href="Solvers-2.html#ZUZVPoints-5"><i class="fa fa-check"></i><b>7.1.3.1.2</b> ZU and ZV Points</a></li>
+<li class="chapter" data-level="7.1.3.1.3" data-path="Solvers-2.html"><a href="Solvers-2.html#ZHPoint-5"><i class="fa fa-check"></i><b>7.1.3.1.3</b> ZH Point</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7.1.4" data-path="Solvers-2.html"><a href="Solvers-2.html#turbulence-overview"><i class="fa fa-check"></i><b>7.1.4</b> Turbulence</a>
+<ul>
+<li class="chapter" data-level="7.1.4.1" data-path="Solvers-2.html"><a href="Solvers-2.html#Dry-Wall-4"><i class="fa fa-check"></i><b>7.1.4.1</b> Dry Wall Treatment</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="Common-2.html"><a href="Common-2.html"><i class="fa fa-check"></i><b>7.2</b> Common Functionality</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="Common-2.html"><a href="Common-2.html#Domain-3"><i class="fa fa-check"></i><b>7.2.1</b> Defining the Domain</a></li>
+<li class="chapter" data-level="7.2.2" data-path="Common-2.html"><a href="Common-2.html#CellCodes-3"><i class="fa fa-check"></i><b>7.2.2</b> Active / Inactive Cells</a></li>
+<li class="chapter" data-level="7.2.3" data-path="Common-2.html"><a href="Common-2.html#layering-3"><i class="fa fa-check"></i><b>7.2.3</b> Data Layering</a></li>
+<li class="chapter" data-level="7.2.4" data-path="Common-2.html"><a href="Common-2.html#SamplingData-3"><i class="fa fa-check"></i><b>7.2.4</b> Sampling of Data Sets</a>
+<ul>
+<li class="chapter" data-level="7.2.4.1" data-path="Common-2.html"><a href="Common-2.html#traditional-sampling-4"><i class="fa fa-check"></i><b>7.2.4.1</b> Traditional Sampling Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2.5" data-path="Common-2.html"><a href="Common-2.html#CellSelection-3"><i class="fa fa-check"></i><b>7.2.5</b> Cell Selection Approach</a>
+<ul>
+<li class="chapter" data-level="7.2.5.1" data-path="Common-2.html"><a href="Common-2.html#CrossHair-4"><i class="fa fa-check"></i><b>7.2.5.1</b> Cross-Hair Approach</a></li>
+<li class="chapter" data-level="7.2.5.2" data-path="Common-2.html"><a href="Common-2.html#SpiderWeb-4"><i class="fa fa-check"></i><b>7.2.5.2</b> Spider Web Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2.6" data-path="Common-2.html"><a href="Common-2.html#elevations-3"><i class="fa fa-check"></i><b>7.2.6</b> Elevations</a>
+<ul>
+<li class="chapter" data-level="7.2.6.1" data-path="Common-2.html"><a href="Common-2.html#DEMGrids-3"><i class="fa fa-check"></i><b>7.2.6.1</b> Direct Reading of DEM Grids</a></li>
+<li class="chapter" data-level="7.2.6.2" data-path="Common-2.html"><a href="Common-2.html#zsh-4"><i class="fa fa-check"></i><b>7.2.6.2</b> Z Shape Layers (2d_zsh)</a>
+<ul>
+<li class="chapter" data-level="7.2.6.2.1" data-path="Common-2.html"><a href="Common-2.html#zshOrder-5"><i class="fa fa-check"></i><b>7.2.6.2.1</b> Order of Processing</a></li>
+<li class="chapter" data-level="7.2.6.2.2" data-path="Common-2.html"><a href="Common-2.html#zshExamples-5"><i class="fa fa-check"></i><b>7.2.6.2.2</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2.6.3" data-path="Common-2.html"><a href="Common-2.html#vzsh-4"><i class="fa fa-check"></i><b>7.2.6.3</b> Variable Z Shape Layer (2d_vzsh)</a></li>
+<li class="chapter" data-level="7.2.6.4" data-path="Common-2.html"><a href="Common-2.html#ztin-4"><i class="fa fa-check"></i><b>7.2.6.4</b> 3D TIN Layers (2d_ztin)</a></li>
+<li class="chapter" data-level="7.2.6.5" data-path="Common-2.html"><a href="Common-2.html#zln-4"><i class="fa fa-check"></i><b>7.2.6.5</b> Z Line Layers (2d_zln)</a></li>
+<li class="chapter" data-level="7.2.6.6" data-path="Common-2.html"><a href="Common-2.html#zpt-4"><i class="fa fa-check"></i><b>7.2.6.6</b> Zpt Layers (2d_zpt)</a></li>
+<li class="chapter" data-level="7.2.6.7" data-path="Common-2.html"><a href="Common-2.html#using-multiple-and-points-4"><i class="fa fa-check"></i><b>7.2.6.7</b> Using Multiple Layers and Points Layers</a>
+<ul>
+<li class="chapter" data-level="7.2.6.7.1" data-path="Common-2.html"><a href="Common-2.html#point-only-5"><i class="fa fa-check"></i><b>7.2.6.7.1</b> Point Only Layers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7.2.7" data-path="Common-2.html"><a href="Common-2.html#Materials-2"><i class="fa fa-check"></i><b>7.2.7</b> Land Use (Materials)</a>
+<ul>
+<li class="chapter" data-level="7.2.7.1" data-path="Common-2.html"><a href="Common-2.html#Bed-Resistance-4"><i class="fa fa-check"></i><b>7.2.7.1</b> Bed Resistance</a></li>
+<li class="chapter" data-level="7.2.7.2" data-path="Common-2.html"><a href="Common-2.html#log-law-4"><i class="fa fa-check"></i><b>7.2.7.2</b> Log Law Depth Varying Bed Resistance</a></li>
+<li class="chapter" data-level="7.2.7.3" data-path="Common-2.html"><a href="Common-2.html#Materials-File-4"><i class="fa fa-check"></i><b>7.2.7.3</b> Materials File</a>
+<ul>
+<li class="chapter" data-level="7.2.7.3.1" data-path="Common-2.html"><a href="Common-2.html#mat-csv-5"><i class="fa fa-check"></i><b>7.2.7.3.1</b> .csv Format</a></li>
+<li class="chapter" data-level="7.2.7.3.2" data-path="Common-2.html"><a href="Common-2.html#tmf-5"><i class="fa fa-check"></i><b>7.2.7.3.2</b> .tmf Format</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2.7.4" data-path="Common-2.html"><a href="Common-2.html#Rainfall-Losses-4"><i class="fa fa-check"></i><b>7.2.7.4</b> Rainfall Losses</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2.8" data-path="Common-2.html"><a href="Common-2.html#Infiltration-2"><i class="fa fa-check"></i><b>7.2.8</b> Infiltration</a>
+<ul>
+<li class="chapter" data-level="7.2.8.1" data-path="Common-2.html"><a href="Common-2.html#infiltration-layer-4"><i class="fa fa-check"></i><b>7.2.8.1</b> Infiltration Layer</a>
+<ul>
+<li class="chapter" data-level="7.2.8.1.1" data-path="Common-2.html"><a href="Common-2.html#GA-5"><i class="fa fa-check"></i><b>7.2.8.1.1</b> Green-Ampt (GA)</a></li>
+<li class="chapter" data-level="7.2.8.1.2" data-path="Common-2.html"><a href="Common-2.html#HO-5"><i class="fa fa-check"></i><b>7.2.8.1.2</b> Horton (HO)</a></li>
+<li class="chapter" data-level="7.2.8.1.3" data-path="Common-2.html"><a href="Common-2.html#ILCL-5"><i class="fa fa-check"></i><b>7.2.8.1.3</b> Initial Loss/Continuing Loss (ILCL)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2.8.2" data-path="Common-2.html"><a href="Common-2.html#tsoilf-4"><i class="fa fa-check"></i><b>7.2.8.2</b> Soils File (.tsoilf)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2.9" data-path="Common-2.html"><a href="Common-2.html#HydraulicStructures-3"><i class="fa fa-check"></i><b>7.2.9</b> Hydraulic Structures</a>
+<ul>
+<li class="chapter" data-level="7.2.9.1" data-path="Common-2.html"><a href="Common-2.html#HydraulicStructuresIntro-4"><i class="fa fa-check"></i><b>7.2.9.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2.9.2" data-path="Common-2.html"><a href="Common-2.html#bg-layer-4"><i class="fa fa-check"></i><b>7.2.9.2</b> 2D Bridge Structures (2d_bg)</a>
+<ul>
+<li class="chapter" data-level="7.2.9.2.1" data-path="Common-2.html"><a href="Common-2.html#bg-autoFLC-4"><i class="fa fa-check"></i><b>7.2.9.2.1</b> Automatic Generation of Superstructure FLC</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2.9.3" data-path="Common-2.html"><a href="Common-2.html#lfcsh-4"><i class="fa fa-check"></i><b>7.2.9.3</b> Layered Flow Constrictions (2d_lfcsh)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2.10" data-path="Common-2.html"><a href="Common-2.html#cell-mods-3"><i class="fa fa-check"></i><b>7.2.10</b> Cell Modification</a>
+<ul>
+<li class="chapter" data-level="7.2.10.1" data-path="Common-2.html"><a href="Common-2.html#srf-3"><i class="fa fa-check"></i><b>7.2.10.1</b> Storage Reduction (2d_srf)</a></li>
+<li class="chapter" data-level="7.2.10.2" data-path="Common-2.html"><a href="Common-2.html#CWF-4"><i class="fa fa-check"></i><b>7.2.10.2</b> Cell Width Factor (2d_cwf)</a></li>
+<li class="chapter" data-level="7.2.10.3" data-path="Common-2.html"><a href="Common-2.html#flc-4"><i class="fa fa-check"></i><b>7.2.10.3</b> Form Loss Coefficient (2d_flc)</a></li>
+<li class="chapter" data-level="7.2.10.4" data-path="Common-2.html"><a href="Common-2.html#mod-conveyance-4"><i class="fa fa-check"></i><b>7.2.10.4</b> Modify Conveyance</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2.11" data-path="Common-2.html"><a href="Common-2.html#urban-areas-3"><i class="fa fa-check"></i><b>7.2.11</b> Modelling Urban Areas</a>
+<ul>
+<li class="chapter" data-level="7.2.11.1" data-path="Common-2.html"><a href="Common-2.html#buildings-4"><i class="fa fa-check"></i><b>7.2.11.1</b> Buildings</a></li>
+<li class="chapter" data-level="7.2.11.2" data-path="Common-2.html"><a href="Common-2.html#roads-4"><i class="fa fa-check"></i><b>7.2.11.2</b> Roads</a></li>
+<li class="chapter" data-level="7.2.11.3" data-path="Common-2.html"><a href="Common-2.html#fences-4"><i class="fa fa-check"></i><b>7.2.11.3</b> Fences and Walls</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html"><i class="fa fa-check"></i><b>7.3</b> TUFLOW HPC Specific</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#Quadtree-3"><i class="fa fa-check"></i><b>7.3.1</b> Quadtree</a>
+<ul>
+<li class="chapter" data-level="7.3.1.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#qcf-commands-4"><i class="fa fa-check"></i><b>7.3.1.1</b> Quadtree .tcf Commands</a></li>
+<li class="chapter" data-level="7.3.1.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#qcf-mandatory-4"><i class="fa fa-check"></i><b>7.3.1.2</b> Quadtree Control File (.qcf) – Mandatory Commands</a></li>
+<li class="chapter" data-level="7.3.1.3" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#qcf-optional-4"><i class="fa fa-check"></i><b>7.3.1.3</b> Quadtree Control File (.qcf) – Optional Commands</a></li>
+<li class="chapter" data-level="7.3.1.4" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#QDT-mesh-4"><i class="fa fa-check"></i><b>7.3.1.4</b> Defining Grid Refinement Polygons</a></li>
+<li class="chapter" data-level="7.3.1.5" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#QDT-topup-4"><i class="fa fa-check"></i><b>7.3.1.5</b> Quadtree Topographic Updates</a></li>
+<li class="chapter" data-level="7.3.1.6" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#QDT-outops-4"><i class="fa fa-check"></i><b>7.3.1.6</b> Quadtree Output Options</a>
+<ul>
+<li class="chapter" data-level="7.3.1.6.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#QDT-chkfil-5"><i class="fa fa-check"></i><b>7.3.1.6.1</b> Check Files</a></li>
+<li class="chapter" data-level="7.3.1.6.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#QDT-mapops-5"><i class="fa fa-check"></i><b>7.3.1.6.2</b> Map Outputs</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7.3.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-Turbulence-3"><i class="fa fa-check"></i><b>7.3.2</b> HPC Turbulence</a>
+<ul>
+<li class="chapter" data-level="7.3.2.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-Turbulence-4"><i class="fa fa-check"></i><b>7.3.2.1</b> Overview</a></li>
+<li class="chapter" data-level="7.3.2.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#Constant-4"><i class="fa fa-check"></i><b>7.3.2.2</b> Constant Eddy Viscosity</a></li>
+<li class="chapter" data-level="7.3.2.3" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#Smagorinsky-4"><i class="fa fa-check"></i><b>7.3.2.3</b> Smagorinsky Approach</a></li>
+<li class="chapter" data-level="7.3.2.4" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#Wu-4"><i class="fa fa-check"></i><b>7.3.2.4</b> Wu Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3.3" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#SGS-3"><i class="fa fa-check"></i><b>7.3.3</b> Sub-Grid Sampling (SGS)</a>
+<ul>
+<li class="chapter" data-level="7.3.3.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#SGS-commands-4"><i class="fa fa-check"></i><b>7.3.3.1</b> SGS Methodology and Commands</a>
+<ul>
+<li class="chapter" data-level="7.3.3.1.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#SGS-Distance-5"><i class="fa fa-check"></i><b>7.3.3.1.1</b> SGS Sample Distance</a></li>
+<li class="chapter" data-level="7.3.3.1.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#SGS-TopoUpdates-5"><i class="fa fa-check"></i><b>7.3.3.1.2</b> SGS Topographic Updates</a></li>
+<li class="chapter" data-level="7.3.3.1.3" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#SGS-Advanced-5"><i class="fa fa-check"></i><b>7.3.3.1.3</b> Advanced SGS Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3.3.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#SGS-output-4"><i class="fa fa-check"></i><b>7.3.3.2</b> SGS Output Options</a>
+<ul>
+<li class="chapter" data-level="7.3.3.2.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#SGS-check-5"><i class="fa fa-check"></i><b>7.3.3.2.1</b> Check Files</a></li>
+<li class="chapter" data-level="7.3.3.2.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#sgs-output-5"><i class="fa fa-check"></i><b>7.3.3.2.2</b> Map Outputs</a></li>
+<li class="chapter" data-level="7.3.3.2.3" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HighResOutputs-5"><i class="fa fa-check"></i><b>7.3.3.2.3</b> High-Resolution Outputs</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7.3.4" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-US-Controlled-3"><i class="fa fa-check"></i><b>7.3.4</b> 2D Upstream Controlled Flow (Weirs and Supercritical Flow)</a></li>
+<li class="chapter" data-level="7.3.5" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-Infiltration-GW"><i class="fa fa-check"></i><b>7.3.5</b> Infiltration and Groundwater Flow</a>
+<ul>
+<li class="chapter" data-level="7.3.5.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-Infiltration-4"><i class="fa fa-check"></i><b>7.3.5.1</b> Infiltration</a>
+<ul>
+<li class="chapter" data-level="7.3.5.1.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#SCS-4"><i class="fa fa-check"></i><b>7.3.5.1.1</b> SCS Curve Number (SCS)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3.5.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-Groundwater-3"><i class="fa fa-check"></i><b>7.3.5.2</b> Groundwater Flow</a>
+<ul>
+<li class="chapter" data-level="7.3.5.2.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#hhc-5"><i class="fa fa-check"></i><b>7.3.5.2.1</b> Horizontal Advection</a></li>
+<li class="chapter" data-level="7.3.5.2.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#CO-4"><i class="fa fa-check"></i><b>7.3.5.2.2</b> Vertical Flux For Convective Flow Layers (CO)</a></li>
+<li class="chapter" data-level="7.3.5.2.3" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#AdjustKvh-5"><i class="fa fa-check"></i><b>7.3.5.2.3</b> Unsaturated Groundwater Flow</a></li>
+<li class="chapter" data-level="7.3.5.2.4" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#GWImplementation-5"><i class="fa fa-check"></i><b>7.3.5.2.4</b> Implementation</a></li>
+<li class="chapter" data-level="7.3.5.2.5" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-soil-type-5"><i class="fa fa-check"></i><b>7.3.5.2.5</b> Soil Type</a></li>
+<li class="chapter" data-level="7.3.5.2.6" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#SoilThickness-5"><i class="fa fa-check"></i><b>7.3.5.2.6</b> Soil Thickness</a></li>
+<li class="chapter" data-level="7.3.5.2.7" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#top-gw-drying-4"><i class="fa fa-check"></i><b>7.3.5.2.7</b> Drying of Top Groundwater Layer</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3.5.3" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-tsoilf-5"><i class="fa fa-check"></i><b>7.3.5.3</b> HPC Soils File (.tsoilf)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3.6" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#NN-3"><i class="fa fa-check"></i><b>7.3.6</b> Non-Newtonian Flow</a>
+<ul>
+<li class="chapter" data-level="7.3.6.1" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#Implementation-4"><i class="fa fa-check"></i><b>7.3.6.1</b> Implementation</a></li>
+<li class="chapter" data-level="7.3.6.2" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#NN-Mix-4"><i class="fa fa-check"></i><b>7.3.6.2</b> Non-Newtonian Mixing</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3.7" data-path="HPC-specific-2.html"><a href="HPC-specific-2.html#HPC-Unsupported-3"><i class="fa fa-check"></i><b>7.3.7</b> Unsupported Features in TUFLOW HPC</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html"><i class="fa fa-check"></i><b>7.4</b> TUFLOW Classic Specific</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-Turbulence-3"><i class="fa fa-check"></i><b>7.4.1</b> Classic Turbulence</a>
+<ul>
+<li class="chapter" data-level="7.4.1.1" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-Constant-4"><i class="fa fa-check"></i><b>7.4.1.1</b> Constant</a></li>
+<li class="chapter" data-level="7.4.1.2" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-Smagorinsky-4"><i class="fa fa-check"></i><b>7.4.1.2</b> Smagorinsky</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4.2" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-US-Controlled-3"><i class="fa fa-check"></i><b>7.4.2</b> 2D Upstream Controlled Flow (Weirs and Supercritical Flow)</a></li>
+<li class="chapter" data-level="7.4.3" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-mat-3"><i class="fa fa-check"></i><b>7.4.3</b> Land Use (Materials)</a></li>
+<li class="chapter" data-level="7.4.4" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-2D2D-3"><i class="fa fa-check"></i><b>7.4.4</b> Multiple 2D Domain</a></li>
+<li class="chapter" data-level="7.4.5" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-Coriolis-3"><i class="fa fa-check"></i><b>7.4.5</b> Coriolis Term</a></li>
+<li class="chapter" data-level="7.4.6" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#LegacyStructs-3"><i class="fa fa-check"></i><b>7.4.6</b> Legacy Structures</a>
+<ul>
+<li class="chapter" data-level="7.4.6.1" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-FC-4"><i class="fa fa-check"></i><b>7.4.6.1</b> 2D Flow Constrictions (2d_fcsh and 2d_fc)</a></li>
+<li class="chapter" data-level="7.4.6.2" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#EnergyLoss-fc-fcsh-4"><i class="fa fa-check"></i><b>7.4.6.2</b> Applying Form (Energy) Loss in 2d_fc and 2d_fcsh Layers</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4.7" data-path="CLASpecific-2.html"><a href="CLASpecific-2.html#CLA-Unsupported-3"><i class="fa fa-check"></i><b>7.4.7</b> Unsupported Features in TUFLOW Classic</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="Boundaries-InitialConditions-1.html"><a href="Boundaries-InitialConditions-1.html"><i class="fa fa-check"></i><b>8</b> Boundaries and Initial Conditions</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="BCArrangements-2.html"><a href="BCArrangements-2.html"><i class="fa fa-check"></i><b>8.1</b> Recommended BC Arrangements</a></li>
+<li class="chapter" data-level="8.2" data-path="BC-Solver-2.html"><a href="BC-Solver-2.html"><i class="fa fa-check"></i><b>8.2</b> Solver Specific Considerations</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="BC-Solver-2.html"><a href="BC-Solver-2.html#ClassicBC-3"><i class="fa fa-check"></i><b>8.2.1</b> Classic Specific Boundaries / Options</a></li>
+<li class="chapter" data-level="8.2.2" data-path="BC-Solver-2.html"><a href="BC-Solver-2.html#ClassicHPC-3"><i class="fa fa-check"></i><b>8.2.2</b> HPC Specific Boundaries / Options</a>
+<ul>
+<li class="chapter" data-level="8.2.2.1" data-path="BC-Solver-2.html"><a href="BC-Solver-2.html#HPCEnergyOptions-4"><i class="fa fa-check"></i><b>8.2.2.1</b> HPC Energy Options for 2D HT, HQ and QT Boundaries</a></li>
+<li class="chapter" data-level="8.2.2.2" data-path="BC-Solver-2.html"><a href="BC-Solver-2.html#HpcHQApproach-4"><i class="fa fa-check"></i><b>8.2.2.2</b> HPC HQ Boundary Approach</a></li>
+<li class="chapter" data-level="8.2.2.3" data-path="BC-Solver-2.html"><a href="BC-Solver-2.html#HpcHQFilter-4"><i class="fa fa-check"></i><b>8.2.2.3</b> HPC HQ Boundary Stability</a></li>
+<li class="chapter" data-level="8.2.2.4" data-path="BC-Solver-2.html"><a href="BC-Solver-2.html#HpcInfiltration-4"><i class="fa fa-check"></i><b>8.2.2.4</b> HPC Infiltration Approach</a></li>
+<li class="chapter" data-level="8.2.2.5" data-path="BC-Solver-2.html"><a href="BC-Solver-2.html#HpcSXMomentum-4"><i class="fa fa-check"></i><b>8.2.2.5</b> HPC Momentum Source at SX Boundary</a></li>
+<li class="chapter" data-level="8.2.2.6" data-path="BC-Solver-2.html"><a href="BC-Solver-2.html#HpcQuadtreeParallelInteria-4"><i class="fa fa-check"></i><b>8.2.2.6</b> Quadtree BC Parallel Inertia Approach</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="OneDBoundaries-2.html"><a href="OneDBoundaries-2.html"><i class="fa fa-check"></i><b>8.3</b> 1D Boundaries (1d_bc Layers)</a></li>
+<li class="chapter" data-level="8.4" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html"><i class="fa fa-check"></i><b>8.4</b> 2D Boundaries (2d_bc, 2d_sa and 2d_rf Layers)</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#BC-Layers-3"><i class="fa fa-check"></i><b>8.4.1</b> Boundary Conditions (2d_bc)</a>
+<ul>
+<li class="chapter" data-level="8.4.1.1" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#SlopingLevel-3"><i class="fa fa-check"></i><b>8.4.1.1</b> Sloping Water Level Boundaries</a></li>
+<li class="chapter" data-level="8.4.1.2" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#GT-4"><i class="fa fa-check"></i><b>8.4.1.2</b> Groundwater Boundaries</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4.2" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#SA-Layers-3"><i class="fa fa-check"></i><b>8.4.2</b> Source Area Boundaries</a>
+<ul>
+<li class="chapter" data-level="8.4.2.1" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#SA-Option-4"><i class="fa fa-check"></i><b>8.4.2.1</b> Source Area Options (2d_sa)</a>
+<ul>
+<li class="chapter" data-level="8.4.2.1.1" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#Streamlines-4"><i class="fa fa-check"></i><b>8.4.2.1.1</b> Streamlines</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4.2.2" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#RFOption-4"><i class="fa fa-check"></i><b>8.4.2.2</b> Rainfall Option (2d_sa_rf)</a></li>
+<li class="chapter" data-level="8.4.2.3" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#TriggerOption-4"><i class="fa fa-check"></i><b>8.4.2.3</b> Trigger Option (2d_sa_tr)</a></li>
+<li class="chapter" data-level="8.4.2.4" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#FlowFeature-4"><i class="fa fa-check"></i><b>8.4.2.4</b> Flow Feature (2d_sa_po)</a></li>
+<li class="chapter" data-level="8.4.2.5" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#OverlappingSA-4"><i class="fa fa-check"></i><b>8.4.2.5</b> Overlapping 2d_sa regions</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4.3" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#Rainfall-3"><i class="fa fa-check"></i><b>8.4.3</b> Rainfall Boundaries</a>
+<ul>
+<li class="chapter" data-level="8.4.3.1" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#RainfallOverview-4"><i class="fa fa-check"></i><b>8.4.3.1</b> Rainfall Overview</a></li>
+<li class="chapter" data-level="8.4.3.2" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#RainfallConsiderations-4"><i class="fa fa-check"></i><b>8.4.3.2</b> Considerations for Rainfall Modelling</a></li>
+<li class="chapter" data-level="8.4.3.3" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#RF-Global-4"><i class="fa fa-check"></i><b>8.4.3.3</b> Global Rainfall</a></li>
+<li class="chapter" data-level="8.4.3.4" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#RF-Layers-4"><i class="fa fa-check"></i><b>8.4.3.4</b> Rainfall Polygons (2d_rf)</a></li>
+<li class="chapter" data-level="8.4.3.5" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#GriddedRainfall-4"><i class="fa fa-check"></i><b>8.4.3.5</b> Gridded Rainfall</a></li>
+<li class="chapter" data-level="8.4.3.6" data-path="TwoDBoundaries-2.html"><a href="TwoDBoundaries-2.html#TRFC-File-4"><i class="fa fa-check"></i><b>8.4.3.6</b> Rainfall Control File (.trfc file)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="bcdbase-2.html"><a href="bcdbase-2.html"><i class="fa fa-check"></i><b>8.5</b> Boundary Condition (BC) Database</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="bcdbase-2.html"><a href="bcdbase-2.html#bcdbase-Example-3"><i class="fa fa-check"></i><b>8.5.1</b> BC Database Example</a></li>
+<li class="chapter" data-level="8.5.2" data-path="bcdbase-2.html"><a href="bcdbase-2.html#BoundaryGenerators-3"><i class="fa fa-check"></i><b>8.5.2</b> TUFLOW Boundary Generators</a></li>
+<li class="chapter" data-level="8.5.3" data-path="bcdbase-2.html"><a href="bcdbase-2.html#DelftFEWSBoundary-3"><i class="fa fa-check"></i><b>8.5.3</b> Delft FEWS Boundaries</a></li>
+<li class="chapter" data-level="8.5.4" data-path="bcdbase-2.html"><a href="bcdbase-2.html#HECDSS-3"><i class="fa fa-check"></i><b>8.5.4</b> HEC-DSS Boundaries</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="Cyclones-2.html"><a href="Cyclones-2.html"><i class="fa fa-check"></i><b>8.6</b> Cyclones / Hurricanes / Typhoons</a></li>
+<li class="chapter" data-level="8.7" data-path="ExternalStress-2.html"><a href="ExternalStress-2.html"><i class="fa fa-check"></i><b>8.7</b> External Stress Boundaries</a></li>
+<li class="chapter" data-level="8.8" data-path="InitialConditions-2.html"><a href="InitialConditions-2.html"><i class="fa fa-check"></i><b>8.8</b> Initial Conditions</a>
+<ul>
+<li class="chapter" data-level="8.8.1" data-path="InitialConditions-2.html"><a href="InitialConditions-2.html#IWL-3"><i class="fa fa-check"></i><b>8.8.1</b> Initial Water Levels (IWL)</a>
+<ul>
+<li class="chapter" data-level="8.8.1.1" data-path="InitialConditions-2.html"><a href="InitialConditions-2.html#IWL-1D-4"><i class="fa fa-check"></i><b>8.8.1.1</b> 1D Domains</a></li>
+<li class="chapter" data-level="8.8.1.2" data-path="InitialConditions-2.html"><a href="InitialConditions-2.html#IWL-2D-4"><i class="fa fa-check"></i><b>8.8.1.2</b> 2D Domains</a></li>
+<li class="chapter" data-level="8.8.1.3" data-path="InitialConditions-2.html"><a href="InitialConditions-2.html#IWL-Auto-4"><i class="fa fa-check"></i><b>8.8.1.3</b> Automatic Initial Water Level</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8.2" data-path="InitialConditions-2.html"><a href="InitialConditions-2.html#IGW-3"><i class="fa fa-check"></i><b>8.8.2</b> Initial Groundwater Levels</a></li>
+<li class="chapter" data-level="8.8.3" data-path="InitialConditions-2.html"><a href="InitialConditions-2.html#RestartFiles-3"><i class="fa fa-check"></i><b>8.8.3</b> Restart Files</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="AD-1.html"><a href="AD-1.html"><i class="fa fa-check"></i><b>9</b> Advection Dispersion</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="AD-2D-2.html"><a href="AD-2D-2.html"><i class="fa fa-check"></i><b>9.1</b> 2D Domains</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="AD-2D-2.html"><a href="AD-2D-2.html#AD-Solution-3"><i class="fa fa-check"></i><b>9.1.1</b> 2D Depth Averaged Equation of Motion</a></li>
+<li class="chapter" data-level="9.1.2" data-path="AD-2D-2.html"><a href="AD-2D-2.html#AD-Solution-2"><i class="fa fa-check"></i><b>9.1.2</b> Solution Method (TUFLOW Classic)</a></li>
+<li class="chapter" data-level="9.1.3" data-path="AD-2D-2.html"><a href="AD-2D-2.html#AD-Solution-HPC-3"><i class="fa fa-check"></i><b>9.1.3</b> Solution Method (TUFLOW HPC)</a></li>
+<li class="chapter" data-level="9.1.4" data-path="AD-2D-2.html"><a href="AD-2D-2.html#AD-Local-3"><i class="fa fa-check"></i><b>9.1.4</b> Local Constituent Transformation</a></li>
+<li class="chapter" data-level="9.1.5" data-path="AD-2D-2.html"><a href="AD-2D-2.html#AD-GW-3"><i class="fa fa-check"></i><b>9.1.5</b> Groundwater</a></li>
+<li class="chapter" data-level="9.1.6" data-path="AD-2D-2.html"><a href="AD-2D-2.html#AD-Limitations-2D"><i class="fa fa-check"></i><b>9.1.6</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="AD-1D-2.html"><a href="AD-1D-2.html"><i class="fa fa-check"></i><b>9.2</b> 1D Domains</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="AD-1D-2.html"><a href="AD-1D-2.html#AD-1D-Solution-3"><i class="fa fa-check"></i><b>9.2.1</b> 1D Cross-Sectional Averaged Equation of Motion</a></li>
+<li class="chapter" data-level="9.2.2" data-path="AD-1D-2.html"><a href="AD-1D-2.html#AD-Solution-ESTRY-3"><i class="fa fa-check"></i><b>9.2.2</b> 1D Solution Method (ESTRY)</a></li>
+<li class="chapter" data-level="9.2.3" data-path="AD-1D-2.html"><a href="AD-1D-2.html#AD-Limitations-1D"><i class="fa fa-check"></i><b>9.2.3</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="AD-ModellingProcess-2.html"><a href="AD-ModellingProcess-2.html"><i class="fa fa-check"></i><b>9.3</b> The Modelling Process</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="AD-ModellingProcess-2.html"><a href="AD-ModellingProcess-2.html#AD-DataInput-3"><i class="fa fa-check"></i><b>9.3.1</b> Data Input Requirements</a></li>
+<li class="chapter" data-level="9.3.2" data-path="AD-ModellingProcess-2.html"><a href="AD-ModellingProcess-2.html#AD-Calibration-3"><i class="fa fa-check"></i><b>9.3.2</b> Calibration and Sensitivity</a></li>
+<li class="chapter" data-level="9.3.3" data-path="AD-ModellingProcess-2.html"><a href="AD-ModellingProcess-2.html#AD-Model-Res-3"><i class="fa fa-check"></i><b>9.3.3</b> Model Resolution</a></li>
+<li class="chapter" data-level="9.3.4" data-path="AD-ModellingProcess-2.html"><a href="AD-ModellingProcess-2.html#AD-Computational-Timestep-3"><i class="fa fa-check"></i><b>9.3.4</b> Computational Timestep</a></li>
+<li class="chapter" data-level="9.3.5" data-path="AD-ModellingProcess-2.html"><a href="AD-ModellingProcess-2.html#AD-Example-3"><i class="fa fa-check"></i><b>9.3.5</b> Example AD Models</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="AD-DataInput-2.html"><a href="AD-DataInput-2.html"><i class="fa fa-check"></i><b>9.4</b> Data Input</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="AD-DataInput-2.html"><a href="AD-DataInput-2.html#AD-SimControlFile-3"><i class="fa fa-check"></i><b>9.4.1</b> Simulation Control File</a>
+<ul>
+<li class="chapter" data-level="9.4.1.1" data-path="AD-DataInput-2.html"><a href="AD-DataInput-2.html#ADControlFile-4"><i class="fa fa-check"></i><b>9.4.1.1</b> TUFLOW AD Control File (.adcf File)</a></li>
+<li class="chapter" data-level="9.4.1.2" data-path="AD-DataInput-2.html"><a href="AD-DataInput-2.html#AD-inputs-4"><i class="fa fa-check"></i><b>9.4.1.2</b> GIS Input File Types and Naming Conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4.2" data-path="AD-DataInput-2.html"><a href="AD-DataInput-2.html#AD-OneDGeoms-3"><i class="fa fa-check"></i><b>9.4.2</b> 1D Geometries</a></li>
+<li class="chapter" data-level="9.4.3" data-path="AD-DataInput-2.html"><a href="AD-DataInput-2.html#ADConstituentProp-3"><i class="fa fa-check"></i><b>9.4.3</b> Specification of Constituent Properties</a></li>
+<li class="chapter" data-level="9.4.4" data-path="AD-DataInput-2.html"><a href="AD-DataInput-2.html#ADBoundaryConditions-3"><i class="fa fa-check"></i><b>9.4.4</b> Boundary Conditions</a>
+<ul>
+<li class="chapter" data-level="9.4.4.1" data-path="AD-DataInput-2.html"><a href="AD-DataInput-2.html#BCDatabase-4"><i class="fa fa-check"></i><b>9.4.4.1</b> Boundary Condition (BC) Database</a></li>
+<li class="chapter" data-level="9.4.4.2" data-path="AD-DataInput-2.html"><a href="AD-DataInput-2.html#BCDatabaseExample-4"><i class="fa fa-check"></i><b>9.4.4.2</b> BC Database Example</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4.5" data-path="AD-DataInput-2.html"><a href="AD-DataInput-2.html#initial-conditions"><i class="fa fa-check"></i><b>9.4.5</b> Initial Conditions</a></li>
+<li class="chapter" data-level="9.4.6" data-path="AD-DataInput-2.html"><a href="AD-DataInput-2.html#GW-initial-conditions"><i class="fa fa-check"></i><b>9.4.6</b> Groundwater Initial Conditions</a></li>
+<li class="chapter" data-level="9.4.7" data-path="AD-DataInput-2.html"><a href="AD-DataInput-2.html#minimum-dispersion-coefficient"><i class="fa fa-check"></i><b>9.4.7</b> Minimum Dispersion Coefficient</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="AD-DataOutput-2.html"><a href="AD-DataOutput-2.html"><i class="fa fa-check"></i><b>9.5</b> Data Output</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="AD-DataOutput-2.html"><a href="AD-DataOutput-2.html#AD-LogFiles-3"><i class="fa fa-check"></i><b>9.5.1</b> TUFLOW AD Log Files</a>
+<ul>
+<li class="chapter" data-level="9.5.1.1" data-path="AD-DataOutput-2.html"><a href="AD-DataOutput-2.html#AD-log-4"><i class="fa fa-check"></i><b>9.5.1.1</b> Simulation Log File</a></li>
+<li class="chapter" data-level="9.5.1.2" data-path="AD-DataOutput-2.html"><a href="AD-DataOutput-2.html#ADCFLLogFile-4"><i class="fa fa-check"></i><b>9.5.1.2</b> CFL Log File</a></li>
+<li class="chapter" data-level="9.5.1.3" data-path="AD-DataOutput-2.html"><a href="AD-DataOutput-2.html#ADLogMass-4"><i class="fa fa-check"></i><b>9.5.1.3</b> Mass Log File</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5.2" data-path="AD-DataOutput-2.html"><a href="AD-DataOutput-2.html#AD-CheckFiles-3"><i class="fa fa-check"></i><b>9.5.2</b> Check Files</a></li>
+<li class="chapter" data-level="9.5.3" data-path="AD-DataOutput-2.html"><a href="AD-DataOutput-2.html#AD-ResultFiles-3"><i class="fa fa-check"></i><b>9.5.3</b> Result Files</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="DomainLinking-1.html"><a href="DomainLinking-1.html"><i class="fa fa-check"></i><b>10</b> Combining Domains and Solvers</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="Linked-1D2D-Models-Intro-2.html"><a href="Linked-1D2D-Models-Intro-2.html"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html"><i class="fa fa-check"></i><b>10.2</b> 1D and 2D Domain Linking Theory</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#HXBoundary-3"><i class="fa fa-check"></i><b>10.2.1</b> HX 2D Head Boundary</a></li>
+<li class="chapter" data-level="10.2.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundary-3"><i class="fa fa-check"></i><b>10.2.2</b> SX 2D Flow Boundaries</a>
+<ul>
+<li class="chapter" data-level="10.2.2.1" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundarySW-4"><i class="fa fa-check"></i><b>10.2.2.1</b> SX 2D Flow Boundary to Surface Water</a></li>
+<li class="chapter" data-level="10.2.2.2" data-path="OneD2dLinking-2.html"><a href="OneD2dLinking-2.html#SXBoundaryGW-4"><i class="fa fa-check"></i><b>10.2.2.2</b> SX 2D Flow Boundary to Groundwater</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html"><i class="fa fa-check"></i><b>10.3</b> TUFLOW 1D (ESTRY) to TUFLOW 2D Linking</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYChannel-3"><i class="fa fa-check"></i><b>10.3.1</b> 1D Open Channel and 2D Domain Linking</a></li>
+<li class="chapter" data-level="10.3.2" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYCulverts-3"><i class="fa fa-check"></i><b>10.3.2</b> 1D Structures Embedded within 2D Domains</a></li>
+<li class="chapter" data-level="10.3.3" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#OneD2DESTRYPipeNetwork-3"><i class="fa fa-check"></i><b>10.3.3</b> 1D Pipe Network Pits linked to 2D Domains</a></li>
+<li class="chapter" data-level="10.3.4" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#VirtualPits-3"><i class="fa fa-check"></i><b>10.3.4</b> Virtual Pits linked to 2D Domains</a></li>
+<li class="chapter" data-level="10.3.5" data-path="OneD2DLinking-Estry-2.html"><a href="OneD2DLinking-Estry-2.html#GroundwaterLinked-3"><i class="fa fa-check"></i><b>10.3.5</b> TUFLOW 1D (ESTRY) linked to Groundwater</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html"><i class="fa fa-check"></i><b>10.4</b> SWMM to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMCulverts-5"><i class="fa fa-check"></i><b>10.4.1</b> 1D Culvert Connections to 2D Domains</a></li>
+<li class="chapter" data-level="10.4.2" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DSWMMPipeNetwork-3"><i class="fa fa-check"></i><b>10.4.2</b> 1D Pipe Network Connections to 2D Domains</a>
+<ul>
+<li class="chapter" data-level="10.4.2.1" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#SWMMPipeNetBackground-4"><i class="fa fa-check"></i><b>10.4.2.1</b> Background</a></li>
+<li class="chapter" data-level="10.4.2.2" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#SWMMPipeNetSetup-4"><i class="fa fa-check"></i><b>10.4.2.2</b> Setup</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4.3" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DGWConnections-3"><i class="fa fa-check"></i><b>10.4.3</b> Groundwater Connections to 2D Domains</a></li>
+<li class="chapter" data-level="10.4.4" data-path="OneD2DLinkingSWMM-2.html"><a href="OneD2DLinkingSWMM-2.html#OneD2DLinkingSWMM1D-3"><i class="fa fa-check"></i><b>10.4.4</b> SWMM to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html"><i class="fa fa-check"></i><b>10.5</b> Flood Modeller to TUFLOW Linking</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html#oneD2DFMLinking2D-3"><i class="fa fa-check"></i><b>10.5.1</b> Flood Modeller 1D to TUFLOW 2D Linking</a></li>
+<li class="chapter" data-level="10.5.2" data-path="OneD2DLinkingFM-2.html"><a href="OneD2DLinkingFM-2.html#oneD2DFMLinking1D-3"><i class="fa fa-check"></i><b>10.5.2</b> Flood Modeller 1D to TUFLOW 1D (ESTRY) Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="oneD2D12D-2.html"><a href="oneD2D12D-2.html"><i class="fa fa-check"></i><b>10.6</b> 12D-DDA to TUFLOW Linking</a></li>
+<li class="chapter" data-level="10.7" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html"><i class="fa fa-check"></i><b>10.7</b> Multiple 2D Domains</a>
+<ul>
+<li class="chapter" data-level="10.7.1" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html#TwoD2DLinkingQDT-3"><i class="fa fa-check"></i><b>10.7.1</b> Classic’s M2D Feature versus HPC Quadtree</a></li>
+<li class="chapter" data-level="10.7.2" data-path="TwoD2DLinking-2.html"><a href="TwoD2DLinking-2.html#TwoD2DLinkingM2D-3"><i class="fa fa-check"></i><b>10.7.2</b> TUFLOW Classic’s Multiple 2D Domains</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="Outputs-1.html"><a href="Outputs-1.html"><i class="fa fa-check"></i><b>11</b> Outputs</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="Location-2.html"><a href="Location-2.html"><i class="fa fa-check"></i><b>11.1</b> Output Location</a></li>
+<li class="chapter" data-level="11.2" data-path="Map-2.html"><a href="Map-2.html"><i class="fa fa-check"></i><b>11.2</b> Map Outputs</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="Map-2.html"><a href="Map-2.html#TimeControl-3"><i class="fa fa-check"></i><b>11.2.1</b> Output Time Controls</a></li>
+<li class="chapter" data-level="11.2.2" data-path="Map-2.html"><a href="Map-2.html#Format-3"><i class="fa fa-check"></i><b>11.2.2</b> Map Output Formats</a>
+<ul>
+<li class="chapter" data-level="11.2.2.1" data-path="Map-2.html"><a href="Map-2.html#MeshBased-4"><i class="fa fa-check"></i><b>11.2.2.1</b> Mesh Based Formats</a>
+<ul>
+<li class="chapter" data-level="11.2.2.1.1" data-path="Map-2.html"><a href="Map-2.html#Mesh-5"><i class="fa fa-check"></i><b>11.2.2.1.1</b> Mesh Configurations</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2.2.2" data-path="Map-2.html"><a href="Map-2.html#Grid-4"><i class="fa fa-check"></i><b>11.2.2.2</b> Grid Based Formats</a></li>
+<li class="chapter" data-level="11.2.2.3" data-path="Map-2.html"><a href="Map-2.html#HRGrid-4"><i class="fa fa-check"></i><b>11.2.2.3</b> High-Resolution Grids</a>
+<ul>
+<li class="chapter" data-level="11.2.2.3.1" data-path="Map-2.html"><a href="Map-2.html#HR-Advanced-5"><i class="fa fa-check"></i><b>11.2.2.3.1</b> Advanced High-Resolution Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2.2.4" data-path="Map-2.html"><a href="Map-2.html#Combined-4"><i class="fa fa-check"></i><b>11.2.2.4</b> Combined Format</a></li>
+<li class="chapter" data-level="11.2.2.5" data-path="Map-2.html"><a href="Map-2.html#GISBased-4"><i class="fa fa-check"></i><b>11.2.2.5</b> GIS Based Format</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2.3" data-path="Map-2.html"><a href="Map-2.html#DataTypes-3"><i class="fa fa-check"></i><b>11.2.3</b> Map Output Data Types</a>
+<ul>
+<li class="chapter" data-level="11.2.3.1" data-path="Map-2.html"><a href="Map-2.html#Hazards-4"><i class="fa fa-check"></i><b>11.2.3.1</b> Hazard Data Types</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2.4" data-path="Map-2.html"><a href="Map-2.html#OneDMap-3"><i class="fa fa-check"></i><b>11.2.4</b> 1D Map Outputs</a>
+<ul>
+<li class="chapter" data-level="11.2.4.1" data-path="Map-2.html"><a href="Map-2.html#WLL-4"><i class="fa fa-check"></i><b>11.2.4.1</b> Water Level Lines</a></li>
+<li class="chapter" data-level="11.2.4.2" data-path="Map-2.html"><a href="Map-2.html#WLLp-4"><i class="fa fa-check"></i><b>11.2.4.2</b> Water Level Line Points</a></li>
+<li class="chapter" data-level="11.2.4.3" data-path="Map-2.html"><a href="Map-2.html#WLLtriangles-4"><i class="fa fa-check"></i><b>11.2.4.3</b> Adding Triangles into the 1d_WLL Layer</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2.5" data-path="Map-2.html"><a href="Map-2.html#OutputZones-3"><i class="fa fa-check"></i><b>11.2.5</b> Output Zones</a></li>
+<li class="chapter" data-level="11.2.6" data-path="Map-2.html"><a href="Map-2.html#GaugeLevel-3"><i class="fa fa-check"></i><b>11.2.6</b> Gauge Level Output</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="TimeSeries-2.html"><a href="TimeSeries-2.html"><i class="fa fa-check"></i><b>11.3</b> Time-Series Outputs</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="TimeSeries-2.html"><a href="TimeSeries-2.html#OneDTS-3"><i class="fa fa-check"></i><b>11.3.1</b> 1D Time-Series Output</a></li>
+<li class="chapter" data-level="11.3.2" data-path="TimeSeries-2.html"><a href="TimeSeries-2.html#TwoDTS-3"><i class="fa fa-check"></i><b>11.3.2</b> 2D Time-Series Output</a>
+<ul>
+<li class="chapter" data-level="11.3.2.1" data-path="TimeSeries-2.html"><a href="TimeSeries-2.html#PlotOutput-4"><i class="fa fa-check"></i><b>11.3.2.1</b> Plot Output</a></li>
+<li class="chapter" data-level="11.3.2.2" data-path="TimeSeries-2.html"><a href="TimeSeries-2.html#LongProfile-4"><i class="fa fa-check"></i><b>11.3.2.2</b> Long Profile Output</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3.3" data-path="TimeSeries-2.html"><a href="TimeSeries-2.html#ReportingLocation-3"><i class="fa fa-check"></i><b>11.3.3</b> Reporting Locations</a></li>
+<li class="chapter" data-level="11.3.4" data-path="TimeSeries-2.html"><a href="TimeSeries-2.html#Structure-3"><i class="fa fa-check"></i><b>11.3.4</b> Structure Output</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="Specialised-2.html"><a href="Specialised-2.html"><i class="fa fa-check"></i><b>11.4</b> Specialised Outputs</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="Specialised-2.html"><a href="Specialised-2.html#Receptors-3"><i class="fa fa-check"></i><b>11.4.1</b> Receptors</a></li>
+<li class="chapter" data-level="11.4.2" data-path="Specialised-2.html"><a href="Specialised-2.html#EvaculationRoutes-3"><i class="fa fa-check"></i><b>11.4.2</b> Evacuation Routes</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="ChecksLogs-2.html"><a href="ChecksLogs-2.html"><i class="fa fa-check"></i><b>11.5</b> Check and Log Files</a></li>
+<li class="chapter" data-level="11.6" data-path="Commands-2.html"><a href="Commands-2.html"><i class="fa fa-check"></i><b>11.6</b> Output Control Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="Hardware-1.html"><a href="Hardware-1.html"><i class="fa fa-check"></i><b>12</b> Hardware and Operating System</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="OperatingSystems-2.html"><a href="OperatingSystems-2.html"><i class="fa fa-check"></i><b>12.1</b> Operating Systems</a></li>
+<li class="chapter" data-level="12.2" data-path="TUFLOWClassic-2.html"><a href="TUFLOWClassic-2.html"><i class="fa fa-check"></i><b>12.2</b> TUFLOW Classic</a></li>
+<li class="chapter" data-level="12.3" data-path="TUFLOWHPC-2.html"><a href="TUFLOWHPC-2.html"><i class="fa fa-check"></i><b>12.3</b> TUFLOW HPC (Including Quadtree)</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="TUFLOWHPC-2.html"><a href="TUFLOWHPC-2.html#HPC-CPU-3"><i class="fa fa-check"></i><b>12.3.1</b> TUFLOW HPC Solver on CPU</a></li>
+<li class="chapter" data-level="12.3.2" data-path="TUFLOWHPC-2.html"><a href="TUFLOWHPC-2.html#HPC-GPU-3"><i class="fa fa-check"></i><b>12.3.2</b> TUFLOW HPC Solver on GPU</a></li>
+<li class="chapter" data-level="12.3.3" data-path="TUFLOWHPC-2.html"><a href="TUFLOWHPC-2.html#GPUTypes-3"><i class="fa fa-check"></i><b>12.3.3</b> Types of GPU</a></li>
+<li class="chapter" data-level="12.3.4" data-path="TUFLOWHPC-2.html"><a href="TUFLOWHPC-2.html#MultipleGPUs-3"><i class="fa fa-check"></i><b>12.3.4</b> Utilising Multiple GPUs for One Model</a></li>
+<li class="chapter" data-level="12.3.5" data-path="TUFLOWHPC-2.html"><a href="TUFLOWHPC-2.html#MultipleModelsoneGPU-3"><i class="fa fa-check"></i><b>12.3.5</b> Running Multiple Models on a Single GPU</a></li>
+<li class="chapter" data-level="12.3.6" data-path="TUFLOWHPC-2.html"><a href="TUFLOWHPC-2.html#DiffResultsCPUGPU-3"><i class="fa fa-check"></i><b>12.3.6</b> Differences in results between CPU and GPU</a></li>
+<li class="chapter" data-level="12.3.7" data-path="TUFLOWHPC-2.html"><a href="TUFLOWHPC-2.html#HPCRAM-3"><i class="fa fa-check"></i><b>12.3.7</b> RAM</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="ProxiesforCPUandGPU-2.html"><a href="ProxiesforCPUandGPU-2.html"><i class="fa fa-check"></i><b>12.4</b> Proxies for CPU and GPU performance</a></li>
+<li class="chapter" data-level="12.5" data-path="Virtualisation-2.html"><a href="Virtualisation-2.html"><i class="fa fa-check"></i><b>12.5</b> Virtualisation</a></li>
+<li class="chapter" data-level="12.6" data-path="CloudCompute-2.html"><a href="CloudCompute-2.html"><i class="fa fa-check"></i><b>12.6</b> Cloud Compute</a></li>
+<li class="chapter" data-level="12.7" data-path="HardwareCommands-2.html"><a href="HardwareCommands-2.html"><i class="fa fa-check"></i><b>12.7</b> Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="Running-Simulations-1.html"><a href="Running-Simulations-1.html"><i class="fa fa-check"></i><b>13</b> Managing and Starting Simulations</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="FileNaming-2.html"><a href="FileNaming-2.html"><i class="fa fa-check"></i><b>13.1</b> File Naming</a></li>
+<li class="chapter" data-level="13.2" data-path="SimulationManagement-2.html"><a href="SimulationManagement-2.html"><i class="fa fa-check"></i><b>13.2</b> Simulation Management</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="SimulationManagement-2.html"><a href="SimulationManagement-2.html#Events-3"><i class="fa fa-check"></i><b>13.2.1</b> Events</a></li>
+<li class="chapter" data-level="13.2.2" data-path="SimulationManagement-2.html"><a href="SimulationManagement-2.html#Scenarios-3"><i class="fa fa-check"></i><b>13.2.2</b> Scenarios</a></li>
+<li class="chapter" data-level="13.2.3" data-path="SimulationManagement-2.html"><a href="SimulationManagement-2.html#Variables-3"><i class="fa fa-check"></i><b>13.2.3</b> Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="TUFLOWExecDownload-2.html"><a href="TUFLOWExecDownload-2.html"><i class="fa fa-check"></i><b>13.3</b> TUFLOW Executable Download</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="TUFLOWExecDownload-2.html"><a href="TUFLOWExecDownload-2.html#InstallOverview-3"><i class="fa fa-check"></i><b>13.3.1</b> Overview and Where to Install</a></li>
+<li class="chapter" data-level="13.3.2" data-path="TUFLOWExecDownload-2.html"><a href="TUFLOWExecDownload-2.html#iSPdSP-3"><i class="fa fa-check"></i><b>13.3.2</b> Single and Double Precision</a>
+<ul>
+<li class="chapter" data-level="13.3.2.1" data-path="TUFLOWExecDownload-2.html"><a href="TUFLOWExecDownload-2.html#iSPdSP-Classic"><i class="fa fa-check"></i><b>13.3.2.1</b> TUFLOW Classic</a></li>
+<li class="chapter" data-level="13.3.2.2" data-path="TUFLOWExecDownload-2.html"><a href="TUFLOWExecDownload-2.html#iSPdSP-HPC"><i class="fa fa-check"></i><b>13.3.2.2</b> TUFLOW HPC</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3.3" data-path="TUFLOWExecDownload-2.html"><a href="TUFLOWExecDownload-2.html#CustomingTUFLOW-3"><i class="fa fa-check"></i><b>13.3.3</b> Customising TUFLOW using TUFLOW_USER_DEFINED.dll</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="RunningSims-2.html"><a href="RunningSims-2.html"><i class="fa fa-check"></i><b>13.4</b> Running Simulations</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="RunningSims-2.html"><a href="RunningSims-2.html#DongleTypesandSetup-3"><i class="fa fa-check"></i><b>13.4.1</b> Dongle Types and Setup</a>
+<ul>
+<li class="chapter" data-level="13.4.1.1" data-path="RunningSims-2.html"><a href="RunningSims-2.html#DongleAccessProtocols-4"><i class="fa fa-check"></i><b>13.4.1.1</b> Protocols for Accessing Dongles</a>
+<ul>
+<li class="chapter" data-level="13.4.1.1.1" data-path="RunningSims-2.html"><a href="RunningSims-2.html#LicenceSwitchingOptions-5"><i class="fa fa-check"></i><b>13.4.1.1.1</b> Licence Switching Options</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4.1.2" data-path="RunningSims-2.html"><a href="RunningSims-2.html#DongleSettingsFile-4"><i class="fa fa-check"></i><b>13.4.1.2</b> TUFLOW_Licence_Settings.lcf File</a></li>
+<li class="chapter" data-level="13.4.1.3" data-path="RunningSims-2.html"><a href="RunningSims-2.html#DongleFailure-4"><i class="fa fa-check"></i><b>13.4.1.3</b> Dongle Failure during a Simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4.2" data-path="RunningSims-2.html"><a href="RunningSims-2.html#StartingaSim-3"><i class="fa fa-check"></i><b>13.4.2</b> Starting a Simulation</a>
+<ul>
+<li class="chapter" data-level="13.4.2.1" data-path="RunningSims-2.html"><a href="RunningSims-2.html#BatchFileExamples-4"><i class="fa fa-check"></i><b>13.4.2.1</b> Batch File Example and Run Options (Switches)</a></li>
+<li class="chapter" data-level="13.4.2.2" data-path="RunningSims-2.html"><a href="RunningSims-2.html#CopyModelBatchFiles-4"><i class="fa fa-check"></i><b>13.4.2.2</b> Copy/Package Model from Batch Files</a></li>
+<li class="chapter" data-level="13.4.2.3" data-path="RunningSims-2.html"><a href="RunningSims-2.html#AdvancedBatchFiles-4"><i class="fa fa-check"></i><b>13.4.2.3</b> Advanced Batch Files</a></li>
+<li class="chapter" data-level="13.4.2.4" data-path="RunningSims-2.html"><a href="RunningSims-2.html#RunLinux-4"><i class="fa fa-check"></i><b>13.4.2.4</b> Running TUFLOW on Linux</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4.3" data-path="RunningSims-2.html"><a href="RunningSims-2.html#RunningHPC-3"><i class="fa fa-check"></i><b>13.4.3</b> Running TUFLOW HPC</a>
+<ul>
+<li class="chapter" data-level="13.4.3.1" data-path="RunningSims-2.html"><a href="RunningSims-2.html#HPCGPUCommands-4"><i class="fa fa-check"></i><b>13.4.3.1</b> TUFLOW HPC and GPU Module Commands</a></li>
+<li class="chapter" data-level="13.4.3.2" data-path="RunningSims-2.html"><a href="RunningSims-2.html#GPUCompatibility-4"><i class="fa fa-check"></i><b>13.4.3.2</b> Compatible Graphics Cards</a></li>
+<li class="chapter" data-level="13.4.3.3" data-path="RunningSims-2.html"><a href="RunningSims-2.html#UpdatingGPUDrivers-4"><i class="fa fa-check"></i><b>13.4.3.3</b> Updating NVIDIA Drivers</a></li>
+<li class="chapter" data-level="13.4.3.4" data-path="RunningSims-2.html"><a href="RunningSims-2.html#GPUNVLink-4"><i class="fa fa-check"></i><b>13.4.3.4</b> NVLink – Multi-GPU Performance (HPC Only)</a></li>
+<li class="chapter" data-level="13.4.3.5" data-path="RunningSims-2.html"><a href="RunningSims-2.html#GPUTroubleshooting-4"><i class="fa fa-check"></i><b>13.4.3.5</b> Troubleshooting</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4.4" data-path="RunningSims-2.html"><a href="RunningSims-2.html#Running1D-3"><i class="fa fa-check"></i><b>13.4.4</b> Running TUFLOW 1D Only Simulations</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="TUFLOWExternalSchemes-2.html"><a href="TUFLOWExternalSchemes-2.html"><i class="fa fa-check"></i><b>13.5</b> Using TUFLOW with Flood Modeller, SWMM, XP-SWMM, 12D or from SMS</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="TUFLOWExternalSchemes-2.html"><a href="TUFLOWExternalSchemes-2.html#SWMMSimulations-3"><i class="fa fa-check"></i><b>13.5.1</b> Using TUFLOW with EPA SWMM</a></li>
+<li class="chapter" data-level="13.5.2" data-path="TUFLOWExternalSchemes-2.html"><a href="TUFLOWExternalSchemes-2.html#FMSimulations-3"><i class="fa fa-check"></i><b>13.5.2</b> Using TUFLOW with Flood Modeller</a></li>
+<li class="chapter" data-level="13.5.3" data-path="TUFLOWExternalSchemes-2.html"><a href="TUFLOWExternalSchemes-2.html#TwelveDSimulations-3"><i class="fa fa-check"></i><b>13.5.3</b> Using TUFLOW with 12D</a></li>
+<li class="chapter" data-level="13.5.4" data-path="TUFLOWExternalSchemes-2.html"><a href="TUFLOWExternalSchemes-2.html#XPSWMMSimulations-3"><i class="fa fa-check"></i><b>13.5.4</b> Using TUFLOW with XP-SWMM</a></li>
+<li class="chapter" data-level="13.5.5" data-path="TUFLOWExternalSchemes-2.html"><a href="TUFLOWExternalSchemes-2.html#SMSSimulations-3"><i class="fa fa-check"></i><b>13.5.5</b> Using TUFLOW with SMS</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="OptimisingSims.html"><a href="OptimisingSims.html"><i class="fa fa-check"></i><b>13.6</b> Optimising Startup and Run Times</a>
+<ul>
+<li class="chapter" data-level="13.6.1" data-path="OptimisingSims.html"><a href="OptimisingSims.html#Improved1DInputs"><i class="fa fa-check"></i><b>13.6.1</b> Improved pre-processing of 1D Model Inputs</a></li>
+<li class="chapter" data-level="13.6.2" data-path="OptimisingSims.html"><a href="OptimisingSims.html#SGSParallelProcessing"><i class="fa fa-check"></i><b>13.6.2</b> Parallel Processing for SGS initialisation</a></li>
+<li class="chapter" data-level="13.6.3" data-path="OptimisingSims.html"><a href="OptimisingSims.html#OptimisingMultiGPUPerformance"><i class="fa fa-check"></i><b>13.6.3</b> Optimising Multi-GPU Performance (HPC Only)</a></li>
+<li class="chapter" data-level="13.6.4" data-path="OptimisingSims.html"><a href="OptimisingSims.html#AutoTerminateOptions-3"><i class="fa fa-check"></i><b>13.6.4</b> Auto Terminate (Simulation End) Options</a></li>
+</ul></li>
+<li class="chapter" data-level="13.7" data-path="ResultsReplication-3.html"><a href="ResultsReplication-3.html"><i class="fa fa-check"></i><b>13.7</b> Reproducibility of Results</a>
+<ul>
+<li class="chapter" data-level="13.7.1" data-path="ResultsReplication-3.html"><a href="ResultsReplication-3.html#ResultsReplicationClassic-3"><i class="fa fa-check"></i><b>13.7.1</b> TUFLOW Classic (CPU only)</a></li>
+<li class="chapter" data-level="13.7.2" data-path="ResultsReplication-3.html"><a href="ResultsReplication-3.html#ResultsReplicationHPCCPU-3"><i class="fa fa-check"></i><b>13.7.2</b> TUFLOW HPC (incl. Quadtree) on CPU</a></li>
+<li class="chapter" data-level="13.7.3" data-path="ResultsReplication-3.html"><a href="ResultsReplication-3.html#ResultsReplicationHPCGPU-3"><i class="fa fa-check"></i><b>13.7.3</b> TUFLOW HPC (incl. Quadtree) on GPU</a></li>
+<li class="chapter" data-level="13.7.4" data-path="ResultsReplication-3.html"><a href="ResultsReplication-3.html#ResultsReplicationHPCMultiThread-3"><i class="fa fa-check"></i><b>13.7.4</b> TUFLOW HPC (incl. Quadtree) on multiple GPUs / CPU threads</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Checks-and-Logs-1.html"><a href="Checks-and-Logs-1.html"><i class="fa fa-check"></i><b>14</b> Checks and Log Files</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="ConsoleDisplay-2.html"><a href="ConsoleDisplay-2.html"><i class="fa fa-check"></i><b>14.1</b> Console Window Display</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="ConsoleDisplay-2.html"><a href="ConsoleDisplay-2.html#Classic-3"><i class="fa fa-check"></i><b>14.1.1</b> TUFLOW Classic</a></li>
+<li class="chapter" data-level="14.1.2" data-path="ConsoleDisplay-2.html"><a href="ConsoleDisplay-2.html#HPC-3"><i class="fa fa-check"></i><b>14.1.2</b> TUFLOW HPC</a></li>
+<li class="chapter" data-level="14.1.3" data-path="ConsoleDisplay-2.html"><a href="ConsoleDisplay-2.html#ConsoleDisappear-3"><i class="fa fa-check"></i><b>14.1.3</b> The Console Window Does Not Appear</a></li>
+<li class="chapter" data-level="14.1.4" data-path="ConsoleDisplay-2.html"><a href="ConsoleDisplay-2.html#QuickEdit-3"><i class="fa fa-check"></i><b>14.1.4</b> Unexpected Simulation Pause (Console Window Quick Edit Mode)</a></li>
+<li class="chapter" data-level="14.1.5" data-path="ConsoleDisplay-2.html"><a href="ConsoleDisplay-2.html#ConsoleShortcut-3"><i class="fa fa-check"></i><b>14.1.5</b> Stopping the Console Window</a></li>
+<li class="chapter" data-level="14.1.6" data-path="ConsoleDisplay-2.html"><a href="ConsoleDisplay-2.html#ConsoleCustomisation-3"><i class="fa fa-check"></i><b>14.1.6</b> Customisation of Console Window</a></li>
+<li class="chapter" data-level="14.1.7" data-path="ConsoleDisplay-2.html"><a href="ConsoleDisplay-2.html#ErrorLevel-3"><i class="fa fa-check"></i><b>14.1.7</b> TUFLOW Windows ERROR LEVEL Reporting</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="MessageBox-2.html"><a href="MessageBox-2.html"><i class="fa fa-check"></i><b>14.2</b> Message Boxes</a></li>
+<li class="chapter" data-level="14.3" data-path="SimLog-2.html"><a href="SimLog-2.html"><i class="fa fa-check"></i><b>14.3</b> Simulations .log</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="SimLog-2.html"><a href="SimLog-2.html#LocalLog-3"><i class="fa fa-check"></i><b>14.3.1</b> Local .log File</a></li>
+<li class="chapter" data-level="14.3.2" data-path="SimLog-2.html"><a href="SimLog-2.html#GlobalLog-3"><i class="fa fa-check"></i><b>14.3.2</b> Global .log File</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="SimLogFiles-2.html"><a href="SimLogFiles-2.html"><i class="fa fa-check"></i><b>14.4</b> Simulation Log Files</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="SimLogFiles-2.html"><a href="SimLogFiles-2.html#TLF-3"><i class="fa fa-check"></i><b>14.4.1</b> TLF</a>
+<ul>
+<li class="chapter" data-level="14.4.1.1" data-path="SimLogFiles-2.html"><a href="SimLogFiles-2.html#HPCTLF-4"><i class="fa fa-check"></i><b>14.4.1.1</b> HPC TLF and DT</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4.2" data-path="SimLogFiles-2.html"><a href="SimLogFiles-2.html#TSF-3"><i class="fa fa-check"></i><b>14.4.2</b> TSF</a></li>
+<li class="chapter" data-level="14.4.3" data-path="SimLogFiles-2.html"><a href="SimLogFiles-2.html#start-stats-3"><i class="fa fa-check"></i><b>14.4.3</b> Start Stats</a></li>
+<li class="chapter" data-level="14.4.4" data-path="SimLogFiles-2.html"><a href="SimLogFiles-2.html#run-stats-3"><i class="fa fa-check"></i><b>14.4.4</b> Run Stats</a></li>
+<li class="chapter" data-level="14.4.5" data-path="SimLogFiles-2.html"><a href="SimLogFiles-2.html#Messages-3"><i class="fa fa-check"></i><b>14.4.5</b> Messages</a></li>
+<li class="chapter" data-level="14.4.6" data-path="SimLogFiles-2.html"><a href="SimLogFiles-2.html#Workspaces-2"><i class="fa fa-check"></i><b>14.4.6</b> GIS Workspaces</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="EOF-2.html"><a href="EOF-2.html"><i class="fa fa-check"></i><b>14.5</b> 1D Output File</a></li>
+<li class="chapter" data-level="14.6" data-path="CheckLayers-2.html"><a href="CheckLayers-2.html"><i class="fa fa-check"></i><b>14.6</b> Check Files</a></li>
+<li class="chapter" data-level="14.7" data-path="MB-2.html"><a href="MB-2.html"><i class="fa fa-check"></i><b>14.7</b> Mass Balance Output</a>
+<ul>
+<li class="chapter" data-level="14.7.1" data-path="MB-2.html"><a href="MB-2.html#def-MB-3"><i class="fa fa-check"></i><b>14.7.1</b> Mass Balance Definitions</a></li>
+<li class="chapter" data-level="14.7.2" data-path="MB-2.html"><a href="MB-2.html#OneD-MB-3"><i class="fa fa-check"></i><b>14.7.2</b> TUFLOW 1D Mass Balance</a></li>
+<li class="chapter" data-level="14.7.3" data-path="MB-2.html"><a href="MB-2.html#MB-CLA-3"><i class="fa fa-check"></i><b>14.7.3</b> TUFLOW Classic Mass Balance</a></li>
+<li class="chapter" data-level="14.7.4" data-path="MB-2.html"><a href="MB-2.html#MB-HPC-3"><i class="fa fa-check"></i><b>14.7.4</b> TUFLOW HPC Mass Balance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="Viewing-Output-1.html"><a href="Viewing-Output-1.html"><i class="fa fa-check"></i><b>15</b> Viewing Outputs</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="Output-Folder-2.html"><a href="Output-Folder-2.html"><i class="fa fa-check"></i><b>15.1</b> Folder Structure</a></li>
+<li class="chapter" data-level="15.2" data-path="view-1D-2.html"><a href="view-1D-2.html"><i class="fa fa-check"></i><b>15.2</b> 1D Output</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="view-1D-2.html"><a href="view-1D-2.html#view-tpc-3"><i class="fa fa-check"></i><b>15.2.1</b> TUFLOW Plot Control file (TPC)</a></li>
+<li class="chapter" data-level="15.2.2" data-path="view-1D-2.html"><a href="view-1D-2.html#mm-4"><i class="fa fa-check"></i><b>15.2.2</b> Maximum and Minimum Output</a></li>
+<li class="chapter" data-level="15.2.3" data-path="view-1D-2.html"><a href="view-1D-2.html#ccA-4"><i class="fa fa-check"></i><b>15.2.3</b> ccA GIS Layer</a></li>
+<li class="chapter" data-level="15.2.4" data-path="view-1D-2.html"><a href="view-1D-2.html#TS-GIS-3"><i class="fa fa-check"></i><b>15.2.4</b> _TS GIS Layer</a></li>
+<li class="chapter" data-level="15.2.5" data-path="view-1D-2.html"><a href="view-1D-2.html#Viewing-WLL-4"><i class="fa fa-check"></i><b>15.2.5</b> 1D Water Level Lines (WLL)</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="view-2D-2.html"><a href="view-2D-2.html"><i class="fa fa-check"></i><b>15.3</b> 2D Output</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="view-2D-2.html"><a href="view-2D-2.html#view-mesh-3"><i class="fa fa-check"></i><b>15.3.1</b> Mesh Output</a></li>
+<li class="chapter" data-level="15.3.2" data-path="view-2D-2.html"><a href="view-2D-2.html#view-raster-3"><i class="fa fa-check"></i><b>15.3.2</b> Raster Output</a></li>
+<li class="chapter" data-level="15.3.3" data-path="view-2D-2.html"><a href="view-2D-2.html#View-PO-3"><i class="fa fa-check"></i><b>15.3.3</b> Plot Output</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="Post-Process-2.html"><a href="Post-Process-2.html"><i class="fa fa-check"></i><b>15.4</b> Post Processing</a></li>
+<li class="chapter" data-level="15.5" data-path="Impact-Map-2.html"><a href="Impact-Map-2.html"><i class="fa fa-check"></i><b>15.5</b> Impact Mapping</a></li>
+<li class="chapter" data-level="15.6" data-path="Animations-2.html"><a href="Animations-2.html"><i class="fa fa-check"></i><b>15.6</b> Animations</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="QualityControl-and-Troubleshooting-1.html"><a href="QualityControl-and-Troubleshooting-1.html"><i class="fa fa-check"></i><b>16</b> Quality Control and Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="ModelHealth-2.html"><a href="ModelHealth-2.html"><i class="fa fa-check"></i><b>16.1</b> Model Health</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="ModelHealth-2.html"><a href="ModelHealth-2.html#TUFLOWClassicModelHealth-3"><i class="fa fa-check"></i><b>16.1.1</b> TUFLOW Classic</a>
+<ul>
+<li class="chapter" data-level="16.1.1.1" data-path="ModelHealth-2.html"><a href="ModelHealth-2.html#TUFLOWClassicTimestep-4"><i class="fa fa-check"></i><b>16.1.1.1</b> Timestep</a></li>
+</ul></li>
+<li class="chapter" data-level="16.1.2" data-path="ModelHealth-2.html"><a href="ModelHealth-2.html#TUFLOWHPCModelHealth-3"><i class="fa fa-check"></i><b>16.1.2</b> TUFLOW HPC</a>
+<ul>
+<li class="chapter" data-level="16.1.2.1" data-path="ModelHealth-2.html"><a href="ModelHealth-2.html#TUFLOWHPCTimestep-4"><i class="fa fa-check"></i><b>16.1.2.1</b> Timestep</a></li>
+</ul></li>
+<li class="chapter" data-level="16.1.3" data-path="ModelHealth-2.html"><a href="ModelHealth-2.html#TUFLOWQAIndicators-3"><i class="fa fa-check"></i><b>16.1.3</b> Healthy Model Indicators</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="QATroubleshooting-2.html"><a href="QATroubleshooting-2.html"><i class="fa fa-check"></i><b>16.2</b> Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="QATroubleshooting-2.html"><a href="QATroubleshooting-2.html#QAGeneralComments-3"><i class="fa fa-check"></i><b>16.2.1</b> General Comments</a></li>
+<li class="chapter" data-level="16.2.2" data-path="QATroubleshooting-2.html"><a href="QATroubleshooting-2.html#tuflowinstability-3"><i class="fa fa-check"></i><b>16.2.2</b> Instability Identification</a>
+<ul>
+<li class="chapter" data-level="16.2.2.1" data-path="QATroubleshooting-2.html"><a href="QATroubleshooting-2.html#onedinstability-4"><i class="fa fa-check"></i><b>16.2.2.1</b> 1D (ESTRY) Domains</a></li>
+<li class="chapter" data-level="16.2.2.2" data-path="QATroubleshooting-2.html"><a href="QATroubleshooting-2.html#ClassicInstability-4"><i class="fa fa-check"></i><b>16.2.2.2</b> TUFLOW Classic</a></li>
+<li class="chapter" data-level="16.2.2.3" data-path="QATroubleshooting-2.html"><a href="QATroubleshooting-2.html#HPCInstability-4"><i class="fa fa-check"></i><b>16.2.2.3</b> TUFLOW HPC</a></li>
+<li class="chapter" data-level="16.2.2.4" data-path="QATroubleshooting-2.html"><a href="QATroubleshooting-2.html#onedtwodinstability-4"><i class="fa fa-check"></i><b>16.2.2.4</b> 1D/2D Links</a></li>
+<li class="chapter" data-level="16.2.2.5" data-path="QATroubleshooting-2.html"><a href="QATroubleshooting-2.html#othertroublshooting-4"><i class="fa fa-check"></i><b>16.2.2.5</b> Other General Troubleshooting Recommendations</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2.3" data-path="QATroubleshooting-2.html"><a href="QATroubleshooting-2.html#fileaccess-3"><i class="fa fa-check"></i><b>16.2.3</b> File Access</a>
+<ul>
+<li class="chapter" data-level="16.2.3.1" data-path="QATroubleshooting-2.html"><a href="QATroubleshooting-2.html#xffileaccess-4"><i class="fa fa-check"></i><b>16.2.3.1</b> XF File Access</a></li>
+<li class="chapter" data-level="16.2.3.2" data-path="QATroubleshooting-2.html"><a href="QATroubleshooting-2.html#xmdffileaccess-4"><i class="fa fa-check"></i><b>16.2.3.2</b> XMDF File Access</a></li>
+<li class="chapter" data-level="16.2.3.3" data-path="QATroubleshooting-2.html"><a href="QATroubleshooting-2.html#gpkgfileaccess-4"><i class="fa fa-check"></i><b>16.2.3.3</b> GPKG File Access</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="QAchecklist-2.html"><a href="QAchecklist-2.html"><i class="fa fa-check"></i><b>16.3</b> QA Check List and Simulation Logging</a></li>
+<li class="chapter" data-level="16.4" data-path="ExceedingRAM-2.html"><a href="ExceedingRAM-2.html"><i class="fa fa-check"></i><b>16.4</b> Models Exceeding Hardware RAM</a>
+<ul>
+<li class="chapter" data-level="16.4.1" data-path="ExceedingRAM-2.html"><a href="ExceedingRAM-2.html#ComputerRAM-3"><i class="fa fa-check"></i><b>16.4.1</b> Computer RAM</a></li>
+<li class="chapter" data-level="16.4.2" data-path="ExceedingRAM-2.html"><a href="ExceedingRAM-2.html#TUFLOWVersion-3"><i class="fa fa-check"></i><b>16.4.2</b> TUFLOW Version</a></li>
+<li class="chapter" data-level="16.4.3" data-path="ExceedingRAM-2.html"><a href="ExceedingRAM-2.html#QAmodeldesign-3"><i class="fa fa-check"></i><b>16.4.3</b> Model Design</a></li>
+<li class="chapter" data-level="16.4.4" data-path="ExceedingRAM-2.html"><a href="ExceedingRAM-2.html#memoryusage-3"><i class="fa fa-check"></i><b>16.4.4</b> Memory Usage Reporting</a></li>
+<li class="chapter" data-level="16.4.5" data-path="ExceedingRAM-2.html"><a href="ExceedingRAM-2.html#tempmemoryusage-3"><i class="fa fa-check"></i><b>16.4.5</b> Temporary Memory Usage</a></li>
+<li class="chapter" data-level="16.4.6" data-path="ExceedingRAM-2.html"><a href="ExceedingRAM-2.html#GPURAM-3"><i class="fa fa-check"></i><b>16.4.6</b> TUFLOW HPC GPU Module and RAM requirements</a></li>
+</ul></li>
+<li class="chapter" data-level="16.5" data-path="backwardcompatibility-2.html"><a href="backwardcompatibility-2.html"><i class="fa fa-check"></i><b>16.5</b> Past Release Version Backward Compatibility</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="Utilities-1.html"><a href="Utilities-1.html"><i class="fa fa-check"></i><b>17</b> Utilities</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="GIS-Utilities-2.html"><a href="GIS-Utilities-2.html"><i class="fa fa-check"></i><b>17.1</b> GIS Based Utilities</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="GIS-Utilities-2.html"><a href="GIS-Utilities-2.html#QGIS-Plugin-3"><i class="fa fa-check"></i><b>17.1.1</b> QGIS TUFLOW Plugin</a></li>
+<li class="chapter" data-level="17.1.2" data-path="GIS-Utilities-2.html"><a href="GIS-Utilities-2.html#ArcGIS-Toolbar-3"><i class="fa fa-check"></i><b>17.1.2</b> ArcGIS Pro Toolbar</a></li>
+<li class="chapter" data-level="17.1.3" data-path="GIS-Utilities-2.html"><a href="GIS-Utilities-2.html#ArcMap-Toolbox-3"><i class="fa fa-check"></i><b>17.1.3</b> ArcMap Toolbox</a></li>
+<li class="chapter" data-level="17.1.4" data-path="GIS-Utilities-2.html"><a href="GIS-Utilities-2.html#MiTools-3"><i class="fa fa-check"></i><b>17.1.4</b> MiTools</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="Console-2.html"><a href="Console-2.html"><i class="fa fa-check"></i><b>17.2</b> Console Utilities</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="Console-2.html"><a href="Console-2.html#Processing-Utilites-3"><i class="fa fa-check"></i><b>17.2.1</b> Pre and Post Processing</a></li>
+<li class="chapter" data-level="17.2.2" data-path="Console-2.html"><a href="Console-2.html#Convert-Utilties-3"><i class="fa fa-check"></i><b>17.2.2</b> Convert to TUFLOW</a></li>
+<li class="chapter" data-level="17.2.3" data-path="Console-2.html"><a href="Console-2.html#Syntax-Highlighting-3"><i class="fa fa-check"></i><b>17.2.3</b> Textfile Syntax Highlighting</a></li>
+<li class="chapter" data-level="17.2.4" data-path="Console-2.html"><a href="Console-2.html#PyTUFLOW-3"><i class="fa fa-check"></i><b>17.2.4</b> PyTUFLOW</a></li>
+<li class="chapter" data-level="17.2.5" data-path="Console-2.html"><a href="Console-2.html#Excel-3"><i class="fa fa-check"></i><b>17.2.5</b> Excel Macros</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="Features-and-Changes-1.html"><a href="Features-and-Changes-1.html"><i class="fa fa-check"></i><b>18</b> Default Changes</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="backward-compat-2026.html"><a href="backward-compat-2026.html"><i class="fa fa-check"></i><b>18.1</b> 2026.0 Release</a></li>
+<li class="chapter" data-level="18.2" data-path="backward-compat-2025-0.html"><a href="backward-compat-2025-0.html"><i class="fa fa-check"></i><b>18.2</b> 2025.0 Release</a></li>
+<li class="chapter" data-level="18.3" data-path="backward-compat-2023-03.html"><a href="backward-compat-2023-03.html"><i class="fa fa-check"></i><b>18.3</b> 2023-03 Release</a></li>
+<li class="chapter" data-level="18.4" data-path="backward-compat-2020-10.html"><a href="backward-compat-2020-10.html"><i class="fa fa-check"></i><b>18.4</b> 2020-10 Release</a></li>
+<li class="chapter" data-level="18.5" data-path="backward-compat-2020-01.html"><a href="backward-compat-2020-01.html"><i class="fa fa-check"></i><b>18.5</b> 2020-01 Release</a></li>
+<li class="chapter" data-level="18.6" data-path="backward-compat-2018-03.html"><a href="backward-compat-2018-03.html"><i class="fa fa-check"></i><b>18.6</b> 2018-03 Release</a></li>
+<li class="chapter" data-level="18.7" data-path="backward-compat-2017-09.html"><a href="backward-compat-2017-09.html"><i class="fa fa-check"></i><b>18.7</b> 2017-09 Release</a></li>
+<li class="chapter" data-level="18.8" data-path="backward-compat-2016-03.html"><a href="backward-compat-2016-03.html"><i class="fa fa-check"></i><b>18.8</b> 2016-03 Release</a></li>
+<li class="chapter" data-level="18.9" data-path="backward-compat-2013-12.html"><a href="backward-compat-2013-12.html"><i class="fa fa-check"></i><b>18.9</b> 2013-12 Release</a></li>
+<li class="chapter" data-level="18.10" data-path="backward-compat-2012-05.html"><a href="backward-compat-2012-05.html"><i class="fa fa-check"></i><b>18.10</b> 2012-05 Release</a></li>
+<li class="chapter" data-level="18.11" data-path="backward-compat-2011-09.html"><a href="backward-compat-2011-09.html"><i class="fa fa-check"></i><b>18.11</b> 2011-09 Release</a></li>
+<li class="chapter" data-level="18.12" data-path="backward-compat-2010-10.html"><a href="backward-compat-2010-10.html"><i class="fa fa-check"></i><b>18.12</b> 2010-10 Release</a></li>
+<li class="chapter" data-level="18.13" data-path="backward-compat-2009-07.html"><a href="backward-compat-2009-07.html"><i class="fa fa-check"></i><b>18.13</b> 2009-07 Release</a></li>
+<li class="chapter" data-level="18.14" data-path="backward-compat-2008-08.html"><a href="backward-compat-2008-08.html"><i class="fa fa-check"></i><b>18.14</b> 2008-08 Release</a></li>
+<li class="chapter" data-level="18.15" data-path="backward-compat-2007-07.html"><a href="backward-compat-2007-07.html"><i class="fa fa-check"></i><b>18.15</b> 2007-07 Release</a></li>
+<li class="chapter" data-level="18.16" data-path="backward-compat-2006-06.html"><a href="backward-compat-2006-06.html"><i class="fa fa-check"></i><b>18.16</b> 2006-06 Release</a></li>
+<li class="chapter" data-level="18.17" data-path="pre-2006-06.html"><a href="pre-2006-06.html"><i class="fa fa-check"></i><b>18.17</b> Pre 2006-06 Release</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="TCFCommands-1.html"><a href="TCFCommands-1.html"><i class="fa fa-check"></i><b>A</b> TCF Commands</a></li>
+<li class="chapter" data-level="B" data-path="ECFCommands-1.html"><a href="ECFCommands-1.html"><i class="fa fa-check"></i><b>B</b> ECF Commands</a></li>
+<li class="chapter" data-level="C" data-path="TGCCommands-1.html"><a href="TGCCommands-1.html"><i class="fa fa-check"></i><b>C</b> TGC Commands</a></li>
+<li class="chapter" data-level="D" data-path="TBCCommands-1.html"><a href="TBCCommands-1.html"><i class="fa fa-check"></i><b>D</b> TBC Commands</a></li>
+<li class="chapter" data-level="E" data-path="TOCCommands-1.html"><a href="TOCCommands-1.html"><i class="fa fa-check"></i><b>E</b> TOC Commands</a></li>
+<li class="chapter" data-level="F" data-path="TRFCCommands-1.html"><a href="TRFCCommands-1.html"><i class="fa fa-check"></i><b>F</b> TRFC Commands</a></li>
+<li class="chapter" data-level="G" data-path="TESFCommands-1.html"><a href="TESFCommands-1.html"><i class="fa fa-check"></i><b>G</b> TESF Commands</a></li>
+<li class="chapter" data-level="H" data-path="QCFCommands-1.html"><a href="QCFCommands-1.html"><i class="fa fa-check"></i><b>H</b> QCF Commands</a></li>
+<li class="chapter" data-level="I" data-path="TSCFCommands-1.html"><a href="TSCFCommands-1.html"><i class="fa fa-check"></i><b>I</b> TSCF Commands</a></li>
+<li class="chapter" data-level="J" data-path="ADCFCommands-1.html"><a href="ADCFCommands-1.html"><i class="fa fa-check"></i><b>J</b> ADCF Commands</a></li>
+<li class="chapter" data-level="K" data-path="TEFCommands-1.html"><a href="TEFCommands-1.html"><i class="fa fa-check"></i><b>K</b> TEF Commands</a></li>
+<li class="chapter" data-level="L" data-path="SWMMGeopackage-1.html"><a href="SWMMGeopackage-1.html"><i class="fa fa-check"></i><b>L</b> SWMM GeoPackage Format</a>
+<ul>
+<li class="chapter" data-level="L.1" data-path="SWMMGPKGLayerList-2.html"><a href="SWMMGPKGLayerList-2.html"><i class="fa fa-check"></i><b>L.1</b> SWMM GeoPackage Layer List</a></li>
+<li class="chapter" data-level="L.2" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html"><i class="fa fa-check"></i><b>L.2</b> SWMM GeoPackage Layer Descriptions</a>
+<ul>
+<li class="chapter" data-level="L.2.1" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGInflows-3"><i class="fa fa-check"></i><b>L.2.1</b> Inflows</a></li>
+<li class="chapter" data-level="L.2.2" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGCurves-3"><i class="fa fa-check"></i><b>L.2.2</b> Curves</a></li>
+<li class="chapter" data-level="L.2.3" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGTimeseries-3"><i class="fa fa-check"></i><b>L.2.3</b> Timeseries</a></li>
+<li class="chapter" data-level="L.2.4" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGAquifers-3"><i class="fa fa-check"></i><b>L.2.4</b> Aquifers</a></li>
+<li class="chapter" data-level="L.2.5" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGGroundwater-3"><i class="fa fa-check"></i><b>L.2.5</b> Groundwater</a></li>
+<li class="chapter" data-level="L.2.6" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGGWF-3"><i class="fa fa-check"></i><b>L.2.6</b> GWF</a></li>
+<li class="chapter" data-level="L.2.7" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGAdjustments-3"><i class="fa fa-check"></i><b>L.2.7</b> Adjustments</a></li>
+<li class="chapter" data-level="L.2.8" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGEvaporation-3"><i class="fa fa-check"></i><b>L.2.8</b> Evaporation</a></li>
+<li class="chapter" data-level="L.2.9" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGHydrographs-3"><i class="fa fa-check"></i><b>L.2.9</b> Hydrographs</a></li>
+<li class="chapter" data-level="L.2.10" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGPatterns-3"><i class="fa fa-check"></i><b>L.2.10</b> Patterns</a></li>
+<li class="chapter" data-level="L.2.11" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGRaingages-3"><i class="fa fa-check"></i><b>L.2.11</b> Raingages</a></li>
+<li class="chapter" data-level="L.2.12" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGRDII-3"><i class="fa fa-check"></i><b>L.2.12</b> RDII</a></li>
+<li class="chapter" data-level="L.2.13" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGSnowpacks-3"><i class="fa fa-check"></i><b>L.2.13</b> Snowpacks</a></li>
+<li class="chapter" data-level="L.2.14" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGTemperature-3"><i class="fa fa-check"></i><b>L.2.14</b> Temperature</a></li>
+<li class="chapter" data-level="L.2.15" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGInletUsage-3"><i class="fa fa-check"></i><b>L.2.15</b> Inlet Usage</a></li>
+<li class="chapter" data-level="L.2.16" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGInlets-3"><i class="fa fa-check"></i><b>L.2.16</b> Inlets</a></li>
+<li class="chapter" data-level="L.2.17" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGLIDControls-3"><i class="fa fa-check"></i><b>L.2.17</b> LID Controls</a></li>
+<li class="chapter" data-level="L.2.18" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGLIDUsage-3"><i class="fa fa-check"></i><b>L.2.18</b> LID Usage</a></li>
+<li class="chapter" data-level="L.2.19" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGConduits-3"><i class="fa fa-check"></i><b>L.2.19</b> Conduits</a></li>
+<li class="chapter" data-level="L.2.20" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGControls-3"><i class="fa fa-check"></i><b>L.2.20</b> Controls</a></li>
+<li class="chapter" data-level="L.2.21" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGOrifices-3"><i class="fa fa-check"></i><b>L.2.21</b> Orifices</a></li>
+<li class="chapter" data-level="L.2.22" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGOutlets-3"><i class="fa fa-check"></i><b>L.2.22</b> Outlets</a></li>
+<li class="chapter" data-level="L.2.23" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGPumps-3"><i class="fa fa-check"></i><b>L.2.23</b> Pumps</a></li>
+<li class="chapter" data-level="L.2.24" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGStreets-3"><i class="fa fa-check"></i><b>L.2.24</b> Streets</a></li>
+<li class="chapter" data-level="L.2.25" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGTransects-3"><i class="fa fa-check"></i><b>L.2.25</b> Transects</a></li>
+<li class="chapter" data-level="L.2.26" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGTransectsCoordinates-3"><i class="fa fa-check"></i><b>L.2.26</b> Transects Coordinates</a></li>
+<li class="chapter" data-level="L.2.27" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGWeirs-3"><i class="fa fa-check"></i><b>L.2.27</b> Weirs</a></li>
+<li class="chapter" data-level="L.2.28" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGDividers-3"><i class="fa fa-check"></i><b>L.2.28</b> Dividers</a></li>
+<li class="chapter" data-level="L.2.29" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGDWF-3"><i class="fa fa-check"></i><b>L.2.29</b> DWF</a></li>
+<li class="chapter" data-level="L.2.30" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGJunctions-3"><i class="fa fa-check"></i><b>L.2.30</b> Junctions</a></li>
+<li class="chapter" data-level="L.2.31" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGOutfalls-3"><i class="fa fa-check"></i><b>L.2.31</b> Outfalls</a></li>
+<li class="chapter" data-level="L.2.32" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGStorage-3"><i class="fa fa-check"></i><b>L.2.32</b> Storage</a></li>
+<li class="chapter" data-level="L.2.33" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGFiles-3"><i class="fa fa-check"></i><b>L.2.33</b> Files</a></li>
+<li class="chapter" data-level="L.2.34" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGOptions-3"><i class="fa fa-check"></i><b>L.2.34</b> Options</a></li>
+<li class="chapter" data-level="L.2.35" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGReport-3"><i class="fa fa-check"></i><b>L.2.35</b> Report</a></li>
+<li class="chapter" data-level="L.2.36" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGTitle-3"><i class="fa fa-check"></i><b>L.2.36</b> Title</a></li>
+<li class="chapter" data-level="L.2.37" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGSubcatchments-3"><i class="fa fa-check"></i><b>L.2.37</b> Subcatchments</a></li>
+<li class="chapter" data-level="L.2.38" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGBuildup-3"><i class="fa fa-check"></i><b>L.2.38</b> Buildup</a></li>
+<li class="chapter" data-level="L.2.39" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGCoverages-3"><i class="fa fa-check"></i><b>L.2.39</b> Coverages</a></li>
+<li class="chapter" data-level="L.2.40" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGLanduses-3"><i class="fa fa-check"></i><b>L.2.40</b> Landuses</a></li>
+<li class="chapter" data-level="L.2.41" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGLoadings-3"><i class="fa fa-check"></i><b>L.2.41</b> Loadings</a></li>
+<li class="chapter" data-level="L.2.42" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGPollutants-3"><i class="fa fa-check"></i><b>L.2.42</b> Pollutants</a></li>
+<li class="chapter" data-level="L.2.43" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGTreatment-3"><i class="fa fa-check"></i><b>L.2.43</b> Treatment</a></li>
+<li class="chapter" data-level="L.2.44" data-path="SWMMGPKGLayerDes-2.html"><a href="SWMMGPKGLayerDes-2.html#SWMMGPKGWashoff-3"><i class="fa fa-check"></i><b>L.2.44</b> Washoff</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://docs.tuflow.com/classic-hpc/manual/2026.0/"><img src="images/WQFooter.jpg" style="width:246px;height:10px;"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><h0 style="color:rgb(0,128,0);">TUFLOW Classic/HPC User Manual Beta Release 2026.0 </h0></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<p class="wmark before"></p>
+<div id="HowtoBuildYourFirstModel-2" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> How to Build Your First Model<a href="HowtoBuildYourFirstModel-2.html#HowtoBuildYourFirstModel-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>TUFLOW includes a wide range of self-education resources to aid new users. Available options include online tutorials, example models, demonstration models and eLearning modules. All models included or constructed when completing these self-education options have been designed using a licence-free mode. As such, there is no need to purchase a software licence to learn TUFLOW.</p>
+<p>All TUFLOW self-education resources are fully supported via the <a href="https://www.tuflow.com/support/">TUFLOW Support Services</a>, and <a href="mailto:support@tuflow.com" class="email">support@tuflow.com</a> can be contacted for support.</p>
+<p>As an alternative to self-education, paid online and in-person training classes are also available for learning under the guided instruction of a TUFLOW expert. Courses are advertised via the <a href="https://www.tuflow.com/training/training-course-catalogue/">TUFLOW Website Training Catalogue</a>. For further information on paid training options please contact <a href="mailto:training@tuflow.com" class="email">training@tuflow.com</a>.</p>
+<div id="TutorialModels-3" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Tutorial Models<a href="HowtoBuildYourFirstModel-2.html#TutorialModels-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A number of free Tutorial Models are available for download and are documented in the <a href="https://wiki.tuflow.com/Tutorial_Introduction">TUFLOW Wiki Tutorial Introduction</a>.
+Current tutorials include:</p>
+<ul>
+<li><a href="https://wiki.tuflow.com/Tutorial_M01">Module 1 - 2D Base Model</a></li>
+<li><a href="https://wiki.tuflow.com/Tutorial_M02">Module 2 - Topography Updates</a></li>
+<li><a href="https://wiki.tuflow.com/Tutorial_M03">Module 3 - 1D Culverts</a></li>
+<li><a href="https://wiki.tuflow.com/Tutorial_M04">Module 4 - 2D Bridges</a></li>
+<li><a href="https://wiki.tuflow.com/Tutorial_M05">Module 5 - Integrated Urban Drainage</a></li>
+<li><a href="https://wiki.tuflow.com/Tutorial_M06">Module 6 - Direct Rainfall</a></li>
+<li><a href="https://wiki.tuflow.com/Tutorial_M07">Module 7 - Quadtree</a></li>
+<li><a href="https://wiki.tuflow.com/Tutorial_M08">Module 8 - Scenario Management</a></li>
+<li><a href="https://wiki.tuflow.com/Tutorial_M09">Module 9 - Event Management</a></li>
+<li><a href="https://wiki.tuflow.com/Tutorial_M10">Module 10 - Dam Break</a></li>
+<li><a href="https://wiki.tuflow.com/Tutorial_M11">Module 11 - 1D Open Channel</a></li>
+</ul>
+<p>The tutorials have been created using QGIS as the model development environment. It is strongly recommended that new users complete our free <a href="https://www.tuflow.com/training/training-course-catalogue/tt001-e-qgis-introduction-for-tuflow-free-elearning/">Introduction to QGIS for TUFLOW eLearning</a> beforehand.</p>
+</div>
+<div id="ExampleModels-3" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Example Models<a href="HowtoBuildYourFirstModel-2.html#ExampleModels-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Free Example Models are documented and are available for download via the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models">TUFLOW Wiki TUFLOW Example Models</a>. The example model dataset includes over 150 standalone models demonstrating the most commonly used TUFLOW features. This education resource is intended for experienced modellers wishing to further develop their skills following completion of the <a href="https://wiki.tuflow.com/Tutorial_Introduction">Tutorial Models</a>. Unlike the tutorials, this dataset does not include step-by-step instructions. Users of this dataset are expected to have a basic knowledge TUFLOW, and have suitable skills to open the model files by referencing the TUFLOW Control File (TCF) referenced in the example model catalogue list. The catalogue list on the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models">TUFLOW Wiki</a> has been separated into the following sub-sections:</p>
+<ul>
+<li><a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Project_Initiation">Project initiation</a></li>
+<li><a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Model_Units">Model units</a></li>
+<li><a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Solver_Options">Solver options</a></li>
+<li><a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Output_Options">Output options</a></li>
+<li><a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Boundary_Condition_Options">Boundary condition options (inflows, outflows and losses)</a></li>
+<li><a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Topography_Features">Topography features (static and dynamic topography changes, sub-grid sampling options)</a></li>
+<li><a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Structures">Structures (bridges, weirs, culverts, operational controls)</a></li>
+<li><a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Multiple_Domain_Model_Design">Multiple domain model design (1D/2D and 2D/2D)</a></li>
+<li><a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Bulk_Simulation_Management">Bulk simulation</a></li>
+<li><a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Advection_Dispersion">Advection dispersion.</a></li>
+</ul>
+</div>
+<div id="DemonstrationModels-3" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Demonstration Models<a href="HowtoBuildYourFirstModel-2.html#DemonstrationModels-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A series of demonstration models were developed as part of three “challenges” issued prior to the 2012 Flood Managers Association (FMA) Conference in Sacramento, USA. The objective was to establish the variation in flood extents using different 2D software and modellers. Anyone could submit results, and the results were presented anonymously at the 2D Modelling Symposium held on the first day of the conference.</p>
+<p>The three Challenge Models were:</p>
+<ul>
+<li>Challenge 1: An urban environment with a concrete lined main channel and numerous structures.</li>
+<li>Challenge 2: A coastal floodplain with two river entrances to the ocean during a flood.</li>
+<li>Challenge 3: A levied river within an alluvial fan in an arid, irrigated area.</li>
+</ul>
+<p>The models developed using TUFLOW were created within a week and run for various scenarios. Positive feedback was received on TUFLOW’s accuracy, and on the impressively short turnaround time required to build the models and run the simulations. The Free Demonstration Models are documented and are available for download from the <a href="https://wiki.tuflow.com/FMA_Challenge_Models_Introduction">TUFLOW Wiki FMA Challenge Models Introduction</a>.</p>
+</div>
+<div id="LicenceFreeDemoMode-3" class="section level3 hasAnchor" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Licence Free Demo Mode<a href="HowtoBuildYourFirstModel-2.html#LicenceFreeDemoMode-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As of the 2016-03 release, setting <tcmd><a href="TCFCommands-1.html#tcfDemoModel">Demo Model</a></tcmd><teq>==</teq><tblk> ON</tblk> within the TCF allows users to set up and simulate small-scale test models using their own datasets, but without a licence. The limits associated with the licence-free demo mode are:</p>
+<ul>
+<li>The total number of 2D cells may not exceed 100,000 – this is the number of cells within the bounding rectangle.</li>
+<li>The total number of active 2D cells may not exceed 30,000.</li>
+<li>The total number of 1D channels may not exceed 100.</li>
+<li>There is only one (1) 2D domain.</li>
+<li>Simulation clock time cannot exceed 10 minutes.</li>
+</ul>
+</div>
+<div id="eLearningModules-3" class="section level3 hasAnchor" number="2.1.5">
+<h3><span class="header-section-number">2.1.5</span> eLearning Modules<a href="HowtoBuildYourFirstModel-2.html#eLearningModules-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>TUFLOW eLearning is a suite of online guided training modules available on-demand. The eLearning includes step-by-step lessons comprising a combination of written notes, background content videos, demonstration videos and hands-on exercises. The list of available eLearning modules is growing year-on-year. The current available catalogue includes:</p>
+<ul>
+<li><a href="https://www.tuflow.com/training/training-course-catalogue/tt001-e-qgis-introduction-for-tuflow-free-elearning/">Introduction to QGIS for TUFLOW</a></li>
+<li><a href="https://www.tuflow.com/training/training-course-catalogue/tt102-e-introduction-to-2d-modelling-elearning/">Introduction to 2D Modelling TUFLOW</a></li>
+<li><a href="https://www.tuflow.com/training/training-course-catalogue/tt004-e-introduction-to-python-for-tuflow-elearning/">Introduction to Python for TUFLOW</a></li>
+<li><a href="https://www.tuflow.com/training/training-course-catalogue/tt005-e-introduction-to-gdal-for-tuflow-elearning/">Introduction to GDAL for TUFLOW</a></li>
+<li><a href="https://www.tuflow.com/training/training-course-catalogue/tt103-e-2d-topographic-layering-and-modification-options-elearning/">2D Topography and Modification Options</a></li>
+<li><a href="https://www.tuflow.com/training/training-course-catalogue/tt104-e-1d-culvert-and-2d-bridge-modelling-elearning/">1D Culvert and 2D Bridge Modelling</a></li>
+<li><a href="https://www.tuflow.com/training/training-course-catalogue/tt105-e-bulk-simulation-management-scenarios-user-defined-variables-and-events-elearning/">Bulk Simulation Management</a></li>
+</ul>
+<p>Access the eLearning via the <a href="https://www.tuflow.com/training/training-course-catalogue/#!d=e-learning">TUFLOW Website Training Catalogue</a>.</p>
+</div>
+<div id="InstructorLedTUFLOWTrainingCourses-3" class="section level3 hasAnchor" number="2.1.6">
+<h3><span class="header-section-number">2.1.6</span> Instructor Led TUFLOW Training Courses<a href="HowtoBuildYourFirstModel-2.html#InstructorLedTUFLOWTrainingCourses-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As an alternative to self-education, paid online and in-person training classes are also available to learn under the guided instruction of a TUFLOW expert. Scheduled courses are advertised via the <a href="https://www.tuflow.com/training/training-course-catalogue/">TUFLOW Website Training Catalogue</a>. For further information on paid training options please contact <a href="mailto:training@tuflow.com" class="email">training@tuflow.com</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="GettingStarted-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="TheTUFLOWModellingConcept-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": true,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": false,
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
