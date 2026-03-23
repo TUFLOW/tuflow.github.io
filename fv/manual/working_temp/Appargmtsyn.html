@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.7 Computational Timestep | TUFLOW FV User Manual</title>
-  <meta name="description" content="5.7 Computational Timestep | TUFLOW FV User Manual" />
+  <title>A.2 Argument syntax | TUFLOW FV User Manual</title>
+  <meta name="description" content="A.2 Argument syntax | TUFLOW FV User Manual" />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.7 Computational Timestep | TUFLOW FV User Manual" />
+  <meta property="og:title" content="A.2 Argument syntax | TUFLOW FV User Manual" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="5.7 Computational Timestep | TUFLOW FV User Manual" />
+  <meta property="og:description" content="A.2 Argument syntax | TUFLOW FV User Manual" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.7 Computational Timestep | TUFLOW FV User Manual" />
+  <meta name="twitter:title" content="A.2 Argument syntax | TUFLOW FV User Manual" />
   
-  <meta name="twitter:description" content="5.7 Computational Timestep | TUFLOW FV User Manual" />
+  <meta name="twitter:description" content="A.2 Argument syntax | TUFLOW FV User Manual" />
   
 
 <meta name="author" content="" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/TUFLOW.ico" type="image/x-icon" />
-<link rel="prev" href="HD2D-STS-2.html"/>
-<link rel="next" href="HD2D-WAD-2.html"/>
+<link rel="prev" href="Appcmdsyn.html"/>
+<link rel="next" href="Appcmds.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -1095,9 +1095,9 @@ div.csl-indent {
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="AppCommands.html"><a href="AppCommands.html"><i class="fa fa-check"></i><b>A</b> Commands</a>
 <ul>
-<li class="chapter" data-level="" data-path="AppCommands.html"><a href="AppCommands.html#command-syntax"><i class="fa fa-check"></i>Command syntax</a></li>
-<li class="chapter" data-level="" data-path="AppCommands.html"><a href="AppCommands.html#argument-syntax"><i class="fa fa-check"></i>Argument syntax</a></li>
-<li class="chapter" data-level="" data-path="AppCommands.html"><a href="AppCommands.html#commands-1"><i class="fa fa-check"></i>Commands</a></li>
+<li class="chapter" data-level="A.1" data-path="Appcmdsyn.html"><a href="Appcmdsyn.html"><i class="fa fa-check"></i><b>A.1</b> Command syntax</a></li>
+<li class="chapter" data-level="A.2" data-path="Appargmtsyn.html"><a href="Appargmtsyn.html"><i class="fa fa-check"></i><b>A.2</b> Argument syntax</a></li>
+<li class="chapter" data-level="A.3" data-path="Appcmds.html"><a href="Appcmds.html"><i class="fa fa-check"></i><b>A.3</b> Commands</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="AppProc-GE-2.html"><a href="AppProc-GE-2.html"><i class="fa fa-check"></i><b>B</b> Science</a>
 <ul>
@@ -1284,115 +1284,18 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="HD2D-CT-2" class="section level2 hasAnchor" number="5.7">
-<h2><span class="header-section-number">5.7</span> Computational Timestep<a href="HD2D-CT-2.html#HD2D-CT-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="HD2D-CT-CS-3" class="section level3 hasAnchor" number="5.7.1">
-<h3><span class="header-section-number">5.7.1</span> Command Status<a href="HD2D-CT-2.html#HD2D-CT-CS-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><em>Required</em>.</p>
-</div>
-<div id="HD2D-CT-Desc-3" class="section level3 hasAnchor" number="5.7.2">
-<h3><span class="header-section-number">5.7.2</span> Description<a href="HD2D-CT-2.html#HD2D-CT-Desc-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The computational timestep defines how frequently TUFLOW FV updates the model state during a simulation. It directly influences model stability, accuracy, and model run times.</p>
-<p>TUFLOW FV uses an adaptive computational timestep that changes during a simulation in response to flow and scalar concentration stability constraints. Timestep selection and timestep science is described in Appendix <a href="AppProc-GE-NS-2.html#AppProc-GE-NS-MS-3">B.4.3</a> and Appendix <a href="AppProc-GE-NS-2.html#AppProc-GE-NS-CT-MT2D-4">B.4.5.2</a>. The computational timestep model implementation is summarised in Table <a href="HD2D-CT-2.html#tab:tab-ComputationalTimestepMI">5.10</a>, with a link to the relevant implementation section below. The commands affecting TUFLOW FV’s computational timestep are provided in Table <a href="HD2D-CT-2.html#tab:tab-ComputationalTimestep">5.11</a>.</p>
-<table>
-<caption>
-<span id="tab:tab-ComputationalTimestepMI">Table 5.10: </span><strong>Computational Timestep Model Implementation</strong>
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
-Model Implementation
-</th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
-Description
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="HD2D-CT-2.html#HD2D-CT-CT-3">Computational Timestep</a>
-</td>
-<td style="text-align:left;">
-Sets timestep limit and timestep stability constraints.
-</td>
-</tr>
-</tbody>
-</table>
-<table>
-<caption>
-<span id="tab:tab-ComputationalTimestep">Table 5.11: </span><strong>Computational Timestep Commands</strong>
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
-Command
-</th>
-<th style="text-align:left;font-weight: bold;color: WHITE !important;background-color: rgba(26, 189, 201, 255) !important;">
-Description
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="AppCommands.html#FVCTimestepLimits">Timestep Limits</a>
-</td>
-<td style="text-align:left;">
-Required - Sets the limiting value for the lower and upper timestep for the simulation.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="AppCommands.html#FVCCFL">CFL</a>
-</td>
-<td style="text-align:left;">
-Optional - Assigns the global computational stability constraints.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="AppCommands.html#FVCCFLInternal">CFL Internal</a>
-</td>
-<td style="text-align:left;">
-Optional - Command to override the global CFL stability constraint for internal mode calculations.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="AppCommands.html#FVCCFLExternal">CFL External</a>
-</td>
-<td style="text-align:left;">
-Optional - Command to override the global CFL stability constraint for external mode calculations.
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="HD2D-CT-CT-3" class="section level3 hasAnchor" number="5.7.3">
-<h3><span class="header-section-number">5.7.3</span> Computational Timestep<a href="HD2D-CT-2.html#HD2D-CT-CT-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The following example is a typical setup for a 2D HD simulation where a single CFL constraint is used.</p>
-<div class="scrollable-block">
-<p><tgrn>! GLobal CFL With Timestep Limits</tgrn><br />
-<span class="align2"><tcmd>CFL</tcmd> <teq> == </teq> <tblk>0.95</tblk></span> <tgrn>! {1.0} CFL Number</tgrn><br />
-<span class="align2"><tcmd>Timestep Limits</tcmd> <teq> == </teq> <tblk>0.5, 5.0</tblk></span> <tgrn>! {No default} Minimum Timestep (s), {No default} Maximum Timestep (s)</tgrn></p>
-</div>
-<p>This example shows the use of differing internal and external model CFL numbers. This can be of use to improve model stability and speed when internal model processes are constraining the overall model timestep.</p>
-<div class="scrollable-block">
-<p><tgrn>! Internal and External CFL With Timestep Limits</tgrn><br />
-<span class="align2"><tcmd>CFL Internal</tcmd> <teq> == </teq> <tblk>0.6</tblk></span> <tgrn>! {1.0} Internal CFL Number</tgrn><br />
-<span class="align2"><tcmd>CFL External</tcmd> <teq> == </teq> <tblk>0.95</tblk></span> <tgrn>! {1.0} External CFL Number</tgrn><br />
-<span class="align2"><tcmd>Timestep Limits</tcmd> <teq> == </teq> <tblk>0.5, 5.0</tblk></span> <tgrn>! {No default} Minimum Timestep (s), {No default} Maximum Timestep (s)</tgrn></p>
-</div>
-</div>
+<div id="Appargmtsyn" class="section level2 hasAnchor" number="12.2">
+<h2><span class="header-section-number">A.2</span> Argument syntax<a href="Appargmtsyn.html#Appargmtsyn" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Arguments expected by TUFLOW FV commands (that is, information provided after <teq> == </teq>) are displayed using contrasting <tblk>colouring</tblk> and are enclosed in angle brackets, for example <tblk><span class="math inline">\(\langle\)</span>argument<span class="math inline">\(\rangle\)</span></tblk>.</p>
+<p>Arguments are separated by commas and each argument is described in the description column.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="HD2D-STS-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="HD2D-WAD-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="Appcmdsyn.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="Appcmds.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
