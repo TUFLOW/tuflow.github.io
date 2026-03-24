@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Process descriptions – TUFLOW CATCH User Manual 2026.0</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04-Simulation-Construction.html" rel="next">
+<link href="./02-Architecture.html" rel="prev">
+<link href="./images/TUFLOW.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-899db113b743a1ec0a2aff7a7556c5f6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-75ce5223928517a2da6b6fe5d2623402.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-899db113b743a1ec0a2aff7a7556c5f6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+
+
+<script>
+
+window.addEventListener("load", function () {
+
+  document.querySelectorAll(".quarto-figure table.app-commands").forEach(function(table){
+
+      new DataTable(table, {
+
+          paging: true,
+
+          pageLength: -1,
+
+          lengthMenu: [
+
+            [-1, 10, 20, 50],
+
+            ["All", 10, 20, 50]
+
+          ],
+
+          searching: true,
+
+          ordering: true,
+
+          order: [[0, "asc"]],
+
+          rowId: null
+
+      });
+
+  });
+
+});
+
+</script>
+
+
+
+<script>
+
+window.addEventListener("load", function () {
+
+  document.querySelectorAll(".quarto-figure table.param-commands").forEach(function(table){
+
+      new DataTable(table, {
+
+          paging: true,
+
+          pageLength: -1,
+
+          lengthMenu: [
+
+            [-1, 10, 20, 50],
+
+            ["All", 10, 20, 50]
+
+          ],
+
+          searching: true,
+
+          ordering: true,
+
+          order: [[0, "asc"]],
+
+          rowId: null
+
+      });
+
+  });
+
+});
+
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/TUFLOW_Catch_Logo-02.png" alt="" class="navbar-logo light-content">
+    <img src="./images/TUFLOW_Catch_Logo-02.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TUFLOW CATCH User Manual 2026.0</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://tuflow.com/"> 
+<span class="menu-text"><img src="images/BMT_logo.png" style="height:1.5em"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="./TUFLOW-CATCH-User-Manual-2026.0.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-Process-Descriptions.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Process descriptions</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TUFLOW CATCH Manual</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Architecture</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Process-Descriptions.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Process descriptions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Simulation-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Simulation construction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Simulation-Execution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Simulation execution</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-Outputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Outputs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80-AppendicesACommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./81-AppendicesBParams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Parameters</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./82-AppendicesCOutputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Files and data fields</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./83-AppendicesDDemoModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Demonstration model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./84-AppendicesEVersionControl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Application under version control</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-ProcessDescriptionsGeo-2" id="toc-sec-ProcessDescriptionsGeo-2" class="nav-link active" data-scroll-target="#sec-ProcessDescriptionsGeo-2"><span class="header-section-number">3.1</span> Geolocation</a></li>
+  <li><a href="#sec-ProcessDescriptionsPollExp-2" id="toc-sec-ProcessDescriptionsPollExp-2" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsPollExp-2"><span class="header-section-number">3.2</span> Pollutant export</a>
+  <ul>
+  <li><a href="#sec-ProcessDescriptionsConst-3" id="toc-sec-ProcessDescriptionsConst-3" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsConst-3"><span class="header-section-number">3.2.1</span> Constant</a></li>
+  <li><a href="#sec-ProcessDescriptionsTS-3" id="toc-sec-ProcessDescriptionsTS-3" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsTS-3"><span class="header-section-number">3.2.2</span> Timeseries</a></li>
+  <li><a href="#sec-ProcessDescriptionsMats-3" id="toc-sec-ProcessDescriptionsMats-3" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsMats-3"><span class="header-section-number">3.2.3</span> Material based export</a>
+  <ul>
+  <li><a href="#sec-ProcessDescriptionsAccWO-3" id="toc-sec-ProcessDescriptionsAccWO-3" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsAccWO-3"><span class="header-section-number">3.2.3.1</span> Accumulation and washoff</a>
+  <ul class="collapse">
+  <li><a href="#sec-ProcessDescriptionsAcc-4" id="toc-sec-ProcessDescriptionsAcc-4" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsAcc-4"><span class="header-section-number">3.2.3.1.1</span> Accumulation</a></li>
+  <li><a href="#sec-ProcessDescriptionsWO-4" id="toc-sec-ProcessDescriptionsWO-4" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsWO-4"><span class="header-section-number">3.2.3.1.2</span> Washoff</a></li>
+  </ul></li>
+  <li><a href="#sec-ProcessDescriptionsSS-3" id="toc-sec-ProcessDescriptionsSS-3" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsSS-3"><span class="header-section-number">3.2.3.2</span> Shear stress</a>
+  <ul class="collapse">
+  <li><a href="#sec-ProcessDescriptionsEro-4" id="toc-sec-ProcessDescriptionsEro-4" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsEro-4"><span class="header-section-number">3.2.3.2.1</span> Erosion</a></li>
+  <li><a href="#sec-ProcessDescriptionsDep-4" id="toc-sec-ProcessDescriptionsDep-4" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsDep-4"><span class="header-section-number">3.2.3.2.2</span> Deposition</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-ProcessDescriptionsInterv-2" id="toc-sec-ProcessDescriptionsInterv-2" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsInterv-2"><span class="header-section-number">3.3</span> Interventions</a>
+  <ul>
+  <li><a href="#sec-ProcessDescriptionsIntervMR-3" id="toc-sec-ProcessDescriptionsIntervMR-3" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsIntervMR-3"><span class="header-section-number">3.3.1</span> Mass removal</a>
+  <ul>
+  <li><a href="#sec-ProcessDescriptionsIntervEqn-4" id="toc-sec-ProcessDescriptionsIntervEqn-4" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsIntervEqn-4"><span class="header-section-number">3.3.1.1</span> Equation</a>
+  <ul class="collapse">
+  <li><a href="#sec-ProcessDescriptionsIntervConst-5" id="toc-sec-ProcessDescriptionsIntervConst-5" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsIntervConst-5"><span class="header-section-number">3.3.1.1.1</span> Constant</a></li>
+  <li><a href="#sec-ProcessDescriptionsIntervOther-5" id="toc-sec-ProcessDescriptionsIntervOther-5" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsIntervOther-5"><span class="header-section-number">3.3.1.1.2</span> Other</a></li>
+  </ul></li>
+  <li><a href="#sec-ProcessDescriptionsIntervMatrix-4" id="toc-sec-ProcessDescriptionsIntervMatrix-4" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsIntervMatrix-4"><span class="header-section-number">3.3.1.2</span> Table</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-ProcessDescriptionsSAs-2" id="toc-sec-ProcessDescriptionsSAs-2" class="nav-link" data-scroll-target="#sec-ProcessDescriptionsSAs-2"><span class="header-section-number">3.4</span> Non-hydrologic surface loads</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-ProcessDescriptions-1" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Process descriptions</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Previous chapters have presented an overview of the architecture and capabilities of TUFLOW CATCH. This chapter presents the details of the processes that TUFLOW CATCH executes. It does not present the processes executed by either TUFLOW HPC or TUFLOW FV: these are detailed in the respective model user and science manuals, and relevant release notes here:</p>
+<ul>
+<li><a href="https://www.tuflow.com/downloads/#tuflow">TUFLOW HPC</a></li>
+<li><a href="https://tuflow.com/downloads/#tuflow_fv">TUFLOW FV</a></li>
+</ul>
+<p>TUFLOW CATCH provides these primary functions:</p>
+<ul>
+<li>Coordination of the execution of TUFLOW HPC and TUFLOW FV across a whole-of-catchment domain (<strong>Hydrology</strong> and <strong>Integrated</strong> configurations)</li>
+<li>Automatic geolocation and writing of flow and concentration boundary conditions for TUFLOW FV (as the receiving water model), generated from TUFLOW HPC predictions (as the catchment model) (<strong>Hydrology</strong> and <strong>Integrated</strong> configurations)</li>
+<li>Pollutant export and transport calculations within a catchment (<strong>Pollutant Export</strong> and <strong>Integrated</strong> configurations)</li>
+</ul>
+<p>The first of these is its core architectural capability and so is described in <a href="02-Architecture.html#sec-ExCoord-3" class="quarto-xref"><span>Section 2.3.1</span></a>. The latter are technical componentry of this architecture and so are detailed here in <a href="#sec-ProcessDescriptionsGeo-2" class="quarto-xref"><span>Section 3.1</span></a>, <a href="#sec-ProcessDescriptionsPollExp-2" class="quarto-xref"><span>Section 3.2</span></a> and <a href="#sec-ProcessDescriptionsInterv-2" class="quarto-xref"><span>Section 3.3</span></a>, respectively.</p>
+<section id="sec-ProcessDescriptionsGeo-2" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-ProcessDescriptionsGeo-2"><span class="header-section-number">3.1</span> Geolocation</h2>
+<p>Manually linking catchment and receiving water models can potentially be a time consuming and error prone process. When executed in configurations other than <strong>Pollutant Export</strong> (see <a href="01-Overview.html#sec-Configs-2" class="quarto-xref"><span>Section 1.3</span></a>), TUFLOW CATCH undertakes this task automatically via a process of geolocation, whereby TUFLOW HPC cells that spatially coincide with either TUFLOW FV nodestring inflows (user nominated, see <a href="04-Simulation-Construction.html#sec-SCTCCFV-3" class="quarto-xref"><span>Section 4.5.4</span></a>) or TUFLOW FV mesh cells are identified. These TUFLOW HPC cells are called transfer cells. Once identified, these transfer cells track the local surface and groundwater flow volumes and constituent masses predicted by TUFLOW HPC, and each transfer cell’s outflows are converted into timeseries and exported into the comma delimited (.csv) format expected by TUFLOW FV as boundary conditions. It is noted that:</p>
+<ul>
+<li>Where the user has nominated a nodestring/s as transfer locations from TUFLOW HPC to TUFLOW FV, TUFLOW CATCH will write the corresponding TUFLOW FV boundary condition files as ‘Q’ types that include the transfer of momentum from TUFLOW HPC to TUFLOW FV. As such, these boundaries (and specifying the corresponding TUFLOW FV nodestrings) should be considered where channelised riverine inflows and the like are to be matched, i.e.&nbsp;where inflow momentum is important in controlling receiving water hydrodynamics</li>
+<li>Where TUFLOW CATCH automatically geolocates non-nodestring transfer locations from TUFLOW HPC to TUFLOW FV, TUFLOW CATCH will write the corresponding TUFLOW FV boundary condition files as ‘QC’ types that exclude the transfer of momentum from TUFLOW HPC to TUFLOW FV. As such, these boundaries should typify non-channelised ‘lateral’ inflows where momentum transfer is less important in controlling receiving water hydrodynamics</li>
+<li>Boundary data for TUFLOW FV is written with date (<code>dd/mm/yyyy hh:mm:ss</code>) format</li>
+<li>TUFLOW HPC cells that are located within the TUFLOW FV mesh but are not transfer cells (e.g.&nbsp;lie well within the TUFLOW FV model mesh) are designated as deactivated within TUFLOW HPC and are not included in simulation</li>
+</ul>
+<p>This automated selection of linkage cells is sufficiently robust to handle relative differences in mesh/grid resolution between TUFLOW HPC and TUFLOW FV, including cases where the TUFLOW HPC model is higher resolution than the (local) TUFLOW FV model mesh, and vice-versa. Some typical cases are presented in <a href="#fig-TransferCells" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>.</p>
+<div id="fig-TransferCells" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-TransferCells-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/TransferCells.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-TransferCells-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: Examples of linkages under varying TUFLOW HPC and TUFLOW FV cell resolutions
+</figcaption>
+</figure>
+</div>
+<p>After all mesh elements and boundary nodestrings are processed, any cells entirely within the TUFLOW FV mesh are deactivated from TUFLOW HPC computations - these locations within the overall model domain are simulated by TUFLOW FV.</p>
+<p>The locations of the TUFLOW HPC transfer cells automatically geolocated by TUFLOW CATCH are reported in the TUFLOW HPC <code>hpc_transfer</code> check file for review. The corresponding TUFLOW FV boundary condition locations are also reported in the TUFLOW FV <code>bc_check_P</code> check files. An example of both is presented in <a href="#fig-TransferCells2" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>, with TUFLOW HPC and TUFLOW FV check file outputs on the left (brown squares) and right (red dots), respectively.</p>
+<div id="fig-TransferCells2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-TransferCells2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/FVHPCtransfer.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-TransferCells2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: HPC transfer cell (left) and TUFLOW FV boundary cell (right) check file examples
+</figcaption>
+</figure>
+</div>
+<p>The above geolocation process does not exclude or prevent the TUFLOW FV user from manually specifying additional boundaries to a TUFLOW FV model. For example, tidal or wastewater discharge (or other) boundaries can be specified by the user within the TUFLOW CATCH control file as per a normal TUFLOW FV model set up by specifying ‘bc’ blocks as required. TUFLOW CATCH will collect these manual (user defined) boundaries and all automatically geolocated boundaries and apply them to the execution of TUFLOW FV under TUFLOW CATCH.</p>
+<p>An example of how this geolocation method supports transfer of water, concentrations and momentum is provided in <a href="#fig-transfervid" class="quarto-xref">Figure&nbsp;<span>3.3</span></a>. The animation presents a catchment derived TUFLOW HPC flow originating from left of screen (and from the fixed grid domain) being transferred automatically into the (flexible mesh) TUFLOW FV domain, and then advected downstream to the right. Constituent concentrations vary from low (blue) to red (high).</p>
+<div id="fig-transfervid" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-transfervid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<video src="videos/Cudgen_crop_trim.mp4" class="img-fluid" controls=""><a href="videos/Cudgen_crop_trim.mp4">Video</a></video>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-transfervid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3: Example of transferral of an inflow (from left to right) from TUFLOW HPC to TUFLOW FV
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-ProcessDescriptionsPollExp-2" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-ProcessDescriptionsPollExp-2"><span class="header-section-number">3.2</span> Pollutant export</h2>
+<p>TUFLOW CATCH supports the simulation of pollutant generation and associated surface (and optionally subsurface) transport within the catchment domain. It does so on a spatially varying basis via use of materials so that, in a manner analogous to hydraulic roughness calculations (that also use materials), pollutant export simulation is ultimately affected on a computational cell by computational cell basis. This obviates the need to make top-down lumped hydrologic or pollutant export related assumptions, and facilitates the solution of the equations of motion and solutes on a spatially and temporally resolved basis.</p>
+<p>Pollutant export simulation within TUFLOW CATCH allows for any of the following simulation methods per pollutant:</p>
+<ul>
+<li><strong>Constant.</strong> Specification of a constant concentration to be written to TUFLOW FV boundary conditions without numerical simulation in TUFLOW HPC. Examples include water quality constituents that are not meaningfully conceptualised as being liberated from a ground surface, such as dissolved oxygen, or</li>
+<li><strong>Timeseries.</strong> Specification of a time varying concentration, again to be written to TUFLOW FV boundary conditions without numerical simulation. Examples include water temperature</li>
+<li><strong>Material based.</strong> Specification of the following on a material by material basis, for a given pollutant:
+<ul>
+<li>The computational pollutant export method to be used</li>
+<li>The parameters associated with the selected computational pollutant export method</li>
+</ul></li>
+</ul>
+<p>For a model demonstration of the above pollutant export options, please refer to <a href="https://wiki.tuflow.com/TUFLOW_CATCH_Tutorial_M01">TUFLOW CATCH Tutorial Model 1</a>.</p>
+<p>Different pollutant export methods across the above options can be used within a single TUFLOW CATCH simulation for different pollutants. A given pollutant, however, should not have different material based pollutant export methods applied to it within a given simulation. Commands are provided in detail in <a href="04-Simulation-Construction.html" class="quarto-xref"><span>Chapter 4</span></a>, however an example of such a specification is provided following, with incomplete (…) parameter lists for brevity.</p>
+<div class="scrollable-block">
+<p><span class="tcmd">Constant</span> <span class="tblk">POLLUTANT_A</span> <span class="teq">==</span> <span class="tblk">8.0</span><br>
+<span class="tcmd">Time-Series</span> <span class="tblk">POLLUTANT_B</span> <span class="teq">==</span> <span class="tblk">temptre</span></p>
+<p><span class="tcmd">Material</span> <span class="teq">==</span> <span class="tblk">ALL</span><br>
+<span class="indent1"></span><span class="tblk">POLLUTANT_C,</span> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">method1,</span> <span class="tcmd">param1</span> <span class="teq">==</span> <span class="tblk">100.0,</span> <span class="math inline">\(\ldots\)</span><br>
+<span class="indent1"></span><span class="tblk">POLLUTANT_D,</span> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">method2,</span> <span class="tcmd">param1</span> <span class="teq">==</span> <span class="tblk">10.0,</span> <span class="math inline">\(\ldots\)</span><br>
+<span class="indent1"></span><span class="tblk">POLLUTANT_E,</span> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">method1,</span> <span class="tcmd">param1</span> <span class="teq">==</span> <span class="tblk">0.17,</span> <span class="math inline">\(\ldots\)</span><br>
+<span class="indent1"></span><span class="tblk">POLLUTANT_F,</span> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">method2,</span> <span class="tcmd">param1</span> <span class="teq">==</span> <span class="tblk">1.23,</span> <span class="math inline">\(\ldots\)</span><br>
+<span class="indent1"></span><span class="math inline">\(\ldots\)</span><br>
+<span class="tcmd">End Material</span></p>
+<p><span class="tcmd">Material</span> <span class="teq">==</span> <span class="tblk">1, 4</span><br>
+<span class="indent1"></span><span class="tblk">POLLUTANT_C,</span> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">method1,</span> <span class="tcmd">param1</span> <span class="teq">==</span> <span class="tblk">43.0</span> <span class="math inline">\(\ldots\)</span><br>
+<span class="indent1"></span><span class="tblk">POLLUTANT_E,</span> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">method1,</span> <span class="tcmd">param1</span> <span class="teq">==</span> <span class="tblk">0.37</span> <span class="math inline">\(\ldots\)</span><br>
+<span class="indent1"></span><span class="math inline">\(\ldots\)</span><br>
+<span class="tcmd">End Material</span></p>
+</div>
+<p>Multiple constant and time-series pollutants can be specified (via individual command lines), and material blocks can be specified to apply to more than one material (the above example applies to ALL materials, then materials 1 and 4, for example). In a manner akin to specification of roughness in TUFLOW HPC, sequences of material blocks progressively spatially overwrite in the order presented. In the above example, materials 1 and 4 would therefore be interpreted as</p>
+<div class="scrollable-block">
+<p><span class="tcmd">Material</span> <span class="teq">==</span> <span class="tblk">1, 4</span><br>
+<span class="indent1"></span><span class="tblk">POLLUTANT_C,</span> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">method1,</span> <span class="tcmd">param1</span> <span class="teq">==</span> <span class="tblk">43.0,</span> <span class="math inline">\(\ldots\)</span><br>
+<span class="indent1"></span><span class="tblk">POLLUTANT_D,</span> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">method2,</span> <span class="tcmd">param1</span> <span class="teq">==</span> <span class="tblk">10.0,</span> <span class="math inline">\(\ldots\)</span><br>
+<span class="indent1"></span><span class="tblk">POLLUTANT_E,</span> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">method1,</span> <span class="tcmd">param1</span> <span class="teq">==</span> <span class="tblk">0.37,</span> <span class="math inline">\(\ldots\)</span><br>
+<span class="indent1"></span><span class="tblk">POLLUTANT_F,</span> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">method2,</span> <span class="tcmd">param1</span> <span class="teq">==</span> <span class="tblk">1.23,</span> <span class="math inline">\(\ldots\)</span><br>
+<span class="indent1"></span><span class="math inline">\(\ldots\)</span><br>
+<span class="tcmd">End Material</span></p>
+</div>
+<p>Materials 2 and 3 would be as per the ALL specification above.</p>
+<p>Different computational pollutant export methods can be assigned to different pollutants within a single material block. The same computational pollutant export method should be assigned to the same pollutant across multiple material blocks, albeit with different parameterisations. For example, POLLUTANT_C should not have the Washoff1 method applied in material 3 and the Shear1 method applied in material 1.</p>
+<p>The above pollutant export models are described following.</p>
+<section id="sec-ProcessDescriptionsConst-3" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="sec-ProcessDescriptionsConst-3"><span class="header-section-number">3.2.1</span> Constant</h3>
+<p>The constant pollutant export method is the simplest of all available methods. It does not involve any calculations within TUFLOW HPC. Rather, it has TUFLOW CATCH assign the specified constant value to the relevant column in all TUFLOW FV boundary condition files produced by TUFLOW HPC, for all times. It is suitable for pollutants that are conceptually inconsistent with generation from a ground surface, such as dissolved oxygen or phytoplankton.</p>
+</section>
+<section id="sec-ProcessDescriptionsTS-3" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="sec-ProcessDescriptionsTS-3"><span class="header-section-number">3.2.2</span> Timeseries</h3>
+<p>The timeseries pollutant export method does not involve any calculations within TUFLOW HPC. Rather, it has TUFLOW CATCH assign an interpolated timeseries value to the relevant column in all TUFLOW FV boundary condition files produced. Interpolation is based on matching the specified timeseries timestamp with the output frequency of TUFLOW FV boundary condition files. It is suitable for pollutants that are conceptually inconsistent with generation from a ground surface and also likely to vary temporally, such as water temperature. One timeseries per pollutant can be specified and it is applied across the entire model domain.</p>
+</section>
+<section id="sec-ProcessDescriptionsMats-3" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="sec-ProcessDescriptionsMats-3"><span class="header-section-number">3.2.3</span> Material based export</h3>
+<p>The material based pollutant export method involves cell by cell calculations within TUFLOW HPC, coordinated by TUFLOW CATCH. The available methods are described following.</p>
+<section id="sec-ProcessDescriptionsAccWO-3" class="level4" data-number="3.2.3.1">
+<h4 data-number="3.2.3.1" class="anchored" data-anchor-id="sec-ProcessDescriptionsAccWO-3"><span class="header-section-number">3.2.3.1</span> Accumulation and washoff</h4>
+<p>Accumulation/washoff methods are common in urban water modelling and are conceptually distinct from event mean concentration / dry weather concentration (EMC/DWC) methods. The former have been the subject of considerable research and development since at least the 1970s. In short, the accumulation washoff method conceptualises pollutant accumulation during no-flow or low-flow conditions and washoff during higher-flow conditions. Typically, a proportion of the accumulated pollutant runs off if a threshold flow or flow depth is reached (i.e.&nbsp;enough energy is available for liberation of mass). This mechanism is generally based on a non-linear function for the runoff, if runoff is not explicitly simulated (e.g.&nbsp;in models that make lumped average assumptions). TUFLOW CATCH’s implementation of this method (that explicitly simulates hydrology so does not resort to such lumped assumptions) is described following. It can be applied equally to both dissolved and particulate pollutants.</p>
+<section id="sec-ProcessDescriptionsAcc-4" class="level5" data-number="3.2.3.1.1">
+<h5 data-number="3.2.3.1.1" class="anchored" data-anchor-id="sec-ProcessDescriptionsAcc-4"><span class="header-section-number">3.2.3.1.1</span> Accumulation</h5>
+<p>TUFLOW CATCH allows for the specification of accumulation rates for each pollutant simulated, on a spatially varying (material by material) basis. These rates are linearly applied in time until a user specified maximum areal mass (also kg/ha/yr) is reached. Even though these rates and maximums are specified per material, they are used to undertake accumulation calculations on a cell by cell basis at the beginning of every timestep. For example, if a user has specified a 5 metre TUFLOW HPC grid size, then pollutant accumulation calculations will be undertaken at this same spatial resolution.</p>
+<p>As each pollutant accumulates, it is added to TUFLOW HPC’s dry store mass, which is also tracked on a cell by cell basis. It is this dry store mass that is then depleted (washed off) when user specified hydrologic conditions are met (see <a href="#sec-ProcessDescriptionsWO-4" class="quarto-xref"><span>Section 3.2.3.1.2</span></a>). Each pollutant’s and each cell’s dry store mass is temporally incremented at the specified rate, up to a user specified limiting areal mass (kg/ha). Accumulation does not occur (i.e.&nbsp;the accumulation rate is set to zero) if washoff is occurring during a given timestep.</p>
+<p>One advantage of the pollutant accumulation method is that the user has full control over the spatial distribution of the associated rates, through the use of materials. Specifically, each material is assigned these rates, and materials are (typically) specified as polygons that cover regions with similar pollutant properties (analogous to roughness materials). Although it may seem natural to equate this spatial distribution of pollutant properties with land uses (as is often the case in lumped hydrology/pollutant export models), this is not a requirement of TUFLOW CATCH. Indeed, the user has full discretion with regard to how pollutant properties are set, and whilst perhaps making initial use of land use data, it is possible that different material polygons that represent the same land use are given different pollutant properties. For example, an ‘urban’ land use might be tagged to two separate housing estates in a generic land use GIS vector layer, but the user may also know that one estate has stormwater treatment devices in place and the other does not. In such an instance, different pollutant accumulation (and washoff) parameters can be applied through TUFLOW CATCH. In short, TUFLOW CATCH has been deliberately designed to allow users to insert their local knowledge of the systems being modelled into the model build process directly, down to a cell by cell spatial resolution if required, without being limited by lumping assumptions.</p>
+<p>Akin to the flexibility offered in spatial resolution, TUFLOW CATCH allows full control over the specification of pollutant accumulation rates, and in doing so allows the user to inform the modelling process with local knowledge and expertise.</p>
+<p>The relevant TUFLOW CATCH commands are described in <a href="04-Simulation-Construction.html#sec-SCTCCPollExpAW-5" class="quarto-xref"><span>Section 4.5.3.3.1</span></a>.</p>
+</section>
+<section id="sec-ProcessDescriptionsWO-4" class="level5" data-number="3.2.3.1.2">
+<h5 data-number="3.2.3.1.2" class="anchored" data-anchor-id="sec-ProcessDescriptionsWO-4"><span class="header-section-number">3.2.3.1.2</span> Washoff</h5>
+<p>TUFLOW CATCH allows for the specification of the manner in which the accumulated dry store mass described in <a href="#sec-ProcessDescriptionsAcc-4" class="quarto-xref"><span>Section 3.2.3.1.1</span></a> is washed off in response to local hydrologic conditions. This specification occurs in the same command line as accumulation rates (for a given pollutant), which is therefore also on a material by material basis: for a given material and pollutant, the accumulation and washoff parameters are related, and therefore co-specified.</p>
+<p>The TUFLOW CATCH washoff method is presented conceptually in <a href="#fig-WO" class="quarto-xref">Figure&nbsp;<span>3.4</span></a>. Under wet weather conditions, a mass per unit area <span class="math inline">\(\Delta\)</span> (kg/ha) is released from the dry store mass (<span class="math inline">\(\alpha_{dry}\)</span>, kg/ha) into the wet store (<span class="math inline">\(\alpha_{wet}\)</span>, concentration <span class="math inline">\(C\)</span>, mg/L) (i.e.&nbsp;to add to a water concentration), governed by a user defined time constant (also referred to as a time of concentration), <span class="tcmd"><a href="./81-AppendicesBParams.html#par-Tcon">T<span class="math inline">\(_c\)</span></a></span>, such that over a timestep <span class="math inline">\(dT\)</span> (with appropriate conversion factors for reconciliation of units):</p>
+<p><span id="eq-wo"><span class="math display">\[
+\Delta = dT\frac{\alpha_{dry}}{T_c}
+\tag{3.1}\]</span></span></p>
+<p>This release only occurs once user specified minimum rain rates, <span class="tcmd"><a href="./81-AppendicesBParams.html#par-RnThrshd"><span class="math inline">\(R_r\)</span></a></span>, and surface water depths, <span class="tcmd"><a href="./81-AppendicesBParams.html#par-dThresh"><span class="math inline">\(d\)</span></a></span>, have both been exceeded. Otherwise, the dry store masses described in <a href="#sec-ProcessDescriptionsAcc-4" class="quarto-xref"><span>Section 3.2.3.1.1</span></a> are accumulated at the rates specified.</p>
+<div id="fig-WO" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-WO-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/WO2.png" class="img-fluid figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-WO-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.4: Washoff method
+</figcaption>
+</figure>
+</div>
+<p>If a pollutant is released into its wet store, it is transported according to the progression of hydrologic and hydraulic flows (and associated advection and dispersion), which is completed as a separate calculation step to the generation update.</p>
+<p>Settling velocities are assigned to individual pollutants, and may vary spatially with material. An example of where the latter might be applied is when sediment is known to flocculate in saline conditions and hence have its settling properties modified. Any settling returns pollutants from the wet store to the dry store. This is not recommended for dissolved pollutants, and where settling is to be turned off, the velocity should be set to zero. The mass flux per unit area in time <span class="math inline">\(dT\)</span> due to settling <span class="math inline">\(\Delta\)</span> (kg/ha) is given by <a href="#eq-wo-sett" class="quarto-xref">Equation&nbsp;<span>3.2</span></a>:</p>
+<p><span id="eq-wo-sett"><span class="math display">\[
+\Delta = dT \times w_sC
+\tag{3.2}\]</span></span></p>
+<p><span class="tcmd"><a href="./81-AppendicesBParams.html#par-DeposVel">w<span class="math inline">\(_s\)</span></a></span> is the user specified settling velocity, <span class="math inline">\(C\)</span> is the wet store cell concentration of pollutant. No other constraints to settling occurring are applied in this model.</p>
+<p>If soils and subsurface flow (interflow) is not simulated in TUFLOW HPC, then this transport is purely surficial. If soils are included then released pollutants will be transported in both the surface and subsurface in accordance with water flows. TUFLOW CATCH allows for the optional prevention of infiltration of a given pollutant into the subsurface flow if soils are included in the TUFLOW HPC simulation. This is most relevant for particulate pollutants such as sediment or particulate organic material.</p>
+<p>A conceptualisation of TUFLOW CATCH’s pollutant generation and transport methods is presented in <a href="#fig-wopoll" class="quarto-xref">Figure&nbsp;<span>3.5</span></a>.</p>
+<div id="fig-wopoll" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wopoll-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Catchpic-01.jpg" class="img-fluid figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wopoll-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.5: TUFLOW CATCH pollutant generation method
+</figcaption>
+</figure>
+</div>
+<p>The relevant TUFLOW CATCH commands are described in <a href="04-Simulation-Construction.html#sec-SCTCCPollExpAW-5" class="quarto-xref"><span>Section 4.5.3.3.1</span></a>.</p>
+</section>
+</section>
+<section id="sec-ProcessDescriptionsSS-3" class="level4" data-number="3.2.3.2">
+<h4 data-number="3.2.3.2" class="anchored" data-anchor-id="sec-ProcessDescriptionsSS-3"><span class="header-section-number">3.2.3.2</span> Shear stress</h4>
+<p>Shear stress generation methods are common in natural waterway modelling studies (e.g.&nbsp;estuaries and coastal oceans), particularly with regard to the simulation of sediment transport. In short, these methods conceptualise sediment release from the bed as a function of overlying hydrodynamic shear stress: once a specified minimum shear stress is exceeded, sediment is released to the water column. Similarly, these methods also allow for deposition of previously suspended sediment back to the bed, and this is typically allowed to occur (at a set settling velocity) once ambient hydrodynamic shear stress drops below a specified maximum depositional shear stress. More advanced methods allow for construction of intermediary bed roughness models that translate raw hydrodynamic shear stress to the corresponding shear stress that is actually felt by the bed and can therefore cause erosion (or allow deposition). These methods therefore allow for the ongoing erosion and deposition of particulate materials as hydrodynamic conditions evolve in time and space. TUFLOW CATCH’s implementation of this method is described following. It is intended to be applied primarily to particulate pollutants, rather than dissolved.</p>
+<section id="sec-ProcessDescriptionsEro-4" class="level5" data-number="3.2.3.2.1">
+<h5 data-number="3.2.3.2.1" class="anchored" data-anchor-id="sec-ProcessDescriptionsEro-4"><span class="header-section-number">3.2.3.2.1</span> Erosion</h5>
+<p>TUFLOW CATCH allows for the specification of erosion behaviour of any pollutant, on a spatially varying (material by material) basis. Even though this behaviour is specified per material, it is used to undertake erosion calculations on a cell by cell basis at the beginning of every timestep. For example, if a user has specified a 5 metre TUFLOW HPC grid size, then erosion calculations will be undertaken at this same spatial resolution. As each pollutant erodes from its dry store mass, it is released to its wet store and advected/dispersed accordingly. This removal is tracked and reported at the end of a simulation as a loss to each cell’s dry store mass (kg/ha).</p>
+<p>TUFLOW CATCH adopts the Mehta erosion model on a cell by cell basis, such that the erosive flux <span class="math inline">\(\Delta\)</span> (kg/ha) is given by <a href="#eq-mehta-er" class="quarto-xref">Equation&nbsp;<span>3.3</span></a> in time <span class="math inline">\(dT\)</span> (with appropriate units conversions):</p>
+<p><span id="eq-mehta-er"><span class="math display">\[
+\Delta = dT \times E_r\left(\frac{\tau}{\tau_{ce}}-1\right)^{\alpha}
+\tag{3.3}\]</span></span></p>
+<p><span class="tcmd"><a href="./81-AppendicesBParams.html#par-Er"><span class="math inline">\(E_r\)</span></a></span> is the erosion rate (g/m<span class="math inline">\(^2\)</span>/s), <span class="math inline">\(\tau\)</span> is the simulated hydrodynamic shear stress (N/m<span class="math inline">\(^2\)</span>), <span class="tcmd"><a href="./81-AppendicesBParams.html#par-ErosThresh"><span class="math inline">\(\tau_{ce}\)</span></a></span> is the user specified critical shear stress for erosion (N/m<span class="math inline">\(^2\)</span>), <span class="math inline">\(\alpha\)</span> is a dimensionless parameter set to 1.0 and <span class="math inline">\(\tau &gt; \tau_{ce}\)</span>. TUFLOW CATCH does not deploy a bed roughness model so <span class="math inline">\(\tau\)</span> is the pure hydrodynamic shear stress calculated from cell velocity. Once computed, eroded mass is tracked so that at simulation end, TUFLOW CATCH produces a map of eroded areas that allows for identification, for example, of ‘hotspot’ erosion locations. Users specify a limit to the mass of pollutant per unit area that is erodable within each material. This can be converted by the user to a depth via independent post processing steps if desired, by assuming a bulk density. This same output layer presents areas of accumulation, if this has occurred.</p>
+<p>The relevant TUFLOW CATCH commands are described in <a href="04-Simulation-Construction.html#sec-SCTCCPollExpSS-5" class="quarto-xref"><span>Section 4.5.3.3.2</span></a>.</p>
+</section>
+<section id="sec-ProcessDescriptionsDep-4" class="level5" data-number="3.2.3.2.2">
+<h5 data-number="3.2.3.2.2" class="anchored" data-anchor-id="sec-ProcessDescriptionsDep-4"><span class="header-section-number">3.2.3.2.2</span> Deposition</h5>
+<p>TUFLOW CATCH allows for the specification of depositional behaviour of any pollutant, on a spatially varying (material by material) basis. Even though this behaviour is specified per material, it is used to undertake deposition calculations on a cell by cell basis at the beginning of every timestep. As each pollutant deposits from its wet store mass, it is transferred to its dry store mass. This deposition is tracked and reported at the end of a simulation as a gain to each cell’s dry store mass (kg/ha).</p>
+<p>TUFLOW CATCH adopts the Krone deposition model on a cell by cell basis within this pollutant export model, such that the areal depositional flux <span class="math inline">\(\Delta\)</span> (kg/ha) in time <span class="math inline">\(dT\)</span> is given by <a href="#eq-krone-dp" class="quarto-xref">Equation&nbsp;<span>3.4</span></a>. This is a more advanced version of the deposition approach used in the accumulation washoff model (<a href="#eq-wo-sett" class="quarto-xref">Equation&nbsp;<span>3.2</span></a>).</p>
+<p><span id="eq-krone-dp"><span class="math display">\[
+\Delta = dT \times \left(1-\frac{\tau}{\tau_{cd}}\right)w_sC
+\tag{3.4}\]</span></span></p>
+<p><span class="math inline">\(\tau\)</span> is the raw hydrodynamic shear stress (N/m<span class="math inline">\(^2\)</span>), <span class="tcmd"><a href="./81-AppendicesBParams.html#par-DeposThresh"><span class="math inline">\(\tau_{cd}\)</span></a></span> is the user specified critical shear stress for deposition (N/m<span class="math inline">\(^2\)</span>), <span class="tcmd"><a href="./81-AppendicesBParams.html#par-DeposVel">w<span class="math inline">\(_s\)</span></a></span> is the user specified settling velocity, <span class="math inline">\(C\)</span> is the wet store cell concentration of pollutant and <span class="math inline">\(\tau &lt; \tau_{cd}\)</span>.</p>
+<p>The relevant TUFLOW CATCH commands are described in <a href="04-Simulation-Construction.html#sec-SCTCCPollExpSS-5" class="quarto-xref"><span>Section 4.5.3.3.2</span></a>.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="sec-ProcessDescriptionsInterv-2" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-ProcessDescriptionsInterv-2"><span class="header-section-number">3.3</span> Interventions</h2>
+<p>TUFLOW CATCH supports the simulation of spatially distributed catchment based measures to remove pollutants from surface waters. These measures are referred to as interventions, and might include devices such as constructed wetlands, bioretention systems, grassed swales, riparian revegetation strips or similar. TUFLOW CATCH does so by allowing users to specify:</p>
+<ul>
+<li>The location and orientation of any number of intervention devices via a user digitised polyline for each</li>
+<li>The pollutant removal properties of each intervention device, with these properties adjustable within a device on a pollutant by pollutant basis</li>
+</ul>
+<p>TUFLOW CATCH explicitly predicts surface hydraulics (i.e.&nbsp;water location, depth, velocity and associated pollutant concentrations) to the spatial resolution of a grid cell. This offers a powerful potential to users when simulating interventions: it means that intervention devices can be digitised in the actual locations they are intended to be (or already exist) and to therefore interact only with the water volume that TUFLOW CATCH predicts to pass through those locations. This obviates the need to somehow parameterise this volume by relying on proportioning or other assumptions - TUFLOW CATCH explicitly avoids this for the user as a matter of course, and does not resort to top down or lumped assumptions.</p>
+<p>TUFLOW CATCH performs removal calculations based on mass fluxes. TUFLOW CATCH does not modify concentrations directly. This is because mass flux based approaches are meaningful in terms of environmental process simulation and understanding - concentrations are very much less so. This is discussed in detail in one of <a href="https://www.tuflow.com/library/webinars/#apr2024_wq_model_validation">TUFLOW’s global webinars</a>. The pollutant mass removal methods offered by TUFLOW CATCH’s intervention devices are (per pollutant):</p>
+<ul>
+<li><strong>Equation:</strong> An equation based reduction in pollutant mass flux passing through a device</li>
+<li><strong>Table:</strong> A two dimensional array of proportional pollutant mass removals that vary based on (dynamically simulated) incoming pollutant concentration and flow rate</li>
+</ul>
+<p>For a model demonstration of the above mass removal options, please refer to <a href="https://wiki.tuflow.com/TUFLOW_CATCH_Tutorial_M02">TUFLOW CATCH Tutorial Model 2</a>.</p>
+<p>Different mass removal methods across the above options can be used within a single TUFLOW CATCH intervention device for different pollutants. Commands are provided in detail in <a href="04-Simulation-Construction.html#sec-SCTCCPollExpInter-4" class="quarto-xref"><span>Section 4.5.3.5</span></a>, however the fundamental premise is that interventions are specified via device blocks (akin to material based pollutant export), as follows.</p>
+<div class="scrollable-block">
+<p><span class="tcmd">Device</span> <span class="teq">==</span> <span class="tblk">ALL</span><br>
+<span class="indent1"></span><span class="align3"><span class="tblk">POLLUTANT_C,</span> </span> <span class="align3"> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">Eqn,</span> </span> <span class="align1"> <span class="tcmd">Eqn</span> <span class="teq">==</span> <span class="tblk">Constant,</span> </span> <span class="align2"> <span class="tcmd">Coefficients</span> <span class="teq">==</span> <span class="tblk">1.0</span></span><br>
+<span class="indent1"></span><span class="align3"><span class="tblk">POLLUTANT_D,</span> </span> <span class="align3"> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">Eqn,</span> </span> <span class="align1"> <span class="tcmd">Eqn</span> <span class="teq">==</span> <span class="tblk">Constant,</span> </span> <span class="align2"> <span class="tcmd">Coefficients</span> <span class="teq">==</span> <span class="tblk">0.2</span></span><br>
+<span class="indent1"></span><span class="align3"><span class="tblk">POLLUTANT_E,</span> </span> <span class="align3"> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">Table,</span> </span> <span class="align2"> <span class="tcmd">Path</span> <span class="teq">==</span> <span class="tblk">..\..\bc_dbase\Alldevices.csv</span></span><br>
+<span class="indent1"></span><span class="align3"><span class="tblk">POLLUTANT_F,</span> </span> <span class="align3"> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">Eqn,</span> </span> <span class="align1"> <span class="tcmd">Eqn</span> <span class="teq">==</span> <span class="tblk">Constant,</span> </span> <span class="align2"> <span class="tcmd">Coefficients</span> <span class="teq">==</span> <span class="tblk">0.1</span></span><br>
+<span class="tcmd">End Device</span></p>
+<p><span class="tcmd">Device</span> <span class="teq">==</span> <span class="tblk">Wetland1</span><br>
+<span class="indent1"></span><span class="align3"><span class="tblk">POLLUTANT_C,</span> </span> <span class="align3"> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">Eqn,</span> </span> <span class="align1"> <span class="tcmd">Eqn</span> <span class="teq">==</span> <span class="tblk">Constant,</span> </span> <span class="align2"> <span class="tcmd">Coefficients</span> <span class="teq">==</span> <span class="tblk">0.5</span></span><br>
+<span class="indent1"></span><span class="align3"><span class="tblk">POLLUTANT_E,</span> </span> <span class="align3"> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">Table,</span> </span> <span class="align2"> <span class="tcmd">Path</span> <span class="teq">==</span> <span class="tblk">..\..\bc_dbase\Wetland1.csv</span></span><br>
+<span class="tcmd">End Device</span></p>
+</div>
+<p>Multiple methods can be specified within a device block (one for each pollutant), and subsequent block specifications can be constructed to progressively overwrite previous commands. For example, the above applies a suite of methods to ALL devices in the first block, and these are then partially overwritten (modified) for Wetland1. In a manner akin to specification of pollutant export properties, sequences of blocks affect this overwrite in the order presented. In the above example, device Wetland1 would therefore be interpreted as</p>
+<div class="scrollable-block">
+<p><span class="tcmd">Device</span> <span class="teq">==</span> <span class="tblk">Wetland1</span><br>
+<span class="indent1"></span><span class="align3"><span class="tblk">POLLUTANT_C,</span> </span> <span class="align3"> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">Eqn,</span> </span> <span class="align1"> <span class="tcmd">Eqn</span> <span class="teq">==</span> <span class="tblk">Constant,</span> </span> <span class="align2"> <span class="tcmd">Coefficients</span> <span class="teq">==</span> <span class="tblk">0.5</span></span><br>
+<span class="indent1"></span><span class="align3"><span class="tblk">POLLUTANT_D,</span> </span> <span class="align3"> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">Eqn,</span> </span> <span class="align1"> <span class="tcmd">Eqn</span> <span class="teq">==</span> <span class="tblk">Constant,</span> </span> <span class="align2"> <span class="tcmd">Coefficients</span> <span class="teq">==</span> <span class="tblk">0.2</span></span><br>
+<span class="indent1"></span><span class="align3"><span class="tblk">POLLUTANT_E,</span> </span> <span class="align3"> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">Table,</span> </span> <span class="align2"> <span class="tcmd">Path</span> <span class="teq">==</span> <span class="tblk">..\..\bc_dbase\Wetland1.csv</span></span><br>
+<span class="indent1"></span><span class="align3"><span class="tblk">POLLUTANT_F,</span> </span> <span class="align3"> <span class="tcmd">Method</span> <span class="teq">==</span> <span class="tblk">Eqn,</span> </span> <span class="align1"> <span class="tcmd">Eqn</span> <span class="teq">==</span> <span class="tblk">Constant,</span> </span> <span class="align2"> <span class="tcmd">Coefficients</span> <span class="teq">==</span> <span class="tblk">0.1</span></span><br>
+<span class="tcmd">End Device</span></p>
+</div>
+<p>Other intervention devices would be as per the ALL specification above. The relevant TUFLOW CATCH commands are described in <a href="04-Simulation-Construction.html#sec-SCTCCPollExpInter-4" class="quarto-xref"><span>Section 4.5.3.5</span></a>.</p>
+<section id="sec-ProcessDescriptionsIntervMR-3" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="sec-ProcessDescriptionsIntervMR-3"><span class="header-section-number">3.3.1</span> Mass removal</h3>
+<p>TUFLOW CATCH offers a range of mass removal methods. Regardless of individual removal details however, all methods rely on initially computing the incoming mass flux of pollutant <span class="math inline">\(j\)</span>, <span class="math inline">\(F^{in}_j\)</span> across cell faces intersected by the intervention polyline, at each simulation timestep. It is this mass flux (not concentration) that is subsequently adjusted by TUFLOW CATCH based on the operation of user defined mass removal methods. These methods are described following.</p>
+<section id="sec-ProcessDescriptionsIntervEqn-4" class="level4" data-number="3.3.1.1">
+<h4 data-number="3.3.1.1" class="anchored" data-anchor-id="sec-ProcessDescriptionsIntervEqn-4"><span class="header-section-number">3.3.1.1</span> Equation</h4>
+<section id="sec-ProcessDescriptionsIntervConst-5" class="level5" data-number="3.3.1.1.1">
+<h5 data-number="3.3.1.1.1" class="anchored" data-anchor-id="sec-ProcessDescriptionsIntervConst-5"><span class="header-section-number">3.3.1.1.1</span> Constant</h5>
+<p>The constant mass removal method is the simplest of all available methods. At each computational timestep, this method multiplies the incoming mass flux of pollutant <span class="math inline">\(j\)</span> by the user specified factor. This factor (in the range 0.0 - 1.0) is a mass removal factor for a given constituent, <a href="./81-AppendicesBParams.html#par-Rj"><span class="math inline">\(R_j\)</span></a>, where the corresponding outgoing pollutant mass flux for constituent <span class="math inline">\(j\)</span>, <span class="math inline">\(F^{out}_j\)</span> is given by <a href="#eq-intvn-const" class="quarto-xref">Equation&nbsp;<span>3.5</span></a>.</p>
+<p><span id="eq-intvn-const"><span class="math display">\[
+F^{out}_j = (1 - R_j) \times F^{in}_j
+\tag{3.5}\]</span></span></p>
+<p>The removed flux <span class="math inline">\(F^{rem}_j\)</span> is therefore given by <a href="#eq-intvn-const2" class="quarto-xref">Equation&nbsp;<span>3.6</span></a>.</p>
+<p><span id="eq-intvn-const2"><span class="math display">\[
+F^{rem}_j = (R_j) \times F^{in}_j
+\tag{3.6}\]</span></span></p>
+<p>For example, if a user sets <span class="tcmd"><a href="./81-AppendicesBParams.html#par-Rj"><span class="math inline">\(R_j\)</span></a></span> to be 0.7 for a given intervention device and constituent, then 70% of pollutant <span class="math inline">\(j\)</span>’s mass flux is removed at each timestep, and 30% is allowed to pass.</p>
+<p>The relevant TUFLOW CATCH commands are described in <a href="04-Simulation-Construction.html#sec-SCTCCIntervConst-5" class="quarto-xref"><span>Section 4.5.3.5.1</span></a>.</p>
+</section>
+<section id="sec-ProcessDescriptionsIntervOther-5" class="level5" data-number="3.3.1.1.2">
+<h5 data-number="3.3.1.1.2" class="anchored" data-anchor-id="sec-ProcessDescriptionsIntervOther-5"><span class="header-section-number">3.3.1.1.2</span> Other</h5>
+<p>Other equation based interventions may be implemented in future. Contact <a href="mailto:support@tuflow.com">support@tuflow.com</a> with requests or suggestions.</p>
+</section>
+</section>
+<section id="sec-ProcessDescriptionsIntervMatrix-4" class="level4" data-number="3.3.1.2">
+<h4 data-number="3.3.1.2" class="anchored" data-anchor-id="sec-ProcessDescriptionsIntervMatrix-4"><span class="header-section-number">3.3.1.2</span> Table</h4>
+<p>The table mass removal method is an extension of the constant mass removal method in that it allows the user to specify different <span class="tcmd"><a href="./81-AppendicesBParams.html#par-Rj"><span class="math inline">\(R_j\)</span></a></span> for different (dynamically computed) environmental conditions. Specifically, this method allows the user to specify the variation of <span class="tcmd"><a href="./81-AppendicesBParams.html#par-Rj"><span class="math inline">\(R_j\)</span></a></span> as a function of both:</p>
+<ul>
+<li>Incoming flow rate (m<span class="math inline">\(^3\)</span>/s), and</li>
+<li>Incoming pollutant concentration (variable units)</li>
+</ul>
+<p>This approach is supported in acknowledgement that some intervention devices are able to treat higher concentrations of pollutants entering a device at lower flow rates more efficiently and effectively than the same pollutant entering at lower concentrations and higher flow rates. This variation in <span class="tcmd"><a href="./81-AppendicesBParams.html#par-Rj"><span class="math inline">\(R_j\)</span></a></span> is provided via a text based table input, with:</p>
+<ul>
+<li>A rows defining the variation in <span class="tcmd"><a href="./81-AppendicesBParams.html#par-Rj"><span class="math inline">\(R_j\)</span></a></span> with incoming concentration from left to right, for a given incoming flow rate, and</li>
+<li>A columns defining the variation in <span class="tcmd"><a href="./81-AppendicesBParams.html#par-Rj"><span class="math inline">\(R_j\)</span></a></span> with incoming flow rate from top to bottom, for a given incoming concentration</li>
+</ul>
+<p>At each timestep, TUFLOW CATCH uses incoming concentrations and flow rates to dynamically interpolate a value of <span class="tcmd"><a href="./81-AppendicesBParams.html#par-Rj"><span class="math inline">\(R_j\)</span></a></span> from the user specified table, and applies <a href="#eq-intvn-const" class="quarto-xref">Equation&nbsp;<span>3.5</span></a> accordingly.</p>
+<p>Support for this mass removal method is only possible because TUFLOW CATCH solves the equations of motion and transport to predict temporally and spatially varying water velocities (flow rates) and concentrations. Such a capability is difficult to offer under, for example, the application of lumped assumptions that do not admit the explicit simulation of water as it moves through environmental systems.</p>
+<p>The relevant TUFLOW CATCH commands are described in <a href="04-Simulation-Construction.html#sec-SCTCCIntervMtrx-5" class="quarto-xref"><span>Section 4.5.3.5.2</span></a>.</p>
+</section>
+</section>
+</section>
+<section id="sec-ProcessDescriptionsSAs-2" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="sec-ProcessDescriptionsSAs-2"><span class="header-section-number">3.4</span> Non-hydrologic surface loads</h2>
+<p>TUFLOW CATCH supports simulation of the introduction of non-hydrologic (i.e.&nbsp;independent of rainfall) surface flows and loads to the catchment domain. This feature might be used, for example, to simulate the discharge of sewage treatment plants, groundwater exfiltration or other non-hydrologic processes. This simulation is spatially explicit: flows and pollutants are introduced where they actually occur on ground rather than be distributed across a lumped computational subcatchment. Simulation is affected through construction of point, line or region GIS features (using the standard TUFLOW 2d_sa_ empty GIS layer), and linking associated feature names with entries in the TUFLOW database csv file. These entries then point to flow and concentration timeseries data.</p>
+<p>The relevant TUFLOW CATCH commands are described in <a href="04-Simulation-Construction.html#sec-SCTCCSAs-4" class="quarto-xref"><span>Section 4.5.3.6</span></a>.</p>
+<p><img src="images/WQFooter.jpg" class="img-fluid" style="width:100.0%"></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./02-Architecture.html" class="pagination-link" aria-label="Architecture">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Architecture</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04-Simulation-Construction.html" class="pagination-link" aria-label="Simulation construction">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Simulation construction</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
