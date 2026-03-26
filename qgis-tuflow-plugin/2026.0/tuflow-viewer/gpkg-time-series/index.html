@@ -5,25 +5,27 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://docs.tuflow/qgis-tuflow-plugin/2026.0/tuflow-viewer/" rel="canonical"/>
-<link href="installation/" rel="next"/>
-<link href="assets/favicon/TUFLOW.ico" rel="icon"/>
+<meta content="Detailed guidance on how to load GPKG time series results into TUFLOW Viewer" name="description"/>
+<link href="https://docs.tuflow/qgis-tuflow-plugin/2026.0/tuflow-viewer/gpkg-time-series/" rel="canonical"/>
+<link href="../netcdf-grid/" rel="prev"/>
+<link href="../bc-tables-check/" rel="next"/>
+<link href="../assets/favicon/TUFLOW.ico" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.21" name="generator"/>
-<title>TUFLOW Viewer Documentation</title>
-<link href="assets/stylesheets/main.2a3383ac.min.css" rel="stylesheet"/>
-<link href="assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<title>GPKG Time Series - TUFLOW Viewer Documentation</title>
+<link href="../assets/stylesheets/main.2a3383ac.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Fira Code"}</style>
-<link href="stylesheets/extra.css" rel="stylesheet"/>
-<script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="../stylesheets/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
 </head>
 <body data-md-color-accent="pink" data-md-color-primary="blue" data-md-color-scheme="tuflow-default" dir="ltr">
 <input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#welcome-to-the-tuflow-viewer-documentation">1. 
+<a class="md-skip" href="#loading">9.1 
           Skip to content
         </a>
 </div>
@@ -33,8 +35,8 @@
 </div>
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
 <nav aria-label="Header" class="md-header__inner md-grid">
-<a aria-label="TUFLOW Viewer Documentation" class="md-header__button md-logo" data-md-component="logo" href="." title="TUFLOW Viewer Documentation">
-<img alt="logo" src="assets/logo/TUFLOW.png"/>
+<a aria-label="TUFLOW Viewer Documentation" class="md-header__button md-logo" data-md-component="logo" href=".." title="TUFLOW Viewer Documentation">
+<img alt="logo" src="../assets/logo/TUFLOW.png"/>
 </a>
 <label class="md-header__button md-icon" for="__drawer">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
@@ -49,7 +51,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Home
+              GPKG Time Series
             
           </span>
 </div>
@@ -100,8 +102,8 @@
 <nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
 <div class="md-grid">
 <ul class="md-tabs__list">
-<li class="md-tabs__item md-tabs__item--active">
-<a class="md-tabs__link" href=".">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="..">
         
   
   
@@ -112,7 +114,7 @@
       </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="installation/">
+<a class="md-tabs__link" href="../installation/">
           
   
   
@@ -122,8 +124,8 @@
 
         </a>
 </li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="xmdf/">
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../xmdf/">
           
   
   
@@ -134,7 +136,7 @@
         </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="roadmap/">
+<a class="md-tabs__link" href="../roadmap/">
         
   
   
@@ -156,15 +158,14 @@
 <div class="md-sidebar__inner">
 <nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
 <label class="md-nav__title" for="__drawer">
-<a aria-label="TUFLOW Viewer Documentation" class="md-nav__button md-logo" data-md-component="logo" href="." title="TUFLOW Viewer Documentation">
-<img alt="logo" src="assets/logo/TUFLOW.png"/>
+<a aria-label="TUFLOW Viewer Documentation" class="md-nav__button md-logo" data-md-component="logo" href=".." title="TUFLOW Viewer Documentation">
+<img alt="logo" src="../assets/logo/TUFLOW.png"/>
 </a>
     TUFLOW Viewer Documentation
   </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<a class="md-nav__link md-nav__link--active" href=".">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
 <span class="md-ellipsis">
     Home
     
@@ -187,7 +188,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="installation/">
+<a class="md-nav__link" href="../installation/">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg id="svg2" version="1.1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
@@ -204,7 +205,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="quick-start-guide/">
+<a class="md-nav__link" href="../quick-start-guide/">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 16.5v-9l6 4.5M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"></path></svg>
 <span class="md-ellipsis">
     Quick Start Guide
@@ -213,7 +214,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="differences/">
+<a class="md-nav__link" href="../differences/">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 1c-1.11 0-2 .89-2 2v11c0 1.11.89 2 2 2h2v-2H3V3h11v2h2V3c0-1.11-.89-2-2-2zm6 6c-1.11 0-2 .89-2 2v2h2V9h2V7zm4 0v2h1v1h2V7zm5 0v2h2v11H9v-2H7v2c0 1.11.89 2 2 2h11c1.11 0 2-.89 2-2V9c0-1.11-.89-2-2-2zm-4 5v2h-2v2h2c1.11 0 2-.89 2-2v-2zm-7 1v3h3v-2H9v-1z"></path></svg>
 <span class="md-ellipsis">
     TUFLOW Viewer V2 vs Legacy TUFLOW Viewer
@@ -224,23 +225,23 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3" type="checkbox"/>
-<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
 <span class="md-ellipsis">
     User Guide
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_3">
 <span class="md-nav__icon md-icon"></span>
             User Guide
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="xmdf/">
+<a class="md-nav__link" href="../xmdf/">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg id="svg13" version="1.1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs id="defs13"></defs>
@@ -271,7 +272,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="tpc/">
+<a class="md-nav__link" href="../tpc/">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 <svg id="svg5" version="1.1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
@@ -288,7 +289,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="netcdf-mesh/">
+<a class="md-nav__link" href="../netcdf-mesh/">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 12h2v2h-2c-1.38 0-2.74-.35-4-1-2.5 1.3-5.5 1.3-8 0-1.26.65-2.63 1-4 1H2v-2h2c1.39 0 2.78-.47 4-1.33 2.44 1.71 5.56 1.71 8 0 1.22.86 2.61 1.33 4 1.33m0-6h2v2h-2c-1.38 0-2.74-.35-4-1-2.5 1.3-5.5 1.3-8 0-1.26.65-2.63 1-4 1H2V6h2c1.39 0 2.78-.47 4-1.33 2.44 1.71 5.56 1.71 8 0C17.22 5.53 18.61 6 20 6m0 12h2v2h-2c-1.38 0-2.74-.35-4-1-2.5 1.3-5.5 1.3-8 0-1.26.65-2.63 1-4 1H2v-2h2c1.39 0 2.78-.47 4-1.33 2.44 1.71 5.56 1.71 8 0 1.22.86 2.61 1.33 4 1.33"></path></svg>
 <span class="md-ellipsis">
     NetCDF Mesh
@@ -297,7 +298,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="netcdf-grid/">
+<a class="md-nav__link" href="../netcdf-grid/">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg fill="#000000" id="Capa_1" version="1.1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs10"></defs>
@@ -320,8 +321,37 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="gpkg-time-series/">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg id="svg3277" version="1.1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+<defs id="defs3281"></defs>
+<g id="g3283" transform="translate(-492.85044,-305.79343)">
+<path d="m 500.80239,310.69292 -7.92375,3.69533 4.54879,2.06777 7.89196,-3.70976 z" id="path27294" style="opacity:1;fill:currentColor;fill-opacity:0;stroke:currentColor;stroke-width:0.116763;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"></path>
+<path d="m 508.9779,310.48157 7.75356,3.43017 -4.12328,2.4012 -7.75642,-3.4908 z" id="path25085" style="opacity:1;fill:currentColor;fill-opacity:0;stroke:currentColor;stroke-width:0.115056;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"></path>
+<ellipse cx="505.21686" cy="313.97717" id="path27364" rx="6.8161335" ry="7.0505967" style="fill:#ffffff;fill-opacity:0;stroke:currentColor;stroke-width:0.3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"></ellipse>
+<path d="m 497.58198,321.57914 -0.099,4.57019 6.78196,2.13987 0.0745,-4.67721 -3.94527,-0.73106 z" id="path4259" style="opacity:1;fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:0.796014;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"></path>
+<path d="m 499.34389,314.9807 c -0.29771,-2.59653 1.96247,-6.91914 6.78772,-6.83051 0.0254,0.0423 -0.0222,0.19024 -0.10588,0.32902 -0.24474,0.40594 -0.21357,0.44487 0.3071,0.38322 0.25257,-0.0299 0.53359,-0.0832 0.62451,-0.11852 0.1623,-0.0629 0.16532,-0.0539 0.16532,0.5023 v 0.56645 l 0.27551,-0.0485 c 0.34361,-0.0606 0.93191,-0.45345 1.01863,-0.68044 0.0641,-0.1682 0.071,-0.16606 0.52948,0.1737 0.37715,0.27941 0.44617,0.36145 0.36737,0.43671 -0.19987,0.19087 -1.60765,0.56362 -2.1285,0.56362 h -0.50333 v -0.22598 c 0,-0.33279 -0.1657,-0.27958 -0.35179,0.11306 -0.13934,0.2941 -0.19094,0.33896 -0.38978,0.33896 -0.14377,0 -0.33282,0.0841 -0.50743,0.22596 -0.19927,0.16177 -0.35881,0.22627 -0.56163,0.22709 -0.15582,6.1e-4 -0.33288,0.0341 -0.39352,0.0742 -0.0969,0.0642 -0.0963,0.0733 0.005,0.0742 0.0632,6.2e-4 0.19839,0.0945 0.3005,0.20829 0.16672,0.18599 0.17893,0.23981 0.11962,0.52725 l -0.066,0.3201 h -0.72519 -0.72518 l -0.0878,0.43309 c -0.0799,0.39396 -0.0725,0.47871 0.0828,0.93798 l 0.17062,0.50491 0.59164,-0.0442 c 0.32538,-0.0244 0.69907,-0.0886 0.83041,-0.1433 0.22816,-0.0947 0.23876,-0.11729 0.23876,-0.50786 0,-0.39747 0.007,-0.40999 0.2296,-0.45576 0.12624,-0.0258 0.49824,-0.0477 0.82657,-0.0487 0.42779,-9.3e-4 0.68449,-0.0424 0.90583,-0.14544 0.25692,-0.11958 0.3465,-0.12917 0.53267,-0.0573 0.13873,0.0539 0.22378,0.13979 0.22378,0.22647 0,0.077 0.16816,0.38672 0.37366,0.68846 0.35351,0.51907 0.36969,0.56341 0.29982,0.82281 -0.0698,0.25909 -0.0642,0.27416 0.099,0.27416 0.0989,0 0.19146,-0.0562 0.21644,-0.1318 0.024,-0.0725 0.092,-0.19685 0.15073,-0.27638 0.10412,-0.14065 0.11113,-0.14081 0.25693,-0.006 0.10015,0.0929 0.17426,0.114 0.22347,0.0634 0.0492,-0.0504 -0.0961,-0.322 -0.43778,-0.81826 -0.40713,-0.59133 -0.49704,-0.77029 -0.441,-0.87761 0.0584,-0.11189 0.12946,-0.12677 0.41765,-0.0872 0.43417,0.0592 0.76728,0.33054 0.93392,0.76054 0.12785,0.32983 0.40257,0.54444 0.69696,0.54444 h 0.1521 l -0.14844,-0.29829 c -0.18432,-0.37041 -0.18447,-0.40146 -9.4e-4,-0.34193 0.11275,0.0367 0.14693,0.0135 0.14693,-0.0998 0,-0.15695 0.33966,-0.29926 0.44608,-0.18686 0.0901,0.0953 0.26769,1.79595 0.20543,1.96844 -0.0402,0.11107 -0.20595,0.20053 -0.58919,0.31755 -0.7227,0.22063 -1.26688,0.47509 -1.60742,0.75157 l -0.28393,0.23055 -0.64674,-0.12235 c -0.81478,-0.1542 -0.94518,-0.2376 -0.9976,-0.63819 -0.0225,-0.17197 -0.0573,-0.32965 -0.0776,-0.35038 -0.1065,-0.10918 -1.80194,-0.32565 -2.55407,-0.32604 -0.75882,-3.8e-4 -0.86647,-0.017 -0.98514,-0.15137 -0.13251,-0.15013 -0.13391,-0.1498 -0.25912,0.0613 -0.0692,0.11672 -0.28923,0.31968 -0.48887,0.45099 -0.31291,0.20586 -0.3806,0.29606 -0.4907,0.65426 -0.0703,0.22854 -0.10577,0.29315 -0.17913,0.33661 0,0 -3.00602,-1.06714 -3.01776,-1.07315 z m 9.10125,-0.16609 v -0.26362 h -0.41022 c -0.48322,0 -0.50055,0.10023 -0.0615,0.35654 0.39837,0.23254 0.47185,0.21808 0.47185,-0.093 z m -1.39752,-0.81472 c 0.10538,-0.3379 0.0837,-0.37675 -0.17344,-0.31058 -0.16538,0.0425 -0.19235,0.0898 -0.19235,0.33632 0,0.16086 0.0403,0.302 0.092,0.32138 0.12411,0.0467 0.1688,-0.01 0.27394,-0.34712 z m 0.14851,-0.77505 c 0,-0.0576 -0.0496,-0.10502 -0.11013,-0.10502 -0.0606,0 -0.11013,0.0668 -0.11013,0.14829 0,0.10078 0.0352,0.13439 0.11013,0.10491 0.0605,-0.0238 0.11013,-0.0905 0.11013,-0.14829 z m -2.05958,-2.99273 c 0.33838,-0.45948 0.35107,-0.50157 0.15102,-0.50157 -0.18978,0 -0.3967,-0.32747 -0.34475,-0.54552 0.0222,-0.0935 -9.4e-4,-0.22837 -0.0536,-0.29973 -0.0867,-0.11961 -0.11013,-0.11259 -0.29995,0.0904 -0.19203,0.20548 -0.19944,0.23605 -0.11025,0.45675 0.0634,0.1569 0.0705,0.2532 0.0206,0.28606 -0.0411,0.0273 -0.12865,0.15703 -0.19431,0.28843 -0.0903,0.18082 -0.0973,0.24677 -0.0285,0.27144 0.0644,0.0232 0.05,0.0794 -0.0492,0.19417 l -0.13997,0.16167 h 0.37638 c 0.36886,0 0.38226,-0.008 0.67262,-0.40228 z m -1.02461,-0.61961 c 0.0475,-0.14777 0.0709,-0.28479 0.0516,-0.30448 -0.0191,-0.0198 -0.15477,0.0227 -0.30122,0.0944 -0.19277,0.0941 -0.26624,0.17828 -0.26624,0.30451 0,0.14247 0.0393,0.17434 0.21473,0.17434 0.18099,0 0.22826,-0.0422 0.30119,-0.26866 z" id="path27310" style="fill:currentColor;stroke-width:0.0743901"></path>
+<path d="m 505.79891,322.17311 1.50998,-0.47209 2.27187,1.24153 2.77759,-1.39432 -0.11588,4.68178 -6.48632,2.03864 z" id="path6595" style="opacity:1;fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:0.78387;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"></path>
+<path d="m 505.60794,320.6296 2.09833,1.05226 -0.16128,0.64222 -1.97224,1.04733 z" id="path6595-5" style="fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:0.334543;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"></path>
+<path d="m 511.93,316.1169 0.26491,-2.25864 -0.26611,-2.01128 4.67473,2.08915 -3.60108,2.04821 z" id="path6595-5-11" style="fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:0.12425;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"></path>
+<path d="m 493.30942,314.35574 5.17213,-2.54963 10e-4,3.67632 -0.87534,0.93542 z" id="path6595-5-11-2" style="fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:0.419902;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"></path>
+<path d="m 504.55423,324.1588 -2.77053,-1.29942 -0.91891,-0.17157 3.74932,-2.02257 z" id="path6595-5-1" style="fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:0.338161;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"></path>
+<path d="m 497.25353,316.33121 7.68292,3.15111 -4.28738,2.25012 -7.6829,-3.4702 z" id="path26550" style="opacity:1;fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:0.109917;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"></path>
+<path d="m 512.89019,315.90962 -7.6712,3.60132 4.40381,2.01516 7.6404,-3.61538 z" id="path27292" style="opacity:1;fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:0.113415;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"></path>
+<path d="m 511.17166,318.88382 -1.26988,-0.79909 2.07963,-1.99037 1.41715,1.10808 z" id="path6595-5-11-6" style="fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:0.1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"></path>
+<path d="m 498.11898,318.08307 -1.16991,-1.24893 1.42985,-1.0407 0.91732,1.70788 z" id="path6595-5-11-6-4" style="fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:0.1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"></path>
+</g>
+</svg>
+<span class="md-ellipsis">
+    GPKG Time Series
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 <svg id="svg3277" version="1.1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
@@ -348,9 +378,38 @@
     
   </span>
 </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#loading">9.1 
+<span class="md-ellipsis">
+      Loading
+    </span>
+</a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="bc-tables-check/">
+<a class="md-nav__link" href="#styling">9.2 
+<span class="md-ellipsis">
+      Styling
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#plotting">9.3 
+<span class="md-ellipsis">
+      Plotting
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../bc-tables-check/">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m0 4v4h6V8zm8 0v4h6V8zm-8 6v4h6v-4zm8 0v4h6v-4z"></path></svg>
 <span class="md-ellipsis">
     BC Tables Check
@@ -359,7 +418,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="hydraulic-tables-check/">
+<a class="md-nav__link" href="../hydraulic-tables-check/">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg id="dam" version="1.1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
@@ -373,7 +432,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="sms-dat/">
+<a class="md-nav__link" href="../sms-dat/">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg data-name="Layer 1" fill="currentColor" id="Layer_1" version="1.1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
@@ -389,7 +448,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="tuflow-catch-json/">
+<a class="md-nav__link" href="../tuflow-catch-json/">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg id="Layer_1" version="1.1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
 <defs id="defs1"></defs>
@@ -402,7 +461,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="flood-modeller/">
+<a class="md-nav__link" href="../flood-modeller/">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 <svg id="svg1" inkscape:export-filename="flood_modeller.svg" inkscape:export-xdpi="96" inkscape:export-ydpi="96" version="1.1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg">
@@ -423,7 +482,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="tuflow-cross-sections/">
+<a class="md-nav__link" href="../tuflow-cross-sections/">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 <svg id="svg16223" version="1.1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
@@ -441,7 +500,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="fv-tide-boundary/">
+<a class="md-nav__link" href="../fv-tide-boundary/">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16.5 21c-3 0-4.19-4.24-5.45-8.72C10.14 9.04 9 5 7.5 5 4.11 5 4 11.93 4 12H2c0-.37.06-9 5.5-9 3 0 4.21 4.25 5.47 8.74C13.83 14.8 15 19 16.5 19c3.44 0 3.53-6.93 3.53-7h2c0 .37-.06 9-5.53 9"></path></svg>
 <span class="md-ellipsis">
     TUFLOW FV Tide Boundary
@@ -450,7 +509,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="plot-window/">
+<a class="md-nav__link" href="../plot-window/">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 <svg id="svg5" version="1.1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
@@ -466,7 +525,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="settings/">
+<a class="md-nav__link" href="../settings/">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg id="svg1" version="1.1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg">
@@ -495,7 +554,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="troubleshooting/">
+<a class="md-nav__link" href="../troubleshooting/">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg fill="currentColor" id="svg1" version="1.1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg">
@@ -520,7 +579,7 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="roadmap/">
+<a class="md-nav__link" href="../roadmap/">
 <span class="md-ellipsis">
     Roadmap
     
@@ -536,27 +595,88 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#loading">9.1 
+<span class="md-ellipsis">
+      Loading
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#styling">9.2 
+<span class="md-ellipsis">
+      Styling
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#plotting">9.3 
+<span class="md-ellipsis">
+      Plotting
+    </span>
+</a>
+</li>
+</ul>
 </nav>
 </div>
 </div>
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="welcome-to-the-tuflow-viewer-documentation"><span class="enumerate-headings-plugin enumerate-heading-plugin">1.</span> <strong>Welcome to the TUFLOW Viewer Documentation!</strong><a class="headerlink" href="#welcome-to-the-tuflow-viewer-documentation" title="Permanent link">¶</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This documentation is largely complete, however it is still currently considered a work in progress and may contain incomplete information and can change without notice.</p>
-</div>
-<p>This documentation explains the updated <span class="guilabeltuflow">TUFLOW Viewer</span> tool. It is included as part of the <code>2026.0.0</code> QGIS TUFLOW plugin release. </p>
-<p>The following pages show how to get started, use features such as opening and plotting TUFLOW results, and outline the road map for future developments.</p>
-<p><a class="md-button md-button--primary" href="installation/">Getting Started</a>
- 
-<a class="md-button md-button--primary" href="xmdf/">User Guide</a>
- 
-<a class="md-button md-button--primary" href="roadmap/">Roadmap</a></p>
-<video autoplay="" loop="" muted="" playsinline="" width="1200">
-<source src="./assets/videos/front-page-video.mp4" type="video/mp4"/>
+<h1><span class="enumerate-headings-plugin enumerate-heading-plugin">9.</span> GPKG Time Series</h1>
+<h2 id="loading"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.1</span> Loading<a class="headerlink" href="#loading" title="Permanent link">¶</a></h2>
+<p>GPKG time series result files can be loaded by dragging and dropping the <code>.gpkg</code> file into the <span class="guilabelqgis">QGIS Map Canvas</span> from a file explorer or from the <span class="guilabelqgis">Browser Panel</span>. <span class="guilabeltuflow">TUFLOW Viewer</span> will automatically load the GIS layers into the workspace. The GIS layers are directly tied to the GPKG time series result, and the result can be closed by removing the relevant GIS layers from the <span class="guilabelqgis">QGIS</span> project.</p>
+<p><em>Note:</em> GPKG time series results will also be loaded via the <a href="../tpc/">TPC</a> file. However, it is also possible to load GPKG time series results independently of the TPC file, which is what the above instructions refer to.</p>
+<figure>
+<video autoplay="" controls="" loop="" muted="" playsinline="" preload="auto" style="max-width: 600px; height: auto;">
+<source src="../assets/videos/gpkg_ts_load_example.mp4" type="video/mp4"/>
 </video>
+</figure>
+<h2 id="styling"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2</span> Styling<a class="headerlink" href="#styling" title="Permanent link">¶</a></h2>
+<p>The styling defaults to using a temporally varying style, controlled by flow for lines and level for points (if those result types exist). The default styling uses a colour ramp to show the variation in results, updating as the time step changes. This can be changed to use line thickness rather than colour by changing the "Method" from "Color" to "Size" in the <span class="guilabelqgis">Styling Panel</span>.</p>
+<figure>
+<video autoplay="" controls="" loop="" muted="" playsinline="" preload="auto" style="max-width: 600px; height: auto;">
+<source src="../assets/videos/gpkg_ts_styling_example.mp4" type="video/mp4"/>
+</video>
+<figcaption>Example: Changing the styling to use "Size"</figcaption>
+</figure>
+<figure>
+<video autoplay="" controls="" loop="" muted="" playsinline="" preload="auto" style="max-width: 600px; height: auto;">
+<source src="../assets/videos/gpkg_ts_styling_advanced_example.mp4" type="video/mp4"/>
+</video>
+<figcaption>Example: Following on from the above example, adapting the styling to use a red colour and change the arrow direction if the flow value is negative</figcaption>
+</figure>
+<p>The styling can also be changed by right-clicking the relevant layer in the <span class="guilabelqgis">Layers Panel</span> and selecting "TUFLOW" and selecting the desired style. The options will be styling temporally using a different result type, or styling using a static style ("Shape" for EPA-SWMM results or "Type" for ESTRY results).</p>
+<figure>
+<img alt="" src="../assets/images/gpkg_ts_styling_options.png" width="400">
+</img></figure>
+<h2 id="plotting"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.3</span> Plotting<a class="headerlink" href="#plotting" title="Permanent link">¶</a></h2>
+<p>The GPKG time series result format is supported in the following plot types:</p>
+<ul>
+<li><span class="guilabeltuflow"><img alt="" src="../assets/icons/time_series.svg#only-light" width="16"><img alt="" src="../assets/icons/time_series-night-mapping.svg#only-dark" width="16"/> Time Series Plot</img></span></li>
+<li><span class="guilabeltuflow"><img alt="" src="../assets/icons/cross_section.svg#only-light" width="16"/><img alt="" src="../assets/icons/cross_section-night-mapping.svg#only-dark" width="16"/> Section Plot</span><sup>*</sup></li>
+</ul>
+<p><sup>*</sup><em>Only 1D and SWMM results are supported in the Section Plot.</em></p>
+<p>The GPKG time series result only supports plotting using the <img alt="" src="../assets/icons/mActionSelectRectangle.svg" width="20"/> selection tool. See the <a href="../plot-window/">Plot Window documentation</a> for more information on plotting.</p>
+<p>Within the <span class="guilabeltuflow"><img alt="" src="../assets/icons/cross_section.svg#only-light" width="16"/><img alt="" src="../assets/icons/cross_section-night-mapping.svg#only-dark" width="16"/> Section Plot</span>, the generated long sections can be limited to a section of channels by selecting an upstream and downstream channel. It is also possible to select more than two channels, as long as one of the selected channels is downstream of all the other selected channels (this will be treated as multiple branches).</p>
+<figure>
+<video autoplay="" controls="" loop="" muted="" playsinline="" preload="auto" style="max-width: 600px; height: auto;">
+<source src="../assets/videos/gpkg_ts_time_series_example.mp4" type="video/mp4"/>
+</video>
+<figcaption>Example: Plotting the flow time series through pipes from GPKG time series results.</figcaption>
+</figure>
+<figure>
+<video autoplay="" controls="" loop="" muted="" playsinline="" preload="auto" style="max-width: 600px; height: auto;">
+<source src="../assets/videos/gpkg_ts_section_example.mp4" type="video/mp4"/>
+</video>
+<figcaption>Example: Plotting a pipe long section from GPKG time series results.</figcaption>
+</figure>
+<p><em>Note:</em> Selected channels (or PO/RL features) are linked to a specific time step. If the time step changes, the selection may disappear in the <span class="guilabelqgis">Map Canvas</span> but it will still be active in <span class="guilabeltuflow">TUFLOW Viewer</span>.</p>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
@@ -568,13 +688,26 @@
 </main>
 <footer class="md-footer">
 <nav aria-label="Footer" class="md-footer__inner md-grid">
-<a aria-label="Next: Installation" class="md-footer__link md-footer__link--next" href="installation/">
+<a aria-label="Previous: NetCDF Grid" class="md-footer__link md-footer__link--prev" href="../netcdf-grid/">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</div>
+<div class="md-footer__title">
+<span class="md-footer__direction">
+                Previous
+              </span>
+<div class="md-ellipsis">
+                NetCDF Grid
+              </div>
+</div>
+</a>
+<a aria-label="Next: BC Tables Check" class="md-footer__link md-footer__link--next" href="../bc-tables-check/">
 <div class="md-footer__title">
 <span class="md-footer__direction">
                 Next
               </span>
 <div class="md-ellipsis">
-                Installation
+                BC Tables Check
               </div>
 </div>
 <div class="md-footer__button md-icon">
@@ -597,7 +730,7 @@
 <div class="md-dialog__inner md-typeset"></div>
 </div>
 <div class="md-progress" data-md-component="progress" role="progressbar"></div>
-<script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer", "navigation.instant.progress", "navigation.instant.prefetch", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.expand", "navigation.indexes", "toc.expand", "navigation.top", "search.highlight"], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "2026.0"}</script>
-<script src="assets/javascripts/bundle.f55a23d4.min.js"></script>
+<script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "navigation.instant.progress", "navigation.instant.prefetch", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.expand", "navigation.indexes", "toc.expand", "navigation.top", "search.highlight"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "2026.0"}</script>
+<script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
 </body>
 </html>
