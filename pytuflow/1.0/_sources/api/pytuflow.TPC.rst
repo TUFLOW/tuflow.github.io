@@ -49,7 +49,6 @@
       ~TPC.node_count
       ~TPC.channel_count
       ~TPC.name
-      ~TPC.has_reference_time
       ~TPC.reference_time
       ~TPC.po_objs
       ~TPC.rl_objs

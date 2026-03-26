@@ -18,17 +18,11 @@
       :nosignatures:
    
       ~NCMesh.curtain
-      ~NCMesh.data_point
       ~NCMesh.data_types
-      ~NCMesh.maximum
-      ~NCMesh.minimum
       ~NCMesh.profile
       ~NCMesh.section
-      ~NCMesh.surface
       ~NCMesh.time_series
       ~NCMesh.times
-      ~NCMesh.to_alembic
-      ~NCMesh.to_gltf
    
    
 
@@ -43,9 +37,7 @@
       ~NCMesh.DOMAIN_TYPES
       ~NCMesh.GEOMETRY_TYPES
       ~NCMesh.ID_COLUMNS
-      ~NCMesh.spherical
       ~NCMesh.name
-      ~NCMesh.has_reference_time
       ~NCMesh.reference_time
    
    

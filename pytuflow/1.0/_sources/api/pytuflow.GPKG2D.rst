@@ -44,7 +44,6 @@
       ~GPKG2D.units
       ~GPKG2D.format_version
       ~GPKG2D.name
-      ~GPKG2D.has_reference_time
       ~GPKG2D.reference_time
       ~GPKG2D.po_objs
       ~GPKG2D.rl_objs

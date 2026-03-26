@@ -18,17 +18,11 @@
       :nosignatures:
    
       ~XMDF.curtain
-      ~XMDF.data_point
       ~XMDF.data_types
-      ~XMDF.maximum
-      ~XMDF.minimum
       ~XMDF.profile
       ~XMDF.section
-      ~XMDF.surface
       ~XMDF.time_series
       ~XMDF.times
-      ~XMDF.to_alembic
-      ~XMDF.to_gltf
    
    
 
@@ -43,9 +37,7 @@
       ~XMDF.DOMAIN_TYPES
       ~XMDF.GEOMETRY_TYPES
       ~XMDF.ID_COLUMNS
-      ~XMDF.spherical
       ~XMDF.name
-      ~XMDF.has_reference_time
       ~XMDF.reference_time
    
    

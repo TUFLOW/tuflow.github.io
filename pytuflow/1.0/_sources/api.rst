@@ -88,8 +88,6 @@ This page gives an overview of the public modules, classes, and functions within
 
    XMDF
    TPC
-   Grid
-   GridMesh
    NCGrid
    NCMesh
    CATCHJson
@@ -103,7 +101,6 @@ This page gives an overview of the public modules, classes, and functions within
    HydTablesCheck
    BCTablesCheck
    CrossSections
-   DATCrossSections
 
 .. rubric:: Utilities
 
@@ -122,7 +119,6 @@ This page gives an overview of the public modules, classes, and functions within
    :nosignatures:
    :template: custom-class-template.rst
 
-   Scope
    TuflowBinaries
    results.ResultTypeError
 

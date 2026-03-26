@@ -44,7 +44,6 @@
       ~BCTablesCheck.provider
       ~BCTablesCheck.objs
       ~BCTablesCheck.name
-      ~BCTablesCheck.has_reference_time
       ~BCTablesCheck.reference_time
    
    

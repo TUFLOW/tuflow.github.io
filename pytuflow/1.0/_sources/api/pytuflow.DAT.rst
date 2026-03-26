@@ -18,17 +18,11 @@
       :nosignatures:
    
       ~DAT.curtain
-      ~DAT.data_point
       ~DAT.data_types
-      ~DAT.maximum
-      ~DAT.minimum
       ~DAT.profile
       ~DAT.section
-      ~DAT.surface
       ~DAT.time_series
       ~DAT.times
-      ~DAT.to_alembic
-      ~DAT.to_gltf
    
    
 
@@ -43,9 +37,7 @@
       ~DAT.DOMAIN_TYPES
       ~DAT.GEOMETRY_TYPES
       ~DAT.ID_COLUMNS
-      ~DAT.spherical
       ~DAT.name
-      ~DAT.has_reference_time
       ~DAT.reference_time
    
    

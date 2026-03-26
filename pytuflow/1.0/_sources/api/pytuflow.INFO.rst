@@ -45,7 +45,6 @@
       ~INFO.node_count
       ~INFO.channel_count
       ~INFO.name
-      ~INFO.has_reference_time
       ~INFO.reference_time
    
    
