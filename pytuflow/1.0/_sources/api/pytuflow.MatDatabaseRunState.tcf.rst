@@ -1,4 +1,4 @@
-﻿pytuflow.MatDatabaseRunState.tcf
+pytuflow.MatDatabaseRunState.tcf
 ================================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.TCFRunState.output\_folder\_1d
+pytuflow.TCFRunState.output\_folder\_1d
 =======================================
 
 .. currentmodule:: pytuflow

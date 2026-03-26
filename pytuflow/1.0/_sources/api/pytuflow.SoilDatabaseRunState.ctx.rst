@@ -1,4 +1,4 @@
-﻿pytuflow.SoilDatabaseRunState.ctx
+pytuflow.SoilDatabaseRunState.ctx
 =================================
 
 .. currentmodule:: pytuflow

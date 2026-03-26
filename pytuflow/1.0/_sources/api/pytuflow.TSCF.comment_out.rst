@@ -1,4 +1,4 @@
-﻿pytuflow.TSCF.comment\_out
+pytuflow.TSCF.comment\_out
 ==========================
 
 .. currentmodule:: pytuflow

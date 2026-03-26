@@ -1,4 +1,4 @@
-﻿pytuflow.SoilDatabase.record\_change
+pytuflow.SoilDatabase.record\_change
 ====================================
 
 .. currentmodule:: pytuflow

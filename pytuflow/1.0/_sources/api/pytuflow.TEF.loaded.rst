@@ -1,4 +1,4 @@
-﻿pytuflow.TEF.loaded
+pytuflow.TEF.loaded
 ===================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.QCF.parent
+pytuflow.QCF.parent
 ===================
 
 .. currentmodule:: pytuflow

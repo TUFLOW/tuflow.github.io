@@ -1,4 +1,4 @@
-﻿pytuflow.TinInput.comment
+pytuflow.TinInput.comment
 =========================
 
 .. currentmodule:: pytuflow

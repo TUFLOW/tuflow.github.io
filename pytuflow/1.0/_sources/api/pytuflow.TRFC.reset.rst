@@ -1,4 +1,4 @@
-﻿pytuflow.TRFC.reset
+pytuflow.TRFC.reset
 ===================
 
 .. currentmodule:: pytuflow

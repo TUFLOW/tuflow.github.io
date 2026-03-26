@@ -1,4 +1,4 @@
-﻿pytuflow.TGC.parent
+pytuflow.TGC.parent
 ===================
 
 .. currentmodule:: pytuflow

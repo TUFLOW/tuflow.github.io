@@ -1,4 +1,4 @@
-﻿pytuflow.TCF.config
+pytuflow.TCF.config
 ===================
 
 .. currentmodule:: pytuflow

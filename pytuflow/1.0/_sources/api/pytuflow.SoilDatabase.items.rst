@@ -1,4 +1,4 @@
-﻿pytuflow.SoilDatabase.items
+pytuflow.SoilDatabase.items
 ===========================
 
 .. currentmodule:: pytuflow

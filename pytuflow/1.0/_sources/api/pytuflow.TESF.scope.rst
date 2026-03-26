@@ -1,4 +1,4 @@
-﻿pytuflow.TESF.scope
+pytuflow.TESF.scope
 ===================
 
 .. currentmodule:: pytuflow

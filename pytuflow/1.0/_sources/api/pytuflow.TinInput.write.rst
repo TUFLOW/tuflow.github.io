@@ -1,4 +1,4 @@
-﻿pytuflow.TinInput.write
+pytuflow.TinInput.write
 =======================
 
 .. currentmodule:: pytuflow

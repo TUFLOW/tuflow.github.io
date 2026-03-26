@@ -1,4 +1,4 @@
-﻿pytuflow.QCF.write
+pytuflow.QCF.write
 ==================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.SettingInput.uuid
+pytuflow.SettingInput.uuid
 ==========================
 
 .. currentmodule:: pytuflow

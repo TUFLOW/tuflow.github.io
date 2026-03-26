@@ -1,4 +1,4 @@
-﻿pytuflow.RainfallDatabase.loaded
+pytuflow.RainfallDatabase.loaded
 ================================
 
 .. currentmodule:: pytuflow

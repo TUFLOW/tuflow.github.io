@@ -1,4 +1,4 @@
-﻿pytuflow.QCF.fpath
+pytuflow.QCF.fpath
 ==================
 
 .. currentmodule:: pytuflow

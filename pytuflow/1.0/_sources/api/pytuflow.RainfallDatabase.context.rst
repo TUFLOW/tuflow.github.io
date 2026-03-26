@@ -1,4 +1,4 @@
-﻿pytuflow.RainfallDatabase.context
+pytuflow.RainfallDatabase.context
 =================================
 
 .. currentmodule:: pytuflow

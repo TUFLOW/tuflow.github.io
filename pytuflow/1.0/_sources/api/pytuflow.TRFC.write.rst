@@ -1,4 +1,4 @@
-﻿pytuflow.TRFC.write
+pytuflow.TRFC.write
 ===================
 
 .. currentmodule:: pytuflow

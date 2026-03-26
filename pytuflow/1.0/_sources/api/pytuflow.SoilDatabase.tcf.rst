@@ -1,4 +1,4 @@
-﻿pytuflow.SoilDatabase.tcf
+pytuflow.SoilDatabase.tcf
 =========================
 
 .. currentmodule:: pytuflow

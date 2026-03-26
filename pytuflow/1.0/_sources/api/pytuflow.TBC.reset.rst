@@ -1,4 +1,4 @@
-﻿pytuflow.TBC.reset
+pytuflow.TBC.reset
 ==================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.TCFRunState.loaded
+pytuflow.TCFRunState.loaded
 ===========================
 
 .. currentmodule:: pytuflow

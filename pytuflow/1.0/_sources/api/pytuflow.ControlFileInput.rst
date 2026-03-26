@@ -40,6 +40,7 @@
       ~ControlFileInput.files
       ~ControlFileInput.has_missing_files
       ~ControlFileInput.lhs
+      ~ControlFileInput.line_number
       ~ControlFileInput.rhs
       ~ControlFileInput.scope
       ~ControlFileInput.value
@@ -48,6 +49,7 @@
       ~ControlFileInput.cf
       ~ControlFileInput.uuid
       ~ControlFileInput.trd
+      ~ControlFileInput.trd_input
       ~ControlFileInput.part_count
    
    

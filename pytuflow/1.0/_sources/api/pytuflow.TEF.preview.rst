@@ -1,4 +1,4 @@
-﻿pytuflow.TEF.preview
+pytuflow.TEF.preview
 ====================
 
 .. currentmodule:: pytuflow

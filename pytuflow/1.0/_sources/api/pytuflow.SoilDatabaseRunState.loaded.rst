@@ -1,4 +1,4 @@
-﻿pytuflow.SoilDatabaseRunState.loaded
+pytuflow.SoilDatabaseRunState.loaded
 ====================================
 
 .. currentmodule:: pytuflow

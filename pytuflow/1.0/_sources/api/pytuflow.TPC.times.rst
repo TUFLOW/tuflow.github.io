@@ -1,4 +1,4 @@
-﻿pytuflow.TPC.times
+pytuflow.TPC.times
 ==================
 
 .. currentmodule:: pytuflow

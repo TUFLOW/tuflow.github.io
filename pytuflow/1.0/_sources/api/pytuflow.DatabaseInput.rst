@@ -40,6 +40,7 @@
       ~DatabaseInput.files
       ~DatabaseInput.has_missing_files
       ~DatabaseInput.lhs
+      ~DatabaseInput.line_number
       ~DatabaseInput.rhs
       ~DatabaseInput.scope
       ~DatabaseInput.value
@@ -48,6 +49,7 @@
       ~DatabaseInput.cf
       ~DatabaseInput.uuid
       ~DatabaseInput.trd
+      ~DatabaseInput.trd_input
       ~DatabaseInput.part_count
    
    

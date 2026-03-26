@@ -1,4 +1,4 @@
-﻿pytuflow.TRFC.remove\_input
+pytuflow.TRFC.remove\_input
 ===========================
 
 .. currentmodule:: pytuflow

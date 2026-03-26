@@ -1,4 +1,4 @@
-﻿pytuflow.TinInput.has\_missing\_files
+pytuflow.TinInput.has\_missing\_files
 =====================================
 
 .. currentmodule:: pytuflow

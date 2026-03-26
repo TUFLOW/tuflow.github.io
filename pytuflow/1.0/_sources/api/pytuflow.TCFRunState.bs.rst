@@ -1,4 +1,4 @@
-﻿pytuflow.TCFRunState.bs
+pytuflow.TCFRunState.bs
 =======================
 
 .. currentmodule:: pytuflow

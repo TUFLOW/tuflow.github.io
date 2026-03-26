@@ -1,4 +1,4 @@
-﻿pytuflow.TGC.tcf
+pytuflow.TGC.tcf
 ================
 
 .. currentmodule:: pytuflow

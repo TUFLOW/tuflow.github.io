@@ -1,4 +1,4 @@
-﻿pytuflow.RainfallDatabase.altered\_inputs
+pytuflow.RainfallDatabase.altered\_inputs
 =========================================
 
 .. currentmodule:: pytuflow

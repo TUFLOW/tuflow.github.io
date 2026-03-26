@@ -1,4 +1,4 @@
-﻿pytuflow.NCMesh.GEOMETRY\_TYPES
+pytuflow.NCMesh.GEOMETRY\_TYPES
 ===============================
 
 .. currentmodule:: pytuflow

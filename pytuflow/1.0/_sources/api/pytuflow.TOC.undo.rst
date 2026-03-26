@@ -1,4 +1,4 @@
-﻿pytuflow.TOC.undo
+pytuflow.TOC.undo
 =================
 
 .. currentmodule:: pytuflow

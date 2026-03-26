@@ -1,4 +1,4 @@
-﻿pytuflow.TRFC.dirty
+pytuflow.TRFC.dirty
 ===================
 
 .. currentmodule:: pytuflow

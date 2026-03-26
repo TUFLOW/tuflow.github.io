@@ -1,4 +1,4 @@
-﻿pytuflow.TCF.ecf
+pytuflow.TCF.ecf
 ================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.SoilDatabase.loaded
+pytuflow.SoilDatabase.loaded
 ============================
 
 .. currentmodule:: pytuflow

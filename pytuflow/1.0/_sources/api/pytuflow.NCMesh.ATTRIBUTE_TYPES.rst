@@ -1,4 +1,4 @@
-﻿pytuflow.NCMesh.ATTRIBUTE\_TYPES
+pytuflow.NCMesh.ATTRIBUTE\_TYPES
 ================================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.TCF.bc\_dbase
+pytuflow.TCF.bc\_dbase
 ======================
 
 .. currentmodule:: pytuflow

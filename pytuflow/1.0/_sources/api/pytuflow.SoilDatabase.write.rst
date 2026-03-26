@@ -1,4 +1,4 @@
-﻿pytuflow.SoilDatabase.write
+pytuflow.SoilDatabase.write
 ===========================
 
 .. currentmodule:: pytuflow

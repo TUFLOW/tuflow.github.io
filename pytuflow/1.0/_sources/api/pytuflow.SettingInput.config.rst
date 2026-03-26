@@ -1,4 +1,4 @@
-﻿pytuflow.SettingInput.config
+pytuflow.SettingInput.config
 ============================
 
 .. currentmodule:: pytuflow

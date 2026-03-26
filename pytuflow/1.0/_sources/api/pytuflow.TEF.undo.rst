@@ -1,4 +1,4 @@
-﻿pytuflow.TEF.undo
+pytuflow.TEF.undo
 =================
 
 .. currentmodule:: pytuflow

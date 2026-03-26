@@ -1,4 +1,4 @@
-﻿pytuflow.RainfallDatabase.config
+pytuflow.RainfallDatabase.config
 ================================
 
 .. currentmodule:: pytuflow

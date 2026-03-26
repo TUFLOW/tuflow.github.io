@@ -1,4 +1,4 @@
-﻿pytuflow.PitInletDatabase.write
+pytuflow.PitInletDatabase.write
 ===============================
 
 .. currentmodule:: pytuflow

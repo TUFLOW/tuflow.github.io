@@ -1,4 +1,4 @@
-﻿pytuflow.NCGrid.name
+pytuflow.NCGrid.name
 ====================
 
 .. currentmodule:: pytuflow

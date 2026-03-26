@@ -1,4 +1,4 @@
-﻿pytuflow.TEF.fpath
+pytuflow.TEF.fpath
 ==================
 
 .. currentmodule:: pytuflow

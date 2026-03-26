@@ -1,4 +1,4 @@
-﻿pytuflow.TPC.curtain
+pytuflow.TPC.curtain
 ====================
 
 .. currentmodule:: pytuflow

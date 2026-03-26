@@ -1,4 +1,4 @@
-﻿pytuflow.TSCF.parent
+pytuflow.TSCF.parent
 ====================
 
 .. currentmodule:: pytuflow

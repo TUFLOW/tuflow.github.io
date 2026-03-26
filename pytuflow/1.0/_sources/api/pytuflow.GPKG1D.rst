@@ -47,6 +47,7 @@
       ~GPKG1D.node_count
       ~GPKG1D.channel_count
       ~GPKG1D.name
+      ~GPKG1D.has_reference_time
       ~GPKG1D.reference_time
    
    

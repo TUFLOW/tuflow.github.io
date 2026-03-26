@@ -1,4 +1,4 @@
-﻿pytuflow.TSCF.dirty
+pytuflow.TSCF.dirty
 ===================
 
 .. currentmodule:: pytuflow

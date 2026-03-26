@@ -1,4 +1,4 @@
-﻿pytuflow.NCGrid.DOMAIN\_TYPES
+pytuflow.NCGrid.DOMAIN\_TYPES
 =============================
 
 .. currentmodule:: pytuflow

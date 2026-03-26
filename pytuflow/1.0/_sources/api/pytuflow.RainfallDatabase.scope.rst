@@ -1,4 +1,4 @@
-﻿pytuflow.RainfallDatabase.scope
+pytuflow.RainfallDatabase.scope
 ===============================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.TOC.write
+pytuflow.TOC.write
 ==================
 
 .. currentmodule:: pytuflow

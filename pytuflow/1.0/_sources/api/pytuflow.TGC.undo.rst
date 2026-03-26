@@ -1,4 +1,4 @@
-﻿pytuflow.TGC.undo
+pytuflow.TGC.undo
 =================
 
 .. currentmodule:: pytuflow

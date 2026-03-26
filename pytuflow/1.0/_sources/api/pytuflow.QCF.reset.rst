@@ -1,4 +1,4 @@
-﻿pytuflow.QCF.reset
+pytuflow.QCF.reset
 ==================
 
 .. currentmodule:: pytuflow

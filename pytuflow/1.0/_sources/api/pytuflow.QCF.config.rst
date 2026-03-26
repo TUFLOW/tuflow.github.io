@@ -1,4 +1,4 @@
-﻿pytuflow.QCF.config
+pytuflow.QCF.config
 ===================
 
 .. currentmodule:: pytuflow

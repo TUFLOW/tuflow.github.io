@@ -1,4 +1,4 @@
-﻿pytuflow.SettingInput.rhs
+pytuflow.SettingInput.rhs
 =========================
 
 .. currentmodule:: pytuflow

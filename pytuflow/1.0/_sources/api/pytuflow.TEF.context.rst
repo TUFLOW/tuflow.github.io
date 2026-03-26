@@ -1,4 +1,4 @@
-﻿pytuflow.TEF.context
+pytuflow.TEF.context
 ====================
 
 .. currentmodule:: pytuflow

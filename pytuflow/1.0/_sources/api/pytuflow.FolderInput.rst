@@ -40,6 +40,7 @@
       ~FolderInput.files
       ~FolderInput.has_missing_files
       ~FolderInput.lhs
+      ~FolderInput.line_number
       ~FolderInput.rhs
       ~FolderInput.scope
       ~FolderInput.value
@@ -48,6 +49,7 @@
       ~FolderInput.cf
       ~FolderInput.uuid
       ~FolderInput.trd
+      ~FolderInput.trd_input
       ~FolderInput.part_count
    
    

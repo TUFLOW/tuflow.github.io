@@ -1,4 +1,4 @@
-﻿pytuflow.TCFRunState.output\_name
+pytuflow.TCFRunState.output\_name
 =================================
 
 .. currentmodule:: pytuflow

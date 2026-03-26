@@ -1,4 +1,4 @@
-﻿pytuflow.TBC.input
+pytuflow.TBC.input
 ==================
 
 .. currentmodule:: pytuflow

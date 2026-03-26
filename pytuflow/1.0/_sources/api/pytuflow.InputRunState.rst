@@ -37,6 +37,7 @@
       ~InputRunState.files
       ~InputRunState.has_missing_files
       ~InputRunState.lhs
+      ~InputRunState.line_number
       ~InputRunState.rhs
       ~InputRunState.scope
       ~InputRunState.value
@@ -48,5 +49,6 @@
       ~InputRunState.config
       ~InputRunState.part_count
       ~InputRunState.ctx
+      ~InputRunState.trd_input
    
    

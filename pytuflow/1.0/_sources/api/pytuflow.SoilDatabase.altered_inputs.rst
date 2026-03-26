@@ -1,4 +1,4 @@
-﻿pytuflow.SoilDatabase.altered\_inputs
+pytuflow.SoilDatabase.altered\_inputs
 =====================================
 
 .. currentmodule:: pytuflow

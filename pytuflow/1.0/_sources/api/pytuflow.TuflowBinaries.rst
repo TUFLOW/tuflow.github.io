@@ -17,14 +17,19 @@
       :toctree:
       :nosignatures:
    
-      ~TuflowBinaries.check_tuflow_folders
-      ~TuflowBinaries.convert_old_settings
+      ~TuflowBinaries.clear
+      ~TuflowBinaries.count
       ~TuflowBinaries.get
-      ~TuflowBinaries.load_reg_tuflow_folder_cache
-      ~TuflowBinaries.load_reg_tuflow_version_cache
+      ~TuflowBinaries.items
+      ~TuflowBinaries.load_dpkg_tuflow
+      ~TuflowBinaries.load_installed_tuflow_versions
+      ~TuflowBinaries.load_rpm_tuflow
       ~TuflowBinaries.load_tuflow_settings_cache
+      ~TuflowBinaries.load_versions
+      ~TuflowBinaries.package_manager
       ~TuflowBinaries.save_tuflow_settings_cache
       ~TuflowBinaries.tuflow_version_json
+      ~TuflowBinaries.tuflow_version_query
    
    
 
@@ -35,8 +40,8 @@
    .. autosummary::
       :toctree:
    
-      ~TuflowBinaries.reg_version2bin
-      ~TuflowBinaries.folders
       ~TuflowBinaries.version2bin
+      ~TuflowBinaries.user_bin_locations
+      ~TuflowBinaries.user_folders
    
    

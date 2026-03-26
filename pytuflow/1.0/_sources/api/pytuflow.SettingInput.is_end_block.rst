@@ -1,4 +1,4 @@
-﻿pytuflow.SettingInput.is\_end\_block
+pytuflow.SettingInput.is\_end\_block
 ====================================
 
 .. currentmodule:: pytuflow

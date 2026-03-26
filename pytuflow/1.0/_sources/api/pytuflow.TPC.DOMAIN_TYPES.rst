@@ -1,4 +1,4 @@
-﻿pytuflow.TPC.DOMAIN\_TYPES
+pytuflow.TPC.DOMAIN\_TYPES
 ==========================
 
 .. currentmodule:: pytuflow

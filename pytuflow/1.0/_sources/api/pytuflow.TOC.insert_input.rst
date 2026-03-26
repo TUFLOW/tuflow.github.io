@@ -1,4 +1,4 @@
-﻿pytuflow.TOC.insert\_input
+pytuflow.TOC.insert\_input
 ==========================
 
 .. currentmodule:: pytuflow

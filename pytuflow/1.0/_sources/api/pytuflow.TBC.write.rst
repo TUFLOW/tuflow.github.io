@@ -1,4 +1,4 @@
-﻿pytuflow.TBC.write
+pytuflow.TBC.write
 ==================
 
 .. currentmodule:: pytuflow

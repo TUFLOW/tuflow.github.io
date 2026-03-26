@@ -43,6 +43,7 @@
       ~HydTablesCheck.cross_section_count
       ~HydTablesCheck.channel_count
       ~HydTablesCheck.name
+      ~HydTablesCheck.has_reference_time
       ~HydTablesCheck.reference_time
    
    

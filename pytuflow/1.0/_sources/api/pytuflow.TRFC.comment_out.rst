@@ -1,4 +1,4 @@
-﻿pytuflow.TRFC.comment\_out
+pytuflow.TRFC.comment\_out
 ==========================
 
 .. currentmodule:: pytuflow

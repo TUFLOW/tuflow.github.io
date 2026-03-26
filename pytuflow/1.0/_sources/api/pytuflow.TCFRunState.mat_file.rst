@@ -1,4 +1,4 @@
-﻿pytuflow.TCFRunState.mat\_file
+pytuflow.TCFRunState.mat\_file
 ==============================
 
 .. currentmodule:: pytuflow

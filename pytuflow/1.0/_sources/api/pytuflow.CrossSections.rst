@@ -43,6 +43,7 @@
       ~CrossSections.objs
       ~CrossSections.cross_section_count
       ~CrossSections.name
+      ~CrossSections.has_reference_time
       ~CrossSections.reference_time
    
    

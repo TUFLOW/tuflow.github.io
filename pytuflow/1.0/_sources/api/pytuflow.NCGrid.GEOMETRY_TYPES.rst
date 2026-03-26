@@ -1,4 +1,4 @@
-﻿pytuflow.NCGrid.GEOMETRY\_TYPES
+pytuflow.NCGrid.GEOMETRY\_TYPES
 ===============================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.RainfallDatabase.VALUE\_INDEX
+pytuflow.RainfallDatabase.VALUE\_INDEX
 ======================================
 
 .. currentmodule:: pytuflow

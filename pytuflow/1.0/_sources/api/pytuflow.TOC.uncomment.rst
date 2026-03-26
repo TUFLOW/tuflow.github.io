@@ -1,4 +1,4 @@
-﻿pytuflow.TOC.uncomment
+pytuflow.TOC.uncomment
 ======================
 
 .. currentmodule:: pytuflow

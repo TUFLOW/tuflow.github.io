@@ -1,4 +1,4 @@
-﻿pytuflow.XMDF.GEOMETRY\_TYPES
+pytuflow.XMDF.GEOMETRY\_TYPES
 =============================
 
 .. currentmodule:: pytuflow

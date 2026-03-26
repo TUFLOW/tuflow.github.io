@@ -1,4 +1,4 @@
-﻿pytuflow.MatDatabaseRunState.scope
+pytuflow.MatDatabaseRunState.scope
 ==================================
 
 .. currentmodule:: pytuflow

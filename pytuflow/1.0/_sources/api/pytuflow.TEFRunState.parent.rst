@@ -1,4 +1,4 @@
-﻿pytuflow.TEFRunState.parent
+pytuflow.TEFRunState.parent
 ===========================
 
 .. currentmodule:: pytuflow

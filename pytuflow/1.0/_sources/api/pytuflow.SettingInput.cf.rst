@@ -1,4 +1,4 @@
-﻿pytuflow.SettingInput.cf
+pytuflow.SettingInput.cf
 ========================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.PitInletDatabase.loaded
+pytuflow.PitInletDatabase.loaded
 ================================
 
 .. currentmodule:: pytuflow

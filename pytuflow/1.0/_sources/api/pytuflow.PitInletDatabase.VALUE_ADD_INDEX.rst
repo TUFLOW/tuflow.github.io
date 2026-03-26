@@ -1,4 +1,4 @@
-﻿pytuflow.PitInletDatabase.VALUE\_ADD\_INDEX
+pytuflow.PitInletDatabase.VALUE\_ADD\_INDEX
 ===========================================
 
 .. currentmodule:: pytuflow

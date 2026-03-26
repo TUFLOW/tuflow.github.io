@@ -1,4 +1,4 @@
-﻿pytuflow.XMDF.times
+pytuflow.XMDF.times
 ===================
 
 .. currentmodule:: pytuflow

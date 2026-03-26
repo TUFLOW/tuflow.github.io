@@ -1,4 +1,4 @@
-﻿pytuflow.TPC.time\_series
+pytuflow.TPC.time\_series
 =========================
 
 .. currentmodule:: pytuflow

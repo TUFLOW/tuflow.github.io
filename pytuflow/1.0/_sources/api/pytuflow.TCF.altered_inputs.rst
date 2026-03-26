@@ -1,4 +1,4 @@
-﻿pytuflow.TCF.altered\_inputs
+pytuflow.TCF.altered\_inputs
 ============================
 
 .. currentmodule:: pytuflow

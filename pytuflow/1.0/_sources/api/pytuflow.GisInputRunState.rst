@@ -38,6 +38,7 @@
       ~GisInputRunState.geoms
       ~GisInputRunState.has_missing_files
       ~GisInputRunState.lhs
+      ~GisInputRunState.line_number
       ~GisInputRunState.rhs
       ~GisInputRunState.scope
       ~GisInputRunState.value
@@ -50,5 +51,6 @@
       ~GisInputRunState.config
       ~GisInputRunState.part_count
       ~GisInputRunState.ctx
+      ~GisInputRunState.trd_input
    
    

@@ -1,4 +1,4 @@
-﻿pytuflow.TinInput.value
+pytuflow.TinInput.value
 =======================
 
 .. currentmodule:: pytuflow

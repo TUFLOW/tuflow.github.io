@@ -1,4 +1,4 @@
-﻿pytuflow.TEFRunState.scope
+pytuflow.TEFRunState.scope
 ==========================
 
 .. currentmodule:: pytuflow

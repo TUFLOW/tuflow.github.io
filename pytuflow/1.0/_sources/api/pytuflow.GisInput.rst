@@ -43,6 +43,7 @@
       ~GisInput.geoms
       ~GisInput.has_missing_files
       ~GisInput.lhs
+      ~GisInput.line_number
       ~GisInput.rhs
       ~GisInput.scope
       ~GisInput.value
@@ -50,6 +51,7 @@
       ~GisInput.config
       ~GisInput.uuid
       ~GisInput.trd
+      ~GisInput.trd_input
       ~GisInput.part_count
    
    

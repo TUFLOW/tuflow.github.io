@@ -1,4 +1,4 @@
-﻿pytuflow.XMDF.profile
+pytuflow.XMDF.profile
 =====================
 
 .. currentmodule:: pytuflow

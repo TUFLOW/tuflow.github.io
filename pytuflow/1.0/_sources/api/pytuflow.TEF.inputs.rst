@@ -1,4 +1,4 @@
-﻿pytuflow.TEF.inputs
+pytuflow.TEF.inputs
 ===================
 
 .. currentmodule:: pytuflow

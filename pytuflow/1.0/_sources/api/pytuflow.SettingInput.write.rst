@@ -1,4 +1,4 @@
-﻿pytuflow.SettingInput.write
+pytuflow.SettingInput.write
 ===========================
 
 .. currentmodule:: pytuflow

@@ -40,6 +40,7 @@
       ~CommentInput.files
       ~CommentInput.has_missing_files
       ~CommentInput.lhs
+      ~CommentInput.line_number
       ~CommentInput.rhs
       ~CommentInput.scope
       ~CommentInput.value
@@ -48,6 +49,7 @@
       ~CommentInput.cf
       ~CommentInput.uuid
       ~CommentInput.trd
+      ~CommentInput.trd_input
       ~CommentInput.part_count
    
    

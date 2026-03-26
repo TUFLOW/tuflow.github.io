@@ -1,4 +1,4 @@
-﻿pytuflow.SettingInput.part\_count
+pytuflow.SettingInput.part\_count
 =================================
 
 .. currentmodule:: pytuflow

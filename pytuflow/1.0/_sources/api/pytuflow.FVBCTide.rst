@@ -47,6 +47,7 @@
       ~FVBCTide.node_count
       ~FVBCTide.node_string_count
       ~FVBCTide.name
+      ~FVBCTide.has_reference_time
       ~FVBCTide.reference_time
    
    

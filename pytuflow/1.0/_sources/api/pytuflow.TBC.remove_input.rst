@@ -1,4 +1,4 @@
-﻿pytuflow.TBC.remove\_input
+pytuflow.TBC.remove\_input
 ==========================
 
 .. currentmodule:: pytuflow

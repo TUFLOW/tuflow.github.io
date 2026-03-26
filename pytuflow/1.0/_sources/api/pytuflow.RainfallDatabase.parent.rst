@@ -1,4 +1,4 @@
-﻿pytuflow.RainfallDatabase.parent
+pytuflow.RainfallDatabase.parent
 ================================
 
 .. currentmodule:: pytuflow

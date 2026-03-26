@@ -1,4 +1,4 @@
-﻿pytuflow.PitInletDatabase.altered\_inputs
+pytuflow.PitInletDatabase.altered\_inputs
 =========================================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.TOC.config
+pytuflow.TOC.config
 ===================
 
 .. currentmodule:: pytuflow

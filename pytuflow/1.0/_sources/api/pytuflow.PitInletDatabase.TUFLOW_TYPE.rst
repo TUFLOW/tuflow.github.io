@@ -1,4 +1,4 @@
-﻿pytuflow.PitInletDatabase.TUFLOW\_TYPE
+pytuflow.PitInletDatabase.TUFLOW\_TYPE
 ======================================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.TESF.config
+pytuflow.TESF.config
 ====================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.TGC.scope
+pytuflow.TGC.scope
 ==================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.TRFC.tcf
+pytuflow.TRFC.tcf
 =================
 
 .. currentmodule:: pytuflow

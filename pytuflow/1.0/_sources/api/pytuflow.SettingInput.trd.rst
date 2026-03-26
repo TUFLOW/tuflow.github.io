@@ -1,4 +1,4 @@
-﻿pytuflow.SettingInput.trd
+pytuflow.SettingInput.trd
 =========================
 
 .. currentmodule:: pytuflow

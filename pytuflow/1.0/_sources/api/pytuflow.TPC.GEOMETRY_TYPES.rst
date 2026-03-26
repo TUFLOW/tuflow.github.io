@@ -1,4 +1,4 @@
-﻿pytuflow.TPC.GEOMETRY\_TYPES
+pytuflow.TPC.GEOMETRY\_TYPES
 ============================
 
 .. currentmodule:: pytuflow

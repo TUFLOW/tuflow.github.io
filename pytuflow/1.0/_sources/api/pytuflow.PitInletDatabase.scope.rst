@@ -1,4 +1,4 @@
-﻿pytuflow.PitInletDatabase.scope
+pytuflow.PitInletDatabase.scope
 ===============================
 
 .. currentmodule:: pytuflow

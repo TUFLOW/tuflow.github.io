@@ -1,4 +1,4 @@
-﻿pytuflow.TPC.format
+pytuflow.TPC.format
 ===================
 
 .. currentmodule:: pytuflow

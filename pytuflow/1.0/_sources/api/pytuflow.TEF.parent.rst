@@ -1,4 +1,4 @@
-﻿pytuflow.TEF.parent
+pytuflow.TEF.parent
 ===================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.TBC.fpath
+pytuflow.TBC.fpath
 ==================
 
 .. currentmodule:: pytuflow

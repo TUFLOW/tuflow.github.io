@@ -1,4 +1,4 @@
-﻿pytuflow.QCF.preview
+pytuflow.QCF.preview
 ====================
 
 .. currentmodule:: pytuflow

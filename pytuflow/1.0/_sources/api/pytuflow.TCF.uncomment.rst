@@ -1,4 +1,4 @@
-﻿pytuflow.TCF.uncomment
+pytuflow.TCF.uncomment
 ======================
 
 .. currentmodule:: pytuflow

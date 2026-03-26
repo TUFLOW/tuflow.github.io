@@ -1,4 +1,4 @@
-﻿pytuflow.TEFRunState.input
+pytuflow.TEFRunState.input
 ==========================
 
 .. currentmodule:: pytuflow

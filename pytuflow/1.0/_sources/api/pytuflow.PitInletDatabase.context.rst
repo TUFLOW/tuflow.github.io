@@ -1,4 +1,4 @@
-﻿pytuflow.PitInletDatabase.context
+pytuflow.PitInletDatabase.context
 =================================
 
 .. currentmodule:: pytuflow

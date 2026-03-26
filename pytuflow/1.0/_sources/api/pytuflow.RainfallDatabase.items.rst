@@ -1,4 +1,4 @@
-﻿pytuflow.RainfallDatabase.items
+pytuflow.RainfallDatabase.items
 ===============================
 
 .. currentmodule:: pytuflow

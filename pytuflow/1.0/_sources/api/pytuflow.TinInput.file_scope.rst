@@ -1,4 +1,4 @@
-﻿pytuflow.TinInput.file\_scope
+pytuflow.TinInput.file\_scope
 =============================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.TESF.uncomment
+pytuflow.TESF.uncomment
 =======================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.TPC.rl\_line\_count
+pytuflow.TPC.rl\_line\_count
 ============================
 
 .. currentmodule:: pytuflow

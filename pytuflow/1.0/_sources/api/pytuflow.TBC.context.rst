@@ -1,4 +1,4 @@
-﻿pytuflow.TBC.context
+pytuflow.TBC.context
 ====================
 
 .. currentmodule:: pytuflow

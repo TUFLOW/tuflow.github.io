@@ -1,4 +1,4 @@
-﻿pytuflow.NCMesh.curtain
+pytuflow.NCMesh.curtain
 =======================
 
 .. currentmodule:: pytuflow

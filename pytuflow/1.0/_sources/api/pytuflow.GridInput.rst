@@ -40,6 +40,7 @@
       ~GridInput.files
       ~GridInput.has_missing_files
       ~GridInput.lhs
+      ~GridInput.line_number
       ~GridInput.rhs
       ~GridInput.scope
       ~GridInput.value
@@ -48,6 +49,7 @@
       ~GridInput.cf
       ~GridInput.uuid
       ~GridInput.trd
+      ~GridInput.trd_input
       ~GridInput.part_count
    
    

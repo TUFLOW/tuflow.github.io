@@ -1,4 +1,4 @@
-﻿pytuflow.PitInletDatabase.config
+pytuflow.PitInletDatabase.config
 ================================
 
 .. currentmodule:: pytuflow

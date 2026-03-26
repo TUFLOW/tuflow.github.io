@@ -44,6 +44,7 @@
       ~GPKGRL.units
       ~GPKGRL.format_version
       ~GPKGRL.name
+      ~GPKGRL.has_reference_time
       ~GPKGRL.reference_time
       ~GPKGRL.po_objs
       ~GPKGRL.rl_objs

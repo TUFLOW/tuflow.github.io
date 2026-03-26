@@ -1,4 +1,4 @@
-﻿pytuflow.TEF.parse\_event\_file
+pytuflow.TEF.parse\_event\_file
 ===============================
 
 .. currentmodule:: pytuflow

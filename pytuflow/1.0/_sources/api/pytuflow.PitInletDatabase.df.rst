@@ -1,4 +1,4 @@
-﻿pytuflow.PitInletDatabase.df
+pytuflow.PitInletDatabase.df
 ============================
 
 .. currentmodule:: pytuflow

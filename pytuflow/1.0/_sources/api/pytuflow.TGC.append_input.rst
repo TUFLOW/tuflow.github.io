@@ -1,4 +1,4 @@
-﻿pytuflow.TGC.append\_input
+pytuflow.TGC.append\_input
 ==========================
 
 .. currentmodule:: pytuflow

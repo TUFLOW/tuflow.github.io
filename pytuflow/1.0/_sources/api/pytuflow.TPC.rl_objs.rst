@@ -1,4 +1,4 @@
-﻿pytuflow.TPC.rl\_objs
+pytuflow.TPC.rl\_objs
 =====================
 
 .. currentmodule:: pytuflow

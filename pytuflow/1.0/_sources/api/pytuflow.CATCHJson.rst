@@ -18,7 +18,10 @@
       :nosignatures:
    
       ~CATCHJson.curtain
+      ~CATCHJson.data_point
       ~CATCHJson.data_types
+      ~CATCHJson.maximum
+      ~CATCHJson.minimum
       ~CATCHJson.profile
       ~CATCHJson.section
       ~CATCHJson.time_series
@@ -38,6 +41,7 @@
       ~CATCHJson.GEOMETRY_TYPES
       ~CATCHJson.ID_COLUMNS
       ~CATCHJson.name
+      ~CATCHJson.has_reference_time
       ~CATCHJson.reference_time
    
    

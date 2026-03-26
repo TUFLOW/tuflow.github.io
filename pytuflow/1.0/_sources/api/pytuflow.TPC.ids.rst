@@ -1,4 +1,4 @@
-﻿pytuflow.TPC.ids
+pytuflow.TPC.ids
 ================
 
 .. currentmodule:: pytuflow

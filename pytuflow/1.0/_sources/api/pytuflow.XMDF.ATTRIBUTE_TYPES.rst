@@ -1,4 +1,4 @@
-﻿pytuflow.XMDF.ATTRIBUTE\_TYPES
+pytuflow.XMDF.ATTRIBUTE\_TYPES
 ==============================
 
 .. currentmodule:: pytuflow

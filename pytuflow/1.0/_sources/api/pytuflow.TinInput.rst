@@ -40,6 +40,7 @@
       ~TinInput.files
       ~TinInput.has_missing_files
       ~TinInput.lhs
+      ~TinInput.line_number
       ~TinInput.rhs
       ~TinInput.scope
       ~TinInput.value
@@ -48,6 +49,7 @@
       ~TinInput.cf
       ~TinInput.uuid
       ~TinInput.trd
+      ~TinInput.trd_input
       ~TinInput.part_count
    
    

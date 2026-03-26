@@ -1,4 +1,4 @@
-﻿pytuflow.QCF.altered\_inputs
+pytuflow.QCF.altered\_inputs
 ============================
 
 .. currentmodule:: pytuflow

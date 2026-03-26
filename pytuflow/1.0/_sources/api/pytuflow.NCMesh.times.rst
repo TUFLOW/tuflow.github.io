@@ -1,4 +1,4 @@
-﻿pytuflow.NCMesh.times
+pytuflow.NCMesh.times
 =====================
 
 .. currentmodule:: pytuflow

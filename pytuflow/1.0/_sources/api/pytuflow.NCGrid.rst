@@ -17,12 +17,17 @@
       :toctree:
       :nosignatures:
    
-      ~NCGrid.curtain
+      ~NCGrid.close
+      ~NCGrid.data_point
       ~NCGrid.data_types
-      ~NCGrid.profile
+      ~NCGrid.maximum
+      ~NCGrid.minimum
+      ~NCGrid.open_reader
       ~NCGrid.section
+      ~NCGrid.surface
       ~NCGrid.time_series
       ~NCGrid.times
+      ~NCGrid.to_mesh
    
    
 
@@ -37,8 +42,16 @@
       ~NCGrid.DOMAIN_TYPES
       ~NCGrid.GEOMETRY_TYPES
       ~NCGrid.ID_COLUMNS
+      ~NCGrid.dx
+      ~NCGrid.dy
+      ~NCGrid.ncol
+      ~NCGrid.no_data_value
+      ~NCGrid.nrow
+      ~NCGrid.ox
+      ~NCGrid.oy
       ~NCGrid.time_units
       ~NCGrid.name
+      ~NCGrid.has_reference_time
       ~NCGrid.reference_time
    
    

@@ -1,4 +1,4 @@
-﻿pytuflow.TRFC.find\_input
+pytuflow.TRFC.find\_input
 =========================
 
 .. currentmodule:: pytuflow

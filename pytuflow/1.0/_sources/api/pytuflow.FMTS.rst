@@ -47,6 +47,7 @@
       ~FMTS.node_count
       ~FMTS.channel_count
       ~FMTS.name
+      ~FMTS.has_reference_time
       ~FMTS.reference_time
    
    

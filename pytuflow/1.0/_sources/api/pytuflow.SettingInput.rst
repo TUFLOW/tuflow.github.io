@@ -40,6 +40,7 @@
       ~SettingInput.files
       ~SettingInput.has_missing_files
       ~SettingInput.lhs
+      ~SettingInput.line_number
       ~SettingInput.rhs
       ~SettingInput.scope
       ~SettingInput.value
@@ -48,6 +49,7 @@
       ~SettingInput.cf
       ~SettingInput.uuid
       ~SettingInput.trd
+      ~SettingInput.trd_input
       ~SettingInput.part_count
    
    

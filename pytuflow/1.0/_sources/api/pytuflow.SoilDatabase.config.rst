@@ -1,4 +1,4 @@
-﻿pytuflow.SoilDatabase.config
+pytuflow.SoilDatabase.config
 ============================
 
 .. currentmodule:: pytuflow

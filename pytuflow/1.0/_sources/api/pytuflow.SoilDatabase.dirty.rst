@@ -1,4 +1,4 @@
-﻿pytuflow.SoilDatabase.dirty
+pytuflow.SoilDatabase.dirty
 ===========================
 
 .. currentmodule:: pytuflow

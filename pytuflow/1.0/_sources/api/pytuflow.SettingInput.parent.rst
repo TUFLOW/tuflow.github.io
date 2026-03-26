@@ -1,4 +1,4 @@
-﻿pytuflow.SettingInput.parent
+pytuflow.SettingInput.parent
 ============================
 
 .. currentmodule:: pytuflow

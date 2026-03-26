@@ -1,4 +1,4 @@
-﻿pytuflow.TRFC.parent
+pytuflow.TRFC.parent
 ====================
 
 .. currentmodule:: pytuflow

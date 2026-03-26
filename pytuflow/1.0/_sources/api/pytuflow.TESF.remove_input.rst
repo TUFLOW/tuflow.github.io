@@ -1,4 +1,4 @@
-﻿pytuflow.TESF.remove\_input
+pytuflow.TESF.remove\_input
 ===========================
 
 .. currentmodule:: pytuflow

@@ -1,4 +1,4 @@
-﻿pytuflow.TSCF.undo
+pytuflow.TSCF.undo
 ==================
 
 .. currentmodule:: pytuflow

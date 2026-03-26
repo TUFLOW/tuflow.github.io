@@ -1,4 +1,4 @@
-﻿pytuflow.TSCF.append\_input
+pytuflow.TSCF.append\_input
 ===========================
 
 .. currentmodule:: pytuflow

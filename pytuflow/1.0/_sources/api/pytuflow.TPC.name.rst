@@ -1,4 +1,4 @@
-﻿pytuflow.TPC.name
+pytuflow.TPC.name
 =================
 
 .. currentmodule:: pytuflow

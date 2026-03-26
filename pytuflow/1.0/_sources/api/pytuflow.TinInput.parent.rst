@@ -1,4 +1,4 @@
-﻿pytuflow.TinInput.parent
+pytuflow.TinInput.parent
 ========================
 
 .. currentmodule:: pytuflow

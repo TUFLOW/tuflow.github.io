@@ -1,4 +1,4 @@
-﻿pytuflow.SoilDatabaseRunState.scope
+pytuflow.SoilDatabaseRunState.scope
 ===================================
 
 .. currentmodule:: pytuflow

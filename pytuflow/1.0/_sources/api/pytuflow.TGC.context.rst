@@ -1,4 +1,4 @@
-﻿pytuflow.TGC.context
+pytuflow.TGC.context
 ====================
 
 .. currentmodule:: pytuflow

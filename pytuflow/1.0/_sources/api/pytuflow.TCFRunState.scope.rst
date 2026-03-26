@@ -1,4 +1,4 @@
-﻿pytuflow.TCFRunState.scope
+pytuflow.TCFRunState.scope
 ==========================
 
 .. currentmodule:: pytuflow

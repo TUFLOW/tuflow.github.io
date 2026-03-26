@@ -1,4 +1,4 @@
-﻿pytuflow.SoilDatabase.SOURCE\_INDEX
+pytuflow.SoilDatabase.SOURCE\_INDEX
 ===================================
 
 .. currentmodule:: pytuflow
