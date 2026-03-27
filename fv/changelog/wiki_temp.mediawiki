@@ -1,0 +1,82 @@
+== Introduction ==
+This page describes how to install and run TUFLOW FV on Linux using the <code>.rpm</code> and <code>.deb</code> installer packages. It covers the current Linux installation layout, versioned install locations and basic command-line usage.
+
+The installers have currently been tested on Rocky Linux 9 and Ubuntu 22.04. They should also work on other modern Red Hat and Debian distributions, but testing is recommended.
+
+These instructions apply to TUFLOW FV 2026.0.0 and later. For TUFLOW FV versions prior to 2026.0.0 refer to [[Linux_Install_Archive | Linux Install Archive]]. If you would like an <code>.rpm</code> or <code>.deb</code> built for commercial releases prior to 2020 please contact [mailto:support@tuflow.com support@tuflow.com].
+
+== Codemeter Configuration ==
+To license TUFLOW FV on Linux install and configure Codemeter User Runtime Package for Linux (.rpm or .deb options are available) https://www.wibu.com/support/user/user-software.html. 
+
+* If using a hardware based usb dongle (either network or local licenses) please follow the instructions within [[Installing_Wibu_CodeMeter_Linux | Installing Wibu Codemeter Linux]].
+* If using a software lock (either network or local licenses please follow the instructions within [[WIBU_Software_Licence_Linux  |  Wibu Software License Linux]].
+
+== TUFLOW Versioning ==
+TUFLOW FV uses a year.minor.patch versioning convention as follows. 
+
+* The year corresponds to the major version number e.g. 2025.0.0. Major releases are the only releases that will admit the possibility of breaking changes (changing in defaults or features that may change model results between versions). There is one major release per year
+
+* Minor releases contain new features and bug fixes, but no breaking changes and increment the minor version number, e.g. 2025.1.0
+* Patch releases are bug fixes only and increment the patch version number, e.g. 2025.0.1
+
+== RPM Install ==
+<ol>
+<li> Download the <code>.rpm</code> for the specific TUFLOW FV build from https://www.tuflow.com/downloads/#tuflow_fv
+<li> Save the <code>.rpm</code> locally. A common location is the home folder for the current user <code>~/</code>
+<li> Run the preferred installation command. For example, if installing the TUFLOW FV 2026.0.0 release:</li>
+  sudo rpm -ivh ~/tuflowfv-2026.0-2026.0.0-1.x86_64.rpm
+  or 
+  sudo yum install ~/tuflowfv-2026.0-2026.0.0-1.x86_64.rpm
+</ol>
+<ol>
+<li value="4">This installs a version-specific copy of the TUFLOW FV binaries and libraries under <code>/opt/tuflow/&lt;version&gt;/bin</code> and <code>/opt/tuflow/&lt;version&gt;/lib</code>. A launcher script is also installed to <code>/usr/bin</code>, allowing the required version to be run directly from the command line. The launcher script calls the version-specific binary with the required paths and contains commands similar to the following:
+</li>
+  #!/bin/bash
+  export INSTALL_DIR=/opt/tuflow/2026.0
+  export LD_LIBRARY_PATH=$INSTALL_DIR/lib:$LD_LIBRARY_PATH
+  ulimit -s unlimited > /dev/null
+  $INSTALL_DIR/bin/tuflowfv-2026.0 "$@"
+
+Note: The contents of these scripts should not be modified as they are part of the installation setup.
+
+<li>To uninstall run the preferred uninstaller command. For example:</li>
+  sudo rpm -e tuflowfv-2026.0-2026.0.0-1.x86_64
+  or 
+  sudo yum remove tuflowfv-2026.0-2026.0.0-1.x86_64
+ To return a list of previously installed versions and review the correct uninstall version run:
+  rpm -qa | grep tuflowfv
+  or 
+  yum list installed | grep tuflowfv
+</ol>''Note: Major and minor releases are installed with a new directory under <code>/opt/tuflow</code>. For example, TUFLOW FV 2026.0.0 is installed under <code>/opt/tuflow/2026.0</code>. Patch releases overwrite the existing installation that shares the same major and minor release number. For example, TUFLOW FV 2026.0.1 will update 2026.0.0 if present.'' 
+
+== DEB Install ==
+The process for <code>.deb</code> is essentially the same as the <code>.rpm</code> steps 2-5. For steps 3 and 5, the install and uninstall command examples below are for Debian derivatives. For example (assuming TUFLOW FV 2026.0.0, modify for the specific version required):
+
+To install:
+  sudo apt-get install ./tuflowfv-2026.0_2026.0.0-1_amd64.deb
+
+To uninstall:
+  sudo apt remove tuflowfv-2026.0
+If unsure about which versions you have previously installed you can return a list of all the installed versions via:
+  apt list --installed | grep tuflowfv
+''Note: Major and minor releases are installed with a new directory under <code>/opt/tuflow</code>. For example, TUFLOW FV 2026.0.0 is installed under <code>/opt/tuflow/2026.0</code>. Patch releases overwrite the existing installation that shares the same major and minor release number. For example, TUFLOW FV 2026.0.1 will update 2026.0.0 if present.'' 
+
+== Running A Model ==
+For either Linux distribution TUFLOW FV can be run by calling <code>tuflowfv-2026.0</code> (replace with the required version) or by passing it a configuration file name:
+
+tuflowfv-2026.0 my_run.fvc
+
+Model-specific commands such as the <code>export OMP_NUM_THREADS</code> environment variable can either be added via the command line, or in your own custom run script that calls the configuration file name, for example run_model.sh:
+ 
+<nowiki>#</nowiki>!/bin/bash
+export OMP_NUM_THREADS=8
+tuflowfv-2026.0 my_run.fvc
+
+Once saved the script 'run_model.sh' will need to be configured to run as an executable as follows:
+chmod +x run_model.sh
+
+== Linux Install Archive ==
+For TUFLOW FV versions prior to 2026.0.0 refer to [[Linux_Install_Archive | Linux Install Archive]].
+
+== Return To Home Page ==
+Return to [[Main_Page | Wiki Home Page]].
