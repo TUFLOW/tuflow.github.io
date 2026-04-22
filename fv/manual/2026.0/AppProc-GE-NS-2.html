@@ -1381,7 +1381,7 @@ D_{xy} = D_{yx} = \frac{(D_l - D_t) uvh}{u_*}
 <div id="AppProc-GE-NS-FT-VF-VVF-5" class="section level5 hasAnchor" number="13.4.4.1.2">
 <h5><span class="header-section-number">B.4.4.1.2</span> Vertical Viscous Fluxes<a href="AppProc-GE-NS-2.html#AppProc-GE-NS-FT-VF-VVF-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>The vertical viscous fluxes <span class="math inline">\(\mathbf{F}_z^V\)</span> are calculated according to Equations <a href="AppProc-GE-GE-2.html#eq:equ-nslwe-mass-momentum-fluxes">(B.5)</a> (momentum) and <a href="AppProc-GE-SCE-2.html#eq:equ-nslwe-scalar-fluxes">(B.8)</a> (scalars). An unconditionally stable semi-implicit scheme is adopted in the discretization of <span class="math inline">\(\mathbf{F}_z^V\)</span> to prevent timestep restrictions.</p>
-<p>The vertical eddy viscosity, <span class="math inline">\(\nu_t\)</span>, can be directly specified as constant, computed using TUFLOW FV’s turbulence model, or calculated from the simple parametric model formulation including the <span class="citation">Munk &amp; Anderson (<a href="references.html#ref-Munk1948">1948</a>)</span> stability function:</p>
+<p>The vertical eddy viscosity, <span class="math inline">\(\nu_t\)</span>, can be directly specified as constant, computed using TUFLOW FV’s turbulence model or calculated from the simple parametric model formulation including the <span class="citation">Munk &amp; Anderson (<a href="references.html#ref-Munk1948">1948</a>)</span> stability function:</p>
 <p><span class="math display" id="eq:equ-nut0">\[\begin{equation}
 \nu_{t0}=\kappa u_\ast z\left(c_1-c_2\frac{z}{h}\right)
 \tag{B.14}
@@ -1493,7 +1493,7 @@ L^* = \frac{\min(A_i, A_j)}{L_k}
 </div>
 <div id="AppProc-GE-NS-CT-MT2D-4" class="section level4 hasAnchor" number="13.4.5.2">
 <h4><span class="header-section-number">B.4.5.2</span> Model Timestep 2D<a href="AppProc-GE-NS-2.html#AppProc-GE-NS-CT-MT2D-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>In 2D, the variable timestep scheme ensures that the model satisfies each criterion across all cells while maintaining the largest possible stable timestep. The maximum allowable timestep is computed by rearranging Equations <a href="AppProc-GE-NS-2.html#eq:equ-cfl-cond">(B.18)</a>, <a href="AppProc-GE-NS-2.html#eq:equ-cfl-internal-cond">(B.19)</a>, and <a href="AppProc-GE-NS-2.html#eq:equ-peclet-cond">(B.20)</a> with respect to timestep.</p>
+<p>In 2D, the variable timestep scheme ensures that the model satisfies each criterion across all cells while maintaining the largest possible stable timestep. The maximum allowable timestep is computed by rearranging Equations <a href="AppProc-GE-NS-2.html#eq:equ-cfl-cond">(B.18)</a>, <a href="AppProc-GE-NS-2.html#eq:equ-cfl-internal-cond">(B.19)</a> and <a href="AppProc-GE-NS-2.html#eq:equ-peclet-cond">(B.20)</a> with respect to timestep.</p>
 <p><span class="math display" id="eq:equ-cfl-cond-dt">\[\begin{equation}
 \Delta t_c \;\leq\; \frac{L^*}{\left| \mathbf{u}\cdot\mathbf{n} \pm \sqrt{g\,h} \right|}
 \tag{B.22}
@@ -1558,7 +1558,7 @@ Figure B.1: Internal And External Model Timesteps
 </div>
 <div id="AppProc-GE-NS-CT-MT3D-4" class="section level4 hasAnchor" number="13.4.5.3">
 <h4><span class="header-section-number">B.4.5.3</span> Model Timestep 3D<a href="AppProc-GE-NS-2.html#AppProc-GE-NS-CT-MT3D-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>In 3D, the external mode timestep is determined using the same formulation as the 2D HD simulation class Equation <a href="AppProc-GE-NS-2.html#eq:equ-dt-max-external">(B.25)</a>. In evaluating the 3D external model timestep <a href="AppProc-GE-NS-2.html#eq:equ-dt-max-external-3d">(B.31)</a>, the full water depth together with depth-averaged velocity and eddy viscosity are used to compute <span class="math inline">\(\Delta t_c\)</span>, <span class="math inline">\(\Delta t_u\)</span>, and <span class="math inline">\(\Delta t_d\)</span>.</p>
+<p>In 3D, the external mode timestep is determined using the same formulation as the 2D HD simulation class Equation <a href="AppProc-GE-NS-2.html#eq:equ-dt-max-external">(B.25)</a>. In evaluating the 3D external model timestep <a href="AppProc-GE-NS-2.html#eq:equ-dt-max-external-3d">(B.31)</a>, the full water depth together with depth-averaged velocity and eddy viscosity are used to compute <span class="math inline">\(\Delta t_c\)</span>, <span class="math inline">\(\Delta t_u\)</span> and <span class="math inline">\(\Delta t_d\)</span>.</p>
 <p><span class="math display" id="eq:equ-dt-max-external-3d">\[\begin{equation}
 \Delta t_{\max\_external} \;=\; \min\!\left(
 \frac{1}{\tfrac{1}{\Delta t_c(2D)} + \tfrac{1}{\Delta t_d(2D)}},\; \Delta t_u(2D)
@@ -1602,7 +1602,7 @@ Figure B.1: Internal And External Model Timesteps
 <p>This section provides a suggested workflow for selecting initial upper and lower model <tcmd><a href="AppCommands.html#FVCTimestepLimits">Timestep Limits</a></tcmd> for a new model, or existing model that is applying an updated mesh.</p>
 <ol style="list-style-type: decimal">
 <li><strong>Estimate the external mode timestep</strong><br />
-Use Equation <a href="AppProc-GE-NS-2.html#eq:equ-cfl-cond-dt">(B.22)</a> with indicative values of flow velocity <span class="math inline">\(u\)</span> (m/s), water depth <span class="math inline">\(h\)</span> (m), and <span class="math inline">\(L^*\)</span> (m). The shallow water wave celerity will generally control the timestep.</li>
+Use Equation <a href="AppProc-GE-NS-2.html#eq:equ-cfl-cond-dt">(B.22)</a> with indicative values of flow velocity <span class="math inline">\(u\)</span> (m/s), water depth <span class="math inline">\(h\)</span> (m) and <span class="math inline">\(L^*\)</span> (m). The shallow water wave celerity will generally control the timestep.</li>
 </ol>
 <p>Example:</p>
 <ul>
@@ -1748,7 +1748,7 @@ c_b, &amp; w_{10} \geq w_b
 c_{db} = \left( \frac{\kappa}{\ln \left( \frac{30 z&#39;}{k_s} \right)} \right)^2
 \tag{B.44}
 \end{equation}\]</span></p>
-<p>The above relationship assumes a rough-turbulent logarithmic velocity profile in the lowest model layer, where <span class="math inline">\(\kappa\)</span> is von Karman’s constant, <span class="math inline">\(k_s\)</span> is the effective bed roughness length (equivalent Nikuradse roughness), and <span class="math inline">\(z&#39;\)</span> is the height of the bottom cell centroid above the bed.</p>
+<p>The above relationship assumes a rough-turbulent logarithmic velocity profile in the lowest model layer, where <span class="math inline">\(\kappa\)</span> is von Karman’s constant, <span class="math inline">\(k_s\)</span> is the effective bed roughness length (equivalent Nikuradse roughness) and <span class="math inline">\(z&#39;\)</span> is the height of the bottom cell centroid above the bed.</p>
 <p>Instead of specifying <span class="math inline">\(k_s\)</span>, Manning’s <span class="math inline">\(n\)</span> roughness can be specified and is internally converted into an equivalent roughness length:</p>
 <p><span class="math display" id="eq:equ-manning-to-ks">\[\begin{equation}
 k_s = 11 h \exp \left( -\frac{\kappa h^{1/6}}{\sqrt{g} n} \right)

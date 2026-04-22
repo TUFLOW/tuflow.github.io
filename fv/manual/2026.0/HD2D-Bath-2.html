@@ -1326,19 +1326,19 @@ Time varying bathymetry implementation. Can be used to model levee breaches, rud
 </div>
 <div id="HD2D-Bath-SB-3" class="section level3 hasAnchor" number="5.13.3">
 <h3><span class="header-section-number">5.13.3</span> Static Bathymetry<a href="HD2D-Bath-2.html#HD2D-Bath-SB-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>TUFLOW FV supports the assignment of static model bathymetry using a range of input formats, including unstructured mesh files (.2dm), Triangulated Irregular Networks (TINs), Digital Elevation Models (DEMs), and GIS vector layers. These datasets are used to define elevations across the model domain, enforce bathymetric breaklines, and assign elevation values to specified spatial regions.</p>
+<p>TUFLOW FV supports the assignment of static model bathymetry using a range of input formats, including unstructured mesh files (.2dm), Triangulated Irregular Networks (TINs), Digital Elevation Models (DEMs) and GIS vector layers. These datasets are used to define elevations across the model domain, enforce bathymetric breaklines and assign elevation values to specified spatial regions.</p>
 <p>The workflow used to apply bathymetry depends on the mesh type. For structured meshes (Section <a href="HD2D-CM-2.html#HD2D-CM-SM-3">5.12.4</a>), at least one static bathymetry command is required to define bed elevations. For unstructured meshes (Section <a href="HD2D-CM-2.html#HD2D-CM-UM-3">5.12.3</a>) bathymetry is initially provided through the .2dm mesh file. This base .2dm bathymetry can then be optionally updated or replaced using the static bathymetry commands described in the following sections.</p>
 <p>When using unstructured meshes it is generally preferable to disregard the bathymetry stored within the .2dm file and instead define bathymetry directly within the TUFLOW FV control file using external datasets. The reasons for this are as follows.</p>
 <ol style="list-style-type: decimal">
 <li>The .2dm file contains both the mesh topology and a vertex based bathymetry dataset. Because the bathymetry is stored at mesh vertices it is inherently dependent on the mesh geometry. Any modification to the mesh topology requires the bathymetry to be regenerated</li>
-<li>During model initialisation, TUFLOW FV averages vertex elevations from the .2dm file to cell centred bathymetry values. This can lead to smoothing of narrow channels, banks, levees, or other small scale features. For applications with relatively uniform bed levels, such as large lakes or offshore domains, this behaviour may be acceptable and the user can use the .2dm alone to define the bathymetry. For applications requiring accurate representation of fine bathymetric detail it is recommended to use bathymetric update commands</li>
+<li>During model initialisation, TUFLOW FV averages vertex elevations from the .2dm file to cell centred bathymetry values. This can lead to smoothing of narrow channels, banks, levees or other small scale features. For applications with relatively uniform bed levels, such as large lakes or offshore domains, this behaviour may be acceptable and the user can use the .2dm alone to define the bathymetry. For applications requiring accurate representation of fine bathymetric detail it is recommended to use bathymetric update commands</li>
 </ol>
 <p>The recommended workflow to apply model bathymetry is as follows.</p>
 <ol style="list-style-type: decimal">
 <li>The unstructured mesh is read from the .2dm file. The associated bathymetry is loaded by default during this step</li>
 <li>The initial bathymetry from Step 1 is disregarded by applying a global default bathymetry value (Section <a href="HD2D-Bath-2.html#HD2D-Bath-SB-SC-4">5.13.3.2</a>)</li>
 <li>Detailed bathymetric data are assigned using spatially varying datasets such as DEMs (Section <a href="HD2D-Bath-2.html#HD2D-Bath-SB-DRODG-4">5.13.3.3</a>) or TINs (Section <a href="HD2D-Bath-2.html#HD2D-Bath-SB-DROT-4">5.13.3.4</a>). These commands interpolate elevations directly to cell centres and are mesh independent</li>
-<li>The base bathymetry established in the previous step can be locally modified to represent hydraulic controls or design features. For example using breaklines to define channel thalwegs, embankment crests, levees, or other linear structures (Section <a href="HD2D-Bath-2.html#HD2D-Bath-SB-BL-4">5.13.3.5</a>) or to incorporate proposed earthworks, cut and fill operations</li>
+<li>The base bathymetry established in the previous step can be locally modified to represent hydraulic controls or design features. For example using breaklines to define channel thalwegs, embankment crests, levees or other linear structures (Section <a href="HD2D-Bath-2.html#HD2D-Bath-SB-BL-4">5.13.3.5</a>) or to incorporate proposed earthworks, cut and fill operations</li>
 </ol>
 <p>The static bathymetry command implementations listed in Table <a href="HD2D-Bath-2.html#tab:tab-BathymetrySpatial">5.23</a> are described in the sub sections that follow.</p>
 <table>
@@ -1401,7 +1401,7 @@ Optional - CSV file that updates cell centre elevations. Can be assigned using (
 <a href="AppCommands.html#FVCGlobalBedElevationLimits">Global Bed Elevation Limits</a>
 </td>
 <td style="text-align:left;">
-Optional - Sets a spatially constant lower limit (zbmin) and upper limit (zbmax) to the model bathymetry. Model elevations below zbmin will be set to zbmin, and likewise model elevations will be set to zbmax. This command is executed after all other bathymetry commands, and will overwrite any preceeding bathymetry below or above the zbmin or zbmax values (Section <a href="HD2D-Bath-2.html#HD2D-Bath-SB-BEL-4">5.13.3.8</a>).
+Optional - Sets a spatially constant lower limit (zbmin) and upper limit (zbmax) to the model bathymetry. Model elevations below zbmin will be set to zbmin and likewise model elevations will be set to zbmax. This command is executed after all other bathymetry commands and will overwrite any preceeding bathymetry below or above the zbmin or zbmax values (Section <a href="HD2D-Bath-2.html#HD2D-Bath-SB-BEL-4">5.13.3.8</a>).
 </td>
 </tr>
 </tbody>
@@ -1588,8 +1588,8 @@ X, Y, Z
 <div id="HD2D-Bath-TVB-3" class="section level3 hasAnchor" number="5.13.4">
 <h3><span class="header-section-number">5.13.4</span> Time Varying Bathymetry<a href="HD2D-Bath-2.html#HD2D-Bath-TVB-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>TUFLOW FV supports the specification of bathymetry that changes during the simulation using a set of time varying structure commands. These
-allow localised adjustments to bed elevation based on a prescribed time series, model sampled parameters (e.g. flow or level), or a combination
-of digital elevation model (DEM) surfaces and control rules. Common applications include the representation of levee breaches, sandbar migration, or event driven scouring and deposition.</p>
+allow localised adjustments to bed elevation based on a prescribed time series, model sampled parameters (e.g. flow or level) or a combination
+of digital elevation model (DEM) surfaces and control rules. Common applications include the representation of levee breaches, sandbar migration or event driven scouring and deposition.</p>
 <p>Time varying bathymetry is configured using TUFLOW FV’s hydraulic structure block functionality and thus is not repeated here (see Section <a href="HD2D-HS-2.html#HD2D-HS-VB-3">5.17.10</a>).</p>
 </div>
 </div>

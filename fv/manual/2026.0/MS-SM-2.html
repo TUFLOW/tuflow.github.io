@@ -1284,18 +1284,18 @@ div.csl-indent {
 <h3><span class="header-section-number">11.3.1</span> Overview<a href="MS-SM-2.html#MS-SM-Over-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Modelling studies commonly require simulation of multiple events or time periods. Examples include the following cases.</p>
 <ol style="list-style-type: decimal">
-<li>Coastal studies that consider different seasons, climate change conditions, multiple tidal periods, or the duration of individual dredging campaigns.</li>
+<li>Coastal studies that consider different seasons, climate change conditions, multiple tidal periods or the duration of individual dredging campaigns.</li>
 <li>Storm tide studies that evaluate alternative combinations of tropical cyclone tracks and tidal conditions.</li>
-<li>Flood studies that assess annual exceedance probability events, including 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0, and 50.0 percent events, as well as extreme flood conditions.</li>
+<li>Flood studies that assess annual exceedance probability events, including 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0 and 50.0 percent events, as well as extreme flood conditions.</li>
 <li>Water quality studies that investigate multiple scenarios to assess impacts of proposed changes or effectiveness of management interventions.</li>
 </ol>
 <p>To support simulation management and quality control, TUFLOW FV includes three features that may be used individually or in combination.</p>
 <ol style="list-style-type: decimal">
-<li>Model Events provide event management capability to support simulation of multiple event combinations, such as magnitude, duration, temporal pattern, or climate change condition, using a single set of control files rather than creating separate control files for each simulation. See Section <a href="MS-SM-2.html#MS-SM-Even-3">11.3.3</a>.</li>
+<li>Model Events provide event management capability to support simulation of multiple event combinations, such as magnitude, duration, temporal pattern or climate change condition, using a single set of control files rather than creating separate control files for each simulation. See Section <a href="MS-SM-2.html#MS-SM-Even-3">11.3.3</a>.</li>
 <li>Model Scenarios provide a framework for simulation of alternative model configurations, such as proposed bathymetric changes, from a single <code>.fvc</code> control file rather than requiring separate control files for each scenario. See Section <a href="MS-SM-2.html#MS-SM-Scen-3">11.3.4</a>.</li>
 <li>Model Variables enable assignment of a user specified value to a single string variable. See Section <a href="MS-SM-2.html#MS-SM-Vari-3">11.3.5</a>.</li>
 </ol>
-<p>Construction and use of events, scenarios, and variables are described in the following sections, after introduction of the general nomenclature used to define these features.</p>
+<p>Construction and use of events, scenarios and variables are described in the following sections, after introduction of the general nomenclature used to define these features.</p>
 </div>
 <div id="MS-SM-Nome-3" class="section level3 hasAnchor" number="11.3.2">
 <h3><span class="header-section-number">11.3.2</span> Nomenclature<a href="MS-SM-2.html#MS-SM-Nome-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1303,7 +1303,7 @@ div.csl-indent {
 <p>The same control file is executed repeatedly with different event and scenario arguments supplied at run time. These arguments perform defined functions within the <code>.fvc</code> file and are substituted at locations corresponding to the paired tildes in the file name.</p>
 <p>For example, where a model requires simulation of two events, such as an inflow event and a tidal event, together with one scenario, such as an alternative bathymetry setting, the <code>.fvc</code> file name must accommodate three substitutable identifiers using tilde pairs. In this context, the identifiers <code>eX</code> and <code>sX</code> denote event and scenario keywords respectively, where <code>X</code> is a sequential integer.</p>
 <pre><code>Model_~e1~_~e2~_~s1~_001.fvc</code></pre>
-<p>In one configuration, the event and scenario arguments may be defined such that <code>e1</code> is assigned the value <code>Q100</code>, <code>e2</code> is assigned the value <code>HighTide</code>, and <code>s1</code> is assigned the value <code>BASECASE</code>. In this case, the reusable <code>.fvc</code> control file is resolved using these argument values.</p>
+<p>In one configuration, the event and scenario arguments may be defined such that <code>e1</code> is assigned the value <code>Q100</code>, <code>e2</code> is assigned the value <code>HighTide</code> and <code>s1</code> is assigned the value <code>BASECASE</code>. In this case, the reusable <code>.fvc</code> control file is resolved using these argument values.</p>
 <pre><code>Model_Q100_HighTide_BASECASE_001.fvc</code></pre>
 <p>This <code>.fvc</code> control file is not created in this substituted form, as doing so would negate the purpose of using wildcard substitution within a single <code>.fvc</code> file. Output files produced by the simulation are named according to the resolved event and scenario values applied during execution.</p>
 <pre><code>Model_Q100_HighTide_BASECASE_001.nc
@@ -1313,12 +1313,12 @@ Model_Q100_HighTide_BASECASE_001.csv</code></pre>
 <div class="scrollable-block">
 <p><span class="align5"><tcmd>Initial WQ Concentration</tcmd> <teq> == </teq> <tblk>&lt;&lt;DO_HIGH&gt;&gt;</tblk></span></p>
 </div>
-<p>Use of this notation for configuration and execution of events, scenarios, and variables is described in the following sections.</p>
+<p>Use of this notation for configuration and execution of events, scenarios and variables is described in the following sections.</p>
 </div>
 <div id="MS-SM-Even-3" class="section level3 hasAnchor" number="11.3.3">
 <h3><span class="header-section-number">11.3.3</span> Events<a href="MS-SM-2.html#MS-SM-Even-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Event management supports execution of multiple event combinations, such as magnitude, duration, temporal pattern, and climate change condition, using a single set of control files rather than creating separate control files for each simulation.</p>
-<p>For example, a flood study may require simulation of the 1 percent, 2 percent, and 5 percent Annual Exceedance Probability (AEP) events. Each AEP event may require simulation for multiple storm durations, such as 1 hour and 2 hours. Figure <a href="MS-SM-2.html#fig:fig-ExampleTEFF">11.1</a> presents the number of <code>.fvc</code> control files required with and without use of event management.</p>
+<p>Event management supports execution of multiple event combinations, such as magnitude, duration, temporal pattern and climate change condition, using a single set of control files rather than creating separate control files for each simulation.</p>
+<p>For example, a flood study may require simulation of the 1 percent, 2 percent and 5 percent Annual Exceedance Probability (AEP) events. Each AEP event may require simulation for multiple storm durations, such as 1 hour and 2 hours. Figure <a href="MS-SM-2.html#fig:fig-ExampleTEFF">11.1</a> presents the number of <code>.fvc</code> control files required with and without use of event management.</p>
 Commands associated with event management are presented in Table <a href="MS-SM-2.html#tab:tab-Events">11.1</a>.
 <center>
 <div class="figure"><span style="display:block;" id="fig:fig-ExampleTEFF"></span>
@@ -1435,7 +1435,7 @@ Conditional - Required if using event simulation management logic or nested scen
 </div>
 <p>Within the <code>.tef</code> file, event specific commands are defined between the <tcmd><a href="AppCommands.html#FVCDefineEvent">Define Event</a></tcmd> and <tcmd><a href="AppCommands.html#FVCEndDefine">End Define</a></tcmd> commands, which together form an event block. The <tcmd><a href="AppCommands.html#FVCDefineEvent">Define Event</a></tcmd> command specifies the event name and initiates the corresponding event block. Commands within an event block are either applied or ignored at model startup depending on whether the event is activated using the <code>-e</code> run option or the <tcmd><a href="AppCommands.html#FVCModelEvents">Model Events</a></tcmd> command. Options for event execution are described in Section <a href="MS-SM-2.html#SimManagmentRunningEvents-3">11.3.3.2</a>.</p>
 <p>Any TUFLOW FV command may be included within a Define Event block, however event blocks are commonly used to define commands related to model boundary conditions and simulation timing, including start and end times. Global <code>.fvc</code> commands may also be included within the <code>.tef</code> file by placing them outside the Define Event blocks, typically at the beginning of the file.</p>
-<p>The <tcmd><a href="AppCommands.html#FVCBCEventSource">BC Event Source</a></tcmd> command enables runtime text substitution within <code>.fvc</code> files. This functionality allows boundary conditions, include files, or model parameters to be varied through use of a single <code>.fvc</code> file.</p>
+<p>The <tcmd><a href="AppCommands.html#FVCBCEventSource">BC Event Source</a></tcmd> command enables runtime text substitution within <code>.fvc</code> files. This functionality allows boundary conditions, include files or model parameters to be varied through use of a single <code>.fvc</code> file.</p>
 <p>An example of <code>.tef</code> syntax is provided in the following syntax block. The example follows the nomenclature described in Section <a href="MS-SM-2.html#MS-SM-Nome-3">11.3.2</a>, using paired tildes to identify text intended for substitution. These substitutable text identifiers are user defined and are distinct from reserved keywords. For example, <code>aep</code> is user defined, whereas <code>e1</code> represents a reserved keyword.</p>
 <div class="scrollable-block">
 <p><tgrn>! TUFLOW EVENT FILE (.TEF) defines the parameters for the model events</tgrn><br />
@@ -1561,9 +1561,9 @@ for %%a in (%ev1%) do (
 <p>Three examples are presented. Similar examples can be downloaded and run licence-free using the <a href="https://fvwiki.tuflow.com/TUFLOW_FV_Example_Models">TUFLOW FV Example Model Suite</a>.</p>
 <ul>
 <li>Examples 1 and 2 describe an estuary model use case in which a series of simulation years from 2016 to 2018 is executed. Example 1 applies a single event condition to select the simulation year. Example 2 introduces a second event condition to represent climate change allowance selection for inflow and downstream water level conditions.</li>
-<li>Example 3 describes a catchment model that applies three event conditions to execute combinations of rainfall event intensity, duration, and temporal pattern.</li>
+<li>Example 3 describes a catchment model that applies three event conditions to execute combinations of rainfall event intensity, duration and temporal pattern.</li>
 </ul>
-<p>In each example, start time, end time, initial condition, and output directory commands are defined within the event blocks to modify model configuration according to the event being simulated.</p>
+<p>In each example, start time, end time, initial condition and output directory commands are defined within the event blocks to modify model configuration according to the event being simulated.</p>
 <p><strong>Events Example 1 - Single Event Condition</strong></p>
 <p>The .fvc file to be configured with events is named <code>Example_Estuary_001.fvc</code>. This example outlines the updates required to make the .fvc file event compatible.</p>
 <p>Within each BC Block, add BC Event Source wildcards so that the boundary condition selected is a function of the model event.</p>
@@ -1729,7 +1729,7 @@ set OMP_NUM_THREADS=4
 <span class="align5">  <tcmd>BC Header</tcmd> <teq> == </teq> <tblk>Time_hrs, Flow_cumecs_~tpattern~</tblk></span><br />
 <span class="align5"><tcmd>End BC</tcmd></span></p>
 </div>
-<p>Include “~e1~”, “~e2~”, and “~e3~” in the .fvc file name, for example “Nile_~e1~_~e2~_~e3~_001.fvc”, and the following line to the bottom of the .fvc file.</p>
+<p>Include “~e1~”, “~e2~” and “~e3~” in the .fvc file name, for example “Nile_~e1~_~e2~_~e3~_001.fvc”, and the following line to the bottom of the .fvc file.</p>
 <div class="scrollable-block">
 <p><span class="align5"><tcmd>Event File</tcmd> <teq> == </teq> <tblk>Nile_Events.tef</tblk></span></p>
 </div>
@@ -1830,7 +1830,7 @@ set OMP_NUM_THREADS=4
 <p>During project and research work, comparison of existing or base case conditions with future design conditions is commonly required. This may involve evaluation of one or more alternative design options. Example applications include the following cases.</p>
 <ul>
 <li>Earthworks or land use changes associated with proposed coastal or floodplain development.</li>
-<li>Construction of new capital works such as ports, dredged channels, or alternative channel design options.</li>
+<li>Construction of new capital works such as ports, dredged channels or alternative channel design options.</li>
 <li>Modification of dam operation strategies.</li>
 <li>Assessment of alternative bridge or hydraulic structure upgrade options.</li>
 </ul>
@@ -2060,7 +2060,7 @@ Optional - Assigns a user specified value to a string variable for dynamic subst
 </tr>
 </tbody>
 </table>
-<p><strong>Note:</strong> Set Variable commands can only be specified in the .fvc file or within an include file referenced from the .fvc. They are not yet available within sediment, particle, or water quality control files.</p>
+<p><strong>Note:</strong> Set Variable commands can only be specified in the .fvc file or within an include file referenced from the .fvc. They are not yet available within sediment, particle or water quality control files.</p>
 <p>The example below is a floodplain model where two different mesh resolutions are being tested. To manage the size of result output, the variable “NC_OUTPUT_INTERVAL” is used to set the map output interval.</p>
 <p>In the .fvc file we have the following syntax.</p>
 <div class="scrollable-block">
