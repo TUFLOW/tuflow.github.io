@@ -713,8 +713,8 @@ blockquote {
 }
 @media (min-width: 66.5rem) {
   .side-bar {
-    width: calc((100% - 66.5rem) / 2 + 16.5rem);
-    min-width: 16.5rem;
+    width: calc((100% - 1220px) / 2 + 320px);
+    min-width: 320px;
   }
 }
 @media (min-width: 50rem) {
@@ -724,7 +724,7 @@ blockquote {
 }
 @media (min-width: 66.5rem) {
   .side-bar + .main {
-    margin-left: max(16.5rem, (100% - 66.5rem) / 2 + 16.5rem);
+    margin-left: max(320px, (100% - 1220px) / 2 + 320px);
   }
 }
 .side-bar + .main .main-header {
@@ -752,7 +752,7 @@ blockquote {
 @media (min-width: 50rem) {
   .main {
     position: relative;
-    max-width: 50rem;
+    max-width: 900px;
   }
 }
 
@@ -796,7 +796,7 @@ blockquote {
   .site-nav,
   .site-header,
   .site-footer {
-    width: 16.5rem;
+    width: 320px;
   }
 }
 
@@ -7441,16 +7441,8 @@ h3 {
   counter-reset: h3;
 }
 
-h5 {
-  color: #00b6dd;
-}
-h5 {
-  font-size: 0.875rem !important;
-}
-@media (min-width: 31.25rem) {
-  h5 {
-    font-size: 1rem !important;
-  }
+h4 {
+  color: #1ABDC9;
 }
 
 h2:before {
@@ -7481,6 +7473,34 @@ th {
   content: counter(step-counter) "." counter(sub-counter);
 }
 
+figure {
+  display: table;
+  margin: 2em auto;
+  text-align: center;
+}
+
+figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+figure figcaption {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #666;
+  margin-top: 0.5em;
+}
+
+/* Force all nav sections open */
+.site-nav .nav-list .nav-list {
+  display: block !important;
+}
+
+.site-nav .nav-list-expander {
+  pointer-events: none;
+  display: none;
+}
+
 tcmd {
   font-family: "Lucida Console", "Courier New", monospace;
   font-size: small;
@@ -7503,22 +7523,6 @@ tgrn {
   font-family: "Lucida Console", "Courier New", monospace;
   font-size: small;
   color: rgb(0, 128, 0);
-}
-
-mjx-container {
-  font-size: small;
-}
-
-.label-experimental:not(g) {
-  background-color: #ff752a;
-}
-.label-experimental:not(g) {
-  font-size: 0.5625rem !important;
-}
-@media (min-width: 31.25rem) {
-  .label-experimental:not(g) {
-    font-size: 0.625rem !important;
-  }
 }
 
 .label-major-feature:not(g) {
@@ -7553,6 +7557,18 @@ mjx-container {
 }
 @media (min-width: 31.25rem) {
   .label-beta-functionality:not(g) {
+    font-size: 0.625rem !important;
+  }
+}
+
+.label-experimental:not(g) {
+  background-color: #d4d00f;
+}
+.label-experimental:not(g) {
+  font-size: 0.5625rem !important;
+}
+@media (min-width: 31.25rem) {
+  .label-experimental:not(g) {
     font-size: 0.625rem !important;
   }
 }
@@ -7603,6 +7619,52 @@ mjx-container {
   .label-swmm:not(g) {
     font-size: 0.625rem !important;
   }
+}
+
+/* Ensure styles work within blockquotes */
+a .tcmd, a .teq, a .tblk, a .tgrn {
+  text-decoration: inherit;
+}
+
+/* Ensure styles work within blockquotes */
+blockquote .tcmd, blockquote .teq, blockquote .tblk, blockquote .tgrn {
+  color: inherit;
+}
+
+/* Green Beta Release label + callout (outlined box) */
+p.beta-release::before,
+blockquote.beta-release::before {
+  content: "Beta Release";
+  display: inline-block;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  color: #1b5e20;
+  padding: 0;
+  margin-bottom: 0.35rem;
+}
+
+blockquote.beta-release {
+  background-color: #e6f4ea;
+  border: 2px solid #2e7d32; /* ← outline around the box */
+  border-left-width: 6px; /* ← stronger left accent */
+  color: #1b5e20;
+}
+
+/* Remove default top margin on first paragraph */
+blockquote.beta-release > p:first-child {
+  margin-top: 0;
+}
+
+blockquote.beta-release p,
+blockquote.beta-release strong,
+blockquote.beta-release a {
+  color: #1b5e20;
+}
+
+/* Bold only expandable parent headings (years like 2025, 2026) */
+.nav-list-item > .nav-list-expander + .nav-list-link {
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=just-the-docs-default.css.map */
