@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Appendix P — Computed variables – TUFLOW FV Water Quality (WQ) Module User Manual 2026.0</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./71-AppendicesE-DiagnosticVars.html" rel="next">
+<link href="./61-AppendicesD-Processes-Pathogens.html" rel="prev">
+<link href="./manuals-shared/images/TUFLOW.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-906f34f6d1cf263ebf2580b5ddf0f064.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-906f34f6d1cf263ebf2580b5ddf0f064.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-906f34f6d1cf263ebf2580b5ddf0f064.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-8d028ac1361deeefb106f8515fbc7a05.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-a7b3bbcf8399b14aba9280b868bc45f1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-8d028ac1361deeefb106f8515fbc7a05.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/TUFLOWFV_logo.png" alt="" class="navbar-logo light-content">
+    <img src="./images/TUFLOWFV_logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TUFLOW FV Water Quality (WQ) Module User Manual 2026.0</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://tuflow.com/"> 
+<span class="menu-text"><img src="manuals-shared/images/BMT_logo.png" style="height:1.5em"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="./TUFLOW-FV-Water-Quality--WQ--Module-User-Manual-2026.0.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./20-AppendicesA-Syntax.html">Appendices</a></li><li class="breadcrumb-item"><a href="./70-AppendicesE-ComputedVars.html"><span class="chapter-number">P</span>&nbsp; <span class="chapter-title">Computed variables</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TUFLOW FV Water Quality (WQ) Module User Manual</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Architecture</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Process-Descriptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Process Descriptions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Simulation-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Simulation Construction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-AppendicesA-Syntax.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Syntax of command descriptions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30-AppendicesB-Commands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./40-AppendicesC-DemoModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Demonstration model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./50-AppendicesD-Processes-DO.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Processes: oxygen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./51-AppendicesD-Processes-Si.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Processes: silicate</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./52-AppendicesD-Processes-IN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Processes: inorganic nitrogen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./53-AppendicesD-Processes-IP.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Processes: inorganic phosphorus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./54-AppendicesD-Processes-PhytoGeneral.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Processes: phyto general</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./55-AppendicesD-Processes-PhytoBiomass.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">Processes: phyto biomass rates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./56-AppendicesD-Processes-PhytoLimits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">Processes: phyto limitation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./57-AppendicesD-Processes-PhytoUptake.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">Processes: phyto uptake</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./58-AppendicesD-Processes-PhytoLosses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">L</span>&nbsp; <span class="chapter-title">Processes: phyto losses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./59-AppendicesD-Processes-PhytoOther.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">M</span>&nbsp; <span class="chapter-title">Processes: phyto other</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./60-AppendicesD-Processes-Org.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">N</span>&nbsp; <span class="chapter-title">Processes: organic matter</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./61-AppendicesD-Processes-Pathogens.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">O</span>&nbsp; <span class="chapter-title">Processes: pathogens</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./70-AppendicesE-ComputedVars.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">P</span>&nbsp; <span class="chapter-title">Computed variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./71-AppendicesE-DiagnosticVars.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">Q</span>&nbsp; <span class="chapter-title">Diagnostic variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80-AppendicesF-Parameters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">R</span>&nbsp; <span class="chapter-title">Parameters</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./90-AppendicesG-MassConservationModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">S</span>&nbsp; <span class="chapter-title">Mass Conservation Model</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#computed-variables" id="toc-computed-variables" class="nav-link active" data-scroll-target="#computed-variables"><span class="header-section-number">P.1</span> Computed Variables</a>
+  <ul>
+  <li><a href="#var-CompDO" id="toc-var-CompDO" class="nav-link" data-scroll-target="#var-CompDO"><span class="tblk"><span class="math inline">\(\left[DO\right]\)</span> - Dissolved Oxygen</span></a></li>
+  <li><a href="#var-CompSi" id="toc-var-CompSi" class="nav-link" data-scroll-target="#var-CompSi"><span class="tblk"><span class="math inline">\(\left[Si\right]\)</span> - Silicate</span></a></li>
+  <li><a href="#var-CompAmm" id="toc-var-CompAmm" class="nav-link" data-scroll-target="#var-CompAmm"><span class="tblk"><span class="math inline">\(\left[NH_4\right]\)</span> - Ammonium</span></a></li>
+  <li><a href="#var-CompNit" id="toc-var-CompNit" class="nav-link" data-scroll-target="#var-CompNit"><span class="tblk"><span class="math inline">\(\left[NO_3\right]\)</span> - Nitrate</span></a></li>
+  <li><a href="#var-CompFRP" id="toc-var-CompFRP" class="nav-link" data-scroll-target="#var-CompFRP"><span class="tblk"><span class="math inline">\(\left[FRP\right]\)</span> - Filterable Reactive Phosphorus</span></a></li>
+  <li><a href="#var-CompFRPads" id="toc-var-CompFRPads" class="nav-link" data-scroll-target="#var-CompFRPads"><span class="tblk"><span class="math inline">\(\left[FRPads\right]\)</span> - Filterable Reactive Phosphorus Adsorbed</span></a></li>
+  <li><a href="#var-CompDOC" id="toc-var-CompDOC" class="nav-link" data-scroll-target="#var-CompDOC"><span class="tblk"><span class="math inline">\(\left[DOC\right]\)</span> - Dissolved Organic Carbon</span></a></li>
+  <li><a href="#var-CompPOC" id="toc-var-CompPOC" class="nav-link" data-scroll-target="#var-CompPOC"><span class="tblk"><span class="math inline">\(\left[POC\right]\)</span> - Particulate Organic Carbon</span></a></li>
+  <li><a href="#var-CompDON" id="toc-var-CompDON" class="nav-link" data-scroll-target="#var-CompDON"><span class="tblk"><span class="math inline">\(\left[DON\right]\)</span> - Dissolved Organic Nitrogen</span></a></li>
+  <li><a href="#var-CompPON" id="toc-var-CompPON" class="nav-link" data-scroll-target="#var-CompPON"><span class="tblk"><span class="math inline">\(\left[PON\right]\)</span> - Particulate Organic Nitrogen</span></a></li>
+  <li><a href="#var-CompDOP" id="toc-var-CompDOP" class="nav-link" data-scroll-target="#var-CompDOP"><span class="tblk"><span class="math inline">\(\left[DOP\right]\)</span> - Dissolved Organic Phosphorus</span></a></li>
+  <li><a href="#var-CompPOP" id="toc-var-CompPOP" class="nav-link" data-scroll-target="#var-CompPOP"><span class="tblk"><span class="math inline">\(\left[POP\right]\)</span> - Particulate Organic Phosphorus</span></a></li>
+  <li><a href="#var-CompRDOC" id="toc-var-CompRDOC" class="nav-link" data-scroll-target="#var-CompRDOC"><span class="tblk"><span class="math inline">\(\left[RDOC\right]\)</span> - Refractory Dissolved Organic Carbon</span></a></li>
+  <li><a href="#var-CompRDON" id="toc-var-CompRDON" class="nav-link" data-scroll-target="#var-CompRDON"><span class="tblk"><span class="math inline">\(\left[RDON\right]\)</span> - Refractory Dissolved Organic Nitrogen</span></a></li>
+  <li><a href="#var-CompRDOP" id="toc-var-CompRDOP" class="nav-link" data-scroll-target="#var-CompRDOP"><span class="tblk"><span class="math inline">\(\left[RDOP\right]\)</span> - Refractory Dissolved Organic Phosphorus</span></a></li>
+  <li><a href="#var-CompRPOM" id="toc-var-CompRPOM" class="nav-link" data-scroll-target="#var-CompRPOM"><span class="tblk"><span class="math inline">\(\left[RPOM\right]\)</span> - Refractory Particulate Organic Matter</span></a></li>
+  <li><a href="#var-CompPhy" id="toc-var-CompPhy" class="nav-link" data-scroll-target="#var-CompPhy"><span class="tblk"><span class="math inline">\(\left[PHY\right]\)</span> - Phytoplankton</span></a></li>
+  <li><a href="#var-CompPhyRho" id="toc-var-CompPhyRho" class="nav-link" data-scroll-target="#var-CompPhyRho"><span class="tblk"><span class="math inline">\(\rho_{PHY}\)</span> - Cell Density</span></a></li>
+  <li><a href="#var-CompPhyIN" id="toc-var-CompPhyIN" class="nav-link" data-scroll-target="#var-CompPhyIN"><span class="tblk"><span class="math inline">\(\left[IN\right]\)</span> - Internal Nitrogen</span></a></li>
+  <li><a href="#var-CompPhyIP" id="toc-var-CompPhyIP" class="nav-link" data-scroll-target="#var-CompPhyIP"><span class="tblk"><span class="math inline">\(\left[IP\right]\)</span> - Internal Phosphorus</span></a></li>
+  <li><a href="#var-CompSS" id="toc-var-CompSS" class="nav-link" data-scroll-target="#var-CompSS"><span class="tblk"><span class="math inline">\(\left[SS\right]\)</span> - Suspended Sediment</span></a></li>
+  <li><a href="#var-CompT" id="toc-var-CompT" class="nav-link" data-scroll-target="#var-CompT"><span class="tblk">T - Water Temperature</span></a></li>
+  <li><a href="#var-CompSal" id="toc-var-CompSal" class="nav-link" data-scroll-target="#var-CompSal"><span class="tblk">S - Water Salinity</span></a></li>
+  <li><a href="#var-CompNitrit" id="toc-var-CompNitrit" class="nav-link" data-scroll-target="#var-CompNitrit"><span class="tblk"><span class="math inline">\(\left[NO_2\right]\)</span> - Nitrite</span></a></li>
+  <li><a href="#var-CompAlivePath" id="toc-var-CompAlivePath" class="nav-link" data-scroll-target="#var-CompAlivePath"><span class="tblk"><span class="math inline">\(\left[PTH_a\right]\)</span> - Alive Pathogen</span></a></li>
+  <li><a href="#var-CompDeadPath" id="toc-var-CompDeadPath" class="nav-link" data-scroll-target="#var-CompDeadPath"><span class="tblk"><span class="math inline">\(\left[PTH_d\right]\)</span> - Dead Pathogen</span></a></li>
+  <li><a href="#var-CompAttachPath" id="toc-var-CompAttachPath" class="nav-link" data-scroll-target="#var-CompAttachPath"><span class="tblk"><span class="math inline">\(\left[PTH_t\right]\)</span> - Attached Pathogen</span></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./20-AppendicesA-Syntax.html">Appendices</a></li><li class="breadcrumb-item"><a href="./70-AppendicesE-ComputedVars.html"><span class="chapter-number">P</span>&nbsp; <span class="chapter-title">Computed variables</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-AppConstits" class="quarto-section-identifier">Appendix P — Computed variables</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The WQ Module’s computed variables, and the core (lowest order) constituent model class and instance where each is deployed are listed below. Output variable names are also included for cross referencing. Some TUFLOW FV variables are included in the table for completeness. With regard to naming:</p>
+<ul>
+<li>The text “<span class="tblk">NAME</span>” in variable names is a placeholder for the user defined phytoplankton group name. “<span class="tblk">WQ_PHYTO_NAME_INT_N_MGL</span>” list in the table would be named “<span class="tblk">WQ_PHYTO_CYLINDRO_INT_N_MGL</span>” if a user defined phytoplankton group name was “<span class="tblk">cylindro</span>”</li>
+<li>The TUFLOW FV MATLAB toolbox:
+<ul>
+<li>Offers several post processing tools which rely on output phytoplankton group names. These are defined in ‘<span class="tblk">..\TUFLOWFV_Matlab_Utilities_001\toolbox\tuflowfv\fv_variables.m</span>’ with default names: ‘<span class="tblk">BLUEGREEN</span>’, ‘<span class="tblk">BGA</span>’, ‘<span class="tblk">FDIAT</span>’, ‘<span class="tblk">MDIAT</span>’, ‘<span class="tblk">DIATOM</span>’, ‘<span class="tblk">GREEN</span>’, ‘<span class="tblk">PHY01</span>’, ‘<span class="tblk">PHY02</span>’, ‘<span class="tblk">PHY03</span>’, ‘<span class="tblk">PHY04</span>’, ‘<span class="tblk">PHY05</span>’, ‘<span class="tblk">PHY06</span>’, ‘<span class="tblk">PHY07</span>’, ‘<span class="tblk">PHY08</span>’, ‘<span class="tblk">PHY09</span>’, ‘<span class="tblk">PHY10</span>’ and ‘<span class="tblk">PHY11</span>’. Users may choose to deploy any of these names and therefore use the MATLAB post processing tools unchanged. If not, then users will need to extend the ‘<span class="tblk">fvwq_mgL</span>’ or ‘<span class="tblk">fvwq_mmm</span>’ name lists provided in ‘<span class="tblk">fv_variables.m</span>’. A template is provided in that mfile, with instructions on what to change.</li>
+<li>Uses dissolved oxygen in the following example scripts. It has been assumed that the MGL units system has been used so that the variable name of the interrogated data set is ‘<span class="tblk">WQ_DISS_OXYGEN_MG_L</span>’. Users can change this if desired. Other ancillaries such as plot labels, colour limits and scale factors will also need to be changed for correct presentation of data if oxygen in the MGL units system is not processed:
+<ul>
+<li>‘<span class="tblk">..\TUFLOWFV_Matlab_Utilities_001\tutorial\visual\3.sheets\sh_006_impact_sheet_multiple_models.m</span>’</li>
+<li>‘<span class="tblk">..\TUFLOWFV_Matlab_Utilities_001\tutorial\visual\4.curtains\cu_000_plot_curtain_WQ.m</span>’</li>
+<li>‘<span class="tblk">..\TUFLOWFV_Matlab_Utilities_001\tutorial\visual\5.combined_plots\co_000_plot_multiple_ways_WQ.m</span>’</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>It is recommended that this Appendix be viewed with the left hand pane table of contents hidden. Use the ‘s’ key to toggle this pane on and off. Output computed variable names are exact, and can therefore be copied and pasted directly into output blocks of control files, for example. The exception is phytoplankton variables, where the user specified group name is included within the variable name, so will need to be inserted by the user.</p>
+<p>When interrogating three dimensional computed variable results in NetCDF format, the stat field of each output file indicates whether or not a 2D cell (and hence its associated 3D column) is wet or dry. The stat field is of dimension [number of 2D cells <span class="math inline">\(\times\)</span> number of timesteps] and a value of zero indicates that a 2D cell (and associated 3D column) is dry. Water quality computed variables are reported as zero when 2D cells are dry, so using the stat field to filter out these dry cells is essential when post processing results from models where cells wet and dry. Similarly, if viewing NetCDF water quality computed variables in QGIS using the TUFLOW Viewer, QGIS’s automatic colour bar (displayed in the layer legend and properties tab) will extend to zero if the model considered includes cells that wet and dry - QGIS does not use the stat field to filter out dry cells when automatically determining colour bar ranges. The user can manually adjust this colour bar range as required. The stat field is, however, used when water quality computed variable results are viewed in plan or curtain mode in the map window when using the TUFLOW Viewer: dry cells are set to be transparent, even though their ‘zero’ values may influence the automatic setting of the colour bar range.</p>
+<div id="40b4c1ca" class="cell" data-cache="false" data-execution_count="2">
+<section id="computed-variables" class="level2" data-number="P.1">
+<h2 data-number="P.1" class="anchored" data-anchor-id="computed-variables"><span class="header-section-number">P.1</span> Computed Variables</h2>
+<section id="var-CompDO" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompDO"><span class="tblk"><span class="math inline">\(\left[DO\right]\)</span> - Dissolved Oxygen</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_DISS_OXYGEN_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_DISS_OXYGEN_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(O_2\)</span><br>
+<strong>Atomic Number (Z):</strong> 16<br>
+<strong>Atomic Weight (M):</strong> 32<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModDODO-3">Oxygen</a> - <a href="03-Process-Descriptions.html#sec-ConModDOO2-4">O2</a></p>
+</blockquote>
+</section>
+<section id="var-CompSi" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompSi"><span class="tblk"><span class="math inline">\(\left[Si\right]\)</span> - Silicate</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_SILICATE_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_SILICATE_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(Si\)</span><br>
+<strong>Atomic Number (Z):</strong> 14<br>
+<strong>Atomic Weight (M):</strong> 28<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModInorgSi-3">Silicate</a> - <a href="03-Process-Descriptions.html#sec-ConModSiSi-4">Si</a></p>
+</blockquote>
+</section>
+<section id="var-CompAmm" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompAmm"><span class="tblk"><span class="math inline">\(\left[NH_4\right]\)</span> - Ammonium</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_AMMONIUM_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_AMMONIUM_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(N\)</span><br>
+<strong>Atomic Number (Z):</strong> 7<br>
+<strong>Atomic Weight (M):</strong> 14<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModInorgN-3">Inorganic nitrogen</a> - <a href="03-Process-Descriptions.html#sec-ConModNAmmNit-4">AmoniumNitrate</a></p>
+</blockquote>
+</section>
+<section id="var-CompNit" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompNit"><span class="tblk"><span class="math inline">\(\left[NO_3\right]\)</span> - Nitrate</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_NITRATE_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_NITRATE_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(N\)</span><br>
+<strong>Atomic Number (Z):</strong> 7<br>
+<strong>Atomic Weight (M):</strong> 14<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModInorgN-3">Inorganic nitrogen</a> - <a href="03-Process-Descriptions.html#sec-ConModNAmmNit-4">AmoniumNitrate</a></p>
+</blockquote>
+</section>
+<section id="var-CompFRP" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompFRP"><span class="tblk"><span class="math inline">\(\left[FRP\right]\)</span> - Filterable Reactive Phosphorus</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_FRP_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_FRP_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(P\)</span><br>
+<strong>Atomic Number (Z):</strong> 15<br>
+<strong>Atomic Weight (M):</strong> 31<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModInorgP-3">Inorganic phosphorus</a> - <a href="03-Process-Descriptions.html#sec-ConModFRPhs-4">FRPhs</a></p>
+</blockquote>
+</section>
+<section id="var-CompFRPads" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompFRPads"><span class="tblk"><span class="math inline">\(\left[FRPads\right]\)</span> - Filterable Reactive Phosphorus Adsorbed</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_FRP_ADS_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_FRP_ADS_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(P\)</span><br>
+<strong>Atomic Number (Z):</strong> 15<br>
+<strong>Atomic Weight (M):</strong> 31<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModInorgP-3">Inorganic phosphorus</a> - <a href="03-Process-Descriptions.html#sec-ConModFRPhsAds-4">FRPhsads</a></p>
+</blockquote>
+</section>
+<section id="var-CompDOC" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompDOC"><span class="tblk"><span class="math inline">\(\left[DOC\right]\)</span> - Dissolved Organic Carbon</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_DOC_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_DOC_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(C\)</span><br>
+<strong>Atomic Number (Z):</strong> 6<br>
+<strong>Atomic Weight (M):</strong> 12<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModOrgOrg-3">Organic matter</a> - <a href="03-Process-Descriptions.html#sec-ConModOrgLab-4">Labile</a></p>
+</blockquote>
+</section>
+<section id="var-CompPOC" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompPOC"><span class="tblk"><span class="math inline">\(\left[POC\right]\)</span> - Particulate Organic Carbon</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_POC_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_POC_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(C\)</span><br>
+<strong>Atomic Number (Z):</strong> 6<br>
+<strong>Atomic Weight (M):</strong> 12<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModOrgOrg-3">Organic matter</a> - <a href="03-Process-Descriptions.html#sec-ConModOrgLab-4">Labile</a></p>
+</blockquote>
+</section>
+<section id="var-CompDON" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompDON"><span class="tblk"><span class="math inline">\(\left[DON\right]\)</span> - Dissolved Organic Nitrogen</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_DON_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_DON_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(N\)</span><br>
+<strong>Atomic Number (Z):</strong> 7<br>
+<strong>Atomic Weight (M):</strong> 14<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModOrgOrg-3">Organic matter</a> - <a href="03-Process-Descriptions.html#sec-ConModOrgLab-4">Labile</a></p>
+</blockquote>
+</section>
+<section id="var-CompPON" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompPON"><span class="tblk"><span class="math inline">\(\left[PON\right]\)</span> - Particulate Organic Nitrogen</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_PON_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_PON_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(N\)</span><br>
+<strong>Atomic Number (Z):</strong> 7<br>
+<strong>Atomic Weight (M):</strong> 14<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModOrgOrg-3">Organic matter</a> - <a href="03-Process-Descriptions.html#sec-ConModOrgLab-4">Labile</a></p>
+</blockquote>
+</section>
+<section id="var-CompDOP" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompDOP"><span class="tblk"><span class="math inline">\(\left[DOP\right]\)</span> - Dissolved Organic Phosphorus</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_DOP_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_DOP_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(P\)</span><br>
+<strong>Atomic Number (Z):</strong> 15<br>
+<strong>Atomic Weight (M):</strong> 31<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModOrgOrg-3">Organic matter</a> - <a href="03-Process-Descriptions.html#sec-ConModOrgLab-4">Labile</a></p>
+</blockquote>
+</section>
+<section id="var-CompPOP" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompPOP"><span class="tblk"><span class="math inline">\(\left[POP\right]\)</span> - Particulate Organic Phosphorus</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_POP_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_POP_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(P\)</span><br>
+<strong>Atomic Number (Z):</strong> 15<br>
+<strong>Atomic Weight (M):</strong> 31<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModOrgOrg-3">Organic matter</a> - <a href="03-Process-Descriptions.html#sec-ConModOrgLab-4">Labile</a></p>
+</blockquote>
+</section>
+<section id="var-CompRDOC" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompRDOC"><span class="tblk"><span class="math inline">\(\left[RDOC\right]\)</span> - Refractory Dissolved Organic Carbon</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_RDOC_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_RDOC_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(C\)</span><br>
+<strong>Atomic Number (Z):</strong> 6<br>
+<strong>Atomic Weight (M):</strong> 12<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModOrgOrg-3">Organic matter</a> - <a href="03-Process-Descriptions.html#sec-ConModOrgRef-4">Refractory</a></p>
+</blockquote>
+</section>
+<section id="var-CompRDON" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompRDON"><span class="tblk"><span class="math inline">\(\left[RDON\right]\)</span> - Refractory Dissolved Organic Nitrogen</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_RDON_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_RDON_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(N\)</span><br>
+<strong>Atomic Number (Z):</strong> 7<br>
+<strong>Atomic Weight (M):</strong> 14<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModOrgOrg-3">Organic matter</a> - <a href="03-Process-Descriptions.html#sec-ConModOrgRef-4">Refractory</a></p>
+</blockquote>
+</section>
+<section id="var-CompRDOP" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompRDOP"><span class="tblk"><span class="math inline">\(\left[RDOP\right]\)</span> - Refractory Dissolved Organic Phosphorus</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_RDOP_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_RDOP_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(P\)</span><br>
+<strong>Atomic Number (Z):</strong> 15<br>
+<strong>Atomic Weight (M):</strong> 31<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModOrgOrg-3">Organic matter</a> - <a href="03-Process-Descriptions.html#sec-ConModOrgRef-4">Refractory</a></p>
+</blockquote>
+</section>
+<section id="var-CompRPOM" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompRPOM"><span class="tblk"><span class="math inline">\(\left[RPOM\right]\)</span> - Refractory Particulate Organic Matter</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_RPOM_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_RPOM_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(C\)</span><br>
+<strong>Atomic Number (Z):</strong> 6<br>
+<strong>Atomic Weight (M):</strong> 12<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModOrgOrg-3">Organic matter</a> - <a href="03-Process-Descriptions.html#sec-ConModOrgRef-4">Refractory</a></p>
+</blockquote>
+</section>
+<section id="var-CompPhy" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompPhy"><span class="tblk"><span class="math inline">\(\left[PHY\right]\)</span> - Phytoplankton</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\mu\)</span>g/L</td>
+<td style="text-align: left;">WQ_PHYTO_NAME_CONC_MICG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_PHYTO_NAME_CONC_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(C\)</span> (or Chl <em>a</em>)<br>
+<strong>Atomic Number (Z):</strong> 6<br>
+<strong>Atomic Weight (M):</strong> 12<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModInorgPhy-3">Phytoplankton</a> - <a href="03-Process-Descriptions.html#sec-ConModPhyBas-4">Basic</a></p>
+</blockquote>
+</section>
+<section id="var-CompPhyRho" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompPhyRho"><span class="tblk"><span class="math inline">\(\rho_{PHY}\)</span> - Cell Density</span></h3>
+<blockquote class="blockquote">
+<p><strong>Output Variable Name:</strong> WQ_PHYTO_NAME_DENS_KG_M3<br>
+<strong>Units:</strong> kg/m<span class="math inline">\(^3\)</span><br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModInorgPhy-3">Phytoplankton</a> - <a href="03-Process-Descriptions.html#sec-ConModPhyBas-4">Basic</a></p>
+</blockquote>
+</section>
+<section id="var-CompPhyIN" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompPhyIN"><span class="tblk"><span class="math inline">\(\left[IN\right]\)</span> - Internal Nitrogen</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_PHYTO_NAME_INT_N_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_PHYTO_NAME_INT_N_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(N\)</span><br>
+<strong>Atomic Number (Z):</strong> 7<br>
+<strong>Atomic Weight (M):</strong> 14<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModInorgPhy-3">Phytoplankton</a> - <a href="03-Process-Descriptions.html#sec-ConModPhyAdv-4">Advanced</a></p>
+</blockquote>
+</section>
+<section id="var-CompPhyIP" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompPhyIP"><span class="tblk"><span class="math inline">\(\left[IP\right]\)</span> - Internal Phosphorus</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_PHYTO_NAME_INT_P_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_PHYTO_NAME_INT_P_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(P\)</span><br>
+<strong>Atomic Number (Z):</strong> 15<br>
+<strong>Atomic Weight (M):</strong> 31<br>
+<strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModInorgPhy-3">Phytoplankton</a> - <a href="03-Process-Descriptions.html#sec-ConModPhyAdv-4">Advanced</a></p>
+</blockquote>
+</section>
+<section id="var-CompSS" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompSS"><span class="tblk"><span class="math inline">\(\left[SS\right]\)</span> - Suspended Sediment</span></h3>
+<blockquote class="blockquote">
+<p><strong>Output Variable Name:</strong> SED_N<br>
+<strong>Units:</strong> mg/L</p>
+</blockquote>
+</section>
+<section id="var-CompT" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompT"><span class="tblk">T - Water Temperature</span></h3>
+<blockquote class="blockquote">
+<p><strong>Output Variable Name:</strong> TEMP<br>
+<strong>Units:</strong> <span class="math inline">\(^o\)</span>C</p>
+</blockquote>
+</section>
+<section id="var-CompSal" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompSal"><span class="tblk">S - Water Salinity</span></h3>
+<blockquote class="blockquote">
+<p><strong>Output Variable Name:</strong> SAL<br>
+<strong>Units:</strong> g/L</p>
+</blockquote>
+</section>
+<section id="var-CompNitrit" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompNitrit"><span class="tblk"><span class="math inline">\(\left[NO_2\right]\)</span> - Nitrite</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mg/L</td>
+<td style="text-align: left;">WQ_NITRITE_MG_L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mmol/m<span class="math inline">\(^3\)</span></td>
+<td style="text-align: left;">WQ_NITRITE_MM_M3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevant Element:</strong> <span class="math inline">\(N\)</span><br>
+<strong>Atomic Number (Z):</strong> 7<br>
+<strong>Atomic Weight (M):</strong> 14</p>
+</blockquote>
+</section>
+<section id="var-CompAlivePath" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompAlivePath"><span class="tblk"><span class="math inline">\(\left[PTH_a\right]\)</span> - Alive Pathogen</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CFU/100mL</td>
+<td style="text-align: left;">WQ_PATH_NAME_ALIVE_CFU_100ML</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">check with MEB</td>
+<td style="text-align: left;">WQ_PATH_NAME_ALIVE_CFU_100ML</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModDOPath-3">Pathogens</a> - <a href="03-Process-Descriptions.html#sec-ConModPathFree-4">Free</a></p>
+</blockquote>
+</section>
+<section id="var-CompDeadPath" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompDeadPath"><span class="tblk"><span class="math inline">\(\left[PTH_d\right]\)</span> - Dead Pathogen</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CFU/100mL</td>
+<td style="text-align: left;">WQ_PATH_NAME_DEAD_CFU_100ML</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">check with MEB</td>
+<td style="text-align: left;">WQ_PATH_NAME_DEAD_CFU_100ML</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModDOPath-3">Pathogens</a> - <a href="03-Process-Descriptions.html#sec-ConModPathFree-4">Free</a></p>
+</blockquote>
+</section>
+<section id="var-CompAttachPath" class="level3 variable unnumbered">
+<h3 class="variable unnumbered anchored" data-anchor-id="var-CompAttachPath"><span class="tblk"><span class="math inline">\(\left[PTH_t\right]\)</span> - Attached Pathogen</span></h3>
+<blockquote class="blockquote">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Units</strong></th>
+<th style="text-align: left;"><strong>Output Variable Name</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CFU/100mL</td>
+<td style="text-align: left;">WQ_PATH_NAME_ATTCHD_CFU_100ML</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">check with MEB</td>
+<td style="text-align: left;">WQ_PATH_NAME_ATTCHD_CFU_100ML</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Core Constituent Model:</strong> <a href="03-Process-Descriptions.html#sec-ConModDOPath-3">Pathogens</a> - <a href="03-Process-Descriptions.html#sec-ConModPathAtt-4">Attached</a></p>
+</blockquote>
+</section>
+</section>
+</div>
+<p><img src="images/WQFooter.jpg" class="img-fluid" style="width:100.0%"></p>
+
+
+
+</main> <!-- /main -->
+<script>
+
+// Hover preview for plain anchor links -- mirrors native quarto-xref behaviour.
+
+// Supports same-page anchors and cross-chapter links on the same origin.
+
+// Placed via include-after-body so all DOM is parsed when this runs.
+
+(function () {
+
+  if (typeof window.tippy !== 'function') { return; }
+
+
+
+  var doc = window.document;
+
+  var pageCache = {};
+
+
+
+  function stripColumnClasses(el) {
+
+    el.classList.remove('page-full', 'page-columns');
+
+    for (var i = 0; i < el.children.length; i++) {
+
+      stripColumnClasses(el.children[i]);
+
+    }
+
+  }
+
+
+
+  function buildContent(id, target) {
+
+    var clone = target.cloneNode(true);
+
+    stripColumnClasses(clone);
+
+
+
+    var anchor = clone.querySelector('a.anchorjs-link');
+
+    if (anchor) { anchor.parentNode.removeChild(anchor); }
+
+
+
+    var isSectionEl = (clone.tagName === 'SECTION' || /^H[1-6]$/.test(clone.tagName || ''));
+
+    var isSectionId = (typeof id === 'string' && id.indexOf('sec-') === 0);
+
+
+
+    if (isSectionEl || isSectionId) {
+
+      var container = doc.createElement('div');
+
+      var kids = clone.children;
+
+      if (kids.length > 2) {
+
+        container.appendChild(kids[0].cloneNode(true));
+
+        for (var j = 1; j < kids.length; j++) {
+
+          if (kids[j].tagName === 'P' && (kids[j].textContent || '').trim() === '') { continue; }
+
+          container.appendChild(kids[j].cloneNode(true));
+
+          break;
+
+        }
+
+        if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(container); }
+
+        return container.innerHTML;
+
+      }
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.innerHTML;
+
+    }
+
+
+
+    if (clone.classList.contains('callout')) {
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.outerHTML;
+
+    }
+
+
+
+    if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+    return clone.innerHTML;
+
+  }
+
+
+
+  function getTargetFromPage(pageUrl, id, callback) {
+
+    if (pageCache[pageUrl]) {
+
+      callback(pageCache[pageUrl].getElementById(id));
+
+      return;
+
+    }
+
+    fetch(pageUrl)
+
+      .then(function (r) { return r.text(); })
+
+      .then(function (html) {
+
+        var parser = new DOMParser();
+
+        var parsedDoc = parser.parseFromString(html, 'text/html');
+
+        pageCache[pageUrl] = parsedDoc;
+
+        callback(parsedDoc.getElementById(id));
+
+      })
+
+      .catch(function () { callback(null); });
+
+  }
+
+
+
+  // Same-page anchor links (href starts with "#")
+
+  var samePageLinks = doc.querySelectorAll(
+
+    'main a[href^="#"]:not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < samePageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var hash   = link.getAttribute('href');
+
+      var id     = hash.replace(/^#\/?/, '');
+
+      var target = doc.getElementById(id);
+
+      if (!target) { return; }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           function () { return buildContent(id, target); }
+
+      });
+
+    })(samePageLinks[i]);
+
+  }
+
+
+
+  // Cross-page anchor links (same origin, href contains "#" but does not start with "#")
+
+  var crossPageLinks = doc.querySelectorAll(
+
+    'main a[href*="#"]:not([href^="#"]):not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < crossPageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var href = link.getAttribute('href');
+
+
+
+      var pageUrl, id;
+
+      try {
+
+        var resolved = new URL(href, window.location.href);
+
+        if (resolved.origin !== window.location.origin) { return; }
+
+        pageUrl = resolved.origin + resolved.pathname;
+
+        id = resolved.hash.replace(/^#\/?/, '');
+
+      } catch (e) { return; }
+
+
+
+      if (!id) { return; }
+
+
+
+      // If the link points to the current page, look up the element directly
+
+      if (pageUrl === (window.location.origin + window.location.pathname)) {
+
+        var target = doc.getElementById(id);
+
+        if (!target) { return; }
+
+        window.tippy(link, {
+
+          allowHTML:         true,
+
+          maxWidth:          500,
+
+          delay:             100,
+
+          arrow:             false,
+
+          appendTo:          function (el) { return el.parentElement; },
+
+          interactive:       true,
+
+          interactiveBorder: 10,
+
+          theme:             'quarto',
+
+          placement:         'bottom-start',
+
+          content:           function () { return buildContent(id, target); }
+
+        });
+
+        return;
+
+      }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           'Loading\u2026',
+
+        onShow:            function (instance) {
+
+          if (instance._fetched) { return; }
+
+          instance._fetched = true;
+
+          getTargetFromPage(pageUrl, id, function (target) {
+
+            if (target) {
+
+              instance.setContent(buildContent(id, target));
+
+            } else {
+
+              instance.destroy();
+
+            }
+
+          });
+
+        }
+
+      });
+
+    })(crossPageLinks[i]);
+
+  }
+
+})();
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./61-AppendicesD-Processes-Pathogens.html" class="pagination-link" aria-label="Processes: pathogens">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">O</span>&nbsp; <span class="chapter-title">Processes: pathogens</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./71-AppendicesE-DiagnosticVars.html" class="pagination-link" aria-label="Diagnostic variables">
+        <span class="nav-page-text"><span class="chapter-number">Q</span>&nbsp; <span class="chapter-title">Diagnostic variables</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

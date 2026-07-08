@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Appendix F — Processes: inorganic nitrogen – TUFLOW FV Water Quality (WQ) Module User Manual 2026.0</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./53-AppendicesD-Processes-IP.html" rel="next">
+<link href="./51-AppendicesD-Processes-Si.html" rel="prev">
+<link href="./manuals-shared/images/TUFLOW.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-906f34f6d1cf263ebf2580b5ddf0f064.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-906f34f6d1cf263ebf2580b5ddf0f064.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-906f34f6d1cf263ebf2580b5ddf0f064.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-8d028ac1361deeefb106f8515fbc7a05.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-a7b3bbcf8399b14aba9280b868bc45f1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-8d028ac1361deeefb106f8515fbc7a05.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/TUFLOWFV_logo.png" alt="" class="navbar-logo light-content">
+    <img src="./images/TUFLOWFV_logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TUFLOW FV Water Quality (WQ) Module User Manual 2026.0</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://tuflow.com/"> 
+<span class="menu-text"><img src="manuals-shared/images/BMT_logo.png" style="height:1.5em"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="./TUFLOW-FV-Water-Quality--WQ--Module-User-Manual-2026.0.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./20-AppendicesA-Syntax.html">Appendices</a></li><li class="breadcrumb-item"><a href="./52-AppendicesD-Processes-IN.html"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Processes: inorganic nitrogen</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TUFLOW FV Water Quality (WQ) Module User Manual</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Architecture</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Process-Descriptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Process Descriptions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Simulation-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Simulation Construction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-AppendicesA-Syntax.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Syntax of command descriptions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30-AppendicesB-Commands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./40-AppendicesC-DemoModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Demonstration model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./50-AppendicesD-Processes-DO.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Processes: oxygen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./51-AppendicesD-Processes-Si.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Processes: silicate</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./52-AppendicesD-Processes-IN.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Processes: inorganic nitrogen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./53-AppendicesD-Processes-IP.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Processes: inorganic phosphorus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./54-AppendicesD-Processes-PhytoGeneral.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Processes: phyto general</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./55-AppendicesD-Processes-PhytoBiomass.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">Processes: phyto biomass rates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./56-AppendicesD-Processes-PhytoLimits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">Processes: phyto limitation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./57-AppendicesD-Processes-PhytoUptake.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">Processes: phyto uptake</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./58-AppendicesD-Processes-PhytoLosses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">L</span>&nbsp; <span class="chapter-title">Processes: phyto losses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./59-AppendicesD-Processes-PhytoOther.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">M</span>&nbsp; <span class="chapter-title">Processes: phyto other</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./60-AppendicesD-Processes-Org.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">N</span>&nbsp; <span class="chapter-title">Processes: organic matter</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./61-AppendicesD-Processes-Pathogens.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">O</span>&nbsp; <span class="chapter-title">Processes: pathogens</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./70-AppendicesE-ComputedVars.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">P</span>&nbsp; <span class="chapter-title">Computed variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./71-AppendicesE-DiagnosticVars.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">Q</span>&nbsp; <span class="chapter-title">Diagnostic variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80-AppendicesF-Parameters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">R</span>&nbsp; <span class="chapter-title">Parameters</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./90-AppendicesG-MassConservationModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">S</span>&nbsp; <span class="chapter-title">Mass Conservation Model</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-SedAmmNitProd-3" id="toc-sec-SedAmmNitProd-3" class="nav-link active" data-scroll-target="#sec-SedAmmNitProd-3"><span class="header-section-number">F.1</span> Sediment ammonium and nitrate flux</a></li>
+  <li><a href="#sec-Nitrif-3" id="toc-sec-Nitrif-3" class="nav-link" data-scroll-target="#sec-Nitrif-3"><span class="header-section-number">F.2</span> Nitrification</a></li>
+  <li><a href="#sec-Denitrif-3" id="toc-sec-Denitrif-3" class="nav-link" data-scroll-target="#sec-Denitrif-3"><span class="header-section-number">F.3</span> Denitrification</a></li>
+  <li><a href="#sec-Anammox-3" id="toc-sec-Anammox-3" class="nav-link" data-scroll-target="#sec-Anammox-3"><span class="header-section-number">F.4</span> Anaerobic oxidation of ammonium</a></li>
+  <li><a href="#sec-DRNA-3" id="toc-sec-DRNA-3" class="nav-link" data-scroll-target="#sec-DRNA-3"><span class="header-section-number">F.5</span> Dissimilatory reduction of nitrate to ammonium</a></li>
+  <li><a href="#sec-WetDepIN-3" id="toc-sec-WetDepIN-3" class="nav-link" data-scroll-target="#sec-WetDepIN-3"><span class="header-section-number">F.6</span> Wet deposition of inorganic nitrogen</a></li>
+  <li><a href="#sec-DryDepIN-3" id="toc-sec-DryDepIN-3" class="nav-link" data-scroll-target="#sec-DryDepIN-3"><span class="header-section-number">F.7</span> Dry deposition of inorganic nitrogen</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./20-AppendicesA-Syntax.html">Appendices</a></li><li class="breadcrumb-item"><a href="./52-AppendicesD-Processes-IN.html"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Processes: inorganic nitrogen</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-AppIN" class="quarto-section-identifier">Appendix F — Processes: inorganic nitrogen</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-SedAmmNitProd-3" class="level2" data-number="F.1">
+<h2 data-number="F.1" class="anchored" data-anchor-id="sec-SedAmmNitProd-3"><span class="header-section-number">F.1</span> Sediment ammonium and nitrate flux</h2>
+<p>Ammonium and nitrate are exchanged between the water column and sediments via specification of separate sediment fluxes. In both cases, this flux is most commonly out of the sediments, i.e.&nbsp;a positive specification of sediment flux. Although it is rare that sediments act as sinks of these nitrogenous species, the WQ Module can be parameterised to allow for this if required.</p>
+<p>The user specified rates of ammonium and nitrate fluxes (which can be spatially varying) are modified by overlying ambient dissolved oxygen concentration (together with respective user specified half saturation oxygen concentrations) and water temperature. These modifications are simulated via Michaelis-Menten and Arrhenius models, respectively, as per <a href="#eq-sed-amm-flux" class="quarto-xref">Equation&nbsp;<span>F.1</span></a>.</p>
+<p><span id="eq-sed-amm-flux"><span class="math display">\[
+\left.\begin{aligned}
+  \href{AppDiags.html#var-DiagAmmSedFlx}{F_{sed\langle computed\rangle}^{NH_4}} =&amp; F_{sed}^{NH_4} \times \frac{K_{sed-O_2}^{NH_4}}{K_{sed-O_2}^{NH_4} + \left[DO\right]} \times
+  \hphantom{\text{ab}} \left[\theta_{sed}^{NH_4}\right]^{\left(T-20\right)}
+\\ \\
+  \href{AppDiags.html#var-DiagNitSedFlx}{F_{sed\langle computed\rangle}^{NO_3}} =&amp; F_{sed}^{NO_3} \times \underbrace{\frac{\left[DO\right]}{K_{sed-O_2}^{NO_3} + \left[DO\right]}}_{\text{Influence of oxygen}} \times \underbrace{\vphantom{\frac{\left[DO\right]}{K_{sed-O_2}^{NO_3} + \left[DO\right]}}    
+  \left[\theta_{sed}^{NO_3}\right]^{\left(T-20\right)}}_{\text{Influence of temperature}}
+\end{aligned}\right\}
+\tag{F.1}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQFsedAmm"><span class="math inline">\(F_{sed}^{NH_4}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQFsedNit"><span class="math inline">\(F_{sed}^{NO_3}\)</span></a> are the user specified ammonium and nitrate sediment fluxes at 20<span class="math inline">\(^o\)</span>C without the influence of dissolved oxygen, <a href="70-AppendicesE-ComputedVars.html#var-CompDO"><span class="math inline">\(\left[DO\right]\)</span></a> is the overlying dissolved oxygen concentration, <a href="30-AppendicesB-Commands.html#par-WQKsedAmm"><span class="math inline">\(K_{sed-O_2}^{NH_4}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQKsedNit"><span class="math inline">\(K_{sed-O_2}^{NO_3}\)</span></a> are the user specified half saturation concentrations of dissolved oxygen for ammonium and nitrate sediment flux, <a href="30-AppendicesB-Commands.html#par-WQthetasedAmm"><span class="math inline">\(\theta_{sed}^{NH_4}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQthetasedNit"><span class="math inline">\(\theta_{sed}^{NO_3}\)</span></a> are the corresponding temperature coefficients, and <a href="70-AppendicesE-ComputedVars.html#var-CompT"><span class="math inline">\(T\)</span></a> is ambient water temperature.</p>
+<p>As per silicate sediment flux (see <a href="51-AppendicesD-Processes-Si.html#sec-SedSilProd-3" class="quarto-xref"><span>Section E.1</span></a>), the above equations lead to linearly varying ambient ammonium and nitrate concentrations in the demonstration model when dissolved oxygen concentration, half saturation oxygen concentrations and ambient temperature are set to be constant.</p>
+<p>A more realistic environmental setting has sediment ammonium and nitrate fluxes occurring against a background of oxygen concentration drawdown. The demonstration model has been used to illustrate this via execution of a suite of simulations that experience dissolved oxygen drawdown (in the dissolved oxygen constituent model, with <span class="math inline">\(K_{sed-O_2}^{O_2}\)</span> = 4 mg/L) and each simulation using a the same value for both <span class="math inline">\(K_{sed-O_2}^{NH_4}\)</span> and <span class="math inline">\(K_{sed-O_2}^{NO_3}\)</span>. The ammonium and nitrate sediment flux rates were both specified as 140 mg/m<span class="math inline">\(^2\)</span>/d, and temperature effects were turned off. The predicted temporal evolution of water column ammonium and nitrate concentrations is provided in <a href="#fig-AmmNitKSatDODyn" class="quarto-xref">Figure&nbsp;<span>F.1</span></a>. Use the “play” button or drag the slider to see how different half saturation concentrations change ambient concentrations (ordinate) in time (abscissa).</p>
+<div id="fig-AmmNitKSatDODyn" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-AmmNitKSatDODyn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<embed src="images/plots/AmmNitKSatDODyn.html" style="width:100.0%" height="600">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-AmmNitKSatDODyn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;F.1: Move the slider to see the effect of changing the <span class="math inline">\(K_{sed-O_2}^{NH_4}\)</span> (and <span class="math inline">\(K_{sed-O_2}^{NO_3}\)</span> - they are set to be equal to each other in this example) values on ambient ammonium and nitrate concentrations. Ambient dissolved oxygen is drawn down in time
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-AmmNitKSatDODyn" class="quarto-xref">Figure&nbsp;<span>F.1</span></a> illustrates the different oxygen responses of ammonium and nitrate sediment fluxes, as reflected in the different formulations within <a href="#eq-sed-amm-flux" class="quarto-xref">Equation&nbsp;<span>F.1</span></a>. Importantly, the figure demonstrates that as ambient oxygen concentrations reach zero near 60 hours (see <a href="50-AppendicesD-Processes-DO.html#fig-DOKSat" class="quarto-xref">Figure&nbsp;<span>D.2</span></a> with the slider bar set to <span class="math inline">\(K_{sed-O_2}^{O_2}\)</span> = 4 mg/L), nitrate sediment flux ceases and the resultant ambient concentrations plateau. The converse is true to ammonium. One implication of this behaviour is that in environmental systems being simulated using the WQ Module, the rate of delivery of ammonium mass to the water column will generally increase under low dissolved oxygen conditions (e.g.&nbsp;waters isolated underneath a strong lacustrine a thermocline), whilst the corresponding nitrate mass fluxes will reduce under the same conditions. This is the expected and observed behaviour of environmental systems.</p>
+<p>The rate of ammonium and nitrate flux is also related to ambient water temperature, via the Arrhenius model in <a href="#eq-sed-amm-flux" class="quarto-xref">Equation&nbsp;<span>F.1</span></a>. To demonstrate this, the same model above (with time varying dissolved oxygen concentration) was executed at a range of ambient temperatures, but constant half saturation concentrations for oxygen for both ammonium and nitrate set to 4 mg/L. All temperature coefficients were set to 1.05. The results are provided in <a href="#fig-AmmNitTDODyn" class="quarto-xref">Figure&nbsp;<span>F.2</span></a>. Use the “play” button or drag the slider to see how different ambient temperatures change the ambient ammonium and nitrate concentrations (ordinate) in time (abscissa).</p>
+<div id="fig-AmmNitTDODyn" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-AmmNitTDODyn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<embed src="images/plots/AmmNitTDODyn.html" style="width:100.0%" height="600">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-AmmNitTDODyn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;F.2: Move the slider to see the effect of changing the ambient water temperature on ammonium and nitrate concentrations, with ambient dissolved oxygen drawdown
+</figcaption>
+</figure>
+</div>
+<p>The figure shows that as ambient water temperature increases, the rate of increases of both ammonium and nitrate concentrations follow suit. Again, nitrate concentrations plateau once background dissolved oxygen concentrations reach zero, however ammonium concentrations continue to rise throughout the simulation. This is expected behaviour.</p>
+</section>
+<section id="sec-Nitrif-3" class="level2" data-number="F.2">
+<h2 data-number="F.2" class="anchored" data-anchor-id="sec-Nitrif-3"><span class="header-section-number">F.2</span> Nitrification</h2>
+<p>Nitrification is the pelagic biological oxidation of ammonium to nitrate. The equations representing this process (including intermediates) are as follows.</p>
+<p><span id="eq-pel-nit-stoi2"><span class="math display">\[
+\left.\begin{aligned}
+  2NH_4^{+} + 3O_2 \rightarrow &amp; 2NO_2^{.unnumbered} + 4H^+ + 2H_2O
+  \\
+  \\
+  2NO_2^{.unnumbered} + O_2 \rightarrow &amp; 2NO_3^-
+\end{aligned}\right\}
+\tag{F.2}\]</span></span></p>
+<p>Dissolved oxygen is consumed by nitrification of ammonium, in a molar ratio of 1:2 N:O<span class="math inline">\(_2\)</span> (i.e.&nbsp;2 moles of ammonium consume 4 moles of diatomic oxygen). Nitrite is an intermediate product of nitrification, and simulation of this quantity is possible within the WQ Module although not currently activated. Contact <a href="mailto:support@tuflow.com">support@tuflow.com</a> if this capability is required.</p>
+<p>The pelagic nitrification rate is computed within the WQ Module via <a href="#eq-pel-nitrif-rate" class="quarto-xref">Equation&nbsp;<span>F.3</span></a>.</p>
+<p><span id="eq-pel-nitrif-rate"><span class="math display">\[
+R_{nitrif\langle computed\rangle}^{NH_4} = R_{nitrif}^{NH_4} \times \underbrace{\frac{\left[ DO \right]}{K_{nitrif-O_2}^{NH_4} + \left[DO\right]}}_{\text{Influence of oxygen}} \times \underbrace{ \vphantom{\frac{\left[ DO \right]}{K_{nitrif-O_2}^{NH_4} + \left[DO\right]}} \left[\theta_{nitrif}^{NH_4}\right]^{\left(T-20\right)}}_{\text{Influence of temperature}}
+\tag{F.3}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQRnitrif"><span class="math inline">\(R_{nitrif}^{NH_4}\)</span></a> is the user specified ammonium nitrifcation rate at 20<span class="math inline">\(^o\)</span>C without the influence of dissolved oxygen, <a href="70-AppendicesE-ComputedVars.html#var-CompDO"><span class="math inline">\(\left[DO\right]\)</span></a> is the ambient dissolved oxygen concentration, <a href="30-AppendicesB-Commands.html#par-WQKNitrif"><span class="math inline">\(K_{nitrif-O_2}^{NH_4}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQthetaNitrif"><span class="math inline">\(\theta_{nitrif}^{NH_4}\)</span></a> are the half saturation concentration of dissolved oxygen and temperature coefficient for nitrification of ammonium respectively (both are user specified), and <a href="70-AppendicesE-ComputedVars.html#var-CompT"><span class="math inline">\(T\)</span></a> is ambient water temperature.</p>
+<p>The nitrification rate from <a href="#eq-pel-nitrif-rate" class="quarto-xref">Equation&nbsp;<span>F.3</span></a> is multiplied by ambient ammonium concentration to compute the flux of ammonium to nitrate at each model timestep in each model cell via <a href="#eq-pel-nitrif-flux" class="quarto-xref">Equation&nbsp;<span>F.4</span></a>.</p>
+<p><span id="eq-pel-nitrif-flux"><span class="math display">\[
+\href{AppDiags.html#var-DiagNitrif}{F_{nitrif\langle computed\rangle}^{NH_4}} = R_{nitrif\langle computed\rangle}^{NH_4} \times \left[ NH_4 \right]
+\tag{F.4}\]</span></span></p>
+<p><a href="#eq-pel-nitrif-rate" class="quarto-xref">Equation&nbsp;<span>F.3</span></a> reveals a linear relationship between <span class="math inline">\(R_{nitrif\langle computed\rangle}^{NH_4}\)</span> and both (constant) dissolved oxygen concentration and half saturation oxygen concentration. In dissolved oxygen conditions away from oxygen sinks other than nitrification itself (such as sediments), this leaves ambient temperature as the key external determinant of the computed nitrification rates.</p>
+<p>A suite of demonstration model simulations were executed to illustrate this, with each simulation having its own temperature, and a constant nitrification rate <span class="math inline">\(R_{nitrif}^{NH_4}\)</span> of 0.1/day. Ammonium and nitrate initial conditions were always set to 4 and 0 mg/L respectively, <span class="math inline">\(K_{nitrif-O_2}^{NH_4}\)</span> to 4 mg/L and <span class="math inline">\(\theta_{nitrif}^{NH_4}\)</span> was set to 1.05. In order to illustrate only the workings of nitrification, all sediment fluxes were set to zero. The predicted temporal evolution of water column ammonium and nitrate concentrations in these simulations are provided in <a href="#fig-AmmNitTNitrif" class="quarto-xref">Figure&nbsp;<span>F.3</span></a>. Corresponding dissolved oxygen concentrations are also included to demonstrate the impact of nitrification on water column oxygen. Use the “play” button or drag the slider to see how different ambient temperatures change the ambient ammonium, nitrate and dissolved oxygen concentrations (ordinate) in time (abscissa).</p>
+<div id="fig-AmmNitTNitrif" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-AmmNitTNitrif-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<embed src="images/plots/AmmNitTNitrif.html" style="width:100.0%" height="600">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-AmmNitTNitrif-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;F.3: Move the slider to see the effect of changing ambient water temperature on the concentrations of ammonia, nitrate and oxygen
+</figcaption>
+</figure>
+</div>
+<p>The figure demonstrates the expected behaviour, where ammonium is consumed and nitrate produced. The drawdown in oxygen presented in the figure is due only to nitrification.</p>
+<p>The figure also reveals the mass conserving behaviour of the WQ Module: the decrease in ammonium (N) concentration is the same as the corresponding increase in nitrate (N) concentration for each of the different temperature simulations. This confirms the 1:1 ratio of nitrogen conversion from ammonium to nitrate in moles (<a href="#eq-pel-nit-stoi2" class="quarto-xref">Equation&nbsp;<span>F.2</span></a>), and hence concentration in an otherwise closed system.</p>
+<p>The drawdown in oxygen also demonstrates the WQ Module mass balance. In the 12<span class="math inline">\(^o\)</span>C case for example:</p>
+<ul>
+<li>The change in dissolved oxygen concentration is 4.37 mg/L</li>
+<li>Converting this to moles of O<span class="math inline">\(_2\)</span> gives 0.1366 moles O<span class="math inline">\(_2\)</span> (= 4.37/32)</li>
+<li>The change in ammonium (or nitrate) concentration is 0.955 mg/L</li>
+<li>Converting this to moles of N gives 0.0682 moles of N (= 0.955/14)</li>
+</ul>
+<p>The number of moles of dissolved oxygen consumed (0.137) is twice that the number of moles of N transformed from ammonium to nitrate (0.0682), to two decimal places. This is consistent with <a href="#eq-pel-nit-stoi2" class="quarto-xref">Equation&nbsp;<span>F.2</span></a>.</p>
+<p>A full WQ Module mass balance is presented in <a href="90-AppendicesG-MassConservationModel.html" class="quarto-xref"><span>Appendix S</span></a>.</p>
+</section>
+<section id="sec-Denitrif-3" class="level2" data-number="F.3">
+<h2 data-number="F.3" class="anchored" data-anchor-id="sec-Denitrif-3"><span class="header-section-number">F.3</span> Denitrification</h2>
+<p>Denitrification is the pelagic biological reduction of nitrate to free nitrogen gas, <span class="math inline">\(N_2\)</span>. This typically occurs as a result of microbial oxygen stripping from nitrate in low dissolved oxygen environments. It occurs through a series of intermediate stages, but is typically represented as a single-step process with a governing denitrification rate. This rate is computed within the WQ Module via either <a href="#eq-pel-denit-rateMM" class="quarto-xref">Equation&nbsp;<span>F.5</span></a> or <a href="#eq-pel-denit-rateExp" class="quarto-xref">Equation&nbsp;<span>F.6</span></a>. These are identical other than their treatment of the influence of dissolved oxygen on denitrification, which is either Michaelis-Menten or exponential, respectively. Unlike nitrification, denitrification includes the influence of nitrate concentration in both rate calculations, again in a Michaelis-Menten form.</p>
+<p><span id="eq-pel-denit-rateMM"><span class="math display">\[
+R_{denit\langle computed\rangle}^{NO_3} = R_{denit}^{NO_3} \hphantom{\text{abc}} \times \hphantom{\text{abc}} \frac{K_{denit-O_2-MM}^{NO_3}}{K_{denit-O_2-MM}^{NO_3} + \left[DO\right]} \times \left[\theta_{denit}^{NO_3}\right]^{\left(T-20\right)} \times \frac{\left[NO_3\right]}{K_{denit-NO_3}^{NO_3} + \left[NO_3\right]}
+\tag{F.5}\]</span></span></p>
+<p><span id="eq-pel-denit-rateExp"><span class="math display">\[
+R_{denit\langle computed\rangle}^{NO_3} = R_{denit}^{NO_3} \hphantom{\text{abc}} \times \hphantom{\text{abc}} \underbrace{\vphantom{\frac{\left[NO_3\right]}{K_{denit-NO_3}^{NO_3} + \left[NO_3\right]}}{\rm e}^{\left[\frac{-\left[DO\right]}{K_{denit-O_2-exp}^{NO_3}}\right]}}_{\text{Influence of oxygen}} \times \hphantom{\text{abcd}} \underbrace{\vphantom{\frac{\left[NO_3\right]}{K_{denit-NO_3}^{NO_3} + \left[NO_3\right]}}\left[\theta_{denit}^{NO_3}\right]^{\left(T-20\right)}}_{\text{Influence of temperature}} \times \underbrace{\frac{\left[NO_3\right]}{K_{denit-NO_3}^{NO_3} + \left[NO_3\right]}}_{\text{Influence of nitrate}}
+\tag{F.6}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQRdenitExp"><span class="math inline">\(R_{denit}^{NO_3}\)</span></a> is the user specified nitrate denitrification rate at 20<span class="math inline">\(^o\)</span>C and without the influence of dissolved oxygen, and <a href="70-AppendicesE-ComputedVars.html#var-CompDO"><span class="math inline">\(\left[DO\right]\)</span></a> and <a href="70-AppendicesE-ComputedVars.html#var-CompNit"><span class="math inline">\(\left[NO_3\right]\)</span></a> are the ambient dissolved oxygen and nitrate concentrations respectively. If the Michaelis-Menten oxygen model is used then <a href="30-AppendicesB-Commands.html#par-WQKdenitO2MM"><span class="math inline">\(K_{denit-O2-MM}^{NO_3}\)</span></a> is the half saturation concentration of oxygen for denitrification. If the exponential model is used then <a href="30-AppendicesB-Commands.html#par-WQKdenitO2Exp"><span class="math inline">\(K_{denit-O2-exp}^{NO_3}\)</span></a> is the dissolved oxygen concentration that normalises (i.e.&nbsp;non-dimensionalises) the ambient oxygen concentration used in <a href="#eq-pel-denit-rateExp" class="quarto-xref">Equation&nbsp;<span>F.6</span></a>. <a href="#eq-pel-denit-rateMM" class="quarto-xref">Equation&nbsp;<span>F.5</span></a> is the default. Finally, <a href="30-AppendicesB-Commands.html#par-WQthetadenitExp"><span class="math inline">\(\theta_{denit}^{NO_3}\)</span></a> is the temperature coefficient for denitrification of nitrate, <a href="70-AppendicesE-ComputedVars.html#var-CompT"><span class="math inline">\(T\)</span></a> is ambient water temperature, and <span class="math inline">\(K_{denit-NO_3}^{NO_3}\)</span> is the Michaelis-Menten half saturation nitrate concentration that influences denitrification in both <a href="#eq-pel-denit-rateMM" class="quarto-xref">Equation&nbsp;<span>F.5</span></a> and <a href="#eq-pel-denit-rateExp" class="quarto-xref">Equation&nbsp;<span>F.6</span></a>. <span class="math inline">\(K_{denit-NO_3}^{NO_3}\)</span> is the nitrate concentration for which the computed denitrification rate is half the user specified rate, at 20<span class="math inline">\(^o\)</span>C and with no influence of ambient dissolved oxygen concentration. It is not user definable, but hardwired to a value of 0.07 mg/L of nitrate (5.0 mmol/m<span class="math inline">\(^3\)</span>).</p>
+<p>The computed denitrification rate from <a href="#eq-pel-denit-rateMM" class="quarto-xref">Equation&nbsp;<span>F.5</span></a> or <a href="#eq-pel-denit-rateExp" class="quarto-xref">Equation&nbsp;<span>F.6</span></a> is then multiplied by ambient nitrate concentration to compute the flux of nitrate to free nitrogen gas at each model timestep in each model cell via <a href="#eq-pel-denit-flux" class="quarto-xref">Equation&nbsp;<span>F.7</span></a>.</p>
+<p><span id="eq-pel-denit-flux"><span class="math display">\[
+\href{AppDiags.html#var-DiagDenitrif}{F_{denit\langle computed\rangle}^{NO_3}} = R_{denit\langle computed\rangle}^{NO_3} \times \left[ NO_3 \right]
+\tag{F.7}\]</span></span></p>
+<p>Unlike nitrification, denitrification does not produce or consume dissolved oxygen. It does, however, consume nitrate and therefore presents a feedback loop in <a href="#eq-pel-denit-rateMM" class="quarto-xref">Equation&nbsp;<span>F.5</span></a> through <a href="#eq-pel-denit-flux" class="quarto-xref">Equation&nbsp;<span>F.7</span></a>.</p>
+<p>The demonstration model was executed over two suites of identical simulations that varied temperature from one simulation to the next, with the first suite using <a href="#eq-pel-denit-rateMM" class="quarto-xref">Equation&nbsp;<span>F.5</span></a> and the second suite using <a href="#eq-pel-denit-rateExp" class="quarto-xref">Equation&nbsp;<span>F.6</span></a>. Only denitrification was turned on, and constant values for <span class="math inline">\(R_{denit}^{NO_3}\)</span> (1.5/day - a deliberately very large value was chosen to demonstrate trends), <span class="math inline">\(K_{denit-O_2}^{NO_3}\)</span> (4 mg/L) and <span class="math inline">\(K_{denit-NO_3}^{NO_3}\)</span> (15.5 mg/L) were set. Temperature coefficients were set to 1.05. The predicted temporal evolution of water column nitrate concentrations in these simulation pairs are provided in <a href="#fig-DeNitT" class="quarto-xref">Figure&nbsp;<span>F.4</span></a>.</p>
+<div id="fig-DeNitT" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-DeNitT-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<embed src="images/plots/DeNitT.html" style="width:100.0%" height="600">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-DeNitT-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;F.4: Move the slider to see the effect of changing temperature on the concentrations of nitrate, where two different denitrification models are used
+</figcaption>
+</figure>
+</div>
+<p>The figure demonstrates the expected behaviour, where nitrate is consumed in a non-linear manner. The different models produce different drawdown rates, also as expected. In this example, these differences are substantial.</p>
+<p>The same two suites of demonstration models were also used to illustrate the influence of varying <span class="math inline">\(K_{denit-O_2}^{NO_3}\)</span> (instead of temperature) on denitrification. All set ups from the models used above were retained, other than setting ambient water temperature to constant at 20 <span class="math inline">\(^o\)</span>C, and allowing <span class="math inline">\(K_{denit-O_2}^{NO_3}\)</span> to vary. The predicted temporal evolution of water column nitrate concentrations in these demonstration model simulation pairs are provided in <a href="#fig-DeNitK" class="quarto-xref">Figure&nbsp;<span>F.5</span></a>.</p>
+<div id="fig-DeNitK" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-DeNitK-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<embed src="images/plots/DeNitK.html" style="width:100.0%" height="600">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-DeNitK-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;F.5: Move the slider to see the effect of changing <span class="math inline">\(K_{denit-O_2}^{NO_3}\)</span> on the concentrations of nitrate, where two different denitrification models are used
+</figcaption>
+</figure>
+</div>
+<p>Substantial differences in the prediction of nitrate concentrations is again observed, especially at lower half saturation concentrations.</p>
+</section>
+<section id="sec-Anammox-3" class="level2" data-number="F.4">
+<h2 data-number="F.4" class="anchored" data-anchor-id="sec-Anammox-3"><span class="header-section-number">F.4</span> Anaerobic oxidation of ammonium</h2>
+<p>Anaerobic oxidation of ammonium (also referred to as anammox) is the microbial conversion of ammonium and nitrite to free nitrogen gas in low dissolved oxygen environments. Oxygen for this process is stripped from nitrite. The equation representing this process is as follows.</p>
+<p><span id="eq-pel-anammox-stoi"><span class="math display">\[
+NH_4^{+} + NO_2^{.unnumbered} \rightarrow N_2 + 2H_2O
+\tag{F.8}\]</span></span></p>
+<p><span class="math inline">\(NH_4^{+}\)</span> and <span class="math inline">\(NO_2^{.unnumbered}\)</span> are ammonium and nitrite, respectively, and N<span class="math inline">\(_2\)</span> is free nitrogen gas. In the absence of simulating nitrite, the WQ Module assumes that nitrite and nitrate are related (only at dissolved oxygen concentrations below 0.1 mg/L) as follows.</p>
+<p><span id="eq-pel-anammox-no2no3"><span class="math display">\[
+\left[NO_2\right] = \left[NO_3\right] \times \left( 1.0 - \frac{\left[ DO \right]}{0.1 + \left[ DO \right]}\right)
+\tag{F.9}\]</span></span></p>
+<p><a href="70-AppendicesE-ComputedVars.html#var-CompNitrit"><span class="math inline">\(\left[NO_2\right]\)</span></a>, <a href="70-AppendicesE-ComputedVars.html#var-CompNit"><span class="math inline">\(\left[NO_3\right]\)</span></a> and <a href="70-AppendicesE-ComputedVars.html#var-CompDO"><span class="math inline">\(\left[DO\right]\)</span></a> are the ambient nitrite, ammonium and dissolved oxygen concentrations, respectively. The anammox flux to free nitrogen gas N at each model timestep in each model cell that has an ambient dissolved oxygen concentration less than 0.1 mg/L is computed as per <a href="#eq-pel-anmmox-flux" class="quarto-xref">Equation&nbsp;<span>F.10</span></a>.</p>
+<p><span id="eq-pel-anmmox-flux"><span class="math display">\[
+\href{AppDiags.html#var-DiagAnammox}{F_{anmx\langle computed\rangle}^{N_2}} = k_{anmx}^{N_2} \times \frac{\left[NH_4\right]}{K_{anmx-NH_4}^{N_2} + \left[NH_4\right]} \times \frac{\left[NO_2\right]}{K_{anmx-NO_2}^{N_2} + \left[NO_2\right]}
+\tag{F.10}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQRanmx"><span class="math inline">\(k_{anmx}^{N_2}\)</span></a> is the user specified anaerobic volumetric mass oxidation rate without the influence of ammonium or nitrite, <a href="30-AppendicesB-Commands.html#par-WQKanmxAmm"><span class="math inline">\(K_{anmx-NH_4}^{N_2}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQKanmxNit"><span class="math inline">\(K_{anmx-NO_2}^{N_2}\)</span></a> are the Michaelis-Menten half saturation ammonium and nitrite concentrations for anammox respectively, and <a href="70-AppendicesE-ComputedVars.html#var-CompAmm"><span class="math inline">\(\left[NH_4\right]\)</span></a> and <a href="70-AppendicesE-ComputedVars.html#var-CompNitrit"><span class="math inline">\(\left[NO_2\right]\)</span></a> are the ambient ammonium and nitrite concentrations, respectively. For ambient conditions that have dissolved oxygen concentrations greater than 0.1 mg/L, the anammox rate is set to zero.</p>
+</section>
+<section id="sec-DRNA-3" class="level2" data-number="F.5">
+<h2 data-number="F.5" class="anchored" data-anchor-id="sec-DRNA-3"><span class="header-section-number">F.5</span> Dissimilatory reduction of nitrate to ammonium</h2>
+<p>Dissimilatory reduction of nitrate to ammonium (also referred to as DRNA) is the microbial conversion of nitrate to ammonium. Dissolved oxygen is not consumed in this process. The WQ Module assumes the number of moles of nitrate-N consumed is the same as the number of ammonium-N moles produced. The DRNA rate is computed within the WQ Module via <a href="#eq-pel-drna-rate" class="quarto-xref">Equation&nbsp;<span>F.11</span></a>.</p>
+<p><span id="eq-pel-drna-rate"><span class="math display">\[
+R_{DRNA\langle computed\rangle}^{NO_3} = R_{DRNA}^{NO_3} \times \frac{K_{DRNA-O_2}^{NO_3}}{K_{DRNA-O_2}^{NO_3} + \left[DO\right]}
+\tag{F.11}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQRdrna"><span class="math inline">\(R_{DRNA}^{NO_3}\)</span></a> is the user specified rate of dissimilatory reduction of nitrate to ammonium without the influence of oxygen, <a href="30-AppendicesB-Commands.html#par-WQKdrna"><span class="math inline">\(K_{DRNA-O_2}^{NO_3}\)</span></a> is the Michaelis-Menten half saturation dissolved oxygen concentration for DRNA, and <a href="70-AppendicesE-ComputedVars.html#var-CompDO"><span class="math inline">\(\left[DO\right]\)</span></a> is the ambient dissolved oxygen concentration.</p>
+<p>The computed DRNA rate from <a href="#eq-pel-drna-rate" class="quarto-xref">Equation&nbsp;<span>F.11</span></a> is multiplied by ambient nitrate concentration to compute the flux to ammonium at each model timestep in each model cell as per <a href="#eq-pel-drna-flux" class="quarto-xref">Equation&nbsp;<span>F.12</span></a>.</p>
+<p><span id="eq-pel-drna-flux"><span class="math display">\[
+\href{AppDiags.html#var-DiagDRNA}{F_{DRNA\langle computed\rangle}^{NO_3}} = R_{DRNA\langle computed\rangle}^{NO_3} \times \left[NO_3\right]
+\tag{F.12}\]</span></span></p>
+<p>Although not recommended, the influence of oxygen in all the processes described in <a href="#sec-SedAmmNitProd-3" class="quarto-xref"><span>Section F.1</span></a> to <a href="#sec-DRNA-3" class="quarto-xref"><span>Section F.5</span></a> can be removed by setting the command <code>oxygen == off</code> in the nitrogen model block. This switch applies to sediment flux, nitrification and denitrification. Anammox and DRNA will be switched off entirely if this command is issued.</p>
+</section>
+<section id="sec-WetDepIN-3" class="level2" data-number="F.6">
+<h2 data-number="F.6" class="anchored" data-anchor-id="sec-WetDepIN-3"><span class="header-section-number">F.6</span> Wet deposition of inorganic nitrogen</h2>
+<p>Wet deposition of inorganic nitrogen includes the pluvial delivery of both ammonium and nitrate to the water column. A global total inorganic nitrogen concentration in rainfall is specifiable, together with the proportion of that total that is nitrate. From this, the WQ Module computes ammonium and nitrate concentrations (<a href="#eq-pel-atm-TN-wammsplit" class="quarto-xref">Equation&nbsp;<span>F.13</span></a> and <a href="#eq-pel-atm-TN-wnitsplit" class="quarto-xref">Equation&nbsp;<span>F.14</span></a>, respectively).</p>
+<p><span id="eq-pel-atm-TN-wammsplit"><span class="math display">\[
+\left[{NH_4}\right]_{rain} = \left[{TN}\right]_{rain} \times (1-f_{TN}^{NO_3})
+\tag{F.13}\]</span></span></p>
+<p><span id="eq-pel-atm-TN-wnitsplit"><span class="math display">\[
+\left[{NO_3}\right]_{rain} = \left[{TN}\right]_{rain} \times f_{TN}^{NO_3}
+\tag{F.14}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQAtmWetTN"><span class="math inline">\(\left[{TN}\right]_{rain}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQAtmWetNFrac"><span class="math inline">\(f_{TN}^{NO_3}\)</span></a> are the concentration of total nitrogen in rain and the fraction of that total that is nitrate, respectively. The WQ Module separately multiplies <span class="math inline">\(\left[{NH_4}\right]_{rain}\)</span> and <span class="math inline">\(\left[{NO_3}\right]_{rain}\)</span> by each timestep’s rainfall depth and corresponding model surface area(s) to compute the wet mass flux of ammonium and nitrate (<a href="#eq-pel-atm-amm-wflux" class="quarto-xref">Equation&nbsp;<span>F.15</span></a> and <a href="#eq-pel-atm-nit-wflux" class="quarto-xref">Equation&nbsp;<span>F.16</span></a>, respectively). These masses are added to the uppermost model layer cells and corresponding changes to ambient concentrations computed.</p>
+<p><span id="eq-pel-atm-amm-wflux"><span class="math display">\[
+F_{atm-wet}^{NH_4} = \left[{NH_4}\right]_{rain} \times \text{Timestep rainfall depth} \times \text{Model area(s)}
+\tag{F.15}\]</span></span></p>
+<p><span id="eq-pel-atm-nit-wflux"><span class="math display">\[
+F_{atm-wet}^{NO_3} = \left[{NO_3}\right]_{rain} \times \text{Timestep rainfall depth} \times \text{Model area(s)}
+\tag{F.16}\]</span></span></p>
+<p>If rainfall depth is specified as being spatially variable (i.e.&nbsp;by application of multiple atmospheric boundary conditions within TUFLOW FV), then <span class="math inline">\(F_{atm-wet}^{NH_4}\)</span> and <span class="math inline">\(F_{atm-wet}^{NO_3}\)</span> will correspondingly vary spatially.</p>
+</section>
+<section id="sec-DryDepIN-3" class="level2" data-number="F.7">
+<h2 data-number="F.7" class="anchored" data-anchor-id="sec-DryDepIN-3"><span class="header-section-number">F.7</span> Dry deposition of inorganic nitrogen</h2>
+<p>Dry deposition of nitrogen includes the delivery of both ammonium and nitrate to the water column from atmospheric fallout. This fallout is typically thought of as being associated with dust, with the dry fallout dissolving on entry to the water column to become dissolved inorganic nitrogen. A single constant daily deposition rate of total nitrogen is specifiable, and the WQ Module splits this into separate ammonia and nitrate rates using the same fraction applied to the wet deposition total inorganic nitrogen concentration (<a href="#sec-WetDepIN-3" class="quarto-xref"><span>Section F.6</span></a>).</p>
+<p><span id="eq-pel-atm-TN-dammsplit"><span class="math display">\[
+R^{NH_4}_{atm-dry} = R^{TN}_{atm-dry} \times (1-f_{TN}^{NO_3})
+\tag{F.17}\]</span></span></p>
+<p><span id="eq-pel-atm-TN-ditsplit"><span class="math display">\[
+R^{NO_3}_{atm-dry} = R^{TN}_{atm-dry} \times f_{TN}^{NO_3}
+\tag{F.18}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQAtmDryTN"><span class="math inline">\(R^{TN}_{atm-dry}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQAtmWetNFrac"><span class="math inline">\(f_{TN}^{NO_3}\)</span></a> are the user specified rate of dry total inorganic nitrogen deposition, and the fraction that is nitrate, respectively. These individual rates <span class="math inline">\(R^{NH_4}_{atm-dry}\)</span> and <span class="math inline">\(R^{NO_3}_{atm-dry}\)</span> are multiplied by model timestep and the global model surface area to compute the dry mass flux of ammonium and nitrate (<a href="#eq-pel-atm-amm-dflux" class="quarto-xref">Equation&nbsp;<span>F.19</span></a> and <a href="#eq-pel-atm-nit-dflux" class="quarto-xref">Equation&nbsp;<span>F.20</span></a>, respectively). These masses are added to the uppermost model layer cells and corresponding changes to ambient concentrations computed.</p>
+<p><span id="eq-pel-atm-amm-dflux"><span class="math display">\[
+F_{atm-dry}^{NH_4} = R^{NH_4}_{atm-dry} \times \text{Timestep} \times \text{Global model area}
+\tag{F.19}\]</span></span></p>
+<p><span id="eq-pel-atm-nit-dflux"><span class="math display">\[
+F_{atm-dry}^{NO_3} = R^{NO_3}_{atm-dry} \times \text{Timestep} \times \text{Global model area}
+\tag{F.20}\]</span></span></p>
+<p>This constant dry mass flux for each of ammonium and nitrate is applied globally.</p>
+<p>The total atmospheric depositional flux of dissolved inorganic nitrogen (noting that dry atmospheric flux is assumed to dissolve on entry to the water column) is as per <a href="#eq-pel-atm-din-flux" class="quarto-xref">Equation&nbsp;<span>F.21</span></a>.</p>
+<p><span id="eq-pel-atm-din-flux"><span class="math display">\[
+\href{AppDiags.html#var-DiagDINAtmFlx}{F_{atm-din\langle computed \rangle}^{N}} = F_{atm-wet}^{NH_4} + F_{atm-wet}^{NO_3} + F_{atm-dry}^{NH_4} + F_{atm-dry}^{NO_3}
+\tag{F.21}\]</span></span></p>
+<p><img src="images/WQFooter.jpg" class="img-fluid" style="width:100.0%"></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+
+// Hover preview for plain anchor links -- mirrors native quarto-xref behaviour.
+
+// Supports same-page anchors and cross-chapter links on the same origin.
+
+// Placed via include-after-body so all DOM is parsed when this runs.
+
+(function () {
+
+  if (typeof window.tippy !== 'function') { return; }
+
+
+
+  var doc = window.document;
+
+  var pageCache = {};
+
+
+
+  function stripColumnClasses(el) {
+
+    el.classList.remove('page-full', 'page-columns');
+
+    for (var i = 0; i < el.children.length; i++) {
+
+      stripColumnClasses(el.children[i]);
+
+    }
+
+  }
+
+
+
+  function buildContent(id, target) {
+
+    var clone = target.cloneNode(true);
+
+    stripColumnClasses(clone);
+
+
+
+    var anchor = clone.querySelector('a.anchorjs-link');
+
+    if (anchor) { anchor.parentNode.removeChild(anchor); }
+
+
+
+    var isSectionEl = (clone.tagName === 'SECTION' || /^H[1-6]$/.test(clone.tagName || ''));
+
+    var isSectionId = (typeof id === 'string' && id.indexOf('sec-') === 0);
+
+
+
+    if (isSectionEl || isSectionId) {
+
+      var container = doc.createElement('div');
+
+      var kids = clone.children;
+
+      if (kids.length > 2) {
+
+        container.appendChild(kids[0].cloneNode(true));
+
+        for (var j = 1; j < kids.length; j++) {
+
+          if (kids[j].tagName === 'P' && (kids[j].textContent || '').trim() === '') { continue; }
+
+          container.appendChild(kids[j].cloneNode(true));
+
+          break;
+
+        }
+
+        if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(container); }
+
+        return container.innerHTML;
+
+      }
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.innerHTML;
+
+    }
+
+
+
+    if (clone.classList.contains('callout')) {
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.outerHTML;
+
+    }
+
+
+
+    if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+    return clone.innerHTML;
+
+  }
+
+
+
+  function getTargetFromPage(pageUrl, id, callback) {
+
+    if (pageCache[pageUrl]) {
+
+      callback(pageCache[pageUrl].getElementById(id));
+
+      return;
+
+    }
+
+    fetch(pageUrl)
+
+      .then(function (r) { return r.text(); })
+
+      .then(function (html) {
+
+        var parser = new DOMParser();
+
+        var parsedDoc = parser.parseFromString(html, 'text/html');
+
+        pageCache[pageUrl] = parsedDoc;
+
+        callback(parsedDoc.getElementById(id));
+
+      })
+
+      .catch(function () { callback(null); });
+
+  }
+
+
+
+  // Same-page anchor links (href starts with "#")
+
+  var samePageLinks = doc.querySelectorAll(
+
+    'main a[href^="#"]:not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < samePageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var hash   = link.getAttribute('href');
+
+      var id     = hash.replace(/^#\/?/, '');
+
+      var target = doc.getElementById(id);
+
+      if (!target) { return; }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           function () { return buildContent(id, target); }
+
+      });
+
+    })(samePageLinks[i]);
+
+  }
+
+
+
+  // Cross-page anchor links (same origin, href contains "#" but does not start with "#")
+
+  var crossPageLinks = doc.querySelectorAll(
+
+    'main a[href*="#"]:not([href^="#"]):not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < crossPageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var href = link.getAttribute('href');
+
+
+
+      var pageUrl, id;
+
+      try {
+
+        var resolved = new URL(href, window.location.href);
+
+        if (resolved.origin !== window.location.origin) { return; }
+
+        pageUrl = resolved.origin + resolved.pathname;
+
+        id = resolved.hash.replace(/^#\/?/, '');
+
+      } catch (e) { return; }
+
+
+
+      if (!id) { return; }
+
+
+
+      // If the link points to the current page, look up the element directly
+
+      if (pageUrl === (window.location.origin + window.location.pathname)) {
+
+        var target = doc.getElementById(id);
+
+        if (!target) { return; }
+
+        window.tippy(link, {
+
+          allowHTML:         true,
+
+          maxWidth:          500,
+
+          delay:             100,
+
+          arrow:             false,
+
+          appendTo:          function (el) { return el.parentElement; },
+
+          interactive:       true,
+
+          interactiveBorder: 10,
+
+          theme:             'quarto',
+
+          placement:         'bottom-start',
+
+          content:           function () { return buildContent(id, target); }
+
+        });
+
+        return;
+
+      }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           'Loading\u2026',
+
+        onShow:            function (instance) {
+
+          if (instance._fetched) { return; }
+
+          instance._fetched = true;
+
+          getTargetFromPage(pageUrl, id, function (target) {
+
+            if (target) {
+
+              instance.setContent(buildContent(id, target));
+
+            } else {
+
+              instance.destroy();
+
+            }
+
+          });
+
+        }
+
+      });
+
+    })(crossPageLinks[i]);
+
+  }
+
+})();
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./51-AppendicesD-Processes-Si.html" class="pagination-link" aria-label="Processes: silicate">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Processes: silicate</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./53-AppendicesD-Processes-IP.html" class="pagination-link" aria-label="Processes: inorganic phosphorus">
+        <span class="nav-page-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Processes: inorganic phosphorus</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Appendix N — Processes: organic matter – TUFLOW FV Water Quality (WQ) Module User Manual 2026.0</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./61-AppendicesD-Processes-Pathogens.html" rel="next">
+<link href="./59-AppendicesD-Processes-PhytoOther.html" rel="prev">
+<link href="./manuals-shared/images/TUFLOW.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-906f34f6d1cf263ebf2580b5ddf0f064.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-906f34f6d1cf263ebf2580b5ddf0f064.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-906f34f6d1cf263ebf2580b5ddf0f064.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-8d028ac1361deeefb106f8515fbc7a05.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-a7b3bbcf8399b14aba9280b868bc45f1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-8d028ac1361deeefb106f8515fbc7a05.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/TUFLOWFV_logo.png" alt="" class="navbar-logo light-content">
+    <img src="./images/TUFLOWFV_logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TUFLOW FV Water Quality (WQ) Module User Manual 2026.0</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://tuflow.com/"> 
+<span class="menu-text"><img src="manuals-shared/images/BMT_logo.png" style="height:1.5em"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="./TUFLOW-FV-Water-Quality--WQ--Module-User-Manual-2026.0.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./20-AppendicesA-Syntax.html">Appendices</a></li><li class="breadcrumb-item"><a href="./60-AppendicesD-Processes-Org.html"><span class="chapter-number">N</span>&nbsp; <span class="chapter-title">Processes: organic matter</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TUFLOW FV Water Quality (WQ) Module User Manual</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Architecture</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Process-Descriptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Process Descriptions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Simulation-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Simulation Construction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-AppendicesA-Syntax.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Syntax of command descriptions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30-AppendicesB-Commands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./40-AppendicesC-DemoModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Demonstration model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./50-AppendicesD-Processes-DO.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Processes: oxygen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./51-AppendicesD-Processes-Si.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Processes: silicate</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./52-AppendicesD-Processes-IN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Processes: inorganic nitrogen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./53-AppendicesD-Processes-IP.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Processes: inorganic phosphorus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./54-AppendicesD-Processes-PhytoGeneral.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Processes: phyto general</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./55-AppendicesD-Processes-PhytoBiomass.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">Processes: phyto biomass rates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./56-AppendicesD-Processes-PhytoLimits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">Processes: phyto limitation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./57-AppendicesD-Processes-PhytoUptake.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">Processes: phyto uptake</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./58-AppendicesD-Processes-PhytoLosses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">L</span>&nbsp; <span class="chapter-title">Processes: phyto losses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./59-AppendicesD-Processes-PhytoOther.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">M</span>&nbsp; <span class="chapter-title">Processes: phyto other</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./60-AppendicesD-Processes-Org.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">N</span>&nbsp; <span class="chapter-title">Processes: organic matter</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./61-AppendicesD-Processes-Pathogens.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">O</span>&nbsp; <span class="chapter-title">Processes: pathogens</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./70-AppendicesE-ComputedVars.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">P</span>&nbsp; <span class="chapter-title">Computed variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./71-AppendicesE-DiagnosticVars.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">Q</span>&nbsp; <span class="chapter-title">Diagnostic variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80-AppendicesF-Parameters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">R</span>&nbsp; <span class="chapter-title">Parameters</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./90-AppendicesG-MassConservationModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">S</span>&nbsp; <span class="chapter-title">Mass Conservation Model</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-SedDissOrgProd-3" id="toc-sec-SedDissOrgProd-3" class="nav-link active" data-scroll-target="#sec-SedDissOrgProd-3"><span class="header-section-number">N.1</span> Sediment flux</a></li>
+  <li><a href="#sec-Hydrol-3" id="toc-sec-Hydrol-3" class="nav-link" data-scroll-target="#sec-Hydrol-3"><span class="header-section-number">N.2</span> Hydrolysis</a>
+  <ul>
+  <li><a href="#sec-HydrolCons-4" id="toc-sec-HydrolCons-4" class="nav-link" data-scroll-target="#sec-HydrolCons-4"><span class="header-section-number">N.2.1</span> Consumption</a></li>
+  <li><a href="#sec-HydrolProd-4" id="toc-sec-HydrolProd-4" class="nav-link" data-scroll-target="#sec-HydrolProd-4"><span class="header-section-number">N.2.2</span> Production</a></li>
+  </ul></li>
+  <li><a href="#sec-Break-3" id="toc-sec-Break-3" class="nav-link" data-scroll-target="#sec-Break-3"><span class="header-section-number">N.3</span> Breakdown</a>
+  <ul>
+  <li><a href="#sec-BreakCons-4" id="toc-sec-BreakCons-4" class="nav-link" data-scroll-target="#sec-BreakCons-4"><span class="header-section-number">N.3.1</span> Consumption</a></li>
+  <li><a href="#sec-BreakProd-4" id="toc-sec-BreakProd-4" class="nav-link" data-scroll-target="#sec-BreakProd-4"><span class="header-section-number">N.3.2</span> Production</a></li>
+  </ul></li>
+  <li><a href="#sec-Miner-3" id="toc-sec-Miner-3" class="nav-link" data-scroll-target="#sec-Miner-3"><span class="header-section-number">N.4</span> Mineralisation</a>
+  <ul>
+  <li><a href="#sec-MinerCons-4" id="toc-sec-MinerCons-4" class="nav-link" data-scroll-target="#sec-MinerCons-4"><span class="header-section-number">N.4.1</span> Consumption</a></li>
+  <li><a href="#sec-MinerProd-4" id="toc-sec-MinerProd-4" class="nav-link" data-scroll-target="#sec-MinerProd-4"><span class="header-section-number">N.4.2</span> Production</a></li>
+  </ul></li>
+  <li><a href="#sec-Active-3" id="toc-sec-Active-3" class="nav-link" data-scroll-target="#sec-Active-3"><span class="header-section-number">N.5</span> Activation</a>
+  <ul>
+  <li><a href="#sec-ActiveCons-4" id="toc-sec-ActiveCons-4" class="nav-link" data-scroll-target="#sec-ActiveCons-4"><span class="header-section-number">N.5.1</span> Consumption</a></li>
+  <li><a href="#sec-ActiveProd-4" id="toc-sec-ActiveProd-4" class="nav-link" data-scroll-target="#sec-ActiveProd-4"><span class="header-section-number">N.5.2</span> Production</a></li>
+  </ul></li>
+  <li><a href="#sec-OrgPhot-3" id="toc-sec-OrgPhot-3" class="nav-link" data-scroll-target="#sec-OrgPhot-3"><span class="header-section-number">N.6</span> Photolysis</a>
+  <ul>
+  <li><a href="#sec-PhotCons-4" id="toc-sec-PhotCons-4" class="nav-link" data-scroll-target="#sec-PhotCons-4"><span class="header-section-number">N.6.1</span> Consumption</a></li>
+  <li><a href="#sec-PhotProd-4" id="toc-sec-PhotProd-4" class="nav-link" data-scroll-target="#sec-PhotProd-4"><span class="header-section-number">N.6.2</span> Production</a></li>
+  </ul></li>
+  <li><a href="#sec-OrgLight-3" id="toc-sec-OrgLight-3" class="nav-link" data-scroll-target="#sec-OrgLight-3"><span class="header-section-number">N.7</span> Self shading</a></li>
+  <li><a href="#sec-OrgSettle-3" id="toc-sec-OrgSettle-3" class="nav-link" data-scroll-target="#sec-OrgSettle-3"><span class="header-section-number">N.8</span> Settling</a>
+  <ul>
+  <li><a href="#sec-OrgSettleNone-5" id="toc-sec-OrgSettleNone-5" class="nav-link" data-scroll-target="#sec-OrgSettleNone-5"><span class="header-section-number">N.8.1</span> None</a></li>
+  <li><a href="#sec-OrgSettleConst-5" id="toc-sec-OrgSettleConst-5" class="nav-link" data-scroll-target="#sec-OrgSettleConst-5"><span class="header-section-number">N.8.2</span> Constant</a></li>
+  <li><a href="#sec-OrgSettleConstD-5" id="toc-sec-OrgSettleConstD-5" class="nav-link" data-scroll-target="#sec-OrgSettleConstD-5"><span class="header-section-number">N.8.3</span> Constant with density correction</a></li>
+  <li><a href="#sec-OrgSettleStokes-5" id="toc-sec-OrgSettleStokes-5" class="nav-link" data-scroll-target="#sec-OrgSettleStokes-5"><span class="header-section-number">N.8.4</span> Stokes</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./20-AppendicesA-Syntax.html">Appendices</a></li><li class="breadcrumb-item"><a href="./60-AppendicesD-Processes-Org.html"><span class="chapter-number">N</span>&nbsp; <span class="chapter-title">Processes: organic matter</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-AppOrg" class="quarto-section-identifier">Appendix N — Processes: organic matter</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-SedDissOrgProd-3" class="level2" data-number="N.1">
+<h2 data-number="N.1" class="anchored" data-anchor-id="sec-SedDissOrgProd-3"><span class="header-section-number">N.1</span> Sediment flux</h2>
+<p>Dissolved organic carbon, nitrogen and phosphorus are exchanged between the water column and sediments via specification of separate sediment fluxes. In all cases, this flux is most commonly out of the sediments, i.e.&nbsp;a positive specification of sediment flux. Although it is rare that sediments act as sinks of these species, TUFLOW WQ Module can be parameterised to allow for this if required. Only labile dissolved organic matter is released from the sediments in the WQ Module, and as such, references to organics in this section should be interpreted as labile organics.</p>
+<p>The user specified rates of dissolved organic fluxes (which can be spatially varying) are modified by overlying ambient dissolved oxygen concentration (together with respective user specified half saturation oxygen concentrations) and water temperature. These modifications are simulated via Michaelis-Menten and Arrhenius models, respectively, as per <a href="#eq-sed-org-flux" class="quarto-xref">Equation&nbsp;<span>N.1</span></a>.</p>
+<p><span id="eq-sed-org-flux"><span class="math display">\[
+\left.\begin{aligned}
+  \href{AppDiags.html#var-DiagDOCSedFlx}{F_{sed\langle computed\rangle}^{DOC}} =&amp; F_{sed}^{DOC} \times \frac{K_{sed-O_2}^{DOM}}{K_{sed-O_2}^{DOM} + \left[DO\right]} \times
+  \hphantom{\text{ab}} \left[\theta_{sed}^{DOM}\right]^{\left(T-20\right)}
+\\ \\
+  \href{AppDiags.html#var-DiagDONSedFlx}{F_{sed\langle computed\rangle}^{DON}} =&amp; F_{sed}^{DON} \times \frac{K_{sed-O_2}^{DOM}}{K_{sed-O_2}^{DOM} + \left[DO\right]} \times
+  \hphantom{\text{ab}} \left[\theta_{sed}^{DOM}\right]^{\left(T-20\right)}
+\\ \\
+  \href{AppDiags.html#var-DiagDOPSedFlx}{F_{sed\langle computed\rangle}^{DOP}} =&amp; F_{sed}^{DOP} \times \underbrace{\frac{K_{sed-O_2}^{DOM}}{K_{sed-O_2}^{DOM} + \left[DO\right]}}_{\text{Influence of oxygen}} \times \underbrace{\vphantom{\frac{\left[DO\right]}{K_{sed-O_2}^{NO_3} + \left[DO\right]}}    
+  \left[\theta_{sed}^{DOM}\right]^{\left(T-20\right)}}_{\text{Influence of temperature}}
+\end{aligned}\right\}
+\tag{N.1}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQFsedDOC"><span class="math inline">\(F_{sed}^{DOC}\)</span></a>, <a href="30-AppendicesB-Commands.html#par-WQFsedDON"><span class="math inline">\(F_{sed}^{DON}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQFsedDOP"><span class="math inline">\(F_{sed}^{DOP}\)</span></a> are the user specified dissolved organic carbon, nitrogen and phosphorus sediment fluxes at 20<span class="math inline">\(^o\)</span>C without the influence of dissolved oxygen, <a href="70-AppendicesE-ComputedVars.html#var-CompDO"><span class="math inline">\(\left[DO\right]\)</span></a> is the overlying dissolved oxygen concentration, <a href="30-AppendicesB-Commands.html#par-WQKsedDOM"><span class="math inline">\(K_{sed-O_2}^{DOM}\)</span></a> is the user specified half saturation concentration of dissolved oxygen for dissolved organic matter sediment flux, <a href="30-AppendicesB-Commands.html#par-WQthetasedDOM"><span class="math inline">\(\theta_{sed}^{DOM}\)</span></a> is the corresponding temperature coefficient, and <a href="70-AppendicesE-ComputedVars.html#var-CompT"><span class="math inline">\(T\)</span></a> is ambient water temperature. The values of <span class="math inline">\(K_{sed-O_2}^{DOM}\)</span> and <span class="math inline">\(\theta_{sed}^{DOM}\)</span> are intentionally applied equally to dissolved organic carbon, nitrogen and phosphorus sediment fluxes. This is because there is one (not three) biological consumption process that generates these constituents: <span class="math inline">\(K_{sed-O_2}^{DOM}\)</span> and <span class="math inline">\(\theta_{sed}^{DOM}\)</span> apply to this single process. In a similar vein, the user specifications for <span class="math inline">\(F_{sed}^{DOC}\)</span>, <span class="math inline">\(F_{sed}^{DON}\)</span> and <span class="math inline">\(F_{sed}^{DOP}\)</span> should not vary significantly in their relative proportions from the ratio that these typically occur in the organic matter being consumed (e.g.&nbsp;the Redfield ratio).</p>
+<p>As per silicate sediment flux (see <a href="51-AppendicesD-Processes-Si.html#sec-SedSilProd-3" class="quarto-xref"><span>Section E.1</span></a>), the above equations lead to linearly varying ambient dissolved organics concentrations in the demonstration model when dissolved oxygen concentration, half saturation oxygen concentrations and ambient temperature are set to be constant. As per FRP simulation, the above equations also lead to the form of sediment release presented in <a href="53-AppendicesD-Processes-IP.html#fig-FRPKSatDODyn" class="quarto-xref">Figure&nbsp;<span>G.1</span></a> and <a href="53-AppendicesD-Processes-IP.html#fig-FRPTDODyn" class="quarto-xref">Figure&nbsp;<span>G.2</span></a> when oxygen drawdown and temperature changes occur, respectively.</p>
+</section>
+<section id="sec-Hydrol-3" class="level2" data-number="N.2">
+<h2 data-number="N.2" class="anchored" data-anchor-id="sec-Hydrol-3"><span class="header-section-number">N.2</span> Hydrolysis</h2>
+<p>Hydrolysis is the pelagic biological conversion of labile particulate organic matter to labile dissolved organic matter. It is therefore a source of dissolved carbon, nitrogen and phosphorus, and a sink of the corresponding particulates. Hydrolysis neither consumes or produces dissolved oxygen or bioavailable inorganic nutrients. Hydrolysis is implemented within the labile organics constituent model of the WQ Module, and the term organic matter in this section therefore refers to labile organic matter. Refractory organic matter processes are described elsewhere.</p>
+<p>The pelagic hydrolysis rate is computed within the labile organics constituent model via <a href="#eq-pel-hydrolysis-rate" class="quarto-xref">Equation&nbsp;<span>N.2</span></a>.</p>
+<p><span id="eq-pel-hydrolysis-rate"><span class="math display">\[
+\left.\begin{aligned}
+  R_{hyd\langle computed\rangle}^{POC} =&amp; R_{hyd}^{POC} \times \frac{\left[DO\right]}{K_{hyd-O_2}^{POM} + \left[DO\right]} \times
+  \hphantom{\text{ab}} \left[\theta_{hyd}^{POM}\right]^{\left(T-20\right)}
+\\ \\
+  R_{hyd\langle computed\rangle}^{PON} =&amp; R_{hyd}^{PON} \times \frac{\left[DO\right]}{K_{hyd-O_2}^{POM} + \left[DO\right]} \times
+  \hphantom{\text{ab}} \left[\theta_{hyd}^{POM}\right]^{\left(T-20\right)}
+\\ \\
+  R_{hyd\langle computed\rangle}^{POP} =&amp; R_{hyd}^{POP} \times \underbrace{\frac{\left[DO\right]}{K_{hyd-O_2}^{POM} + \left[DO\right]}}_{\text{Influence of oxygen}} \times \underbrace{\vphantom{\frac{\left[DO\right]}{K_{sed-O_2}^{NO_3} + \left[DO\right]}}
+  \hphantom{\text{ab}} \left[\theta_{hyd}^{POM}\right]^{\left(T-20\right)}}_{\text{Influence of temperature}}
+\end{aligned}\right\}
+\tag{N.2}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQRhydPOC"><span class="math inline">\(R_{hyd}^{POC}\)</span></a>, <a href="30-AppendicesB-Commands.html#par-WQRhydPON"><span class="math inline">\(R_{hyd}^{PON}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQRhydPOP"><span class="math inline">\(R_{hyd}^{POP}\)</span></a> are the user specified particulate organic carbon, nitrogen and phosphorus hydrolysis rates at 20<span class="math inline">\(^o\)</span>C without the influence of dissolved oxygen, <a href="70-AppendicesE-ComputedVars.html#var-CompDO"><span class="math inline">\(\left[DO\right]\)</span></a> is the ambient dissolved oxygen concentration, <a href="30-AppendicesB-Commands.html#par-WQKhydPOM"><span class="math inline">\(K_{hyd-O_2}^{POM}\)</span></a> is the user specified half saturation concentration of dissolved oxygen for particulate organic matter hydrolysis, <a href="30-AppendicesB-Commands.html#par-WQthetahydPOM"><span class="math inline">\(\theta_{hyd}^{POM}\)</span></a> is the corresponding temperature coefficient, and <a href="70-AppendicesE-ComputedVars.html#var-CompT"><span class="math inline">\(T\)</span></a> is ambient water temperature. As per sediment fluxes, the values of <span class="math inline">\(K_{hyd-O_2}^{POM}\)</span> and <span class="math inline">\(\theta_{hyd}^{POM}\)</span> are intentionally applied equally to particulate organic carbon, nitrogen and phosphorus hydrolysis. This is because there is one (not three) biological consumption process that generates these constituents: <span class="math inline">\(K_{hyd-O_2}^{POM}\)</span> and <span class="math inline">\(\theta_{hyd}^{POM}\)</span> apply to this single process. In a similar vein, the user specifications for <span class="math inline">\(R_{hyd}^{POC}\)</span>, <span class="math inline">\(R_{hyd}^{PON}\)</span> and <span class="math inline">\(R_{hyd}^{POP}\)</span> should not vary significantly in their relative proportions from the ratio that these typically occur in the organic matter being consumed (e.g.&nbsp;the Redfield ratio).</p>
+<section id="sec-HydrolCons-4" class="level3" data-number="N.2.1">
+<h3 data-number="N.2.1" class="anchored" data-anchor-id="sec-HydrolCons-4"><span class="header-section-number">N.2.1</span> Consumption</h3>
+<p>The hydrolysis rates from <a href="#eq-pel-hydrolysis-rate" class="quarto-xref">Equation&nbsp;<span>N.2</span></a> are multiplied by their respective ambient particulate organic matter concentrations to compute their respective consumptive fluxes (losses) at each model timestep in each model cell via <a href="#eq-pel-hydrolysis-fluxcons" class="quarto-xref">Equation&nbsp;<span>N.3</span></a>.</p>
+<p><span id="eq-pel-hydrolysis-fluxcons"><span class="math display">\[
+\left.\begin{aligned}
+  \href{AppDiags.html#var-DiagPOCHydrol}{F_{hyd\langle computed\rangle}^{POC}} =&amp; R_{hyd\langle computed\rangle}^{POC} \times \left[ POC \right]
+\\ \\  
+  \href{AppDiags.html#var-DiagPONHydrol}{F_{hyd\langle computed\rangle}^{PON}} =&amp; R_{hyd\langle computed\rangle}^{PON} \times \left[ PON \right]
+\\ \\  
+  \href{AppDiags.html#var-DiagPOPHydrol}{F_{hyd\langle computed\rangle}^{POP}} =&amp; R_{hyd\langle computed\rangle}^{POP} \times \left[ POP \right]
+\end{aligned}\right\}
+\tag{N.3}\]</span></span></p>
+</section>
+<section id="sec-HydrolProd-4" class="level3" data-number="N.2.2">
+<h3 data-number="N.2.2" class="anchored" data-anchor-id="sec-HydrolProd-4"><span class="header-section-number">N.2.2</span> Production</h3>
+<p>The consumptive fluxes from <a href="#eq-pel-hydrolysis-fluxcons" class="quarto-xref">Equation&nbsp;<span>N.3</span></a> result in the dissolved organic productive fluxes in <a href="#eq-pel-hydrolysis-fluxprod" class="quarto-xref">Equation&nbsp;<span>N.4</span></a>.</p>
+<p><span id="eq-pel-hydrolysis-fluxprod"><span class="math display">\[
+\left.\begin{aligned}
+  F_{hyd\langle computed\rangle}^{DOC} =&amp; F_{hyd\langle computed\rangle}^{POC}
+\\ \\  
+  F_{hyd\langle computed\rangle}^{DON} =&amp; F_{hyd\langle computed\rangle}^{PON}
+\\ \\  
+  F_{hyd\langle computed\rangle}^{DOP} =&amp; F_{hyd\langle computed\rangle}^{POP}
+\end{aligned}\right\}
+\tag{N.4}\]</span></span></p>
+</section>
+</section>
+<section id="sec-Break-3" class="level2" data-number="N.3">
+<h2 data-number="N.3" class="anchored" data-anchor-id="sec-Break-3"><span class="header-section-number">N.3</span> Breakdown</h2>
+<p>Breakdown is the pelagic biological conversion of refractory particulate organic matter (which is a single computed variable) to three labile particulate organic matter computed variables. It is therefore a source of labile particulate organic carbon, nitrogen and phosphorus, and a sink of refractory particulate organic matter. Breakdown neither consumes or produces dissolved oxygen or bioavailable inorganic nutrients. Breakdown is implemented within the refractory organics constituent model of the WQ Module only, so the following does not apply if the labile organics constituent model is used.</p>
+<p>The pelagic breakdown rate of refractory particulate organic matter is computed via <a href="#eq-pel-bdown-rate" class="quarto-xref">Equation&nbsp;<span>N.5</span></a>.</p>
+<p><span id="eq-pel-bdown-rate"><span class="math display">\[
+R_{bdn\langle computed\rangle}^{RPOM} = R_{bdn}^{RPOM} \times \underbrace{\frac{\left[DO\right]}{K_{hyd-O_2}^{POM} + \left[DO\right]}}_{\text{Influence of oxygen}} \times \underbrace{\vphantom{\frac{\left[DO\right]}{K_{sed-O_2}^{NO_3} + \left[DO\right]}}
+  \hphantom{\text{ab}} \left[\theta_{hyd}^{POM}\right]^{\left(T-20\right)}}_{\text{Influence of temperature}}
+\tag{N.5}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQRbdnRPOM"><span class="math inline">\(R_{bdn}^{RPOM}\)</span></a>is the user specified (or default) refractory particulate organic matter breakdown rate at 20<span class="math inline">\(^o\)</span>C without the influence of dissolved oxygen, <a href="70-AppendicesE-ComputedVars.html#var-CompDO"><span class="math inline">\(\left[DO\right]\)</span></a> is the ambient dissolved oxygen concentration, <a href="30-AppendicesB-Commands.html#par-WQKhydPOM"><span class="math inline">\(K_{hyd-O_2}^{POM}\)</span></a> is the user specified (or default) half saturation concentration of dissolved oxygen for labile particulate organic matter hydrolysis, <a href="30-AppendicesB-Commands.html#par-WQthetahydPOM"><span class="math inline">\(\theta_{hyd}^{POM}\)</span></a> is the corresponding temperature coefficient, and <a href="70-AppendicesE-ComputedVars.html#var-CompT"><span class="math inline">\(T\)</span></a> is ambient water temperature. The parameters <span class="math inline">\(K_{hyd-O_2}^{POM}\)</span> and <span class="math inline">\(\theta_{hyd}^{POM}\)</span> used in <a href="#eq-pel-bdown-rate" class="quarto-xref">Equation&nbsp;<span>N.5</span></a> are the same as those used for the hydrolysis calculations described in <a href="#sec-Hydrol-3" class="quarto-xref"><span>Section N.2</span></a> and specified via the associated labile organic matter hydrolysis command.</p>
+<section id="sec-BreakCons-4" class="level3" data-number="N.3.1">
+<h3 data-number="N.3.1" class="anchored" data-anchor-id="sec-BreakCons-4"><span class="header-section-number">N.3.1</span> Consumption</h3>
+<p>The breakdown rate from <a href="#eq-pel-bdown-rate" class="quarto-xref">Equation&nbsp;<span>N.5</span></a> is multiplied by the ambient refractory particulate organic matter concentration to compute its consumptive flux (loss) at each model timestep in each model cell via <a href="#eq-pel-bdown-fluxcons" class="quarto-xref">Equation&nbsp;<span>N.6</span></a>.</p>
+<p><span id="eq-pel-bdown-fluxcons"><span class="math display">\[
+\href{AppDiags.html#var-DiagBdn}{F_{bdn\langle computed\rangle}^{RPOM}} = R_{bdn\langle computed\rangle}^{RPOM} \times \left[ RPOM \right]
+\tag{N.6}\]</span></span></p>
+</section>
+<section id="sec-BreakProd-4" class="level3" data-number="N.3.2">
+<h3 data-number="N.3.2" class="anchored" data-anchor-id="sec-BreakProd-4"><span class="header-section-number">N.3.2</span> Production</h3>
+<p>The consumptive flux from <a href="#eq-pel-bdown-fluxcons" class="quarto-xref">Equation&nbsp;<span>N.6</span></a> results in the labile particulate organic carbon, nitrogen and phosphorus productive fluxes in <a href="#eq-pel-bdown-fluxprod" class="quarto-xref">Equation&nbsp;<span>N.7</span></a>.</p>
+<p><span id="eq-pel-bdown-fluxprod"><span class="math display">\[
+\left.\begin{aligned}
+  F_{bdn\langle computed\rangle}^{POC} =&amp; F_{bdn\langle computed\rangle}^{RPOM}
+\\ \\  
+  F_{bdn\langle computed\rangle}^{PON} =&amp; F_{bdn\langle computed\rangle}^{RPOM} \times X_N^{RPOM}
+\\ \\  
+  F_{bdn\langle computed\rangle}^{POP} =&amp; F_{bdn\langle computed\rangle}^{RPOM} \times X_P^{RPOM}
+\end{aligned}\right\}
+\tag{N.7}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQXNRPOM"><span class="math inline">\(X_N^{RPOM}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQXPRPOM"><span class="math inline">\(X_P^{RPOM}\)</span></a> are the user specified (or default) molar ratios of nitrogen and phosphorus to carbon within refractory particulate organic matter. These should not differ significantly from the Redfield ratios of 16/106 and 1/106, respectively.</p>
+</section>
+</section>
+<section id="sec-Miner-3" class="level2" data-number="N.4">
+<h2 data-number="N.4" class="anchored" data-anchor-id="sec-Miner-3"><span class="header-section-number">N.4</span> Mineralisation</h2>
+<p>Mineralisation is the pelagic biological conversion of labile dissolved organic matter to dissolved inorganic carbon and nutrients. It is therefore a source of dissolved inorganic carbon, ammonium and filterable reactive phosphorus, and a sink of the corresponding labile dissolved organics. Mineralisation is conceptualised as comprising aerobic (i.e.&nbsp;consuming dissolved oxygen and (via denitrification) inorganic nitrate) and anaerobic components, and is implemented within the labile organics constituent model of the WQ Module. The term organic matter in this section therefore refers to labile organic matter.</p>
+<p>The same pelagic mineralisation rate is computed within the WQ Module for dissolved organic carbon, nitrogen and phosphorus via <a href="#eq-pel-miner-rate" class="quarto-xref">Equation&nbsp;<span>N.8</span></a>.</p>
+<p><span id="eq-pel-miner-rate"><span class="math display">\[
+R_{miner\langle computed\rangle}^{DOM} = R_{miner}^{DOM} \times \underbrace{\left[\underbrace{\frac{\left[DO\right]}{K_{miner-O_2}^{DOM} + \left[DO\right]}}_{\text{O2 consumption}} + \underbrace{f_{an} \times \frac{K_{miner-O_2}^{DOM}}{K_{miner-O_2}^{DOM} + \left[DO\right]}}_{\text{non-O2 consumption}}\right]}_{\text{Influence of oxygen}} \times \underbrace{\vphantom{\left[\underbrace{\frac{\left[DO\right]}{K_{miner-O_2}^{DOM} + \left[DO\right]}}_{\text{aerobic}} + \underbrace{f_{an} \times \frac{K_{miner-O_2}^{DOM}}{K_{miner-O_2}^{DOM} + \left[DO\right]}}_{\text{anaerobic}}\right]}
+  \hphantom{\text{ab}} \left[\theta_{miner}^{DOM}\right]^{\left(T-20\right)}}_{\text{Influence of temperature}}
+\tag{N.8}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQRminerDOM"><span class="math inline">\(R_{miner}^{DOM}\)</span></a> is the user specified (or default) dissolved organic matter (i.e.&nbsp;carbon, nitrogen and phosphorus) mineralisation rate at 20<span class="math inline">\(^o\)</span>C without the influence of dissolved oxygen, <a href="70-AppendicesE-ComputedVars.html#var-CompDO"><span class="math inline">\(\left[DO\right]\)</span></a> is the ambient dissolved oxygen concentration, <a href="30-AppendicesB-Commands.html#par-WQKminerDOM"><span class="math inline">\(K_{miner-O_2}^{DOM}\)</span></a> is the user specified half saturation concentration of dissolved oxygen for dissolved organic matter mineralisation, <a href="30-AppendicesB-Commands.html#par-WQthetaminerDOM"><span class="math inline">\(\theta_{miner}^{DOM}\)</span></a> is the corresponding temperature coefficient, <a href="30-AppendicesB-Commands.html#par-WQfanminer"><span class="math inline">\(f_{an}\)</span></a> is a fractional multiplier that weights the Michaelis-Menten contribution of non-O<span class="math inline">\(_2\)</span> processes within the calculation of total mineralisation and <a href="70-AppendicesE-ComputedVars.html#var-CompT"><span class="math inline">\(T\)</span></a> is ambient water temperature. As per sediment fluxes and hydrolysis, the values of <span class="math inline">\(K_{miner-O_2}^{DOM}\)</span> and <span class="math inline">\(\theta_{miner}^{DOM}\)</span> are intentionally applied equally to dissolved organic carbon, nitrogen and phosphorus mineralisation. In addition, the rate at which mineralisation of dissolved organic matter (to inorganics) occurs is the same for all dissolved organic constituents. This is because there is one (not three) biological conversion process that is assumed to draw equally on all dissolved organic constituents. Finally, setting <span class="math inline">\(f_{an}\)</span> to zero does not suppress entirely non-O<span class="math inline">\(_2\)</span> mineralisation (see following section), but it does remove the Michaelis-Menten based influence of anaerobic processes on the calculation of total mineralisation.</p>
+<section id="sec-MinerCons-4" class="level3" data-number="N.4.1">
+<h3 data-number="N.4.1" class="anchored" data-anchor-id="sec-MinerCons-4"><span class="header-section-number">N.4.1</span> Consumption</h3>
+<p>The mineralisation rate from <a href="#eq-pel-miner-rate" class="quarto-xref">Equation&nbsp;<span>N.8</span></a> is multiplied by ambient labile dissolved organic carbon, nitrogen and phosphorus concentrations to compute their respective consumptive fluxes (losses) at each model timestep in each model cell via <a href="#eq-pel-miner-fluxcons" class="quarto-xref">Equation&nbsp;<span>N.9</span></a>.</p>
+<p><span id="eq-pel-miner-fluxcons"><span class="math display">\[
+\left.\begin{aligned}
+  \href{AppDiags.html#var-DiagDOCMiner}{F_{miner\langle computed\rangle}^{DOC}} =&amp; R_{miner\langle computed\rangle}^{DOM} \times \left[ DOC \right]
+\\ \\  
+  \href{AppDiags.html#var-DiagDONMiner}{F_{miner\langle computed\rangle}^{DON}} =&amp; R_{miner\langle computed\rangle}^{DOM} \times \left[ DON \right]
+\\ \\  
+  \href{AppDiags.html#var-DiagDOPMiner}{F_{miner\langle computed\rangle}^{DOP}} =&amp; R_{miner\langle computed\rangle}^{DOM} \times \left[ DOP \right]
+\end{aligned}\right\}
+\tag{N.9}\]</span></span></p>
+<p>The fraction of dissolved organic carbon mineralisation that consumes dissolved oxygen <span class="math inline">\(O_2\)</span> is given by <a href="#eq-pel-miner-dosink" class="quarto-xref">Equation&nbsp;<span>N.10</span></a>. <a href="30-AppendicesB-Commands.html#par-WQKminerDOM"><span class="math inline">\(K_{miner-O_2}^{DOM}\)</span></a>, <a href="70-AppendicesE-ComputedVars.html#var-CompDO"><span class="math inline">\(\left[DO\right]\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQfanminer"><span class="math inline">\(f_{an}\)</span></a> have been described previously.</p>
+<p><span id="eq-pel-miner-dosink"><span class="math display">\[
+f_{miner-O_2\langle computed\rangle}^{DOC} = \frac{\frac{\left[DO\right]}{K_{miner-O_2}^{DOM} + \left[DO\right]}}{\frac{\left[DO\right]}{K_{miner-O_2}^{DOM} + \left[DO\right]} + f_{an} \times \frac{K_{miner-O_2}^{DOM}}{K_{miner-O_2}^{DOM} + \left[DO\right]}}
+\tag{N.10}\]</span></span></p>
+<p>Applying a 1:1 molar ratio of mineralised dissolved organic carbon to consumed diatomic dissolved oxygen, gives the consumptive oxygen flux <span class="math inline">\(F_{miner\langle computed\rangle}^{O_2}\)</span> as:</p>
+<p><span id="eq-pel-miner-dosink2"><span class="math display">\[
+F_{miner\langle computed\rangle}^{O_2} = F_{miner\langle computed\rangle}^{DOC} \times f_{miner-O_2\langle computed\rangle}^{DOC}
+\tag{N.11}\]</span></span></p>
+<p>Substituting <a href="#eq-pel-miner-rate" class="quarto-xref">Equation&nbsp;<span>N.8</span></a> and <a href="#eq-pel-miner-fluxcons" class="quarto-xref">Equation&nbsp;<span>N.9</span></a> into <a href="#eq-pel-miner-dosink2" class="quarto-xref">Equation&nbsp;<span>N.11</span></a> and cancelling terms gives the final expression for <span class="math inline">\(F_{miner\langle computed\rangle}^{O_2}\)</span> as <a href="#eq-pel-miner-flux-aer" class="quarto-xref">Equation&nbsp;<span>N.12</span></a>, again with parameters described previously.</p>
+<p><span id="eq-pel-miner-flux-aer"><span class="math display">\[
+F_{miner\langle computed\rangle}^{O_2} = F_{miner\langle computed\rangle}^{DOC} \times \frac{\left[DO\right]}{K_{miner-O_2}^{DOM} + \left[DO\right]}
+\tag{N.12}\]</span></span></p>
+<p>This is also expressed as the reduction of ambient dissolved oxygen concentration that would result from this consumptive mineralisation over a period of five days. It is a common laboratory reporting unit and referred to as BOD5 (biological oxygen demand over 5 days). BOD5 is computed as per <a href="#eq-pel-miner-BOD5-aerO2" class="quarto-xref">Equation&nbsp;<span>N.13</span></a>.</p>
+<p><span id="eq-pel-miner-BOD5-aerO2"><span class="math display">\[
+\href{AppDiags.html#var-DiagDOCBDO5}{BOD5_{\langle computed\rangle}^{O_2}} = F_{miner\langle computed\rangle}^{O_2} \times 5
+\tag{N.13}\]</span></span></p>
+<p>A portion of remaining mineralisation (<span class="math inline">\(F_{miner\langle computed\rangle}^{DOC} - F_{miner\langle computed\rangle}^{O_2}\)</span>) flux (that follows dissolved oxygen consumption) sources its oxygen from ambient nitrate. This consumptive flux of nitrate <span class="math inline">\(F_{miner\langle computed\rangle}^{NO_3}\)</span> is referred to as denitrification and is the reduction of nitrate N to free diatomic nitrogen gas. Again applying a 1:1 molar ratio of consumed dissolved organic carbon to nitrate, this is quantity is computed via <a href="#eq-pel-miner-flux-no3sink" class="quarto-xref">Equation&nbsp;<span>N.14</span></a>.</p>
+<p><span id="eq-pel-miner-flux-no3sink"><span class="math display">\[
+\href{AppDiags.html#var-DiagDOCDenitrif}{F_{miner\langle computed\rangle}^{NO_3}} = \left(F_{miner\langle computed\rangle}^{DOC} - F_{miner\langle computed\rangle}^{O_2}\right) \times \frac{\left[NO_3\right]}{K_{miner-NO_3}^{NO_3} + \left[NO_3\right]}
+\tag{N.14}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQKminerNitDOM"><span class="math inline">\(K_{miner-NO_3}^{NO_3}\)</span></a> is the user specified half saturation concentration of nitrate for consumption of nitrate as result of mineralisation of dissolved organic carbon and <a href="70-AppendicesE-ComputedVars.html#var-CompNit"><span class="math inline">\(\left[NO_3\right]\)</span></a> is the ambient nitrate concentration.</p>
+<p>The remaining dissolved organic carbon mineralisation flux is referred to as anaerobic mineralisation, <span class="math inline">\(F_{miner\langle computed\rangle}^{an}\)</span>, such that the following overall molar equality applies (with <span class="math inline">\(O2\)</span> and <span class="math inline">\(NO_3\)</span> being in a 1:1 molar ration with their respective carbon fluxes):</p>
+<p><span id="eq-pel-miner-balance"><span class="math display">\[
+F_{miner\langle computed\rangle}^{DOC} = F_{miner\langle computed\rangle}^{O_2} + F_{miner\langle computed\rangle}^{NO_3} + \href{AppDiags.html#var-DiagDOCAnMiner}{F_{miner\langle computed\rangle}^{an}}
+\tag{N.15}\]</span></span></p>
+<p>In summary:</p>
+<ul>
+<li><span class="math inline">\(F_{miner\langle computed\rangle}^{DOC}\)</span> is the total mineralisation flux of DOC to dissolved inorganics</li>
+<li><span class="math inline">\(F_{miner\langle computed\rangle}^{O_2}\)</span> is the portion of the total mineralisation flux that uses dissolved oxygen as its oxygen source. The flux of DOC and dissolved oxygen are applied as a 1:1 molar ratio</li>
+<li><span class="math inline">\(F_{miner\langle computed\rangle}^{NO_3}\)</span> is the portion of the total mineralisation flux that uses nitrate as its oxygen source. The flux of DOC and nitrate are applied as a 1:1 molar ratio</li>
+<li><span class="math inline">\(F_{miner\langle computed\rangle}^{an}\)</span> is the remaining portion of the total mineralisation flux that uses no oxygen. It consumes no computed variables other than DOC</li>
+</ul>
+<p>All these mineralisation diagnostic variables are reported in units of carbon.</p>
+</section>
+<section id="sec-MinerProd-4" class="level3" data-number="N.4.2">
+<h3 data-number="N.4.2" class="anchored" data-anchor-id="sec-MinerProd-4"><span class="header-section-number">N.4.2</span> Production</h3>
+<p>The consumptive flux from <a href="#eq-pel-bdown-fluxcons" class="quarto-xref">Equation&nbsp;<span>N.6</span></a> results in the inorganic carbon, ammonium and FRP productive fluxes in <a href="#eq-pel-miner-fluxprod" class="quarto-xref">Equation&nbsp;<span>N.16</span></a>.</p>
+<p><span id="eq-pel-miner-fluxprod"><span class="math display">\[
+\left.\begin{aligned}
+  F_{miner\langle computed\rangle}^{DIC} =&amp; F_{miner\langle computed\rangle}^{DOC}
+\\ \\  
+  F_{miner\langle computed\rangle}^{NH_4} =&amp; F_{miner\langle computed\rangle}^{DON}
+\\ \\  
+  F_{miner\langle computed\rangle}^{FRP} =&amp; F_{miner\langle computed\rangle}^{DOP}
+\end{aligned}\right\}
+\tag{N.16}\]</span></span></p>
+<p>The WQ Module does not currently support simulation of dissolved inorganic carbon (DIC) so the corresponding carbonic productive flux in <a href="#eq-pel-miner-fluxprod" class="quarto-xref">Equation&nbsp;<span>N.16</span></a> has no effect on inorganic water quality dynamics. Contact <a href="mailto:support@tuflow.com">support@tuflow.com</a> if the DIC model is required.</p>
+</section>
+</section>
+<section id="sec-Active-3" class="level2" data-number="N.5">
+<h2 data-number="N.5" class="anchored" data-anchor-id="sec-Active-3"><span class="header-section-number">N.5</span> Activation</h2>
+<p>Activation is the pelagic biological conversion of refractory dissolved organic carbon, nitrogen and phosphorus to their respective labile dissolved organic equivalents. It is therefore a source of dissolved labile organic carbon, nitrogen and phosphorus, and a sink of the corresponding refractory dissolved organics. Activation does not consume or produce any other computed variables, although its computed rate does depend on dissolved oxygen concentration.</p>
+<p>The pelagic activation rate is computed within the WQ Module for refractory dissolved organic carbon, nitrogen and phosphorus via <a href="#eq-pel-active-rate" class="quarto-xref">Equation&nbsp;<span>N.17</span></a>.</p>
+<p><span id="eq-pel-active-rate"><span class="math display">\[
+R_{act\langle computed\rangle}^{RDOM} = R_{act}^{RDOM} \times \underbrace{\left[\underbrace{\frac{\left[DO\right]}{K_{miner-O_2}^{DOM} + \left[DO\right]}}_{\text{aerobic}} + \underbrace{f_{an} \times \frac{K_{miner-O_2}^{DOM}}{K_{miner-O_2}^{DOM} + \left[DO\right]}}_{\text{anaerobic}}\right]}_{\text{Influence of oxygen}} \times \underbrace{\vphantom{\left[\underbrace{\frac{\left[DO\right]}{K_{miner-O_2}^{DOM} + \left[DO\right]}}_{\text{aerobic}} + \underbrace{f_{an} \times \frac{K_{miner-O_2}^{DOM}}{K_{miner-O_2}^{DOM} + \left[DO\right]}}_{\text{anaerobic}}\right]}
+  \hphantom{\text{ab}} \left[\theta_{miner}^{DOM}\right]^{\left(T-20\right)}}_{\text{Influence of temperature}}
+\tag{N.17}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQRactRDOM"><span class="math inline">\(R_{act}^{RDOM}\)</span></a> is the user specified refractory dissolved organic matter (i.e.&nbsp;carbon, nitrogen and phosphorus) activation rate at 20<span class="math inline">\(^o\)</span>C without the influence of dissolved oxygen, <a href="70-AppendicesE-ComputedVars.html#var-CompDO"><span class="math inline">\(\left[DO\right]\)</span></a> is the ambient dissolved oxygen concentration, <a href="30-AppendicesB-Commands.html#par-WQKminerDOM"><span class="math inline">\(K_{miner-O_2}^{DOM}\)</span></a> is the user specified half saturation concentration of dissolved oxygen for dissolved organic matter mineralisation, <a href="30-AppendicesB-Commands.html#par-WQthetaminerDOM"><span class="math inline">\(\theta_{miner}^{DOM}\)</span></a> is the corresponding temperature coefficient, <a href="30-AppendicesB-Commands.html#par-WQfanminer"><span class="math inline">\(f_{an}\)</span></a> is a fractional multiplier that weights the Michaelis-Menten contribution of non-O<span class="math inline">\(_2\)</span> processes within the calculation of total mineralisation and <a href="70-AppendicesE-ComputedVars.html#var-CompT"><span class="math inline">\(T\)</span></a> is ambient water temperature. The parameters <span class="math inline">\(K_{miner-O_2}^{DOM}\)</span>, <span class="math inline">\(f_{an}\)</span> and <span class="math inline">\(\theta_{miner}^{DOM}\)</span> used in <a href="#eq-pel-active-rate" class="quarto-xref">Equation&nbsp;<span>N.17</span></a> are the same as those used for the mineralisation calculations described in <a href="#sec-Miner-3" class="quarto-xref"><span>Section N.4</span></a> and specified via the associated labile organic matter mineralisation command. If this is the case and labile organic matter mineralisation is not required as a simulated process, then the command can still be issued but with the first argument, <span class="math inline">\(R_{miner}^{DOM}\)</span>, equal to zero.</p>
+<section id="sec-ActiveCons-4" class="level3" data-number="N.5.1">
+<h3 data-number="N.5.1" class="anchored" data-anchor-id="sec-ActiveCons-4"><span class="header-section-number">N.5.1</span> Consumption</h3>
+<p>The activation rate from <a href="#eq-pel-active-rate" class="quarto-xref">Equation&nbsp;<span>N.17</span></a> is multiplied by the ambient refractory dissolved carbon, nitrogen and phosphorus concentrations to compute their respective consumptive fluxes (losses) at each model timestep in each model cell via <a href="#eq-pel-active-fluxcons" class="quarto-xref">Equation&nbsp;<span>N.18</span></a>.</p>
+<p><span id="eq-pel-active-fluxcons"><span class="math display">\[
+\left.\begin{aligned}
+  \href{AppDiags.html#var-DiagActC}{F_{act\langle computed\rangle}^{RDOC}} =&amp; R_{act\langle computed\rangle}^{RDOM} \times \left[ RDOC \right]
+\\ \\  
+  \href{AppDiags.html#var-DiagActN}{F_{act\langle computed\rangle}^{RDON}} =&amp; R_{act\langle computed\rangle}^{RDOM} \times \left[ RDON \right]
+\\ \\  
+  \href{AppDiags.html#var-DiagActP}{F_{act\langle computed\rangle}^{RDOP}} =&amp; R_{act\langle computed\rangle}^{RDOM} \times \left[ RDOP \right]
+\end{aligned}\right\}
+\tag{N.18}\]</span></span></p>
+</section>
+<section id="sec-ActiveProd-4" class="level3" data-number="N.5.2">
+<h3 data-number="N.5.2" class="anchored" data-anchor-id="sec-ActiveProd-4"><span class="header-section-number">N.5.2</span> Production</h3>
+<p>The consumptive flux from <a href="#eq-pel-active-fluxcons" class="quarto-xref">Equation&nbsp;<span>N.18</span></a> results in the labile dissolved organic carbon, nitrogen and phosphorus productive fluxes in <a href="#eq-pel-active-fluxprod" class="quarto-xref">Equation&nbsp;<span>N.19</span></a>.</p>
+<p><span id="eq-pel-active-fluxprod"><span class="math display">\[
+\left.\begin{aligned}
+  F_{act\langle computed\rangle}^{DOC} =&amp; F_{act\langle computed\rangle}^{RDOC}
+\\ \\  
+  F_{act\langle computed\rangle}^{DON} =&amp; F_{act\langle computed\rangle}^{RDON}
+\\ \\  
+  F_{act\langle computed\rangle}^{DOP} =&amp; F_{act\langle computed\rangle}^{RDOP}
+\end{aligned}\right\}
+\tag{N.19}\]</span></span></p>
+</section>
+</section>
+<section id="sec-OrgPhot-3" class="level2" data-number="N.6">
+<h2 data-number="N.6" class="anchored" data-anchor-id="sec-OrgPhot-3"><span class="header-section-number">N.6</span> Photolysis</h2>
+<p>The WQ Module conceptualises photolysis as the conversion of refractory dissolved organic carbon, nitrogen and phosphorus to their labile dissolved and inorganic equivalents, under the action of photosynthetically active (PAR), ultraviolet A (UVA) and ultraviolet B (UVB) radiation. These radiation bands are provided to the WQ Module from TUFLOW for each computational cell at each water quality timestep. The WQ Module computes total photolysis of refractory dissolved organic carbon <span class="math inline">\(F_{photo-tot}^{RDOC}\)</span> as the sum of photolysis due to each of these three bands via <a href="#eq-pel-rorg-phototot" class="quarto-xref">Equation&nbsp;<span>N.20</span></a>.</p>
+<p><span id="eq-pel-rorg-phototot"><span class="math display">\[
+F_{photo-tot}^{RDOC} = F_{photo-PAR}^{RDOC} + F_{photo-UVA}^{RDOC} + F_{photo-UVB}^{RDOC}
+\tag{N.20}\]</span></span></p>
+<p>Each band’s photolysis is computed via <a href="#eq-pel-rorg-photobands" class="quarto-xref">Equation&nbsp;<span>N.21</span></a>, with Radiation<span class="math inline">\(_{band}\)</span> (where band is PAR, UVA or UVB) being previously converted from <span class="math inline">\(W/m^2\)</span> (as provided by TUFLOW) to moles of photons.</p>
+<p><span id="eq-pel-rorg-photobands"><span class="math display">\[
+F_{photo-band}^{RDOC} = \text{Radiation$_{band}$} \times \underbrace{c \times 10^{-d \times \lambda_{band}}}_{\text{Apparent quantum yield}} \times
+\underbrace{CDOM \times e^{S\times(x-\lambda_{band})}}_{\text{Absorption coefficient}}
+\tag{N.21}\]</span></span></p>
+<p>where <span class="math inline">\(c\)</span> = 7.52, <span class="math inline">\(d\)</span> = 0.0122, <span class="math inline">\(\lambda_{band}\)</span> is each band’s characteristic wavelength, <span class="math inline">\(S\)</span> = 0.0188 and <span class="math inline">\(x\)</span> = 440.0 nm. <a href="71-AppendicesE-DiagnosticVars.html#var-DiagCDOM"><span class="math inline">\(CDOM\)</span></a> is chromomorphic dissolved organic matter and is computed via <a href="#eq-pel-rorg-cdom" class="quarto-xref">Equation&nbsp;<span>N.22</span></a>.</p>
+<p><span id="eq-pel-rorg-cdom"><span class="math display">\[
+\href{AppDiags.html#var-DiagCDOM}{CDOM_{\langle computed \rangle}} = 0.35 \times e^{0.1922\times \left( \left[DOC\right] + \left[RDOC\right]\right) \times (12/1000)}
+\tag{N.22}\]</span></span></p>
+<p><a href="70-AppendicesE-ComputedVars.html#var-CompDOC"><span class="math inline">\(\left[DOC\right]\)</span></a> and <a href="70-AppendicesE-ComputedVars.html#var-CompRDOC"><span class="math inline">\(\left[RDOC\right]\)</span></a> and the ambient concentrations of labile and refractory dissolved organic carbon, respectively.</p>
+<section id="sec-PhotCons-4" class="level3" data-number="N.6.1">
+<h3 data-number="N.6.1" class="anchored" data-anchor-id="sec-PhotCons-4"><span class="header-section-number">N.6.1</span> Consumption</h3>
+<p>Once total photolysis has been computed, the associated consumptive fluxes (losses) of refractory dissolved organic carbon, nitrogen and phosphorus are computed via <a href="#eq-pel-photor-fluxcons" class="quarto-xref">Equation&nbsp;<span>N.23</span></a>, using ambient refractory dissolved nitrogen and phosphorus concentrations to proportion the computed fluxes.</p>
+<p><span id="eq-pel-photor-fluxcons"><span class="math display">\[
+\left.\begin{aligned}
+  \href{AppDiags.html#var-DiagPhoto}{F_{photo\langle computed\rangle}^{RDOC}} =&amp; F_{photo-tot}^{RDOC}
+\\ \\  
+  F_{photo\langle computed\rangle}^{RDON} =&amp; F_{photo-tot}^{RDOC} \times \frac{\left[RDON\right]}{\left[RDOC\right]}
+\\ \\  
+  F_{photo\langle computed\rangle}^{RDOP} =&amp; F_{photo-tot}^{RDOC} \times \frac{\left[RDOP\right]}{\left[RDOC\right]}
+\end{aligned}\right\}
+\tag{N.23}\]</span></span></p>
+</section>
+<section id="sec-PhotProd-4" class="level3" data-number="N.6.2">
+<h3 data-number="N.6.2" class="anchored" data-anchor-id="sec-PhotProd-4"><span class="header-section-number">N.6.2</span> Production</h3>
+<p>The consumptive fluxes from <a href="#eq-pel-photor-fluxcons" class="quarto-xref">Equation&nbsp;<span>N.23</span></a> result in the labile dissolved organic carbon, nitrogen and phosphorus productive fluxes in <a href="#eq-pel-photo-fluxprodO" class="quarto-xref">Equation&nbsp;<span>N.24</span></a>.</p>
+<p><span id="eq-pel-photo-fluxprodO"><span class="math display">\[
+\left.\begin{aligned}
+  F_{photo\langle computed\rangle}^{DOC} =&amp; F_{photo\langle computed\rangle}^{RDOC} \times f_{photo}^{RDOM}
+\\ \\  
+  F_{photo\langle computed\rangle}^{DON} =&amp; F_{photo\langle computed\rangle}^{RDON} \times f_{photo}^{RDOM}
+\\ \\  
+  F_{photo\langle computed\rangle}^{DOP} =&amp; F_{photo\langle computed\rangle}^{RDOP} \times f_{photo}^{RDOM}
+\end{aligned}\right\}
+\tag{N.24}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQfphotoDOM"><span class="math inline">\(f_{photo}^{RDOM}\)</span></a> is the proportion of the total photolysed refractory dissolved organic matter that becomes the corresponding labile organics. The remainder of the photolysed refractory dissolved organic matter fluxes produce inorganic carbon and nutrients via <a href="#eq-pel-photo-fluxprodI" class="quarto-xref">Equation&nbsp;<span>N.25</span></a>.</p>
+<p><span id="eq-pel-photo-fluxprodI"><span class="math display">\[
+\left.\begin{aligned}
+  F_{photo\langle computed\rangle}^{DIC} =&amp; F_{photo\langle computed\rangle}^{RDOC} \times \left(1.0 - f_{photo}^{RDOM}\right)
+\\ \\  
+  F_{photo\langle computed\rangle}^{NH_4} =&amp; F_{photo\langle computed\rangle}^{RDON} \times \left(1.0 - f_{photo}^{RDOM}\right)
+\\ \\  
+  F_{photo\langle computed\rangle}^{FRP} =&amp; F_{photo\langle computed\rangle}^{RDOP} \times \left(1.0 - f_{photo}^{RDOM}\right)
+\end{aligned}\right\}
+\tag{N.25}\]</span></span></p>
+<p>The WQ Module does not currently support simulation of dissolved inorganic carbon (DIC) so the corresponding carbonic productive flux in <a href="#eq-pel-photo-fluxprodI" class="quarto-xref">Equation&nbsp;<span>N.25</span></a> has no effect on inorganic water quality dynamics. Contact <a href="mailto:support@tuflow.com">support@tuflow.com</a> if the DIC model is required.</p>
+</section>
+</section>
+<section id="sec-OrgLight-3" class="level2" data-number="N.7">
+<h2 data-number="N.7" class="anchored" data-anchor-id="sec-OrgLight-3"><span class="header-section-number">N.7</span> Self shading</h2>
+<p>Photosynthetically available radiation is provided to the WQ Module from TUFLOW for each computational cell at each water quality timestep. The WQ Module allows for modification of this TUFLOW field to incorporate the effect of light attenuation due to the presence of particulate and dissolved organic matter. This additional light extinction is computed dynamically at each water quality timestep, based on instantaneous organic matter concentrations in individual computational cells.</p>
+<p>For labile organics, the associated additive specific light attenuation coefficient is computed as per <a href="#eq-pel-org-selfshad" class="quarto-xref">Equation&nbsp;<span>N.26</span></a>.</p>
+<p><span id="eq-pel-org-selfshad"><span class="math display">\[
+Ke_{\langle computed \rangle}^{OM} = Ke^{POM} \times \left[POC\right] + Ke^{DOM} \times \left[DOC\right]
+\tag{N.26}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQKePOM"><span class="math inline">\(Ke^{POM}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQKeDOM"><span class="math inline">\(Ke^{DOM}\)</span></a> are the user specified (or default) specific shading coefficients for labile particulate and dissolved organic matter respectively, and <a href="70-AppendicesE-ComputedVars.html#var-CompPOC"><span class="math inline">\(\left[POC\right]\)</span></a> and <a href="70-AppendicesE-ComputedVars.html#var-CompDOC"><span class="math inline">\(\left[DOC\right]\)</span></a> are the ambient labile particulate and dissolved organic carbon concentrations (used as proxies for organic matter) in each cell. For each cell and at each timestep, this quantity <span class="math inline">\(Ke_{\langle computed \rangle}^{OM}\)</span> is computed and returned to TUFLOW as a two- or three-dimensional field which TUFLOW then includes these in subsequent light distribution calculations.</p>
+<p>For refractory organics (if computed), the associated additive specific light attenuation coefficient is computed as per <a href="#eq-pel-rorg-selfshad" class="quarto-xref">Equation&nbsp;<span>N.27</span></a>.</p>
+<p><span id="eq-pel-rorg-selfshad"><span class="math display">\[
+Ke_{\langle computed \rangle}^{ROM} = R_{CDOM}^{RDOM} \times CDOM + Ke^{RPOM} \times \left[RPOM\right]
+\tag{N.27}\]</span></span></p>
+<p><a href="30-AppendicesB-Commands.html#par-WQKeRDOM"><span class="math inline">\(R_{CDOM}^{RDOM}\)</span></a> is a user specified (or default) dimensionless multiplier applied to the CDOM computed in <a href="#eq-pel-rorg-cdom" class="quarto-xref">Equation&nbsp;<span>N.22</span></a>, where the same CDOM is used in photolysis calculations. <span class="math inline">\(R_{CDOM}^{RDOM}\)</span> is not a specific shading coefficient, but can be thought of as (light attenuation (/m) / CDOM (/m)), or the strength of CDOM in attenuating light. <a href="30-AppendicesB-Commands.html#par-WQKeRPOM"><span class="math inline">\(Ke^{RPOM}\)</span></a> is the user specified (or default) specific shading coefficient for refractory particulate organic matter, and <a href="70-AppendicesE-ComputedVars.html#var-CompRPOM"><span class="math inline">\(\left[RPOM\right]\)</span></a> is the instantaneous refractory particulate organic matter concentration in each cell. For each cell and at each timestep, this quantity <span class="math inline">\(Ke_{\langle computed \rangle}^{ROM}\)</span> is computed and returned to TUFLOW as a two- or three-dimensional field which TUFLOW then includes these in subsequent light distribution calculations.</p>
+</section>
+<section id="sec-OrgSettle-3" class="level2" data-number="N.8">
+<h2 data-number="N.8" class="anchored" data-anchor-id="sec-OrgSettle-3"><span class="header-section-number">N.8</span> Settling</h2>
+<p>Particulate organic matter is able to be settled within the WQ Module. Four settling models are available. These are able to be applied equally to both labile and refractory particulate organic matter to compute <span class="math inline">\(V_{settle}^{lorg}\)</span> and <span class="math inline">\(V_{settle}^{rorg}\)</span>, respectively. The same settling model must be applied to both types of particulates, although the parameters ascribed to a model can be different for labile and refractory particulates. Once computed, the same settling rate is applied to each of labile particulate organic carbon, nitrogen and phosphorus.</p>
+<section id="sec-OrgSettleNone-5" class="level3" data-number="N.8.1">
+<h3 data-number="N.8.1" class="anchored" data-anchor-id="sec-OrgSettleNone-5"><span class="header-section-number">N.8.1</span> None</h3>
+<p>In this model, particulate organic settling is set to zero and organic matter is simply advected by the hydrodynamic flow field.</p>
+</section>
+<section id="sec-OrgSettleConst-5" class="level3" data-number="N.8.2">
+<h3 data-number="N.8.2" class="anchored" data-anchor-id="sec-OrgSettleConst-5"><span class="header-section-number">N.8.2</span> Constant</h3>
+<p>In this model, <a href="30-AppendicesB-Commands.html#par-WQConVLOrgConst"><span class="math inline">\(V_{settle}^{lorg}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQConVROrgConst"><span class="math inline">\(V_{settle}^{rorg}\)</span></a> are set to constant values, and matter is settled at these velocities. These can be different velocities for labile and refractory particulate organics. A negative specification of this quantity corresponds to a downwards settling velocity.</p>
+</section>
+<section id="sec-OrgSettleConstD-5" class="level3" data-number="N.8.3">
+<h3 data-number="N.8.3" class="anchored" data-anchor-id="sec-OrgSettleConstD-5"><span class="header-section-number">N.8.3</span> Constant with density correction</h3>
+<p>In this model, <a href="30-AppendicesB-Commands.html#par-WQConVLOrgTherm"><span class="math inline">\(V_{settle}^{lorg}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQConVROrgTherm"><span class="math inline">\(V_{settle}^{rorg}\)</span></a> are set to constant values, and matter is settled at these velocities, but corrected for ambient water density effects, as per <a href="#eq-pel-org-settdens" class="quarto-xref">Equation&nbsp;<span>N.28</span></a>.</p>
+<p><span id="eq-pel-org-settdens"><span class="math display">\[
+V_{sett\langle computed\rangle}^{org} = V_{settle}^{org} \times \frac{\mu_{20}\times\rho_w}{\mu\times\rho_{w20}}
+\tag{N.28}\]</span></span></p>
+<p><span class="math inline">\(V_{settle}^{org}\)</span> is <span class="math inline">\(V_{settle}^{lorg}\)</span> or <span class="math inline">\(V_{settle}^{rorg}\)</span> at 20<span class="math inline">\(^o\)</span>C, <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\rho_w\)</span> are the ambient water dynamic viscosity (in Ns/m<span class="math inline">\(^2\)</span>) and density (in kg/m<span class="math inline">\(^3\)</span>), respectively, and <span class="math inline">\(\mu_{20}\)</span> and <span class="math inline">\(\rho_{w20}\)</span> are the dynamic viscosity and density of freshwater at 20<span class="math inline">\(^o\)</span>C, respectively. A negative specification of <span class="math inline">\(V_{settle}^{org}\)</span> corresponds to a downwards settling velocity.</p>
+</section>
+<section id="sec-OrgSettleStokes-5" class="level3" data-number="N.8.4">
+<h3 data-number="N.8.4" class="anchored" data-anchor-id="sec-OrgSettleStokes-5"><span class="header-section-number">N.8.4</span> Stokes</h3>
+<p>In this model, particulate organic settling is computed using the Stokes equation and particle diameter and density, as per <a href="#eq-pel-org-settstokes1" class="quarto-xref">Equation&nbsp;<span>N.29</span></a> and <a href="#eq-pel-org-settstokes2" class="quarto-xref">Equation&nbsp;<span>N.30</span></a>.</p>
+<p><span id="eq-pel-org-settstokes1"><span class="math display">\[
+V_{sett\langle computed\rangle}^{lorg} = -g \times d_{lorg}^2 \times \frac{\left(\rho_{lorg}-\rho_w\right)}{18\mu}
+\tag{N.29}\]</span></span></p>
+<p><span id="eq-pel-org-settstokes2"><span class="math display">\[
+V_{sett\langle computed\rangle}^{rorg} = -g \times d_{rorg}^2 \times \frac{\left(\rho_{rorg}-\rho_w\right)}{18\mu}
+\tag{N.30}\]</span></span></p>
+<p><span class="math inline">\(g\)</span> is acceleration due to gravity, <a href="30-AppendicesB-Commands.html#par-WQDLOrg"><span class="math inline">\(d_{lorg}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQDROrg"><span class="math inline">\(d_{rorg}\)</span></a> are conceptualised diameters of labile and refractory particulate organic matter respectively, <a href="30-AppendicesB-Commands.html#par-WQRhoLOrg"><span class="math inline">\(\rho_{lorg}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQRhoROrg"><span class="math inline">\(\rho_{rorg}\)</span></a> are labile and refractory particulate organic matter densities, respectively, and <span class="math inline">\(\rho_w\)</span> and <span class="math inline">\(\mu\)</span> are the ambient water density and dynamic viscosity, respectively.</p>
+<p>Once the settling velocities for labile and refractory particulate organic matter have been computed, the relevant fluxes are calculated as follows.</p>
+<p><span id="eq-pel-lsedmtn-flux"><span class="math display">\[
+\left.\begin{aligned}
+  \href{AppDiags.html#var-DiagPOCSedmtn}{F_{sedmtn\langle computed\rangle}^{POC}} =&amp; \left(\href{AppDiags.html#var-DiagPOMVVel}{V_{settle\langle computed\rangle}}^{lorg} / {dz}\right) \times \left[POC\right]
+\\ \\  
+  \href{AppDiags.html#var-DiagPONSedmtn}{F_{sedmtn\langle computed\rangle}^{PON}} =&amp; \left(\href{AppDiags.html#var-DiagPOMVVel}{V_{settle\langle computed\rangle}^{lorg}} / {dz}\right) \times \left[PON\right]
+\\ \\  
+  \href{AppDiags.html#var-DiagPOPSedmtn}{F_{sedmtn\langle computed\rangle}^{POP}} =&amp; \left(\href{AppDiags.html#var-DiagPOMVVel}{V_{settle\langle computed\rangle}^{lorg}} / {dz}\right) \times \left[POP\right]
+\end{aligned}\right\}
+\tag{N.31}\]</span></span></p>
+<p><span id="eq-pel-rsedmtn-flux"><span class="math display">\[
+\href{AppDiags.html#var-DiagRPOMSedmtn}{F_{sedmtn\langle computed\rangle}^{RPOM}} = \left(\href{AppDiags.html#var-DiagRPOMVVel}{V_{settle\langle computed \rangle}^{rorg}} / {dz}\right) \times \left[ RPOM \right]
+\tag{N.32}\]</span></span></p>
+<p><span class="math inline">\(dz\)</span> is the relevant cell thickness, and divides the flux to produce a per volume result for consistency with other corresponding diagnostics.</p>
+<p>The limitations of this approach to modelling particulate organic matter settling are recognised. Future releases of the WQ Module will offer direct linkages between the TUFLOW FV ST Module and WQ Module, and treat particulate organics as sediment fractions that are transported using the advanced techniques and models offered by the ST Module.</p>
+<p><img src="images/WQFooter.jpg" class="img-fluid" style="width:100.0%"></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+// Hover preview for plain anchor links -- mirrors native quarto-xref behaviour.
+
+// Supports same-page anchors and cross-chapter links on the same origin.
+
+// Placed via include-after-body so all DOM is parsed when this runs.
+
+(function () {
+
+  if (typeof window.tippy !== 'function') { return; }
+
+
+
+  var doc = window.document;
+
+  var pageCache = {};
+
+
+
+  function stripColumnClasses(el) {
+
+    el.classList.remove('page-full', 'page-columns');
+
+    for (var i = 0; i < el.children.length; i++) {
+
+      stripColumnClasses(el.children[i]);
+
+    }
+
+  }
+
+
+
+  function buildContent(id, target) {
+
+    var clone = target.cloneNode(true);
+
+    stripColumnClasses(clone);
+
+
+
+    var anchor = clone.querySelector('a.anchorjs-link');
+
+    if (anchor) { anchor.parentNode.removeChild(anchor); }
+
+
+
+    var isSectionEl = (clone.tagName === 'SECTION' || /^H[1-6]$/.test(clone.tagName || ''));
+
+    var isSectionId = (typeof id === 'string' && id.indexOf('sec-') === 0);
+
+
+
+    if (isSectionEl || isSectionId) {
+
+      var container = doc.createElement('div');
+
+      var kids = clone.children;
+
+      if (kids.length > 2) {
+
+        container.appendChild(kids[0].cloneNode(true));
+
+        for (var j = 1; j < kids.length; j++) {
+
+          if (kids[j].tagName === 'P' && (kids[j].textContent || '').trim() === '') { continue; }
+
+          container.appendChild(kids[j].cloneNode(true));
+
+          break;
+
+        }
+
+        if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(container); }
+
+        return container.innerHTML;
+
+      }
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.innerHTML;
+
+    }
+
+
+
+    if (clone.classList.contains('callout')) {
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.outerHTML;
+
+    }
+
+
+
+    if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+    return clone.innerHTML;
+
+  }
+
+
+
+  function getTargetFromPage(pageUrl, id, callback) {
+
+    if (pageCache[pageUrl]) {
+
+      callback(pageCache[pageUrl].getElementById(id));
+
+      return;
+
+    }
+
+    fetch(pageUrl)
+
+      .then(function (r) { return r.text(); })
+
+      .then(function (html) {
+
+        var parser = new DOMParser();
+
+        var parsedDoc = parser.parseFromString(html, 'text/html');
+
+        pageCache[pageUrl] = parsedDoc;
+
+        callback(parsedDoc.getElementById(id));
+
+      })
+
+      .catch(function () { callback(null); });
+
+  }
+
+
+
+  // Same-page anchor links (href starts with "#")
+
+  var samePageLinks = doc.querySelectorAll(
+
+    'main a[href^="#"]:not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < samePageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var hash   = link.getAttribute('href');
+
+      var id     = hash.replace(/^#\/?/, '');
+
+      var target = doc.getElementById(id);
+
+      if (!target) { return; }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           function () { return buildContent(id, target); }
+
+      });
+
+    })(samePageLinks[i]);
+
+  }
+
+
+
+  // Cross-page anchor links (same origin, href contains "#" but does not start with "#")
+
+  var crossPageLinks = doc.querySelectorAll(
+
+    'main a[href*="#"]:not([href^="#"]):not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < crossPageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var href = link.getAttribute('href');
+
+
+
+      var pageUrl, id;
+
+      try {
+
+        var resolved = new URL(href, window.location.href);
+
+        if (resolved.origin !== window.location.origin) { return; }
+
+        pageUrl = resolved.origin + resolved.pathname;
+
+        id = resolved.hash.replace(/^#\/?/, '');
+
+      } catch (e) { return; }
+
+
+
+      if (!id) { return; }
+
+
+
+      // If the link points to the current page, look up the element directly
+
+      if (pageUrl === (window.location.origin + window.location.pathname)) {
+
+        var target = doc.getElementById(id);
+
+        if (!target) { return; }
+
+        window.tippy(link, {
+
+          allowHTML:         true,
+
+          maxWidth:          500,
+
+          delay:             100,
+
+          arrow:             false,
+
+          appendTo:          function (el) { return el.parentElement; },
+
+          interactive:       true,
+
+          interactiveBorder: 10,
+
+          theme:             'quarto',
+
+          placement:         'bottom-start',
+
+          content:           function () { return buildContent(id, target); }
+
+        });
+
+        return;
+
+      }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           'Loading\u2026',
+
+        onShow:            function (instance) {
+
+          if (instance._fetched) { return; }
+
+          instance._fetched = true;
+
+          getTargetFromPage(pageUrl, id, function (target) {
+
+            if (target) {
+
+              instance.setContent(buildContent(id, target));
+
+            } else {
+
+              instance.destroy();
+
+            }
+
+          });
+
+        }
+
+      });
+
+    })(crossPageLinks[i]);
+
+  }
+
+})();
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./59-AppendicesD-Processes-PhytoOther.html" class="pagination-link" aria-label="Processes: phyto other">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">M</span>&nbsp; <span class="chapter-title">Processes: phyto other</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./61-AppendicesD-Processes-Pathogens.html" class="pagination-link" aria-label="Processes: pathogens">
+        <span class="nav-page-text"><span class="chapter-number">O</span>&nbsp; <span class="chapter-title">Processes: pathogens</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

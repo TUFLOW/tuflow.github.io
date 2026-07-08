@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Appendix K — Processes: phyto uptake – TUFLOW FV Water Quality (WQ) Module User Manual 2026.0</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./58-AppendicesD-Processes-PhytoLosses.html" rel="next">
+<link href="./56-AppendicesD-Processes-PhytoLimits.html" rel="prev">
+<link href="./manuals-shared/images/TUFLOW.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-906f34f6d1cf263ebf2580b5ddf0f064.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-906f34f6d1cf263ebf2580b5ddf0f064.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-906f34f6d1cf263ebf2580b5ddf0f064.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-8d028ac1361deeefb106f8515fbc7a05.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-a7b3bbcf8399b14aba9280b868bc45f1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-8d028ac1361deeefb106f8515fbc7a05.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/TUFLOWFV_logo.png" alt="" class="navbar-logo light-content">
+    <img src="./images/TUFLOWFV_logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TUFLOW FV Water Quality (WQ) Module User Manual 2026.0</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://tuflow.com/"> 
+<span class="menu-text"><img src="manuals-shared/images/BMT_logo.png" style="height:1.5em"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="./TUFLOW-FV-Water-Quality--WQ--Module-User-Manual-2026.0.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./20-AppendicesA-Syntax.html">Appendices</a></li><li class="breadcrumb-item"><a href="./57-AppendicesD-Processes-PhytoUptake.html"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">Processes: phyto uptake</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TUFLOW FV Water Quality (WQ) Module User Manual</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Architecture</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Process-Descriptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Process Descriptions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Simulation-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Simulation Construction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-AppendicesA-Syntax.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Syntax of command descriptions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30-AppendicesB-Commands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./40-AppendicesC-DemoModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Demonstration model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./50-AppendicesD-Processes-DO.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Processes: oxygen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./51-AppendicesD-Processes-Si.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Processes: silicate</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./52-AppendicesD-Processes-IN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Processes: inorganic nitrogen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./53-AppendicesD-Processes-IP.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Processes: inorganic phosphorus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./54-AppendicesD-Processes-PhytoGeneral.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Processes: phyto general</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./55-AppendicesD-Processes-PhytoBiomass.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">Processes: phyto biomass rates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./56-AppendicesD-Processes-PhytoLimits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">Processes: phyto limitation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./57-AppendicesD-Processes-PhytoUptake.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">Processes: phyto uptake</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./58-AppendicesD-Processes-PhytoLosses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">L</span>&nbsp; <span class="chapter-title">Processes: phyto losses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./59-AppendicesD-Processes-PhytoOther.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">M</span>&nbsp; <span class="chapter-title">Processes: phyto other</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./60-AppendicesD-Processes-Org.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">N</span>&nbsp; <span class="chapter-title">Processes: organic matter</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./61-AppendicesD-Processes-Pathogens.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">O</span>&nbsp; <span class="chapter-title">Processes: pathogens</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./70-AppendicesE-ComputedVars.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">P</span>&nbsp; <span class="chapter-title">Computed variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./71-AppendicesE-DiagnosticVars.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">Q</span>&nbsp; <span class="chapter-title">Diagnostic variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80-AppendicesF-Parameters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">R</span>&nbsp; <span class="chapter-title">Parameters</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./90-AppendicesG-MassConservationModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">S</span>&nbsp; <span class="chapter-title">Mass Conservation Model</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-PhyUptakeC-4" id="toc-sec-PhyUptakeC-4" class="nav-link active" data-scroll-target="#sec-PhyUptakeC-4"><span class="header-section-number">K.1</span> Carbon</a></li>
+  <li><a href="#sec-PhyLimUpN-4" id="toc-sec-PhyLimUpN-4" class="nav-link" data-scroll-target="#sec-PhyLimUpN-4"><span class="header-section-number">K.2</span> Nitrogen</a>
+  <ul>
+  <li><a href="#sec-PhyLimUPNB-5" id="toc-sec-PhyLimUPNB-5" class="nav-link" data-scroll-target="#sec-PhyLimUPNB-5"><span class="header-section-number">K.2.1</span> Basic phytoplankton constituent model</a></li>
+  <li><a href="#sec-PhyLimUPNA-5" id="toc-sec-PhyLimUPNA-5" class="nav-link" data-scroll-target="#sec-PhyLimUPNA-5"><span class="header-section-number">K.2.2</span> Advanced phytoplankton constituent model</a></li>
+  <li><a href="#sec-PhyLimUPNFix-5" id="toc-sec-PhyLimUPNFix-5" class="nav-link" data-scroll-target="#sec-PhyLimUPNFix-5"><span class="header-section-number">K.2.3</span> Nitrogen fixing</a></li>
+  </ul></li>
+  <li><a href="#sec-PhyLimUpP-4" id="toc-sec-PhyLimUpP-4" class="nav-link" data-scroll-target="#sec-PhyLimUpP-4"><span class="header-section-number">K.3</span> Phosphorus</a>
+  <ul>
+  <li><a href="#sec-PhyLimUPPB-5" id="toc-sec-PhyLimUPPB-5" class="nav-link" data-scroll-target="#sec-PhyLimUPPB-5"><span class="header-section-number">K.3.1</span> Basic phytoplankton constituent model</a></li>
+  <li><a href="#sec-PhyLimUPPA-5" id="toc-sec-PhyLimUPPA-5" class="nav-link" data-scroll-target="#sec-PhyLimUPPA-5"><span class="header-section-number">K.3.2</span> Advanced phytoplankton constituent model</a></li>
+  </ul></li>
+  <li><a href="#sec-PhyLimUpSi-4" id="toc-sec-PhyLimUpSi-4" class="nav-link" data-scroll-target="#sec-PhyLimUpSi-4"><span class="header-section-number">K.4</span> Silicate</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./20-AppendicesA-Syntax.html">Appendices</a></li><li class="breadcrumb-item"><a href="./57-AppendicesD-Processes-PhytoUptake.html"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">Processes: phyto uptake</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-PhyUptake-3" class="quarto-section-identifier">Appendix K — Processes: phyto uptake</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Once the primary productivity <span class="math inline">\(R_{prod\langle computed\rangle}^{phy}\)</span> rate has been computed for a phytoplankton group via <a href="55-AppendicesD-Processes-PhytoBiomass.html#eq-pel-phy-pprod" class="quarto-xref">Equation&nbsp;<span>I.2</span></a> (and potentially <a href="55-AppendicesD-Processes-PhytoBiomass.html#eq-pel-phy-pprodNfx" class="quarto-xref">Equation&nbsp;<span>I.3</span></a> and <a href="55-AppendicesD-Processes-PhytoBiomass.html#eq-pel-phy-pprodSal" class="quarto-xref">Equation&nbsp;<span>I.4</span></a> if nitrogen fixing and salinity limitation are activated, respectively), then that rate drives the mass uptake of inorganic carbon, nitrogen, phosphorus and silicate. This uptake includes the operation of a number of user specified (or default) parameters, and the respective calculations are described following. Uptakes are denoted as fluxes, <span class="math inline">\(F\)</span>.</p>
+<section id="sec-PhyUptakeC-4" class="level2" data-number="K.1">
+<h2 data-number="K.1" class="anchored" data-anchor-id="sec-PhyUptakeC-4"><span class="header-section-number">K.1</span> Carbon</h2>
+<p>Carbon has the simplest uptake calculation, as per <a href="#eq-pel-phy-CUp" class="quarto-xref">Equation&nbsp;<span>K.1</span></a>.</p>
+<p><span id="eq-pel-phy-CUp"><span class="math display">\[
+F_{C-uptake}^{phy} = R_{prod\langle computed\rangle}^{phy} \times \left[PHY\right]
+\tag{K.1}\]</span></span></p>
+<p><span class="math inline">\(F_{C-uptake}^{phy}\)</span> is the uptake of carbon, <span class="math inline">\(R_{prod\langle computed\rangle}^{phy}\)</span> is the computed primary productivity rate and <a href="70-AppendicesE-ComputedVars.html#var-CompPhy"><span class="math inline">\(\left[PHY\right]\)</span></a> is a computational cell’s phytoplankton concentration. This flux is summed over all simulated phytoplankton groups to compute the community carbon uptake, <a href="71-AppendicesE-DiagnosticVars.html#var-DiagCPhyCUp"><span class="math inline">\(F_{C-uptake\langle computed\rangle}^{comm}\)</span></a>.</p>
+<p>Carbon does not need to be explicitly simulated as a computed variable for this uptake to occur, but because carbon is used as the units of accounting for phytoplankton biomass, its uptake is computed by the WQ Module in order to report phytoplankton concentrations. These concentrations are either mmol C per m<span class="math inline">\(^3\)</span> or <span class="math inline">\(\mu\)</span>g chlorophyll <em>a</em> per litre (using a specified or default conversion), depending on the specified simulation units system. Carbon stores from which phytoplankton uptake can draw are assumed to be unlimited and unaccounted for when carbon is not explicitly included in a simulation as a computed variable.</p>
+</section>
+<section id="sec-PhyLimUpN-4" class="level2" data-number="K.2">
+<h2 data-number="K.2" class="anchored" data-anchor-id="sec-PhyLimUpN-4"><span class="header-section-number">K.2</span> Nitrogen</h2>
+<p>The WQ Module allows for phytoplankton to uptake nitrate and ammonium (i.e.&nbsp;inorganic nitrogen) to meet primary production nitrogen demands. The parallel uptake of organic nitrogen (i.e.&nbsp;simulation of mixotrophic phytoplankton) is not yet implemented within the WQ Module. Uptake is computed differently for the basic and advanced phytoplankton constituent models</p>
+<section id="sec-PhyLimUPNB-5" class="level3" data-number="K.2.1">
+<h3 data-number="K.2.1" class="anchored" data-anchor-id="sec-PhyLimUPNB-5"><span class="header-section-number">K.2.1</span> Basic phytoplankton constituent model</h3>
+<p>If internal phytoplankton nutrients are not simulated dynamically, nitrogen uptake is calculated as per <a href="#eq-pel-phy-NUp" class="quarto-xref">Equation&nbsp;<span>K.2</span></a>.</p>
+<p><span id="eq-pel-phy-NUp"><span class="math display">\[
+F_{N-uptake}^{phy} = R_{prod\langle computed\rangle}^{phy} \times \left[PHY\right] \times X_{N-C-con}^{phy}
+\tag{K.2}\]</span></span></p>
+<p><a href="71-AppendicesE-DiagnosticVars.html#var-DiagPhyPriProdN"><span class="math inline">\(F_{N-uptake}^{phy}\)</span></a> is the uptake of water column inorganic nitrogen, <span class="math inline">\(R_{prod\langle computed\rangle}^{phy}\)</span> is the computed primary productivity rate, <a href="70-AppendicesE-ComputedVars.html#var-CompPhy"><span class="math inline">\(\left[PHY\right]\)</span></a> is a computational cell’s phytoplankton concentration and <a href="30-AppendicesB-Commands.html#par-WQConNCRat"><span class="math inline">\(X_{N-C-con}^{phy}\)</span></a> is the specified (or default) constant ratio of internal nitrogen to carbon in the phytoplankton group being considered.</p>
+<p>This quantity <span class="math inline">\(F_{N-uptake}^{phy}\)</span> is the total uptake of inorganic nitrogen. In order to disaggregate this uptake into that of ammonium and nitrate, the WQ Module applies <a href="#eq-pel-phy-NUp2" class="quarto-xref">Equation&nbsp;<span>K.3</span></a>, for ammonium concentrations greater than zero.</p>
+<p><span id="eq-pel-phy-NUp2"><span class="math display">\[
+\left.\begin{aligned}
+f_{amm-uptake}^{phy} =&amp; \frac{\left[NH_4\right]\times\left[NO_3\right]}{\left(\left[NH_4\right] + K_{lim-N}^{phy}\right)\times\left(\left[NO_3\right]+K_{lim-N}^{phy}\right)} + \frac{\left[NH_4\right]\times K_{lim-N}^{phy}}{\left(\left[NH_4\right] + \left[NO_3\right]\right)\times\left(\left[NO_3\right]+K_{lim-N}^{phy}\right)}
+\\
+\\
+F_{amm-uptake}^{phy} =&amp; F_{N-uptake}^{phy} \times f_{amm-uptake}^{phy}
+\\
+\\
+F_{nit-uptake}^{phy} =&amp; F_{N-uptake}^{phy} \times \left(1.0 - f_{amm-uptake}^{phy}\right)
+\end{aligned}\right\}
+\tag{K.3}\]</span></span></p>
+<p>For a phytoplankton group, <span class="math inline">\(f_{amm-uptake}^{phy}\)</span> is the fraction of nitrogen uptake that is ammonium, <a href="70-AppendicesE-ComputedVars.html#var-CompAmm"><span class="math inline">\(\left[NH_4\right]\)</span></a> and <a href="70-AppendicesE-ComputedVars.html#var-CompNit"><span class="math inline">\(\left[NO_3\right]\)</span></a> are the ambient water column ammonium and nitrate concentrations, respectively, <a href="30-AppendicesB-Commands.html#par-WQKNlimBas"><span class="math inline">\(K_{lim-N}^{phy}\)</span></a> is the half saturation nitrogen concentration for phytoplankton uptake and <span class="math inline">\(F_{amm-uptake}^{phy}\)</span> and <span class="math inline">\(F_{nit-uptake}^{phy}\)</span> are the uptake by phytoplankton of ammonium and nitrate, respectively. These fluxes (whether computed from <a href="#eq-pel-phy-NUp2" class="quarto-xref">Equation&nbsp;<span>K.3</span></a> or <a href="#eq-pel-phy-NUpA" class="quarto-xref">Equation&nbsp;<span>K.4</span></a>) are summed over all simulated phytoplankton groups to compute the community ammonium and nitrate uptake, <a href="71-AppendicesE-DiagnosticVars.html#var-DiagCPhyNH4Up"><span class="math inline">\(F_{amm-uptake\langle computed\rangle}^{comm}\)</span></a> and <a href="71-AppendicesE-DiagnosticVars.html#var-DiagCPhyNO3Up"><span class="math inline">\(F_{nit-uptake\langle computed\rangle}^{comm}\)</span></a>, respectively.</p>
+<p>The form of <span class="math inline">\(f_{amm-uptake}^{phy}\)</span> in <a href="#eq-pel-phy-NUp2" class="quarto-xref">Equation&nbsp;<span>K.3</span></a> with ammonium concentration is presented in <a href="#fig-PhyNUPSplit" class="quarto-xref">Figure&nbsp;<span>K.1</span></a>. Use the “play” button or drag the slider to see how different half saturation concentrations <span class="math inline">\(K_{lim-N}^{phy}\)</span> change the fraction of ammonium taken up by phytoplankton (ordinate), as a function of ambient ammonium concentration (abscissa). Nitrate concentration is set to a fixed 5 mg/L.</p>
+<div id="fig-PhyNUPSplit" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-PhyNUPSplit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<embed src="images/plots/PhyNUPSplit.html" style="width:100.0%" height="600">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-PhyNUPSplit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;K.1: Move the slider to see the effect of changing <span class="math inline">\(K_{lim-N}^{phy}\)</span> on the fraction of ammonium taken up by phytoplankton. Nitrate concentration is set to 5 mg/L and is fixed
+</figcaption>
+</figure>
+</div>
+<p>To complement <a href="#fig-PhyNUPSplit" class="quarto-xref">Figure&nbsp;<span>K.1</span></a>, the form of <span class="math inline">\(f_{amm-uptake}^{phy}\)</span> in <a href="#eq-pel-phy-NUp2" class="quarto-xref">Equation&nbsp;<span>K.3</span></a> with nitrate concentration is presented in <a href="#fig-PhyNUPSplit2" class="quarto-xref">Figure&nbsp;<span>K.2</span></a>, using the same ordinate axis limits. Use the “play” button or drag the slider to see how different half saturation concentrations <span class="math inline">\(K_{lim-N}^{phy}\)</span> change the fraction of ammonium taken up by phytoplankton (ordinate), as a function of ambient nitrate concentration (abscissa). Ammonium concentration is set to a fixed 2 mg/L.</p>
+<div id="fig-PhyNUPSplit2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-PhyNUPSplit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<embed src="images/plots/PhyNUPSplit2.html" style="width:100.0%" height="600">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-PhyNUPSplit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;K.2: Move the slider to see the effect of changing <span class="math inline">\(K_{lim-N}^{phy}\)</span> on the fraction of ammonium taken up by phytoplankton. Ammonium concentration is set to 2 mg/L and is fixed
+</figcaption>
+</figure>
+</div>
+<p>The parameter <span class="math inline">\(K_{lim-N}^{phy}\)</span> is the same as that used for calculation of the nitrogen limitation function in the basic (and advanced if internal nitrogen stores are exhausted) phytoplankton constituent model, so its specification should be considered in terms of its influence on both uptake on limitation.</p>
+</section>
+<section id="sec-PhyLimUPNA-5" class="level3" data-number="K.2.2">
+<h3 data-number="K.2.2" class="anchored" data-anchor-id="sec-PhyLimUPNA-5"><span class="header-section-number">K.2.2</span> Advanced phytoplankton constituent model</h3>
+<p>If internal phytoplankton nutrients are simulated dynamically, nitrogen uptake is calculated as per <a href="#eq-pel-phy-NUpA" class="quarto-xref">Equation&nbsp;<span>K.4</span></a>.</p>
+<p><span id="eq-pel-phy-NUpA"><span class="math display">\[
+F_{N-uptake}^{phy} = R_{N-uptake}^{phy} \times L_{T}^{phy} \times \left[PHY\right] \times \frac{\left(X_{N-C-max}^{phy} - \frac{\left[IN\right]}{\left[PHY\right]}\right)}{\left(X_{N-C-max}^{phy} - X_{N-C-min}^{phy}\right)} \times \frac{\left(\left[N\right]_{avail} - \left[N\right]_{min}\right)}{\left(\left[N\right]_{avail} - \left[N\right]_{min}\right) + K_{lim-N}^{phy}}
+\tag{K.4}\]</span></span></p>
+<p><a href="71-AppendicesE-DiagnosticVars.html#var-DiagPhyPriProdN"><span class="math inline">\(F_{N-uptake}^{phy}\)</span></a> is the uptake of water column inorganic nitrogen, <a href="30-AppendicesB-Commands.html#par-WQNuptake"><span class="math inline">\(R_{N-uptake}^{phy}\)</span></a> is the specified (or default) rate of uptake of inorganic nitrogen, <span class="math inline">\(L_{T}^{phy}\)</span> is the temperature limitation function, <a href="70-AppendicesE-ComputedVars.html#var-CompPhy"><span class="math inline">\(\left[PHY\right]\)</span></a> and <a href="70-AppendicesE-ComputedVars.html#var-CompPhyIN"><span class="math inline">\(\left[IN\right]\)</span></a> are a computational cell’s phytoplankton and internal nitrogen concentrations respectively, <a href="30-AppendicesB-Commands.html#par-WQMinNClim"><span class="math inline">\(X_{N-C-min}^{phy}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQMaxNClim"><span class="math inline">\(X_{N-C-max}^{phy}\)</span></a> are the specified (or default) minimum and maximum ratios of internal nitrogen to carbon in the phytoplankton group being considered, respectively, <span class="math inline">\(\left[N\right]_{avail}\)</span> is the available (water column) nitrogen pool on which phytoplankton can draw for primary productivity, and is the sum of inorganic (ammonium and nitrate) nitrogen, <a href="30-AppendicesB-Commands.html#par-WQMinNlimAdv"><span class="math inline">\(\left[N\right]_{min}^{phy}\)</span></a> is the nitrogen concentration below which phytoplankton is no longer permitted to uptake nitrogen and <a href="30-AppendicesB-Commands.html#par-WQKNlimAdv"><span class="math inline">\(K_{lim-N}^{phy}\)</span></a> is the half saturation nitrogen concentration for phytoplankton uptake. These last three parameters (and the last term in <a href="#eq-pel-phy-NUpA" class="quarto-xref">Equation&nbsp;<span>K.4</span></a>) are the same as that applied to the basic phytoplankton constituent model as per <a href="#eq-pel-phy-NUp" class="quarto-xref">Equation&nbsp;<span>K.2</span></a>, via calculation of the limitation function applied to <span class="math inline">\(R_{prod\langle computed\rangle}^{phy}\)</span> (as per <a href="56-AppendicesD-Processes-PhytoLimits.html#eq-pel-phy-NLim1" class="quarto-xref">Equation&nbsp;<span>J.9</span></a>).</p>
+<p><a href="#eq-pel-phy-NUpA" class="quarto-xref">Equation&nbsp;<span>K.4</span></a> reveals the following:</p>
+<ul>
+<li>The uptake of water column nitrogen to internal phytoplankton stores is governed by the specified (or default) nitrogen uptake rate</li>
+<li>This rate is modified by
+<ul>
+<li>Temperature, using the specified (or default) temperature limitation model for uptake (<a href="56-AppendicesD-Processes-PhytoLimits.html#sec-PhyLimT-4" class="quarto-xref"><span>Section J.2</span></a>)</li>
+<li>The current internal nitrogen concentrations, relative to the specified (or default) minima and maxima</li>
+<li>Ambient water column inorganic nitrogen concentrations, and</li>
+<li>The half saturation nitrogen concentration for uptake, which is the same parameter as used in the basic phytoplankton constituent model</li>
+</ul></li>
+</ul>
+<p>If for example the internal nitrogen concentration <span class="math inline">\(\left[IN\right]\)</span> at a particular timestep and computational cell is equal to <span class="math inline">\(X_{N-C-max}^{phy} \times \left[PHY\right]\)</span>, then <a href="#eq-pel-phy-NUpA" class="quarto-xref">Equation&nbsp;<span>K.4</span></a> has that internal nitrogen stores are full and that uptake is therefore zero. Conversely, if <span class="math inline">\(\left[IN\right]\)</span> at a particular timestep and computational cell is equal to <span class="math inline">\(X_{N-C-min}^{phy} \times \left[PHY\right]\)</span>, then internal nitrogen stores are at their lowest and therefore (in themselves) do not limit uptake of water column nitrogen. Finally, if the available water column nitrogen <span class="math inline">\(\left[N\right]_{avail}\)</span> is equal to the specified (or default) minimum allowable nitrogen concentration for uptake <span class="math inline">\(\left[N\right]_{min}^{phy}\)</span>, then uptake to internal nutrient stores is zero.</p>
+<p>If uptake from the water column to internal stores occurs, then the split between ammonium and nitrate uptake is computed as per <a href="#eq-pel-phy-NUp2" class="quarto-xref">Equation&nbsp;<span>K.3</span></a>.</p>
+<p>The parameter <a href="30-AppendicesB-Commands.html#par-WQKNlimAdv"><span class="math inline">\(K_{lim-N}^{phy}\)</span></a> is the same as that used for calculation of the nitrogen limitation function in the advanced phytoplankton constituent model if internal nitrogen stores are exhausted, so its specification should be considered in terms of its influence on both uptake on limitation.</p>
+</section>
+<section id="sec-PhyLimUPNFix-5" class="level3" data-number="K.2.3">
+<h3 data-number="K.2.3" class="anchored" data-anchor-id="sec-PhyLimUPNFix-5"><span class="header-section-number">K.2.3</span> Nitrogen fixing</h3>
+<p>If nitrogen fixing by phytoplankton is simulated, then a modification to the above computed nitrogen uptakes (for both the basic and advanced phytoplankton constituent models) is applied. The flux of atmospheric nitrogen is computed as per <a href="#eq-pel-phy-NUpFix" class="quarto-xref">Equation&nbsp;<span>K.5</span></a>.</p>
+<p><span id="eq-pel-phy-NUpFix"><span class="math display">\[
+F_{N-fix}^{phy} = R_{N-fix}^{phy} \times \left(1.0 - L_{nit}^{phy}\right) \times \left[PHY\right]
+\tag{K.5}\]</span></span></p>
+<p><span class="math inline">\(F_{N-fix}^{phy}\)</span> is the fixing of atmospheric nitrogen, <a href="30-AppendicesB-Commands.html#par-WQRNFix"><span class="math inline">\(R_{N-fix}^{phy}\)</span></a> is the specified (or default) rate of nitrogen fixing, <span class="math inline">\(L_{nit}^{phy}\)</span> is the nitrogen limitation function computed via either <a href="56-AppendicesD-Processes-PhytoLimits.html#eq-pel-phy-NLim1" class="quarto-xref">Equation&nbsp;<span>J.9</span></a> or <a href="56-AppendicesD-Processes-PhytoLimits.html#eq-pel-phy-NLimA1" class="quarto-xref">Equation&nbsp;<span>J.11</span></a> for the basic and advanced phytoplankton constituent models, respectively, before <span class="math inline">\(L_{nit}^{phy}\)</span> is set to one. Once computed, <span class="math inline">\(F_{N-uptake}^{phy}\)</span> is modified as follows:</p>
+<ul>
+<li>If <span class="math inline">\(|F_{N-fix}^{phy}| \ge |F_{N-uptake}^{phy}|\)</span> then all uptake is assigned to <span class="math inline">\(F_{N-fix}^{phy}\)</span>, and <span class="math inline">\(F_{N-uptake}^{phy}\)</span> is set to zero.</li>
+<li>If If <span class="math inline">\(|F_{N-fix}^{phy}| \le |F_{N-uptake}^{phy}|\)</span> then nitrogen water column uptake is reduced as per <a href="#eq-pel-phy-NUpFix2" class="quarto-xref">Equation&nbsp;<span>K.6</span></a>.</li>
+</ul>
+<p><span id="eq-pel-phy-NUpFix2"><span class="math display">\[
+F_{N-uptake\langle computed \rangle}^{phy} = F_{N-uptake}^{phy} \times \frac{\left(|F_{N-uptake}^{phy}| - F_{N-fix}^{phy}\right)}{|F_{N-uptake}^{phy}|}
+\tag{K.6}\]</span></span></p>
+<p><a href="#eq-pel-phy-NUpFix2" class="quarto-xref">Equation&nbsp;<span>K.6</span></a> is a simple linearisation that maps <span class="math inline">\(F_{N-uptake\langle computed \rangle}^{phy}\)</span> to a value between 0.0 (where <span class="math inline">\(F_{N-fix}^{phy} = F_{N-uptake}^{phy}\)</span>) and <span class="math inline">\(F_{N-uptake\langle computed \rangle}^{phy}\)</span> (where <span class="math inline">\(F_{N-fix}^{phy}\)</span> is zero).</p>
+</section>
+</section>
+<section id="sec-PhyLimUpP-4" class="level2" data-number="K.3">
+<h2 data-number="K.3" class="anchored" data-anchor-id="sec-PhyLimUpP-4"><span class="header-section-number">K.3</span> Phosphorus</h2>
+<p>The WQ Module allows for phytoplankton to uptake filterable reactive phosphorus (i.e.&nbsp;inorganic phosphorus, FRP) to meet primary production phosphorus demands. The parallel uptake of organic phosphorus (i.e.&nbsp;simulation of mixotrophic phytoplankton) is not yet implemented within the WQ Module. Uptake is computed differently for the basic and advanced phytoplankton constituent models</p>
+<section id="sec-PhyLimUPPB-5" class="level3" data-number="K.3.1">
+<h3 data-number="K.3.1" class="anchored" data-anchor-id="sec-PhyLimUPPB-5"><span class="header-section-number">K.3.1</span> Basic phytoplankton constituent model</h3>
+<p>If internal phytoplankton nutrients are not simulated dynamically, phosphorus uptake is calculated as per <a href="#eq-pel-phy-PUp" class="quarto-xref">Equation&nbsp;<span>K.7</span></a>.</p>
+<p><span id="eq-pel-phy-PUp"><span class="math display">\[
+F_{P-uptake}^{phy} = R_{prod\langle computed\rangle}^{phy} \times \left[PHY\right] \times X_{P-C-con}^{phy}
+\tag{K.7}\]</span></span></p>
+<p><a href="71-AppendicesE-DiagnosticVars.html#var-DiagPhyPriProdP"><span class="math inline">\(F_{P-uptake}^{phy}\)</span></a> is the uptake of inorganic phosphorus, <span class="math inline">\(R_{prod\langle computed\rangle}^{phy}\)</span> is the computed primary productivity rate, <a href="70-AppendicesE-ComputedVars.html#var-CompPhy"><span class="math inline">\(\left[PHY\right]\)</span></a> is a computational cell’s phytoplankton concentration and <span class="math inline">\(X_{P-C-con}^{phy}\)</span> is the specified (or default) constant ratio of internal phosphorus to carbon in the phytoplankton group being considered. This flux (whether computed from <a href="#eq-pel-phy-PUp" class="quarto-xref">Equation&nbsp;<span>K.7</span></a> or <a href="#eq-pel-phy-PUpA" class="quarto-xref">Equation&nbsp;<span>K.8</span></a>) is summed over all simulated phytoplankton groups to compute the community FRP uptake, <a href="71-AppendicesE-DiagnosticVars.html#var-DiagCPhyPUp"><span class="math inline">\(F_{P-uptake\langle computed\rangle}^{comm}\)</span></a>.</p>
+</section>
+<section id="sec-PhyLimUPPA-5" class="level3" data-number="K.3.2">
+<h3 data-number="K.3.2" class="anchored" data-anchor-id="sec-PhyLimUPPA-5"><span class="header-section-number">K.3.2</span> Advanced phytoplankton constituent model</h3>
+<p>If internal phytoplankton nutrients are simulated dynamically, phosphorus uptake is calculated as per <a href="#eq-pel-phy-PUpA" class="quarto-xref">Equation&nbsp;<span>K.8</span></a>.</p>
+<p><span id="eq-pel-phy-PUpA"><span class="math display">\[
+F_{P-uptake}^{phy} = R_{P-uptake}^{phy} \times L_{T}^{phy} \times \left[PHY\right] \times \frac{\left(X_{P-C-max}^{phy} - \frac{\left[IP\right]}{\left[PHY\right]}\right)}{\left(X_{P-C-max}^{phy} - X_{P-C-min}^{phy}\right)} \times \frac{\left(\left[P\right]_{avail} - \left[P\right]_{min}^{phy}\right)}{\left(\left[P\right]_{avail} - \left[P\right]_{min}^{phy}\right) + K_{lim-P}^{phy}}
+\tag{K.8}\]</span></span></p>
+<p><a href="71-AppendicesE-DiagnosticVars.html#var-DiagPhyPriProdP"><span class="math inline">\(F_{P-uptake}^{phy}\)</span></a> is the uptake of water column FRP, <a href="30-AppendicesB-Commands.html#par-WQPuptake"><span class="math inline">\(R_{P-uptake}^{phy}\)</span></a> is the specified (or default) rate of uptake of FRP, <span class="math inline">\(L_{T}^{phy}\)</span> is the temperature limitation function, <a href="70-AppendicesE-ComputedVars.html#var-CompPhy"><span class="math inline">\(\left[PHY\right]\)</span></a> and <a href="70-AppendicesE-ComputedVars.html#var-CompPhyIP"><span class="math inline">\(\left[IP\right]\)</span></a> are a computational cell’s phytoplankton and internal phosphorus concentrations respectively, <a href="30-AppendicesB-Commands.html#par-WQMinPClim"><span class="math inline">\(X_{P-C-min}^{phy}\)</span></a> and <a href="30-AppendicesB-Commands.html#par-WQMaxPClim"><span class="math inline">\(X_{P-C-max}^{phy}\)</span></a> are the specified (or default) minimum and maximum ratios of internal phosphorus to carbon in the phytoplankton group being considered, respectively, <span class="math inline">\(\left[P\right]_{avail}\)</span> is the available (i.e.&nbsp;ambient water column) FRP pool on which phytoplankton can draw for primary productivity, <a href="30-AppendicesB-Commands.html#par-WQMinPlimAdv"><span class="math inline">\(\left[P\right]_{min}^{phy}\)</span></a> is the FRP concentration below which phytoplankton is no longer permitted to uptake phosphorus and <a href="30-AppendicesB-Commands.html#par-WQKPlimAdv"><span class="math inline">\(K_{lim-P}^{phy}\)</span></a> is the half saturation FRP concentration for phytoplankton uptake. These last three parameters (and the last term in <a href="#eq-pel-phy-PUpA" class="quarto-xref">Equation&nbsp;<span>K.8</span></a>) are the same as that applied to the basic phytoplankton constituent model as per <a href="#eq-pel-phy-PUp" class="quarto-xref">Equation&nbsp;<span>K.7</span></a>, via calculation of the limitation function applied to <span class="math inline">\(R_{prod\langle computed\rangle}^{phy}\)</span> (as per <a href="56-AppendicesD-Processes-PhytoLimits.html#eq-pel-phy-PLim1" class="quarto-xref">Equation&nbsp;<span>J.13</span></a>).</p>
+<p><a href="#eq-pel-phy-PUpA" class="quarto-xref">Equation&nbsp;<span>K.8</span></a> reveals the following:</p>
+<ul>
+<li>The uptake of water column FRP to internal phytoplankton stores is governed by the specified (or default) phosphorus uptake rate</li>
+<li>This rate is modified by
+<ul>
+<li>Temperature, using the specified (or default) temperature limitation model for uptake (<a href="56-AppendicesD-Processes-PhytoLimits.html#sec-PhyLimT-4" class="quarto-xref"><span>Section J.2</span></a>)</li>
+<li>The current internal phosphorus concentrations, relative to the specified (or default) minima and maxima</li>
+<li>Ambient water column FRP concentrations, and</li>
+<li>The half saturation phosphorus concentration for uptake, which is the same parameter as used in the basic phytoplankton constituent model</li>
+</ul></li>
+</ul>
+<p>If for example the internal phosphorus concentration <span class="math inline">\(\left[IP\right]\)</span> at a particular timestep and computational cell is equal to <span class="math inline">\(X_{P-C-max}^{phy}\times \left[PHY\right]\)</span>, then <a href="#eq-pel-phy-PUpA" class="quarto-xref">Equation&nbsp;<span>K.8</span></a> has that internal phosphorus stores are full and that uptake is therefore zero. Conversely, if <span class="math inline">\(\left[IP\right]\)</span> at a particular timestep and computational cell is equal to <span class="math inline">\(X_{P-C-min}^{phy} \times \left[PHY\right]\)</span>, then internal phosphorus stores are at their lowest and therefore (in themselves) do not limit uptake of water column FRP. Finally, if the available water column FRP <span class="math inline">\(\left[P\right]_{avail}\)</span> is equal to the specified (or default) minimum allowable FRP concentration for uptake <span class="math inline">\(\left[P\right]_{min}^{phy}\)</span>, then uptake to internal nutrient stores is zero.</p>
+<p>The parameter <a href="30-AppendicesB-Commands.html#par-WQKPlimAdv"><span class="math inline">\(K_{lim-P}^{phy}\)</span></a> is the same as that used for calculation of the phosphorus limitation function in the <a href="#PhyLimisPA-5">advanced</a> phytoplankton constituent model if internal phosphorus stores are exhausted, so its specification should be considered in terms of its influence on both uptake on limitation.</p>
+</section>
+</section>
+<section id="sec-PhyLimUpSi-4" class="level2" data-number="K.4">
+<h2 data-number="K.4" class="anchored" data-anchor-id="sec-PhyLimUpSi-4"><span class="header-section-number">K.4</span> Silicate</h2>
+<p>The WQ Module allows for phytoplankton to uptake silicate to meet primary production demands, for phytoplankton groups that require silicate. Silicate uptake is calculated as per <a href="#eq-pel-phy-SiUp" class="quarto-xref">Equation&nbsp;<span>K.9</span></a>.</p>
+<p><span id="eq-pel-phy-SiUp"><span class="math display">\[
+F_{Si-uptake}^{phy} = R_{prod\langle computed\rangle}^{phy} \times \left[PHY\right] \times X_{Si-C-con}^{phy}
+\tag{K.9}\]</span></span></p>
+<p><span class="math inline">\(F_{Si-uptake}^{phy}\)</span> is the uptake of silicate, <span class="math inline">\(R_{prod\langle computed\rangle}^{phy}\)</span> is the computed primary productivity rate, <a href="70-AppendicesE-ComputedVars.html#var-CompPhy"><span class="math inline">\(\left[PHY\right]\)</span></a> is a computational cell’s phytoplankton concentration and <span class="math inline">\(X_{Si-C-con}^{phy}\)</span> is the specified (or default) constant ratio of internal silicate to carbon in the phytoplankton group being considered.</p>
+<p><img src="images/WQFooter.jpg" class="img-fluid" style="width:100.0%"></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+
+// Hover preview for plain anchor links -- mirrors native quarto-xref behaviour.
+
+// Supports same-page anchors and cross-chapter links on the same origin.
+
+// Placed via include-after-body so all DOM is parsed when this runs.
+
+(function () {
+
+  if (typeof window.tippy !== 'function') { return; }
+
+
+
+  var doc = window.document;
+
+  var pageCache = {};
+
+
+
+  function stripColumnClasses(el) {
+
+    el.classList.remove('page-full', 'page-columns');
+
+    for (var i = 0; i < el.children.length; i++) {
+
+      stripColumnClasses(el.children[i]);
+
+    }
+
+  }
+
+
+
+  function buildContent(id, target) {
+
+    var clone = target.cloneNode(true);
+
+    stripColumnClasses(clone);
+
+
+
+    var anchor = clone.querySelector('a.anchorjs-link');
+
+    if (anchor) { anchor.parentNode.removeChild(anchor); }
+
+
+
+    var isSectionEl = (clone.tagName === 'SECTION' || /^H[1-6]$/.test(clone.tagName || ''));
+
+    var isSectionId = (typeof id === 'string' && id.indexOf('sec-') === 0);
+
+
+
+    if (isSectionEl || isSectionId) {
+
+      var container = doc.createElement('div');
+
+      var kids = clone.children;
+
+      if (kids.length > 2) {
+
+        container.appendChild(kids[0].cloneNode(true));
+
+        for (var j = 1; j < kids.length; j++) {
+
+          if (kids[j].tagName === 'P' && (kids[j].textContent || '').trim() === '') { continue; }
+
+          container.appendChild(kids[j].cloneNode(true));
+
+          break;
+
+        }
+
+        if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(container); }
+
+        return container.innerHTML;
+
+      }
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.innerHTML;
+
+    }
+
+
+
+    if (clone.classList.contains('callout')) {
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.outerHTML;
+
+    }
+
+
+
+    if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+    return clone.innerHTML;
+
+  }
+
+
+
+  function getTargetFromPage(pageUrl, id, callback) {
+
+    if (pageCache[pageUrl]) {
+
+      callback(pageCache[pageUrl].getElementById(id));
+
+      return;
+
+    }
+
+    fetch(pageUrl)
+
+      .then(function (r) { return r.text(); })
+
+      .then(function (html) {
+
+        var parser = new DOMParser();
+
+        var parsedDoc = parser.parseFromString(html, 'text/html');
+
+        pageCache[pageUrl] = parsedDoc;
+
+        callback(parsedDoc.getElementById(id));
+
+      })
+
+      .catch(function () { callback(null); });
+
+  }
+
+
+
+  // Same-page anchor links (href starts with "#")
+
+  var samePageLinks = doc.querySelectorAll(
+
+    'main a[href^="#"]:not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < samePageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var hash   = link.getAttribute('href');
+
+      var id     = hash.replace(/^#\/?/, '');
+
+      var target = doc.getElementById(id);
+
+      if (!target) { return; }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           function () { return buildContent(id, target); }
+
+      });
+
+    })(samePageLinks[i]);
+
+  }
+
+
+
+  // Cross-page anchor links (same origin, href contains "#" but does not start with "#")
+
+  var crossPageLinks = doc.querySelectorAll(
+
+    'main a[href*="#"]:not([href^="#"]):not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < crossPageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var href = link.getAttribute('href');
+
+
+
+      var pageUrl, id;
+
+      try {
+
+        var resolved = new URL(href, window.location.href);
+
+        if (resolved.origin !== window.location.origin) { return; }
+
+        pageUrl = resolved.origin + resolved.pathname;
+
+        id = resolved.hash.replace(/^#\/?/, '');
+
+      } catch (e) { return; }
+
+
+
+      if (!id) { return; }
+
+
+
+      // If the link points to the current page, look up the element directly
+
+      if (pageUrl === (window.location.origin + window.location.pathname)) {
+
+        var target = doc.getElementById(id);
+
+        if (!target) { return; }
+
+        window.tippy(link, {
+
+          allowHTML:         true,
+
+          maxWidth:          500,
+
+          delay:             100,
+
+          arrow:             false,
+
+          appendTo:          function (el) { return el.parentElement; },
+
+          interactive:       true,
+
+          interactiveBorder: 10,
+
+          theme:             'quarto',
+
+          placement:         'bottom-start',
+
+          content:           function () { return buildContent(id, target); }
+
+        });
+
+        return;
+
+      }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           'Loading\u2026',
+
+        onShow:            function (instance) {
+
+          if (instance._fetched) { return; }
+
+          instance._fetched = true;
+
+          getTargetFromPage(pageUrl, id, function (target) {
+
+            if (target) {
+
+              instance.setContent(buildContent(id, target));
+
+            } else {
+
+              instance.destroy();
+
+            }
+
+          });
+
+        }
+
+      });
+
+    })(crossPageLinks[i]);
+
+  }
+
+})();
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./56-AppendicesD-Processes-PhytoLimits.html" class="pagination-link" aria-label="Processes: phyto limitation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">Processes: phyto limitation</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./58-AppendicesD-Processes-PhytoLosses.html" class="pagination-link" aria-label="Processes: phyto losses">
+        <span class="nav-page-text"><span class="chapter-number">L</span>&nbsp; <span class="chapter-title">Processes: phyto losses</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
