@@ -1,0 +1,30 @@
+{# RIGHT SIDEBAR OVERRIDE — show section pages instead of headings #}
+
+<aside class="md-sidebar md-sidebar--secondary" aria-label="Section navigation">
+  <div class="md-sidebar__scrollwrap">
+    <div class="md-sidebar__inner">
+
+      <label class="md-nav__title">User Guide</label>
+
+      <nav class="md-nav">
+        <ul class="md-nav__list">
+
+          {# Loop through the top-level nav and find the "User Guide" section #}
+          {% for item in nav %}
+            {% if item.title == "User Guide" %}
+              {% for child in item.children %}
+                <li class="md-nav__item">
+                  <a href="{{ child.url | url }}" class="md-nav__link">
+                    {{ child.title }}
+                  </a>
+                </li>
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+
+        </ul>
+      </nav>
+
+    </div>
+  </div>
+</aside>

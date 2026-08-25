@@ -1,0 +1,31 @@
+{# LEFT SIDEBAR OVERRIDE — show page headings instead of page list #}
+
+<nav class="md-nav md-nav--primary" aria-label="Page navigation">
+  <label class="md-nav__title">{{ section_title }}</label>
+
+  {# Render the table of contents for the current page #}
+  {% if page.toc %}
+    <ul class="md-nav__list">
+      {% for toc_item in page.toc %}
+        <li class="md-nav__item">
+          <a href="{{ toc_item.url }}" class="md-nav__link">
+            {{ toc_item.title }}
+          </a>
+
+          {# Render nested headings #}
+          {% if toc_item.children %}
+            <ul class="md-nav__list">
+              {% for child in toc_item.children %}
+                <li class="md-nav__item">
+                  <a href="{{ child.url }}" class="md-nav__link">
+                    {{ child.title }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</nav>
