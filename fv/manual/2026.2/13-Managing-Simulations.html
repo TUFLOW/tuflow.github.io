@@ -1,0 +1,2669 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>11&nbsp; Managing And Starting Simulations – TUFLOW FV User Manual 2026.2</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./99-References.html" rel="next">
+<link href="./10-PT-Construction.html" rel="prev">
+<link href="./manuals-shared/images/TUFLOW.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ea94015a310cf19a1d0a98706902972b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const tocNav = document.querySelector("nav[role='doc-toc']");
+
+    if (!tocNav) return;
+
+
+
+    const observer = new MutationObserver((mutations) => {
+
+      mutations.forEach((mutation) => {
+
+        if (mutation.attributeName === "class") {
+
+          const target = mutation.target;
+
+          if (target.classList.contains("active")) {
+
+            // Scroll the active item smoothly ('smooth') with the least amount of movement ('nearest')
+
+            target.scrollIntoView({
+
+              behavior: "smooth",
+
+              block: "nearest"
+
+            });
+
+          }
+
+        }
+
+      });
+
+    });
+
+
+
+    // Target all links inside the TOC
+
+    const tocLinks = tocNav.querySelectorAll("ul li a");
+
+    tocLinks.forEach((link) => {
+
+      observer.observe(link, { attributes: true });
+
+    });
+
+  });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+
+
+<script>
+
+window.addEventListener("load", function () {
+
+  document.querySelectorAll(".quarto-figure table.searchable").forEach(function(table){
+
+      new DataTable(table, {
+
+          paging: true,
+
+          pageLength: -1,
+
+          lengthMenu: [
+
+            [-1, 10, 20, 50],
+
+            ["All", 10, 20, 50]
+
+          ],
+
+          searching: true,
+
+          ordering: true,
+
+          order: [],
+
+          rowId: null
+
+      });
+
+  });
+
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/TUFLOWFV_logo.png" alt="" class="navbar-logo light-content">
+    <img src="./images/TUFLOWFV_logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TUFLOW FV User Manual 2026.2</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://tuflow.com/"> 
+<span class="menu-text"><img src="manuals-shared/images/BMT_logo.png" style="height:1.5em"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="./TUFLOW-FV-User-Manual-2026.2.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./13-Managing-Simulations.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Managing And Starting Simulations</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TUFLOW FV User Manual</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01b-Architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Architecture</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Getting-Started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ControlFiles-and-Inputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Folders, Control Files and Data Layers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Hydrodynamics-2D-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Model Construction: 2D HD Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-Hydrodynamics-3D-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Model Construction: 3D HD Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-AD-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model Construction: AD Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-ST-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model Construction: ST Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-WQ-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Construction: WQ Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-PT-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Model Construction: PT Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Managing-Simulations.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Managing And Starting Simulations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./70-AppendicesBCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./86-AppendicesProcSolver.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Science</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-MS-Over-2" id="toc-sec-MS-Over-2" class="nav-link active" data-scroll-target="#sec-MS-Over-2"><span class="header-section-number">11.1</span> Overview</a></li>
+  <li><a href="#sec-MS-FN-2" id="toc-sec-MS-FN-2" class="nav-link" data-scroll-target="#sec-MS-FN-2"><span class="header-section-number">11.2</span> File Naming</a></li>
+  <li><a href="#sec-MS-SM-2" id="toc-sec-MS-SM-2" class="nav-link" data-scroll-target="#sec-MS-SM-2"><span class="header-section-number">11.3</span> Simulation Management</a>
+  <ul>
+  <li><a href="#sec-MS-SM-Over-3" id="toc-sec-MS-SM-Over-3" class="nav-link" data-scroll-target="#sec-MS-SM-Over-3"><span class="header-section-number">11.3.1</span> Overview</a></li>
+  <li><a href="#sec-MS-SM-Nome-3" id="toc-sec-MS-SM-Nome-3" class="nav-link" data-scroll-target="#sec-MS-SM-Nome-3"><span class="header-section-number">11.3.2</span> Nomenclature</a></li>
+  <li><a href="#sec-MS-SM-Even-3" id="toc-sec-MS-SM-Even-3" class="nav-link" data-scroll-target="#sec-MS-SM-Even-3"><span class="header-section-number">11.3.3</span> Events</a>
+  <ul>
+  <li><a href="#sec-SimManagmentTEF-3" id="toc-sec-SimManagmentTEF-3" class="nav-link" data-scroll-target="#sec-SimManagmentTEF-3"><span class="header-section-number">11.3.3.1</span> TUFLOW Event File</a></li>
+  <li><a href="#sec-SimManagmentRunningEvents-3" id="toc-sec-SimManagmentRunningEvents-3" class="nav-link" data-scroll-target="#sec-SimManagmentRunningEvents-3"><span class="header-section-number">11.3.3.2</span> Running Events</a></li>
+  <li><a href="#sec-SimManagmentEventExamples-3" id="toc-sec-SimManagmentEventExamples-3" class="nav-link" data-scroll-target="#sec-SimManagmentEventExamples-3"><span class="header-section-number">11.3.3.3</span> Event Examples</a></li>
+  <li><a href="#sec-SimManagmentAdditionalFunctionality-4" id="toc-sec-SimManagmentAdditionalFunctionality-4" class="nav-link" data-scroll-target="#sec-SimManagmentAdditionalFunctionality-4"><span class="header-section-number">11.3.3.4</span> Additional Functionality</a>
+  <ul class="collapse">
+  <li><a href="#sec-SimManagmentIfEventAndEventVariables-3" id="toc-sec-SimManagmentIfEventAndEventVariables-3" class="nav-link" data-scroll-target="#sec-SimManagmentIfEventAndEventVariables-3"><span class="header-section-number">11.3.3.4.1</span> Event Logic Blocks</a></li>
+  <li><a href="#sec-SimManagmentEventsAsVariables-3" id="toc-sec-SimManagmentEventsAsVariables-3" class="nav-link" data-scroll-target="#sec-SimManagmentEventsAsVariables-3"><span class="header-section-number">11.3.3.4.2</span> Events as Variables</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-MS-SM-Scen-3" id="toc-sec-MS-SM-Scen-3" class="nav-link" data-scroll-target="#sec-MS-SM-Scen-3"><span class="header-section-number">11.3.4</span> Scenarios</a>
+  <ul>
+  <li><a href="#sec-SimManagmentRunningScenarios-3" id="toc-sec-SimManagmentRunningScenarios-3" class="nav-link" data-scroll-target="#sec-SimManagmentRunningScenarios-3"><span class="header-section-number">11.3.4.1</span> Running Scenarios</a></li>
+  <li><a href="#sec-SimManagmentScenarioExamples-3" id="toc-sec-SimManagmentScenarioExamples-3" class="nav-link" data-scroll-target="#sec-SimManagmentScenarioExamples-3"><span class="header-section-number">11.3.4.2</span> Scenario Examples</a></li>
+  </ul></li>
+  <li><a href="#sec-MS-SM-Vari-3" id="toc-sec-MS-SM-Vari-3" class="nav-link" data-scroll-target="#sec-MS-SM-Vari-3"><span class="header-section-number">11.3.5</span> Variables</a></li>
+  </ul></li>
+  <li><a href="#sec-AutoTerminateOptions-3" id="toc-sec-AutoTerminateOptions-3" class="nav-link" data-scroll-target="#sec-AutoTerminateOptions-3"><span class="header-section-number">11.4</span> Auto Terminate (Simulation End) Options</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-MS-1" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Managing And Starting Simulations</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- MJS: I would suggest having a look at Section 13.2 of the HPC manual. I recently rewrote that whole section and it might be worth copying some of that into this chapter 
+https://docs.tuflow.com/classic-hpc/manual/2026.0/SimulationManagement-2.html#SimulationManagement-2
+-->
+<section id="sec-MS-Over-2" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="sec-MS-Over-2"><span class="header-section-number">11.1</span> Overview</h2>
+<p>This chapter describes model naming conventions and the use of the TUFLOW FV Events, Scenarios and Variables functionality to support simulation of multiple scenarios and events from a single control file (<code>.fvc</code>). The latter part of the chapter describes the Auto Terminate feature and provides an example of its application.</p>
+</section>
+<section id="sec-MS-FN-2" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="sec-MS-FN-2"><span class="header-section-number">11.2</span> File Naming</h2>
+<p>A single hydrodynamic model may generate a large number of input, check and result files over the course of development and execution. Establishing a clear and consistent naming convention is an important aspect of model development. Effective naming conventions support interpretation, organisation, error checking, quality control and traceability for quality assurance purposes.</p>
+<p>The examples provided illustrate progression from a simple naming convention to more detailed conventions that account for different events and scenarios. The focus is on naming of the <code>.fvc</code> control file, as this determines the prefix applied to associated check, result and log files.</p>
+<p>Use of concise file names, with acronyms where appropriate, supports clarity and manageability. For example, for a model of the Hawkesbury River with a simulation period from 1 January 2019 to 3 January 2019, the file name <code>HR_20190101_20190103_001.fvc</code> is preferable to <code>Hawkesbury_River_01_January_2019_03_January_2019_001.fvc</code>.</p>
+<p><strong>Example 1</strong></p>
+<p>HR_001.fvc</p>
+<p>In its simplest form, TUFLOW FV model names consist of a short study identifier combined with a version number. The study identifier is typically used across all input files to indicate that the files are specific to a particular study. The version number is used to distinguish different iterations of the model. Each time a change is made and the model is rerun, the version number is incremented. This approach supports clear identification of which input files produced a given set of model outputs and is important for troubleshooting and quality control activities.</p>
+<p><strong>Example 2</strong></p>
+<p>HR_20190601_20190831_001.fvc</p>
+<p>HR_20200601_20200831_001.fvc</p>
+<p>Many hydrodynamic modelling studies require simulation of multiple events or combinations of events, such as differences in magnitude, duration, temporal pattern or climate condition. In these cases, inclusion of an event identifier within the simulation name is preferable to relying only on version numbering.</p>
+<p>In the examples shown, a consistent date format is used to represent Australian winter periods from 1 June 2019 to 31 August 2019 and from 1 June 2020 to 31 August 2020. The same number of characters is used for both file names. Consistent character length supports correct alphabetical ordering when files are viewed in Windows Explorer. The version number is unchanged in this example, indicating that the same model configuration was applied to two different simulation periods.</p>
+<p><a href="#sec-MS-SM-Even-3" class="quarto-xref"><span>Section 11.3.3</span></a> describes the Events functionality, which supports simulation of one or more events using a single <code>.tef</code> control file.</p>
+<p><strong>Example 3</strong></p>
+<p>HR_20190101_20190103_EXG_001.fvc</p>
+<p>HR_20190101_20190103_DEV_001.fvc</p>
+<p>Many hydrodynamic modelling studies require simulation of multiple scenarios, such as existing and development conditions or sensitivity testing where one or more model parameters are varied. Including the scenario identifier within the <code>.fvc</code> file name distinguishes outputs associated with each scenario. The characters used to represent the scenario are typically applied consistently to scenario specific model input files.</p>
+<p>For example, a development scenario identified as DEV may include construction of a new weir structure. In this case, a GIS layer used to represent the weir may be named <code>2d_ns_HR_DEV_weir_001.shp</code>. Presence of this layer within a simulation representing the existing scenario identified as EXG indicates an inconsistency in scenario configuration.</p>
+<p><a href="#sec-MS-SM-Scen-3" class="quarto-xref"><span>Section 11.3.4</span></a> describes the Scenarios functionality, which supports modelling of one or more scenarios using a single <code>.fvc</code> control file.</p>
+</section>
+<section id="sec-MS-SM-2" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="sec-MS-SM-2"><span class="header-section-number">11.3</span> Simulation Management</h2>
+<section id="sec-MS-SM-Over-3" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="sec-MS-SM-Over-3"><span class="header-section-number">11.3.1</span> Overview</h3>
+<p>Modelling studies commonly require simulation of multiple events or time periods. Examples include the following cases.</p>
+<ol type="1">
+<li>Coastal studies that consider different seasons, climate change conditions, multiple tidal periods or the duration of individual dredging campaigns.</li>
+<li>Storm tide studies that evaluate alternative combinations of tropical cyclone tracks and tidal conditions.</li>
+<li>Flood studies that assess annual exceedance probability events, including 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0 and 50.0 percent events, as well as extreme flood conditions.</li>
+<li>Water quality studies that investigate multiple scenarios to assess impacts of proposed changes or effectiveness of management interventions.</li>
+</ol>
+<p>To support simulation management and quality control, TUFLOW FV includes three features that may be used individually or in combination.</p>
+<ol type="1">
+<li>Model Events provide event management capability to support simulation of multiple event combinations, such as magnitude, duration, temporal pattern or climate change condition, using a single set of control files rather than creating separate control files for each simulation. See <a href="#sec-MS-SM-Even-3" class="quarto-xref"><span>Section 11.3.3</span></a>.</li>
+<li>Model Scenarios provide a framework for simulation of alternative model configurations, such as proposed bathymetric changes, from a single <code>.fvc</code> control file rather than requiring separate control files for each scenario. See <a href="#sec-MS-SM-Scen-3" class="quarto-xref"><span>Section 11.3.4</span></a>.</li>
+<li>Model Variables enable assignment of a user specified value to a single string variable. See <a href="#sec-MS-SM-Vari-3" class="quarto-xref"><span>Section 11.3.5</span></a>.</li>
+</ol>
+<p>Construction and use of events, scenarios and variables are described in the following sections, after introduction of the general nomenclature used to define these features.</p>
+</section>
+<section id="sec-MS-SM-Nome-3" class="level3" data-number="11.3.2">
+<h3 data-number="11.3.2" class="anchored" data-anchor-id="sec-MS-SM-Nome-3"><span class="header-section-number">11.3.2</span> Nomenclature</h3>
+<p>A text substitution mechanism is required to enable use of a single <code>.fvc</code> control file for repeated execution of multiple events and or scenarios. TUFLOW FV implements this capability using the tilde <code>~</code> symbol to delimit substitutable event and scenario identifiers within <code>.fvc</code> file names. The <code>.fvc</code> file name includes paired tildes for each event and scenario intended to be simulated in combination.</p>
+<p>The same control file is executed repeatedly with different event and scenario arguments supplied at run time. These arguments perform defined functions within the <code>.fvc</code> file and are substituted at locations corresponding to the paired tildes in the file name.</p>
+<p>For example, where a model requires simulation of two events, such as an inflow event and a tidal event, together with one scenario, such as an alternative bathymetry setting, the <code>.fvc</code> file name must accommodate three substitutable identifiers using tilde pairs. In this context, the identifiers <code>eX</code> and <code>sX</code> denote event and scenario keywords respectively, where <code>X</code> is a sequential integer.</p>
+<pre><code>Model_~e1~_~e2~_~s1~_001.fvc</code></pre>
+<p>In one configuration, the event and scenario arguments may be defined such that <code>e1</code> is assigned the value <code>Q100</code>, <code>e2</code> is assigned the value <code>HighTide</code> and <code>s1</code> is assigned the value <code>BASECASE</code>. In this case, the reusable <code>.fvc</code> control file is resolved using these argument values.</p>
+<pre><code>Model_Q100_HighTide_BASECASE_001.fvc</code></pre>
+<p>This <code>.fvc</code> control file is not created in this substituted form, as doing so would negate the purpose of using wildcard substitution within a single <code>.fvc</code> file. Output files produced by the simulation are named according to the resolved event and scenario values applied during execution.</p>
+<pre><code>Model_Q100_HighTide_BASECASE_001.nc
+Model_Q100_HighTide_BASECASE_001.csv</code></pre>
+<p>This means that only one *.fvc is used, but multiple sets of uniquely named output files are created.</p>
+<p>In addition to tilde based substitution for events and scenarios, variables may be referenced within <code>.fvc</code> files using double angle bracket notation. Where a variable named <code>DO_HIGH</code> is assigned a value of <code>6.0</code>, the variable may be referenced anywhere within an <code>.fvc</code> file using the syntax <code>&lt;&lt;DO_HIGH&gt;&gt;</code>. An example application is provided for specification of water quality initial conditions.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Initial WQ Concentration </span><span class="op">==</span> &lt;&lt;DO_HIGH&gt;&gt;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Use of this notation for configuration and execution of events, scenarios and variables is described in the following sections.</p>
+</section>
+<section id="sec-MS-SM-Even-3" class="level3" data-number="11.3.3">
+<h3 data-number="11.3.3" class="anchored" data-anchor-id="sec-MS-SM-Even-3"><span class="header-section-number">11.3.3</span> Events</h3>
+<p>Event management supports execution of multiple event combinations, such as magnitude, duration, temporal pattern and climate change condition, using a single set of control files rather than creating separate control files for each simulation.</p>
+<p>For example, a flood study may require simulation of the 1 percent, 2 percent and 5 percent Annual Exceedance Probability (AEP) events. Each AEP event may require simulation for multiple storm durations, such as 1 hour and 2 hours. <a href="#fig-ExampleTEFF" class="quarto-xref">Figure&nbsp;<span>11.1</span></a> presents the number of <code>.fvc</code> control files required with and without use of event management.</p>
+<p>Commands associated with event management are presented in <a href="#tbl-events" class="quarto-xref">Table&nbsp;<span>11.1</span></a>.</p>
+<div id="fig-ExampleTEFF" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ExampleTEFF-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ExampleTEF.png" class="img-fluid figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ExampleTEFF-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.1: Reduction of Control Files using Event Management
+</figcaption>
+</figure>
+</div>
+<div class="cell" data-execution_count="2">
+<div id="tbl-events" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="2">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-events-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.1: Event Commands
+</figcaption>
+<div aria-describedby="tbl-events-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div id="hdcfxksllf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#hdcfxksllf table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#hdcfxksllf thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#hdcfxksllf p { margin: 0; padding: 0; }
+ #hdcfxksllf .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #hdcfxksllf .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #hdcfxksllf .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #hdcfxksllf .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #hdcfxksllf .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #hdcfxksllf .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #hdcfxksllf .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #hdcfxksllf .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #hdcfxksllf .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #hdcfxksllf .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #hdcfxksllf .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #hdcfxksllf .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #hdcfxksllf .gt_spanner_row { border-bottom-style: hidden; }
+ #hdcfxksllf .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #hdcfxksllf .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #hdcfxksllf .gt_from_md> :first-child { margin-top: 0; }
+ #hdcfxksllf .gt_from_md> :last-child { margin-bottom: 0; }
+ #hdcfxksllf .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #hdcfxksllf .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #hdcfxksllf .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #hdcfxksllf .gt_row_group_first td { border-top-width: 2px; }
+ #hdcfxksllf .gt_row_group_first th { border-top-width: 2px; }
+ #hdcfxksllf .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #hdcfxksllf .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #hdcfxksllf .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #hdcfxksllf .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #hdcfxksllf .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #hdcfxksllf .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #hdcfxksllf .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #hdcfxksllf .gt_left { text-align: left; }
+ #hdcfxksllf .gt_center { text-align: center; }
+ #hdcfxksllf .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #hdcfxksllf .gt_font_normal { font-weight: normal; }
+ #hdcfxksllf .gt_font_bold { font-weight: bold; }
+ #hdcfxksllf .gt_font_italic { font-style: italic; }
+ #hdcfxksllf .gt_super { font-size: 65%; }
+ #hdcfxksllf .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #hdcfxksllf .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Command" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Command</th>
+<th id="Description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-DefineEvent">Define Event</a></span></p></td>
+<td class="gt_row gt_left"><p>Conditional - Required when using event simulation management logic. Starts the definition of a command block for the event.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-EndDefine">End Define</a></span></p></td>
+<td class="gt_row gt_left"><p>Conditional - Required if using event simulation management logic. Ends the definition of a command block for the event.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-BCEventSource">BC Event Source</a></span></p></td>
+<td class="gt_row gt_left"><p>Conditional - Required if using model events funcationality. Assigns dynamic text replacement for user-defined text in .fvc files.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-ModelEvents">Model Events</a></span></p></td>
+<td class="gt_row gt_left"><p>Optional - Used to set the default events. In practice these defaults are typically overridden at runtime.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-EventFile">Event File</a></span></p></td>
+<td class="gt_row gt_left"><p>Optional - Reference to the TUFLOW FV Event File.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-IfEvent">If Event</a></span></p></td>
+<td class="gt_row gt_left"><p>Optional - Enables use of conditional programming statement.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-ElseIfEvent">Else If Event</a></span></p></td>
+<td class="gt_row gt_left"><p>Optional - Enables nested if event conditional programming statements</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-Else">Else</a></span></p></td>
+<td class="gt_row gt_left"><p>Optional - Catch all argument for logic not captured by If Event or Else If Event.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-Pause">Pause</a></span></p></td>
+<td class="gt_row gt_left"><p>Optional - Used to pause a simulation. Prints a message to the console window.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-EndIf">End If</a></span></p></td>
+<td class="gt_row gt_left"><p>Conditional - Required if using event simulation management logic or nested scenario definitions. Closes an event conditional programming block.</p></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<section id="sec-SimManagmentTEF-3" class="level4" data-number="11.3.3.1">
+<h4 data-number="11.3.3.1" class="anchored" data-anchor-id="sec-SimManagmentTEF-3"><span class="header-section-number">11.3.3.1</span> TUFLOW Event File</h4>
+<p>Multiple events are defined using a TUFLOW Event File, commonly with the <code>.tef</code> extension. The file contains <code>.fvc</code> commands that apply to specific events. The <code>.tef</code> file is referenced within the <code>.fvc</code> file using the <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-EventFile">Event File</a></span> command. Up to nine different event types may be specified for a simulation, although in most applications only one or two event types are required.</p>
+<p>Commands from the <code>.tef</code> file are inserted into the simulation at the location where the <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-EventFile">Event File</a></span> command is read. These commands are then processed as if they were defined directly within the <code>.fvc</code> file at that position. As the event file is commonly used to overwrite default command values, the <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-EventFile">Event File</a></span> command is typically located at the end of the <code>.fvc</code> file. An example of referencing a TUFLOW Event File within a <code>.fvc</code> file is provided below.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">! EVENTS</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">Event File </span><span class="op">==</span> FLD008_005.tef      <span class="co">! Reference to the TUFLOW Event File</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Within the <code>.tef</code> file, event specific commands are defined between the <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-DefineEvent">Define Event</a></span> and <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-EndDefine">End Define</a></span> commands, which together form an event block. The <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-DefineEvent">Define Event</a></span> command specifies the event name and initiates the corresponding event block. Commands within an event block are either applied or ignored at model startup depending on whether the event is activated using the <code>-e</code> run option or the <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-ModelEvents">Model Events</a></span> command. Options for event execution are described in <a href="#sec-SimManagmentRunningEvents-3" class="quarto-xref"><span>Section 11.3.3.2</span></a>.</p>
+<p>Any TUFLOW FV command may be included within a Define Event block, however event blocks are commonly used to define commands related to model boundary conditions and simulation timing, including start and end times. Global <code>.fvc</code> commands may also be included within the <code>.tef</code> file by placing them outside the Define Event blocks, typically at the beginning of the file.</p>
+<p>The <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-BCEventSource">BC Event Source</a></span> command enables runtime text substitution within <code>.fvc</code> files. This functionality allows boundary conditions, include files or model parameters to be varied through use of a single <code>.fvc</code> file.</p>
+<p>An example of <code>.tef</code> syntax is provided in the following syntax block. The example follows the nomenclature described in <a href="#sec-MS-SM-Nome-3" class="quarto-xref"><span>Section 11.3.2</span></a>, using paired tildes to identify text intended for substitution. These substitutable text identifiers are user defined and are distinct from reserved keywords. For example, <code>aep</code> is user defined, whereas <code>e1</code> represents a reserved keyword.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">! TUFLOW EVENT FILE (.TEF) defines the parameters for the model events</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> Q100                        <span class="co">! Start definition of block of commands for event 'Q100'</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~aep~ | 100yr        <span class="co">! Text for runtime substitution</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Timestep Limits </span><span class="op">==</span> 0.01, 0.3            <span class="co">! Minimum and maximum time steps allowed</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> 2h                          <span class="co">! Start definition of block of commands for event '2h'</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~dur~ | 2hr          <span class="co">! Text for runtime substitution</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">    End Time </span><span class="op">==</span> 3.0                         <span class="co">! Simulation end time</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-BCEventSource">BC Event Source</a></span> and <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-TimestepLimits">Timestep Limits</a></span> commands within the event block are applied when the events <code>Q100</code> and <code>2h</code> are specified at runtime. In this configuration, the commands perform the following functions.</p>
+<ul>
+<li>Within the Define Event block, <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-TimestepLimits">Timestep Limits</a></span> are selected according to event severity. Time step values are modified to accommodate events with increased water depths and velocities.</li>
+<li>The <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-BCEventSource">BC Event Source</a></span> command assigns dynamic text substitution variables for rainfall intensity and storm duration.</li>
+</ul>
+<p>If a model was run with <code>Q100</code> and <code>2hr</code> events specified then the substitution behaviour of <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-BCEventSource">BC Event Source</a></span> is summarised below.</p>
+<ol type="1">
+<li><p>Text replacement is supported within directory paths and file names specified to the right of the <span class="teq">==</span> operator.</p>
+<div class="scrollable-block">
+<p><span class="tcmd">BC</span> <span class="teq">==</span> <span class="tblk">Q, 1, ..\bc_dbase\FLD008_~aep~_~dur~.csv</span></p>
+</div>
+<p>Is substituted to:</p>
+<div class="scrollable-block">
+<p><span class="tcmd">BC</span> <span class="teq">==</span> <span class="tblk">Q, 1, ..\bc_dbase\FLD008_100yr_2hr.csv</span></p>
+</div></li>
+<li><p>Replacement of command input parameters to the right of the <span class="teq">==</span> is supported. For example:</p>
+<div class="scrollable-block">
+<p><span class="tcmd">BC Header</span> <span class="teq">==</span> <span class="tblk">inflow_time_~dur~, inflow_~aep~_~dur~_FC01</span></p>
+</div>
+<p>Is substituted to:</p>
+<div class="scrollable-block">
+<p><span class="tcmd">BC Header</span> <span class="teq">==</span> <span class="tblk">inflow_time_2hr, inflow_100yr_2hr_FC01</span></p>
+</div></li>
+<li><p>Replacement is not allowed in TUFLOW FV command syntax to the left of the <span class="teq">==</span>. For example:</p>
+<div class="scrollable-block">
+<p><span class="tcmd">BC Header ~aep~</span> <span class="teq">==</span> <span class="tblk">inflow_time_hr, inflow_~aep~_FC01</span></p>
+</div>
+<p>This will result in an error due to the ~aep~ to the left of the <span class="teq">==</span> operator.</p></li>
+<li><p>BC Event Source text replacement is currently limited to <code>.fvc</code> and include file commands. It is not currently available for commands within Sediment Transport (.fvsed), Water Quality (.fvwq) and Particle Tracking (.fvptm) Control Files.</p></li>
+</ol>
+</section>
+<section id="sec-SimManagmentRunningEvents-3" class="level4" data-number="11.3.3.2">
+<h4 data-number="11.3.3.2" class="anchored" data-anchor-id="sec-SimManagmentRunningEvents-3"><span class="header-section-number">11.3.3.2</span> Running Events</h4>
+<p>Two methods are available for execution of multiple events using a single <code>.fvc</code> control file.</p>
+<ol type="1">
+<li>Use a batch file (<code>.bat</code>). The <code>-e</code> or <code>-eX</code> options, where <code>X</code> is an integer from 1 to 9, may be specified to execute multiple events using the same <code>.fvc</code> control file. This method supports automated execution of multiple event combinations.</li>
+<li>Use the <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-ModelEvents">Model Events</a></span> command. Event definitions may be modified manually within the <code>.fvc</code> file prior to each simulation. When the <code>-e</code> option is used at runtime through a batch file, it overrides any events defined using the <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-ModelEvents">Model Events</a></span> command within the <code>.fvc</code> file. The <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-ModelEvents">Model Events</a></span> command is typically used to define default event settings.</li>
+</ol>
+<p>Examples of running events from the command line are presented in <a href="#sec-SimManagmentEventExamples-3" class="quarto-xref"><span>Section 11.3.3.3</span></a>.</p>
+<p>To incorporate event identifiers into output file names and maintain uniqueness, the text strings <code>~e~</code> or <code>~e&lt;X&gt;~</code>, where <code>&lt;X&gt;</code> is an integer from 1 to 9, may be included within the <code>.fvc</code> file name.</p>
+<pre><code>MODEL_~e1~_001.fvc</code></pre>
+<p>Can be configured to run any number of e1 event names:</p>
+<ul>
+<li>e1=0100F: <code>MODEL_0100F_001.fvc</code></li>
+<li>e1=0200F: <code>MODEL_0200F_001.fvc</code></li>
+<li>e1=0500F: <code>MODEL_0500F_001.fvc</code></li>
+<li>e1=1000F: <code>MODEL_1000F_001.fvc</code></li>
+</ul>
+<p>Multiple events can be simulated from a single .fvc file using a batch file. The example below uses three events to vary the event rainfall intensity, duration and temporal pattern. file. The example below uses three events to vary the event rainfall intensity, duration and temporal pattern.</p>
+<pre><code>set EXE=C:\Program Files\TUFLOWFV\TUFLOWFV.exe
+set OMP_NUM_THREADS=4
+%EXE%   -e1         10pct   -e2         01h     -e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   -e1         10pct   -e2         01h     -e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   -e1         10pct   -e2         02h     -e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   -e1         10pct   -e2         02h     -e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   -e1         05pct   -e2         01h     -e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   -e1         05pct   -e2         01h     -e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   -e1         05pct   -e2         02h     -e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   -e1         05pct   -e2         02h     -e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   -e1         02pct   -e2         01h     -e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   -e1         02pct   -e2         01h     -e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   -e1         02pct   -e2         02h     -e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   -e1         02pct   -e2         02h     -e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   -e1         01pct   -e2         01h     -e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   -e1         01pct   -e2         01h     -e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   -e1         01pct   -e2         02h     -e3         T01         Nile_~e1~_~e2~_~e3~_001.fvc
+%EXE%   -e1         01pct   -e2         02h     -e3         T02         Nile_~e1~_~e2~_~e3~_001.fvc</code></pre>
+<p>When a large number of events are executed, use of looping structures within a batch file may simplify execution. This approach reduces repetition compared with listing multiple similar command entries and supports improved robustness. Standard Windows batch file syntax may be applied by defining parameter arrays and iterating through those arrays during execution.</p>
+<p>Using this approach, the sixteen TUFLOW FV executions referenced previously may be expressed in a more compact and maintainable form as follows:</p>
+<pre><code>set EXE=C:\Program Files\TUFLOWFV\TUFLOWFV.exe
+set OMP_NUM_THREADS=4
+
+REM Set arrays e1, e2 and e3
+set ev1=10pct 05pct 02pct 01pct
+set ev2=01h 02h
+set ev3=T01 T02
+
+REM Loop through arrays
+for %%a in (%ev1%) do (
+  for %%b in (%ev2%) do (
+    for %%c in (%ev3%) do (
+      %EXE% -e1 %%a -e2 %%b -e3 %%c Nile_~e1~_~e2~_~e3~_001.fvc
+    )
+  )
+)</code></pre>
+<p>For further examples of running events from batch files including advanced batch looping refer to the <a href="https://fvwiki.tuflow.com/Run_TUFLOW_FV_From_A_Batch_File">TUFLOW FV Wiki</a>.</p>
+</section>
+<section id="sec-SimManagmentEventExamples-3" class="level4" data-number="11.3.3.3">
+<h4 data-number="11.3.3.3" class="anchored" data-anchor-id="sec-SimManagmentEventExamples-3"><span class="header-section-number">11.3.3.3</span> Event Examples</h4>
+<p>Three examples are presented. Similar examples can be downloaded and run licence-free using the <a href="https://fvwiki.tuflow.com/TUFLOW_FV_Example_Models">TUFLOW FV Example Model Suite</a>.</p>
+<ul>
+<li>Examples 1 and 2 describe an estuary model use case in which a series of simulation years from 2016 to 2018 is executed. Example 1 applies a single event condition to select the simulation year. Example 2 introduces a second event condition to represent climate change allowance selection for inflow and downstream water level conditions.</li>
+<li>Example 3 describes a catchment model that applies three event conditions to execute combinations of rainfall event intensity, duration and temporal pattern.</li>
+</ul>
+<p>In each example, start time, end time, initial condition and output directory commands are defined within the event blocks to modify model configuration according to the event being simulated.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Events Example 1 - Single Event Condition">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Events Example 1 - Single Event Condition
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The .fvc file to be configured with events is named <code>Example_Estuary_001.fvc</code>. This example outlines the updates required to make the .fvc file event compatible.</p>
+<p>Within each BC Block, add BC Event Source wildcards so that the boundary condition selected is a function of the model event.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">! ~simperiod~ replaced by event file BC Event Source text</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">BC </span><span class="op">==</span> Q, Upstream, ..\bc_dbase\Estuary_Inflows_~simperiod~.csv</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Header </span><span class="op">==</span> Time_UTC, Flow_cumecs, Salinity_ppt, Temp_degC</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">End BC</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">! ~simperiod~ replaced by event file BC Event Source text</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">BC </span><span class="op">==</span> WL, Downstream, ..\bc_dbase\Estuary_Water_Levels_~simperiod~.csv</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Header </span><span class="op">==</span> Time_UTC, Level_mMSL, Salinity_ppt, Temp_degC</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="kw">End BC</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To ensure that each run has unique output result names and diagnostics, add “~e1~” in the .fvc file name, for example “Example_Estuary_~e1~_001.fvc”. With this new file add the Event File command to the bottom of the .fvc file.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Event File </span><span class="op">==</span> Estuary_Events.tef</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The “Estuary_Events.tef” file contains the following.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">! ________________________________________________________________________________</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">! Global Default Settings</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">Time Format </span><span class="op">==</span> ISODATE</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">Start Time </span><span class="op">==</span> 01/01/2016 00:00:00                           <span class="co">! (UTC) Unless Start Time is subsequently repeated all simulations start in 2016</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">! ________________________________________________________________________________</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">! Simulation Year Event Definitions</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">! Commands Specific to 2016</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> 2016</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~simperiod~ | 20160101_20170101      <span class="co">! .fvc file runtime text replacement</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="kw">    End Time </span><span class="op">==</span> 01/01/2017 00:00:00</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Output Dir </span><span class="op">==</span> ..\results\2016</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Write Check Files </span><span class="op">==</span> ..\check\2016</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Initial Water Level </span><span class="op">==</span> 0.1</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Initial Salinity </span><span class="op">==</span> 35.0</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Initial Temperature </span><span class="op">==</span> 18.</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co">! Commands Specific to 2017</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> 2017</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~simperiod~ | 20170101_20180101      <span class="co">! .fvc file runtime text replacement</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Start Time </span><span class="op">==</span> 01/01/2017 00:00:00</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="kw">    End Time </span><span class="op">==</span> 01/01/2018 00:00:00</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Output Dir </span><span class="op">==</span> ..\results\2017</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Write Check Files </span><span class="op">==</span> ..\check\2017</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Restart File </span><span class="op">==</span> ..\log\Example_Estuary_2016_001.rst</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="co">! Commands Specific to 2018</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> 2018</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~simperiod~ | 20180101_20190101      <span class="co">! .fvc file runtime text replacement</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Start Time </span><span class="op">==</span> 01/01/2018 00:00:00</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="kw">    End Time </span><span class="op">==</span> 01/01/2019 00:00:00</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Output Dir </span><span class="op">==</span> ..\results\2018</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Write Check Files </span><span class="op">==</span> ..\check\2018</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Restart File </span><span class="op">==</span> ..\log\Example_Estuary_2017_001.rst</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>With this configuration multiple events can be simulated from a single .fvc file using a batch file. For more information on running batch files refer to the <a href="https://fvwiki.tuflow.com/Run_TUFLOW_FV_From_A_Batch_File">TUFLOW FV Wiki</a>.</p>
+<pre><code>set EXE=C:\Program Files\TUFLOWFV\TUFLOWFV.exe
+set OMP_NUM_THREADS=4
+%EXE%   -e1         2016        Example_Estuary_~e1~_001.fvc
+%EXE%   -e1         2017        Example_Estuary_~e1~_001.fvc
+%EXE%   -e1         2018        Example_Estuary_~e1~_001.fvc</code></pre>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Events Example 2 - Two Event Conditions">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Events Example 2 - Two Event Conditions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Within each BC Block:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">! ~simperiod~ and climate ~clim~ replaced by event file BC Event Source text</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">BC </span><span class="op">==</span> Q, Upstream, ..\bc_dbase\Estuary_Inflows_~simperiod~_~clim~.csv</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Header </span><span class="op">==</span> Time_UTC, Flow_cumecs, Salinity_ppt, Temp_degC</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">End BC</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">! ~simperiod~ and sea level rise allowance ~clim_wl_offset~ replaced by event file BC Event Source text</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="kw">BC </span><span class="op">==</span> WL, Downstream, ..\bc_dbase\Estuary_Water_Levels_~simperiod~.csv</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Header </span><span class="op">==</span> Time_UTC, Level_mMSL, Salinity_ppt, Temp_degC</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Offset </span><span class="op">==</span> ~clim_wl_offset~, 1.0, 1.0</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="kw">End BC</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Include “~e1~” and “~e2~” in the .fvc file name, for example “Example_Estuary_~e1~_~e2~_001.fvc”, and add the following line to the bottom of the .fvc file.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Event File </span><span class="op">==</span> Estuary_Events.tef</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The “Estuary Events.tef” file contains the following:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">! ________________________________________________________________________________</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">! Global Default Settings</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">Time Format </span><span class="op">==</span> ISODATE</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">Start Time </span><span class="op">==</span> 01/01/2016 00:00:00                                 <span class="co">! (UTC) Unless Start Time is subsequently repeated all simulations start in 2016</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">! ________________________________________________________________________________</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">! Simulation Year Event Definitions</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">! Commands Specific to 2016</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> 2016</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~simperiod~ | 20160101_20170101            <span class="co">! .fvc file runtime text replacement</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="kw">    End Time </span><span class="op">==</span> 01/01/2017 00:00:00</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Output Dir </span><span class="op">==</span> ..\results\2016</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Write Check Files </span><span class="op">==</span> ..\check\2016</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Initial Water Level </span><span class="op">==</span> 0.1</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Initial Salinity </span><span class="op">==</span> 35.0</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Initial Temperature </span><span class="op">==</span> 18.</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">! Commands Specific to 2017</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> 2017</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~simperiod~ | 20170101_20180101            <span class="co">! .fvc file runtime text replacement</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Start Time </span><span class="op">==</span> 01/01/2017 00:00:00</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="kw">    End Time </span><span class="op">==</span> 01/01/2018 00:00:00</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Output Dir </span><span class="op">==</span> ..\results\2017</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Write Check Files </span><span class="op">==</span> ..\check\2017</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Restart File </span><span class="op">==</span> ..\log\Example_Estuary_2016_&lt;&lt;~e2~&gt;&gt;_001.rst  <span class="co">! &lt;&lt;~e2~&gt;&gt; event name variable</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co">! Commands Specific to 2018</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> 2018</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~simperiod~ | 20180101_20190101            <span class="co">! .fvc file runtime text replacement</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Start Time </span><span class="op">==</span> 01/01/2018 00:00:00</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="kw">    End Time </span><span class="op">==</span> 01/01/2019 00:00:00</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Output Dir </span><span class="op">==</span> ..\results\2018</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Write Check Files </span><span class="op">==</span> ..\check\2018</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Restart File </span><span class="op">==</span> ..\log\Example_Estuary_2017_&lt;&lt;~e2~&gt;&gt;_001.rst  <span class="co">! &lt;&lt;~e2~&gt;&gt; event name variable</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="co">! ________________________________________________________________________________</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="co">! Climate Change Definitions</span></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="co">! Commands Specific to Existing Climate Conditions</span></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> CC_EXST</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~clim~ | CC_EXST</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~clim_wl_offset~ | 0.0                     <span class="co">! Sea level rise</span></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="co">! Commands Specific to 2050 Climate Projections</span></span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> CC_2050</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~clim~ | CC_2050</span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~clim_wl_offset~ | 0.3                     <span class="co">! Sea level rise</span></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a><span class="co">! Commands Specific to 2100 Climate Projections</span></span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> CC_2100</span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~clim~ | CC_2100</span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~clim_wl_offset~ | 1.0                     <span class="co">! Sea level rise</span></span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a><span class="co">! Commands Specific to 2150 Climate Projections</span></span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> CC_2150</span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~clim~ | CC_2150</span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~clim_wl_offset~ | 1.5                     <span class="co">! Sea level rise</span></span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Multiple events can be simulated from one .fvc file using a batch file. For more information on running batch files refer to the <a href="https://fvwiki.tuflow.com/Run_TUFLOW_FV_From_A_Batch_File">TUFLOW FV Wiki</a>.</p>
+<pre><code>set EXE=C:\Program Files\TUFLOWFV\TUFLOWFV.exe
+set OMP_NUM_THREADS=4
+
+%EXE%   -e1         2016    -e2         CC_EXST         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   -e1         2016    -e2         CC_2050         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   -e1         2016    -e2         CC_2100         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   -e1         2016    -e2         CC_2150         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   -e1         2017    -e2         CC_EXST         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   -e1         2017    -e2         CC_2050         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   -e1         2017    -e2         CC_2100         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   -e1         2017    -e2         CC_2150         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   -e1         2018    -e2         CC_EXST         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   -e1         2018    -e2         CC_2050         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   -e1         2018    -e2         CC_2100         Example_Estuary_~e1~_~e2~_001.fvc
+%EXE%   -e1         2018    -e2         CC_2150         Example_Estuary_~e1~_~e2~_001.fvc</code></pre>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Events Example 3 - Three Event Conditions">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Events Example 3 - Three Event Conditions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The following example shows the setup for a floodplain model with multiple different design rainfall intensities, rainfall durations and temporal patterns.</p>
+<p>Within each BC Block:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">! Storm intensity, duration and temporal pattern replaced by event file BC Event Source text</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">BC </span><span class="op">==</span> Q, Nile_River, ..\bc_dbase\Inflows\Nile_~AEP~_~durn~.csv</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Header </span><span class="op">==</span> Time_hrs, Flow_cumecs_~tpattern~</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">End BC</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">! Storm intensity, duration and temporal pattern replaced by event file BC Event Source text</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="kw">BC </span><span class="op">==</span> QC, Back_Creek, ..\bc_dbase\Inflows\Back_Creek_~AEP~_~durn~.csv</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Header </span><span class="op">==</span> Time_hrs, Flow_cumecs_~tpattern~</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="kw">End BC</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Include “~e1~”, “~e2~” and “~e3~” in the .fvc file name, for example “Nile_~e1~_~e2~_~e3~_001.fvc”, and the following line to the bottom of the .fvc file.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Event File </span><span class="op">==</span> Nile_Events.tef</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The “Nile Events.tef” file contains the event block logic provided below.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">! ________________________________________________________________________________</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">! Global Default Settings</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">Time Format </span><span class="op">==</span> HOURS</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="kw">Start Time </span><span class="op">==</span> 0.0           <span class="co">! Unless Start Time is subsequently repeated all simulations start at time 0</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">! ________________________________________________________________________________</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">! Annual Exceedance Probability Definitions</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> 10pct</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~AEP~ | 010pct</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Output Dir </span><span class="op">==</span> ..\results\10pct</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> 05pct</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~AEP~ | 05pct</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Output Dir </span><span class="op">==</span> ..\results\05pct</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> 02pct</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~AEP~ | 02pct</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Output Dir </span><span class="op">==</span> ..\results\02pct</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> 01pct</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~AEP~ | 01pct</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Output Dir </span><span class="op">==</span> ..\results\01pct</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co">! ________________________________________________________________________________________________________</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co">! Storm Duration Definitions</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> 01h</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~durn~ | 01h</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="kw">    End Time </span><span class="op">==</span> 3.0</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> 02h</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~durn~ | 02h</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="kw">    End Time </span><span class="op">==</span> 4.0</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="co">! ________________________________________________________________________________________________________</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="co">! Temporal Pattern Definitions</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> T01</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~tpattern~ | T01</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="kw">Define Event </span><span class="op">==</span> T02</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Event Source </span><span class="op">==</span> ~tpattern~ | T02</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="kw">End Define</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-SimManagmentAdditionalFunctionality-4" class="level4" data-number="11.3.3.4">
+<h4 data-number="11.3.3.4" class="anchored" data-anchor-id="sec-SimManagmentAdditionalFunctionality-4"><span class="header-section-number">11.3.3.4</span> Additional Functionality</h4>
+<section id="sec-SimManagmentIfEventAndEventVariables-3" class="level5" data-number="11.3.3.4.1">
+<h5 data-number="11.3.3.4.1" class="anchored" data-anchor-id="sec-SimManagmentIfEventAndEventVariables-3"><span class="header-section-number">11.3.3.4.1</span> Event Logic Blocks</h5>
+<p>While a <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-EventFile">Event File</a></span> can be constructed to define any number of events and their associated commands, event names can also be used within *.fvc files to dynamically issue commands within If… Else If… Else… End If logical blocks. For example, the timestep limits can be set within a *.fvc depending on the event chosen. Specifically, if <em>any event</em> has one of these names then the timestep limits will be set accordingly.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">! Modify the model timestep limits as a function of rainfall intensity</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">If Event </span><span class="op">==</span> Q1</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Timestep Limits </span><span class="op">==</span> 0.1, 1.0</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="kw">Else If Event </span><span class="op">==</span> Q10</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Timestep Limits </span><span class="op">==</span> 0.01, 0.1</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="kw">Else If Event </span><span class="op">==</span> Q50</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Timestep Limits </span><span class="op">==</span> 0.01, 0.1</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="kw">Else If Event </span><span class="op">==</span> Q100</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Timestep Limits </span><span class="op">==</span> 0.001, 0.1</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>Else</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Pause </span><span class="op">==</span> Should not be here - invalid event specified.</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="kw">End If</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The Pause command causes TUFLOW FV to stop whenever it is encountered, which in the above case would be if no event had been specified called any of Q1, Q10, Q50 or Q100.</p>
+<p>‘OR’ logic can also be used in blocks such as the above by using the ‘|’ character. Noting that the Q50 and Q100 <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-TimestepLimits">Timestep Limits</a></span> are the same above, the overall block can be written more succinctly as demonstrated in the following example.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">! Modify the model timestep limits as a function of rainfall intensity</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">If Event </span><span class="op">==</span> Q1</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Timestep Limits </span><span class="op">==</span> 0.1, 1.0</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="kw">Else If Event </span><span class="op">==</span> Q10 | Q50      <span class="co">! Example 'OR' logic using '|' character</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Timestep Limits </span><span class="op">==</span> 0.01, 0.1</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="kw">Else If Event </span><span class="op">==</span> Q100</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Timestep Limits </span><span class="op">==</span> 0.001, 0.1</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>Else</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Pause </span><span class="op">==</span> Should not be here - invalid event specified.</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="kw">End If</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="sec-SimManagmentEventsAsVariables-3" class="level5" data-number="11.3.3.4.2">
+<h5 data-number="11.3.3.4.2" class="anchored" data-anchor-id="sec-SimManagmentEventsAsVariables-3"><span class="header-section-number">11.3.3.4.2</span> Events as Variables</h5>
+<p>Events are also automatically defined as <a href="#sec-MS-SM-Vari-3">variables</a> and can be assigned accordingly within *.fvc control files. For example, if multiple events (<code>e1</code>) were set up and executed and a separate folder was desired for each event’s suite of outputs, the following syntax in the *.fvc would accomplish this outcome.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Output Dir </span><span class="op">==</span> ..\results&lt;&lt;~e1~&gt;&gt;\</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If <code>e1</code> was set to <code>Q2</code> then the above would be interpreted as:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Output Dir </span><span class="op">==</span> ..\results\Q2\</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Similar approaches can be applied to other TUFLOW FV *.fvc commands.</p>
+</section>
+</section>
+</section>
+<section id="sec-MS-SM-Scen-3" class="level3" data-number="11.3.4">
+<h3 data-number="11.3.4" class="anchored" data-anchor-id="sec-MS-SM-Scen-3"><span class="header-section-number">11.3.4</span> Scenarios</h3>
+<p>During project and research work, comparison of existing or base case conditions with future design conditions is commonly required. This may involve evaluation of one or more alternative design options. Example applications include the following cases.</p>
+<ul>
+<li>Earthworks or land use changes associated with proposed coastal or floodplain development.</li>
+<li>Construction of new capital works such as ports, dredged channels or alternative channel design options.</li>
+<li>Modification of dam operation strategies.</li>
+<li>Assessment of alternative bridge or hydraulic structure upgrade options.</li>
+</ul>
+<p>Model Scenarios provide a framework for simulation of alternative design options using a single <code>.fvc</code> control file, rather than creation of separate control files for each scenario. Commands associated with scenario configuration are presented in <a href="#tbl-scenarios" class="quarto-xref">Table&nbsp;<span>11.2</span></a>.</p>
+<div class="cell" data-execution_count="3">
+<div id="tbl-scenarios" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-scenarios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.2: Scenario Commands
+</figcaption>
+<div aria-describedby="tbl-scenarios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="fywmxhktqa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#fywmxhktqa table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#fywmxhktqa thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#fywmxhktqa p { margin: 0; padding: 0; }
+ #fywmxhktqa .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #fywmxhktqa .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #fywmxhktqa .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #fywmxhktqa .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #fywmxhktqa .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #fywmxhktqa .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #fywmxhktqa .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #fywmxhktqa .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #fywmxhktqa .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #fywmxhktqa .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #fywmxhktqa .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #fywmxhktqa .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #fywmxhktqa .gt_spanner_row { border-bottom-style: hidden; }
+ #fywmxhktqa .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #fywmxhktqa .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #fywmxhktqa .gt_from_md> :first-child { margin-top: 0; }
+ #fywmxhktqa .gt_from_md> :last-child { margin-bottom: 0; }
+ #fywmxhktqa .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #fywmxhktqa .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #fywmxhktqa .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #fywmxhktqa .gt_row_group_first td { border-top-width: 2px; }
+ #fywmxhktqa .gt_row_group_first th { border-top-width: 2px; }
+ #fywmxhktqa .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #fywmxhktqa .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #fywmxhktqa .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #fywmxhktqa .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #fywmxhktqa .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #fywmxhktqa .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #fywmxhktqa .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #fywmxhktqa .gt_left { text-align: left; }
+ #fywmxhktqa .gt_center { text-align: center; }
+ #fywmxhktqa .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #fywmxhktqa .gt_font_normal { font-weight: normal; }
+ #fywmxhktqa .gt_font_bold { font-weight: bold; }
+ #fywmxhktqa .gt_font_italic { font-style: italic; }
+ #fywmxhktqa .gt_super { font-size: 65%; }
+ #fywmxhktqa .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #fywmxhktqa .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Command" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Command</th>
+<th id="Description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-IfScenario">If Scenario</a></span></p></td>
+<td class="gt_row gt_left"><p>Conditional - Required if using scenario based conditional programming. Required if using scenario functionality. Controls which commands are to be applied depending on the scenario or combination of scenarios specified by the user.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-ModelScenarios">Model Scenarios</a></span></p></td>
+<td class="gt_row gt_left"><p>Optional - Used to set the default scenario. In practice these defaults are typically overridden at runtime.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-ElseIfScenario">Else If Scenario</a></span></p></td>
+<td class="gt_row gt_left"><p>Optional - Enables nested If scenarios using conditional programming statements.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-Else">Else</a></span></p></td>
+<td class="gt_row gt_left"><p>Optional - Catch all argument for logic not captured by If Scenario or Else If Scenario.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-Pause">Pause</a></span></p></td>
+<td class="gt_row gt_left"><p>Optional - Used to pause a simulation. Prints a message to the console window.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-EndIf">End If</a></span></p></td>
+<td class="gt_row gt_left"><p>Conditional - Required if using event simulation management logic or nested scenario definitions. Required if using scenario functionality. Closes an scenario conditional programming block.</p></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<section id="sec-SimManagmentRunningScenarios-3" class="level4" data-number="11.3.4.1">
+<h4 data-number="11.3.4.1" class="anchored" data-anchor-id="sec-SimManagmentRunningScenarios-3"><span class="header-section-number">11.3.4.1</span> Running Scenarios</h4>
+<p>The approach to running scenarios is analogous to Model Events, except that a Scenario File similar to the Event File (<code>.tef</code>) is not required.</p>
+<p>Two options are available to run scenarios from the same .fvc file:</p>
+<ol type="1">
+<li>Using a batch file (.bat): Specify <code>--s</code> or <code>--sX</code> options, where <code>X</code> is a number from 1 to 9, to run single or multiple scenarios using the same .fvc file. Refer to the <a href="#SimManagmentScenarioExamples-3">Scenario Examples</a>. This is the recommended approach.</li>
+<li>Using the <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-ModelScenarios">Model Scenarios</a></span> command: Change the scenarios manually before each simulation within the .fvc file. Note that if the <code>--s</code> option is used, batch file <code>--s</code> calls override any scenarios defined using the <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-ModelScenarios">Model Scenarios</a></span> command within the .fvc. The <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-ModelScenarios">Model Scenarios</a></span> command is typically used to set the default scenario or scenarios.</li>
+</ol>
+<p>To automatically insert the name of the scenario or scenarios into the output filenames and make the output names unique, place “~s~” or “~s&lt;X&gt;~”, where &lt;X&gt; is a number from 1 to 9, into the .fvc file name. For example, a study on the Mary River may use the following .fvc file name:</p>
+<pre><code>MR_~s1~_~s2~_001.fvc</code></pre>
+<p>This can be configured to run any number of <code>s1</code> and <code>s2</code> scenarios. For example:</p>
+<pre><code>set EXE=C:\Program Files\TUFLOWFV\TUFLOWFV.exe
+set OMP_NUM_THREADS=4
+
+%EXE%   -s1         EXG   -s2         BASE        MR_~s1~_~s2~_001.fvc
+%EXE%   -s1         DEV   -s2         OPT1        MR_~s1~_~s2~_001.fvc
+%EXE%   -s1         DEV   -s2         OPT2        MR_~s1~_~s2~_001.fvc
+%EXE%   -s1         DEV   -s2         OPT3        MR_~s1~_~s2~_001.fvc</code></pre>
+<p>becomes:</p>
+<pre><code>s1=EXG and s2=BASE:   MR_EXG_BASE_001.fvc
+s1=DEV and s2=OPT1:   MR_DEV_OPT1_001.fvc
+s1=DEV and s2=OPT2:   MR_DEV_OPT2_001.fvc
+s1=DEV and s2=OPT3:   MR_DEV_OPT3_001.fvc</code></pre>
+<p><em>By coincidence, the character length for s1 (3) and s2 (4) is consistent between each run. This is not required</em></p>
+<p>Examples of running scenarios from batch files including advanced batch looping are provided in the <a href="https://fvwiki.tuflow.com/Run_TUFLOW_FV_From_A_Batch_File">TUFLOW FV Wiki</a>.</p>
+</section>
+<section id="sec-SimManagmentScenarioExamples-3" class="level4" data-number="11.3.4.2">
+<h4 data-number="11.3.4.2" class="anchored" data-anchor-id="sec-SimManagmentScenarioExamples-3"><span class="header-section-number">11.3.4.2</span> Scenario Examples</h4>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Scenarios Example 1">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Scenarios Example 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In a .fvc file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">! ________________________________________________________________________________________________________________</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">! Apply materials</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="kw">Set Mat </span><span class="op">==</span> 1                                <span class="co">! Set materials to default of 1</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_existing.shp     <span class="co">! Apply existing materials</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="kw">If Scenario </span><span class="op">==</span> opA</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_opA.shp      <span class="co">! Option A changes existing materials</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="kw">End If</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>TUFLOW FV will carry out the following steps:</p>
+<ol type="1">
+<li>Set all material values over the entire 2D domain to a value of 1.</li>
+<li>Process the 2d_mat_existing.shp layer to assign material values from a layer of land-use polygons representing the existing situation.</li>
+<li>One of the following will then occur:
+<ol type="i">
+<li>If “-s1 opA” is specified as a run option in a batch file, or <span class="tcmd">Model Scenarios</span> <span class="teq">==</span> <span class="tblk">opA</span> is specified in the .fvc file, then the 2d_mat_opA.shp layer is processed to modify the material values where Option A has changed the landuse. If “~s1~” occurs within the .fvc filename, it is replaced by “opA” in the output filenames, otherwise “opA” is appended to the .fvc filename for the output filenames.</li>
+<li>If opA was not specified as a scenario, this layer would be ignored. For example, as would be required if modelling the existing scenario.</li>
+</ol></li>
+</ol>
+</div>
+</div>
+</div>
+<p>Example 1 can be extended to include an Option B, where Option B is a modified version of Option A as shown in Example 2a below.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Scenarios Example 2a">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Scenarios Example 2a
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Set Mat </span><span class="op">==</span> 1                                <span class="co">! Set unspecified materials to default of 1</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_existing.shp     <span class="co">! Apply existing materials</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="kw">If Scenario </span><span class="op">==</span> opA | opB</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_opA.shp      <span class="co">! Option A changes to existing materials</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="kw">End If</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="kw">If Scenario </span><span class="op">==</span> opB</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_opB.shp      <span class="co">! Option B changes to Existing and Option A</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="kw">End If</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>In the above example, either “–s opB” or “–s1 opA –s2 opB” can be used for the run options when modelling the Option B scenario.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Scenarios Example 2b">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Scenarios Example 2b
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Set Mat </span><span class="op">==</span> 1                                <span class="co">! Set unspecified materials to default of 1</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_existing.shp     <span class="co">! Apply existing materials</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="kw">If Scenario </span><span class="op">==</span> opA</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_opA.shp      <span class="co">! Option A changes to existing materials</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="kw">End If</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="kw">If Scenario </span><span class="op">==</span> opB</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_opB.shp      <span class="co">! Option B changes to existing materials</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="kw">End If</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Alternatively, the following would give the same result.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Set Mat </span><span class="op">==</span> 1                                <span class="co">! Set unspecified materials to default of 1</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_existing.shp     <span class="co">! Apply existing materials</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="kw">If Scenario </span><span class="op">==</span> opA</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_opA.shp      <span class="co">! Option A changes to existing materials</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="kw">Else If Scenario </span><span class="op">==</span> opB</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_opB.shp      <span class="co">! Option B changes to existing materials</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="kw">End If</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>In the above, either “–s opB” or <span class="tcmd">Model Scenarios</span> <span class="teq">==</span> <span class="tblk">opB</span> would be used when modelling Option B. If the Existing, Option A and Option B scenarios all had their own layer of materials for the whole model the commands could be laid out as shown in Example 2c noting the use of the Else option which forces the use of the layer 2d_mat_existing.shp if opA or opB is not specified.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Scenarios Example 2c">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Scenarios Example 2c
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Set Mat </span><span class="op">==</span> 1                                <span class="co">! Set unspecified materials to default of 1</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="kw">If Scenario </span><span class="op">==</span> opA</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_opA.shp      <span class="co">! Option A materials for whole model</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="kw">Else If Scenario </span><span class="op">==</span> opB</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_opB.shp      <span class="co">! Option B materials for whole model</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>Else</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_existing.shp <span class="co">! Existing materials for whole model</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="kw">End If</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Or, a more explicit approach is shown below.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Set Mat </span><span class="op">==</span> 1                                <span class="co">! Set unspecified materials to default of 1</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="kw">If Scenario </span><span class="op">==</span> exg</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_existing.shp <span class="co">! Existing materials for whole model</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="kw">Else If Scenario </span><span class="op">==</span> opA</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_opA.shp      <span class="co">! Option A materials for whole model</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="kw">Else If Scenario </span><span class="op">==</span> opB</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Read GIS Mat </span><span class="op">==</span> shp\2d_mat_opB.shp      <span class="co">! Option B materials for whole model</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="kw">End If</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Scenarios Example 3">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Scenarios Example 3
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The If Scenario command can be nested up to 10 levels. The extract below is from an .fvc file of a complex model that calls various model sub-domains at different floodplain mesh resolutions (20m and 60m). The logic as to which other sub-models/boundaries the CAS sub-model needs is built into include files using nested If Scenarios.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">If Scenario </span><span class="op">==</span> CAS                                    <span class="co">! Cell size dependent commands</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">If Scenario </span><span class="op">==</span> 20m                                <span class="co">! 20m grid Domain</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>        <span class="kw">Geometry 2D </span><span class="op">==</span> ..\model\geo\CAS_20m_001.2dm</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>        <span class="kw">Timestep Limits </span><span class="op">==</span> 0.01, 0.1</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Else If Scenario </span><span class="op">==</span> 60m                           <span class="co">! 60m grid Domain</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">Geometry 2D </span><span class="op">==</span> ..\model\geo\CAS_60m_001.2dm</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">Timestep Limits </span><span class="op">==</span> 0.05, 0.5</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    Else</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">Pause </span><span class="op">==</span> Should not be here - invalid CAS cell size scenario specified.</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="kw">    End If</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="co">! Cell size independent commands</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Include </span><span class="op">==</span> ..\model\CAS_BCs_001.fvc</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Include </span><span class="op">==</span> ..\model\CAS_Outputs_001.fvc</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="kw">End If</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The Pause command causes TUFLOW FV to stop whenever it encounters it. In the example above, the Pause command is used to pause the simulation and display the message shown as a cross-check that an appropriate cell size scenario has been specified.</p>
+</div>
+</div>
+</div>
+<p>Any scenarios are automatically set as variables, so have uses parallel to those described for <a href="#SimManagmentEventsAsVariables-3">Events</a> above.</p>
+</section>
+</section>
+<section id="sec-MS-SM-Vari-3" class="level3" data-number="11.3.5">
+<h3 data-number="11.3.5" class="anchored" data-anchor-id="sec-MS-SM-Vari-3"><span class="header-section-number">11.3.5</span> Variables</h3>
+<p>The <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-SetVariable">Set Variable</a></span> command can be used to assign a user-specified value to a string variable. This command operates at a higher level than If Scenario or If Event logic blocks so that variables can differ within different scenarios and events. The command is described in <a href="#tbl-variables" class="quarto-xref">Table&nbsp;<span>11.3</span></a>.</p>
+<div class="cell" data-execution_count="4">
+<div id="tbl-variables" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.3: Variables Command
+</figcaption>
+<div aria-describedby="tbl-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="vbnucjehte" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#vbnucjehte table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#vbnucjehte thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#vbnucjehte p { margin: 0; padding: 0; }
+ #vbnucjehte .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #vbnucjehte .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #vbnucjehte .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #vbnucjehte .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #vbnucjehte .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #vbnucjehte .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #vbnucjehte .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #vbnucjehte .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #vbnucjehte .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #vbnucjehte .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #vbnucjehte .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #vbnucjehte .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #vbnucjehte .gt_spanner_row { border-bottom-style: hidden; }
+ #vbnucjehte .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #vbnucjehte .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #vbnucjehte .gt_from_md> :first-child { margin-top: 0; }
+ #vbnucjehte .gt_from_md> :last-child { margin-bottom: 0; }
+ #vbnucjehte .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #vbnucjehte .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #vbnucjehte .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #vbnucjehte .gt_row_group_first td { border-top-width: 2px; }
+ #vbnucjehte .gt_row_group_first th { border-top-width: 2px; }
+ #vbnucjehte .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #vbnucjehte .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #vbnucjehte .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #vbnucjehte .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #vbnucjehte .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #vbnucjehte .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #vbnucjehte .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #vbnucjehte .gt_left { text-align: left; }
+ #vbnucjehte .gt_center { text-align: center; }
+ #vbnucjehte .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #vbnucjehte .gt_font_normal { font-weight: normal; }
+ #vbnucjehte .gt_font_bold { font-weight: bold; }
+ #vbnucjehte .gt_font_italic { font-style: italic; }
+ #vbnucjehte .gt_super { font-size: 65%; }
+ #vbnucjehte .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #vbnucjehte .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Command" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Command</th>
+<th id="Description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-SetVariable">Set Variable</a></span></p></td>
+<td class="gt_row gt_left"><p>Optional - Assigns a user specified value to a string variable for dynamic substitution in other commands.</p></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Set Variable commands can only be specified in the .fvc file or within an include file referenced from the .fvc. They are not yet available within sediment, particle or water quality control files.</p>
+</div>
+</div>
+<p>The example below is a floodplain model where two different mesh resolutions are being tested. To manage the size of result output, the variable “NC_OUTPUT_INTERVAL” is used to set the map output interval.</p>
+<p>In the .fvc file we have the following syntax.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">! ________________________________________________________________________________________________</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">! MODEL VARIABLES</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="kw">If Scenario </span><span class="op">==</span> HRES</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Geometry 2D </span><span class="op">==</span> ..\model\geo\Floodplain_001.2dm    <span class="co">! High resolution mesh</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Set Variable NC_OUTPUT_INTERVAL </span><span class="op">==</span> 900.           <span class="co">! Assign variable 900 seconds</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="kw">Else If Scenario </span><span class="op">==</span> LRES</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Geometry 2D </span><span class="op">==</span> ..\model\geo\Floodplain_002.2dm    <span class="co">! Low resolution mesh</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Set Variable NC_OUTPUT_INTERVAL </span><span class="op">==</span> 300.           <span class="co">! Assign variable 300 seconds</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>Else</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Pause </span><span class="op">==</span> Unexpected Scenario Specified - Refer FVC</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="kw">End If</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The variable NC_OUTPUT_INTERVAL is dynamically replaced at runtime to adjust the NetCDF output interval.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Output </span><span class="op">==</span> NetCDF</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Output Parameters </span><span class="op">==</span> h, v, d, zb</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Output Interval </span><span class="op">==</span> &lt;&lt;NC_OUTPUT_INTERVAL&gt;&gt;         <span class="co">! Output at 300 or 900 s as a function of Scenario</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Output Statistics </span><span class="op">==</span> max</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Output Statistics dt </span><span class="op">==</span> 1</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="kw">End Output</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The Set Variable functionality available in TUFLOW FV 2025.0.0 can be used in combination with environment variables assigned in a batch or shell script, introduced in TUFLOW FV 2023.1. For example:</p>
+<pre><code>REM Example batch file that uses the environment variable IWL to set initial water level
+set EXE=C:\Program Files\TUFLOWFV\TUFLOWFV.exe
+set OMP_NUM_THREADS=4
+set IWL=2.0
+
+%EXE% Env_Var_Example.fvc</code></pre>
+<p>Within the .fvc file the environment variable value is returned via the $ syntax. For example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Initial Water Level </span><span class="op">==</span> $IWL</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>achieves the same outcome as the variable syntax shown below.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Set Variable INITIAL_WL </span><span class="op">==</span> 2.0</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="kw">Initial Water Level </span><span class="op">==</span> &lt;&lt;INITIAL_WL&gt;&gt;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="sec-AutoTerminateOptions-3" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="sec-AutoTerminateOptions-3"><span class="header-section-number">11.4</span> Auto Terminate (Simulation End) Options</h2>
+<p>The <span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-AutoTerminate">Auto Terminate</a></span> command automatically stops a simulation once a specified water level threshold is reached at a user defined monitoring location. At model startup, TUFLOW FV reads the initial water level at the specified location (<code>IWL</code>) and compares it to the user defined target water level (<code>WL_target</code>). The simulation tracks the model water level at the specified location (<code>MWL</code>) and TUFLOW FV exits cleanly once the target condition is met. Auto termination is based on the following logic:</p>
+<ul>
+<li>If <code>IWL</code> &gt; <code>WL_target</code>, TUFLOW FV assumes that water levels will follow a decreasing trend during the simulation and will terminate when <code>MWL</code> &lt;= <code>WL_target</code>.</li>
+<li>If <code>IWL</code> &lt; <code>WL_target</code>, TUFLOW FV assumes that water levels will follow an increasing trend during the simulation and will terminate when <code>MWL</code> &gt;= <code>WL_target</code>.</li>
+</ul>
+<p>The command is described in <a href="#tbl-autoterminate" class="quarto-xref">Table&nbsp;<span>11.4</span></a>.</p>
+<div class="cell" data-execution_count="5">
+<div id="tbl-autoterminate" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="5">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-autoterminate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.4: Auto Terminate Command
+</figcaption>
+<div aria-describedby="tbl-autoterminate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="ogybqvinjs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#ogybqvinjs table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#ogybqvinjs thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#ogybqvinjs p { margin: 0; padding: 0; }
+ #ogybqvinjs .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #ogybqvinjs .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #ogybqvinjs .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #ogybqvinjs .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #ogybqvinjs .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #ogybqvinjs .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #ogybqvinjs .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #ogybqvinjs .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #ogybqvinjs .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #ogybqvinjs .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #ogybqvinjs .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #ogybqvinjs .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #ogybqvinjs .gt_spanner_row { border-bottom-style: hidden; }
+ #ogybqvinjs .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #ogybqvinjs .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #ogybqvinjs .gt_from_md> :first-child { margin-top: 0; }
+ #ogybqvinjs .gt_from_md> :last-child { margin-bottom: 0; }
+ #ogybqvinjs .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #ogybqvinjs .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #ogybqvinjs .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #ogybqvinjs .gt_row_group_first td { border-top-width: 2px; }
+ #ogybqvinjs .gt_row_group_first th { border-top-width: 2px; }
+ #ogybqvinjs .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #ogybqvinjs .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #ogybqvinjs .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #ogybqvinjs .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #ogybqvinjs .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #ogybqvinjs .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #ogybqvinjs .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #ogybqvinjs .gt_left { text-align: left; }
+ #ogybqvinjs .gt_center { text-align: center; }
+ #ogybqvinjs .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #ogybqvinjs .gt_font_normal { font-weight: normal; }
+ #ogybqvinjs .gt_font_bold { font-weight: bold; }
+ #ogybqvinjs .gt_font_italic { font-style: italic; }
+ #ogybqvinjs .gt_super { font-size: 65%; }
+ #ogybqvinjs .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #ogybqvinjs .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Command" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Command</th>
+<th id="Description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p><span class="tcmd"><a href="./70-AppendicesBCommands.html#fvc-AutoTerminate">Auto Terminate</a></span></p></td>
+<td class="gt_row gt_left"><p>Optional - Terminates the simulation when a specified water level threshold is reached at a monitoring location.</p></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The example below enables Auto Terminate with a target water level of 6.0 at a specified monitoring location within the model domain.</p>
+<p>In the .fvc file the syntax is as follows.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">! Auto Terminate</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="kw">Auto Terminate </span><span class="op">==</span> 1, 159.07365, -31.35875, 6.0      <span class="co">! {0 Disables} | 1 Enables Auto Terminate, X coordinate of the monitoring point (map units), Y coordinate of the monitoring point (map units), Target water level at which the simulation will stop (mRL or ftRL)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The log file reports the 2D cell ID associated with the specified monitoring location and if the coordinates fall outside the model domain, TUFLOW FV will return an error.</p>
+<p><img src="images/WQFooter.jpg" class="img-fluid" style="width:100.0%"></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+
+// Hover preview for plain anchor links -- mirrors native quarto-xref behaviour.
+
+// Supports same-page anchors and cross-chapter links on the same origin.
+
+// Placed via include-after-body so all DOM is parsed when this runs.
+
+(function () {
+
+  if (typeof window.tippy !== 'function') { return; }
+
+
+
+  var doc = window.document;
+
+  var pageCache = {};
+
+
+
+  function stripColumnClasses(el) {
+
+    el.classList.remove('page-full', 'page-columns');
+
+    for (var i = 0; i < el.children.length; i++) {
+
+      stripColumnClasses(el.children[i]);
+
+    }
+
+  }
+
+
+
+  function buildContent(id, target) {
+
+    var clone = target.cloneNode(true);
+
+    stripColumnClasses(clone);
+
+
+
+    var anchor = clone.querySelector('a.anchorjs-link');
+
+    if (anchor) { anchor.parentNode.removeChild(anchor); }
+
+
+
+    var isSectionEl = (clone.tagName === 'SECTION' || /^H[1-6]$/.test(clone.tagName || ''));
+
+    var isSectionId = (typeof id === 'string' && id.indexOf('sec-') === 0);
+
+
+
+    if (isSectionEl || isSectionId) {
+
+      var container = doc.createElement('div');
+
+      var kids = clone.children;
+
+      if (kids.length > 2) {
+
+        container.appendChild(kids[0].cloneNode(true));
+
+        for (var j = 1; j < kids.length; j++) {
+
+          if (kids[j].tagName === 'P' && (kids[j].textContent || '').trim() === '') { continue; }
+
+          container.appendChild(kids[j].cloneNode(true));
+
+          break;
+
+        }
+
+        if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(container); }
+
+        return container.innerHTML;
+
+      }
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.innerHTML;
+
+    }
+
+
+
+    if (clone.classList.contains('callout')) {
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.outerHTML;
+
+    }
+
+
+
+    if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+    return clone.innerHTML;
+
+  }
+
+
+
+  function getTargetFromPage(pageUrl, id, callback) {
+
+    if (pageCache[pageUrl]) {
+
+      callback(pageCache[pageUrl].getElementById(id));
+
+      return;
+
+    }
+
+    fetch(pageUrl)
+
+      .then(function (r) { return r.text(); })
+
+      .then(function (html) {
+
+        var parser = new DOMParser();
+
+        var parsedDoc = parser.parseFromString(html, 'text/html');
+
+        pageCache[pageUrl] = parsedDoc;
+
+        callback(parsedDoc.getElementById(id));
+
+      })
+
+      .catch(function () { callback(null); });
+
+  }
+
+
+
+  // Same-page anchor links (href starts with "#")
+
+  var samePageLinks = doc.querySelectorAll(
+
+    'main a[href^="#"]:not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < samePageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var hash   = link.getAttribute('href');
+
+      var id     = hash.replace(/^#\/?/, '');
+
+      var target = doc.getElementById(id);
+
+      if (!target) { return; }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           function () { return buildContent(id, target); }
+
+      });
+
+    })(samePageLinks[i]);
+
+  }
+
+
+
+  // Cross-page anchor links (same origin, href contains "#" but does not start with "#")
+
+  var crossPageLinks = doc.querySelectorAll(
+
+    'main a[href*="#"]:not([href^="#"]):not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < crossPageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var href = link.getAttribute('href');
+
+
+
+      var pageUrl, id;
+
+      try {
+
+        var resolved = new URL(href, window.location.href);
+
+        if (resolved.origin !== window.location.origin) { return; }
+
+        pageUrl = resolved.origin + resolved.pathname;
+
+        id = resolved.hash.replace(/^#\/?/, '');
+
+      } catch (e) { return; }
+
+
+
+      if (!id) { return; }
+
+
+
+      // If the link points to the current page, look up the element directly
+
+      if (pageUrl === (window.location.origin + window.location.pathname)) {
+
+        var target = doc.getElementById(id);
+
+        if (!target) { return; }
+
+        window.tippy(link, {
+
+          allowHTML:         true,
+
+          maxWidth:          500,
+
+          delay:             100,
+
+          arrow:             false,
+
+          appendTo:          function (el) { return el.parentElement; },
+
+          interactive:       true,
+
+          interactiveBorder: 10,
+
+          theme:             'quarto',
+
+          placement:         'bottom-start',
+
+          content:           function () { return buildContent(id, target); }
+
+        });
+
+        return;
+
+      }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           'Loading\u2026',
+
+        onShow:            function (instance) {
+
+          if (instance._fetched) { return; }
+
+          instance._fetched = true;
+
+          getTargetFromPage(pageUrl, id, function (target) {
+
+            if (target) {
+
+              instance.setContent(buildContent(id, target));
+
+            } else {
+
+              instance.destroy();
+
+            }
+
+          });
+
+        }
+
+      });
+
+    })(crossPageLinks[i]);
+
+  }
+
+})();
+
+</script>
+
+<script>
+
+// Adds a copy-to-clipboard button to plain code blocks, .styled-code, and .scrollable-block elements.
+
+// .tuflow blocks already receive Quarto's built-in copy button via .sourceCode — those are excluded.
+
+(function () {
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    var selectors = ['pre:not(.sourceCode)', '.styled-code', '.scrollable-block'];
+
+
+
+    selectors.forEach(function (sel) {
+
+      document.querySelectorAll(sel).forEach(function (block) {
+
+        // Skip if already processed
+
+        if (block.parentNode && block.parentNode.classList.contains('copy-block-wrapper')) return;
+
+
+
+        // Wrap block so the button can be positioned outside the scroll area
+
+        var wrapper = document.createElement('div');
+
+        wrapper.className = 'copy-block-wrapper';
+
+        block.parentNode.insertBefore(wrapper, block);
+
+        wrapper.appendChild(block);
+
+
+
+        // Create button
+
+        var btn = document.createElement('button');
+
+        btn.className = 'copy-block-btn';
+
+        btn.title = 'Copy to Clipboard';
+
+        btn.setAttribute('aria-label', 'Copy to Clipboard');
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+
+
+        btn.addEventListener('click', function () {
+
+          var text = block.innerText;
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+
+            navigator.clipboard.writeText(text).then(function () {
+
+              showCopied(btn);
+
+            }).catch(function () {
+
+              fallbackCopy(text);
+
+              showCopied(btn);
+
+            });
+
+          } else {
+
+            fallbackCopy(text);
+
+            showCopied(btn);
+
+          }
+
+        });
+
+
+
+        wrapper.appendChild(btn);
+
+      });
+
+    });
+
+
+
+    function showCopied(btn) {
+
+      btn.innerHTML = '<i class="bi bi-clipboard-check"></i>';
+
+      btn.title = 'Copied!';
+
+      setTimeout(function () {
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+        btn.title = 'Copy to Clipboard';
+
+      }, 2000);
+
+    }
+
+
+
+    function fallbackCopy(text) {
+
+      var ta = document.createElement('textarea');
+
+      ta.value = text;
+
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+
+      document.body.appendChild(ta);
+
+      ta.focus();
+
+      ta.select();
+
+      try { document.execCommand('copy'); } catch (e) {}
+
+      document.body.removeChild(ta);
+
+    }
+
+  });
+
+}());
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./10-PT-Construction.html" class="pagination-link" aria-label="Model Construction: PT Simulation Class">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Model Construction: PT Simulation Class</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./99-References.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-contrib/load_tooltips-1.0.0/load_tooltips.js"></script>
+</body></html>

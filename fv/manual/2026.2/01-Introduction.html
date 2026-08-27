@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; Introduction – TUFLOW FV User Manual 2026.2</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./01b-Architecture.html" rel="next">
+<link href="./overview.html" rel="prev">
+<link href="./manuals-shared/images/TUFLOW.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ea94015a310cf19a1d0a98706902972b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const tocNav = document.querySelector("nav[role='doc-toc']");
+
+    if (!tocNav) return;
+
+
+
+    const observer = new MutationObserver((mutations) => {
+
+      mutations.forEach((mutation) => {
+
+        if (mutation.attributeName === "class") {
+
+          const target = mutation.target;
+
+          if (target.classList.contains("active")) {
+
+            // Scroll the active item smoothly ('smooth') with the least amount of movement ('nearest')
+
+            target.scrollIntoView({
+
+              behavior: "smooth",
+
+              block: "nearest"
+
+            });
+
+          }
+
+        }
+
+      });
+
+    });
+
+
+
+    // Target all links inside the TOC
+
+    const tocLinks = tocNav.querySelectorAll("ul li a");
+
+    tocLinks.forEach((link) => {
+
+      observer.observe(link, { attributes: true });
+
+    });
+
+  });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+
+
+<script>
+
+window.addEventListener("load", function () {
+
+  document.querySelectorAll(".quarto-figure table.searchable").forEach(function(table){
+
+      new DataTable(table, {
+
+          paging: true,
+
+          pageLength: -1,
+
+          lengthMenu: [
+
+            [-1, 10, 20, 50],
+
+            ["All", 10, 20, 50]
+
+          ],
+
+          searching: true,
+
+          ordering: true,
+
+          order: [],
+
+          rowId: null
+
+      });
+
+  });
+
+});
+
+</script>
+
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/TUFLOWFV_logo.png" alt="" class="navbar-logo light-content">
+    <img src="./images/TUFLOWFV_logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TUFLOW FV User Manual 2026.2</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://tuflow.com/"> 
+<span class="menu-text"><img src="manuals-shared/images/BMT_logo.png" style="height:1.5em"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="./TUFLOW-FV-User-Manual-2026.2.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-Introduction.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TUFLOW FV User Manual</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Introduction.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01b-Architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Architecture</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Getting-Started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ControlFiles-and-Inputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Folders, Control Files and Data Layers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Hydrodynamics-2D-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Model Construction: 2D HD Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-Hydrodynamics-3D-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Model Construction: 3D HD Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-AD-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model Construction: AD Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-ST-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model Construction: ST Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-WQ-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Construction: WQ Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-PT-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Model Construction: PT Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Managing-Simulations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Managing And Starting Simulations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./70-AppendicesBCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./86-AppendicesProcSolver.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Science</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-Intro-TP-2" id="toc-sec-Intro-TP-2" class="nav-link active" data-scroll-target="#sec-Intro-TP-2"><span class="header-section-number">1.1</span> TUFLOW Products</a></li>
+  <li><a href="#sec-Intro-TFV-2" id="toc-sec-Intro-TFV-2" class="nav-link" data-scroll-target="#sec-Intro-TFV-2"><span class="header-section-number">1.2</span> TUFLOW FV</a>
+  <ul>
+  <li><a href="#sec-Intro-TFV-FMFV-3" id="toc-sec-Intro-TFV-FMFV-3" class="nav-link" data-scroll-target="#sec-Intro-TFV-FMFV-3"><span class="header-section-number">1.2.1</span> Flexible Mesh Finite Volume</a></li>
+  <li><a href="#sec-Intro-TFV-AOM-3" id="toc-sec-Intro-TFV-AOM-3" class="nav-link" data-scroll-target="#sec-Intro-TFV-AOM-3"><span class="header-section-number">1.2.2</span> Add-on Modules</a>
+  <ul>
+  <li><a href="#sec-Intro-TFV-AOM-3DM-3" id="toc-sec-Intro-TFV-AOM-3DM-3" class="nav-link" data-scroll-target="#sec-Intro-TFV-AOM-3DM-3"><span class="header-section-number">1.2.2.1</span> Three Dimensional (3D) Module</a></li>
+  <li><a href="#sec-Intro-TFV-AOM-STM-4" id="toc-sec-Intro-TFV-AOM-STM-4" class="nav-link" data-scroll-target="#sec-Intro-TFV-AOM-STM-4"><span class="header-section-number">1.2.2.2</span> Sediment Transport (ST) Module</a></li>
+  <li><a href="#sec-Intro-TFV-AOM-WQM-4" id="toc-sec-Intro-TFV-AOM-WQM-4" class="nav-link" data-scroll-target="#sec-Intro-TFV-AOM-WQM-4"><span class="header-section-number">1.2.2.3</span> Water Quality (WQ) Module</a></li>
+  <li><a href="#sec-Intro-TFV-AOM-PTM-4" id="toc-sec-Intro-TFV-AOM-PTM-4" class="nav-link" data-scroll-target="#sec-Intro-TFV-AOM-PTM-4"><span class="header-section-number">1.2.2.4</span> Particle Tracking (PT) Module</a></li>
+  <li><a href="#sec-Intro-TFV-AOM-GHM-4" id="toc-sec-Intro-TFV-AOM-GHM-4" class="nav-link" data-scroll-target="#sec-Intro-TFV-AOM-GHM-4"><span class="header-section-number">1.2.2.5</span> GPU Hardware (GPU) Module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-Intro-1" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-Intro-TP-2" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="sec-Intro-TP-2"><span class="header-section-number">1.1</span> TUFLOW Products</h2>
+<p>TUFLOW is a suite of products that supports the numerical simulation of urban drainage, catchment runoff, flooding, pollutant export, estuarine, lacustrine and coastal hydrodynamics and associated environmental processes. Developed through close collaboration with universities and users, TUFLOW software is known for its high scientific standard, accuracy, rigorous benchmarking and workflow efficiency.</p>
+<p>The TUFLOW suite is comprised of the following products.</p>
+<ol type="1">
+<li><p><strong>TUFLOW Classic/HPC</strong><br>
+TUFLOW Classic/HPC is a hydrodynamic modelling engine for simulating two dimensional free surface flows across floodplains, rivers and urban drainage systems, with support for integrated one dimensional elements such as pipes and channels. Two solvers are available: the Classic solver, which uses a semi implicit finite difference approach suited to robust single core execution, and the HPC solver, which uses an explicit finite volume formulation optimised for parallel CPU and GPU acceleration.</p>
+<p>The software is used for flood modelling, infrastructure design, stormwater assessment and scenario testing under varying hydrological conditions. Its ability to represent complex hydraulic interactions between channels, structures and floodplains makes it suitable for both detailed engineering studies and large scale flood risk assessments. Further information is available at https://docs.tuflow.com/classic-hpc/manual/2025.2/TUFLOWProducts-2.html</p></li>
+<li><p><strong>TUFLOW FV</strong><br>
+TUFLOW FV is a flexible mesh finite volume hydrodynamic engine that supports two and three dimensional simulation of riverine, estuarine, lacustrine and coastal systems. It resolves flow using a conservative formulation of the nonlinear shallow water equations and supports both CPU and GPU execution with consistent results across platforms. The flexible mesh approach allows efficient representation of complex geometries and local refinement where required while maintaining numerical stability and mass conservation.</p>
+<p>The modelling framework is modular and supports simulation of sediment transport, water quality, particle tracking and density driven processes such as stratification. A more detailed introduction of TUFLOW FV is provided in <a href="#sec-Intro-TFV-2" class="quarto-xref"><span>Section 1.2</span></a>.</p></li>
+<li><p><strong>TUFLOW CATCH</strong><br>
+TUFLOW CATCH is a fully integrated modelling framework that seamlessly links catchment (TUFLOW Classic/HPC) and receiving waterway (TUFLOW FV) process simulation. It supports simulation of hydrology, hydraulics and pollutant export/transformation from top of catchment to downstream receiving waterway outlet, without manual coupling or resorting to lumped hydrologic assumptions. Further information is available at https://www.tuflow.com/products/tuflow-catch-module/.</p></li>
+</ol>
+</section>
+<section id="sec-Intro-TFV-2" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="sec-Intro-TFV-2"><span class="header-section-number">1.2</span> TUFLOW FV</h2>
+<section id="sec-Intro-TFV-FMFV-3" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="sec-Intro-TFV-FMFV-3"><span class="header-section-number">1.2.1</span> Flexible Mesh Finite Volume</h3>
+<p>TUFLOW FV is a two and three dimensional flexible mesh hydrodynamic modelling engine designed for use in a broad range of environmental and engineering applications. Typical uses include the simulation of riverine and floodplain hydraulics, coastal and estuarine hydrodynamics, sediment transport and morphological processes, lake dynamics and integrated water quality and ecological modelling. Applications extend to tidal and current simulation, storm tide and tsunami propagation and inundation, pollutant and outfall plume dispersion, freshwater and receiving water process modelling (including lakes, rivers, reservoirs, estuaries and other related waterways) and metocean characterisation, supporting both detailed engineering design and environmental assessment workflows.</p>
+<p>The TUFLOW FV solver is based on a conservative finite volume formulation of the nonlinear shallow water equations, providing robust handling of wetting and drying processes and effective shock capturing. The solver is available for Windows and Linux platforms and can be executed using either CPU or GPU hardware. GPU acceleration is provided through the TUFLOW FV GPU Module. The CPU implementation employs shared memory parallelism via OpenMP to scale efficiently across available cores, while the GPU implementation targets CUDA enabled NVIDIA devices. Numerical results are consistent to round off between CPU and GPU builds, enabling portability of models across hardware configurations and operating systems.</p>
+<p>Both cartesian and spherical coordinate systems are supported. The model includes representation of key environmental processes such as bed friction, Coriolis effects, wind stress, rainfall, evaporation and atmospheric pressure. A comprehensive set of boundary condition formulations is available for coastal, estuarine and riverine applications, including open boundaries, fixed and moving point source inflows and spatially and temporally varying forcings such as wind fields and short wave radiation. Optional coupling to externally defined spectral wave fields is supported, along with integration with selected third party models for oceanic and atmospheric boundary condition specification.</p>
+<p>Model configuration follows TUFLOW’s layered data approach, whereby input datasets are read sequentially and later layers may override earlier ones. This allows localised modifications such as refined bathymetry or bed classification to be applied without duplicating base datasets, supporting transparent, auditable and maintainable model development.</p>
+<p>Simulation management functionality includes support for model scenarios, events and user defined variables. These features enable multiple simulations to be generated from a single, well configured model definition. In combination with batch and multi run execution, restart chaining and scheduler compatible command line operation, TUFLOW FV supports automated, parallelised and reproducible workflows on local workstations and cloud based systems.</p>
+<p>One dimensional hydraulic structures that exchange mass and momentum with the two or three dimensional domain are supported. Available structure types include weirs, culverts, bridges, gates, pumps and destratification units, with optional operational control logic.</p>
+<p>Model outputs include two dimensional map based results in SMS, DAT and XMDF formats, combined two and three dimensional outputs in NetCDF format and CSV time series for detailed analysis. TUFLOW FV integrates with common GIS and graphical user interface tools such as ArcGIS, QGIS and SMS. MATLAB and Python toolboxes are provided to support model construction, results visualisation, specialised plotting and post processing workflows.</p>
+</section>
+<section id="sec-Intro-TFV-AOM-3" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="sec-Intro-TFV-AOM-3"><span class="header-section-number">1.2.2</span> Add-on Modules</h3>
+<section id="sec-Intro-TFV-AOM-3DM-3" class="level4" data-number="1.2.2.1">
+<h4 data-number="1.2.2.1" class="anchored" data-anchor-id="sec-Intro-TFV-AOM-3DM-3"><span class="header-section-number">1.2.2.1</span> Three Dimensional (3D) Module</h4>
+<p>The TUFLOW FV Three Dimensional (3D) Module resolves vertical structure using sigma or z coordinate vertical meshes. Baroclinic pressure gradient terms are included, enabling the flow field to respond to density variations arising from temperature, salinity and suspended sediment, the advection dispersion simulation of which is included within the 3D module. The conservative finite volume formulation is well suited to representing strong vertical gradients, including thermal stratification, fronts and sharp pycnoclines, while maintaining mass balance, numerical accuracy and stability.</p>
+<p>Vertical turbulence and scalar mixing are represented through inbuilt closure schemes based on k-epsilon and k-omega formulations, providing consistent parameterisation of eddy viscosity and tracer mixing. Background terms and limiters may be configured to maintain numerical stability across weakly and strongly stratified regimes. A fully integrated atmospheric heat exchange balance is available to drive temperature evolution from standard meteorological inputs, and boundary condition formulations support baroclinic inflows and outflows as well as flexible specification of initial conditions.</p>
+<p>Three dimensional analysis and data extraction are supported through QGIS, the TUFLOW FV Python Toolbox and the TUFLOW FV MATLAB Toolbox. Available outputs include vertical profiles, slices, layer based maps and depth averaged products to support streamlined calibration and reporting. In addition, TUFLOW FV natively outputs a comprehensive range of three dimensional result fields for detailed inspection and post processing.</p>
+</section>
+<section id="sec-Intro-TFV-AOM-STM-4" class="level4" data-number="1.2.2.2">
+<h4 data-number="1.2.2.2" class="anchored" data-anchor-id="sec-Intro-TFV-AOM-STM-4"><span class="header-section-number">1.2.2.2</span> Sediment Transport (ST) Module</h4>
+<p>The TUFLOW FV Sediment Transport (ST) Module simulates two and three dimensional sediment dynamics for mixed beds and suspended loads across creek, river, reservoir, estuarine and coastal or oceanic environments. The module represents current driven and wave enhanced transport, exchange between the water column and bed through erosion and deposition and bed level evolution with full hydrodynamic feedback. Suspended sediment is transported within the flow field (through deployment of advection dispersion capability included within the ST module), while bedload is routed along the bed with slope and curvature effects, enabling representation of bars, channels and shoreface evolution under transient forcing.</p>
+<p>Process formulations are provided for both noncohesive and cohesive sediment erosion and deposition, with user control over critical shear stresses, availability limits and settling velocity specifications. The framework supports consolidation effects, hindered settling, near bed concentration corrections and slope driven gravity adjustments. Morphological updating is mass conservative and may be accelerated where appropriate to support long term simulations.</p>
+<p>One or more sediment fractions may be defined and tracked in both the water column and the bed. Simulations may include multiple cohesive and noncohesive fractions, each with independent transport formulations and parameter sets. This enables representation of grain size dependent behaviour, sorting and armouring, hiding and exposure effects and multilayer bed stratigraphy within an active layer. The fraction based approach supports targeted calibration and scenario testing for mixed bed systems, dredging and disposal operations and morphology change assessments.</p>
+<p>The module supports spatially and temporally varying sediment sources and boundary concentrations and provides diagnostic outputs to support quality assurance and calibration, including mass budgets, erosion and deposition totals, bed level change and shear stress metrics. Results are available as maps, time series and profile or curtain outputs, consistent with TUFLOW FV post processing toolchains for efficient analysis and reporting.</p>
+<p>Documentation for the TUFLOW FV ST module configuration (beyond activation from TUFLOW FV) is available in the <a href="https://downloads.tuflow.com/_archive/TUFLOW_FV/Manual/STM_PTM_User_Manual_2020.pdf">TUFLOW FV Sediment Transport and Particle Tracking Modules User Manual</a>.</p>
+</section>
+<section id="sec-Intro-TFV-AOM-WQM-4" class="level4" data-number="1.2.2.3">
+<h4 data-number="1.2.2.3" class="anchored" data-anchor-id="sec-Intro-TFV-AOM-WQM-4"><span class="header-section-number">1.2.2.3</span> Water Quality (WQ) Module</h4>
+<p>The TUFLOW FV Water Quality (WQ) Module supports two and three dimensional simulation of water quality and ecological processes, with a configurable level of process complexity to suit a wide range of project requirements. The module includes advection and dispersion of constituents as well as associated transformation processes. Typical constituents include dissolved oxygen, inorganic nitrogen and phosphorus species, silicate, labile and refractory organic matter, one or more phytoplankton groups and one or more pathogen groups.</p>
+<p>Represented processes include water column transformations between constituents, benthic exchange with the sediment bed (for example, sediment oxygen demand) and atmospheric exchanges such as oxygen dissolution and rainfall deposition. Phytoplankton dynamics include primary production, respiration and exudation, while pathogen dynamics include mortality, inactivation, settling and attachment and detachment processes.</p>
+<p>The framework supports spatially and temporally varying initial and boundary conditions, external loads and scenario specific parameter sets. Diagnostic outputs include mass balance checks and constituent budgets to support calibration and QA/QC. Results align with TUFLOW FV post processing tools for mapping, profile and curtain analysis and time series extraction in both two and three dimensional configurations.</p>
+<p>Documentation for the TUFLOW FV WQ module configuration (beyond activation from TUFLOW FV) is available in the <a href="https://docs.tuflow.com/fv/wqm/manual/2025.2/">TUFLOW FV Water Quality (WQ) Module User Manual</a>.</p>
+</section>
+<section id="sec-Intro-TFV-AOM-PTM-4" class="level4" data-number="1.2.2.4">
+<h4 data-number="1.2.2.4" class="anchored" data-anchor-id="sec-Intro-TFV-AOM-PTM-4"><span class="header-section-number">1.2.2.4</span> Particle Tracking (PT) Module</h4>
+<p>The TUFLOW FV Particle Tracking (PT) Module simulates discrete Lagrangian particles in two or three dimensions, transported by the modelled flow field and optional external forcings such as wind or wave driven drift.</p>
+<p>Particle behaviour options include settling and buoyancy, first order decay, sedimentation and resuspension, stochastic dispersion and simplified interaction rules with boundaries and shorelines, such as beaching or stranding. Particles may be released from fixed points, lines, areas or moving sources, with flexible scheduling and attribute specification to support applications including larval transport and debris trajectory assessment.</p>
+<p>Outputs include particle position, age and state or fate classification, along with diagnostic metrics to support quality assurance, such as counts by class and time within zone statistics. Results are provided in formats suitable for mapping, time series analysis and profile or curtain visualisation and integrate with QGIS, the TUFLOW FV Python Toolbox and the MATLAB Toolbox to support efficient analysis and reporting.</p>
+<p>Documentation for the TUFLOW FV PT module configuration (beyond activation from TUFLOW FV) is available in the <a href="https://downloads.tuflow.com/_archive/TUFLOW_FV/Manual/STM_PTM_User_Manual_2020.pdf">TUFLOW FV Sediment Transport and Particle Tracking Modules User Manual</a>.</p>
+</section>
+<section id="sec-Intro-TFV-AOM-GHM-4" class="level4" data-number="1.2.2.5">
+<h4 data-number="1.2.2.5" class="anchored" data-anchor-id="sec-Intro-TFV-AOM-GHM-4"><span class="header-section-number">1.2.2.5</span> GPU Hardware (GPU) Module</h4>
+<p>The TUFLOW FV GPU Module enables execution of the TUFLOW FV solver on NVIDIA CUDA capable graphics processing units. The module provides drop in acceleration of the standard solver, using identical model inputs and producing outputs that are numerically consistent with the CPU build to round off accuracy.</p>
+<p>GPU acceleration can deliver substantial reductions in simulation run time for large meshes and long duration simulations. Project benchmarks demonstrate order of magnitude performance improvements relative to single core CPU execution.</p>
+<p><img src="images/WQFooter.jpg" class="img-fluid" style="width:100.0%"></p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+// Hover preview for plain anchor links -- mirrors native quarto-xref behaviour.
+
+// Supports same-page anchors and cross-chapter links on the same origin.
+
+// Placed via include-after-body so all DOM is parsed when this runs.
+
+(function () {
+
+  if (typeof window.tippy !== 'function') { return; }
+
+
+
+  var doc = window.document;
+
+  var pageCache = {};
+
+
+
+  function stripColumnClasses(el) {
+
+    el.classList.remove('page-full', 'page-columns');
+
+    for (var i = 0; i < el.children.length; i++) {
+
+      stripColumnClasses(el.children[i]);
+
+    }
+
+  }
+
+
+
+  function buildContent(id, target) {
+
+    var clone = target.cloneNode(true);
+
+    stripColumnClasses(clone);
+
+
+
+    var anchor = clone.querySelector('a.anchorjs-link');
+
+    if (anchor) { anchor.parentNode.removeChild(anchor); }
+
+
+
+    var isSectionEl = (clone.tagName === 'SECTION' || /^H[1-6]$/.test(clone.tagName || ''));
+
+    var isSectionId = (typeof id === 'string' && id.indexOf('sec-') === 0);
+
+
+
+    if (isSectionEl || isSectionId) {
+
+      var container = doc.createElement('div');
+
+      var kids = clone.children;
+
+      if (kids.length > 2) {
+
+        container.appendChild(kids[0].cloneNode(true));
+
+        for (var j = 1; j < kids.length; j++) {
+
+          if (kids[j].tagName === 'P' && (kids[j].textContent || '').trim() === '') { continue; }
+
+          container.appendChild(kids[j].cloneNode(true));
+
+          break;
+
+        }
+
+        if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(container); }
+
+        return container.innerHTML;
+
+      }
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.innerHTML;
+
+    }
+
+
+
+    if (clone.classList.contains('callout')) {
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.outerHTML;
+
+    }
+
+
+
+    if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+    return clone.innerHTML;
+
+  }
+
+
+
+  function getTargetFromPage(pageUrl, id, callback) {
+
+    if (pageCache[pageUrl]) {
+
+      callback(pageCache[pageUrl].getElementById(id));
+
+      return;
+
+    }
+
+    fetch(pageUrl)
+
+      .then(function (r) { return r.text(); })
+
+      .then(function (html) {
+
+        var parser = new DOMParser();
+
+        var parsedDoc = parser.parseFromString(html, 'text/html');
+
+        pageCache[pageUrl] = parsedDoc;
+
+        callback(parsedDoc.getElementById(id));
+
+      })
+
+      .catch(function () { callback(null); });
+
+  }
+
+
+
+  // Same-page anchor links (href starts with "#")
+
+  var samePageLinks = doc.querySelectorAll(
+
+    'main a[href^="#"]:not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < samePageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var hash   = link.getAttribute('href');
+
+      var id     = hash.replace(/^#\/?/, '');
+
+      var target = doc.getElementById(id);
+
+      if (!target) { return; }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           function () { return buildContent(id, target); }
+
+      });
+
+    })(samePageLinks[i]);
+
+  }
+
+
+
+  // Cross-page anchor links (same origin, href contains "#" but does not start with "#")
+
+  var crossPageLinks = doc.querySelectorAll(
+
+    'main a[href*="#"]:not([href^="#"]):not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < crossPageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var href = link.getAttribute('href');
+
+
+
+      var pageUrl, id;
+
+      try {
+
+        var resolved = new URL(href, window.location.href);
+
+        if (resolved.origin !== window.location.origin) { return; }
+
+        pageUrl = resolved.origin + resolved.pathname;
+
+        id = resolved.hash.replace(/^#\/?/, '');
+
+      } catch (e) { return; }
+
+
+
+      if (!id) { return; }
+
+
+
+      // If the link points to the current page, look up the element directly
+
+      if (pageUrl === (window.location.origin + window.location.pathname)) {
+
+        var target = doc.getElementById(id);
+
+        if (!target) { return; }
+
+        window.tippy(link, {
+
+          allowHTML:         true,
+
+          maxWidth:          500,
+
+          delay:             100,
+
+          arrow:             false,
+
+          appendTo:          function (el) { return el.parentElement; },
+
+          interactive:       true,
+
+          interactiveBorder: 10,
+
+          theme:             'quarto',
+
+          placement:         'bottom-start',
+
+          content:           function () { return buildContent(id, target); }
+
+        });
+
+        return;
+
+      }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           'Loading\u2026',
+
+        onShow:            function (instance) {
+
+          if (instance._fetched) { return; }
+
+          instance._fetched = true;
+
+          getTargetFromPage(pageUrl, id, function (target) {
+
+            if (target) {
+
+              instance.setContent(buildContent(id, target));
+
+            } else {
+
+              instance.destroy();
+
+            }
+
+          });
+
+        }
+
+      });
+
+    })(crossPageLinks[i]);
+
+  }
+
+})();
+
+</script>
+
+<script>
+
+// Adds a copy-to-clipboard button to plain code blocks, .styled-code, and .scrollable-block elements.
+
+// .tuflow blocks already receive Quarto's built-in copy button via .sourceCode — those are excluded.
+
+(function () {
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    var selectors = ['pre:not(.sourceCode)', '.styled-code', '.scrollable-block'];
+
+
+
+    selectors.forEach(function (sel) {
+
+      document.querySelectorAll(sel).forEach(function (block) {
+
+        // Skip if already processed
+
+        if (block.parentNode && block.parentNode.classList.contains('copy-block-wrapper')) return;
+
+
+
+        // Wrap block so the button can be positioned outside the scroll area
+
+        var wrapper = document.createElement('div');
+
+        wrapper.className = 'copy-block-wrapper';
+
+        block.parentNode.insertBefore(wrapper, block);
+
+        wrapper.appendChild(block);
+
+
+
+        // Create button
+
+        var btn = document.createElement('button');
+
+        btn.className = 'copy-block-btn';
+
+        btn.title = 'Copy to Clipboard';
+
+        btn.setAttribute('aria-label', 'Copy to Clipboard');
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+
+
+        btn.addEventListener('click', function () {
+
+          var text = block.innerText;
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+
+            navigator.clipboard.writeText(text).then(function () {
+
+              showCopied(btn);
+
+            }).catch(function () {
+
+              fallbackCopy(text);
+
+              showCopied(btn);
+
+            });
+
+          } else {
+
+            fallbackCopy(text);
+
+            showCopied(btn);
+
+          }
+
+        });
+
+
+
+        wrapper.appendChild(btn);
+
+      });
+
+    });
+
+
+
+    function showCopied(btn) {
+
+      btn.innerHTML = '<i class="bi bi-clipboard-check"></i>';
+
+      btn.title = 'Copied!';
+
+      setTimeout(function () {
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+        btn.title = 'Copy to Clipboard';
+
+      }, 2000);
+
+    }
+
+
+
+    function fallbackCopy(text) {
+
+      var ta = document.createElement('textarea');
+
+      ta.value = text;
+
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+
+      document.body.appendChild(ta);
+
+      ta.focus();
+
+      ta.select();
+
+      try { document.execCommand('copy'); } catch (e) {}
+
+      document.body.removeChild(ta);
+
+    }
+
+  });
+
+}());
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./overview.html" class="pagination-link" aria-label="Overview">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Overview</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./01b-Architecture.html" class="pagination-link" aria-label="Architecture">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Architecture</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-contrib/load_tooltips-1.0.0/load_tooltips.js"></script>
+</body></html>

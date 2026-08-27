@@ -1,0 +1,2225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; Architecture – TUFLOW FV User Manual 2026.2</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02-Getting-Started.html" rel="next">
+<link href="./01-Introduction.html" rel="prev">
+<link href="./manuals-shared/images/TUFLOW.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ea94015a310cf19a1d0a98706902972b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const tocNav = document.querySelector("nav[role='doc-toc']");
+
+    if (!tocNav) return;
+
+
+
+    const observer = new MutationObserver((mutations) => {
+
+      mutations.forEach((mutation) => {
+
+        if (mutation.attributeName === "class") {
+
+          const target = mutation.target;
+
+          if (target.classList.contains("active")) {
+
+            // Scroll the active item smoothly ('smooth') with the least amount of movement ('nearest')
+
+            target.scrollIntoView({
+
+              behavior: "smooth",
+
+              block: "nearest"
+
+            });
+
+          }
+
+        }
+
+      });
+
+    });
+
+
+
+    // Target all links inside the TOC
+
+    const tocLinks = tocNav.querySelectorAll("ul li a");
+
+    tocLinks.forEach((link) => {
+
+      observer.observe(link, { attributes: true });
+
+    });
+
+  });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+
+
+<script>
+
+window.addEventListener("load", function () {
+
+  document.querySelectorAll(".quarto-figure table.searchable").forEach(function(table){
+
+      new DataTable(table, {
+
+          paging: true,
+
+          pageLength: -1,
+
+          lengthMenu: [
+
+            [-1, 10, 20, 50],
+
+            ["All", 10, 20, 50]
+
+          ],
+
+          searching: true,
+
+          ordering: true,
+
+          order: [],
+
+          rowId: null
+
+      });
+
+  });
+
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/TUFLOWFV_logo.png" alt="" class="navbar-logo light-content">
+    <img src="./images/TUFLOWFV_logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TUFLOW FV User Manual 2026.2</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://tuflow.com/"> 
+<span class="menu-text"><img src="manuals-shared/images/BMT_logo.png" style="height:1.5em"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="./TUFLOW-FV-User-Manual-2026.2.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01b-Architecture.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Architecture</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TUFLOW FV User Manual</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01b-Architecture.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Architecture</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Getting-Started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ControlFiles-and-Inputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Folders, Control Files and Data Layers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Hydrodynamics-2D-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Model Construction: 2D HD Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-Hydrodynamics-3D-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Model Construction: 3D HD Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-AD-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model Construction: AD Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-ST-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model Construction: ST Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-WQ-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Construction: WQ Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-PT-Construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Model Construction: PT Simulation Class</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Managing-Simulations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Managing And Starting Simulations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./70-AppendicesBCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./86-AppendicesProcSolver.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Science</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-Arch-Over-2" id="toc-sec-Arch-Over-2" class="nav-link active" data-scroll-target="#sec-Arch-Over-2"><span class="header-section-number">2.1</span> Overview</a></li>
+  <li><a href="#sec-Arch-ST-2" id="toc-sec-Arch-ST-2" class="nav-link" data-scroll-target="#sec-Arch-ST-2"><span class="header-section-number">2.2</span> Simulation Tiers</a>
+  <ul>
+  <li><a href="#sec-Arch-ST-SC-3" id="toc-sec-Arch-ST-SC-3" class="nav-link" data-scroll-target="#sec-Arch-ST-SC-3"><span class="header-section-number">2.2.1</span> Tier 1: Simulation Class</a></li>
+  <li><a href="#sec-Arch-ST-MC-3" id="toc-sec-Arch-ST-MC-3" class="nav-link" data-scroll-target="#sec-Arch-ST-MC-3"><span class="header-section-number">2.2.2</span> Tier 2: Model Class</a></li>
+  <li><a href="#sec-Arch-ST-MI-3" id="toc-sec-Arch-ST-MI-3" class="nav-link" data-scroll-target="#sec-Arch-ST-MI-3"><span class="header-section-number">2.2.3</span> Tier 3: Model Implementations</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-Arch-1" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Architecture</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-Arch-Over-2" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="sec-Arch-Over-2"><span class="header-section-number">2.1</span> Overview</h2>
+<p>This chapter describes the architectural structure of TUFLOW FV and defines the organising framework used throughout the model construction chapters. The architecture establishes how simulation components are grouped, named and related, providing a consistent structure for locating commands, inputs and configuration options.</p>
+<p>The content of this chapter is conceptual in nature and does not describe specific configuration steps or execution procedures. The material presented is intended to support understanding of the overall model structure, including how individual components relate to one another and how supporting information is distributed across chapters and appendices. Information required to configure and run simulations is provided in subsequent model construction chapters.</p>
+<p>Instructions for the use of any interactive components included in this section are provided in the manual overview.</p>
+</section>
+<section id="sec-Arch-ST-2" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-Arch-ST-2"><span class="header-section-number">2.2</span> Simulation Tiers</h2>
+<p>A TUFLOW FV simulation is comprised of three simulation tiers as illustrated in <a href="#fig-hierarchy" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>. Each TUFLOW FV simulation comprises:</p>
+<ul>
+<li><strong>Tier 1 — Simulation class:</strong> A user defined simulation class instance (<a href="#sec-Arch-ST-SC-3" class="quarto-xref"><span>Section 2.2.1</span></a>)</li>
+<li><strong>Tier 2 — Model classes:</strong> A suite of model class instances associated with the simulation class (<a href="#sec-Arch-ST-MC-3" class="quarto-xref"><span>Section 2.2.2</span></a>)</li>
+<li><strong>Tier 3 — Model implementations:</strong> A selected implementation for each model class instance (<a href="#sec-Arch-ST-MI-3" class="quarto-xref"><span>Section 2.2.3</span></a>)</li>
+</ul>
+<div id="fig-hierarchy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hierarchy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Heirachy3Layer.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hierarchy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: TUFLOW FV model architecture tiers
+</figcaption>
+</figure>
+</div>
+<section id="sec-Arch-ST-SC-3" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="sec-Arch-ST-SC-3"><span class="header-section-number">2.2.1</span> Tier 1: Simulation Class</h3>
+<p>A simulation class defines the type of TUFLOW FV model being constructed and the modelling objective it is intended to address. It determines which physical and numerical processes are active in the simulation and, by extension, which model components must be configured. The available simulation classes and their typical applications are summarised in <a href="#tbl-simclasses" class="quarto-xref">Table&nbsp;<span>2.1</span></a>, which can be used to identify the appropriate simulation class for a given modelling problem.</p>
+<div class="cell" data-execution_count="2">
+<div id="tbl-simclasses" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="2">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-simclasses-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.1: TUFLOW FV simulation class instances
+</figcaption>
+<div aria-describedby="tbl-simclasses-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div id="dkvqsxbnpt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#dkvqsxbnpt table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#dkvqsxbnpt thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#dkvqsxbnpt p { margin: 0; padding: 0; }
+ #dkvqsxbnpt .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #dkvqsxbnpt .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #dkvqsxbnpt .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #dkvqsxbnpt .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #dkvqsxbnpt .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #dkvqsxbnpt .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #dkvqsxbnpt .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #dkvqsxbnpt .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #dkvqsxbnpt .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #dkvqsxbnpt .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #dkvqsxbnpt .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #dkvqsxbnpt .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #dkvqsxbnpt .gt_spanner_row { border-bottom-style: hidden; }
+ #dkvqsxbnpt .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #dkvqsxbnpt .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #dkvqsxbnpt .gt_from_md> :first-child { margin-top: 0; }
+ #dkvqsxbnpt .gt_from_md> :last-child { margin-bottom: 0; }
+ #dkvqsxbnpt .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #dkvqsxbnpt .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #dkvqsxbnpt .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #dkvqsxbnpt .gt_row_group_first td { border-top-width: 2px; }
+ #dkvqsxbnpt .gt_row_group_first th { border-top-width: 2px; }
+ #dkvqsxbnpt .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #dkvqsxbnpt .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #dkvqsxbnpt .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #dkvqsxbnpt .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #dkvqsxbnpt .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #dkvqsxbnpt .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #dkvqsxbnpt .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #dkvqsxbnpt .gt_left { text-align: left; }
+ #dkvqsxbnpt .gt_center { text-align: center; }
+ #dkvqsxbnpt .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #dkvqsxbnpt .gt_font_normal { font-weight: normal; }
+ #dkvqsxbnpt .gt_font_bold { font-weight: bold; }
+ #dkvqsxbnpt .gt_font_italic { font-style: italic; }
+ #dkvqsxbnpt .gt_super { font-size: 65%; }
+ #dkvqsxbnpt .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #dkvqsxbnpt .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Simulation-Class-Instance" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Simulation Class Instance</th>
+<th id="Potential-Uses" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Potential Uses</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p>Two Dimensional Hydrodynamics (2D HD)</p></td>
+<td class="gt_row gt_left"><p>Simulation of 2D hydrodynamic use cases such as:</p>
+<ul>
+<li>Storm tide or tsunami impact assessment</li>
+<li>Astronomical tide modelling</li>
+<li>Flooding and floodplain management</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Three Dimensional Hydrodynamics (3D HD)</p></td>
+<td class="gt_row gt_left"><p>Simulation of 3D hydrodynamic use cases which do not require the simulation of salinity, temperature and density effects such as:</p>
+<ul>
+<li>Rudimentary scour assessment</li>
+<li>Hydraulic structure design</li>
+<li>Flooding and floodplain management</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Advection Dispersion (AD)</p></td>
+<td class="gt_row gt_left"><p>Simulation in 2D or 3D with salinity, temperature and/or non-transformative tracers for use cases such as:</p>
+<ul>
+<li>Coastal and estuarine assessments</li>
+<li>Lake hydrodynamics</li>
+<li>Rudimentary tracer assessments</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Sediment Transport (ST)</p></td>
+<td class="gt_row gt_left"><p>Simulation of coastal, estuarine, riverine, lake and catchment sediment transport processes for use cases such as:</p>
+<ul>
+<li>Dredging and navigation management</li>
+<li>Scour assessments</li>
+<li>Channel design</li>
+<li>Environmental impact assessment</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Water Quality (WQ)</p></td>
+<td class="gt_row gt_left"><p>Simulation of coastal, estuarine, riverine, lake and catchment transformative water quality processes for use cases such as:</p>
+<ul>
+<li>Disolved oxygen, inorganics and organic matter dynamics</li>
+<li>Outfall impact assessment</li>
+<li>Water supply and bathing waters</li>
+<li>Aquaculture operations</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Particle Tracking (PT)</p></td>
+<td class="gt_row gt_left"><p>Discrete particle tracking for use cases such as:</p>
+<ul>
+<li>Environmental impact assessments</li>
+<li>Rescue and salvage</li>
+<li>Animal migration</li>
+<li>Aquaculture operations</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Simulation classes are cumulative: more advanced classes extend the capability of simpler classes, with the 2D Hydrodynamic (2D HD) simulation class providing the foundation for all other simulation classes. The dependency relationships between simulation classes are summarised in <a href="#tbl-simclassesdep" class="quarto-xref">Table&nbsp;<span>2.2</span></a>. Each simulation class has a corresponding model construction chapter.</p>
+<div class="cell" data-execution_count="3">
+<div id="tbl-simclassesdep" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-simclassesdep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.2: TUFLOW FV simulation class dependencies
+</figcaption>
+<div aria-describedby="tbl-simclassesdep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="ogggcrukvp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#ogggcrukvp table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#ogggcrukvp thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#ogggcrukvp p { margin: 0; padding: 0; }
+ #ogggcrukvp .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #ogggcrukvp .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #ogggcrukvp .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #ogggcrukvp .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #ogggcrukvp .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #ogggcrukvp .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #ogggcrukvp .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #ogggcrukvp .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #ogggcrukvp .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #ogggcrukvp .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #ogggcrukvp .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #ogggcrukvp .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #ogggcrukvp .gt_spanner_row { border-bottom-style: hidden; }
+ #ogggcrukvp .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #ogggcrukvp .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #ogggcrukvp .gt_from_md> :first-child { margin-top: 0; }
+ #ogggcrukvp .gt_from_md> :last-child { margin-bottom: 0; }
+ #ogggcrukvp .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #ogggcrukvp .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #ogggcrukvp .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #ogggcrukvp .gt_row_group_first td { border-top-width: 2px; }
+ #ogggcrukvp .gt_row_group_first th { border-top-width: 2px; }
+ #ogggcrukvp .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #ogggcrukvp .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #ogggcrukvp .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #ogggcrukvp .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #ogggcrukvp .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #ogggcrukvp .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #ogggcrukvp .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #ogggcrukvp .gt_left { text-align: left; }
+ #ogggcrukvp .gt_center { text-align: center; }
+ #ogggcrukvp .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #ogggcrukvp .gt_font_normal { font-weight: normal; }
+ #ogggcrukvp .gt_font_bold { font-weight: bold; }
+ #ogggcrukvp .gt_font_italic { font-style: italic; }
+ #ogggcrukvp .gt_super { font-size: 65%; }
+ #ogggcrukvp .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #ogggcrukvp .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Simulation-Class-Instance" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Simulation Class Instance</th>
+<th id="Simulation-Class-Dependencies" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Simulation Class Dependencies</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p>2D HD</p></td>
+<td class="gt_row gt_left"><p>Not applicable - 2D HD is the fundamental simulation class</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>3D HD</p></td>
+<td class="gt_row gt_left"><p>2D HD</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>AD</p></td>
+<td class="gt_row gt_left"><p>2D HD or 3D HD</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>ST</p></td>
+<td class="gt_row gt_left"><p>AD</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>WQ</p></td>
+<td class="gt_row gt_left"><p>AD or ST</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>PT</p></td>
+<td class="gt_row gt_left"><p>Can be run on any of the above simulation classes</p></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="sec-Arch-ST-MC-3" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="sec-Arch-ST-MC-3"><span class="header-section-number">2.2.2</span> Tier 2: Model Class</h3>
+<p>Each simulation class (Tier 1) is associated with a defined suite of model classes (Tier 2). For a given simulation class, individual model classes may be either <em>required</em>, <em>conditionally required</em> or <em>optional</em>, and this status is identified consistently throughout the model construction chapters. As simulation classes build on one another, the underlying model class suites expand, with model classes introduced in earlier simulation classes reused or extended in later classes.</p>
+<p>Model classes represent discrete physical or numerical components of a simulation and form the primary organisational units of the model construction chapters. The model class suites associated with each simulation class are summarised in <a href="#tbl-modelclasses" class="quarto-xref">Table&nbsp;<span>2.3</span></a> and illustrated in <a href="#fig-ConClassesNtwk" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>.</p>
+<div class="cell" data-execution_count="4">
+<div id="tbl-modelclasses" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-modelclasses-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.3: TUFLOW FV simulation class instances and corresponding model class suites
+</figcaption>
+<div aria-describedby="tbl-modelclasses-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="yxkvpemjvx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#yxkvpemjvx table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#yxkvpemjvx thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#yxkvpemjvx p { margin: 0; padding: 0; }
+ #yxkvpemjvx .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #yxkvpemjvx .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #yxkvpemjvx .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #yxkvpemjvx .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #yxkvpemjvx .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #yxkvpemjvx .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #yxkvpemjvx .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #yxkvpemjvx .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #yxkvpemjvx .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #yxkvpemjvx .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #yxkvpemjvx .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #yxkvpemjvx .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #yxkvpemjvx .gt_spanner_row { border-bottom-style: hidden; }
+ #yxkvpemjvx .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #yxkvpemjvx .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #yxkvpemjvx .gt_from_md> :first-child { margin-top: 0; }
+ #yxkvpemjvx .gt_from_md> :last-child { margin-bottom: 0; }
+ #yxkvpemjvx .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #yxkvpemjvx .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #yxkvpemjvx .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #yxkvpemjvx .gt_row_group_first td { border-top-width: 2px; }
+ #yxkvpemjvx .gt_row_group_first th { border-top-width: 2px; }
+ #yxkvpemjvx .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #yxkvpemjvx .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #yxkvpemjvx .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #yxkvpemjvx .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #yxkvpemjvx .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #yxkvpemjvx .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #yxkvpemjvx .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #yxkvpemjvx .gt_left { text-align: left; }
+ #yxkvpemjvx .gt_center { text-align: center; }
+ #yxkvpemjvx .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #yxkvpemjvx .gt_font_normal { font-weight: normal; }
+ #yxkvpemjvx .gt_font_bold { font-weight: bold; }
+ #yxkvpemjvx .gt_font_italic { font-style: italic; }
+ #yxkvpemjvx .gt_super { font-size: 65%; }
+ #yxkvpemjvx .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #yxkvpemjvx .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Simulation-Class" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Simulation Class</th>
+<th id="Model-Class-Suite" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Model Class Suite</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p>2D HD</p></td>
+<td class="gt_row gt_left"><ul>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-CRF-2">Coordinate Reference Frame</a></li>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-Hard-2">Hardware (optional)</a></li>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-SO-2">Spatial Order (optional)</a></li>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-STS-2">Simulation Time Settings</a></li>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-CT-2">Computational Timestep</a></li>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-WAD-2">Wetting And Drying (optional)</a></li>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-BD-2">Bottom Drag</a></li>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-HM-2">Horizontal Mixing</a></li>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-WS-2">Wind Stress (optional)</a></li>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-CM-2">Computational Mesh</a></li>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-Bath-2">Bathymetry</a></li>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-Mate-2">Materials</a></li>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-IC-2">Initial Conditions (optional)</a></li>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-BC-2">Boundary Conditions</a></li>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-HS-2">Hydraulic Structures (optional)</a></li>
+<li><a href="05-Hydrodynamics-2D-Construction.html#sec-HD2D-MO-2">Model Output</a></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>3D HD</p></td>
+<td class="gt_row gt_left"><p>2D HD Simulation Class plus:</p>
+<ul>
+<li><a href="06-Hydrodynamics-3D-Construction.html#sec-HD3D-VM-2">Vertical Mixing</a></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>AD</p></td>
+<td class="gt_row gt_left"><p>2D HD or 3D HD Simulation Class plus:</p>
+<ul>
+<li><a href="07-AD-Construction.html#sec-AD-Sali-2">Salinity (optional)</a></li>
+<li><a href="07-AD-Construction.html#sec-AD-Temp-2">Temperature (optional)</a></li>
+<li><a href="07-AD-Construction.html#sec-AD-Trac-2">Tracer (optional)</a></li>
+<li><a href="07-AD-Construction.html#sec-AD-AHE-2">Atmospheric Heat Exchange (optional)</a></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>ST</p></td>
+<td class="gt_row gt_left"><p>AD Simulation Class plus:</p>
+<ul>
+<li><a href="08-ST-Construction.html#sec-ST-SM-2">Sediment</a></li>
+<li><a href="08-ST-Construction.html#sec-ST-SC-2">Sediment Configuration</a></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>WQ</p></td>
+<td class="gt_row gt_left"><p>AD or ST Simulation Class plus:</p>
+<ul>
+<li><a href="09-WQ-Construction.html#sec-WQ-WQ-2">Water Quality</a></li>
+<li><a href="09-WQ-Construction.html#sec-WQ-WQC-2">Water Quality Configuration</a></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>PT</p></td>
+<td class="gt_row gt_left"><p>Any of the above simulation classes plus:</p>
+<ul>
+<li><a href="10-PT-Construction.html#sec-PT-PTC-2">Particle Tracking Configuration</a></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="light-content">
+<div id="fig-ConClassesNtwk" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ConClassesNtwk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<embed src="images/networks/ConClassesNtwk.html" style="width:100.0%" height="810">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ConClassesNtwk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: TUFLOW FV simulation class and model class instance
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="dark-content">
+<div id="fig-ConClassesNtwk" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ConClassesNtwk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<embed src="images/networks/ConClassesNtwk_dark.html" style="width:100.0%" height="810">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ConClassesNtwk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3: TUFLOW FV simulation class and model class instance
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="sec-Arch-ST-MI-3" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="sec-Arch-ST-MI-3"><span class="header-section-number">2.2.3</span> Tier 3: Model Implementations</h3>
+<p>Model implementations (Tier 3) configure a model class (Tier 2). Each model class can select only one model implementation. Available model implementations are summarised in <a href="#tbl-modelinstances" class="quarto-xref">Table&nbsp;<span>2.4</span></a>.</p>
+<div class="cell searchable" data-execution_count="5">
+<div id="tbl-modelinstances" class="cell searchable quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="5">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-modelinstances-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.4: TUFLOW FV model classes and available model implementations
+</figcaption>
+<div aria-describedby="tbl-modelinstances-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="swdtvbezao" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#swdtvbezao table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#swdtvbezao thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#swdtvbezao p { margin: 0; padding: 0; }
+ #swdtvbezao .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #swdtvbezao .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #swdtvbezao .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #swdtvbezao .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #swdtvbezao .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #swdtvbezao .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #swdtvbezao .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #swdtvbezao .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #swdtvbezao .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #swdtvbezao .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #swdtvbezao .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #swdtvbezao .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #swdtvbezao .gt_spanner_row { border-bottom-style: hidden; }
+ #swdtvbezao .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #swdtvbezao .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #swdtvbezao .gt_from_md> :first-child { margin-top: 0; }
+ #swdtvbezao .gt_from_md> :last-child { margin-bottom: 0; }
+ #swdtvbezao .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #swdtvbezao .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #swdtvbezao .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #swdtvbezao .gt_row_group_first td { border-top-width: 2px; }
+ #swdtvbezao .gt_row_group_first th { border-top-width: 2px; }
+ #swdtvbezao .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #swdtvbezao .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #swdtvbezao .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #swdtvbezao .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #swdtvbezao .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #swdtvbezao .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #swdtvbezao .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #swdtvbezao .gt_left { text-align: left; }
+ #swdtvbezao .gt_center { text-align: center; }
+ #swdtvbezao .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #swdtvbezao .gt_font_normal { font-weight: normal; }
+ #swdtvbezao .gt_font_bold { font-weight: bold; }
+ #swdtvbezao .gt_font_italic { font-style: italic; }
+ #swdtvbezao .gt_super { font-size: 65%; }
+ #swdtvbezao .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #swdtvbezao .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell searchable caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Model-Class" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Model Class</th>
+<th id="Model-Implementation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Model Implementation</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p>Coordinate Reference Frame</p></td>
+<td class="gt_row gt_left"><ul>
+<li>Cartesian (Metric Units)</li>
+<li>Cartesian (US Customary Units)</li>
+<li>Spherical (Metric Units)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Spatial Order (optional)</p></td>
+<td class="gt_row gt_left"><ul>
+<li>First Order</li>
+<li>Second Order</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Hardware (optional)</p></td>
+<td class="gt_row gt_left"><ul>
+<li>CPU</li>
+<li>GPU</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Simulation Time Settings</p></td>
+<td class="gt_row gt_left"><ul>
+<li>Hours</li>
+<li>ISODate</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Computational Timestep</p></td>
+<td class="gt_row gt_left"><ul>
+<li>Computational Timestep</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Wetting And Drying (optional)</p></td>
+<td class="gt_row gt_left"><ul>
+<li>Wetting And Drying</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Bottom Drag</p></td>
+<td class="gt_row gt_left"><ul>
+<li>Manning</li>
+<li>ks</li>
+<li>ks (sediment coupled)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Horizontal Mixing</p></td>
+<td class="gt_row gt_left"><ul>
+<li>None</li>
+<li>Constant</li>
+<li>Smagorinsky</li>
+<li>Wu</li>
+<li>Elder</li>
+<li>Warmup</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Wind Stress (optional)</p></td>
+<td class="gt_row gt_left"><ul>
+<li>Wu</li>
+<li>Constant</li>
+<li>Kondo</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Computational Mesh</p></td>
+<td class="gt_row gt_left"><ul>
+<li>Unstructured</li>
+<li>Structured</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Bathymetry</p></td>
+<td class="gt_row gt_left"><ul>
+<li>Static (potentially multiple)</li>
+<li>Time Varying (potentially multiple)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Materials</p></td>
+<td class="gt_row gt_left"><ul>
+<li>Spatially Constant</li>
+<li>Spatially Varying (potentially multiple)</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Initial Conditions (optional)</p></td>
+<td class="gt_row gt_left"><ul>
+<li>Spatially Constant</li>
+<li>Spatially Varying (potentially multiple)</li>
+<li>Ocean Circulation Model</li>
+<li>Restart File</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Boundary Conditions</p></td>
+<td class="gt_row gt_left"><ul>
+<li>Water Level (potentially multiple)</li>
+<li>Inflow/Outflow (potentially multiple)</li>
+<li>Stage Discharge (potentially multiple)</li>
+<li>Ocean Circulation Model (potentially multiple)</li>
+<li>Atmospheric (potentially multiple)</li>
+<li>Spectral Wave (potentially multiple)</li>
+<li>Mass (potentially multiple)</li>
+<li>Force (potentially multiple)</li>
+<li>Zero Gradient and Reflective (potentially multiple)</li>
+<li>Transport File</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Hydraulic Structures</p></td>
+<td class="gt_row gt_left"><ul>
+<li>Weir (potentially multiple)</li>
+<li>Culvert (potentially multiple)</li>
+<li>Bridge (potentially multiple)</li>
+<li>Porous (potentially multiple)</li>
+<li>User-Defined Matrix (potentially multiple)</li>
+<li>User-Defined Timeseries (potentially multiple)</li>
+<li>Wall (potentially multiple)</li>
+<li>Bubble Plume (potentially multiple)</li>
+<li>Operational Control (optional, potentially multiple)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Model Output</p></td>
+<td class="gt_row gt_left"><ul>
+<li>Log Files And Diagnostics</li>
+<li>Check Files (potentially multiple)</li>
+<li>Point (potentially multiple)</li>
+<li>Line (potentially multiple)</li>
+<li>Mesh (potentially multiple)</li>
+<li>Hydraulic Structure (potentially multiple)</li>
+<li>Mass Balance</li>
+<li>Restart File</li>
+<li>Transport File</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Vertical Mixing</p></td>
+<td class="gt_row gt_left"><ul>
+<li>None</li>
+<li>Constant</li>
+<li>Parametric</li>
+<li>K-Epsilon</li>
+<li>K-Omega</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Salinity (optional)</p></td>
+<td class="gt_row gt_left"><ul>
+<li>None</li>
+<li>Barotropic</li>
+<li>Baroclinic</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Temperature (optional)</p></td>
+<td class="gt_row gt_left"><ul>
+<li>None</li>
+<li>Barotropic</li>
+<li>Baroclinic</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Tracer (optional)</p></td>
+<td class="gt_row gt_left"><ul>
+<li>None</li>
+<li>Conservative</li>
+<li>Decay</li>
+<li>Settling</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Atmospheric Heat Exchange (optional)</p></td>
+<td class="gt_row gt_left"><ul>
+<li>On</li>
+<li>Off</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Sediment</p></td>
+<td class="gt_row gt_left"><ul>
+<li>None</li>
+<li>Barotropic</li>
+<li>Baroclinic</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Sediment Configuration</p></td>
+<td class="gt_row gt_left"><ul>
+<li>Sediment Control File</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Water Quality</p></td>
+<td class="gt_row gt_left"><ul>
+<li>None</li>
+<li>TUFLOW</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Water Quality Configuration</p></td>
+<td class="gt_row gt_left"><ul>
+<li>Water Quality Control File</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Particle Tracking Configuration</p></td>
+<td class="gt_row gt_left"><ul>
+<li>None</li>
+<li>Particle Tracking Control File</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><img src="images/WQFooter.jpg" class="img-fluid" style="width:100.0%"></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+// Hover preview for plain anchor links -- mirrors native quarto-xref behaviour.
+
+// Supports same-page anchors and cross-chapter links on the same origin.
+
+// Placed via include-after-body so all DOM is parsed when this runs.
+
+(function () {
+
+  if (typeof window.tippy !== 'function') { return; }
+
+
+
+  var doc = window.document;
+
+  var pageCache = {};
+
+
+
+  function stripColumnClasses(el) {
+
+    el.classList.remove('page-full', 'page-columns');
+
+    for (var i = 0; i < el.children.length; i++) {
+
+      stripColumnClasses(el.children[i]);
+
+    }
+
+  }
+
+
+
+  function buildContent(id, target) {
+
+    var clone = target.cloneNode(true);
+
+    stripColumnClasses(clone);
+
+
+
+    var anchor = clone.querySelector('a.anchorjs-link');
+
+    if (anchor) { anchor.parentNode.removeChild(anchor); }
+
+
+
+    var isSectionEl = (clone.tagName === 'SECTION' || /^H[1-6]$/.test(clone.tagName || ''));
+
+    var isSectionId = (typeof id === 'string' && id.indexOf('sec-') === 0);
+
+
+
+    if (isSectionEl || isSectionId) {
+
+      var container = doc.createElement('div');
+
+      var kids = clone.children;
+
+      if (kids.length > 2) {
+
+        container.appendChild(kids[0].cloneNode(true));
+
+        for (var j = 1; j < kids.length; j++) {
+
+          if (kids[j].tagName === 'P' && (kids[j].textContent || '').trim() === '') { continue; }
+
+          container.appendChild(kids[j].cloneNode(true));
+
+          break;
+
+        }
+
+        if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(container); }
+
+        return container.innerHTML;
+
+      }
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.innerHTML;
+
+    }
+
+
+
+    if (clone.classList.contains('callout')) {
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.outerHTML;
+
+    }
+
+
+
+    if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+    return clone.innerHTML;
+
+  }
+
+
+
+  function getTargetFromPage(pageUrl, id, callback) {
+
+    if (pageCache[pageUrl]) {
+
+      callback(pageCache[pageUrl].getElementById(id));
+
+      return;
+
+    }
+
+    fetch(pageUrl)
+
+      .then(function (r) { return r.text(); })
+
+      .then(function (html) {
+
+        var parser = new DOMParser();
+
+        var parsedDoc = parser.parseFromString(html, 'text/html');
+
+        pageCache[pageUrl] = parsedDoc;
+
+        callback(parsedDoc.getElementById(id));
+
+      })
+
+      .catch(function () { callback(null); });
+
+  }
+
+
+
+  // Same-page anchor links (href starts with "#")
+
+  var samePageLinks = doc.querySelectorAll(
+
+    'main a[href^="#"]:not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < samePageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var hash   = link.getAttribute('href');
+
+      var id     = hash.replace(/^#\/?/, '');
+
+      var target = doc.getElementById(id);
+
+      if (!target) { return; }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           function () { return buildContent(id, target); }
+
+      });
+
+    })(samePageLinks[i]);
+
+  }
+
+
+
+  // Cross-page anchor links (same origin, href contains "#" but does not start with "#")
+
+  var crossPageLinks = doc.querySelectorAll(
+
+    'main a[href*="#"]:not([href^="#"]):not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < crossPageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var href = link.getAttribute('href');
+
+
+
+      var pageUrl, id;
+
+      try {
+
+        var resolved = new URL(href, window.location.href);
+
+        if (resolved.origin !== window.location.origin) { return; }
+
+        pageUrl = resolved.origin + resolved.pathname;
+
+        id = resolved.hash.replace(/^#\/?/, '');
+
+      } catch (e) { return; }
+
+
+
+      if (!id) { return; }
+
+
+
+      // If the link points to the current page, look up the element directly
+
+      if (pageUrl === (window.location.origin + window.location.pathname)) {
+
+        var target = doc.getElementById(id);
+
+        if (!target) { return; }
+
+        window.tippy(link, {
+
+          allowHTML:         true,
+
+          maxWidth:          500,
+
+          delay:             100,
+
+          arrow:             false,
+
+          appendTo:          function (el) { return el.parentElement; },
+
+          interactive:       true,
+
+          interactiveBorder: 10,
+
+          theme:             'quarto',
+
+          placement:         'bottom-start',
+
+          content:           function () { return buildContent(id, target); }
+
+        });
+
+        return;
+
+      }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           'Loading\u2026',
+
+        onShow:            function (instance) {
+
+          if (instance._fetched) { return; }
+
+          instance._fetched = true;
+
+          getTargetFromPage(pageUrl, id, function (target) {
+
+            if (target) {
+
+              instance.setContent(buildContent(id, target));
+
+            } else {
+
+              instance.destroy();
+
+            }
+
+          });
+
+        }
+
+      });
+
+    })(crossPageLinks[i]);
+
+  }
+
+})();
+
+</script>
+
+<script>
+
+// Adds a copy-to-clipboard button to plain code blocks, .styled-code, and .scrollable-block elements.
+
+// .tuflow blocks already receive Quarto's built-in copy button via .sourceCode — those are excluded.
+
+(function () {
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    var selectors = ['pre:not(.sourceCode)', '.styled-code', '.scrollable-block'];
+
+
+
+    selectors.forEach(function (sel) {
+
+      document.querySelectorAll(sel).forEach(function (block) {
+
+        // Skip if already processed
+
+        if (block.parentNode && block.parentNode.classList.contains('copy-block-wrapper')) return;
+
+
+
+        // Wrap block so the button can be positioned outside the scroll area
+
+        var wrapper = document.createElement('div');
+
+        wrapper.className = 'copy-block-wrapper';
+
+        block.parentNode.insertBefore(wrapper, block);
+
+        wrapper.appendChild(block);
+
+
+
+        // Create button
+
+        var btn = document.createElement('button');
+
+        btn.className = 'copy-block-btn';
+
+        btn.title = 'Copy to Clipboard';
+
+        btn.setAttribute('aria-label', 'Copy to Clipboard');
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+
+
+        btn.addEventListener('click', function () {
+
+          var text = block.innerText;
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+
+            navigator.clipboard.writeText(text).then(function () {
+
+              showCopied(btn);
+
+            }).catch(function () {
+
+              fallbackCopy(text);
+
+              showCopied(btn);
+
+            });
+
+          } else {
+
+            fallbackCopy(text);
+
+            showCopied(btn);
+
+          }
+
+        });
+
+
+
+        wrapper.appendChild(btn);
+
+      });
+
+    });
+
+
+
+    function showCopied(btn) {
+
+      btn.innerHTML = '<i class="bi bi-clipboard-check"></i>';
+
+      btn.title = 'Copied!';
+
+      setTimeout(function () {
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+        btn.title = 'Copy to Clipboard';
+
+      }, 2000);
+
+    }
+
+
+
+    function fallbackCopy(text) {
+
+      var ta = document.createElement('textarea');
+
+      ta.value = text;
+
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+
+      document.body.appendChild(ta);
+
+      ta.focus();
+
+      ta.select();
+
+      try { document.execCommand('copy'); } catch (e) {}
+
+      document.body.removeChild(ta);
+
+    }
+
+  });
+
+}());
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./01-Introduction.html" class="pagination-link" aria-label="Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./02-Getting-Started.html" class="pagination-link" aria-label="Getting Started">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting Started</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-contrib/load_tooltips-1.0.0/load_tooltips.js"></script>
+</body></html>
