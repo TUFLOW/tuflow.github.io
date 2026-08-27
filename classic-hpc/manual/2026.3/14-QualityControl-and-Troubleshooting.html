@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>16&nbsp; Quality Control and Troubleshooting – TUFLOW Classic/HPC User Manual 2026.3</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./15-Utilities.html" rel="next">
+<link href="./13-Viewing-and-PostProcessing.html" rel="prev">
+<link href="./manuals-shared/images/TUFLOW.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ea94015a310cf19a1d0a98706902972b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const tocNav = document.querySelector("nav[role='doc-toc']");
+
+    if (!tocNav) return;
+
+
+
+    const observer = new MutationObserver((mutations) => {
+
+      mutations.forEach((mutation) => {
+
+        if (mutation.attributeName === "class") {
+
+          const target = mutation.target;
+
+          if (target.classList.contains("active")) {
+
+            // Scroll the active item smoothly ('smooth') with the least amount of movement ('nearest')
+
+            target.scrollIntoView({
+
+              behavior: "smooth",
+
+              block: "nearest"
+
+            });
+
+          }
+
+        }
+
+      });
+
+    });
+
+
+
+    // Target all links inside the TOC
+
+    const tocLinks = tocNav.querySelectorAll("ul li a");
+
+    tocLinks.forEach((link) => {
+
+      observer.observe(link, { attributes: true });
+
+    });
+
+  });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+
+
+<script>
+
+window.addEventListener("load", function () {
+
+  document.querySelectorAll(".quarto-figure table.searchable").forEach(function(table){
+
+      new DataTable(table, {
+
+          paging: true,
+
+          pageLength: -1,
+
+          lengthMenu: [
+
+            [-1, 10, 20, 50],
+
+            ["All", 10, 20, 50]
+
+          ],
+
+          searching: true,
+
+          ordering: true,
+
+          order: [],
+
+          rowId: null
+
+      });
+
+  });
+
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/TUFLOW_logo.png" alt="" class="navbar-logo light-content">
+    <img src="./images/TUFLOW_logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TUFLOW Classic/HPC User Manual 2026.3</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://tuflow.com/"> 
+<span class="menu-text"><img src="manuals-shared/images/BMT_logo.png" style="height:1.5em"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="./TUFLOW-Classic-HPC-User-Manual-2026.3.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14-QualityControl-and-Troubleshooting.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Quality Control and Troubleshooting</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TUFLOW Classic/HPC User Manual</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Getting-Started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Hydraulic-Modelling-Fundamentals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hydraulic Modelling Fundamentals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ControlFiles-and-Inputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Control Files and Input Layers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-1D-Domains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">1D Network Domains - ESTRY</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./055-1D-SWMM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">1D Network Domains - EPA SWMM</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-2D-Domains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">2D Domains</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-Boundaries-and-Initial-Conditions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Boundaries and Initial Conditions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./075-Advection-Dispersion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Advection Dispersion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-Linked-1D2D-Models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Domains and Solvers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-Outputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Outputs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-Hardware.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hardware and Operating System</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-RunningSimulations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Managing and Starting Simulations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-Checks-and-Logs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Checks and Log Files</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Viewing-and-PostProcessing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Viewing Outputs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-QualityControl-and-Troubleshooting.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Quality Control and Troubleshooting</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-Utilities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Utilities</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-Features-and-Changes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Default Changes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80-AppendicesA-TCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">TCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./81-AppendicesB-ECFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">ECF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./82-AppendicesC-TGCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">TGC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./83-AppendicesD-TBCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">TBC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./84-AppendicesE-TOCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">TOC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./85-AppendicesF-TRFCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">TRFC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./86-AppendicesG-TESFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">TESF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./87-AppendicesH-QCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">QCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./88-AppendicesI-TSCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">TSCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./89-AppendicesJ-ADCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">ADCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./90-AppendicesK-TEFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">TEF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./91-AppendicesL-SWMM-Geopackage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">L</span>&nbsp; <span class="chapter-title">SWMM GeoPackage Format</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-ModelHealth-2" id="toc-sec-ModelHealth-2" class="nav-link active" data-scroll-target="#sec-ModelHealth-2"><span class="header-section-number">16.1</span> Model Health</a>
+  <ul>
+  <li><a href="#sec-TUFLOWClassicModelHealth-3" id="toc-sec-TUFLOWClassicModelHealth-3" class="nav-link" data-scroll-target="#sec-TUFLOWClassicModelHealth-3"><span class="header-section-number">16.1.1</span> TUFLOW Classic</a>
+  <ul>
+  <li><a href="#sec-TUFLOWClassicTimestep-4" id="toc-sec-TUFLOWClassicTimestep-4" class="nav-link" data-scroll-target="#sec-TUFLOWClassicTimestep-4"><span class="header-section-number">16.1.1.1</span> Timestep</a></li>
+  </ul></li>
+  <li><a href="#sec-TUFLOWHPCModelHealth-3" id="toc-sec-TUFLOWHPCModelHealth-3" class="nav-link" data-scroll-target="#sec-TUFLOWHPCModelHealth-3"><span class="header-section-number">16.1.2</span> TUFLOW HPC</a>
+  <ul>
+  <li><a href="#sec-TUFLOWHPCTimestep-4" id="toc-sec-TUFLOWHPCTimestep-4" class="nav-link" data-scroll-target="#sec-TUFLOWHPCTimestep-4"><span class="header-section-number">16.1.2.1</span> Timestep</a></li>
+  </ul></li>
+  <li><a href="#sec-TUFLOWQAIndicators-3" id="toc-sec-TUFLOWQAIndicators-3" class="nav-link" data-scroll-target="#sec-TUFLOWQAIndicators-3"><span class="header-section-number">16.1.3</span> Healthy Model Indicators</a></li>
+  </ul></li>
+  <li><a href="#sec-QATroubleshooting-2" id="toc-sec-QATroubleshooting-2" class="nav-link" data-scroll-target="#sec-QATroubleshooting-2"><span class="header-section-number">16.2</span> Troubleshooting</a>
+  <ul>
+  <li><a href="#sec-QAGeneralComments-3" id="toc-sec-QAGeneralComments-3" class="nav-link" data-scroll-target="#sec-QAGeneralComments-3"><span class="header-section-number">16.2.1</span> General Comments</a></li>
+  <li><a href="#sec-tuflowinstability-3" id="toc-sec-tuflowinstability-3" class="nav-link" data-scroll-target="#sec-tuflowinstability-3"><span class="header-section-number">16.2.2</span> Instability Identification</a>
+  <ul>
+  <li><a href="#sec-onedinstability-4" id="toc-sec-onedinstability-4" class="nav-link" data-scroll-target="#sec-onedinstability-4"><span class="header-section-number">16.2.2.1</span> 1D (ESTRY) Domains</a></li>
+  <li><a href="#sec-ClassicInstability-4" id="toc-sec-ClassicInstability-4" class="nav-link" data-scroll-target="#sec-ClassicInstability-4"><span class="header-section-number">16.2.2.2</span> TUFLOW Classic</a></li>
+  <li><a href="#sec-HPCInstability-4" id="toc-sec-HPCInstability-4" class="nav-link" data-scroll-target="#sec-HPCInstability-4"><span class="header-section-number">16.2.2.3</span> TUFLOW HPC</a></li>
+  <li><a href="#sec-onedtwodinstability-4" id="toc-sec-onedtwodinstability-4" class="nav-link" data-scroll-target="#sec-onedtwodinstability-4"><span class="header-section-number">16.2.2.4</span> 1D/2D Links</a></li>
+  <li><a href="#sec-othertroublshooting-4" id="toc-sec-othertroublshooting-4" class="nav-link" data-scroll-target="#sec-othertroublshooting-4"><span class="header-section-number">16.2.2.5</span> Other General Troubleshooting Recommendations</a></li>
+  </ul></li>
+  <li><a href="#sec-fileaccess-3" id="toc-sec-fileaccess-3" class="nav-link" data-scroll-target="#sec-fileaccess-3"><span class="header-section-number">16.2.3</span> File Access</a>
+  <ul>
+  <li><a href="#sec-xffileaccess-4" id="toc-sec-xffileaccess-4" class="nav-link" data-scroll-target="#sec-xffileaccess-4"><span class="header-section-number">16.2.3.1</span> XF File Access</a></li>
+  <li><a href="#sec-xmdffileaccess-4" id="toc-sec-xmdffileaccess-4" class="nav-link" data-scroll-target="#sec-xmdffileaccess-4"><span class="header-section-number">16.2.3.2</span> XMDF File Access</a></li>
+  <li><a href="#sec-gpkgfileaccess-4" id="toc-sec-gpkgfileaccess-4" class="nav-link" data-scroll-target="#sec-gpkgfileaccess-4"><span class="header-section-number">16.2.3.3</span> GPKG File Access</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-QAchecklist-2" id="toc-sec-QAchecklist-2" class="nav-link" data-scroll-target="#sec-QAchecklist-2"><span class="header-section-number">16.3</span> QA Check List and Simulation Logging</a></li>
+  <li><a href="#sec-ExceedingRAM-2" id="toc-sec-ExceedingRAM-2" class="nav-link" data-scroll-target="#sec-ExceedingRAM-2"><span class="header-section-number">16.4</span> Models Exceeding Hardware RAM</a>
+  <ul>
+  <li><a href="#sec-ComputerRAM-3" id="toc-sec-ComputerRAM-3" class="nav-link" data-scroll-target="#sec-ComputerRAM-3"><span class="header-section-number">16.4.1</span> Computer RAM</a></li>
+  <li><a href="#sec-TUFLOWVersion-3" id="toc-sec-TUFLOWVersion-3" class="nav-link" data-scroll-target="#sec-TUFLOWVersion-3"><span class="header-section-number">16.4.2</span> TUFLOW Version</a></li>
+  <li><a href="#sec-QAmodeldesign-3" id="toc-sec-QAmodeldesign-3" class="nav-link" data-scroll-target="#sec-QAmodeldesign-3"><span class="header-section-number">16.4.3</span> Model Design</a></li>
+  <li><a href="#sec-memoryusage-3" id="toc-sec-memoryusage-3" class="nav-link" data-scroll-target="#sec-memoryusage-3"><span class="header-section-number">16.4.4</span> Memory Usage Reporting</a></li>
+  <li><a href="#sec-tempmemoryusage-3" id="toc-sec-tempmemoryusage-3" class="nav-link" data-scroll-target="#sec-tempmemoryusage-3"><span class="header-section-number">16.4.5</span> Temporary Memory Usage</a></li>
+  <li><a href="#sec-GPURAM-3" id="toc-sec-GPURAM-3" class="nav-link" data-scroll-target="#sec-GPURAM-3"><span class="header-section-number">16.4.6</span> TUFLOW HPC GPU Module and RAM requirements</a></li>
+  </ul></li>
+  <li><a href="#sec-backwardcompatibility-2" id="toc-sec-backwardcompatibility-2" class="nav-link" data-scroll-target="#sec-backwardcompatibility-2"><span class="header-section-number">16.5</span> Past Release Version Backward Compatibility</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-QualityControl-and-Troubleshooting-1" class="quarto-section-identifier"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Quality Control and Troubleshooting</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Proficient and effective 1D and 2D hydrodynamic modelling is a skill that takes time to develop. During the development of these skills, most modellers may produce “unhealthy” models at some point (i.e.&nbsp;models that are problematic in that they regularly go unstable, produce strange flow patterns, etc.). Whilst, in most cases, the reasons for problems are due to the quality of input data, other reasons include poor model schematisation, and, of course, human error. With mentoring from experienced modellers, and/or following an iterative testing process, unhealthy models can be corrected to become healthy, and hydrodynamic modelling skill levels greatly enhanced. This section attempts to convey some ways to identify problematic areas within an unhealthy model, and solutions to resolving the problem.</p>
+<section id="sec-ModelHealth-2" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="sec-ModelHealth-2"><span class="header-section-number">16.1</span> Model Health</h2>
+<p>Due to the computational differences associated with the two solvers, TUFLOW Classic and TUFLOW HPC, there are slightly different approaches to assess and deal with model health issues in each. The following sections will outline the characteristics of unhealthy models in TUFLOW Classic and HPC separately, though the general approach to troubleshooting is very similar.</p>
+<section id="sec-TUFLOWClassicModelHealth-3" class="level3" data-number="16.1.1">
+<h3 data-number="16.1.1" class="anchored" data-anchor-id="sec-TUFLOWClassicModelHealth-3"><span class="header-section-number">16.1.1</span> TUFLOW Classic</h3>
+<p>Unhealthy TUFLOW Classic models usually exhibit one or more of the following characteristics:</p>
+<ul>
+<li>The model only remains stable if using a smaller than recommended timestep.</li>
+<li>Poor mass error (<span class="math inline">\(&gt; \pm 1 \%\)</span>) as indicated by the “CE” percentages displayed to the Console Window (see <a href="12-Checks-and-Logs.html#sec-Classic-3" class="quarto-xref"><span>Section 14.1.1</span></a>), and output to the various mass balance files as described in <a href="12-Checks-and-Logs.html#sec-MB-2" class="quarto-xref"><span>Section 14.7</span></a>.</li>
+<li>“Unnatural” fluctuations of flow in/out and change in volume values (i.e.&nbsp;the Qi, Qo and dV values displayed to the Console Window) discussed in <a href="12-Checks-and-Logs.html#sec-Classic-3" class="quarto-xref"><span>Section 14.1.1</span></a>.</li>
+<li>Locations in the model that repetitively have negative depth WARNINGs. These repeatedly appear as a message such as: <em>“<a href="https://wiki.tuflow.com/TUFLOW_Message_2991">WARNING 2991</a> - Negative U depth at [030;088], Time = 0:01:30, Depth = -0.4…”</em>. The occurrence of the message several times at a location is usually not an issue (this means that the model experienced a short and slight numerical disturbance), however, if it repeatedly occurs for a period of time, it is good practice to resolve the source of the problem as this numerical disturbance may cause mass errors, possibly forcing the use of too small a timestep, and may initiate an instability in a future simulation.</li>
+</ul>
+<p>If one or more of the above apply, the model needs to be reviewed and the cause of the unhealthy behaviour identified. This can be a daunting and difficult task for inexperienced modellers, however, the guidelines in the sections below are hopefully of some assistance.</p>
+<section id="sec-TUFLOWClassicTimestep-4" class="level4" data-number="16.1.1.1">
+<h4 data-number="16.1.1.1" class="anchored" data-anchor-id="sec-TUFLOWClassicTimestep-4"><span class="header-section-number">16.1.1.1</span> Timestep</h4>
+<p>For the majority of TUFLOW Classic flood models, the 2D <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-Timestep">Timestep</a></span> in seconds should be somewhere between <span class="math inline">\(\frac{1}{2}\)</span> to <span class="math inline">\(\frac{1}{5}\)</span> of the 2D <span class="tcmd"><a href="./82-AppendicesC-TGCCommands.html#tgc-CellSize">Cell Size</a></span> (in metres). For example, a 10m 2D grid should use a timestep of between 2 and 5 seconds. 2D domains with predominantly sub-critical flow usually can have timesteps larger than those for steeper models with significant areas of supercritical flow.</p>
+<p>For coastal models, models with large cell sizes (&gt;50m) or models with significant areas of deep water (&gt;20m), the above rule-of-thumb may not apply with the timestep often being smaller. This is due to the Courant condition described in <a href="03-Hydraulic-Modelling-Fundamentals.html#sec-TimestepBackground-2" class="quarto-xref"><span>Section 3.4</span></a>.</p>
+<p>There is a tendency for hydraulic modellers to “solve” an instability by reducing the model timestep. Whilst this may “work”, if the required timestep is less than the above mentioned recommended minimums, it is usually not solving the fundamental cause of the model’s poor hydraulic performance or instability. Using too small a timestep can mask fundamental problems in the input data, and hide mistakes in the construction of the model. For example, if the user accidentally applies a topography modifier with an elevation -99m below the surrounding cells, a small timestep may “remove” the instability but does not resolve the issues in the input data.</p>
+<p>Using a too large a timestep will cause mass errors. If the model runs stable without any negative depth warnings, yet the cumulative mass error is poor throughout the simulation, this is often an indication that the 1D and/or 2D timesteps are too large.</p>
+</section>
+</section>
+<section id="sec-TUFLOWHPCModelHealth-3" class="level3" data-number="16.1.2">
+<h3 data-number="16.1.2" class="anchored" data-anchor-id="sec-TUFLOWHPCModelHealth-3"><span class="header-section-number">16.1.2</span> TUFLOW HPC</h3>
+<p>TUFLOW HPC uses an explicit finite volume scheme. It uses an automatic adaptive timestep routine which is unconditionally stable and provides 100% 2D mass conservation. TUFLOW HPC will not show a mass balance error like TUFLOW Classic but rather, in situations where the stability is threatened, the model timestep is reduced. In recognition of this behaviour, reviewing the minimum timestep is useful in determining the health of a TUFLOW HPC model. For TUFLOW HPC, the *_dt_Min map output file can be used to identify the specific location that is requiring the minimum timestep to achieve simulation stability. This is useful output to help identify where the modeller should be reviewing model inputs and model schematisation.</p>
+<div id="fig-DTOutput" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-DTOutput-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/DT_Map_Output.png" class="img-fluid figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-DTOutput-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.1: TUFLOW HPC Minimum Timestep (dt) Map Output
+</figcaption>
+</figure>
+</div>
+<p>Unhealthy TUFLOW HPC models usually exhibit one or more of the following characteristics:</p>
+<ul>
+<li>A large number of repeat timesteps within the Console Window. The total number of repeated timesteps is recorded in the Simulation Summary section at the end of the .tlf file, and is reported to the _messages layer. Repeated timesteps are an indication that the TUFLOW HPC 2D solution is numerically “on-the-edge”. Models that have a high number of repeated timesteps should be sensitivity tested by reducing the control number limits using the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ControlNumberFactor">Control Number Factor</a></span> command.</li>
+<li>The model only remains stable if using an excessively small timestep.</li>
+<li>Oscillating timesteps and controls numbers as shown in the <a href="https://wiki.tuflow.com/HPC_Model_Review#HPC_dt_Time_Series_Output_.28.2A.hpc.dt.csv.29">*.hpc.dt.csv</a> output to the log folder.</li>
+<li>“Unnatural” fluctuations of flow in/out and change in volume values (i.e.&nbsp;the Qi, Qo and dV values displayed to the Console Window) discussed in <a href="12-Checks-and-Logs.html#sec-Classic-3" class="quarto-xref"><span>Section 14.1.1</span></a>.</li>
+</ul>
+<p>Like TUFLOW Classic, if one or more of the above apply, the model needs to be reviewed, the cause identified and rectified.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Although TUFLOW HPC is 100% mass conservative and will not produce any mass error in the 2D, it is still important to review the Mass Error from a simulation. Mass Error can occur in poorly configured models when coupling HPC with 1D elements (either associated with the 1D/2D linking or in the 1D scheme itself).</p>
+</div>
+</div>
+<section id="sec-TUFLOWHPCTimestep-4" class="level4" data-number="16.1.2.1">
+<h4 data-number="16.1.2.1" class="anchored" data-anchor-id="sec-TUFLOWHPCTimestep-4"><span class="header-section-number">16.1.2.1</span> Timestep</h4>
+<p>The TUFLOW HPC solver, by default, uses adaptive timestepping to progress through the simulation. The timestep is adjusted so that it complies with the mathematical stability criteria of a 2D explicit solution. Due to the underlying solution scheme, TUFLOW HPC typically uses a smaller timestep than Classic. As a general rule, a healthy TUFLOW HPC timestep is roughly <span class="math inline">\(\frac{1}{10}\)</span> of a TUFLOW Classic healthy timestep (i.e.&nbsp;for a cell size of 10m, a healthy TUFLOW Classic timestep would be 2 to 5s, and a healthy TUFLOW HPC timestep would be between 0.2 to 0.5s).</p>
+<p>There are three primary processes that determine the maximum timestep that an explicit solution of the Shallow Water Equations can use:</p>
+<ul>
+<li><strong>Courant Number, Nu:</strong> The Courant number relates to velocity relative to the cell size. Higher velocities will trigger this as the timestep control.</li>
+<li><strong>Wave Celerity Number, Nc:</strong> The Celerity Control number relates to water depth relative to cell size. Energy can pass through deeper water faster than shallow water, as such deep water will trigger this control.</li>
+<li><strong>Diffusion Number, Nd:</strong> The diffusion control relates diffusion of momentum relating to the sub grid viscosity. Small cells subject to deep water will trigger this control.</li>
+</ul>
+<p>Further description of these control numbers is provided on the <a href="https://wiki.tuflow.com/HPC_Adaptive_Timestepping">TUFLOW Wiki HPC Adaptive Timestepping</a> page.</p>
+<p>TUFLOW will use the highest timestep possible without exceeding the limits associated with each of the control numbers. The <a href="https://wiki.tuflow.com/HPC_Model_Review#HPC_TUFLOW_Log_File_.28.2Ahpc.tlf.29">.hpc.tlf log file</a> records the model timestep, control numbers and the volume of water in model at each timestep. It also shows repeated timesteps if the control number limits were exceeded or there is a significant change in control numbers (more than 20%). If a model has a sudden change in rainfall between timesteps, or has a warmup period with small flow rate before a large inflow then repeated timesteps are possible. However, if there is a high occurrence of repeating timesteps when the boundary inflows are smooth, this could be an indicator of model instability. The total number of repeated timesteps is also recorded in Simulation Summary of the .tlf file.</p>
+<div id="fig-HPCrepeatingtimestep" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-HPCrepeatingtimestep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/HPC_repeating_timestep.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-HPCrepeatingtimestep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.2: TUFLOW HPC.TLF Repeating Timesteps
+</figcaption>
+</figure>
+</div>
+<p>It is possible to plot the time-varying control number settings from the <a href="https://wiki.tuflow.com/HPC_Model_Review#HPC_dt_Time_Series_Output_.28.2A.hpc.dt.csv.29">*.hpc.dt.csv</a> that is output to the log folder when running a TUFLOW HPC simulation. This can be done using spreadsheet software such as Excel, or a scripting language such as python. An example using a drag and drop tool, the <a href="https://tuflow-dashboard.onrender.com">TUFLOW Summary Dashboard</a>, is shown in <a href="#fig-HPCDTCSV" class="quarto-xref">Figure&nbsp;<span>16.3</span></a>. The tool is available on the <a href="https://gitlab.com/tuflow-user-group">TUFLOW Gitlab User Group</a>.</p>
+<div id="fig-HPCDTCSV" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-HPCDTCSV-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/HPC_DT_CSV.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-HPCDTCSV-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.3: Timestep and Control Numbers plotted from the .hpc.dt.csv
+</figcaption>
+</figure>
+</div>
+<p>The two key features that modellers should look for in the hpc.dt.csv output, is erratic oscillation of the timestep values and extremely low timesteps. If an oscillating timestep or an unusually low timestep is observed in the HPC dt time series, it is important to review the associated value for each control number (Nu, Nc and Nd). This will allow the modeller to determine which hydraulic condition is limiting the timestep. Since the 2023-03 release of TUFLOW, it is also possible to provide map output for the three control number using the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-MapOutputDataTypes">Map Output Data Types</a></span> command which can also help identify model features leading to reduced timesteps.</p>
+</section>
+</section>
+<section id="sec-TUFLOWQAIndicators-3" class="level3" data-number="16.1.3">
+<h3 data-number="16.1.3" class="anchored" data-anchor-id="sec-TUFLOWQAIndicators-3"><span class="header-section-number">16.1.3</span> Healthy Model Indicators</h3>
+<p>A summary of healthy model indicators is provided at the end of the simulation on the display console, and at the end of the .tlf file. A selection of these indicators are also written to the “_ TUFLOW Simulations.log” files – see <a href="12-Checks-and-Logs.html#sec-SimLog-2" class="quarto-xref"><span>Section 14.3</span></a>. The indicators are discussed in <a href="#tbl-modelindicators" class="quarto-xref">Table&nbsp;<span>16.1</span></a> below.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These model health reporting items should be used in conjunction with good model review practices. They are a set of indicators of various model health parameters. They are not definitive proof that a simulation was or was not healthy.</p>
+</div>
+</div>
+<div class="cell searchable" data-execution_count="2">
+<div id="tbl-modelindicators" class="cell searchable quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="2">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-modelindicators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;16.1: Simulation Summary Healthy Model Indicators
+</figcaption>
+<div aria-describedby="tbl-modelindicators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div id="yfkxrcjeyk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#yfkxrcjeyk table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#yfkxrcjeyk thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#yfkxrcjeyk p { margin: 0; padding: 0; }
+ #yfkxrcjeyk .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #yfkxrcjeyk .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #yfkxrcjeyk .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #yfkxrcjeyk .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #yfkxrcjeyk .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #yfkxrcjeyk .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #yfkxrcjeyk .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #yfkxrcjeyk .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #yfkxrcjeyk .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #yfkxrcjeyk .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #yfkxrcjeyk .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #yfkxrcjeyk .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #yfkxrcjeyk .gt_spanner_row { border-bottom-style: hidden; }
+ #yfkxrcjeyk .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #yfkxrcjeyk .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #yfkxrcjeyk .gt_from_md> :first-child { margin-top: 0; }
+ #yfkxrcjeyk .gt_from_md> :last-child { margin-bottom: 0; }
+ #yfkxrcjeyk .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #yfkxrcjeyk .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #yfkxrcjeyk .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #yfkxrcjeyk .gt_row_group_first td { border-top-width: 2px; }
+ #yfkxrcjeyk .gt_row_group_first th { border-top-width: 2px; }
+ #yfkxrcjeyk .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #yfkxrcjeyk .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #yfkxrcjeyk .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #yfkxrcjeyk .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #yfkxrcjeyk .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #yfkxrcjeyk .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #yfkxrcjeyk .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #yfkxrcjeyk .gt_left { text-align: left; }
+ #yfkxrcjeyk .gt_center { text-align: center; }
+ #yfkxrcjeyk .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #yfkxrcjeyk .gt_font_normal { font-weight: normal; }
+ #yfkxrcjeyk .gt_font_bold { font-weight: bold; }
+ #yfkxrcjeyk .gt_font_italic { font-style: italic; }
+ #yfkxrcjeyk .gt_super { font-size: 65%; }
+ #yfkxrcjeyk .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #yfkxrcjeyk .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell searchable caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 65%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Model-Health-Reporting-Item" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Model Health Reporting Item</th>
+<th id="Description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+<th id="Solver" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Solver</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p>Total Negative Depths</p></td>
+<td class="gt_row gt_left"><p>The occurrence of negative depths at 1D nodes or 2D cell sides is an indication that the solution has not converged or has over-stepped at that location and time. <a href="https://wiki.tuflow.com/TUFLOW_Message_1991">WARNING 1991</a> for 1D nodes and <a href="https://wiki.tuflow.com/TUFLOW_Message_2991">WARNING 2991</a> at 2D cell mid-sides are issued each time a negative depth greater than -0.1m occurs. The location of these warnings can be viewed using the _messages GIS layer.</p>
+<p>From a healthy model perspective, the occasional negative depth is not necessarily a concern, but repeat occurrences at the same location are an indication of a potential issue. See <a href="#sec-tuflowinstability-3" class="quarto-xref"><span>Section 16.2.2</span></a> for further discussion. Negative depths may often precede an instability.</p></td>
+<td class="gt_row gt_left"><p>Classic/HPC</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>WARNINGs and CHECKs prior to and during simulation</p></td>
+<td class="gt_row gt_left"><p>Number of CHECKs and WARNINGs issued. At key stages of a project, review any CHECKs and WARNINGs, and if needed, resolve any issues, particularly for WARNINGs. If a CHECK or WARNING is not in the _messages layer, this means that it could not be located geographically and only occurs in the .tlf file (search the .tlf file to review them).</p></td>
+<td class="gt_row gt_left"><p>Classic/HPC</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Peak Flow In and Out (m<span class="math inline">\(^3\)</span>/s)</p></td>
+<td class="gt_row gt_left"><p>Review these numbers in the sense that they are in accordance with your expectations. Usually the “Peak Flow In” exceeds the “Peak Flow Out” for flood simulations due to the flood wave being attenuated as it travels through the model. Note, at boundaries where a circulation develops, there will be flow in and out and these amounts will contribute to the Flow In and Out of the model as reported here and in the _MB.csv files. This behaviour is indicative of a boundary line that is not well aligned (perpendicular to flow) and possibly should be changed.</p></td>
+<td class="gt_row gt_left"><p>Classic</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Volume at Start and End (m<span class="math inline">\(^3\)</span>)</p></td>
+<td class="gt_row gt_left"><p>The volume of water in the model at the start and end of the simulation. Review these numbers, and confirm they are sensible. A very large residual volume at the end of the simulation may indicate that the simulation was not run for long enough, for example, the flood may not have reached its peak. The time of peak water level is also a good indicator of this, if the time of peak water level is the same as the end time of the simulation, the simulation has likely not run long enough for the flood waters to peak.</p></td>
+<td class="gt_row gt_left"><p>Classic/HPC</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Volume In and Out (m<span class="math inline">\(^3\)</span>)</p></td>
+<td class="gt_row gt_left"><p>The total volume of water in and out of the model during the simulation. Review these numbers to confirm they make sense. Usually the volume out is less than the volume in, as the model has a residual amount of water left in it at the end of the simulation.</p></td>
+<td class="gt_row gt_left"><p>Classic/HPC</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Volume Error (m<span class="math inline">\(^3\)</span>) Final Cumulative ME%</p></td>
+<td class="gt_row gt_left"><p>Volume Error is the loss or gain in water over the course of the simulation. Volume Error is equal to:</p>
+<p>(Total Volume In - Total Volume Out) - (Volume at End - Volume at Start)</p>
+<p>The Volume Error % value is the Volume Error divided by the Volume In + Out.</p>
+<p>The Final Cumulative Mass Error % is calculated throughout the simulation using a similar formula, so should be similar to the Volume Error %. Ideally these values should be less than 1%, but 2 or 3% can be acceptable depending on the objectives of the modelling. Values exceeding 3% usually indicate there are significant problems with the model.</p></td>
+<td class="gt_row gt_left"><p>Classic/HPC</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Peak +ve and -ve dV (m<span class="math inline">\(^3\)</span>)</p></td>
+<td class="gt_row gt_left"><p>dV is the change in volume over the whole model in one timestep, and the values shown here are the peak positive and negative dV values.</p>
+<p>**Note: these values will be different to those shown on the display console or in the _MB.csv files** if the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ScreenLogDisplayInterval">Screen/Log Display Interval</a></span> or <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-MassBalanceOutputInterval">Mass Balance Output Interval</a></span> are not set to the computational timestep.</p>
+<p>The time in hours that the Peak dV values occurred is also shown.</p></td>
+<td class="gt_row gt_left"><p>Classic</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Peak ddV (m<span class="math inline">\(^3\)</span>) (% of Peak dV)</p></td>
+<td class="gt_row gt_left"><p>Peak ddV is the maximum (positive or negative) change in dV over one timestep, and the % value is the % of the maximum Peak dV value. A large ddV value or % indicates the model may have been unsteady at some point. This may not be unusual in a model with complex hydraulics, however, it is another indicator of whether there may be somewhere in the model that needs reviewing.</p></td>
+<td class="gt_row gt_left"><p>Classic</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Peak Cumulative ME</p></td>
+<td class="gt_row gt_left"><p>The peak CME% value that occurred. As discussed above, ideally this value should be less than 1%, though larger values can be acceptable depending on the objectives of the modelling. For example, higher numbers may occur during the intimal wetting of a Classic model, though still have a negligible impact on the overall model results.</p></td>
+<td class="gt_row gt_left"><p>Classic</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Values under “Qi+Qo &gt; 5%”</p></td>
+<td class="gt_row gt_left"><p>The values under “Qi+Qo &gt; 5%” are for the period of the simulation when the flow in and out exceeded 5% of the peak flow in and out, and are representative of the bulk of the simulation once the flood wave has begun flowing. These indicators are designed to exclude an initial period of any unsteadiness at the start of the simulation that may occur in some models.</p></td>
+<td class="gt_row gt_left"><p>Classic</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>HPC HCN Repeated Timesteps</p></td>
+<td class="gt_row gt_left"><p>TUFLOW HPC repeats timesteps if the control number limits are exceeded or if there is a significant change in control numbers (&gt;20%). The three control numbers (Courant Number, Wave Celerity Number and Diffusion Number) determine the maximum timestep for the TUFLOW HPC adaptive timestepping. They are reported in the tlf and in the hpc.dt.csv. In general terms:</p>
+<ul>
+<li>Courant number relates to velocity relative to the cell size. High velocities will trigger this as the control. The Courant Number should be less than 1;</li>
+<li>Celerity Control number relates to water depth relative to cell size. Energy can pass through deeper water faster than shallow water, as such deep water will trigger this control. The Wave Celerity number should be less than 1;</li>
+<li>Diffusion control relates diffusion of momentum relating to the sub grid viscosity. Small cells in deep water will trigger this one. The diffusion control number should be less than 0.3.</li>
+</ul>
+<p>A repeat timestep on its own is not necessarily an indication of an unstable model. Oscillating control numbers may be indictive of an unstable TUFLOW HPC model.</p></td>
+<td class="gt_row gt_left"><p>HPC</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>HPC NaN Repeated Timesteps</p></td>
+<td class="gt_row gt_left"><p>Each TUFLOW HPC timestep is tested for the occurrence of a NaN (Not a Number) which can occurs due to undefined mathematical calculations such as a divide by zero or square root of a negative number. The occurrence of a NaN is indicative of a sudden instability.</p></td>
+<td class="gt_row gt_left"><p>HPC</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>HPC NaN Warning 2550</p></td>
+<td class="gt_row gt_left"><p>Provides the cumulative sum of the number of TUFLOW HPC timestep corrections (indicated by <a href="https://wiki.tuflow.com/TUFLOW_Message_2550">WARNING 2550</a>) have been made in order for the TUFLOW HPC solution to remain stable. Whilst not always sign of an unstable model, it is worth reviewing especially in the case of a large number of repeated timesteps.</p></td>
+<td class="gt_row gt_left"><p>HPC</p></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-QATroubleshooting-2" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="sec-QATroubleshooting-2"><span class="header-section-number">16.2</span> Troubleshooting</h2>
+<p>The most common cause for an unhealthy model is poor underlying topography. In the case of 2D domains, the quality of the Digital Terrain Model (DTM) is often the problem, and investing time to create truly representative, well-constructed, DTMs is highly recommended from both the modelling perspective and the quality of the inundation mapping.</p>
+<p>For 1D domains, topographic inaccuracies in cross-section data and at structures is often the source of problems, although model schematisation can sometime also be the source of issues. As a general statement, 1D modelling is more of an “art” than 2D modelling, due to the need for user judgement associated with the selection of cross-section locations, and schematisation of the 1D domain.</p>
+<p>For 1D-2D models, often poor stability of the 1D domain can lead to instabilities in the combined model at higher flows when flow comes out of bank. It is suggested that the 1D model is tested to ensure stability prior to coupling with the 2D domain where possible. Care should also be taken in the schematisation of any 1D-2D linkages.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Take an iterative approach to solving problems. As a model stability issue may cascade to cause others, when searching through the _messages GIS file, resolve the problems in order of occurrence (i.e.&nbsp;in the order the messages appear in a QGIS attributes table, top to bottom). Solving issues earlier may automatically resolve the errors reported later in the simulation</p>
+</div>
+</div>
+<section id="sec-QAGeneralComments-3" class="level3" data-number="16.2.1">
+<h3 data-number="16.2.1" class="anchored" data-anchor-id="sec-QAGeneralComments-3"><span class="header-section-number">16.2.1</span> General Comments</h3>
+<p>When building a model, be proactive about ensuring the data is as complete as possible and accurately reflects reality. For 1D stormwater pipe network data, use the <a href="https://wiki.tuflow.com/1D_Integrity_Tool">1D Integrity Tool</a> is recommended to ensure data is consistent and free of common errors, prior to use within a TUFLOW model simulation. The TUFLOW ‘test’ mode can also be used to test the data inputs without the simulation phase, see <a href="11-RunningSimulations.html#sec-BatchFileExamples-4" class="quarto-xref"><span>Section 13.4.2.1</span></a> for more details. This can be used in the initial model testing phase without using the high specification modelling hardware that is often required for the hydrodynamic simulation.</p>
+<p>Problems in the input data that get through this initial integrity check are readily identified by using <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-WriteCheckFiles">Write Check Files</a></span> command in the .tcf file and/or <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-WriteCheckFiles">Write Check Files</a></span> in the .ecf file to generate GIS check files. These files represent the final combination of the 2D and 1D data inputs, and are excellent for identifying data input problems. A detailed description of all available check files is provided in the <a href="https://wiki.tuflow.com/TUFLOW_Check_Files">TUFLOW Wiki Check Files</a> page.</p>
+<p>If the model becomes unstable, TUFLOW writes output data for the last computed timestep. The location of stability is easily found by viewing the results for the last timestep. Very large velocity vectors and/or excessively high or low water levels usually occur in the vicinity of the instability.The instability can also be located using the <strong>_messages.shp / .gpkg files</strong> (see <a href="12-Checks-and-Logs.html#sec-Messages-3" class="quarto-xref"><span>Section 14.4.5</span></a>).</p>
+<p>Always search the .tlf files for the terms, “UNSTABLE”, “WARNING”, “CHECK” and “ERROR”. ERRORs stop the simulation, while WARNINGs and CHECKs do not. Note, it is possible that latter errors are caused by earlier warnings, and search through the .tlf files, or start at the beginning of the attributes within the _messages.shp/.gpkg file, resolve the earlier errors first, rather than working backwards from the final error which resulted in the instability.</p>
+<p>The Troubleshooting section of the <a href="https://wiki.tuflow.com/TUFLOW_Messages">TUFLOW Wiki TUFLOW Messages</a> page contains a comprehensive database of TUFLOW “CHECK”, “WARNING” and “ERROR” messages. Each “CHECK”, “WARNING” and “ERROR” message has its own Wiki page documenting a description of the message, and suggestions how to address the message.</p>
+</section>
+<section id="sec-tuflowinstability-3" class="level3" data-number="16.2.2">
+<h3 data-number="16.2.2" class="anchored" data-anchor-id="sec-tuflowinstability-3"><span class="header-section-number">16.2.2</span> Instability Identification</h3>
+<p>Instabilities usually start with one or a few computational points “bouncing” as a result of poor convergence of the mathematical equations being solved. To help identify the start of an instability, negative depth warnings are issued if the depth in a 2D cell (usually TUFLOW Classic only) or a 1D node falls below ‑0.1m. Negative depth warnings are usually a pre-cursor to an instability of the true expected solution. It is not uncommon, particularly in areas of rapid wetting and drying for negative depths to occur before the computational point is made dry (inactive). Hence a buffer of -0.1m is used before reporting a WARNING.</p>
+<p>The WARNING messages are sent to the _messages.shp / .gpkg file (see <a href="12-Checks-and-Logs.html#sec-Messages-3" class="quarto-xref"><span>Section 14.4.5</span></a>). Import or open this file in GIS software to identify the location of the negative depth calculation. If the number of these warnings are substantial (e.g.&nbsp;if a model remains stable but with minor instabilities), select some of the first negative depth warnings in the attribute data and display just those. The warnings are in order of occurrence. By tracing through the negative depth warnings in the vicinity of the instability, the original source of the instability can usually be located.</p>
+<div id="fig-Warning2551" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Warning2551-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/unstable_Depths.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Warning2551-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.4: TUFLOW Warning 2551 Messages in QGIS
+</figcaption>
+</figure>
+</div>
+<p>TUFLOW also uses defined 1D and 2D water level threshold values to trigger an instability message. The commands associated with these thresholds are <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-DepthLimitFactor">Depth Limit Factor</a></span> (1D domains) and <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-InstabilityWaterLevel">Instability Water Level</a></span> (2D domains).</p>
+<section id="sec-onedinstability-4" class="level4" data-number="16.2.2.1">
+<h4 data-number="16.2.2.1" class="anchored" data-anchor-id="sec-onedinstability-4"><span class="header-section-number">16.2.2.1</span> 1D (ESTRY) Domains</h4>
+<p>As advised in <a href="#sec-tuflowinstability-3" class="quarto-xref"><span>Section 16.2.2</span></a> for 2D domains, the location of an instability should be determined by investigating where the <a href="https://wiki.tuflow.com/TUFLOW_Message_1991">WARNING 1991</a> messages occur. Common options for helping resolve unstable or problematic 1D nodes and channels are:</p>
+<ol type="1">
+<li>If a 1D node or channel has become unstable, causing a simulation to crash yet the water levels appear stable in the results, check the <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-DepthLimitFactor">Depth Limit Factor</a></span> setting. It may be that the water level is simply exceeding the maximum depth of the node/channel times the <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-DepthLimitFactor">Depth Limit Factor</a></span>.</li>
+<li>If a 1D node has repeated <a href="https://wiki.tuflow.com/TUFLOW_Message_1991">WARNING 1991</a> messages, and/or has a mass error problem, check that the cross-section/structure dimensions of adjoining channels are correct and appropriate. Common causes are:
+<ol type="1">
+<li>A large change in cross-sectional area for successive channels. If the channel is natural, then it is likely that one or more of the cross-sections are not representative of the real situation.</li>
+<li>One or more incorrect upstream and downstream bed levels. Import the <a href="https://wiki.tuflow.com/Check_Files_1d_inverts">1d_inverts_check</a> GIS file, label the <em>Invert</em> attribute, and cross-check that the inverts are correct.</li>
+<li>A very steep channel entering a gently sloping channel. If this is the real situation, then additional 1D channels providing a higher computational resolution may be needed, alternatively inserting a structure at the transition may help.</li>
+<li>If there is a sudden change in 1D flow area, then a more appropriate and more stable approach would be to insert a structure representative of the situation to model the energy losses associated with the contraction and/or expansion of the water.</li>
+<li>Trial using a smaller <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-Timestep">1D Timestep</a></span> to establish whether the problem is timestep related. If it is not timestep related, reducing the timestep should have little change in results. In some problematic models, 1D instabilities may actually magnify with a reducing timestep.</li>
+<li>A common solution is to add additional storage to the 1D node. This can be done by using the 1d_nwk Length_or_ANA attribute described in <a href="05-1D-Domains.html#tbl-nodesattributedescriptions" class="quarto-xref">Table&nbsp;<span>5.31</span></a> or using <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-MinimumNA">Minimum NA</a></span>, <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-StorageAboveStructureObvert">Storage Above Structure Obvert</a></span> or <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-MinimumChannelStorageLength">Minimum Channel Storage Length</a></span>. Usually adding additional storage at problematic nodes does not adversely affect the results (unless there are a lot of problematic nodes), however, this should be checked through sensitivity testing (this can be carried out by adding even more storage again and ascertaining the effect on the hydraulic results).</li>
+</ol></li>
+</ol>
+<p>Besides investigating where the <a href="https://wiki.tuflow.com/TUFLOW_Message_1991">WARNING 1991</a> messages occur, the most effective approach to identify potential problem locations is to thematically map or categorise the _TSMB GIS layer using the ME_Avg_Abs attribute.</p>
+</section>
+<section id="sec-ClassicInstability-4" class="level4" data-number="16.2.2.2">
+<h4 data-number="16.2.2.2" class="anchored" data-anchor-id="sec-ClassicInstability-4"><span class="header-section-number">16.2.2.2</span> TUFLOW Classic</h4>
+<p>To identify problematic areas within a TUFLOW Classic 2D domain, the most common approach is to run the model at a reasonable timestep and investigate where the <a href="https://wiki.tuflow.com/TUFLOW_Message_2991">WARNING 2991</a> messages occur. If mass error is an issue in the 2D domain, the MB1 and MB2 outputs (see <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-MapOutputDataTypes">Map Output Data Types</a></span>) and <a href="09-Outputs.html#tbl-excludinghazard" class="quarto-xref">Table&nbsp;<span>11.4</span></a> may be of use.</p>
+<p>Of particular note, models based on high quality DTMs are as-a-rule rarely problematic. However, if the DTM is rough or “bumpy” (as can be the case with air-borne laser DTMs), or has poor triangulation causing sharp ridges as illustrated in the images below, models based on these DTMs are much more likely to be problematic in/near these areas.</p>
+<div class="quarto-layout-panel" data-layout="[50, 50]">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="images/image194.png" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="images/image195.jpeg" class="img-fluid"></p>
+</div>
+</div>
+</div>
+<p>The following steps are useful to help identify and resolve the problem.</p>
+<ol type="1">
+<li>Set the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-Timestep">2D Timestep</a></span> to somewhere between <span class="math inline">\(\frac{1}{2}\)</span> to <span class="math inline">\(\frac{1}{5}\)</span> of the cell size (in metres).</li>
+<li>Run the model until it becomes unstable or has generated the <a href="https://wiki.tuflow.com/TUFLOW_Message_2991">WARNING 2991</a> messages.</li>
+<li>Import or open the _messages GIS layer.</li>
+<li>Within your chosen GIS package, view the _messages GIS layer in a tabular format and try to trace back from the “<a href="https://wiki.tuflow.com/TUFLOW_Message_2999">UNSTABLE&nbsp;2999</a>” messages to the initial “<a href="https://wiki.tuflow.com/TUFLOW_Message_2991">WARNING 2991</a>” messages that were most likely the trigger for the instability.</li>
+<li>Select a few of these WARNINGs and locate them geographically in the GIS map window.</li>
+<li>Using the various _check GIS layers, carry out some fundamental checks. For example:
+<ol type="1">
+<li><a href="https://wiki.tuflow.com/Check_Files_2d_zpt">2d_zpt_check</a> or <a href="https://wiki.tuflow.com/Check_Files_2d_DEM_Z">_DEM_Z check file</a>: Check the Zpt values are as you would expect. If the Zpt values are particularly “bumpy”, try smoothing the ones at/near the <a href="https://wiki.tuflow.com/TUFLOW_Message_2991">WARNING 2991</a> messages. Where the Zpts change in elevation rapidly (e.g.&nbsp;the outside bend of a river), deep ZU and ZV elevations can be problematic. If modifying the ZU and ZV values, tend to assign an elevation closer to the higher of the two ZC values either side of the ZU/ZV point. To modify the Zpts it is recommended to create a new 2d_zpt or 2d_zsh layer rather than editing the original data source for quality control purposes.</li>
+<li><a href="https://wiki.tuflow.com/Check_Files_2d_uvpt">2d_uvpt_check</a> or <a href="https://wiki.tuflow.com/Check_Files_2d_grd">2d_grd_check</a>: check the Manning’s n values are as expected, if not identify why.</li>
+</ol></li>
+</ol>
+<p>For reference, a detailed description of all available check files is provided in the <a href="https://wiki.tuflow.com/TUFLOW_Check_Files">TUFLOW Wiki Check Files</a> page.</p>
+<p>Other points to note for TUFLOW Classic 2D domains are:</p>
+<ul>
+<li>If the model becomes unstable quickly and the instability location is near a 2D water level boundary, check that the initial water level setting is compatible with the starting water level of the boundary.</li>
+<li>Direct rainfall modelling on high elevations(&gt;100m) may experience unacceptable mass errors due to a floating point imprecision problem. These models need to use the double precision version of TUFLOW (see <a href="11-RunningSimulations.html#sec-iSPdSP-3" class="quarto-xref"><span>Section 13.3.2</span></a>). In addition, the default <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-CellWetDryDepth">Cell Wet/Dry Depth</a></span> may need to be lowered from 0.002m to 0.0002m (when using <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-Units">Units</a></span> <span class="teq">==</span> <span class="tblk">US Customary</span> the equivalent would be lowering from the default of 0.007 to 0.0007ft) due to the substantial amount of sheet flow.</li>
+</ul>
+</section>
+<section id="sec-HPCInstability-4" class="level4" data-number="16.2.2.3">
+<h4 data-number="16.2.2.3" class="anchored" data-anchor-id="sec-HPCInstability-4"><span class="header-section-number">16.2.2.3</span> TUFLOW HPC</h4>
+<p>To identify problematic areas within a TUFLOW HPC 2D domain, the most common approach is to output the ‘dt’ map output (see <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-MapOutputDataTypes">Map Output Data Types</a></span> and <a href="09-Outputs.html#tbl-excludinghazard" class="quarto-xref">Table&nbsp;<span>11.4</span></a>), and identify the locations where the lowest timestep (dt) values occur (see <a href="#fig-DTOutput" class="quarto-xref">Figure&nbsp;<span>16.1</span></a>). For those locations, check files are reviewed to search for data input issues. Of the check files, possibly the most useful for TUFLOW HPC is the <a href="https://wiki.tuflow.com/Check_Files_2d_DEM_Z">_DEM_Z check file</a> in the location of the <a href="https://wiki.tuflow.com/HPC_Model_Review#dt_Map_Output">_dt_min</a> to assess the topography representation. If the topography doesn’t look realistic, it’s useful to open the <a href="https://wiki.tuflow.com/Check_Files_2d_zsh_zpt">zsh_zpt_check file</a> to assess if there’s any topographic modifications made in this location, or whether there is an artefact in the input DTM datasets that is causing the irregularity. The TUFLOW styles can be applied to the <a href="https://wiki.tuflow.com/Check_Files_2d_zsh_zpt">zsh_zpt_check file</a> check file to show different adjustments, red upwards arrows for increased elevation values, blue downwards arrows for decreased elevation values.</p>
+<p>Other points to note for TUFLOW HPC 2D domains are:</p>
+<ul>
+<li>Non-perpendicular boundaries can provide instabilities in both TUFLOW Classic and HPC. Whereas in TUFLOW Classic they will likely lead to an unstable model, they are more challenging to pick up with TUFLOW HPC because of its unconditionally stability. One approach to review inflow boundaries in a TUFLOW HPC model is to a add 2d_po line immediately downstream of any boundary inputs. The PO results can then be used for detailed review of the model stability in that particular location.</li>
+<li>TUFLOW HPC simulates flow depth as its state variable and it does not suffer the same potential loss of precision as TUFLOW Classic when modelling direct rainfall. It is not a requirement to run a double precision version of TUFLOW HPC for direct rainfall applications. There are some situations in which TUFLOW HPC may benefit from double precision, for more information see <a href="11-RunningSimulations.html#sec-iSPdSP-HPC-4" class="quarto-xref"><span>Section 13.3.2.2</span></a>.</li>
+</ul>
+</section>
+<section id="sec-onedtwodinstability-4" class="level4" data-number="16.2.2.4">
+<h4 data-number="16.2.2.4" class="anchored" data-anchor-id="sec-onedtwodinstability-4"><span class="header-section-number">16.2.2.4</span> 1D/2D Links</h4>
+<p>Some common configuration mistakes associated with 1D/2D links, and recommendations to resolve them are:</p>
+<ol type="1">
+<li>Using a mixture of connected HX and SX lines along a river bank can cause mass errors. This is not a recommended configuration. In these situations the 1D and 2D mass error reporting can appear satisfactory, however the overall model mass error is poor. HX connections are the recommended configuration to connect the 1D open channel to the 2D representation of the floodplain. The _TSMB1d2d GIS layer is useful for identifying mass error issues across 2D HX lines. Note, the units of the mass error values for this layer are presently in m<span class="math inline">\(^3\)</span>s<span class="math inline">\(^-1\)</span>, not in percent.</li>
+<li>Unrealistic flow patterns occurring across the HX lines, sometimes causing strange flow patterns and circulations in the 2D domain. This behaviour may occur due to one of the following reasons:
+<ol type="1">
+<li>Insufficient spatial resolution in the 1D domain. If the interval between 1D nodes is too large, then the linearly interpolated 1D water level profile that is transferred from the 1D domain to the 2D domain along the HX line will not accurately reflect the real situation. This can create recirculation in the 2D and oscillations in the 1D. Check that there is a sufficiently fine resolution of 1D nodes along the river to be representative of the river’s longitudinal water surface slope. Typically, areas where there are significant changes in longitudinal water surface gradient will require finer 1D resolution. Additional 1D nodes may be incorporated quickly and easily in the model through the use of automatically interpolated cross-sections (refer to <a href="05-1D-Domains.html#sec-Interpolate-XS-3" class="quarto-xref"><span>Section 5.6.7</span></a>).</li>
+<li>Conversely, having too fine a spatial 1D resolution may cause stability problems due to insufficient nodal storage. As a general rule-of-thumb, the node surface area should be similar to the width of the 1D/2D interface multiplied by 3 to 10 cell widths.</li>
+<li>At a junction of three or more 1D channels, care should be exercised in how the levels from the side branches are transferred to the HX line(s). If the side branch has much higher water levels than the main branch, and a HX line segment is connected at one end to the side branch and the other end to the main branch, a steep water level gradient may be applied along the HX line segment that is not particularly representative of the real situation.</li>
+<li>Similarly, at 1D structures where there is a significant drop in water level (for example, across a weir), the HX line may need to be stopped upstream and restarted downstream of the structure to prevent a steep gradient being applied across HX cells over the structure.</li>
+</ol></li>
+<li>Instabilities can occur across HX boundaries that are located in areas of ponding water due to the frequent transfer of water back and forth between the 1D and 2D domains. Use the <a href="https://wiki.tuflow.com/Check_Files_1d_to_2d_bc">1D_2D_check layer</a> to view the ZC elevations of the boundary, ensuring the elevations are appropriate and the boundaries have been digitised on the top of banks. In some situations the HX boundaries may need to be relocated and the schematisation of the model revisited to resolve the issue.</li>
+<li>Bumpy topography in the approach to SX boundaries may lead to instabilities. Smooth out the Zpt elevations where appropriate, ensuring there is a 2D flow path leading to / departing from the boundary.</li>
+<li>An inappropriate number of SX boundary cells in relation to the 1D structure width may cause stability problems. The number of cells selected should generally always correlate to the 1D structure width. For example, a 5m wide culvert should be connected to 2-3 SX boundary cells when the cell size is 2m wide. If the 1D structure width is less than or equal to a single cell width, two rather than one boundary cell may need to be selected to achieve stability.</li>
+</ol>
+</section>
+<section id="sec-othertroublshooting-4" class="level4" data-number="16.2.2.5">
+<h4 data-number="16.2.2.5" class="anchored" data-anchor-id="sec-othertroublshooting-4"><span class="header-section-number">16.2.2.5</span> Other General Troubleshooting Recommendations</h4>
+<p>Futher general suggestions for common situations that are not uniquely specific to TUFLOW 1D, Classic, HPC or 1D/2D linking are provided below.</p>
+<ol type="1">
+<li>If the Console Window does not appear at all when executing a simulation, check for virtual memory congestion (see <a href="12-Checks-and-Logs.html#sec-ConsoleDisappear-3" class="quarto-xref"><span>Section 14.1.3</span></a>).</li>
+<li>If the Console Window disappears for no apparent reason, first check the following:
+<ol type="1">
+<li>You have sufficient disk space on the drive you are writing your results to and where the .tcf or .ecf files are located (this is where the .tlf file is written by default).</li>
+<li>Your computer network is/was not down.</li>
+<li>If you are executing TUFLOW from a Windows batch file, review the batch file syntax is correct.</li>
+</ol></li>
+<li>If TUFLOW indicates that GIS objects are not snapped, not connected, could not be found or are outside the model domain, check that:
+<ol type="1">
+<li>The most recent GIS updates have been saved or exported for use by TUFLOW.</li>
+<li>The relevant GIS layers are in the correct projection and that the objects are snapped to each other. Some GIS programs can handle layers of different projections, however, TUFLOW requires that all layers be in the same projection. This projection must be a Cartesian projection (not degrees latitude/longitude) and is specified using <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-SHPProjection">SHP Projection</a></span>, <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-GPKGProjection">GPKG Projection</a></span> and/or <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-MIProjection">MI Projection</a></span> in the .tcf file. The default setting is that all input layers are of the same projection otherwise an ERROR occurs (see <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-GISProjectionCheck">GIS Projection Check</a></span>).</li>
+<li>Different GIS software may use a different precision in the coordinates, this may result in objects being snapped within the software but not in TUFLOW. The distance which objects are considered snapped in TUFLOW can be set with the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-SnapTolerance">Snap Tolerance</a></span> command in TUFLOW.</li>
+</ol></li>
+<li>If you are experiencing instability water levels. Follow the advice given in <a href="#sec-tuflowinstability-3" class="quarto-xref"><span>Section 16.2.2</span></a> and <a href="#sec-onedinstability-4" class="quarto-xref"><span>Section 16.2.2.1</span></a>. Otherwise, check the water level that is used for detecting instabilities (<span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-InstabilityWaterLevel">Instability Water Level</a></span>). If every Z point elevation has not been allocated, the default elevation of 99999 will be assigned. Provided the default settings for the .tcf command <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ZptRangeCheck">Zpt Range Check</a></span> have not been altered, TUFLOW will report an ERROR message. If there are very high Z points in your geometry (relative to your water levels), this allows any instabilities to oscillate in a very large range. Consequently, the instability can become so extreme that floating point errors (i.e.&nbsp;the computation is unresolvable) may occur before TUFLOW stops the simulation and declares it unstable. However, in most cases there should be some water level exceedance warnings at the end of the .tlf file and/or negative depth warnings in the _messages GIS layer. To remedy the situation use <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-InstabilityWaterLevel">Instability Water Level</a></span> to set a realistic maximum water level. This same effect can occur in 1D domains if the maximum height in a node storage table or a channel cross-section is very high or the <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-DepthLimitFactor">Depth Limit Factor</a></span> is set unrealistically high. If the problem persists, please contact <a href="mailto:support@tuflow.com">support@tuflow.com</a>.</li>
+<li>If you are having stability problems, check whether the computational timestep is appropriate (see <a href="03-Hydraulic-Modelling-Fundamentals.html#sec-TimestepBackground-2" class="quarto-xref"><span>Section 3.4</span></a>,&nbsp;<a href="#sec-TUFLOWClassicTimestep-4" class="quarto-xref"><span>Section 16.1.1.1</span></a> and <a href="#sec-onedinstability-4" class="quarto-xref"><span>Section 16.2.2.1</span></a>).</li>
+<li>Discontinuous initial water levels, particularly at 1D/2D interfaces are a common source of instability. If the model is going unstable near a 1D/2D interface shortly after starting, check that the initial water levels in the 1D and 2D domains are similar and also equal to any water level timeseries (HT) boundaries included in the model.</li>
+<li>It is not possible to specify a node as a flow boundary as well as being connected to a 2D SX boundary (which automatically applies a HX boundary to the node). This combination of flow boundary and water level (HX) boundary is incompatible. The result is that the HX boundary overrides the flow boundaries. An ERROR check for this occurrence is output.</li>
+<li>Deep river bends with “bumpy” topography may cause instabilities in 2D models. Smoothing the topography, rather than reducing the timestep is recommended.</li>
+<li>Under-sized 1D node storage (NA tables) connected to 2D HX boundaries may cause instabilities near the 1D/2D interface. Over-sized storage attenuates the inflow hydrograph. As a rule-of-thumb, the node surface area should be similar to the width of the 1D/2D interface multiplied by 3 to 10 cell widths.</li>
+<li>Irregular topography just inside a 2D boundary may cause instabilities. If problems occur, smooth the rough topography.</li>
+</ol>
+</section>
+</section>
+<section id="sec-fileaccess-3" class="level3" data-number="16.2.3">
+<h3 data-number="16.2.3" class="anchored" data-anchor-id="sec-fileaccess-3"><span class="header-section-number">16.2.3</span> File Access</h3>
+<p>From the 2023-02 Release, improvements were made to how TUFLOW handles locked .xf and .xmdf files that are being accessed by other processes or simulations. TUFLOW will now automatically retry access up to a defined limit, avoiding the need for manual intervention. Additional .tcf commands allow users to configure the retry behaviour. From the 2023-03-AD Release, GPKG file access can also be controlled using <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-SQLiteOnOpenSQL">SQLite On Open SQL</a></span> to enforce specific SQLite settings, helping prevent lockouts when databases are shared between simulations.</p>
+<section id="sec-xffileaccess-4" class="level4" data-number="16.2.3.1">
+<h4 data-number="16.2.3.1" class="anchored" data-anchor-id="sec-xffileaccess-4"><span class="header-section-number">16.2.3.1</span> XF File Access</h4>
+<p>When multiple instances of TUFLOW are running from the same .tcf file (e.g.&nbsp;different events/scenario combinations), it is possible for these separate TUFLOW simulations to try to access the same .xf file at the same time. This could cause a “race condition” where only one simulation is able to open the file. Previously, TUFLOW would issue a dialog with a message that the file is locked. The user could continue once the XF file was no longer in use by another TUFLOW simulation. The 2023-02 Release will automatically wait for the file to become free and continue without user intervention.</p>
+</section>
+<section id="sec-xmdffileaccess-4" class="level4" data-number="16.2.3.2">
+<h4 data-number="16.2.3.2" class="anchored" data-anchor-id="sec-xmdffileaccess-4"><span class="header-section-number">16.2.3.2</span> XMDF File Access</h4>
+<p>When running TUFLOW, XMDF files may become locked due to external use of the file, such as during file backups. From the 2023-02 Release, TUFLOW will wait for the file to become freed up to the maximum number of retries.</p>
+<p>The .tcf commands below can be used to modify the number of retries and time to wait between retries. The maximum number of retries is capped to prevent and infinite loops if the file is permanently locked. The commands control behaviour for both .xf and .xmdf files.</p>
+<div class="scrollable-block">
+<p><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-FileRetryMaxCount">File Retry Max Count</a></span> <span class="teq">==</span> <span class="tblk">40</span> <span class="tgrn">! Maximum number of retries</span><br>
+<span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-FileRetryTimeout">File Retry Timeout</a></span> <span class="teq">==</span> <span class="tblk">30</span> <span class="tgrn">! Time in seconds to wait between retries</span></p>
+</div>
+</section>
+<section id="sec-gpkgfileaccess-4" class="level4" data-number="16.2.3.3">
+<h4 data-number="16.2.3.3" class="anchored" data-anchor-id="sec-gpkgfileaccess-4"><span class="header-section-number">16.2.3.3</span> GPKG File Access</h4>
+<p>When accessing a GPKG database, TUFLOW does not alter SQLite settings by default. From the 2023-03-AD Release, the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-SQLiteOnOpenSQL">SQLite On Open SQL</a></span> command can be used to apply SQLite PRAGMA settings when the database is opened. This allows users to control behaviours such as journal mode, helping prevent database locks when multiple simulations access the same file. The command can be applied to read, write, or both access modes.</p>
+</section>
+</section>
+</section>
+<section id="sec-QAchecklist-2" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="sec-QAchecklist-2"><span class="header-section-number">16.3</span> QA Check List and Simulation Logging</h2>
+<p>A quality assurance check of any model used for a project is recommended, even if initial simulation appears to be trouble free and healthy. <a href="#tbl-checklist" class="quarto-xref">Table&nbsp;<span>16.2</span></a> presents a helpful shortlist of general quality control checks. This list is <u>not</u> exhaustive, a more detailed list is available from <a href="https://downloads.tuflow.com/Training/Modelling_Log_and_Review_Template.zip">Modelling Log and Review Template</a>. Model review responsibility should be assigned to an experienced modeller, not someone who is not familiar with TUFLOW modelling.</p>
+<div class="cell" data-execution_count="3">
+<div id="tbl-checklist" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-checklist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;16.2: Quality Control Check List
+</figcaption>
+<div aria-describedby="tbl-checklist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="nltkotmzmw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#nltkotmzmw table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#nltkotmzmw thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#nltkotmzmw p { margin: 0; padding: 0; }
+ #nltkotmzmw .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #nltkotmzmw .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #nltkotmzmw .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #nltkotmzmw .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #nltkotmzmw .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #nltkotmzmw .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #nltkotmzmw .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #nltkotmzmw .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #nltkotmzmw .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #nltkotmzmw .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #nltkotmzmw .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #nltkotmzmw .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #nltkotmzmw .gt_spanner_row { border-bottom-style: hidden; }
+ #nltkotmzmw .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #nltkotmzmw .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #nltkotmzmw .gt_from_md> :first-child { margin-top: 0; }
+ #nltkotmzmw .gt_from_md> :last-child { margin-bottom: 0; }
+ #nltkotmzmw .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #nltkotmzmw .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #nltkotmzmw .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #nltkotmzmw .gt_row_group_first td { border-top-width: 2px; }
+ #nltkotmzmw .gt_row_group_first th { border-top-width: 2px; }
+ #nltkotmzmw .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #nltkotmzmw .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #nltkotmzmw .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #nltkotmzmw .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #nltkotmzmw .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #nltkotmzmw .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #nltkotmzmw .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #nltkotmzmw .gt_left { text-align: left; }
+ #nltkotmzmw .gt_center { text-align: center; }
+ #nltkotmzmw .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #nltkotmzmw .gt_font_normal { font-weight: normal; }
+ #nltkotmzmw .gt_font_bold { font-weight: bold; }
+ #nltkotmzmw .gt_font_italic { font-style: italic; }
+ #nltkotmzmw .gt_super { font-size: 65%; }
+ #nltkotmzmw .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #nltkotmzmw .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 70%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Item" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Item</th>
+<th id="Description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+<th id="Checked" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Checked</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p>Modelling Log</p></td>
+<td class="gt_row gt_left"><p>A modelling log is highly recommended and should be a requirement on all projects. The log may be in Excel, Word or other suitable software. A review of the modelling log is to be made by an experienced modeller. It should contain:</p>
+<ul>
+<li>the TUFLOW executable version used for the modelling;</li>
+<li>Sufficient information to record model versions during development and calibration;</li>
+<li>Observations from simulations;</li>
+<li>Key modelling assumptions; and</li>
+<li>A list of data sources used. A model version naming and numbering system needs to be designed prior to the modelling. The version numbering system should be reflected in input data filenames to allow traceability and the ability to reproduce an old simulation if needed.</li>
+</ul></td>
+<td class="gt_row gt_left"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>File Naming, Structure and Management</p></td>
+<td class="gt_row gt_left"><p>A review of the data file management should check:</p>
+<ul>
+<li>Files are named using a logical and appropriate convention that allows easy interpretation of file purpose and content;</li>
+<li>A logical and appropriate system of folders is used to store the files;</li>
+<li>Relative path names are used for input files (e.g.&nbsp;“..\model\geometry.tgc”) so that models are easily moved from one folder to another.</li>
+<li>Documentation of the above in the project Quality Control Document and/or Modelling Log.</li>
+</ul></td>
+<td class="gt_row gt_left"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>2D Cell Size and 1D resolution</p></td>
+<td class="gt_row gt_left"><p>Check whether the 2D cell size is appropriate to reproduce the topography needed to satisfactorily meet the objectives of the study (see <a href="03-Hydraulic-Modelling-Fundamentals.html#sec-ModelResolutionDiscretisation-2" class="quarto-xref"><span>Section 3.2</span></a>), and that the 1D spatial resolution is appropriate to reproduce the water longitudinal surface gradient.</p></td>
+<td class="gt_row gt_left"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Topography</p></td>
+<td class="gt_row gt_left"><p>The topography review should focus on:</p>
+<ul>
+<li>Correct interrogation of Digital Terrain Model (DTM);</li>
+<li>Correct datum;</li>
+<li>Modifications to the base data (e.g.&nbsp;breaklines) have been checked. Regarding the latter, can be carried out by reviewing the <a href="https://wiki.tuflow.com/Check_Files_2d_DEM_Z">_DEM_Z check file</a> (see <a href="12-Checks-and-Logs.html#tbl-checkfiles" class="quarto-xref">Table&nbsp;<span>14.3</span></a>). Note: Reviewing the elevations in the .2dm file is not appropriate as only the ZH Zpt is represented in the .2dm file (the ZH elevation is not used in the hydrodynamic calculations). 1D cross-section locations and conveyance should be reviewed. As a general rule, conveyance should steadily increase downstream. Sudden changes in conveyance need to be cross-checked (these are often easily identified by sudden changes in velocities of successive channels). Are hydraulic controls such as levees, roads and embankments represented in the model?</li>
+</ul></td>
+<td class="gt_row gt_left"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Bed Resistance Values</p></td>
+<td class="gt_row gt_left"><p>Bed resistance values are to be reviewed by an experienced modeller. The review should focus on checking:</p>
+<ul>
+<li>The <a href="https://wiki.tuflow.com/Check_Files_2d_DEM_M">DEM_M check file</a>;</li>
+<li>The Manning_n attribute values in the <a href="https://wiki.tuflow.com/Check_Files_2d_uvpt">uvpt_check file</a> layer created by <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-WriteCheckFiles">Write Check Files</a></span>;</li>
+<li>The Material attribute values in the <a href="https://wiki.tuflow.com/Check_Files_2d_grd">grd_check file</a> created by <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-WriteCheckFiles">Write Check Files</a></span>; or</li>
+</ul>
+<p>The reviewer should be looking for:</p>
+<ul>
+<li>Relative consistency between different land-use (material) types; and</li>
+<li>Values are within accepted calibration values. GIS thematic mapping is an excellent way to visually and quickly review the variation in bed resistance and other parameter values.</li>
+</ul></td>
+<td class="gt_row gt_left"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Calibration / Validation</p></td>
+<td class="gt_row gt_left"><p>Check that the model calibration or validation is satisfactory in regard to the study objectives. Identify any limitations or areas of potential uncertainty that should be noted when interpreting the study outcomes.</p></td>
+<td class="gt_row gt_left"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Mass Conservation</p></td>
+<td class="gt_row gt_left"><p>In addition to the mass balance reporting (see <a href="12-Checks-and-Logs.html#sec-MB-2" class="quarto-xref"><span>Section 14.7</span></a>), it is good practice to carry out independent mass checks. Standard practice is to place 2d_po flow lines (see <a href="09-Outputs.html#sec-PlotOutput-4" class="quarto-xref"><span>Section 11.3.2.1</span></a>) in several locations throughout the model. They are typically aligned roughly perpendicular to the flow direction. The locations should include lines just inside each of the boundaries. Other suitable locations are upstream and downstream of key structures, through structures and areas of particular interest.</p>
+<p>The flows are graphed and conservation of mass checked (i.e.&nbsp;the amount of water entering the model equals the amount leaving allowing for any retention of water in the model). Ensure that the flows from any 1D channels crossed by a 2d_po line are also included in the mass check, and that the 2d_po flow lines are digitised so that they cross the 1D channel where there is a change in colour of the linked 2D HX cells as shown in the <a href="https://wiki.tuflow.com/Check_Files_1d_to_2d_bc">1d_to_2d_check files</a> or _TSMB1d2d layers. In dynamic simulations, an exact match between upstream and downstream will not occur due to retention of water, however, examination of the flow lines should reflect this phenomenon.</p>
+<p>For steady-state simulations, demonstration of reaching steady flow conditions is demonstrated when the flow entering the model equals the flow leaving the model.</p></td>
+<td class="gt_row gt_left"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Hydraulic Structures</p></td>
+<td class="gt_row gt_left"><p>Head losses through a structure need to be validated through:</p>
+<ul>
+<li>Calibration to recorded information (if available).</li>
+<li>Desktop calculations based on theory and/or standard publications (e.g.&nbsp;Hydraulics of Bridge Waterways).</li>
+<li>Cross-checking results using other hydraulic software.</li>
+</ul>
+<p>Simple checks can be made by calculating the number of dynamic head losses that occur and checking that this is in accordance with what is expected (see <a href="06-2D-Domains.html#sec-HydraulicStructures-3" class="quarto-xref"><span>Section 7.2.9</span></a>).</p>
+<p>It is important to note that contraction and expansion losses associated with structures are modelled very differently in 1D and 2D schemes. 1D schemes rely on applying form loss coefficients, as they cannot simulate the horizontal or vertical changes in velocity direction and speed. 2D schemes model these horizontal changes and do not require the introduction of form losses to the same extent as that required for 1D schemes. However, 2D schemes do not model losses in the vertical or fine-scale horizontal effects (such as around a bridge pier) and may require the introduction of additional form losses. See Syme (2001b) for further details.</p></td>
+<td class="gt_row gt_left"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Eddy Viscosity</p></td>
+<td class="gt_row gt_left"><p>Check that the eddy viscosity formulation and coefficient is appropriate (see <a href="06-2D-Domains.html#sec-SGS-3" class="quarto-xref"><span>Section 7.3.3</span></a>).</p></td>
+<td class="gt_row gt_left"></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="sec-ExceedingRAM-2" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="sec-ExceedingRAM-2"><span class="header-section-number">16.4</span> Models Exceeding Hardware RAM</h2>
+<p>In some situations TUFLOW modellers may experience an error due to the model simulation requiring more Random-Access Memory (RAM) than is available in the computer. When this situation occurs the following message is reported.</p>
+<div id="fig-RAMErrorDomainSizeRAM" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-RAMErrorDomainSizeRAM-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/image196.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-RAMErrorDomainSizeRAM-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.5: TUFLOW RAM Error
+</figcaption>
+</figure>
+</div>
+<p>The error may be caused by a number of contributing factors. The following sections discuss the common causes and recommended troubleshooting considerations to help resolve the issue.</p>
+<section id="sec-ComputerRAM-3" class="level3" data-number="16.4.1">
+<h3 data-number="16.4.1" class="anchored" data-anchor-id="sec-ComputerRAM-3"><span class="header-section-number">16.4.1</span> Computer RAM</h3>
+<p>If a TUFLOW simulation can not allocate sufficient RAM the first check that should be made is the amount of available RAM on the computer. What are the computers specifications and what is already being used by other processes? This can be done in Windows Task Manager. Third party software used to build TUFLOW models and view their results (such as GIS or CAD packages) can consume large amounts of RAM, leaving little remaining for the TUFLOW simulation.</p>
+</section>
+<section id="sec-TUFLOWVersion-3" class="level3" data-number="16.4.2">
+<h3 data-number="16.4.2" class="anchored" data-anchor-id="sec-TUFLOWVersion-3"><span class="header-section-number">16.4.2</span> TUFLOW Version</h3>
+<p>The choice of TUFLOW version can influence the amount of RAM needed to simulate the model. The double precision (DP) versions of TUFLOW utilise more RAM (up to twice as much) than the single (SP) precision version, as all real numbers are 8-byte reals in the DP version, rather than 4-byte reals in SP. Refer to <a href="11-RunningSimulations.html#sec-iSPdSP-3" class="quarto-xref"><span>Section 13.3.2</span></a> for further information on the difference between single and double precision versions of TUFLOW.</p>
+</section>
+<section id="sec-QAmodeldesign-3" class="level3" data-number="16.4.3">
+<h3 data-number="16.4.3" class="anchored" data-anchor-id="sec-QAmodeldesign-3"><span class="header-section-number">16.4.3</span> Model Design</h3>
+<p>Key model design items that influence memory allocation, and should be reviewed if simulation RAM requirements need to be reduced, include:</p>
+<ul>
+<li>The size of the redundant area around the perimeter of the active model domain;</li>
+<li>The number of 2D cells, hence the domain extent and the cell size; and</li>
+<li>Choice of model features utilised.</li>
+</ul>
+<p>The term, “redundant area” is defined as the difference between the 2D domain size and the active model area. As discussed in <a href="06-2D-Domains.html#sec-CellCodes-3" class="quarto-xref"><span>Section 7.2.2</span></a>, TUFLOW automatically strips any redundant rows/columns around the active area of the model to reduce simulation times, this however does not reduce the amount of RAM consumed by the model. Refer to <a href="06-2D-Domains.html#sec-Domain-3" class="quarto-xref"><span>Section 7.2.1</span></a> and <a href="06-2D-Domains.html#sec-CellCodes-3" class="quarto-xref"><span>Section 7.2.2</span></a> for further information on defining the 2D domain and the active/inactive areas of a model.</p>
+<p><a href="#fig-DomainSizeRAM" class="quarto-xref">Figure&nbsp;<span>16.6</span></a> presents two different versions of an example model. The only difference between both models is the size of the 2D domain. The <a href="https://wiki.tuflow.com/Check_Files_2d_dom">2d_dom check file</a> of the models has been overlaid on top of the active area of the model, represented by a magenta polygon (2d_code GIS layer with CD=1).</p>
+<div id="fig-DomainSizeRAM" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-DomainSizeRAM-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/image197.png" class="img-fluid figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-DomainSizeRAM-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.6: Influence of 2D Domain Size on RAM Allocation
+</figcaption>
+</figure>
+</div>
+<p>In this example, the green coloured <a href="https://wiki.tuflow.com/Check_Files_2d_dom">2d_dom_check</a> in <a href="#fig-DomainSizeRAM" class="quarto-xref">Figure&nbsp;<span>16.6</span></a> has been defined using the .tgc command <span class="tcmd"><a href="./82-AppendicesC-TGCCommands.html#tgc-GridSizeXY">Grid&nbsp;Size&nbsp;(X,Y)</a></span> <span class="teq">==</span> <span class="tblk">1800, 2000</span>. Its 2D domain extent is significantly larger than the active area of the model (the magenta polygon).</p>
+<p>In contrast the black coloured <a href="https://wiki.tuflow.com/Check_Files_2d_dom">2d_dom_check</a> area in <a href="#fig-DomainSizeRAM" class="quarto-xref">Figure&nbsp;<span>16.6</span></a> shows a much better fit to the active area. This model domain has been defined using the .tgc command <span class="tcmd"><a href="./82-AppendicesC-TGCCommands.html#tgc-GridSizeXY">Grid&nbsp;Size&nbsp;(X,Y)</a></span> <span class="teq">==</span> <span class="tblk">800, 1000</span>.</p>
+<p>The size of the redundant area can be determined by searching within the .tlf file for the term “redundant”.</p>
+<p>For larger (green) domain in the figure above, the tlf file states the following redundant area information.</p>
+<pre><code>Isolating redundant perimeter sections of 2D domain Domain_001...
+...Reduced computational grid by 79%. Now extends from [5,7] to [196,169].
+...Reduced output grid by 79%. Now extends from [5,7] to [196,169].</code></pre>
+<p>It indicates TUFLOW has reduced the computation grid by 79%, meaning the active area is only 21% of the size of the 2D domain! A search for “memory” in the .tlf file shows the required memory allocation for the model:</p>
+<pre><code>Memory requested for 2D domain Domain_001 = 101 Mb
+Total Memory requested thus far = 104 Mb</code></pre>
+<p>For smaller (black) domain in the figure above, the tlf file states the following redundant area information.</p>
+<pre><code>Isolating redundant perimeter sections of 2D domain Domain_001...
+...Reduced computational grid by 8%. Now extends from [5,7] to [196,169].
+...Reduced output grid by 8%. Now extends from [5,7] to [196,169].</code></pre>
+<p>The smaller 2D domain also has a noticeable impact on the memory required to run the model. In this case, reducing it by a factor of 5, from 104Mb to 27Mb.</p>
+<pre><code>Memory requested for 2D domain Domain_001 = 23 Mb
+Total Memory requested thus far = 27 Mb</code></pre>
+<p>The 2D cell size dictates the total number of cells within a given study area, keeping in mind that halving the cell size quadruples the number of cells. The number of cells has a direct correlation to the amount of RAM required to run the model. For each cell, TUFLOW stores a number of variables including depth/water level and velocity components. The greater the number of cells, the greater the amount of information stored and the greater the amount of memory needed to simulate the model. Simulating a variety of models, each with a different cell size during the initial model development stage, will provide a modeller with an understanding of the impact the cell size has on simulation time, memory allocation and also model results. Refer to <a href="03-Hydraulic-Modelling-Fundamentals.html#sec-CellSizeResultsConvergence-3" class="quarto-xref"><span>Section 3.2.4</span></a> for discussion on cell size convergence testing.</p>
+<p>A number of optional TUFLOW features may also increase the simulation memory requirements. Common features include:</p>
+<ul>
+<li><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ModelOutputZones">Model Output Zones</a></span> (Section&nbsp;<a href="09-Outputs.html#sec-OutputZones-3" class="quarto-xref"><span>Section 11.2.5</span></a>). Adding Extra Output Zones will increase the RAM requirement.</li>
+<li>TIF, ASC or FLT grid raster <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-MapOutputFormat">Map Output Format</a></span> (<a href="09-Outputs.html#sec-Format-3" class="quarto-xref"><span>Section 11.2.2</span></a>). Consider using these grid raster output types for maximum reporting only. Use the XMDF or CC format for time varying dynamic 2D Map Outputs.</li>
+<li>Direct rainfall boundary condition inputs defined using the <span class="tcmd"><a href="./83-AppendicesD-TBCCommands.html#tbc-ReadGISRF">Read GIS RF</a></span> format can require significant amounts of RAM. Consider using a <a href="https://wiki.tuflow.com/TUFLOW_Rainfall_Control_File_Examples">Rainfall Control File</a> approach to define the input instead. It requires a far smaller amount of memory.</li>
+<li>Excessively fine TUFLOW HPC sub-grid sampling resolution.</li>
+</ul>
+</section>
+<section id="sec-memoryusage-3" class="level3" data-number="16.4.4">
+<h3 data-number="16.4.4" class="anchored" data-anchor-id="sec-memoryusage-3"><span class="header-section-number">16.4.4</span> Memory Usage Reporting</h3>
+<p>The TUFLOW log file (.tlf) provides a summary of the model’s memory usage. The memory usage information can be used to identify which items of a model require the most RAM. An example is provided below:</p>
+<pre><code>1D QX and HX BCs automatically detected
+1D Geometry data memory ........ 18 Mb
+1D Boundary data memory ........ 0 Mb
+1D yQ Curves memory ............ 0 Mb
+1D Control structures memory ... 0 Mb
+1D Mesh data memory ............ 3 Mb
+1D Results storage memory ...... 24 Mb
+1D Temporary data memory ....... 8 Mb
+1D Computational arrays memory . 0 Mb
+Total 1D domain memory (RAM) requested ............ 54 Mb
+Total 1D domain character memory (RAM) requested .. 7 Mb
+Domain_001 : Allocating Memory Pointers:
+Domain_001 : Grid data memory ............... 47 Mb
+Domain_001 : Variable Z and Layered FC memory 0 Mb
+Domain_001 : Sub-domain linking memory ...... 4 Mb
+Domain_001 : Flow constrictions memory ...... 16 Mb
+Domain_001 : Weirs and viscosity factor memory 14 Mb
+Domain_001 : Pressure, wind and waves memory 0 Mb
+Domain_001 : General Memory ................. 14 Mb
+Domain_001 : Boundary conditions memory ..... 7 Mb
+Domain_001 : Wind &amp; waves boundary memory ... 0 Mb
+Domain_001 : Work arrays memory ............. 115 Mb
+Domain_001 : SMS High Res format memory ..... 0 Mb</code></pre>
+</section>
+<section id="sec-tempmemoryusage-3" class="level3" data-number="16.4.5">
+<h3 data-number="16.4.5" class="anchored" data-anchor-id="sec-tempmemoryusage-3"><span class="header-section-number">16.4.5</span> Temporary Memory Usage</h3>
+<p>A number of input steps may require additional memory for processing during model initialisation. For example, when a large DEM is input (<span class="tcmd"><a href="./82-AppendicesC-TGCCommands.html#tgc-ReadGridZpts">Read Grid Zpts</a></span>), this is read into memory and then processed. This allows for a very rapid processing of the file, though may consume significant additional memory. The DEM can be tiled to reduce memory usage at start-up. Other files that consume additional memory are <span class="tcmd"><a href="./82-AppendicesC-TGCCommands.html#tgc-ReadGISZShape">Read GIS Z Shape</a></span>, as TUFLOW tracks the modified elevation and the change in elevation for all Zpts.</p>
+<p>The <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-MaximumVertices">Maximum Vertices</a></span> and <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-MaximumPoints">Maximum Points</a></span> commands can be used to increase or decrease the size of a single GIS object and will change the memory required.</p>
+<p>For models utilising TUFLOW HPC Sub-Grid Sampling (SGS) with the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-SGSApproach">SGS Approach</a></span> Method A or B (default prior to 2023-03), the sub-grid sampling was undertaken during the data pre-processing, though the raw input data not retained. In the 2023-03 TUFLOW release, a new and improved Method C approach (default in 2023-03 and later) was introduced. Method C retains the raw sub-grid sampled elevation information from the pre-processing stage for numerous post-processed result features. Whilst Method C can potentially use more RAM, the approach has considerable benefits in terms of preserving sub-grid elevation data at cells/faces partially affected by terrain data layers and allows TUFLOW to produce high-resolution mapping at the SGS sampling resolution.</p>
+<p>Sub-grid sampling is a computationally intensive process, particularly for large models with small SGS sample distances. To speed up model initialisation, TUFLOW has been configured to utilise multiple CPU cores. By default, all CPU threads will be used for final SGS elevation pre-processing unless the number of threads (<strong>-nt[thread count]</strong>) command line argument has been specified. For example, to run on 8 threads the command line argument “-nt8” would be used. There is no check for thread licensing used for pre-processing. All threads are used if the number of threads specified in the command line argument exceeds the number of threads available.</p>
+<p>In addition to the parallelisation of the final SGS elevation pre-processing, XF files are now supported for SGS Method C. At the end of the .tgc reading, after all elevation datasets have been processed, an XF file is written if the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-XFFiles">XF Files</a></span> command is set to on (default). This XF file can then be utilised in subsequent simulations, reducing memory requirements and processing time.</p>
+</section>
+<section id="sec-GPURAM-3" class="level3" data-number="16.4.6">
+<h3 data-number="16.4.6" class="anchored" data-anchor-id="sec-GPURAM-3"><span class="header-section-number">16.4.6</span> TUFLOW HPC GPU Module and RAM requirements</h3>
+<p>When running TUFLOW HPC with the GPU Module, TUFLOW Classic carries out all the pre- and post-processing of the data (setting up the model and storing and tracking of all output data). These CPU tasks typically consume significantly more memory than that required to carry out the hydraulic computations on the GPU card. Although the hydrodynamic calculations are carried out on the GPU card/s, significant amounts of CPU RAM are also required. As a rough guide, the CPU RAM requirement is around 4 to 6 times that of the GPU memory (with grid based output active and set to the defaults).</p>
+</section>
+</section>
+<section id="sec-backwardcompatibility-2" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="sec-backwardcompatibility-2"><span class="header-section-number">16.5</span> Past Release Version Backward Compatibility</h2>
+<p>Advances in science, subsequently built into new release versions may cause slight result differences from one release version to another. In recognition of this, if a project is completed using a specific version of the software, continued future use of that software version for that particular model is recommended to achieve identical results.</p>
+<p>Similarly, to obtain identical results, use the same software version on the same operating system (Windows or Linux). The Windows and Linux builds produce largely identical outputs, but minor differences can arise from filesystem conventions and small numerical differences introduced by different compilers or third-party libraries used on each platform. These differences should not be significant, but bit-for-bit identical results are not guaranteed.</p>
+<p>During the life of TUFLOW, every effort has been made to provide full backward compatibility to past release versions. <a href="16-Features-and-Changes.html" class="quarto-xref"><span>Chapter 18</span></a> lists code changes that may cause a change in model result. If a legacy or old model is being upgraded to the latest TUFLOW release, it is recommended that you familiarise yourself with possible changes to the default settings that may change results, and make the necessary changes as appropriate. In nearly all cases a backward compatibility switch is provided so that new builds can reproduce past build results (see <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-Defaults">Defaults</a></span>). In rare cases exact byte identical replication of a past build result may not be possible using a new release version because different compiler versions were used to create the respective executables.</p>
+<p><img src="images/WQFooter.jpg" class="img-fluid" style="width:100.0%"></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+
+// Hover preview for plain anchor links -- mirrors native quarto-xref behaviour.
+
+// Supports same-page anchors and cross-chapter links on the same origin.
+
+// Placed via include-after-body so all DOM is parsed when this runs.
+
+(function () {
+
+  if (typeof window.tippy !== 'function') { return; }
+
+
+
+  var doc = window.document;
+
+  var pageCache = {};
+
+
+
+  function stripColumnClasses(el) {
+
+    el.classList.remove('page-full', 'page-columns');
+
+    for (var i = 0; i < el.children.length; i++) {
+
+      stripColumnClasses(el.children[i]);
+
+    }
+
+  }
+
+
+
+  function buildContent(id, target) {
+
+    var clone = target.cloneNode(true);
+
+    stripColumnClasses(clone);
+
+
+
+    var anchor = clone.querySelector('a.anchorjs-link');
+
+    if (anchor) { anchor.parentNode.removeChild(anchor); }
+
+
+
+    var isSectionEl = (clone.tagName === 'SECTION' || /^H[1-6]$/.test(clone.tagName || ''));
+
+    var isSectionId = (typeof id === 'string' && id.indexOf('sec-') === 0);
+
+
+
+    if (isSectionEl || isSectionId) {
+
+      var container = doc.createElement('div');
+
+      var kids = clone.children;
+
+      if (kids.length > 2) {
+
+        container.appendChild(kids[0].cloneNode(true));
+
+        for (var j = 1; j < kids.length; j++) {
+
+          if (kids[j].tagName === 'P' && (kids[j].textContent || '').trim() === '') { continue; }
+
+          container.appendChild(kids[j].cloneNode(true));
+
+          break;
+
+        }
+
+        if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(container); }
+
+        return container.innerHTML;
+
+      }
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.innerHTML;
+
+    }
+
+
+
+    if (clone.classList.contains('callout')) {
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.outerHTML;
+
+    }
+
+
+
+    if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+    return clone.innerHTML;
+
+  }
+
+
+
+  function getTargetFromPage(pageUrl, id, callback) {
+
+    if (pageCache[pageUrl]) {
+
+      callback(pageCache[pageUrl].getElementById(id));
+
+      return;
+
+    }
+
+    fetch(pageUrl)
+
+      .then(function (r) { return r.text(); })
+
+      .then(function (html) {
+
+        var parser = new DOMParser();
+
+        var parsedDoc = parser.parseFromString(html, 'text/html');
+
+        pageCache[pageUrl] = parsedDoc;
+
+        callback(parsedDoc.getElementById(id));
+
+      })
+
+      .catch(function () { callback(null); });
+
+  }
+
+
+
+  // Same-page anchor links (href starts with "#")
+
+  var samePageLinks = doc.querySelectorAll(
+
+    'main a[href^="#"]:not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < samePageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var hash   = link.getAttribute('href');
+
+      var id     = hash.replace(/^#\/?/, '');
+
+      var target = doc.getElementById(id);
+
+      if (!target) { return; }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           function () { return buildContent(id, target); }
+
+      });
+
+    })(samePageLinks[i]);
+
+  }
+
+
+
+  // Cross-page anchor links (same origin, href contains "#" but does not start with "#")
+
+  var crossPageLinks = doc.querySelectorAll(
+
+    'main a[href*="#"]:not([href^="#"]):not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < crossPageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var href = link.getAttribute('href');
+
+
+
+      var pageUrl, id;
+
+      try {
+
+        var resolved = new URL(href, window.location.href);
+
+        if (resolved.origin !== window.location.origin) { return; }
+
+        pageUrl = resolved.origin + resolved.pathname;
+
+        id = resolved.hash.replace(/^#\/?/, '');
+
+      } catch (e) { return; }
+
+
+
+      if (!id) { return; }
+
+
+
+      // If the link points to the current page, look up the element directly
+
+      if (pageUrl === (window.location.origin + window.location.pathname)) {
+
+        var target = doc.getElementById(id);
+
+        if (!target) { return; }
+
+        window.tippy(link, {
+
+          allowHTML:         true,
+
+          maxWidth:          500,
+
+          delay:             100,
+
+          arrow:             false,
+
+          appendTo:          function (el) { return el.parentElement; },
+
+          interactive:       true,
+
+          interactiveBorder: 10,
+
+          theme:             'quarto',
+
+          placement:         'bottom-start',
+
+          content:           function () { return buildContent(id, target); }
+
+        });
+
+        return;
+
+      }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           'Loading\u2026',
+
+        onShow:            function (instance) {
+
+          if (instance._fetched) { return; }
+
+          instance._fetched = true;
+
+          getTargetFromPage(pageUrl, id, function (target) {
+
+            if (target) {
+
+              instance.setContent(buildContent(id, target));
+
+            } else {
+
+              instance.destroy();
+
+            }
+
+          });
+
+        }
+
+      });
+
+    })(crossPageLinks[i]);
+
+  }
+
+})();
+
+</script>
+
+<script>
+
+// Adds a copy-to-clipboard button to plain code blocks, .styled-code, and .scrollable-block elements.
+
+// .tuflow blocks already receive Quarto's built-in copy button via .sourceCode — those are excluded.
+
+(function () {
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    var selectors = ['pre:not(.sourceCode)', '.styled-code', '.scrollable-block'];
+
+
+
+    selectors.forEach(function (sel) {
+
+      document.querySelectorAll(sel).forEach(function (block) {
+
+        // Skip if already processed
+
+        if (block.parentNode && block.parentNode.classList.contains('copy-block-wrapper')) return;
+
+
+
+        // Wrap block so the button can be positioned outside the scroll area
+
+        var wrapper = document.createElement('div');
+
+        wrapper.className = 'copy-block-wrapper';
+
+        block.parentNode.insertBefore(wrapper, block);
+
+        wrapper.appendChild(block);
+
+
+
+        // Create button
+
+        var btn = document.createElement('button');
+
+        btn.className = 'copy-block-btn';
+
+        btn.title = 'Copy to Clipboard';
+
+        btn.setAttribute('aria-label', 'Copy to Clipboard');
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+
+
+        btn.addEventListener('click', function () {
+
+          var text = block.innerText;
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+
+            navigator.clipboard.writeText(text).then(function () {
+
+              showCopied(btn);
+
+            }).catch(function () {
+
+              fallbackCopy(text);
+
+              showCopied(btn);
+
+            });
+
+          } else {
+
+            fallbackCopy(text);
+
+            showCopied(btn);
+
+          }
+
+        });
+
+
+
+        wrapper.appendChild(btn);
+
+      });
+
+    });
+
+
+
+    function showCopied(btn) {
+
+      btn.innerHTML = '<i class="bi bi-clipboard-check"></i>';
+
+      btn.title = 'Copied!';
+
+      setTimeout(function () {
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+        btn.title = 'Copy to Clipboard';
+
+      }, 2000);
+
+    }
+
+
+
+    function fallbackCopy(text) {
+
+      var ta = document.createElement('textarea');
+
+      ta.value = text;
+
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+
+      document.body.appendChild(ta);
+
+      ta.focus();
+
+      ta.select();
+
+      try { document.execCommand('copy'); } catch (e) {}
+
+      document.body.removeChild(ta);
+
+    }
+
+  });
+
+}());
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./13-Viewing-and-PostProcessing.html" class="pagination-link" aria-label="Viewing Outputs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Viewing Outputs</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./15-Utilities.html" class="pagination-link" aria-label="Utilities">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Utilities</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

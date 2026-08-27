@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>References – TUFLOW Classic/HPC User Manual 2026.3</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./80-AppendicesA-TCFCommands.html" rel="next">
+<link href="./16-Features-and-Changes.html" rel="prev">
+<link href="./manuals-shared/images/TUFLOW.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ea94015a310cf19a1d0a98706902972b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const tocNav = document.querySelector("nav[role='doc-toc']");
+
+    if (!tocNav) return;
+
+
+
+    const observer = new MutationObserver((mutations) => {
+
+      mutations.forEach((mutation) => {
+
+        if (mutation.attributeName === "class") {
+
+          const target = mutation.target;
+
+          if (target.classList.contains("active")) {
+
+            // Scroll the active item smoothly ('smooth') with the least amount of movement ('nearest')
+
+            target.scrollIntoView({
+
+              behavior: "smooth",
+
+              block: "nearest"
+
+            });
+
+          }
+
+        }
+
+      });
+
+    });
+
+
+
+    // Target all links inside the TOC
+
+    const tocLinks = tocNav.querySelectorAll("ul li a");
+
+    tocLinks.forEach((link) => {
+
+      observer.observe(link, { attributes: true });
+
+    });
+
+  });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+
+
+<script>
+
+window.addEventListener("load", function () {
+
+  document.querySelectorAll(".quarto-figure table.searchable").forEach(function(table){
+
+      new DataTable(table, {
+
+          paging: true,
+
+          pageLength: -1,
+
+          lengthMenu: [
+
+            [-1, 10, 20, 50],
+
+            ["All", 10, 20, 50]
+
+          ],
+
+          searching: true,
+
+          ordering: true,
+
+          order: [],
+
+          rowId: null
+
+      });
+
+  });
+
+});
+
+</script>
+
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/TUFLOW_logo.png" alt="" class="navbar-logo light-content">
+    <img src="./images/TUFLOW_logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TUFLOW Classic/HPC User Manual 2026.3</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://tuflow.com/"> 
+<span class="menu-text"><img src="manuals-shared/images/BMT_logo.png" style="height:1.5em"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="./TUFLOW-Classic-HPC-User-Manual-2026.3.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./99-References.html">References</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TUFLOW Classic/HPC User Manual</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Getting-Started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Hydraulic-Modelling-Fundamentals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hydraulic Modelling Fundamentals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ControlFiles-and-Inputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Control Files and Input Layers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-1D-Domains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">1D Network Domains - ESTRY</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./055-1D-SWMM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">1D Network Domains - EPA SWMM</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-2D-Domains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">2D Domains</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-Boundaries-and-Initial-Conditions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Boundaries and Initial Conditions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./075-Advection-Dispersion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Advection Dispersion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-Linked-1D2D-Models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Domains and Solvers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-Outputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Outputs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-Hardware.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hardware and Operating System</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-RunningSimulations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Managing and Starting Simulations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-Checks-and-Logs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Checks and Log Files</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Viewing-and-PostProcessing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Viewing Outputs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-QualityControl-and-Troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Quality Control and Troubleshooting</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-Utilities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Utilities</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-Features-and-Changes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Default Changes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-References.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80-AppendicesA-TCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">TCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./81-AppendicesB-ECFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">ECF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./82-AppendicesC-TGCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">TGC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./83-AppendicesD-TBCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">TBC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./84-AppendicesE-TOCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">TOC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./85-AppendicesF-TRFCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">TRFC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./86-AppendicesG-TESFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">TESF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./87-AppendicesH-QCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">QCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./88-AppendicesI-TSCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">TSCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./89-AppendicesJ-ADCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">ADCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./90-AppendicesK-TEFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">TEF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./91-AppendicesL-SWMM-Geopackage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">L</span>&nbsp; <span class="chapter-title">SWMM GeoPackage Format</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content column-page-right" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">References</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-right">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="1" data-line-spacing="2" role="list">
+<div id="ref-Nair2003" class="csl-entry" role="listitem">
+Ansar M. and Nair S. (2003). <em>Flow Computations at STA-1 West Gated
+Spillways</em>. South Florida Water Management District.
+</div>
+<div id="ref-AEMI2017" class="csl-entry" role="listitem">
+Australian Emergency Management Institute. (2017). <em>Managing the
+Floodplain: A Guide to Best Practice in Flood Risk Management in
+Australia</em>. Australian Institute for Disaster Resilience. <a href="https://knowledge.aidr.org.au/media/3518/adr-guideline-7-3.pdf">https://knowledge.aidr.org.au/media/3518/adr-guideline-7-3.pdf</a>
+</div>
+<div id="ref-Austroads1994" class="csl-entry" role="listitem">
+Austroads. (1994). <em>Waterway Design - a Guide to the Hydraulic Design
+of Bridges, Culverts and Floodways</em>. <a href="https://austroads.gov.au/">https://austroads.gov.au/</a>
+</div>
+<div id="ref-Austroads2018" class="csl-entry" role="listitem">
+Austroads. (2018). <em>Guide to Bridge Technology Part 8, Hydraulic
+Design of Waterway Structures</em>. <a href="https://austroads.gov.au/">https://austroads.gov.au/</a>
+</div>
+<div id="ref-BabisterBarton2012" class="csl-entry" role="listitem">
+Babister, M., &amp; Barton, C. (2012). <em>Two Dimensional Modelling in
+Urban and Rural Floodplains Stage 1 &amp; 2 Report</em>. <a href="https://arr.ga.gov.au/arr-guideline/revision-projects/revision-project-reports/arr-supporting-documents/ARR_Project15_TwoDimensional_Modelling_DraftReport.pdf">https://arr.ga.gov.au/arr-guideline/revision-projects/revision-project-reports/arr-supporting-documents/ARR_Project15_TwoDimensional_Modelling_DraftReport.pdf</a>
+</div>
+<div id="ref-Barton2001" class="csl-entry" role="listitem">
+Barton, C. (2001). <em>Flow Through an Abrupt Constriction – 2D
+Hydrodynamic Model Performance and Influence of Spatial Resolution</em>
+(C. Barton, Ed.) [M.Eng.Sc Master Thesis]. <a href="https://tuflow.com/media/4983/2001-flow-through-an-abrupt-constriction-2d-hydrodynamic-performance-and-influence-of-spatial-resolution-barton-thesis.pdf">https://tuflow.com/media/4983/2001-flow-through-an-abrupt-constriction-2d-hydrodynamic-performance-and-influence-of-spatial-resolution-barton-thesis.pdf</a>
+</div>
+<div id="ref-Bos1989" class="csl-entry" role="listitem">
+Bos, M. (1989). <em>Discharge Measurement Structures</em> (3rd revised
+edition.). International Institute for Land Reclamation; Improvement. <a href="https://www.samsamwater.com/library/pub20.pdf">https://www.samsamwater.com/library/pub20.pdf</a>
+</div>
+<div id="ref-Boyte2014" class="csl-entry" role="listitem">
+Boyte, C. (2014). <em>The Application of Direct Rainfall Models as
+Hydrologic Models Incorporating Hydraulic Resistance at Shallow
+Depths</em> [B.Eng Thesis]. <a href="https://tuflow.com/media/5009/2014-the-application-of-direct-rainfall-models-as-hydrologic-models-incorporating-hydraulic-resistance-at-shallow-depths-boyte-thesis.pdf">https://tuflow.com/media/5009/2014-the-application-of-direct-rainfall-models-as-hydrologic-models-incorporating-hydraulic-resistance-at-shallow-depths-boyte-thesis.pdf</a>
+</div>
+<div id="ref-Bradley1978" class="csl-entry" role="listitem">
+Bradley, J. (1978). <em>Hydraulics of Bridge Waterways</em> (HDS 1,
+FIWA). Bridge Division. <a href="https://www.fhwa.dot.gov/engineering/hydraulics/pubs/hds1.pdf">https://www.fhwa.dot.gov/engineering/hydraulics/pubs/hds1.pdf</a>
+</div>
+<div id="ref-GoldCoastCityPlan" class="csl-entry" role="listitem">
+City of Gold Coast. (n.d.). <em>Gold Coast City Plan</em>. <a href="https://cityplan.goldcoast.qld.gov.au/eplan/rules/0/1403/0/39388/0/226" class="uri">https://cityplan.goldcoast.qld.gov.au/eplan/rules/0/1403/0/39388/0/226</a>.
+</div>
+<div id="ref-UrbanGuide2009" class="csl-entry" role="listitem">
+CIWEM. (2009). <em>Integrated Urban Drainage Modelling Guide</em>.
+CIWEM.
+</div>
+<div id="ref-BridgeDeckAfflux" class="csl-entry" role="listitem">
+Collecutt, G., Baeumer, U., Gao, S., &amp; Syme, W. (2022). Bridge Deck
+Afflux Modelling – Benchmarking of CFD and SWE Codes to Real-World Data.
+<em>Hydrology &amp; Water Resources Symposium</em>. <a href="https://tuflow.com/media/7554/2022-bridge-deck-afflux-modelling-benchmarking-of-cfd-and-swe-codes-to-real-world-data-collecutt-et-al-hwrs.pdf">https://tuflow.com/media/7554/2022-bridge-deck-afflux-modelling-benchmarking-of-cfd-and-swe-codes-to-real-world-data-collecutt-et-al-hwrs.pdf</a>
+</div>
+<div id="ref-Collecutt2020" class="csl-entry" role="listitem">
+Collecutt, G., Gao, S., &amp; Syme, W. (2020). Mesh-Size Insensitive
+Turbulence Modelling for the 2D Shallow Water Equations. <em>River Flow
+2020</em>, pp. 1–9. <a href="https://tuflow.com/media/5023/2020-mesh-size-insensitive-turbulence-modelling-for-the-2d-shallow-water-equations-collecutt-et-al-iahr-river-flow-delft.pdf">https://tuflow.com/media/5023/2020-mesh-size-insensitive-turbulence-modelling-for-the-2d-shallow-water-equations-collecutt-et-al-iahr-river-flow-delft.pdf</a>
+</div>
+<div id="ref-CollecuttSyme2017" class="csl-entry" role="listitem">
+Collecutt, G., &amp; Syme, B. (2017). Experimental Benchmarking of Mesh
+Size and Time-Step Convergence for a 1st and 2nd Order SWE Finite Volume
+Scheme. <em>Proceedings of the 37th IAHR World Congress</em>. <a href="https://downloads.tuflow.com/_archive/Publications/07-31-1369.pdf">https://downloads.tuflow.com/_archive/Publications/07-31-1369.pdf</a>
+</div>
+<div id="ref-CoxShard2010" class="csl-entry" role="listitem">
+Cox, R., Shard, T., &amp; Blacka, M. (2010). <em>Australian Rainfall and
+Runoff Revision Project 10: Appropriate Safety Criteria for People</em>.
+Austalian Institute of Engineers. <a href="https://arr.ga.gov.au/arr-guideline/revision-projects/revision-project-reports/project-10-safety-criteria-for-people/ARR_Project_10_Stage1_report_Final.pdf">https://arr.ga.gov.au/arr-guideline/revision-projects/revision-project-reports/project-10-safety-criteria-for-people/ARR_Project_10_Stage1_report_Final.pdf</a>
+</div>
+<div id="ref-CSIRO2000" class="csl-entry" role="listitem">
+CSIRO. (2000). <em>Floodplain Management in Australia Best Practice
+Principles and Guidelines</em>. CSIRO Publishing.
+</div>
+<div id="ref-DEFRA2006" class="csl-entry" role="listitem">
+DEFRA. (2006a). <em>DEFRA r&amp;d Outputs: Flood Risks to People Phase
+Two Draft FD2321/TR1 and TR2</em>. DEFRA. <a href="https://assets.publishing.service.gov.uk/media/602bbc3de90e07055f646148/Flood_risks_to_people_-_Phase_2_Guidance_Document_Technical_report.pdf">https://assets.publishing.service.gov.uk/media/602bbc3de90e07055f646148/Flood_risks_to_people_-_Phase_2_Guidance_Document_Technical_report.pdf</a>
+</div>
+<div id="ref-DEFRA2006b" class="csl-entry" role="listitem">
+DEFRA. (2006b). <em>Flood Risks to People Phase 2 FD2321/TR1 the Flood
+Risks to People Methodology</em>. DEFRA. <a href="https://assets.publishing.service.gov.uk/media/602bbc768fa8f50383c41f80/Flood_risks_to_people_-_Phase_2_The_flood_risks_to_people_methodology_technical_report.pdf">https://assets.publishing.service.gov.uk/media/602bbc768fa8f50383c41f80/Flood_risks_to_people_-_Phase_2_The_flood_risks_to_people_methodology_technical_report.pdf</a>
+</div>
+<div id="ref-DHI2009" class="csl-entry" role="listitem">
+DHI. (2009). <em>MOUSE PIPE FLOW – Reference Manual</em>. Danish
+Hydraulic Institute. <a href="https://manuals.mikepoweredbydhi.help/2017/Cities/MOUSEPipeFlowReference.pdf">https://manuals.mikepoweredbydhi.help/2017/Cities/MOUSEPipeFlowReference.pdf</a>
+</div>
+<div id="ref-UKFloodRisks2006" class="csl-entry" role="listitem">
+Environment Agency. (2006). <em>UK FD2321 Technical Report - Flood Risks
+to People: Phase 2 Project Record</em>. UK Government; <a href="https://assets.publishing.service.gov.uk/media/602bbb768fa8f50386a7f8aa/Flood_risks_to_people_-_Phase_2_Project_Record.pdf" class="uri">https://assets.publishing.service.gov.uk/media/602bbb768fa8f50386a7f8aa/Flood_risks_to_people_-_Phase_2_Project_Record.pdf</a>.
+</div>
+<div id="ref-UKExplanatoryNote2008" class="csl-entry" role="listitem">
+Environment Agency. (2008). <em>Explanatory Note for FD2320 and FD2321
+Project Record</em>. <a href="https://assets.publishing.service.gov.uk/media/602bbdcfe90e070561b31432/Explanatory_note_for_FD2320_and_FD2321_project_record.pdf" class="uri">https://assets.publishing.service.gov.uk/media/602bbdcfe90e070561b31432/Explanatory_note_for_FD2320_and_FD2321_project_record.pdf</a>.
+</div>
+<div id="ref-EAGuide2010" class="csl-entry" role="listitem">
+Environment Agency. (2010). <em>The Fluvial Design Guide</em>.
+Environment Agency.
+</div>
+<div id="ref-Falconer2005" class="csl-entry" role="listitem">
+Falconer, R. A., Lin, B., &amp; Kashefipour, S. M. (2005). Modelling
+Water Quality Processes in Estuaries. In P. B. Bates, S. N. Lane, &amp;
+R. I. Furguson (Eds.), <em>Computational fluid dynamics: Applications in
+environmental hydraulics</em>. John Wiley; Sons.
+</div>
+<div id="ref-Fringer2005" class="csl-entry" role="listitem">
+Fringer, O. B., Armfield, S. W., &amp; Street, R. L. (2005). Reducing
+Numerical Diffusion in Interfacial Gravity Wave Simulations.
+<em>International Journal for Numerical Methods in Fluids</em>,
+<em>49</em>, 301–329.
+</div>
+<div id="ref-GHD2012" class="csl-entry" role="listitem">
+GHD. (2012). <em>MBRC Storm Tide Management Study</em>.
+</div>
+<div id="ref-HamiltonFloodMapping" class="csl-entry" role="listitem">
+Hamilton City Council. (2012). <em>Flood Mapping</em>. <a href="https://hamilton.govt.nz/property-rates-and-building/district-plan/flood-mapping/" class="uri">https://hamilton.govt.nz/property-rates-and-building/district-plan/flood-mapping/</a>.
+</div>
+<div id="ref-Henderson1966" class="csl-entry" role="listitem">
+Henderson, F. (1966). <em>Open Channel Flow</em>. Macmillan.
+</div>
+<div id="ref-Holland1980" class="csl-entry" role="listitem">
+Holland, G. J. (1980). An Analytic Model of the Wind and Pressure
+Profiles in Hurricanes. <em>Monthly Weather Review</em>,
+<em>108</em>(8), 1212–1218. <a href="https://doi.org/10.1175/1520-0493(1980)108<1212:AAMOTW>2.0.CO;2">https://doi.org/10.1175/1520-0493(1980)108&lt;1212:AAMOTW&gt;2.0.CO;2</a>
+</div>
+<div id="ref-HRWallingford1988" class="csl-entry" role="listitem">
+HR Wallingford. (1988). <em>Afflux at Arch Bridges</em>. <a href="https://eprints.hrwallingford.com/219/1/SR182-Afflux-arch-bridges-HRWallingford.pdf">https://eprints.hrwallingford.com/219/1/SR182-Afflux-arch-bridges-HRWallingford.pdf</a>
+</div>
+<div id="ref-Huxley2004" class="csl-entry" role="listitem">
+Huxley, C. (2004). <em>TUFLOW Testing and Validation</em> (B. ENG.
+Christopher Dylan Huxley, Ed.) [Thesis]. <a href="https://www.tuflow.com/media/4989/2004-tuflow-testing-and-validation-huxley.pdf">https://www.tuflow.com/media/4989/2004-tuflow-testing-and-validation-huxley.pdf</a>
+</div>
+<div id="ref-Huxley2022" class="csl-entry" role="listitem">
+Huxley, C., Syme, W., Ryan, P., &amp; Collecutt, G. (2022). Hydraulic
+Modelling 2D Cell Size Result Convergence – Comparing the Performance of
+Different Shallow Water Equation Solution Schemes. <em>Hydrology and
+Water Resources Symposium, Engineers Australia</em>. <a href="https://www.tuflow.com/media/7555/2022-hydraulic-modelling-2d-cell-size-result-convergence-huxley-et-al-hwrs.pdf">https://www.tuflow.com/media/7555/2022-hydraulic-modelling-2d-cell-size-result-convergence-huxley-et-al-hwrs.pdf</a>
+</div>
+<div id="ref-Kitts2020" class="csl-entry" role="listitem">
+Kitts, D., Syme, W., Gao, S., Collecutt, G., &amp; Ryan, P. (2020). Mesh
+Orientation and Cell Size Sensitivity in 2D SWE Solvers. <em>IAHR River
+Flow Conference</em>. <a href="https://tuflow.com/media/5022/2020-mesh-orientation-and-cell-size-sensitivity-in-2d-swe-solvers-kitts-et-al-iahr-river-flow-delft.pdf">https://tuflow.com/media/5022/2020-mesh-orientation-and-cell-size-sensitivity-in-2d-swe-solvers-kitts-et-al-iahr-river-flow-delft.pdf</a>
+</div>
+<div id="ref-Leonard1991" class="csl-entry" role="listitem">
+Leonard, B. P. (1991). The ULTIMATE Conservative Difference Scheme
+Applied to Unsteady One-Dimensional Advection. <em>Computer Methods in
+Applied Mechanics and Engineering</em>, <em>88</em>(1), 17–74.
+</div>
+<div id="ref-Leonard1993" class="csl-entry" role="listitem">
+Leonard, B. P., MacVean, M. K., &amp; Lock, A. P. (1993).
+<em>Positivity-Preserving Numerical Schemes for Multidimensional
+Advection</em> (93N27091). <span>NASA Centre for Aerospace
+Information</span>.
+</div>
+<div id="ref-LeonardNiknafs1991" class="csl-entry" role="listitem">
+Leonard, B. P., &amp; Niknafs, H. S. (1991). <em>Cost-Effective Accurate
+Coarse-Grid Method for Highly Convective Multidimensional Unsteady
+Flows</em> (91N21075). <span>NASA Centre for Aerospace
+Information</span>.
+</div>
+<div id="ref-MBRC2015" class="csl-entry" role="listitem">
+MBRC. (2015). <em>Flood and Coastal Hazard Evaluation Report</em>.
+Moreton Bay Regional Council. <a href="https://www.moretonbay.qld.gov.au/files/assets/public/v/1/services/building-development/mbrc-plan/background-studies/flood-and-coastal-hazard-evaluation-report-june-2015.pdf">https://www.moretonbay.qld.gov.au/files/assets/public/v/1/services/building-development/mbrc-plan/background-studies/flood-and-coastal-hazard-evaluation-report-june-2015.pdf</a>
+</div>
+<div id="ref-mcdonnell_bryant_2021_5484299" class="csl-entry" role="listitem">
+McDonnell, B., Wu, J. X., Ratliff, K., Mullapudi, A., &amp; Tryby, M.
+(2021). <em>Open Water Analytics Stormwater Management Model</em>
+(5.1.13). Zenodo. <a href="https://doi.org/10.5281/zenodo.5484299">https://doi.org/10.5281/zenodo.5484299</a>
+</div>
+<div id="ref-MW2016" class="csl-entry" role="listitem">
+Melbourne Water. (2016). <em>Flood Mapping Projects Guidelines and
+Technical Specifications</em> (Version 1).
+</div>
+<div id="ref-IAHRManual1994" class="csl-entry" role="listitem">
+Miller, D. (1994). <em>Discharge Characteristics IAHR Hydraulic
+Structures Design Manual</em> (No.8; pp. 249 pages). Hydraulic Design
+Considerations, Balkema Publ.
+</div>
+<div id="ref-MorrisonSmith1978" class="csl-entry" role="listitem">
+Morrison, W., &amp; Smith, P. (1978). <em>A Practical Application of a
+Network Model Numerical Simulation of Fluid Motion</em>. North Holland
+Publishing Company.
+</div>
+<div id="ref-EnvAgency2013" class="csl-entry" role="listitem">
+Neelz, S., &amp; Pender, G. (2013). <em>Benchmarking the Latest
+Generation of 2D Hydaulic Modeling Packages</em>. Environment Agency. <a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/290884/scho0510bsno-e-e.pdf">https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/290884/scho0510bsno-e-e.pdf</a>
+</div>
+<div id="ref-NSWManual2005" class="csl-entry" role="listitem">
+NSW Goverment. (2005). <em>Floodplain Management Manual</em>. NSW
+Department of Land; Water Conservation (NSW Government).
+</div>
+<div id="ref-OllettSyme2016" class="csl-entry" role="listitem">
+Ollett, P., &amp; Syme, B. (2016). <em>ARR blockage: Numerical
+implementation and three case studies</em>. <a href="http://www.hydralinc.com/wp-content/uploads/Ollett-Syme-2016-ARR-Blockage.pdf">http://www.hydralinc.com/wp-content/uploads/Ollett-Syme-2016-ARR-Blockage.pdf</a>
+</div>
+<div id="ref-PortMacquarieFloodPolicy2018" class="csl-entry" role="listitem">
+Port Macquarie-Hastings Council. (2018). <em>PORT MACQUARIE-HASTINGS
+COUNCIL FLOOD POLICY</em>. <a href="https://www.pmhc.nsw.gov.au/files/assets/public/v/1/document-files/your-council/publications/policies/port-macquarie-hastings-council-flood-adopted-2018-12-12.pdf" class="uri">https://www.pmhc.nsw.gov.au/files/assets/public/v/1/document-files/your-council/publications/policies/port-macquarie-hastings-council-flood-adopted-2018-12-12.pdf</a>.
+</div>
+<div id="ref-QG2001" class="csl-entry" role="listitem">
+Queensland Government. (2001). <em>Queensland Climate Change and
+Community Vulnerability to Tropical Cyclones - Ocean Hazrds
+Assessment</em>. <a href="https://www.systemsengineeringaustralia.com.au/download/Ocean_Hazards_Assess_Stage1A_revised.pdf">https://www.systemsengineeringaustralia.com.au/download/Ocean_Hazards_Assess_Stage1A_revised.pdf</a>
+</div>
+<div id="ref-QRAResilientFloodplains2018" class="csl-entry" role="listitem">
+Queensland Reconstruction Authority. (2012). <em>Planning for Stronger,
+More Resilient Fl Oodplains: Part 2</em>. <a href="https://www.qra.qld.gov.au/sites/default/files/2018-10/resilient-floodplains-part2-full_0.pdf" class="uri">https://www.qra.qld.gov.au/sites/default/files/2018-10/resilient-floodplains-part2-full_0.pdf</a>.
+</div>
+<div id="ref-FHWAUrbanDrainageManual2024" class="csl-entry" role="listitem">
+Roger Kilgore and A. Tamim Atayee and George Herrmann. (2024). <em>Urban
+Drainage Design Manual (4th Edition)</em> (pp. 311 pages). U.S.
+Department of Transportation Federal Highway Administration. <a href="https://www.fhwa.dot.gov/engineering/hydraulics/pubs/hif24006.pdf">https://www.fhwa.dot.gov/engineering/hydraulics/pubs/hif24006.pdf</a>
+</div>
+<div id="ref-Ryan2022" class="csl-entry" role="listitem">
+Ryan, P., Syme, W., Gao, S., &amp; Collecutt, G. (2022). Irect Rainfall
+Hydraulic Model Validation. <em>Hydrology &amp; Water Resources
+Symposium</em>. <a href="https://www.tuflow.com/media/7545/2022-direct-rainfall-hydraulic-model-validation-ryan-et-al-hwrs.pdf">https://www.tuflow.com/media/7545/2022-direct-rainfall-hydraulic-model-validation-ryan-et-al-hwrs.pdf</a>
+</div>
+<div id="ref-Schaap2002" class="csl-entry" role="listitem">
+Schaap, M. G. (2002). <em>Rosetta: A Computer Program for Estimating
+Soil Hydraulic Parameters with Hierarchical Pedotransfer Functions</em>.
+University of Arizona. <a href="https://cales.arizona.edu/research/rosetta/download/rosetta.pdf">https://cales.arizona.edu/research/rosetta/download/rosetta.pdf</a>
+</div>
+<div id="ref-Stelling1984" class="csl-entry" role="listitem">
+Stelling, G. (1984). <em>On the Construction of Computational Methods
+for Shallow Water Flow Problems</em>. Rijkswaterstaat Communications.
+</div>
+<div id="ref-Syme1991" class="csl-entry" role="listitem">
+Syme, W. (1991). <em>Dynamically Linked Two Dimensional /
+One-Dimensional Hydrodynamic Modelling Program for Rivers, Estuaries and
+Coastal Waters</em> (W. Syme, Ed.) [M.Eng.Sc(100% Research) Thesis].
+Dept of Civil Engineering. <a href="https://tuflow.com/media/4982/1991-tuflow-dynamically-linked-2d-and-1d-hydrodynamic-modelling-syme-thesis.pdf">https://tuflow.com/media/4982/1991-tuflow-dynamically-linked-2d-and-1d-hydrodynamic-modelling-syme-thesis.pdf</a>
+</div>
+<div id="ref-Syme2001a" class="csl-entry" role="listitem">
+Syme, W. (2001a). Modelling of Bends and Hydraulic Structures in a
+Two-Dimensional Scheme. <em>The Institution of Engineers, Australia
+Conference on Hydraulics in Civil Engineering</em>. <a href="https://tuflow.com/media/4984/2001-modelling-of-bends-and-hydraulic-structures-in-a-2d-scheme-syme.pdf">https://tuflow.com/media/4984/2001-modelling-of-bends-and-hydraulic-structures-in-a-2d-scheme-syme.pdf</a>
+</div>
+<div id="ref-Syme2001b" class="csl-entry" role="listitem">
+Syme, W. (2001b). TUFLOW – Two &amp; One-Dimensional Unsteady FLOW
+Software for Rivers, Estuaries and Coastal Waters. <em>The Institution
+of Engineers, Australia 2D Seminar</em>. <a href="https://tuflow.com/media/4985/2001-tuflow-two-and-one-dimensional-unsteady-flow-software-for-rivers-estuaries-and-coastal-waters-syme.pdf">https://tuflow.com/media/4985/2001-tuflow-two-and-one-dimensional-unsteady-flow-software-for-rivers-estuaries-and-coastal-waters-syme.pdf</a>
+</div>
+<div id="ref-Syme2008" class="csl-entry" role="listitem">
+Syme, W. (2008). Flooding in Urban Areas - 2D Modelling Approaches for
+Buildings and Fences. <em>Engineers Australia, 9th National COnference
+on Hydraulics in Water Enginnering</em>. <a href="https://tuflow.com/media/4997/2008-flooding-in-urban-areas-2d-modelling-approaches-for-buildings-and-fences-syme-hwe-aus.pdf">https://tuflow.com/media/4997/2008-flooding-in-urban-areas-2d-modelling-approaches-for-buildings-and-fences-syme-hwe-aus.pdf</a>
+</div>
+<div id="ref-SymeNielsen1998" class="csl-entry" role="listitem">
+Syme, W., Nielsen, C., &amp; Charteris, A. (1998). Comparison of
+Two-Dimensional Hydrodynamic Modelling Systems Part One - Flow Through a
+Constriction. <em>International Conference on Hydraulics in Civil
+Engineering</em>.
+</div>
+<div id="ref-TMR2024" class="csl-entry" role="listitem">
+TMR. (2024). <em>Road Planning and Design Manual, Edition 2, Volume
+3</em>. Queensland Department of Transport; Main Roads. <a href="https://www.tmr.qld.gov.au/business-industry/technical-standards-publications/road-planning-and-design-manual-2nd-edition">https://www.tmr.qld.gov.au/business-industry/technical-standards-publications/road-planning-and-design-manual-2nd-edition</a>
+</div>
+<div id="ref-TullisRobinson2008" class="csl-entry" role="listitem">
+Tullis, B., &amp; Robinson, S. (2008). Quantifying Culvert Exit Loss.
+<em>Journal of Irrigation and Drainage Engineering</em>, <em>Vol.
+134</em>(No. 2), pp. 263–266.
+</div>
+<div id="ref-USACE1977" class="csl-entry" role="listitem">
+USACE. (1977). <em>Hydraulic Design Criteria-Sheets 312</em>. US Army
+Corp of Engineers. <a href="https://apps.dtic.mil/sti/tr/pdf/ADA092238.pdf">https://apps.dtic.mil/sti/tr/pdf/ADA092238.pdf</a>
+</div>
+<div id="ref-USBR1987" class="csl-entry" role="listitem">
+USBR. (1987). <em>Design of Small Dams</em> [Technology &amp;
+Engineering]. U.S. Dept. of the Interior, Bureau of Reclamation, 1987-.
+<a href="https://www.usbr.gov/tsc/techreferences/mands/mands-pdfs/SmallDams.pdf">https://www.usbr.gov/tsc/techreferences/mands/mands-pdfs/SmallDams.pdf</a>
+</div>
+<div id="ref-USDA1986" class="csl-entry" role="listitem">
+USDA. (1986). <em>Urban Hydrology for Small Watersheds Technical Release
+55 (TR-55)</em>. <a href="https://nationalstormwater.com/wp-content/uploads/2020/07/Urban-Hydrology-for-Small-Watersheds-TR-55.pdf">https://nationalstormwater.com/wp-content/uploads/2020/07/Urban-Hydrology-for-Small-Watersheds-TR-55.pdf</a>
+</div>
+<div id="ref-vanGenuchten1980" class="csl-entry" role="listitem">
+Van Genuchten, M. Th. (1980). A Closed-Form Equation for Predicting the
+Hydraulic Conductivity of Unsaturated Soils. <em>Soil Science Society of
+America Journal</em>, <em>44</em>(5), 892–898.
+</div>
+<div id="ref-WeeksWitheridge2013" class="csl-entry" role="listitem">
+Weeks, W., Witheridge, G., Rigby, E., Barthelmess, A., &amp; O’Loughlin,
+G. (2013). <em>Australian Rainfall and Runoff Revision Project 11:
+Blockage of Hydraulic Structures</em>. Austalian Institute of Engineers.
+<a href="https://arr.ga.gov.au/arr-guideline/revision-projects/project-list/projects/project-11/downloads/ARR_Project_11_Stage2_report_Final.pdf">https://arr.ga.gov.au/arr-guideline/revision-projects/project-list/projects/project-11/downloads/ARR_Project_11_Stage2_report_Final.pdf</a>
+</div>
+<div id="ref-Wu1980" class="csl-entry" role="listitem">
+Wu, J. (1980). Wind-Stress Coefficients over Sea Surface Near Neutral
+Conditions—a Revisit. <em>Journal of Physical Oceanography</em>,
+<em>Vol. 10</em>(5), pp. 727–740. <a href="https://doi.org/10.1175/1520-0485(1980)010<0727:WSCOSS>2.0.CO;2">https://doi.org/10.1175/1520-0485(1980)010&lt;0727:WSCOSS&gt;2.0.CO;2</a>
+</div>
+<div id="ref-Wu1982" class="csl-entry" role="listitem">
+Wu, J. (1982). Wind-Stress Coefficients over Sea Surface from Breeze to
+Hurricane. <em>Journal of Geophysical Research</em>, <em>Vol.
+87</em>(C12), pp. 9704–9706. https://doi.org/<a href="https://doi.org/10.1029/JC087iC12p09704">https://doi.org/10.1029/JC087iC12p09704</a>
+</div>
+<div id="ref-Wu2005" class="csl-entry" role="listitem">
+Wu, W., Shields Jr., F. D., Bennett, S. J., &amp; Wang, S. S. Y. (2005).
+A Depth-Averaged Two-Dimensional Model for Flow, Sediment Transport, and
+Bed Topography in Curved Channels with Riparian Vegetation. <em>Water
+Resources Research</em>, <em>41</em>(3). <a href="https://doi.org/10.1029/2004WR003730">https://doi.org/10.1029/2004WR003730</a>
+</div>
+<div id="ref-Wu2000" class="csl-entry" role="listitem">
+Wu, &amp; Falconer, R. A. (2000). A Mass Conservative 3-d Numerical
+Model for Predicting Solute Fluxes in Estuarine Waters. <em>Advances in
+Water Resources</em>, <em>23</em>(5), 531–543.
+</div>
+</div>
+<p><img src="images/WQFooter.jpg" class="img-fluid" style="width:100.0%"></p>
+
+
+
+</main> <!-- /main -->
+<script>
+
+// Hover preview for plain anchor links -- mirrors native quarto-xref behaviour.
+
+// Supports same-page anchors and cross-chapter links on the same origin.
+
+// Placed via include-after-body so all DOM is parsed when this runs.
+
+(function () {
+
+  if (typeof window.tippy !== 'function') { return; }
+
+
+
+  var doc = window.document;
+
+  var pageCache = {};
+
+
+
+  function stripColumnClasses(el) {
+
+    el.classList.remove('page-full', 'page-columns');
+
+    for (var i = 0; i < el.children.length; i++) {
+
+      stripColumnClasses(el.children[i]);
+
+    }
+
+  }
+
+
+
+  function buildContent(id, target) {
+
+    var clone = target.cloneNode(true);
+
+    stripColumnClasses(clone);
+
+
+
+    var anchor = clone.querySelector('a.anchorjs-link');
+
+    if (anchor) { anchor.parentNode.removeChild(anchor); }
+
+
+
+    var isSectionEl = (clone.tagName === 'SECTION' || /^H[1-6]$/.test(clone.tagName || ''));
+
+    var isSectionId = (typeof id === 'string' && id.indexOf('sec-') === 0);
+
+
+
+    if (isSectionEl || isSectionId) {
+
+      var container = doc.createElement('div');
+
+      var kids = clone.children;
+
+      if (kids.length > 2) {
+
+        container.appendChild(kids[0].cloneNode(true));
+
+        for (var j = 1; j < kids.length; j++) {
+
+          if (kids[j].tagName === 'P' && (kids[j].textContent || '').trim() === '') { continue; }
+
+          container.appendChild(kids[j].cloneNode(true));
+
+          break;
+
+        }
+
+        if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(container); }
+
+        return container.innerHTML;
+
+      }
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.innerHTML;
+
+    }
+
+
+
+    if (clone.classList.contains('callout')) {
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.outerHTML;
+
+    }
+
+
+
+    if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+    return clone.innerHTML;
+
+  }
+
+
+
+  function getTargetFromPage(pageUrl, id, callback) {
+
+    if (pageCache[pageUrl]) {
+
+      callback(pageCache[pageUrl].getElementById(id));
+
+      return;
+
+    }
+
+    fetch(pageUrl)
+
+      .then(function (r) { return r.text(); })
+
+      .then(function (html) {
+
+        var parser = new DOMParser();
+
+        var parsedDoc = parser.parseFromString(html, 'text/html');
+
+        pageCache[pageUrl] = parsedDoc;
+
+        callback(parsedDoc.getElementById(id));
+
+      })
+
+      .catch(function () { callback(null); });
+
+  }
+
+
+
+  // Same-page anchor links (href starts with "#")
+
+  var samePageLinks = doc.querySelectorAll(
+
+    'main a[href^="#"]:not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < samePageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var hash   = link.getAttribute('href');
+
+      var id     = hash.replace(/^#\/?/, '');
+
+      var target = doc.getElementById(id);
+
+      if (!target) { return; }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           function () { return buildContent(id, target); }
+
+      });
+
+    })(samePageLinks[i]);
+
+  }
+
+
+
+  // Cross-page anchor links (same origin, href contains "#" but does not start with "#")
+
+  var crossPageLinks = doc.querySelectorAll(
+
+    'main a[href*="#"]:not([href^="#"]):not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < crossPageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var href = link.getAttribute('href');
+
+
+
+      var pageUrl, id;
+
+      try {
+
+        var resolved = new URL(href, window.location.href);
+
+        if (resolved.origin !== window.location.origin) { return; }
+
+        pageUrl = resolved.origin + resolved.pathname;
+
+        id = resolved.hash.replace(/^#\/?/, '');
+
+      } catch (e) { return; }
+
+
+
+      if (!id) { return; }
+
+
+
+      // If the link points to the current page, look up the element directly
+
+      if (pageUrl === (window.location.origin + window.location.pathname)) {
+
+        var target = doc.getElementById(id);
+
+        if (!target) { return; }
+
+        window.tippy(link, {
+
+          allowHTML:         true,
+
+          maxWidth:          500,
+
+          delay:             100,
+
+          arrow:             false,
+
+          appendTo:          function (el) { return el.parentElement; },
+
+          interactive:       true,
+
+          interactiveBorder: 10,
+
+          theme:             'quarto',
+
+          placement:         'bottom-start',
+
+          content:           function () { return buildContent(id, target); }
+
+        });
+
+        return;
+
+      }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           'Loading\u2026',
+
+        onShow:            function (instance) {
+
+          if (instance._fetched) { return; }
+
+          instance._fetched = true;
+
+          getTargetFromPage(pageUrl, id, function (target) {
+
+            if (target) {
+
+              instance.setContent(buildContent(id, target));
+
+            } else {
+
+              instance.destroy();
+
+            }
+
+          });
+
+        }
+
+      });
+
+    })(crossPageLinks[i]);
+
+  }
+
+})();
+
+</script>
+
+<script>
+
+// Adds a copy-to-clipboard button to plain code blocks, .styled-code, and .scrollable-block elements.
+
+// .tuflow blocks already receive Quarto's built-in copy button via .sourceCode — those are excluded.
+
+(function () {
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    var selectors = ['pre:not(.sourceCode)', '.styled-code', '.scrollable-block'];
+
+
+
+    selectors.forEach(function (sel) {
+
+      document.querySelectorAll(sel).forEach(function (block) {
+
+        // Skip if already processed
+
+        if (block.parentNode && block.parentNode.classList.contains('copy-block-wrapper')) return;
+
+
+
+        // Wrap block so the button can be positioned outside the scroll area
+
+        var wrapper = document.createElement('div');
+
+        wrapper.className = 'copy-block-wrapper';
+
+        block.parentNode.insertBefore(wrapper, block);
+
+        wrapper.appendChild(block);
+
+
+
+        // Create button
+
+        var btn = document.createElement('button');
+
+        btn.className = 'copy-block-btn';
+
+        btn.title = 'Copy to Clipboard';
+
+        btn.setAttribute('aria-label', 'Copy to Clipboard');
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+
+
+        btn.addEventListener('click', function () {
+
+          var text = block.innerText;
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+
+            navigator.clipboard.writeText(text).then(function () {
+
+              showCopied(btn);
+
+            }).catch(function () {
+
+              fallbackCopy(text);
+
+              showCopied(btn);
+
+            });
+
+          } else {
+
+            fallbackCopy(text);
+
+            showCopied(btn);
+
+          }
+
+        });
+
+
+
+        wrapper.appendChild(btn);
+
+      });
+
+    });
+
+
+
+    function showCopied(btn) {
+
+      btn.innerHTML = '<i class="bi bi-clipboard-check"></i>';
+
+      btn.title = 'Copied!';
+
+      setTimeout(function () {
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+        btn.title = 'Copy to Clipboard';
+
+      }, 2000);
+
+    }
+
+
+
+    function fallbackCopy(text) {
+
+      var ta = document.createElement('textarea');
+
+      ta.value = text;
+
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+
+      document.body.appendChild(ta);
+
+      ta.focus();
+
+      ta.select();
+
+      try { document.execCommand('copy'); } catch (e) {}
+
+      document.body.removeChild(ta);
+
+    }
+
+  });
+
+}());
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-page-right">
+  <div class="nav-page nav-page-previous">
+      <a href="./16-Features-and-Changes.html" class="pagination-link" aria-label="Default Changes">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Default Changes</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./80-AppendicesA-TCFCommands.html" class="pagination-link" aria-label="TCF Commands">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">TCF Commands</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

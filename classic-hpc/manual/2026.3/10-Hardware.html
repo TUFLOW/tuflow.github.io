@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>12&nbsp; Hardware and Operating System – TUFLOW Classic/HPC User Manual 2026.3</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./11-RunningSimulations.html" rel="next">
+<link href="./09-Outputs.html" rel="prev">
+<link href="./manuals-shared/images/TUFLOW.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ea94015a310cf19a1d0a98706902972b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const tocNav = document.querySelector("nav[role='doc-toc']");
+
+    if (!tocNav) return;
+
+
+
+    const observer = new MutationObserver((mutations) => {
+
+      mutations.forEach((mutation) => {
+
+        if (mutation.attributeName === "class") {
+
+          const target = mutation.target;
+
+          if (target.classList.contains("active")) {
+
+            // Scroll the active item smoothly ('smooth') with the least amount of movement ('nearest')
+
+            target.scrollIntoView({
+
+              behavior: "smooth",
+
+              block: "nearest"
+
+            });
+
+          }
+
+        }
+
+      });
+
+    });
+
+
+
+    // Target all links inside the TOC
+
+    const tocLinks = tocNav.querySelectorAll("ul li a");
+
+    tocLinks.forEach((link) => {
+
+      observer.observe(link, { attributes: true });
+
+    });
+
+  });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+
+
+<script>
+
+window.addEventListener("load", function () {
+
+  document.querySelectorAll(".quarto-figure table.searchable").forEach(function(table){
+
+      new DataTable(table, {
+
+          paging: true,
+
+          pageLength: -1,
+
+          lengthMenu: [
+
+            [-1, 10, 20, 50],
+
+            ["All", 10, 20, 50]
+
+          ],
+
+          searching: true,
+
+          ordering: true,
+
+          order: [],
+
+          rowId: null
+
+      });
+
+  });
+
+});
+
+</script>
+
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/TUFLOW_logo.png" alt="" class="navbar-logo light-content">
+    <img src="./images/TUFLOW_logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TUFLOW Classic/HPC User Manual 2026.3</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://tuflow.com/"> 
+<span class="menu-text"><img src="manuals-shared/images/BMT_logo.png" style="height:1.5em"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="./TUFLOW-Classic-HPC-User-Manual-2026.3.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-Hardware.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hardware and Operating System</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TUFLOW Classic/HPC User Manual</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Getting-Started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Hydraulic-Modelling-Fundamentals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hydraulic Modelling Fundamentals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ControlFiles-and-Inputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Control Files and Input Layers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-1D-Domains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">1D Network Domains - ESTRY</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./055-1D-SWMM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">1D Network Domains - EPA SWMM</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-2D-Domains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">2D Domains</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-Boundaries-and-Initial-Conditions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Boundaries and Initial Conditions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./075-Advection-Dispersion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Advection Dispersion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-Linked-1D2D-Models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Domains and Solvers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-Outputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Outputs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-Hardware.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hardware and Operating System</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-RunningSimulations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Managing and Starting Simulations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-Checks-and-Logs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Checks and Log Files</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Viewing-and-PostProcessing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Viewing Outputs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-QualityControl-and-Troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Quality Control and Troubleshooting</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-Utilities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Utilities</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-Features-and-Changes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Default Changes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80-AppendicesA-TCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">TCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./81-AppendicesB-ECFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">ECF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./82-AppendicesC-TGCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">TGC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./83-AppendicesD-TBCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">TBC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./84-AppendicesE-TOCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">TOC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./85-AppendicesF-TRFCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">TRFC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./86-AppendicesG-TESFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">TESF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./87-AppendicesH-QCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">QCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./88-AppendicesI-TSCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">TSCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./89-AppendicesJ-ADCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">ADCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./90-AppendicesK-TEFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">TEF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./91-AppendicesL-SWMM-Geopackage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">L</span>&nbsp; <span class="chapter-title">SWMM GeoPackage Format</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-OperatingSystems-2" id="toc-sec-OperatingSystems-2" class="nav-link active" data-scroll-target="#sec-OperatingSystems-2"><span class="header-section-number">12.1</span> Operating Systems</a></li>
+  <li><a href="#sec-TUFLOWClassic-2" id="toc-sec-TUFLOWClassic-2" class="nav-link" data-scroll-target="#sec-TUFLOWClassic-2"><span class="header-section-number">12.2</span> TUFLOW Classic</a></li>
+  <li><a href="#sec-TUFLOWHPC-2" id="toc-sec-TUFLOWHPC-2" class="nav-link" data-scroll-target="#sec-TUFLOWHPC-2"><span class="header-section-number">12.3</span> TUFLOW HPC (Including Quadtree)</a>
+  <ul>
+  <li><a href="#sec-HPC-CPU-3" id="toc-sec-HPC-CPU-3" class="nav-link" data-scroll-target="#sec-HPC-CPU-3"><span class="header-section-number">12.3.1</span> TUFLOW HPC Solver on CPU</a></li>
+  <li><a href="#sec-HPC-GPU-3" id="toc-sec-HPC-GPU-3" class="nav-link" data-scroll-target="#sec-HPC-GPU-3"><span class="header-section-number">12.3.2</span> TUFLOW HPC Solver on GPU</a></li>
+  <li><a href="#sec-GPUTypes-3" id="toc-sec-GPUTypes-3" class="nav-link" data-scroll-target="#sec-GPUTypes-3"><span class="header-section-number">12.3.3</span> Types of GPU</a></li>
+  <li><a href="#sec-MultipleGPUs-3" id="toc-sec-MultipleGPUs-3" class="nav-link" data-scroll-target="#sec-MultipleGPUs-3"><span class="header-section-number">12.3.4</span> Utilising Multiple GPUs for One Model</a></li>
+  <li><a href="#sec-MultipleModelsoneGPU-3" id="toc-sec-MultipleModelsoneGPU-3" class="nav-link" data-scroll-target="#sec-MultipleModelsoneGPU-3"><span class="header-section-number">12.3.5</span> Running Multiple Models on a Single GPU</a></li>
+  <li><a href="#sec-DiffResultsCPUGPU-3" id="toc-sec-DiffResultsCPUGPU-3" class="nav-link" data-scroll-target="#sec-DiffResultsCPUGPU-3"><span class="header-section-number">12.3.6</span> Differences in results between CPU and GPU</a></li>
+  <li><a href="#sec-HPCRAM-3" id="toc-sec-HPCRAM-3" class="nav-link" data-scroll-target="#sec-HPCRAM-3"><span class="header-section-number">12.3.7</span> RAM</a></li>
+  </ul></li>
+  <li><a href="#sec-ProxiesforCPUandGPU-2" id="toc-sec-ProxiesforCPUandGPU-2" class="nav-link" data-scroll-target="#sec-ProxiesforCPUandGPU-2"><span class="header-section-number">12.4</span> Proxies for CPU and GPU performance</a></li>
+  <li><a href="#sec-Virtualisation-2" id="toc-sec-Virtualisation-2" class="nav-link" data-scroll-target="#sec-Virtualisation-2"><span class="header-section-number">12.5</span> Virtualisation</a></li>
+  <li><a href="#sec-CloudCompute-2" id="toc-sec-CloudCompute-2" class="nav-link" data-scroll-target="#sec-CloudCompute-2"><span class="header-section-number">12.6</span> Cloud Compute</a></li>
+  <li><a href="#sec-HardwareCommands-2" id="toc-sec-HardwareCommands-2" class="nav-link" data-scroll-target="#sec-HardwareCommands-2"><span class="header-section-number">12.7</span> Commands</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-Hardware-1" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hardware and Operating System</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This chapter provides information and guidance that aims to help users choose computer hardware that will suit their modelling needs. TUFLOW Classic and HPC utilise distinctly different solution schemes, and likewise have different requirements with regard to the choice of computer hardware. Descriptions for a number of hardware related commands and options that are specific to HPC are provided in <a href="#sec-HardwareCommands-2" class="quarto-xref"><span>Section 12.7</span></a>.</p>
+<p>Additional material on performance/benchmarking and hardware selection advice can be found on the TUFLOW Wiki:</p>
+<ul>
+<li><a href="https://wiki.tuflow.com/Hardware_Benchmarking">Hardware Speed Benchmarking</a></li>
+<li><a href="https://wiki.tuflow.com/Hardware_Selection_Advice">Hardware Selection Advice</a></li>
+</ul>
+<section id="sec-OperatingSystems-2" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="sec-OperatingSystems-2"><span class="header-section-number">12.1</span> Operating Systems</h2>
+<p>TUFLOW Classic and HPC are only available as 64-bit binaries for both Microsoft Windows and Linux. The macOS operating system is not currently supported. While TUFLOW Classic and HPC may run on older versions of Windows, support is limited to Windows 10 and later, and Windows Server 2016 and later. On Linux, support is available for distributions that are under active vendor support within the RHEL and Debian families.</p>
+</section>
+<section id="sec-TUFLOWClassic-2" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="sec-TUFLOWClassic-2"><span class="header-section-number">12.2</span> TUFLOW Classic</h2>
+<p>TUFLOW Classic uses the ADI (alternating direction implicit <span class="citation" data-cites="Stelling1984">(<a href="99-References.html#ref-Stelling1984" role="doc-biblioref">Stelling, 1984</a>)</span>) finite difference scheme that has been further refined by <span class="citation" data-cites="Syme1991">Syme (<a href="99-References.html#ref-Syme1991" role="doc-biblioref">1991</a>)</span>. For further details on the TUFLOW Classic solution scheme refer to <a href="01-Introduction.html#sec-TUFLOW-CLA-3" class="quarto-xref"><span>Section 1.1.1</span></a>. It is a highly efficient scheme, but is difficult to parallelise to use multiple threads. As such it runs on a single core of the main CPU (central processing unit). General hardware advice for TUFLOW Classic is summarised below:</p>
+<ul>
+<li>Within the limits of available hardware, like available CPU and GPU cores, memory, etc., it is possible to run more than one model at a time on the computer, provided the user has access to sufficient licences.</li>
+<li>If running only one model at a time, the primary factor for model speed is the single core computational capability of the CPU. Generally this is mostly driven by the CPU clock speed - a CPU with fewer cores but a higher clock speed will likely provide better performance than one with many cores and a lower clock speed. CPU type and architecture do also play a role in single core performance. For more information refer to the subsection on performance proxies. When running models with Classic, having a dual socket mainboard will be of little benefit if running just one model at a time. Dual socket mainboards are capable of holding two CPUs, doubling the total number of CPU cores available (e.g.&nbsp;2 x 16 core CPUs), these are primarily found in server setups.</li>
+<li>If running multiple models simultaneously, the memory bandwidth between CPUs and the mainboard RAM is quite important, in which case a dual CPU mainboard will usually offer better performance than a single CPU mainboard. Further, running multiple models simultaneously will also require increased CPU RAM, which again typically favours a dual CPU mainboard.</li>
+<li>The mainboard memory required for a particular model will vary significantly due to a number of factors related to model setup. In general the memory required will scale proportionally with number of model cells.</li>
+<li>There is no requirement for a particular GPU (Graphics Processing Unit) to be installed. However, having a medium quality GPU installed may assist with graphics rendering in any GIS software being used for visualising model inputs and outputs.</li>
+<li>The amount of CPU RAM will determine the size of the model that can be run or a number of models that can be run at one time. Faster RAM will result in quicker runtimes, however this is usually a secondary consideration to chip speed, cache size and architecture.</li>
+</ul>
+</section>
+<section id="sec-TUFLOWHPC-2" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="sec-TUFLOWHPC-2"><span class="header-section-number">12.3</span> TUFLOW HPC (Including Quadtree)</h2>
+<p>TUFLOW HPC uses an explicit finite volume scheme which is parallelised to utilise multiple CPU cores, or equally the thousands of cores available on GPUs. The explicit finite volume scheme is not as computationally efficient as the ADI finite difference scheme used in TUFLOW Classic. However, because it can be parallelised, <a href="https://wiki.tuflow.com/Hardware_Benchmarking_Topic_HPC_on_CPU_vs_GPU">benchmarking</a> has found that using the HPC solution scheme on a modern GPU can run a typical model anywhere from 10 to 100 times faster than using the Classic scheme on a single core of a modern CPU. For further details on the TUFLOW HPC solution scheme refer to <a href="01-Introduction.html#sec-TUFLOW-HPC-3" class="quarto-xref"><span>Section 1.1.2</span></a>.</p>
+<section id="sec-HPC-CPU-3" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="sec-HPC-CPU-3"><span class="header-section-number">12.3.1</span> TUFLOW HPC Solver on CPU</h3>
+<p>TUFLOW HPC can be run using multiple CPU cores of a single or dual CPU mainboard, in which case it may offer solution times that are comparable with TUFLOW Classic on a single CPU core. However, most users prefer to utilise the performance of GPU compute, refer to <a href="#sec-HPC-GPU-3" class="quarto-xref"><span>Section 12.3.2</span></a>. Note that compute using GPU does require a GPU module licence, refer to <a href="01-Introduction.html#sec-AddonModules-3" class="quarto-xref"><span>Section 1.1.5</span></a>.</p>
+</section>
+<section id="sec-HPC-GPU-3" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="sec-HPC-GPU-3"><span class="header-section-number">12.3.2</span> TUFLOW HPC Solver on GPU</h3>
+<p>TUFLOW HPC uses the CUDA API that NVIDIA makes available for their GPUs, and only NVIDIA GPUs are supported. The GPU is a physically separate device that is connected to the mainboard at a PCI slot. It has its own separate memory which has to be sufficient to hold the working data for the model solution process, and draws power from the main power supply unit through its own supply cables. The computer’s power supply unit must be capable of supplying the mainboard (with the CPUs) and the GPUs attached to the mainboard. The power draw of the GPUs and the cooling requirements of the whole system can become a constraining issue with regard to the overall system design.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Due to the use of NVIDIA CUDA API, AMD GPU are not supported.</p>
+</div>
+</div>
+<p>For further guidance, see <a href="https://wiki.tuflow.com/Hardware_Selection_Advice">TUFLOW Wiki Hardware Selection Advice</a>, which provides general hardware recommendations for running TUFLOW. The <a href="https://wiki.tuflow.com/Console_Window_GPU_Usage">TUFLOW Wiki Console Window GPU Usage</a> is also helpful for confirming whether the GPU is being utilised during a simulation, including how to use tools like nvidia-smi to monitor performance.</p>
+</section>
+<section id="sec-GPUTypes-3" class="level3" data-number="12.3.3">
+<h3 data-number="12.3.3" class="anchored" data-anchor-id="sec-GPUTypes-3"><span class="header-section-number">12.3.3</span> Types of GPU</h3>
+<p>In general, the price and performance of a GPU are related to the size of its memory, the number of compute cores, and importantly the internal architecture of the GPU. In this regard, the NVIDIA GPUs fall into two broad categories:</p>
+<ol type="1">
+<li><strong>Gaming GPUs</strong>. These usually offer excellent computational performance, but are often physically large and have high power draw. This means that it is often difficult to have more than two attached to a mainboard. Despite these drawbacks, installing gaming GPUs often provides the best overall performance relative to price for TUFLOW modelling.</li>
+<li><strong>Scientific GPUs</strong>. The top-line scientific GPUs can offer superior computational performance to the top-line gaming GPUs, also offer more GPU memory, and are usually physically smaller in size with lower power draw. So it is more feasible to have four or more attached to a mainboard. However, they are significantly more expensive - sometimes an order of magnitude more expensive than even best gaming GPUs.</li>
+</ol>
+</section>
+<section id="sec-MultipleGPUs-3" class="level3" data-number="12.3.4">
+<h3 data-number="12.3.4" class="anchored" data-anchor-id="sec-MultipleGPUs-3"><span class="header-section-number">12.3.4</span> Utilising Multiple GPUs for One Model</h3>
+<p>TUFLOW HPC (including Quadtree) can utilise multiple GPUs (that are all connected to the same mainboard) to compute a single simulation. For larger models (typically more than 5,000,000 2D cells), useful reductions in solve times can be achieved with multiple GPUs. For smaller models (typically less than 100,000 cells), the solve time may actually increase when run across multiple GPUs due to the device to device communication latency.</p>
+<p>Multiple GPU may be used to run very large models that require more GPU memory than available on a single GPU device.</p>
+</section>
+<section id="sec-MultipleModelsoneGPU-3" class="level3" data-number="12.3.5">
+<h3 data-number="12.3.5" class="anchored" data-anchor-id="sec-MultipleModelsoneGPU-3"><span class="header-section-number">12.3.5</span> Running Multiple Models on a Single GPU</h3>
+<p>A single simulation per GPU card will produce the fastest simulation speed from a single model perspective. Running more than one simulation per GPU card will make the simulation run slower, though from an overall project perspective may be a more efficient mode of operation. For example, hypothetically, if a model takes 10 hours to run on a single card, running the same model in parallel with another simulation may reduce the simulation efficiency to 70%. Those models run in parallel would finish in 14.3 hours. This is quicker than the 20 hours that would be required if the models were run in series.</p>
+<p>The optimum number of simulations per GPU card varies depending on the card specs (Cuda cores, RAM etc.) and model compute needs.</p>
+</section>
+<section id="sec-DiffResultsCPUGPU-3" class="level3" data-number="12.3.6">
+<h3 data-number="12.3.6" class="anchored" data-anchor-id="sec-DiffResultsCPUGPU-3"><span class="header-section-number">12.3.6</span> Differences in results between CPU and GPU</h3>
+<p>TUFLOW Classic uses a very different solution scheme to TUFLOW HPC, and there will be some differences between these solutions. However what we are discussing here is running the HPC solver on CPU, and then also on GPU, and comparing the difference. TUFLOW HPC has been written to utilise one source code, that with the use of macros can be compiled for CPU execution or for GPU execution without duplication of code. So the lines of code are the same, but the compilers are different, and the physical hardware that executes the binary instructions is different. In particular, the number of bits used for floating point representation within the CPU cores and GPU cores can differ, though both meet the minimum IEEE standards for single (or double) precision. The math libraries for computing square-roots and logarithms are not absolutely identical. These differences produce very subtle differences in depth calculations. The differences are very, very, small - maybe at the 7th decimal place for single precision calculations, but when an embankment is being over-topped by just a little bit, then a 0.0001% difference in depth can become a 0.1% difference in over-topping flux, leading to what appear to be larger relative differences in depth at shallow locations. Such differences can become as large as a few mm or even cm. These differences are certainly much smaller than the uncertainties involved in flood modelling, and much smaller than the differences that will arise from running the same model at a different resolution, or (to the extent possible) in a different software. It is important for all modellers to understand what constitutes real differences in results vs what is “numerical noise”.</p>
+</section>
+<section id="sec-HPCRAM-3" class="level3" data-number="12.3.7">
+<h3 data-number="12.3.7" class="anchored" data-anchor-id="sec-HPCRAM-3"><span class="header-section-number">12.3.7</span> RAM</h3>
+<p>RAM is the computer memory required to store all of the model data used during the computation. A computer has CPU RAM, which is located on the motherboard and accessed from the CPU, and it has GPU RAM, which is located on the GPU device and accessed from the GPU. The two memory storage systems are physically separate. Both are required for TUFLOW HPC simulations (when using GPU for the compute) The amount of GPU RAM is one of two factors that will determine the size of the model that can be run (the other being CPU RAM). As a general rule, approximately 5 million 2D cells can be simulated per gigabyte (GB) of GPU RAM depending on the model features (e.g.&nbsp;a model with infiltration requires more memory due to the extra variables needed for the infiltration calculation).</p>
+<p>TUFLOW HPC on GPU hardware still uses the CPU to compute and store data (in CPU RAM) during model initialisation and for all 1D calculations. During initialisation and simulation a model will typically require 4-6 times the amount of CPU RAM relative to GPU RAM. As an example, a model that utilises 11GB of GPU RAM (typical memory for high-end gaming card, and corresponds to about a 50 million cell model) the CPU RAM required during initialisation will typically be in range 44GB to 66GB.</p>
+</section>
+</section>
+<section id="sec-ProxiesforCPUandGPU-2" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="sec-ProxiesforCPUandGPU-2"><span class="header-section-number">12.4</span> Proxies for CPU and GPU performance</h2>
+<p>When choosing hardware for running engineering software, it is important to consider performance for price, including an allowance for the cost of the software licencing. With licencing costs included, this often favours choosing recent high performance hardware. Prices for hardware can be well known in advance, but knowing what performance will be achieved on particular hardware, for a specific software, can be difficult.</p>
+<p>TUFLOW publishes computational performance results for a benchmark 2D hydraulic model - refer to the links in <a href="#sec-Hardware-1" class="quarto-xref"><span>Chapter 12</span></a>. For other hardware that is not listed on these pages, the TUFLOW development team has found that some published 3rd party hardware benchmarks offer a relative performance comparison that appears to be consistent with our own performance measurements. These may be found at:</p>
+<p><a href="https://www.videocardbenchmark.net/" class="uri">https://www.videocardbenchmark.net/</a></p>
+<p>At this site there is a “High End Video Card Chart”. The scores for each GPU are calculated from a number of different tests, mostly to do with graphics performance. There is also a “GPU Compute Video Card Chart”, but interestingly we have found the former chart to be a better proxy for how well a GPU will run a TUFLOW HPC model. This site also has excellent CPU charts for multi-core and single-core performance.</p>
+</section>
+<section id="sec-Virtualisation-2" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="sec-Virtualisation-2"><span class="header-section-number">12.5</span> Virtualisation</h2>
+<p>It is possible to share high-performance compute resources amongst multiple users simultaneously by running virtual desktops on a machine that users connect to remotely. There are many reasons why IT professionals favour this solution for sharing expensive resources. However, the important question that must be asked in advance is: how will the GPU(s) be shared between users? Unless the Virtual Desktop Infrastructure (VDI) environment is implemented correctly, users may experience erratic model start up and solve times. There are different sharing mechanisms possible depending on the type of GPU and the choice of operating system. Some key points are:</p>
+<ul>
+<li>Solving the 2D Shallow Water Equations is a computationally intensive task. TUFLOW HPC is a well-optimised engine that will efficiently utilise all of a GPU’s compute resources for hours, sometimes days depending on the size of the model. For optimum performance, it is generally safest to only allow one HPC compute job per GPU device.</li>
+<li>In a VDI environment for modellers, where resources are typically pooled and assigned dynamically, GPU resources should instead be assigned as isolated and independent resources, dedicated to a user session.</li>
+<li>When opting for large NVIDIA GPUs, choosing a GPU model and a hypervisor that support Multi Instance GPU is recommended. Otherwise, select multiple smaller GPUs that can be exclusively assigned to individual user sessions.</li>
+</ul>
+</section>
+<section id="sec-CloudCompute-2" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="sec-CloudCompute-2"><span class="header-section-number">12.6</span> Cloud Compute</h2>
+<p>Organisations may host their TUFLOW network licences on the cloud and run simulations on cloud virtual machines. There are numerous ways both, licencing and simulation can be configured in a cloud environment, depending on the cloud provider (Microsoft, Google, Amazon, other etc.) and internal company protocols. Configuration of your cloud environment is your own responsibility. The <a href="https://wiki.tuflow.com/Organisation_Cloud_Software_Execution">TUFLOW Wiki Cloud Execution</a> page provides guidance on this subject.</p>
+</section>
+<section id="sec-HardwareCommands-2" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="sec-HardwareCommands-2"><span class="header-section-number">12.7</span> Commands</h2>
+<p>The following commands, all optional, are available for the HPC solution scheme (<span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-SolutionScheme">Solution Scheme</a></span> <span class="teq">==</span> <span class="tblk">HPC</span>).</p>
+<hr>
+<div class="scrollable-block">
+<p><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-Hardware">Hardware</a></span> <span class="teq">==</span> <span class="tblk">GPU | {CPU}</span></p>
+</div>
+<p>If an NVIDIA GPU is available, then this may be selected using the Hardware command. If GPU hardware is specified, but the system cannot find an NVIDIA GPU, then <a href="https://wiki.tuflow.com/TUFLOW_Message_3005">ERROR 3005</a> will result. The memory required for the TUFLOW model will be compared against the free memory available on the GPU. If the available memory is insufficient to run the model <a href="https://wiki.tuflow.com/TUFLOW_Message_3017">ERROR 3017</a> will result. For models that only just fit within the available device memory by a small margin, it is possible that a memory allocation will fail due to being unable to find the required memory as a contiguous block, in which case <a href="https://wiki.tuflow.com/TUFLOW_Message_3018">ERROR 3018</a> will be reported during model initialisation.</p>
+<hr>
+<div class="scrollable-block">
+<p><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-HPCDPCheck">HPC DP Check</a></span> <span class="teq">==</span> <span class="tblk">{CHECK} | OFF | ERROR</span></p>
+</div>
+<p>The default setting of “CHECK”, causes TUFLOW to report <a href="https://wiki.tuflow.com/TUFLOW_Message_2420">CHECK 2420</a> if the HPC solution scheme is used with the double precision executable. Prior to the 2025 release, the default setting of this command was “ERROR” and TUFLOW would stop with <a href="https://wiki.tuflow.com/TUFLOW_Message_2420">ERROR 2420</a> (advising that it is recommended to use the single precision binary). Due to its explicit finite volume formulation and being depth based, the HPC 2D scheme does not generally require double precision (DP). There can also be substantial speed gains using single precision (SP) on some GPU cards, and there is significantly less memory footprint. However, 1D-2D linked models that also use the ESTRY 1D engine may still require double precision in situations where the model is at higher elevations. Additionally, applications such as long-term simulations and/or simulations with groundwater may require double precision for an accurate result. The “OFF” option will allows users to run the HPC solution scheme in double precision without producing a CHECK or ERROR message.</p>
+<hr>
+<div class="scrollable-block">
+<p><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-GPUDeviceIDs">GPU Device IDs</a></span> <span class="teq">==</span> <span class="tblk">&lt;list_of_device_ids&gt;</span></p>
+</div>
+<p>For computers with more than one GPU, the NVIDIA GPU driver will search all connected GPUs, and compile an enumerated list of NVIDIA GPUs. This list will range from 0 to n-1, where n is the number of attached NVIDIA GPUs. This command may be used to:</p>
+<ul>
+<li>Run a model on a particular GPU, e.g.&nbsp;“<span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-GPUDeviceIDs">GPU Device IDs</a></span> <span class="teq">==</span> <span class="tblk">1</span>” will run the model on the second NVidia GPU in the list of available NVIDIA GPUs.</li>
+<li>Distribute a model over two or more GPUs, e.g.&nbsp;“<span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-GPUDeviceIDs">GPU Device IDs</a></span> <span class="teq">==</span> <span class="tblk">0 1</span>” will run the model spread over the first two NVIDIA GPUs in the list. Note that the GPUs do not have to be consecutive and the device IDs can appear in any order.</li>
+<li>If you only have one GPU device, or you wish to use the primary device, this command is not needed.</li>
+</ul>
+<p>If desired, the selection of GPU Device IDs can be specified on the command line when running the executable:</p>
+<ul>
+<li>To select a specific GPU, specify “-puN” where N is the device ID.</li>
+<li>To select mutliple GPUs for a distributed run, supply a “-puN” argument for each device ID required, for example -pu0 -pu1.</li>
+<li>The “-pu” arguments will automatically override any GPU Device IDs specified in the tcf.</li>
+</ul>
+<p>Also note:</p>
+<ul>
+<li>If the list of device IDs is longer than the number of available devices, then the list will be truncated to the number of available devices and <a href="https://wiki.tuflow.com/TUFLOW_Message_2784">WARNING 2784</a> issued.</li>
+<li>If a device ID is specified that is outside of the range 0…n-1 then <a href="https://wiki.tuflow.com/TUFLOW_Message_3005">ERROR 3005</a> will result.</li>
+<li>If a device ID is specified that already has a model running on it, then the requested GPU will be loaded up with the additional model, which will cause both the existing model and the new model to solve more slowly.</li>
+<li>A GPU module licence is required for each GPU.</li>
+<li>A CPU thread is created for managing the compute stream for each GPU device.</li>
+<li>Available memory checks are performed on all GPUs in the list.</li>
+<li>If Hardware target is CPU then this command is ignored.</li>
+</ul>
+<hr>
+<div class="scrollable-block">
+<p><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-CPUThreads">CPU Threads</a></span> <span class="teq">==</span> <span class="tblk">{4} | &lt;number_of_threads&gt;</span></p>
+</div>
+<p>These two commands are identical and control the number of CPU threads used by HPC (including Quadtree) when solving on CPU instead of GPU. For example, “CPU Threads == 6” runs the HPC 2D solver across 6 CPU cores. The number of threads may also be specified as a command line argument -nt[number_of_threads]. Using the command line argument will override any definition in the tcf file.</p>
+<p>Notes:</p>
+<ul>
+<li>TUFLOW licences have 4 times the number of TUFLOW engine licences available as HPC “thread” licences. For example a local or network 4 licence has 16 thread licences available.</li>
+<li>The default number of threads that HPC will use for the CPU solver run is 4.</li>
+<li>The maximum number of threads possible is the lesser of the maximum number of cores available on the machine and the number of available TUFLOW thread licences.</li>
+<li>Pre-processing of SGS elevations can be computationally intensive, as can the compression of TIF output files. If the number of threads has not been specified then the number of threads used for these tasks will default to the maximum number of cores available without requiring any additional thread licences.</li>
+</ul>
+<hr>
+<div class="scrollable-block">
+<p><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-HPCDeviceSplit">HPC Device Split</a></span> <span class="teq">==</span> <span class="tblk">&lt;list_of_device_load_factors&gt;</span></p>
+</div>
+<p>When a model is spread over two or more GPUs (or CPU threads), the model is partitioned into vertical ribbons and each device solves its own ribbon, with boundary data synchronised between the devices at each timestep. By default the ribbons are of equal width. However, the computational burden for each GPU is rarely uniform due to each ribbon having a different active cell or wet cell count. This command will vary the ribbon sizes in accordance with the load factors in the list, and can improve overall solution time for unbalanced models. Also, for models that require nearly all of the available GPU memory on systems with GPUs of different memory, this command can be used to apportion ribbon sizes accordingly. Additional notes:</p>
+<ul>
+<li>Load factors are mapped respectively to the devices in the same order in which they appear in the list of device IDs.</li>
+<li>Load factors are normalised after reading, if required, so their average is one.</li>
+<li>Upon completion of the model, TUFLOW will report the approximate computational load split across the devices, and offer a suggested list of load factors that may improve the workload balance.</li>
+<li>When running on CPU, this command adjusts the ribbon size for each thread.</li>
+<li>For a Quadtree model, the decomposition is not performed in ribbons, instead the list of cells is partitioned.</li>
+</ul>
+<hr>
+<div class="scrollable-block">
+<p><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-GPUPeertoPeerAccess">GPU Peer to Peer Access</a></span> <span class="teq">==</span> <span class="tblk">DISABLED | {ENABLED IF AVAILABLE}</span></p>
+</div>
+<p>Some models of NVIDIA GPUs allow for a direct communications link between them, either via a specific hardware connector or via the PCI bus controller. This is known as ‘peer to peer’ access. TUFLOW HPC will by default enable peer to peer access if the driver reports that it is available. This command may be used to specifically disable peer to peer communications if desired.</p>
+<hr>
+<p><img src="images/WQFooter.jpg" class="img-fluid" style="width:100.0%"></p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="1" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-Stelling1984" class="csl-entry" role="listitem">
+Stelling, G. (1984). <em>On the Construction of Computational Methods for Shallow Water Flow Problems</em>. Rijkswaterstaat Communications.
+</div>
+<div id="ref-Syme1991" class="csl-entry" role="listitem">
+Syme, W. (1991). <em>Dynamically Linked Two Dimensional / One-Dimensional Hydrodynamic Modelling Program for Rivers, Estuaries and Coastal Waters</em> (W. Syme, Ed.) [M.Eng.Sc(100% Research) Thesis]. Dept of Civil Engineering. <a href="https://tuflow.com/media/4982/1991-tuflow-dynamically-linked-2d-and-1d-hydrodynamic-modelling-syme-thesis.pdf">https://tuflow.com/media/4982/1991-tuflow-dynamically-linked-2d-and-1d-hydrodynamic-modelling-syme-thesis.pdf</a>
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+// Hover preview for plain anchor links -- mirrors native quarto-xref behaviour.
+
+// Supports same-page anchors and cross-chapter links on the same origin.
+
+// Placed via include-after-body so all DOM is parsed when this runs.
+
+(function () {
+
+  if (typeof window.tippy !== 'function') { return; }
+
+
+
+  var doc = window.document;
+
+  var pageCache = {};
+
+
+
+  function stripColumnClasses(el) {
+
+    el.classList.remove('page-full', 'page-columns');
+
+    for (var i = 0; i < el.children.length; i++) {
+
+      stripColumnClasses(el.children[i]);
+
+    }
+
+  }
+
+
+
+  function buildContent(id, target) {
+
+    var clone = target.cloneNode(true);
+
+    stripColumnClasses(clone);
+
+
+
+    var anchor = clone.querySelector('a.anchorjs-link');
+
+    if (anchor) { anchor.parentNode.removeChild(anchor); }
+
+
+
+    var isSectionEl = (clone.tagName === 'SECTION' || /^H[1-6]$/.test(clone.tagName || ''));
+
+    var isSectionId = (typeof id === 'string' && id.indexOf('sec-') === 0);
+
+
+
+    if (isSectionEl || isSectionId) {
+
+      var container = doc.createElement('div');
+
+      var kids = clone.children;
+
+      if (kids.length > 2) {
+
+        container.appendChild(kids[0].cloneNode(true));
+
+        for (var j = 1; j < kids.length; j++) {
+
+          if (kids[j].tagName === 'P' && (kids[j].textContent || '').trim() === '') { continue; }
+
+          container.appendChild(kids[j].cloneNode(true));
+
+          break;
+
+        }
+
+        if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(container); }
+
+        return container.innerHTML;
+
+      }
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.innerHTML;
+
+    }
+
+
+
+    if (clone.classList.contains('callout')) {
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.outerHTML;
+
+    }
+
+
+
+    if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+    return clone.innerHTML;
+
+  }
+
+
+
+  function getTargetFromPage(pageUrl, id, callback) {
+
+    if (pageCache[pageUrl]) {
+
+      callback(pageCache[pageUrl].getElementById(id));
+
+      return;
+
+    }
+
+    fetch(pageUrl)
+
+      .then(function (r) { return r.text(); })
+
+      .then(function (html) {
+
+        var parser = new DOMParser();
+
+        var parsedDoc = parser.parseFromString(html, 'text/html');
+
+        pageCache[pageUrl] = parsedDoc;
+
+        callback(parsedDoc.getElementById(id));
+
+      })
+
+      .catch(function () { callback(null); });
+
+  }
+
+
+
+  // Same-page anchor links (href starts with "#")
+
+  var samePageLinks = doc.querySelectorAll(
+
+    'main a[href^="#"]:not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < samePageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var hash   = link.getAttribute('href');
+
+      var id     = hash.replace(/^#\/?/, '');
+
+      var target = doc.getElementById(id);
+
+      if (!target) { return; }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           function () { return buildContent(id, target); }
+
+      });
+
+    })(samePageLinks[i]);
+
+  }
+
+
+
+  // Cross-page anchor links (same origin, href contains "#" but does not start with "#")
+
+  var crossPageLinks = doc.querySelectorAll(
+
+    'main a[href*="#"]:not([href^="#"]):not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < crossPageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var href = link.getAttribute('href');
+
+
+
+      var pageUrl, id;
+
+      try {
+
+        var resolved = new URL(href, window.location.href);
+
+        if (resolved.origin !== window.location.origin) { return; }
+
+        pageUrl = resolved.origin + resolved.pathname;
+
+        id = resolved.hash.replace(/^#\/?/, '');
+
+      } catch (e) { return; }
+
+
+
+      if (!id) { return; }
+
+
+
+      // If the link points to the current page, look up the element directly
+
+      if (pageUrl === (window.location.origin + window.location.pathname)) {
+
+        var target = doc.getElementById(id);
+
+        if (!target) { return; }
+
+        window.tippy(link, {
+
+          allowHTML:         true,
+
+          maxWidth:          500,
+
+          delay:             100,
+
+          arrow:             false,
+
+          appendTo:          function (el) { return el.parentElement; },
+
+          interactive:       true,
+
+          interactiveBorder: 10,
+
+          theme:             'quarto',
+
+          placement:         'bottom-start',
+
+          content:           function () { return buildContent(id, target); }
+
+        });
+
+        return;
+
+      }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           'Loading\u2026',
+
+        onShow:            function (instance) {
+
+          if (instance._fetched) { return; }
+
+          instance._fetched = true;
+
+          getTargetFromPage(pageUrl, id, function (target) {
+
+            if (target) {
+
+              instance.setContent(buildContent(id, target));
+
+            } else {
+
+              instance.destroy();
+
+            }
+
+          });
+
+        }
+
+      });
+
+    })(crossPageLinks[i]);
+
+  }
+
+})();
+
+</script>
+
+<script>
+
+// Adds a copy-to-clipboard button to plain code blocks, .styled-code, and .scrollable-block elements.
+
+// .tuflow blocks already receive Quarto's built-in copy button via .sourceCode — those are excluded.
+
+(function () {
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    var selectors = ['pre:not(.sourceCode)', '.styled-code', '.scrollable-block'];
+
+
+
+    selectors.forEach(function (sel) {
+
+      document.querySelectorAll(sel).forEach(function (block) {
+
+        // Skip if already processed
+
+        if (block.parentNode && block.parentNode.classList.contains('copy-block-wrapper')) return;
+
+
+
+        // Wrap block so the button can be positioned outside the scroll area
+
+        var wrapper = document.createElement('div');
+
+        wrapper.className = 'copy-block-wrapper';
+
+        block.parentNode.insertBefore(wrapper, block);
+
+        wrapper.appendChild(block);
+
+
+
+        // Create button
+
+        var btn = document.createElement('button');
+
+        btn.className = 'copy-block-btn';
+
+        btn.title = 'Copy to Clipboard';
+
+        btn.setAttribute('aria-label', 'Copy to Clipboard');
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+
+
+        btn.addEventListener('click', function () {
+
+          var text = block.innerText;
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+
+            navigator.clipboard.writeText(text).then(function () {
+
+              showCopied(btn);
+
+            }).catch(function () {
+
+              fallbackCopy(text);
+
+              showCopied(btn);
+
+            });
+
+          } else {
+
+            fallbackCopy(text);
+
+            showCopied(btn);
+
+          }
+
+        });
+
+
+
+        wrapper.appendChild(btn);
+
+      });
+
+    });
+
+
+
+    function showCopied(btn) {
+
+      btn.innerHTML = '<i class="bi bi-clipboard-check"></i>';
+
+      btn.title = 'Copied!';
+
+      setTimeout(function () {
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+        btn.title = 'Copy to Clipboard';
+
+      }, 2000);
+
+    }
+
+
+
+    function fallbackCopy(text) {
+
+      var ta = document.createElement('textarea');
+
+      ta.value = text;
+
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+
+      document.body.appendChild(ta);
+
+      ta.focus();
+
+      ta.select();
+
+      try { document.execCommand('copy'); } catch (e) {}
+
+      document.body.removeChild(ta);
+
+    }
+
+  });
+
+}());
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./09-Outputs.html" class="pagination-link" aria-label="Outputs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Outputs</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./11-RunningSimulations.html" class="pagination-link" aria-label="Managing and Starting Simulations">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Managing and Starting Simulations</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

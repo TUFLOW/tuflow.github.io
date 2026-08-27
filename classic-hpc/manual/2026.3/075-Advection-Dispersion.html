@@ -1,0 +1,2962 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9&nbsp; Advection Dispersion – TUFLOW Classic/HPC User Manual 2026.3</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./08-Linked-1D2D-Models.html" rel="next">
+<link href="./07-Boundaries-and-Initial-Conditions.html" rel="prev">
+<link href="./manuals-shared/images/TUFLOW.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ea94015a310cf19a1d0a98706902972b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const tocNav = document.querySelector("nav[role='doc-toc']");
+
+    if (!tocNav) return;
+
+
+
+    const observer = new MutationObserver((mutations) => {
+
+      mutations.forEach((mutation) => {
+
+        if (mutation.attributeName === "class") {
+
+          const target = mutation.target;
+
+          if (target.classList.contains("active")) {
+
+            // Scroll the active item smoothly ('smooth') with the least amount of movement ('nearest')
+
+            target.scrollIntoView({
+
+              behavior: "smooth",
+
+              block: "nearest"
+
+            });
+
+          }
+
+        }
+
+      });
+
+    });
+
+
+
+    // Target all links inside the TOC
+
+    const tocLinks = tocNav.querySelectorAll("ul li a");
+
+    tocLinks.forEach((link) => {
+
+      observer.observe(link, { attributes: true });
+
+    });
+
+  });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+
+
+<script>
+
+window.addEventListener("load", function () {
+
+  document.querySelectorAll(".quarto-figure table.searchable").forEach(function(table){
+
+      new DataTable(table, {
+
+          paging: true,
+
+          pageLength: -1,
+
+          lengthMenu: [
+
+            [-1, 10, 20, 50],
+
+            ["All", 10, 20, 50]
+
+          ],
+
+          searching: true,
+
+          ordering: true,
+
+          order: [],
+
+          rowId: null
+
+      });
+
+  });
+
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/TUFLOW_logo.png" alt="" class="navbar-logo light-content">
+    <img src="./images/TUFLOW_logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TUFLOW Classic/HPC User Manual 2026.3</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://tuflow.com/"> 
+<span class="menu-text"><img src="manuals-shared/images/BMT_logo.png" style="height:1.5em"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="./TUFLOW-Classic-HPC-User-Manual-2026.3.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./075-Advection-Dispersion.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Advection Dispersion</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TUFLOW Classic/HPC User Manual</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Getting-Started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Hydraulic-Modelling-Fundamentals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hydraulic Modelling Fundamentals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ControlFiles-and-Inputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Control Files and Input Layers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-1D-Domains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">1D Network Domains - ESTRY</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./055-1D-SWMM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">1D Network Domains - EPA SWMM</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-2D-Domains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">2D Domains</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-Boundaries-and-Initial-Conditions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Boundaries and Initial Conditions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./075-Advection-Dispersion.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Advection Dispersion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-Linked-1D2D-Models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Domains and Solvers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-Outputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Outputs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-Hardware.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hardware and Operating System</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-RunningSimulations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Managing and Starting Simulations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-Checks-and-Logs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Checks and Log Files</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Viewing-and-PostProcessing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Viewing Outputs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-QualityControl-and-Troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Quality Control and Troubleshooting</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-Utilities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Utilities</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-Features-and-Changes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Default Changes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80-AppendicesA-TCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">TCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./81-AppendicesB-ECFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">ECF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./82-AppendicesC-TGCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">TGC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./83-AppendicesD-TBCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">TBC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./84-AppendicesE-TOCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">TOC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./85-AppendicesF-TRFCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">TRFC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./86-AppendicesG-TESFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">TESF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./87-AppendicesH-QCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">QCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./88-AppendicesI-TSCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">TSCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./89-AppendicesJ-ADCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">ADCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./90-AppendicesK-TEFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">TEF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./91-AppendicesL-SWMM-Geopackage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">L</span>&nbsp; <span class="chapter-title">SWMM GeoPackage Format</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-AD-2D-2" id="toc-sec-AD-2D-2" class="nav-link active" data-scroll-target="#sec-AD-2D-2"><span class="header-section-number">9.1</span> 2D Domains</a>
+  <ul>
+  <li><a href="#sec-AD-Solution-3" id="toc-sec-AD-Solution-3" class="nav-link" data-scroll-target="#sec-AD-Solution-3"><span class="header-section-number">9.1.1</span> 2D Depth Averaged Equation of Motion</a></li>
+  <li><a href="#sec-AD-Solution-2" id="toc-sec-AD-Solution-2" class="nav-link" data-scroll-target="#sec-AD-Solution-2"><span class="header-section-number">9.1.2</span> Solution Method (TUFLOW Classic)</a></li>
+  <li><a href="#sec-AD-Solution-HPC-3" id="toc-sec-AD-Solution-HPC-3" class="nav-link" data-scroll-target="#sec-AD-Solution-HPC-3"><span class="header-section-number">9.1.3</span> Solution Method (TUFLOW HPC)</a></li>
+  <li><a href="#sec-AD-Local-3" id="toc-sec-AD-Local-3" class="nav-link" data-scroll-target="#sec-AD-Local-3"><span class="header-section-number">9.1.4</span> Local Constituent Transformation</a></li>
+  <li><a href="#sec-AD-GW-3" id="toc-sec-AD-GW-3" class="nav-link" data-scroll-target="#sec-AD-GW-3"><span class="header-section-number">9.1.5</span> Groundwater</a></li>
+  <li><a href="#sec-AD-Limitations-2D" id="toc-sec-AD-Limitations-2D" class="nav-link" data-scroll-target="#sec-AD-Limitations-2D"><span class="header-section-number">9.1.6</span> Limitations</a></li>
+  </ul></li>
+  <li><a href="#sec-AD-1D-2" id="toc-sec-AD-1D-2" class="nav-link" data-scroll-target="#sec-AD-1D-2"><span class="header-section-number">9.2</span> 1D Domains</a>
+  <ul>
+  <li><a href="#sec-AD-1D-Solution-3" id="toc-sec-AD-1D-Solution-3" class="nav-link" data-scroll-target="#sec-AD-1D-Solution-3"><span class="header-section-number">9.2.1</span> 1D Cross-Sectional Averaged Equation of Motion</a></li>
+  <li><a href="#sec-AD-Solution-ESTRY-3" id="toc-sec-AD-Solution-ESTRY-3" class="nav-link" data-scroll-target="#sec-AD-Solution-ESTRY-3"><span class="header-section-number">9.2.2</span> 1D Solution Method (ESTRY)</a></li>
+  <li><a href="#sec-AD-Limitations-1D" id="toc-sec-AD-Limitations-1D" class="nav-link" data-scroll-target="#sec-AD-Limitations-1D"><span class="header-section-number">9.2.3</span> Limitations</a></li>
+  </ul></li>
+  <li><a href="#sec-AD-ModellingProcess-2" id="toc-sec-AD-ModellingProcess-2" class="nav-link" data-scroll-target="#sec-AD-ModellingProcess-2"><span class="header-section-number">9.3</span> The Modelling Process</a>
+  <ul>
+  <li><a href="#sec-AD-DataInput-3" id="toc-sec-AD-DataInput-3" class="nav-link" data-scroll-target="#sec-AD-DataInput-3"><span class="header-section-number">9.3.1</span> Data Input Requirements</a></li>
+  <li><a href="#sec-AD-Calibration-3" id="toc-sec-AD-Calibration-3" class="nav-link" data-scroll-target="#sec-AD-Calibration-3"><span class="header-section-number">9.3.2</span> Calibration and Sensitivity</a></li>
+  <li><a href="#sec-AD-Model-Res-3" id="toc-sec-AD-Model-Res-3" class="nav-link" data-scroll-target="#sec-AD-Model-Res-3"><span class="header-section-number">9.3.3</span> Model Resolution</a></li>
+  <li><a href="#sec-AD-Computational-Timestep-3" id="toc-sec-AD-Computational-Timestep-3" class="nav-link" data-scroll-target="#sec-AD-Computational-Timestep-3"><span class="header-section-number">9.3.4</span> Computational Timestep</a></li>
+  <li><a href="#sec-AD-Example-3" id="toc-sec-AD-Example-3" class="nav-link" data-scroll-target="#sec-AD-Example-3"><span class="header-section-number">9.3.5</span> Example AD Models</a></li>
+  </ul></li>
+  <li><a href="#sec-AD-DataInput-2" id="toc-sec-AD-DataInput-2" class="nav-link" data-scroll-target="#sec-AD-DataInput-2"><span class="header-section-number">9.4</span> Data Input</a>
+  <ul>
+  <li><a href="#sec-AD-SimControlFile-3" id="toc-sec-AD-SimControlFile-3" class="nav-link" data-scroll-target="#sec-AD-SimControlFile-3"><span class="header-section-number">9.4.1</span> Simulation Control File</a>
+  <ul>
+  <li><a href="#sec-ADControlFile-4" id="toc-sec-ADControlFile-4" class="nav-link" data-scroll-target="#sec-ADControlFile-4"><span class="header-section-number">9.4.1.1</span> TUFLOW AD Control File (.adcf File)</a></li>
+  <li><a href="#sec-AD-inputs-4" id="toc-sec-AD-inputs-4" class="nav-link" data-scroll-target="#sec-AD-inputs-4"><span class="header-section-number">9.4.1.2</span> GIS Input File Types and Naming Conventions</a></li>
+  </ul></li>
+  <li><a href="#sec-AD-OneDGeoms-3" id="toc-sec-AD-OneDGeoms-3" class="nav-link" data-scroll-target="#sec-AD-OneDGeoms-3"><span class="header-section-number">9.4.2</span> 1D Geometries</a></li>
+  <li><a href="#sec-ADConstituentProp-3" id="toc-sec-ADConstituentProp-3" class="nav-link" data-scroll-target="#sec-ADConstituentProp-3"><span class="header-section-number">9.4.3</span> Specification of Constituent Properties</a></li>
+  <li><a href="#sec-ADBoundaryConditions-3" id="toc-sec-ADBoundaryConditions-3" class="nav-link" data-scroll-target="#sec-ADBoundaryConditions-3"><span class="header-section-number">9.4.4</span> Boundary Conditions</a>
+  <ul>
+  <li><a href="#sec-BCDatabase-4" id="toc-sec-BCDatabase-4" class="nav-link" data-scroll-target="#sec-BCDatabase-4"><span class="header-section-number">9.4.4.1</span> Boundary Condition (BC) Database</a></li>
+  <li><a href="#sec-BCDatabaseExample-4" id="toc-sec-BCDatabaseExample-4" class="nav-link" data-scroll-target="#sec-BCDatabaseExample-4"><span class="header-section-number">9.4.4.2</span> BC Database Example</a></li>
+  </ul></li>
+  <li><a href="#sec-initial-conditions" id="toc-sec-initial-conditions" class="nav-link" data-scroll-target="#sec-initial-conditions"><span class="header-section-number">9.4.5</span> Initial Conditions</a></li>
+  <li><a href="#sec-GW-initial-conditions" id="toc-sec-GW-initial-conditions" class="nav-link" data-scroll-target="#sec-GW-initial-conditions"><span class="header-section-number">9.4.6</span> Groundwater Initial Conditions</a></li>
+  <li><a href="#sec-minimum-dispersion-coefficient" id="toc-sec-minimum-dispersion-coefficient" class="nav-link" data-scroll-target="#sec-minimum-dispersion-coefficient"><span class="header-section-number">9.4.7</span> Minimum Dispersion Coefficient</a></li>
+  </ul></li>
+  <li><a href="#sec-AD-DataOutput-2" id="toc-sec-AD-DataOutput-2" class="nav-link" data-scroll-target="#sec-AD-DataOutput-2"><span class="header-section-number">9.5</span> Data Output</a>
+  <ul>
+  <li><a href="#sec-AD-LogFiles-3" id="toc-sec-AD-LogFiles-3" class="nav-link" data-scroll-target="#sec-AD-LogFiles-3"><span class="header-section-number">9.5.1</span> TUFLOW AD Log Files</a>
+  <ul>
+  <li><a href="#sec-AD-log-4" id="toc-sec-AD-log-4" class="nav-link" data-scroll-target="#sec-AD-log-4"><span class="header-section-number">9.5.1.1</span> Simulation Log File</a></li>
+  <li><a href="#sec-ADCFLLogFile-4" id="toc-sec-ADCFLLogFile-4" class="nav-link" data-scroll-target="#sec-ADCFLLogFile-4"><span class="header-section-number">9.5.1.2</span> CFL Log File</a></li>
+  <li><a href="#sec-ADLogMass-4" id="toc-sec-ADLogMass-4" class="nav-link" data-scroll-target="#sec-ADLogMass-4"><span class="header-section-number">9.5.1.3</span> Mass Log File</a></li>
+  </ul></li>
+  <li><a href="#sec-AD-CheckFiles-3" id="toc-sec-AD-CheckFiles-3" class="nav-link" data-scroll-target="#sec-AD-CheckFiles-3"><span class="header-section-number">9.5.2</span> Check Files</a></li>
+  <li><a href="#sec-AD-ResultFiles-3" id="toc-sec-AD-ResultFiles-3" class="nav-link" data-scroll-target="#sec-AD-ResultFiles-3"><span class="header-section-number">9.5.3</span> Result Files</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-AD-1" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Advection Dispersion</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The TUFLOW AD Module is an <a href="01-Introduction.html#sec-AddonModules-3">add-on Module</a> and extension of the TUFLOW hydrodynamic engines. By including passive transport fields for tracers, the advection, dispersion and fate of water quality constituents may be simulated. Examples of constituents include salinity, sediment and/or catchment inflow pollutant concentrations. Both dissolved and particulate constituents can be simulated. TUFLOW AD takes depth and velocity fields computed by the TUFLOW Classic or HPC solver and uses this information, together with initial and boundary conditions, to simulate the transport of the specified constituents. In particular, the effects of both longitudinal dispersion and transverse turbulent diffusion are included. TUFLOW AD is specifically oriented towards analyses of systems including coastal waters, estuaries, rivers, floodplains and urban areas. Up to twenty individual constituents can be simulated within TUFLOW AD. For models with linked 1D-2D domains, transport through 1D elements linked by SX connections is supported, but transport through 1D elements linked by HX connections are not.</p>
+<section id="sec-AD-2D-2" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="sec-AD-2D-2"><span class="header-section-number">9.1</span> 2D Domains</h2>
+<section id="sec-AD-Solution-3" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="sec-AD-Solution-3"><span class="header-section-number">9.1.1</span> 2D Depth Averaged Equation of Motion</h3>
+<p>The equation of motion of a passive tracer <span class="math inline">\(\phi\)</span> (as a concentration), in 2D depth averaged conservative formulation is:</p>
+<p><span id="eq-2DTracerFiniteVolume1"><span class="math display">\[
+\frac{\partial(h \phi)}{\partial t}
++ \frac{\partial(h u \phi)}{\partial x}
++ \frac{\partial(h v \phi)}{\partial y}
+- \frac{\partial}{\partial x} \left( h D \frac{\partial \phi}{\partial x} \right)
+- \frac{\partial}{\partial y} \left( h D \frac{\partial \phi}{\partial y} \right)
+= h S_\phi
+\tag{9.1}\]</span></span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\phi\)</span> = Tracer concentration as mass (or mols) per unit volume</li>
+<li><span class="math inline">\(h\)</span> = Water depth</li>
+<li><span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> = Depth averaged velocity components in the x and y directions</li>
+<li><span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> = 2D spatial coordinates</li>
+<li><span class="math inline">\(t\)</span> = Time</li>
+<li><span class="math inline">\(D\)</span> = Isotropic dispersion plus turbulent diffusion coefficients values in the x and y directions</li>
+<li><span class="math inline">\(S_\phi\)</span> = Tracer source as mass (or mols) per unit volume per unit time</li>
+</ul>
+<p>The first term in the equation can be expanded using the chain rule and then substituting the continuity equation to get:</p>
+<p><span id="eq-2DTracerFiniteVolume2"><span class="math display">\[
+\frac{\partial(h\phi)}{\partial t}
+= h \frac{\partial \phi}{\partial t}
++ \phi \frac{\partial h}{\partial t}
+= h \frac{\partial \phi}{\partial t}
+- \phi \left( \frac{\partial (h u)}{\partial x} + \frac{\partial (h v)}{\partial y} \right)
+\tag{9.2}\]</span></span></p>
+<p>Combining <a href="#eq-2DTracerFiniteVolume1" class="quarto-xref">Equation&nbsp;<span>9.1</span></a> and <a href="#eq-2DTracerFiniteVolume2" class="quarto-xref">Equation&nbsp;<span>9.2</span></a> we get:</p>
+<p><span id="eq-2DTracerFiniteVolume3"><span class="math display">\[
+\frac{\partial \phi}{\partial t}
++ u \frac{\partial \phi}{\partial x}
++ v \frac{\partial \phi}{\partial y}
+- \frac{1}{h} \left[
+  \frac{\partial}{\partial x} \left( h D \frac{\partial \phi}{\partial x} \right)
++ \frac{\partial}{\partial y} \left( h D \frac{\partial \phi}{\partial y} \right) \right]
+= S_\phi
+\tag{9.3}\]</span></span></p>
+</section>
+<section id="sec-AD-Solution-2" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="sec-AD-Solution-2"><span class="header-section-number">9.1.2</span> Solution Method (TUFLOW Classic)</h3>
+<p>The 2D advection dispersion algorithm in TUFLOW Classic is based on the ULTIMATE QUICKEST method of <span class="citation" data-cites="Leonard1991">Leonard (<a href="99-References.html#ref-Leonard1991" role="doc-biblioref">1991</a>)</span>, <span class="citation" data-cites="LeonardNiknafs1991">Leonard &amp; Niknafs (<a href="99-References.html#ref-LeonardNiknafs1991" role="doc-biblioref">1991</a>)</span> and <span class="citation" data-cites="Leonard1993">Leonard et al. (<a href="99-References.html#ref-Leonard1993" role="doc-biblioref">1993</a>)</span>. The equation of motion is based on <a href="#eq-2DTracerFiniteVolume3" class="quarto-xref">Equation&nbsp;<span>9.3</span></a>, but reformulated to make use of the offset grid and the TVD interpolation scheme (i.e.&nbsp;it is better to first compute <span class="math inline">\(\phi\)</span> at the cell faces and then compute <span class="math inline">\(\partial(u\phi)/\partial x\)</span> rather than <span class="math inline">\(\partial\phi/\partial x\)</span>):</p>
+<p><span id="eq-2DTracerClassic"><span class="math display">\[
+\frac{\partial \phi}{\partial t}
++ \frac{\partial (u \phi)}{\partial x}
++ \frac{\partial (v \phi)}{\partial y}
+- \frac{1}{h} \left[
+  \frac{\partial}{\partial x} \left(D_{x}\frac{\partial\phi}{\partial x}\right)
++ \frac{\partial}{\partial y} \left(D_{y}\frac{\partial\phi}{\partial y}\right) \right]
+= S_\phi
++ \phi \left(
+  \frac{\partial u}{\partial x}
++ \frac{\partial v}{\partial y}
+\right)
+\tag{9.4}\]</span></span></p>
+<p>TUFLOW AD applies the dispersion formulation described by <span class="citation" data-cites="Falconer2005">Falconer et al. (<a href="99-References.html#ref-Falconer2005" role="doc-biblioref">2005</a>)</span>. This formulation computes dispersion in the X and Y directions (<span class="math inline">\(D_x\)</span> and <span class="math inline">\(D_y\)</span> respectively, to suit the Cartesian computational grid) from user specification of longitudinal and transverse dispersion coefficients <span class="math inline">\(K_L\)</span> and <span class="math inline">\(K_T\)</span>, respectively. Specifically, <span class="math inline">\(D_x\)</span> and <span class="math inline">\(D_y\)</span> are computed dynamically at each grid cell and timestep as follows:</p>
+<p>X Direction dispersion plus turbulent diffusion:</p>
+<p><span id="eq-X-Dispersion"><span class="math display">\[
+D_x = max \left(
+\frac{(K_L u^2 + K_T v^2) h \sqrt g}{|U| C}, D_{w} \right)
+\tag{9.5}\]</span></span></p>
+<p>Y Direction dispersion plus turbulent diffusion:</p>
+<p><span id="eq-Y-Dispersion"><span class="math display">\[
+D_y = max \left(
+\frac{(K_T u^2 + K_L v^2) h \sqrt g}{|U| C}, D_{w} \right)
+\tag{9.6}\]</span></span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(K_L\)</span> = User specified longitudinal dispersion coefficient</li>
+<li><span class="math inline">\(K_T\)</span> = User specified transverse diffusion coefficient</li>
+<li><span class="math inline">\(g\)</span> = Gravitational acceleration</li>
+<li><span class="math inline">\(|U|\)</span> = Velocity magnitude</li>
+<li><span class="math inline">\(C\)</span> = Chezy bed friction coefficient <span class="math inline">\(C = \frac{h^\frac{1}{6}}{n}\)</span></li>
+<li><span class="math inline">\(D_w\)</span> = User specified lower bound dispersion coefficient</li>
+</ul>
+<p>The value of <span class="math inline">\(D_w\)</span> can be specified as constant or spatially varied as required.</p>
+<p>The source terms also includes sink terms such as settling (for particulate species) and decay. The scheme also includes representation of mixing due to sub-grid-scale turbulence and vertical shear via the dispersion formulation provided in <span class="citation" data-cites="Falconer2005">Falconer et al. (<a href="99-References.html#ref-Falconer2005" role="doc-biblioref">2005</a>)</span>.</p>
+<p>The TUFLOW AD computational procedure used is an explicit scheme based on <span class="citation" data-cites="Leonard1991">Leonard (<a href="99-References.html#ref-Leonard1991" role="doc-biblioref">1991</a>)</span>. This contrasts to the TUFLOW Classic engine, which employs an implicit scheme. As such, TUFLOW AD is generally subject to stricter stability constraints than the Classic hydrodynamic engine. As such, the TUFLOW AD calculation takes the form of three steps within each timestep.</p>
+<p>The first step involves calculation of the Courant-Friedrichs-Lewy (CFL) condition at all wet cells, where the CFL in 1 dimension is:</p>
+<p>CFL Condition:</p>
+<p><span id="eq-CFL"><span class="math display">\[
+CFL =  \frac{u \bullet \Delta t}{\Delta x}
+\tag{9.7}\]</span></span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(u\)</span> (or <span class="math inline">\(v\)</span>) = Fluid velocity</li>
+<li><span class="math inline">\(\Delta x\)</span> = Grid scale</li>
+<li><span class="math inline">\(\Delta t\)</span> = Timestep</li>
+</ul>
+<p>This condition is typically required to be less than 1.0 (additive for both X and Y directions) and has a broad physical interpretation requiring that the distance fluid is advected in one timestep (<span class="math inline">\(u∆t\)</span>) is less than one grid cell (<span class="math inline">\(∆x\)</span>).</p>
+<p>The second step is the computation of a similar condition for the diffusive lengthscale (related to the Peclet number) that ensures that dispersion also does not cause instability at any grid cell. The CFL and dispersion dimensionless numbers are then added and the maximum sum at any given location within a timestep is used to compute the number of sub-stepping iterations required by TUFLOW AD to remain stable within one TUFLOW timestep.</p>
+<p>The third step within each TUFLOW timestep is to execute the advection dispersion calculations for the required number of iterations, with a modified (smaller) <span class="math inline">\(∆t\)</span>.</p>
+<p>The original ULTIMATE QUICKEST solution method has been enhanced and improved as applied in TUFLOW AD. For example, TUFLOW AD also employs adaptive computational stencil expansion where it identifies sharp constituent concentration gradients <span class="citation" data-cites="LeonardNiknafs1991">(<a href="99-References.html#ref-LeonardNiknafs1991" role="doc-biblioref">Leonard &amp; Niknafs, 1991</a>)</span>. Where possible (i.e.&nbsp;away from boundaries and dry cells) and required, the ULTIMATE QUICKEST stencil is expanded from the standard third order scheme to a ninth order scheme, only on principle computational axes. Cross terms greater than third order are not included. If insufficient wet cells exist to switch to ninth order, then seventh and fifth order schemes are progressively tested (with commensurately decreasing stencils) until all required wet cells are located.</p>
+<p>Application of the ULTIMATE limiter <span class="citation" data-cites="Leonard1991">(<a href="99-References.html#ref-Leonard1991" role="doc-biblioref">Leonard, 1991</a>)</span> has been found to induce steady flow anisotropy when extended to multi-dimensional problems and the numerical cross terms associated with additional dimensions are included in calculations. <span class="citation" data-cites="Wu2000">Wu &amp; Falconer (<a href="99-References.html#ref-Wu2000" role="doc-biblioref">2000</a>)</span> developed a modification to the ULTIMATE limiter that reduces this anisotropy, and this has been applied within the TUFLOW AD computational engine.</p>
+</section>
+<section id="sec-AD-Solution-HPC-3" class="level3" data-number="9.1.3">
+<h3 data-number="9.1.3" class="anchored" data-anchor-id="sec-AD-Solution-HPC-3"><span class="header-section-number">9.1.3</span> Solution Method (TUFLOW HPC)</h3>
+<p>The TUFLOW HPC solver tracks areal density, <span class="math inline">\(b=h\phi\)</span>, of the passive tracer as the primary prognostic variable. With this change, equations <a href="#eq-2DTracerFiniteVolume1" class="quarto-xref">Equation&nbsp;<span>9.1</span></a> and <a href="#eq-2DTracerFiniteVolume2" class="quarto-xref">Equation&nbsp;<span>9.2</span></a> combine to become:</p>
+<p><span id="eq-2DConservationHPC"><span class="math display">\[
+\frac{\partial b}{\partial t}
++ \frac{\partial (ub)}{\partial x}
++ \frac{\partial (vb)}{\partial y}
+- \frac{\partial \phi_{bu}}{\partial x}
+- \frac{\partial \phi_{bv}}{\partial y}
+= S_b
+\tag{9.8}\]</span></span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\phi_{bu}\)</span> and <span class="math inline">\(\phi_{by}\)</span> are the combined dispersive and diffusive unit fluxes of tracer in the x and y directions respectively</li>
+<li><span class="math inline">\(S_b\)</span> = source terms (areal density rate)</li>
+</ul>
+<p>The diffusive fluxes of tracer across cell faces are comprised of two components. The first is dispersion (induced by shear in the vertical velocity profile) which acts in the direction of the flow, and the second is turbulent diffusion which acts in both longitudinal and transverse directions. Both calculations use the same formulation, but with different coefficients <span class="citation" data-cites="Falconer2005">(<a href="99-References.html#ref-Falconer2005" role="doc-biblioref">Falconer et al., 2005</a>)</span>:</p>
+<p><span id="eq-AD-Solution-2"><span class="math display">\[
+\left( \substack{ \phi_{bL} \\ \phi_{bT}} \right)
+= -\frac{|U|h\sqrt{g}}{C}
+\left[ \substack{K_L \:\:\: 0 \\ 0 \:\:\: K_T} \right]
+\left( \substack{ \frac{\partial \phi}{\partial L} \\ \frac{\partial \phi}{\partial T}} \right)
+\tag{9.9}\]</span></span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(L\)</span> and <span class="math inline">\(T\)</span> denote longitudinal and transverse directions</li>
+</ul>
+<p>The concentration gradients in the longitudinal and transverse directions can be obtained from those in cartesian coordinates with a rotational transformation:</p>
+<p><span id="eq-AD-Solution-3"><span class="math display">\[
+\left( \substack{\frac{\partial \phi}{\partial L} \\ \frac{\partial \phi}{\partial T}} \right)
+= \left[ \substack{cos \theta \:\:\: -sin \theta \\ sin \theta \:\:\: cos \theta} \right]
+\left( \substack{\frac{\partial \phi}{\partial x} \\ \frac{\partial \phi}{\partial y}} \right)
+\tag{9.10}\]</span></span></p>
+<p>Where</p>
+<ul>
+<li><span class="math inline">\(\theta\)</span> = angle of flow vector such that <span class="math inline">\(cos \theta = \frac{u}{|U|}\)</span> and <span class="math inline">\(sin \theta = \frac{v}{|U|}\)</span></li>
+</ul>
+<p>And similarly the dispersive and diffusive fluxes can be transformed back from flow direction coordinates to the cartesian coordinates with the reverse transform:</p>
+<p><span id="eq-AD-Solution-3"><span class="math display">\[
+\left( \substack{ \phi_{bu} \\ \phi_{bv}} \right)
+= \left[ \substack{cos \theta \:\:\: sin \theta \\ -sin \theta \:\:\: cos \theta} \right]
+\left( \substack{ \phi_{bL} \\ \phi_{bT}} \right)
+\tag{9.11}\]</span></span></p>
+<p>Putting all of this together, and adding an isotropic diffusion term <span class="math inline">\(D_w\)</span> (which can be used to represent wind/wave induced diffusion) yields:</p>
+<p><span id="eq-XY-DispersionHPC"><span class="math display">\[
+\left( \substack{\phi_{bu} \\ \phi_{by}} \right)
+= -hRDR^{-1}
+\left(\substack{\frac{\partial \phi}{\partial x} \\ \frac{\partial \phi}{\partial y}}\right)
+\tag{9.12}\]</span></span></p>
+<p><span id="eq-AD-Solution-4"><span class="math display">\[
+RDR^{-1} = \frac{|U|h\sqrt{g}}{C_z} \left[
+\substack{ K_l cos^2 \theta + K_t sin^2 \theta \:\:\: (K_l - K_t) cos \theta sin \theta
+\\ (K_l - K_t) cos \theta sin \theta \:\:\: K_l sin^2 \theta + K_t cos^2 \theta} \right]
++ \left[ \substack {D_w \\ 0} \: \substack {0 \\ D_w} \right]
+\tag{9.13}\]</span></span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This form is similar to that of <a href="#eq-X-Dispersion" class="quarto-xref">Equation&nbsp;<span>9.5</span></a> and <a href="#eq-Y-Dispersion" class="quarto-xref">Equation&nbsp;<span>9.6</span></a> but includes the off diagonal terms that arise in the matrix. Also note that the isotropic diffusion <span class="math inline">\(D_w\)</span> in HPC is a global constant.</p>
+</div>
+</div>
+</section>
+<section id="sec-AD-Local-3" class="level3" data-number="9.1.4">
+<h3 data-number="9.1.4" class="anchored" data-anchor-id="sec-AD-Local-3"><span class="header-section-number">9.1.4</span> Local Constituent Transformation</h3>
+<p>In addition to pure advection and dispersion/diffusion, constituents simulated within TUFLOW AD (in both Classic and HPC) are modified by transient boundary conditions, and optional settling (for sediment constituents) and decay processes (dissolved and degradable constituents).</p>
+<p>TUFLOW AD boundary conditions can be set to vary in time for each constituent, and can be applied to all TUFLOW boundaries that set water levels and flows (either user-specified or computed), such as HT or QT. TUFLOW AD also supports SA inflow boundaries, where flows and concentrations are used to compute mass loads that are delivered to the model domain, mixed with ambient water and then resultant concentrations computed, prior to execution of the advection routines. Consituents are not supported in rainfall boundaries, which are assumed to be pure water.</p>
+<p>Settling of constituents to simulate removal of particulate matter from the water column has been included in the engine as a simple linear process. Once settled, constituents do not re-enter the computational domain. The local source contribution from settling is given by:</p>
+<p><span id="eq-settling"><span class="math display">\[
+S_\phi = -\frac{w_s}{h} \phi
+\: ; \: or \:
+S_b = -\frac{w_s}{h} b
+\tag{9.14}\]</span></span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(w_s\)</span> is the settling velocity for the particles</li>
+</ul>
+<p>TUFLOW AD also supports the decay of individual species (if positive decay rates are specified) and employs first order rate equations (<a href="#eq-fo-decay" class="quarto-xref">Equation&nbsp;<span>9.16</span></a>) to do so. These equations draw on user defined decay rates:</p>
+<p><span id="eq-decay"><span class="math display">\[
+S_\phi = -K_{d} \phi
+\: ; \: or \:
+S_b = -K_{d} b
+\tag{9.15}\]</span></span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(K_{d}\)</span> is the decay rate for the constituent</li>
+</ul>
+<p>First order decay calculation:</p>
+<p><span id="eq-fo-decay"><span class="math display">\[
+\phi(t) = \phi_{0} e^{-K_{d}t}
+\tag{9.16}\]</span></span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\phi(t)\)</span> is the constituent concentration at time <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\phi_{0}\)</span> is a reference concentration</li>
+<li><span class="math inline">\(K_{d}\)</span> is the decay rate in units of day<span class="math inline">\(^-1\)</span>. Specified in <span class="tcmd"><a href="./89-AppendicesJ-ADCFCommands.html#adcf-ADGlobalDatabase">AD Global Database</a></span>, see <a href="#sec-ADConstituentProp-3" class="quarto-xref"><span>Section 9.4.3</span></a>.</li>
+<li><span class="math inline">\(t\)</span> is time</li>
+</ul>
+</section>
+<section id="sec-AD-GW-3" class="level3" data-number="9.1.5">
+<h3 data-number="9.1.5" class="anchored" data-anchor-id="sec-AD-GW-3"><span class="header-section-number">9.1.5</span> Groundwater</h3>
+<p>The 2023-03-AA release introduces tracking of constituents through the groundwater layers when run using the TUFLOW HPC solver, including return flow to surface water when horizontal hydraulic conductivity in included in the soils file. When this feature is used, groundwater return to the surface typically occurs at the bottom of slopes or adjacent to creeks, representative of catchment baseflows in reality. Refer to <a href="#sec-GW-initial-conditions" class="quarto-xref"><span>Section 9.4.6</span></a> for commands for setting initial concentrations for sub-surface layers. No dispersion is modelled in the groundwater layers. The 2d_bc “GT” type groundwater boundary does not support defined inflow values for constituents.</p>
+<p>Advection-dispersion in groundwater is not supported in TUFLOW Classic or the TUFLOW HPC Quadtree Module.</p>
+</section>
+<section id="sec-AD-Limitations-2D" class="level3" data-number="9.1.6">
+<h3 data-number="9.1.6" class="anchored" data-anchor-id="sec-AD-Limitations-2D"><span class="header-section-number">9.1.6</span> Limitations</h3>
+<p>TUFLOW AD is designed to model dissolved and particulate constituent advection and dispersion in coastal waters, estuaries, rivers, and floodplains. This is achieved through solution of the 2D transport equation combined with sub-models for settling or decay.</p>
+<p>Limitations to note include:</p>
+<ol type="1">
+<li>The dispersion scheme adopted by TUFLOW AD <span class="citation" data-cites="Falconer2005">(<a href="99-References.html#ref-Falconer2005" role="doc-biblioref">Falconer et al., 2005</a>)</span> is such as to allow use of literature values for longitudinal and transverse dispersion coefficients (<span class="math inline">\(K_{L}\)</span> and <span class="math inline">\(K_{T}\)</span>). Users adopting literature values for these coefficients (as provided in <span class="citation" data-cites="Falconer2005">(<a href="99-References.html#ref-Falconer2005" role="doc-biblioref">Falconer et al., 2005</a>)</span>), should however do so with extreme caution, as they are known to vary widely, and by up to several orders of magnitude. It is always preferable to use monitoring data to calibrate advection dispersion models (TUFLOW AD included) and this should be done whenever and wherever possible. If no such data is available, then literature values can be used for <span class="math inline">\(K_{L}\)</span> and <span class="math inline">\(K_{T}\)</span>, however results need to be appropriately caveated, and TUFLOW AD predictions (as for any AD model) should be seen as qualitative or indicative at best.</li>
+<li>Modelling predictions should also be cross checked with desktop calculations where possible. For example, this might include a hand calculation of expected salt masses in a given tidal system, with comparison made to TUFLOW AD outputs.</li>
+<li>TUFLOW AD allows for specification and computation of large dispersion coefficients, and with the automatic substepping implementation it should generally remain stable. However, specification of large (i.e.&nbsp;greater than approximately 100-500) dispersion coefficients may lead to results that are not physically real or defensible. As such, (in conjunction with 2 and 3 above) results should always be sanity checked and correlated with measurements. Relying on uncalibrated model predictions is not recommended.</li>
+</ol>
+</section>
+</section>
+<section id="sec-AD-1D-2" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="sec-AD-1D-2"><span class="header-section-number">9.2</span> 1D Domains</h2>
+<section id="sec-AD-1D-Solution-3" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="sec-AD-1D-Solution-3"><span class="header-section-number">9.2.1</span> 1D Cross-Sectional Averaged Equation of Motion</h3>
+<p>The movement of constituents through 1D (ESTRY) channels is supported via SX connections. Prior to the 2025 release, movement of constituents through these connections was only on a mass balance basis. That is, it assumed that the concentration of a constituent exiting an SX connection is the same as that at the entrance SX connection, at the same timestep. While this provides a simplified method to pass constituents through relatively ‘short’ 1D channels, it does not consider the time taken for the constituents to flow over the distance of a 1D channel, nor the mixing of water with different tracer concentrations at 1D channel junctions.</p>
+<p>The 2025 release introduced a new approach to partially support the advection of constituents in 1D channel networks. The mass balance equation is solved by taking into account the velocity in 1D channels and the water volume at 1D nodes. The travel time of the constituents through 1D channel and the mixing of constituents at 1D junctions are now simulated properly. This new approach is set as default in the 2025 release by the following ecf command:</p>
+<div class="scrollable-block">
+<p><span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-ADApproach">AD Approach</a></span> <span class="teq">==</span> <span class="tblk">Method B</span></p>
+</div>
+<p>Backward compatibility is offered by setting this command to ‘Method A’.</p>
+<p>When Method B (the default) is used, the equation of motion of a passive tracer <span class="math inline">\(\phi\)</span> (as a concentration) in 1D ESTRY channels is solved as:</p>
+<p><span id="eq-1DTracerFiniteVolume1"><span class="math display">\[
+\frac{\partial(A \phi)}{\partial t}
++ \frac{\partial(A u \phi)}{\partial x}
+- \frac{\partial}{\partial x} \left( A D_x \frac{\partial \phi}{\partial x} \right)
+= A S_\phi
+\tag{9.17}\]</span></span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\phi\)</span> = Tracer concentration as mass (or mols) per unit volume</li>
+<li><span class="math inline">\(A\)</span> = Cross-sectional flow area (up to the water surface)</li>
+<li><span class="math inline">\(u\)</span> = Cross-sectional averaged velocity components in the x direction</li>
+<li><span class="math inline">\(x\)</span> = 1D spatial coordinates in the streamwise direction</li>
+<li><span class="math inline">\(t\)</span> = Time</li>
+<li><span class="math inline">\(D_x\)</span> = Isotropic dispersion plus turbulent diffusion coefficients values in the x direction</li>
+<li><span class="math inline">\(S_\phi\)</span> = Tracer source as mass (or mols) per unit volume per unit time</li>
+</ul>
+</section>
+<section id="sec-AD-Solution-ESTRY-3" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="sec-AD-Solution-ESTRY-3"><span class="header-section-number">9.2.2</span> 1D Solution Method (ESTRY)</h3>
+<p>The TUFLOW 1D (ESTRY) AD solver is based on the implicit finite volume method. <a href="#eq-1DTracerFiniteVolume1" class="quarto-xref">Equation&nbsp;<span>9.17</span></a> is integrated over the 1D nodal volume, from the channel mid-section of the upstream channel to the mid-section of the downstream channel, i.e.&nbsp;the same 1D node ESTRY uses to store water volume. The tracer concentration at node <span class="math inline">\(i\)</span>, at the next timestep is calculated as:</p>
+<p><span id="eq-1DConservationESTRY"><span class="math display">\[
+\phi_{i,n+1} =
+\phi_{i,n}
++ \Delta t \frac{\sum{Q \phi}}{V_{i}}
+\tag{9.18}\]</span></span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\phi_{i,n+1}\)</span> = Tracer concentration at node <span class="math inline">\(i\)</span> at next timestep</li>
+<li><span class="math inline">\(\phi_{i,n}\)</span> = Tracer concentration at node <span class="math inline">\(i\)</span> at current timestep</li>
+<li><span class="math inline">\(\Delta t\)</span> = Timestep</li>
+<li><span class="math inline">\(Q\)</span> = Cross-sectional volumetric flux at the connected channel mid-sections</li>
+<li><span class="math inline">\(\phi\)</span> = Tracer concentration the connected channel mid-sections</li>
+<li><span class="math inline">\(V_{i}\)</span> = 1D nodal water volume at node <span class="math inline">\(i\)</span> (up to the water surface)</li>
+</ul>
+<div id="fig-ESTRY-AD" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ESTRY-AD-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/1d_channels_AD.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ESTRY-AD-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.1: 1D Channel Advection
+</figcaption>
+</figure>
+</div>
+<p>ESTRY solves flux/velocity at channel mid-section, so spatial interpolation is not needed for <span class="math inline">\(Q\)</span>. The mid-section concentration <span class="math inline">\(\phi\)</span>, on the other hand, is interpolated from the nodal concentration using 2<span class="math inline">\(^{nd}\)</span> order spatial scheme with Superbee gradient limiter <span class="citation" data-cites="Fringer2005">(<a href="99-References.html#ref-Fringer2005" role="doc-biblioref">Fringer et al., 2005</a>)</span>.</p>
+</section>
+<section id="sec-AD-Limitations-1D" class="level3" data-number="9.2.3">
+<h3 data-number="9.2.3" class="anchored" data-anchor-id="sec-AD-Limitations-1D"><span class="header-section-number">9.2.3</span> Limitations</h3>
+<p>The following features are not yet supported:</p>
+<ul>
+<li>Diffusive fluxes in 1D channels.</li>
+<li>Setting tracer initial concentrations at 1D nodes.</li>
+<li>Tracer source term in a 1D node.</li>
+<li>HX connections (2d_bc “HX” type).</li>
+</ul>
+</section>
+</section>
+<section id="sec-AD-ModellingProcess-2" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="sec-AD-ModellingProcess-2"><span class="header-section-number">9.3</span> The Modelling Process</h2>
+<section id="sec-AD-DataInput-3" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="sec-AD-DataInput-3"><span class="header-section-number">9.3.1</span> Data Input Requirements</h3>
+<p>The minimum requirements for setting up a TUFLOW AD model are:</p>
+<ol type="1">
+<li>A properly constructed and stable TUFLOW hydraulic model; and</li>
+<li>Boundary conditions for constituent concentrations (e.g.&nbsp;ocean salinities, catchment inflow pollutant concentrations etc.).</li>
+</ol>
+<p>Initial conditions, dispersion coefficients, settling and decay rates will all be set to zero if not specified to be otherwise.</p>
+<p>Preferable (and recommended) data requirements include:</p>
+<ol type="1">
+<li>Water quality calibration information as time-series data at points. This is particularly important for dispersion coefficient calibration;</li>
+<li>Spatially variant initial conditions;</li>
+<li>Particulate matter settling rates (if any); and</li>
+<li>Dissolved species decay/transformation rates (if any).</li>
+</ol>
+</section>
+<section id="sec-AD-Calibration-3" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="sec-AD-Calibration-3"><span class="header-section-number">9.3.2</span> Calibration and Sensitivity</h3>
+<p>Advection dispersion models are usually calibrated against water quality observations. For example, salinity recovery data can be used to calibrate and validate models, with longitudinal and transverse dispersion coefficients being the primary free variables. Dissolved and/or particulate constituents can then be simulated using the derived dispersion coefficients, and can include use of settling and/or decay rates as needed.</p>
+<p>Ideally, models should be calibrated for conditions similar to those under investigation (e.g.&nbsp;a catchment inflow to an estuary) although this is not always possible, particularly when data is limited. In these situations, sensitivity analyses could be carried out by increasing and decreasing calibration variables, though this not a preferred approach due to the large variability in the literature with respect to acceptable dispersion coefficients.</p>
+</section>
+<section id="sec-AD-Model-Res-3" class="level3" data-number="9.3.3">
+<h3 data-number="9.3.3" class="anchored" data-anchor-id="sec-AD-Model-Res-3"><span class="header-section-number">9.3.3</span> Model Resolution</h3>
+<p>The 2D domain cell size needs to be sufficiently small to reproduce advection dispersion behaviour. It is worth noting that, in general, the larger the cell size is with respect to the scale of mixing processes, the greater potential there is for numerical dispersion to play a role in the model execution process. Even though TUFLOW AD has in-built measures to reduce these effects, it is advisable to keep this in mind, and perform at least some limited testing with your model to determine its sensitivity to cell size.</p>
+</section>
+<section id="sec-AD-Computational-Timestep-3" class="level3" data-number="9.3.4">
+<h3 data-number="9.3.4" class="anchored" data-anchor-id="sec-AD-Computational-Timestep-3"><span class="header-section-number">9.3.4</span> Computational Timestep</h3>
+<p>With TUFLOW Classic, the selection of the timestep is important in that the run time is directly proportional to the number of timesteps required to calculate model behaviour for the required time period. Notwithstanding this, with TUFLOW Classic the AD module will automatically substep with respect to the main hydraulic engine on the basis of maintaining both advective and dispersive stability (see <a href="#sec-AD-Solution-2" class="quarto-xref"><span>Section 9.1.2</span></a>) so the selection of timestep should be focused on ensuring hydraulic stability, as AD stability should follow, providing reasonable dispersion coefficients are set.</p>
+<p>TUFLOW HPC, being an explicit method already, uses a self-adaptive timestep which is much smaller than Classic. Further, it uses the fourth order Runge-Kutta temporal integration scheme, and the advection dispersion calculations are performed on the same timestep and with the same scheme. When running AD models in HPC There is generally no need for the user to change the timestepping from the default method. Using high dispersion coefficients may cause TUFLOW HPC to use a smaller timestep than otherwise required for the hydraulic calculations due to the diffusion (Peclet) number control.</p>
+</section>
+<section id="sec-AD-Example-3" class="level3" data-number="9.3.5">
+<h3 data-number="9.3.5" class="anchored" data-anchor-id="sec-AD-Example-3"><span class="header-section-number">9.3.5</span> Example AD Models</h3>
+<p>A step-by-step description outlining how to set up an AD model is provided on the <a href="https://wiki.tuflow.com/Advection_Dispersion_Modelling">TUFLOW Wiki Advection Dispersion Modelling</a> page. Example models are also available in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Advection_Dispersion">Advection Dispersion Example Model Dataset</a> on the TUFLOW Wiki.</p>
+</section>
+</section>
+<section id="sec-AD-DataInput-2" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="sec-AD-DataInput-2"><span class="header-section-number">9.4</span> Data Input</h2>
+<section id="sec-AD-SimControlFile-3" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="sec-AD-SimControlFile-3"><span class="header-section-number">9.4.1</span> Simulation Control File</h3>
+<section id="sec-ADControlFile-4" class="level4" data-number="9.4.1.1">
+<h4 data-number="9.4.1.1" class="anchored" data-anchor-id="sec-ADControlFile-4"><span class="header-section-number">9.4.1.1</span> TUFLOW AD Control File (.adcf File)</h4>
+<p>The TUFLOW AD Control File or .adcf file points to the two mandatory files required for AD model execution. It is the top of the tree for the AD model and is called into the .tcf by the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ADControlFile">AD Control File</a></span> command. The .adcf file must reference:</p>
+<ul>
+<li>One global database file, using the <span class="tcmd"><a href="./89-AppendicesJ-ADCFCommands.html#adcf-ADGlobalDatabase">AD Global Database</a></span> command. For example,</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">AD GLOBAL DATABASE </span><span class="op">==</span> ..\bc_dbase\2d_ad_globaldatabase_Demo1.csv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>One boundary database file, using the <span class="tcmd"><a href="./89-AppendicesJ-ADCFCommands.html#adcf-ADBCDatabase">AD BC Database</a></span> command. For example,</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">AD BC DATABASE </span><span class="op">==</span> ..\bc_dbase\2d_ad_dbase_Demo1.csv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="89-AppendicesJ-ADCFCommands.html" class="quarto-xref"><span>Appendix J</span></a> lists and describes these commands and their parameters. No other commands are required in the adcf file.</p>
+</section>
+<section id="sec-AD-inputs-4" class="level4" data-number="9.4.1.2">
+<h4 data-number="9.4.1.2" class="anchored" data-anchor-id="sec-AD-inputs-4"><span class="header-section-number">9.4.1.2</span> GIS Input File Types and Naming Conventions</h4>
+<p>Spatial variation in initial condition and minimum dispersion coefficient is an optional data entry that can be used. If adding this feature to your model, it is recommended that the prefixes described in <a href="#tbl-ad-gis-inputs" class="quarto-xref">Table&nbsp;<span>9.1</span></a> be adhered to for 2D GIS layers. This greatly enhances the data management efficiency and importantly makes it much easier for another modeller or reviewer to quickly interpret the model. This approach is also consistent with that of TUFLOW.</p>
+<div class="cell" data-execution_count="2">
+<div id="tbl-ad-gis-inputs" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="2">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ad-gis-inputs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.1: GIS Input Data Layers and Recommended Prefixes
+</figcaption>
+<div aria-describedby="tbl-ad-gis-inputs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div id="fyvbjjukjv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#fyvbjjukjv table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#fyvbjjukjv thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#fyvbjjukjv p { margin: 0; padding: 0; }
+ #fyvbjjukjv .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #fyvbjjukjv .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #fyvbjjukjv .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #fyvbjjukjv .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #fyvbjjukjv .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #fyvbjjukjv .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #fyvbjjukjv .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #fyvbjjukjv .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #fyvbjjukjv .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #fyvbjjukjv .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #fyvbjjukjv .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #fyvbjjukjv .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #fyvbjjukjv .gt_spanner_row { border-bottom-style: hidden; }
+ #fyvbjjukjv .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #fyvbjjukjv .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #fyvbjjukjv .gt_from_md> :first-child { margin-top: 0; }
+ #fyvbjjukjv .gt_from_md> :last-child { margin-bottom: 0; }
+ #fyvbjjukjv .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #fyvbjjukjv .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #fyvbjjukjv .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #fyvbjjukjv .gt_row_group_first td { border-top-width: 2px; }
+ #fyvbjjukjv .gt_row_group_first th { border-top-width: 2px; }
+ #fyvbjjukjv .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #fyvbjjukjv .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #fyvbjjukjv .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #fyvbjjukjv .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #fyvbjjukjv .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #fyvbjjukjv .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #fyvbjjukjv .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #fyvbjjukjv .gt_left { text-align: left; }
+ #fyvbjjukjv .gt_center { text-align: center; }
+ #fyvbjjukjv .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #fyvbjjukjv .gt_font_normal { font-weight: normal; }
+ #fyvbjjukjv .gt_font_bold { font-weight: bold; }
+ #fyvbjjukjv .gt_font_italic { font-style: italic; }
+ #fyvbjjukjv .gt_super { font-size: 65%; }
+ #fyvbjjukjv .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #fyvbjjukjv .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 15%">
+<col style="width: 45%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="2D-Domain-GIS-Layers" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">2D Domain GIS Layers</th>
+<th id="Suggested-File-Prefix" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Suggested File Prefix</th>
+<th id="Description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+<th id="Section" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Section</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p>2D AD Initial Conditions</p></td>
+<td class="gt_row gt_left"><p>2d_ad_ic_</p></td>
+<td class="gt_row gt_left"><p>Layer containing polygons defining the spatial distribution of initial conditions for a given constituent. Optional.</p></td>
+<td class="gt_row gt_left"><p><a href="#sec-initial-conditions" class="quarto-xref"><span>Section 9.4.5</span></a></p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>2D AD Minimum Dispersion Coefficient</p></td>
+<td class="gt_row gt_left"><p>2d_ad_md_</p></td>
+<td class="gt_row gt_left"><p>Layer containing polygons defining the spatial distribution of minimum dispersion coefficients (<span class="math inline">\(D_w\)</span>) for a given constituent. Optional.</p></td>
+<td class="gt_row gt_left"><p><a href="#sec-minimum-dispersion-coefficient" class="quarto-xref"><span>Section 9.4.7</span></a></p></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-AD-OneDGeoms-3" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2" class="anchored" data-anchor-id="sec-AD-OneDGeoms-3"><span class="header-section-number">9.4.2</span> 1D Geometries</h3>
+<p>TUFLOW AD does not require any further 1D data in addition to the features already included in the TUFLOW hydraulic model.</p>
+</section>
+<section id="sec-ADConstituentProp-3" class="level3" data-number="9.4.3">
+<h3 data-number="9.4.3" class="anchored" data-anchor-id="sec-ADConstituentProp-3"><span class="header-section-number">9.4.3</span> Specification of Constituent Properties</h3>
+<p>Constituent properties are specified in the Global Database file, which is identified in the .adcf file using the <span class="tcmd"><a href="./89-AppendicesJ-ADCFCommands.html#adcf-ADGlobalDatabase">AD Global Database</a></span> command. This database file has a set structure, in much the same way as TUFLOW boundary database files, and can be created in software such as Microsoft Excel. The number of constituents simulated by TUFLOW AD is simply the number of line entries in this file (excepting the header data). Constituents can be removed from the simulation by prefacing rows in the global database file with the ‘!’ or ‘#’ character. The maximum number of constituents TUFLOW AD can simulate is 20.</p>
+<p>The global database file must be .csv (comma delimited) formatted. The first row must contain the predefined keywords (in order) as listed in <a href="#tbl-ad-globaldatabase" class="quarto-xref">Table&nbsp;<span>9.2</span></a>, separated by commas. Subsequent rows contain constituent data.</p>
+<p>Models using an AD global database file are provided in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#Advection_Dispersion">Advection Dispersion Example Model Dataset</a> on the TUFOW Wiki.</p>
+<div class="cell searchable" data-execution_count="3">
+<div id="tbl-ad-globaldatabase" class="cell searchable quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ad-globaldatabase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.2: Global Database Keyword Descriptions
+</figcaption>
+<div aria-describedby="tbl-ad-globaldatabase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="rfigjgorto" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#rfigjgorto table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#rfigjgorto thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#rfigjgorto p { margin: 0; padding: 0; }
+ #rfigjgorto .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #rfigjgorto .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #rfigjgorto .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #rfigjgorto .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #rfigjgorto .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #rfigjgorto .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #rfigjgorto .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #rfigjgorto .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #rfigjgorto .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #rfigjgorto .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #rfigjgorto .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #rfigjgorto .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #rfigjgorto .gt_spanner_row { border-bottom-style: hidden; }
+ #rfigjgorto .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #rfigjgorto .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #rfigjgorto .gt_from_md> :first-child { margin-top: 0; }
+ #rfigjgorto .gt_from_md> :last-child { margin-bottom: 0; }
+ #rfigjgorto .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #rfigjgorto .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #rfigjgorto .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #rfigjgorto .gt_row_group_first td { border-top-width: 2px; }
+ #rfigjgorto .gt_row_group_first th { border-top-width: 2px; }
+ #rfigjgorto .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #rfigjgorto .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #rfigjgorto .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #rfigjgorto .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #rfigjgorto .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #rfigjgorto .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #rfigjgorto .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #rfigjgorto .gt_left { text-align: left; }
+ #rfigjgorto .gt_center { text-align: center; }
+ #rfigjgorto .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #rfigjgorto .gt_font_normal { font-weight: normal; }
+ #rfigjgorto .gt_font_bold { font-weight: bold; }
+ #rfigjgorto .gt_font_italic { font-style: italic; }
+ #rfigjgorto .gt_super { font-size: 65%; }
+ #rfigjgorto .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #rfigjgorto .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell searchable caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Keyword" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Keyword</th>
+<th id="Description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p>Name</p></td>
+<td class="gt_row gt_left"><p>The name of a constituent. This might be ‘TN’ or ‘Salinity’ (without the inverted commas). The Name field is limited to 40 characters and must be alphanumeric characters only. Mandatory.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Heat Name</p></td>
+<td class="gt_row gt_left"><p>Not currently used. Leave blank.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Decay Rate</p></td>
+<td class="gt_row gt_left"><p>The decay rate (<span class="math inline">\(K_{d}\)</span>) of the constituent in units of day<span class="math inline">\(^-1\)</span>. See <a href="#eq-fo-decay" class="quarto-xref">Equation&nbsp;<span>9.16</span></a>.</p>
+<p>If no decay is required, then either enter 0 or leave the field blank.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Settling Rate</p></td>
+<td class="gt_row gt_left"><p>The settling rate of the constituent in units of m.day<span class="math inline">\(^-1\)</span>. This value is used in a simple mass balance calculation that removes the constituent from the water column based on this rate.</p>
+<p>If no settling is required, then either enter 0 or leave the field blank.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Longitudinal Dispersion Coefficient</p></td>
+<td class="gt_row gt_left"><p>The value <span class="math inline">\(K_{L}\)</span> for the constituent, as per <a href="#eq-X-Dispersion" class="quarto-xref">Equation&nbsp;<span>9.5</span></a> for TUFLOW Classic and <a href="#eq-AD-Solution-2" class="quarto-xref">Equation&nbsp;<span>9.9</span></a> for TUFLOW HPC. Allowing such variation between constituents permits simultaneous simulation of multiple constituents with varying dispersion properties. This is useful at the model calibration stage when a range of dispersion coefficients can be tested within one simulation to ascertain the best match to monitoring data. This feature can also be used in sensitivity testing. Notwithstanding this, this value should not be varied from constituent to constituent once the AD model is calibrated.</p>
+<p>If the field is blank or set to zero, then longitudinal dispersion is switched off.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Transverse Dispersion Coefficient</p></td>
+<td class="gt_row gt_left"><p>The value <span class="math inline">\(K_{T}\)</span> for the constituent, as per <a href="#eq-Y-Dispersion" class="quarto-xref">Equation&nbsp;<span>9.6</span></a> for TUFLOW Classic and <a href="#eq-AD-Solution-2" class="quarto-xref">Equation&nbsp;<span>9.9</span></a> for TUFLOW HPC. Allowing such variation can be exploited in the same manner as described above for longitudinal dispersion. This value should not be varied from constituent to constituent once the AD model is calibrated.</p>
+<p>If the field is blank or set to zero, then transverse dispersion is switched off.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Initial Condition</p></td>
+<td class="gt_row gt_left"><p>This can be set to either a single number or a path reference to a GIS layer (2d_ad_ic_). If the former is specified, then that value is applied uniformly to all wet cells at initialisation.</p>
+<p>If a path to a GIS layer is specified, then the layer must comprise of (only) polygons with a single attribute. The attribute must be of type Float. The field name is not used by TUFLOW AD, so can be set to a label that is meaningful to the user. The polygon data, with spatially varying attributes of initial concentration is applied to wet cells at simulation initiation. Wet cells not covered by any polygon in the specified GIS layer are set to a concentration of zero.</p>
+<p>If the field is left blank, then a concentration of zero is applied to all cells.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Minimum</p></td>
+<td class="gt_row gt_left"><p>Not currently used. Leave blank.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Maximum</p></td>
+<td class="gt_row gt_left"><p>Not currently used. Leave blank.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Minimum Dispersion</p></td>
+<td class="gt_row gt_left"><p>This sets the value of <span class="math inline">\(D_{w}\)</span> as per <a href="#eq-X-Dispersion" class="quarto-xref">Equation&nbsp;<span>9.5</span></a> and <a href="#eq-Y-Dispersion" class="quarto-xref">Equation&nbsp;<span>9.6</span></a> for TUFLOW Classic and <a href="#eq-AD-Solution-4" class="quarto-xref">Equation&nbsp;<span>9.13</span></a> for TUFLOW HPC. It can be set to either a single number or a path reference to a GIS layer. If the former is specified, then that value is applied uniformly to all wet cells at each timestep.</p>
+<p>If a path to a GIS layer is specified, then the layer must comprise of (only) polygons with a single attribute. The attribute must be of type Float. The field name is not used by TUFLOW AD, so can be set to a label that is meaningful to the user. The polygon data, with spatially varying values of <span class="math inline">\(D_{w}\)</span> is applied to wet cells at each timestep. Wet cells not covered by any polygon in the specified GIS layer will have <span class="math inline">\(D_{w}\)</span> set to zero.</p>
+<p>This field cannot be left blank. If a minimum dispersion of zero is required, then 0.0 must be entered in this field. Errors will result if this field is left blank.</p></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="sec-ADBoundaryConditions-3" class="level3" data-number="9.4.4">
+<h3 data-number="9.4.4" class="anchored" data-anchor-id="sec-ADBoundaryConditions-3"><span class="header-section-number">9.4.4</span> Boundary Conditions</h3>
+<p>Constituent concentrations at model boundaries are specified in the Boundary Condition (BC) Database file, which is identified in the .adcf file using the <span class="tcmd"><a href="./89-AppendicesJ-ADCFCommands.html#adcf-ADBCDatabase">AD BC Database</a></span> command. Note that TUFLOW AD does not require specification of any geographical information regarding the location of boundaries, which is defined in .tbc file and passed from the TUFLOW hydraulic model to TUFLOW AD.</p>
+<p>TUFLOW AD uses the same approach as TUFLOW hydraulic model to setting up boundary conditions, in that two types of files are required:</p>
+<ul>
+<li>Boundary condition database (see <a href="#sec-BCDatabase-4" class="quarto-xref"><span>Section 9.4.4.1</span></a>); and</li>
+<li>Boundary condition data files (i.e.&nbsp;timeseries, see <a href="#sec-BCDatabaseExample-4" class="quarto-xref"><span>Section 9.4.4.2</span></a>).</li>
+</ul>
+<p>Note that the BC types supported by TUFLOW AD are:</p>
+<ul>
+<li>TUFLOW Classic: HT, QT, ST, HQ, SA</li>
+<li>TUFLOW HPC: HT, QT, SA</li>
+</ul>
+<section id="sec-BCDatabase-4" class="level4" data-number="9.4.4.1">
+<h4 data-number="9.4.4.1" class="anchored" data-anchor-id="sec-BCDatabase-4"><span class="header-section-number">9.4.4.1</span> Boundary Condition (BC) Database</h4>
+<p>A boundary condition (BC) database is created using spreadsheet software, such as Microsoft Excel. It must be .csv (comma delimited) formatted and is identified in the .adcf file (see <span class="tcmd"><a href="./89-AppendicesJ-ADCFCommands.html#adcf-ADBCDatabase">AD BC Database</a></span>). The database contains a list of files and attribute names to search for within those files. The attribute names are then used to extract the desired boundary condition data.</p>
+<p>The TUFLOW AD BC Database is structured in the same way as a standard TUFLOW BC Database, in that it must contain a header line with subsequent rows of information. The header line must contain the following keywords, in the below order, with meanings as per <a href="#tbl-ad-database-keywords" class="quarto-xref">Table&nbsp;<span>9.3</span></a>.</p>
+<p>“Name, Source, Column 1, Column 2, Add Col 1, Mult Col 2, Add Col 2, Column 3, Column 4”</p>
+<div class="cell searchable" data-execution_count="4">
+<div id="tbl-ad-database-keywords" class="cell searchable quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ad-database-keywords-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.3: AD BC Database Keyword Descriptions
+</figcaption>
+<div aria-describedby="tbl-ad-database-keywords-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="xgjhndyidx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#xgjhndyidx table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#xgjhndyidx thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#xgjhndyidx p { margin: 0; padding: 0; }
+ #xgjhndyidx .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #xgjhndyidx .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #xgjhndyidx .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #xgjhndyidx .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #xgjhndyidx .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #xgjhndyidx .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #xgjhndyidx .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #xgjhndyidx .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #xgjhndyidx .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #xgjhndyidx .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #xgjhndyidx .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #xgjhndyidx .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #xgjhndyidx .gt_spanner_row { border-bottom-style: hidden; }
+ #xgjhndyidx .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #xgjhndyidx .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #xgjhndyidx .gt_from_md> :first-child { margin-top: 0; }
+ #xgjhndyidx .gt_from_md> :last-child { margin-bottom: 0; }
+ #xgjhndyidx .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #xgjhndyidx .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #xgjhndyidx .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #xgjhndyidx .gt_row_group_first td { border-top-width: 2px; }
+ #xgjhndyidx .gt_row_group_first th { border-top-width: 2px; }
+ #xgjhndyidx .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #xgjhndyidx .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #xgjhndyidx .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #xgjhndyidx .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #xgjhndyidx .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #xgjhndyidx .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #xgjhndyidx .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #xgjhndyidx .gt_left { text-align: left; }
+ #xgjhndyidx .gt_center { text-align: center; }
+ #xgjhndyidx .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #xgjhndyidx .gt_font_normal { font-weight: normal; }
+ #xgjhndyidx .gt_font_bold { font-weight: bold; }
+ #xgjhndyidx .gt_font_italic { font-style: italic; }
+ #xgjhndyidx .gt_super { font-size: 65%; }
+ #xgjhndyidx .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #xgjhndyidx .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell searchable caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Keyword" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Keyword</th>
+<th id="Description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p>Name</p></td>
+<td class="gt_row gt_left"><p>The name of a BC data set. It consists of two concatenated elements as follows:</p>
+<ul>
+<li>First: This must be the same ‘Name’ attribute used in the GIS 2d_bc layer(s) specified in TUFLOW. This is third attribute in the 2d_bc layer and follows ‘Type’ and ‘Flags’. It may contain spaces, but must not contain commas. It is not case sensitive.</li>
+<li>Second: This must be the name of the appropriate constituent for which the boundary condition is being specified. This name must be one of those specified in the AD Global Database ‘Name’ field.</li>
+</ul>
+<p>These two names are joined by a double underscore. As such, if there are “M” 2d_bc boundary condition objects specified in TUFLOW, and “N” constituents to be simulated by TUFLOW AD, then M*N entries are required in the AD BC Database.</p>
+<p>An example is Ocean__Salinity, where the TUFLOW 2d_bc file has a line with Name attribute “Ocean” and the AD Global Database has a variable called “Salinity” listed.</p>
+<p>Mandatory.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Source</p></td>
+<td class="gt_row gt_left"><p>The file from which to extract the BC data. It must be a .csv file. Paths are relative to the AD Global Database.</p>
+<p>Mandatory.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Column 1</p></td>
+<td class="gt_row gt_left"><p>The name of the first column of data (time values) in the .csv Source File.</p>
+<p>Mandatory.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Column 2</p></td>
+<td class="gt_row gt_left"><p>The name of the column of data in the .csv Source File. Values in this column are always concentrations, for all allowable BC sets. These are applied to cells corresponding to the appropriate locations of all types of BCs specified in TUFLOW 2d_bc GIS layers. These specified concentrations override any other computed concentrations at the boundary locations.</p>
+<p>The exception to the above is for SA boundaries, where the specified concentration is multiplied by the inflow corresponding to that concentration (as passed to TUFLOW AD from TUFLOW) and the mass load over the SA polygon computed. This mass load is then added to the mass of constituent within the wet computational cells within the SA polygon, and mass conservation used to compute a new resultant ambient concentration.</p>
+<p>Mandatory.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Add Col 1</p></td>
+<td class="gt_row gt_left"><p>Not used. Leave Blank.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Mult Col 2</p></td>
+<td class="gt_row gt_left"><p>Not used. Leave Blank.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Add Col 2</p></td>
+<td class="gt_row gt_left"><p>Not used. Leave Blank.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Column 3</p></td>
+<td class="gt_row gt_left"><p>Not used. Leave Blank.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Column 4</p></td>
+<td class="gt_row gt_left"><p>Not used. Leave Blank.</p></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="sec-BCDatabaseExample-4" class="level4" data-number="9.4.4.2">
+<h4 data-number="9.4.4.2" class="anchored" data-anchor-id="sec-BCDatabaseExample-4"><span class="header-section-number">9.4.4.2</span> BC Database Example</h4>
+<p>The Excel spreadsheet below illustrates a simple example of a TUFLOW AD BC Database, created in a Microsoft Excel worksheet that is exported as a .csv file for use by TUFLOW AD. Four line boundaries have been specified via GIS in the TUFLOW model (with Name fields “West”, “North”, “East” and “South”) and two constituents have been specified in the AD Global Database (with Name fields “Tracer_01” and “Tracer_02”). Four boundaries and two constituents thus require eight entries in the TUFLOW AD BC Database file.</p>
+<div id="fig-AD-EXG-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-AD-EXG-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/AD_Database_Example1.png" id="fig-AD-EXG-1" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-AD-EXG-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.2
+</figcaption>
+</figure>
+</div>
+<p>The Demo1_Concs.csv file was created by saving the below as a .csv file from Excel. All values are concentrations in mg/L, with the exception of the Time column, which has units of hours.</p>
+<div id="fig-AD-EXG-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-AD-EXG-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/AD_Database_Example2.png" id="fig-AD-EXG-2" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-AD-EXG-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.3
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-initial-conditions" class="level3" data-number="9.4.5">
+<h3 data-number="9.4.5" class="anchored" data-anchor-id="sec-initial-conditions"><span class="header-section-number">9.4.5</span> Initial Conditions</h3>
+<p>Initial conditions are specified for each constituent as either a constant value or spatially varied value (see <a href="#tbl-ad-globaldatabase" class="quarto-xref">Table&nbsp;<span>9.2</span></a>). The former is simply entered as a decimal (or integer) in the Initial Condition field of the AD Global Database. This value is applied to all wet cells at model initiation. The latter is applied by entering a relative (or absolute) file path to a GIS layer in the Initial Condition field of the AD Global Database. The GIS file has the attributes described in <a href="#tbl-ad-gis-inputs2" class="quarto-xref">Table&nbsp;<span>9.4</span></a>.</p>
+<div class="cell" data-execution_count="5">
+<div id="tbl-ad-gis-inputs2" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="5">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ad-gis-inputs2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.4: 2D Initial Conditions (2d_ad_ic) Attribute Descriptions
+</figcaption>
+<div aria-describedby="tbl-ad-gis-inputs2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="dcbassqvdx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#dcbassqvdx table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#dcbassqvdx thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#dcbassqvdx p { margin: 0; padding: 0; }
+ #dcbassqvdx .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #dcbassqvdx .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #dcbassqvdx .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #dcbassqvdx .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #dcbassqvdx .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #dcbassqvdx .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #dcbassqvdx .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #dcbassqvdx .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #dcbassqvdx .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #dcbassqvdx .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #dcbassqvdx .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #dcbassqvdx .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #dcbassqvdx .gt_spanner_row { border-bottom-style: hidden; }
+ #dcbassqvdx .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #dcbassqvdx .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #dcbassqvdx .gt_from_md> :first-child { margin-top: 0; }
+ #dcbassqvdx .gt_from_md> :last-child { margin-bottom: 0; }
+ #dcbassqvdx .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #dcbassqvdx .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #dcbassqvdx .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #dcbassqvdx .gt_row_group_first td { border-top-width: 2px; }
+ #dcbassqvdx .gt_row_group_first th { border-top-width: 2px; }
+ #dcbassqvdx .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #dcbassqvdx .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #dcbassqvdx .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #dcbassqvdx .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #dcbassqvdx .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #dcbassqvdx .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #dcbassqvdx .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #dcbassqvdx .gt_left { text-align: left; }
+ #dcbassqvdx .gt_center { text-align: center; }
+ #dcbassqvdx .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #dcbassqvdx .gt_font_normal { font-weight: normal; }
+ #dcbassqvdx .gt_font_bold { font-weight: bold; }
+ #dcbassqvdx .gt_font_italic { font-style: italic; }
+ #dcbassqvdx .gt_super { font-size: 65%; }
+ #dcbassqvdx .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #dcbassqvdx .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 45%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="GIS-Attribute" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">GIS Attribute</th>
+<th id="Description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+<th id="Type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Type</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p>Conc</p></td>
+<td class="gt_row gt_left"><p>The initial condition concentration.</p></td>
+<td class="gt_row gt_left"><p>Float</p></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>As many polygons as needed can be included in this layer. Any wet cells not covered by these polygons will be initialised to a concentration of zero. The naming convention prefix for this layer is 2d_ad_ic_. The objects must be polygons. Rectangles, round rectangles etc. are not supported by TUFLOW. The attribute name is not read by TUFLOW AD and can be anything meaningful to the user - “Conc” is used as an example above for clarity.</p>
+</section>
+<section id="sec-GW-initial-conditions" class="level3" data-number="9.4.6">
+<h3 data-number="9.4.6" class="anchored" data-anchor-id="sec-GW-initial-conditions"><span class="header-section-number">9.4.6</span> Groundwater Initial Conditions</h3>
+<p>Initial concentrations can be set within groundwater layers using the following .tgc commands:</p>
+<div class="scrollable-block">
+<p><span class="tcmd"><a href="./82-AppendicesC-TGCCommands.html#tgc-SetIGWConc">[Set | Read GIS | Read Grid] IGW Conc Layer N1,N2,..N Tracer M1,M2,..M</a></span> <span class="teq">==</span> <span class="tblk">value | /path/to/file</span></p>
+</div>
+<p>Where:</p>
+<ul>
+<li>N = The groundwater layer number (reference multiple in a single command)</li>
+<li>M = The tracer number (reference multiple in a single command), as ordered in the AD Global Database</li>
+</ul>
+<p>If a layer number is not referenced, it is assumed to apply to layer 1. Likewise, if a tracer number is not referenced it is assumed to apply to the first tracer.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The order that ‘Layer’ and ‘Tracer’ appear in the command does not matter (i.e.&nbsp;tracer numbers could be listed before layer numbers).</p>
+</div>
+</div>
+</section>
+<section id="sec-minimum-dispersion-coefficient" class="level3" data-number="9.4.7">
+<h3 data-number="9.4.7" class="anchored" data-anchor-id="sec-minimum-dispersion-coefficient"><span class="header-section-number">9.4.7</span> Minimum Dispersion Coefficient</h3>
+<p>Minimum dispersion coefficients are specified for each constituent as either a constant value or spatially varied value (see <a href="#tbl-ad-globaldatabase" class="quarto-xref">Table&nbsp;<span>9.2</span></a>). The former is simply entered as a decimal (or integer) in the Minimum Dispersion field of the AD Global Database. This value is applied to all wet cells at all timesteps. The latter is applied by entering a relative (or absolute) file path to a GIS layer in the Minimum Dispersion field of the AD Global Database. The GIS file has the attributes described in <a href="#tbl-ad-gis-inputs3" class="quarto-xref">Table&nbsp;<span>9.5</span></a>.</p>
+<div class="cell" data-execution_count="6">
+<div id="tbl-ad-gis-inputs3" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="6">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ad-gis-inputs3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.5: 2D Minimum Dispersion Coefficient (2d_ad_md) Attribute Descriptions
+</figcaption>
+<div aria-describedby="tbl-ad-gis-inputs3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div id="nrfrmlzcxg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#nrfrmlzcxg table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#nrfrmlzcxg thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#nrfrmlzcxg p { margin: 0; padding: 0; }
+ #nrfrmlzcxg .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #nrfrmlzcxg .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #nrfrmlzcxg .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #nrfrmlzcxg .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #nrfrmlzcxg .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #nrfrmlzcxg .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #nrfrmlzcxg .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #nrfrmlzcxg .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #nrfrmlzcxg .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #nrfrmlzcxg .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #nrfrmlzcxg .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #nrfrmlzcxg .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #nrfrmlzcxg .gt_spanner_row { border-bottom-style: hidden; }
+ #nrfrmlzcxg .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #nrfrmlzcxg .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #nrfrmlzcxg .gt_from_md> :first-child { margin-top: 0; }
+ #nrfrmlzcxg .gt_from_md> :last-child { margin-bottom: 0; }
+ #nrfrmlzcxg .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #nrfrmlzcxg .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #nrfrmlzcxg .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #nrfrmlzcxg .gt_row_group_first td { border-top-width: 2px; }
+ #nrfrmlzcxg .gt_row_group_first th { border-top-width: 2px; }
+ #nrfrmlzcxg .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #nrfrmlzcxg .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #nrfrmlzcxg .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #nrfrmlzcxg .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #nrfrmlzcxg .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #nrfrmlzcxg .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #nrfrmlzcxg .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #nrfrmlzcxg .gt_left { text-align: left; }
+ #nrfrmlzcxg .gt_center { text-align: center; }
+ #nrfrmlzcxg .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #nrfrmlzcxg .gt_font_normal { font-weight: normal; }
+ #nrfrmlzcxg .gt_font_bold { font-weight: bold; }
+ #nrfrmlzcxg .gt_font_italic { font-style: italic; }
+ #nrfrmlzcxg .gt_super { font-size: 65%; }
+ #nrfrmlzcxg .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #nrfrmlzcxg .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 45%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="GIS-Attribute" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">GIS Attribute</th>
+<th id="Description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+<th id="Type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Type</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p>MD</p></td>
+<td class="gt_row gt_left"><p>Minimum dispersion coefficient.</p></td>
+<td class="gt_row gt_left"><p>Float</p></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>As many polygons as needed can be included in this layer. Any wet cells not covered by these polygons will be assigned a minimum dispersion coefficient of zero. The naming convention prefix for this layer is 2d_ad_md_. The objects must be polygons. Rectangles, round rectangles etc. are not supported by TUFLOW. The attribute name is not read by TUFLOW AD and can be anything meaningful to the user - “MD” is used as an example above for clarity.</p>
+</section>
+</section>
+<section id="sec-AD-DataOutput-2" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="sec-AD-DataOutput-2"><span class="header-section-number">9.5</span> Data Output</h2>
+<section id="sec-AD-LogFiles-3" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="sec-AD-LogFiles-3"><span class="header-section-number">9.5.1</span> TUFLOW AD Log Files</h3>
+<p>TUFLOW AD log files are written to the location specified by <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-LogFolder">Log Folder</a></span> command in the .tcf file, or if this command is not used the same location as the .tcf file. The following logs are available:</p>
+<ul>
+<li>An AD simulation log file (.adlf);</li>
+<li>A CFL condition log file - output when using <span class="tcmd"><a href="./89-AppendicesJ-ADCFCommands.html#adcf-WriteCFL">Write CFL</a></span> <span class="teq">==</span> <span class="tblk">ON</span>, for TUFLOW Classic only; and</li>
+<li>A mass balance log file - output when using <span class="tcmd"><a href="./89-AppendicesJ-ADCFCommands.html#adcf-WriteMass">Write Mass</a></span> <span class="teq">==</span> <span class="tblk">ON</span>.</li>
+</ul>
+<section id="sec-AD-log-4" class="level4" data-number="9.5.1.1">
+<h4 data-number="9.5.1.1" class="anchored" data-anchor-id="sec-AD-log-4"><span class="header-section-number">9.5.1.1</span> Simulation Log File</h4>
+<p>This file is named <code>&lt;TCF_name&gt;.adlf</code>. It contains commentary of input reading, constituent specification etc. as the simulation sets itself up.</p>
+<p>Following model initialisation, if <span class="tcmd"><a href="./89-AppendicesJ-ADCFCommands.html#adcf-WriteIterations">Write Iterations</a></span> <span class="teq">==</span> <span class="tblk">ON</span> is used, for TUFLOW Classic only, the following is output at each timestep. For example:</p>
+<pre><code>Simulation time (h) 0.0125
+Finished constituent Tracer_01 at AD substep iteration number 1
+Finished constituent Tracer_02 at AD substep iteration number 1
+Finished constituent Tracer_02 at AD substep iteration number 2
+Finished constituent Tracer_02 at AD substep iteration number 3</code></pre>
+<p>These lines show information regarding the simulation time for each constituent. In particular, the number of AD sub-steps needed to be executed to maintain stability under CFL and Peclet conditions is reported. In the above example, constituent Tracer_01 required no substepping, whilst constituent Tracer_02 required 3 substep iterations to maintain stability. This is caused by Tracer_02 being set up with greater dispersion coefficients than Tracer_01 in the <span class="tcmd"><a href="./89-AppendicesJ-ADCFCommands.html#adcf-ADGlobalDatabase">AD Global Database</a></span>. Additional rows are added as required by the number of constituents simulated.</p>
+<p>This TUFLOW AD timestep information is not available for TUFLOW HPC, or needs review by the modeller, due to the fact the TUFLOW HPC hydraulic engine and advection dispersion calculations are performed on the same timestep and with the same scheme. See Section <a href="#sec-AD-Computational-Timestep-3" class="quarto-xref"><span>Section 9.3.4</span></a> for discussion regarding timestep differences relating to TUFLOW Classic and TUFLOW HPC.</p>
+</section>
+<section id="sec-ADCFLLogFile-4" class="level4" data-number="9.5.1.2">
+<h4 data-number="9.5.1.2" class="anchored" data-anchor-id="sec-ADCFLLogFile-4"><span class="header-section-number">9.5.1.2</span> CFL Log File</h4>
+<p>This file is named <code>&lt;TCF_name&gt;_ADcfl.csv</code>. It can be output when using TUFLOW Classic in conjunction with the <span class="tcmd"><a href="./89-AppendicesJ-ADCFCommands.html#adcf-WriteCFL">Write CFL</a></span> <span class="teq">==</span> <span class="tblk">ON</span> command. It contains commentary on CFL and Peclet numbers, maximum dispersion coefficients and number of substep iterations. The column data is as per <a href="#tbl-ad-results1" class="quarto-xref">Table&nbsp;<span>9.6</span></a>:</p>
+<div class="cell" data-execution_count="7">
+<div id="tbl-ad-results1" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="7">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ad-results1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.6: _ADcfl.csv File Columns
+</figcaption>
+<div aria-describedby="tbl-ad-results1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div id="wujdtydxgu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#wujdtydxgu table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#wujdtydxgu thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#wujdtydxgu p { margin: 0; padding: 0; }
+ #wujdtydxgu .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #wujdtydxgu .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #wujdtydxgu .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #wujdtydxgu .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #wujdtydxgu .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #wujdtydxgu .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #wujdtydxgu .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #wujdtydxgu .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #wujdtydxgu .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #wujdtydxgu .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #wujdtydxgu .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #wujdtydxgu .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #wujdtydxgu .gt_spanner_row { border-bottom-style: hidden; }
+ #wujdtydxgu .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #wujdtydxgu .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #wujdtydxgu .gt_from_md> :first-child { margin-top: 0; }
+ #wujdtydxgu .gt_from_md> :last-child { margin-bottom: 0; }
+ #wujdtydxgu .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #wujdtydxgu .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #wujdtydxgu .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #wujdtydxgu .gt_row_group_first td { border-top-width: 2px; }
+ #wujdtydxgu .gt_row_group_first th { border-top-width: 2px; }
+ #wujdtydxgu .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #wujdtydxgu .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #wujdtydxgu .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #wujdtydxgu .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #wujdtydxgu .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #wujdtydxgu .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #wujdtydxgu .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #wujdtydxgu .gt_left { text-align: left; }
+ #wujdtydxgu .gt_center { text-align: center; }
+ #wujdtydxgu .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #wujdtydxgu .gt_font_normal { font-weight: normal; }
+ #wujdtydxgu .gt_font_bold { font-weight: bold; }
+ #wujdtydxgu .gt_font_italic { font-style: italic; }
+ #wujdtydxgu .gt_super { font-size: 65%; }
+ #wujdtydxgu .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #wujdtydxgu .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Column" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Column</th>
+<th id="Description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p>time (h)</p></td>
+<td class="gt_row gt_left"><p>The simulation time in hours.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Constituent Name</p></td>
+<td class="gt_row gt_left"><p>The name of the constituent as specified in the AD global database.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Max_CFL_u</p></td>
+<td class="gt_row gt_left"><p>The maximum CFL for u velocities anywhere in the computational domain at that timestep.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Max_CFL_v</p></td>
+<td class="gt_row gt_left"><p>The maximum CFL for v velocities anywhere in the computational domain at that timestep.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Max_Peclet_u</p></td>
+<td class="gt_row gt_left"><p>The maximum Peclet number for u dispersion anywhere in the computational domain at that timestep.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Max_Peclet_v</p></td>
+<td class="gt_row gt_left"><p>The maximum Peclet number for v dispersion anywhere in the computational domain at that timestep.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Max_sum_u</p></td>
+<td class="gt_row gt_left"><p>The maximum of the sum of CFL and Peclet numbers in the x (u) direction anywhere in the computational domain.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Max_sum_v</p></td>
+<td class="gt_row gt_left"><p>The maximum of the sum of CFL and Peclet numbers in the y (v) direction anywhere in the computational domain.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Max_Disp_x</p></td>
+<td class="gt_row gt_left"><p>The maximum dispersion coefficient in the x (u) direction anywhere in the computational domain.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Max_Disp_y</p></td>
+<td class="gt_row gt_left"><p>The maximum dispersion coefficient in the y (v) direction anywhere in the computational domain.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Num_iterations</p></td>
+<td class="gt_row gt_left"><p>The number of iterations required by TUFLOW AD to remain stable. This can vary from constituent to constituent if different dispersion coefficients are applied.</p></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>As per the TUFLOW AD timestep information in the ‘.adlf’ file. This log information is not available for TUFLOW HPC, or needs review by the modeller, due to the fact the TUFLOW HPC hydraulic engine and advection dispersion calculations are performed on the same timestep and with the same scheme. See Section <a href="#sec-AD-Computational-Timestep-3" class="quarto-xref"><span>Section 9.3.4</span></a> for discussion regarding timestep differences relating to TUFLOW Classic and TUFLOW HPC.</p>
+</section>
+<section id="sec-ADLogMass-4" class="level4" data-number="9.5.1.3">
+<h4 data-number="9.5.1.3" class="anchored" data-anchor-id="sec-ADLogMass-4"><span class="header-section-number">9.5.1.3</span> Mass Log File</h4>
+<p>This file is named <code>&lt;TCF_name&gt;_ADmass.csv</code>. It can be output when using TUFLOW Classic or TUFLOW HPC in conjunction with the <span class="tcmd"><a href="./89-AppendicesJ-ADCFCommands.html#adcf-WriteMass">Write Mass</a></span> <span class="teq">==</span> <span class="tblk">ON</span> command. It contains commentary on mass conservation. Specifically, the column data is as per <a href="#tbl-ad-results2" class="quarto-xref">Table&nbsp;<span>9.7</span></a>:</p>
+<div class="cell" data-execution_count="8">
+<div id="tbl-ad-results2" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="8">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ad-results2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.7: _ADmass.csv File Columns
+</figcaption>
+<div aria-describedby="tbl-ad-results2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div id="kjyenqyoeb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#kjyenqyoeb table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#kjyenqyoeb thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#kjyenqyoeb p { margin: 0; padding: 0; }
+ #kjyenqyoeb .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #kjyenqyoeb .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #kjyenqyoeb .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #kjyenqyoeb .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #kjyenqyoeb .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #kjyenqyoeb .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #kjyenqyoeb .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #kjyenqyoeb .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #kjyenqyoeb .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #kjyenqyoeb .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #kjyenqyoeb .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #kjyenqyoeb .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #kjyenqyoeb .gt_spanner_row { border-bottom-style: hidden; }
+ #kjyenqyoeb .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #kjyenqyoeb .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #kjyenqyoeb .gt_from_md> :first-child { margin-top: 0; }
+ #kjyenqyoeb .gt_from_md> :last-child { margin-bottom: 0; }
+ #kjyenqyoeb .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #kjyenqyoeb .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #kjyenqyoeb .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #kjyenqyoeb .gt_row_group_first td { border-top-width: 2px; }
+ #kjyenqyoeb .gt_row_group_first th { border-top-width: 2px; }
+ #kjyenqyoeb .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #kjyenqyoeb .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #kjyenqyoeb .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #kjyenqyoeb .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #kjyenqyoeb .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #kjyenqyoeb .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #kjyenqyoeb .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #kjyenqyoeb .gt_left { text-align: left; }
+ #kjyenqyoeb .gt_center { text-align: center; }
+ #kjyenqyoeb .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #kjyenqyoeb .gt_font_normal { font-weight: normal; }
+ #kjyenqyoeb .gt_font_bold { font-weight: bold; }
+ #kjyenqyoeb .gt_font_italic { font-style: italic; }
+ #kjyenqyoeb .gt_super { font-size: 65%; }
+ #kjyenqyoeb .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #kjyenqyoeb .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Column" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Column</th>
+<th id="Description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p>time (h)</p></td>
+<td class="gt_row gt_left"><p>The simulation time in hours.</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>Constituent Name 1</p></td>
+<td class="gt_row gt_left"><p>The total mass of that constituent in the computational domain. TUFLOW AD assumes that the constituent concentrations are specified in mg/L, and this number is then in tonnes of constituent. If the concentration is g/L, then this number should be multiplied by 1000 to be in units of tonnes.</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>Constituent Name 2</p></td>
+<td class="gt_row gt_left"><p>As per constituent 1. Column repeated until all constituents have been accounted for</p></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-AD-CheckFiles-3" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="sec-AD-CheckFiles-3"><span class="header-section-number">9.5.2</span> Check Files</h3>
+<p>When using the AD module, a _AD_check file is generated. For more information, see the <a href="https://wiki.tuflow.com/Check_Files_2d_ad_check">TUFLOW Wiki Check Files 2d ad check</a> page.</p>
+</section>
+<section id="sec-AD-ResultFiles-3" class="level3" data-number="9.5.3">
+<h3 data-number="9.5.3" class="anchored" data-anchor-id="sec-AD-ResultFiles-3"><span class="header-section-number">9.5.3</span> Result Files</h3>
+<p>Result files contain the computed spatial and temporal evolution of simulated constituents. The output is a temporal format (maximums are not available) and will be output in the format specified by the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-MapOutputFormat">Map Output Format</a></span> command. For example, if <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-MapOutputFormat">Map Output Format</a></span> <span class="teq">==</span> <span class="tblk">XMDF</span> is used, the XMDF output will contain a result type called “Conc Tracer_X”.</p>
+<p>The AD output will automatically be produced unless the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-MapOutputDataTypes">Map Output Data Types</a></span> command is set to “AD OFF”. This off option can also be set on a Map Output format basis (e.g.&nbsp;<span class="tcmd">FLT Map Output Data Types</span> <span class="teq">==</span> <span class="tblk">AD OFF</span>).</p>
+<p><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISPO">Plot Outputs</a></span> are currently not supported for TUFLOW AD outputs.</p>
+<p><img src="images/WQFooter.jpg" class="img-fluid" style="width:100.0%"></p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="1" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-Falconer2005" class="csl-entry" role="listitem">
+Falconer, R. A., Lin, B., &amp; Kashefipour, S. M. (2005). Modelling Water Quality Processes in Estuaries. In P. B. Bates, S. N. Lane, &amp; R. I. Furguson (Eds.), <em>Computational fluid dynamics: Applications in environmental hydraulics</em>. John Wiley; Sons.
+</div>
+<div id="ref-Fringer2005" class="csl-entry" role="listitem">
+Fringer, O. B., Armfield, S. W., &amp; Street, R. L. (2005). Reducing Numerical Diffusion in Interfacial Gravity Wave Simulations. <em>International Journal for Numerical Methods in Fluids</em>, <em>49</em>, 301–329.
+</div>
+<div id="ref-Leonard1991" class="csl-entry" role="listitem">
+Leonard, B. P. (1991). The ULTIMATE Conservative Difference Scheme Applied to Unsteady One-Dimensional Advection. <em>Computer Methods in Applied Mechanics and Engineering</em>, <em>88</em>(1), 17–74.
+</div>
+<div id="ref-Leonard1993" class="csl-entry" role="listitem">
+Leonard, B. P., MacVean, M. K., &amp; Lock, A. P. (1993). <em>Positivity-Preserving Numerical Schemes for Multidimensional Advection</em> (93N27091). <span>NASA Centre for Aerospace Information</span>.
+</div>
+<div id="ref-LeonardNiknafs1991" class="csl-entry" role="listitem">
+Leonard, B. P., &amp; Niknafs, H. S. (1991). <em>Cost-Effective Accurate Coarse-Grid Method for Highly Convective Multidimensional Unsteady Flows</em> (91N21075). <span>NASA Centre for Aerospace Information</span>.
+</div>
+<div id="ref-Wu2000" class="csl-entry" role="listitem">
+Wu, &amp; Falconer, R. A. (2000). A Mass Conservative 3-d Numerical Model for Predicting Solute Fluxes in Estuarine Waters. <em>Advances in Water Resources</em>, <em>23</em>(5), 531–543.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+// Hover preview for plain anchor links -- mirrors native quarto-xref behaviour.
+
+// Supports same-page anchors and cross-chapter links on the same origin.
+
+// Placed via include-after-body so all DOM is parsed when this runs.
+
+(function () {
+
+  if (typeof window.tippy !== 'function') { return; }
+
+
+
+  var doc = window.document;
+
+  var pageCache = {};
+
+
+
+  function stripColumnClasses(el) {
+
+    el.classList.remove('page-full', 'page-columns');
+
+    for (var i = 0; i < el.children.length; i++) {
+
+      stripColumnClasses(el.children[i]);
+
+    }
+
+  }
+
+
+
+  function buildContent(id, target) {
+
+    var clone = target.cloneNode(true);
+
+    stripColumnClasses(clone);
+
+
+
+    var anchor = clone.querySelector('a.anchorjs-link');
+
+    if (anchor) { anchor.parentNode.removeChild(anchor); }
+
+
+
+    var isSectionEl = (clone.tagName === 'SECTION' || /^H[1-6]$/.test(clone.tagName || ''));
+
+    var isSectionId = (typeof id === 'string' && id.indexOf('sec-') === 0);
+
+
+
+    if (isSectionEl || isSectionId) {
+
+      var container = doc.createElement('div');
+
+      var kids = clone.children;
+
+      if (kids.length > 2) {
+
+        container.appendChild(kids[0].cloneNode(true));
+
+        for (var j = 1; j < kids.length; j++) {
+
+          if (kids[j].tagName === 'P' && (kids[j].textContent || '').trim() === '') { continue; }
+
+          container.appendChild(kids[j].cloneNode(true));
+
+          break;
+
+        }
+
+        if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(container); }
+
+        return container.innerHTML;
+
+      }
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.innerHTML;
+
+    }
+
+
+
+    if (clone.classList.contains('callout')) {
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.outerHTML;
+
+    }
+
+
+
+    if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+    return clone.innerHTML;
+
+  }
+
+
+
+  function getTargetFromPage(pageUrl, id, callback) {
+
+    if (pageCache[pageUrl]) {
+
+      callback(pageCache[pageUrl].getElementById(id));
+
+      return;
+
+    }
+
+    fetch(pageUrl)
+
+      .then(function (r) { return r.text(); })
+
+      .then(function (html) {
+
+        var parser = new DOMParser();
+
+        var parsedDoc = parser.parseFromString(html, 'text/html');
+
+        pageCache[pageUrl] = parsedDoc;
+
+        callback(parsedDoc.getElementById(id));
+
+      })
+
+      .catch(function () { callback(null); });
+
+  }
+
+
+
+  // Same-page anchor links (href starts with "#")
+
+  var samePageLinks = doc.querySelectorAll(
+
+    'main a[href^="#"]:not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < samePageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var hash   = link.getAttribute('href');
+
+      var id     = hash.replace(/^#\/?/, '');
+
+      var target = doc.getElementById(id);
+
+      if (!target) { return; }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           function () { return buildContent(id, target); }
+
+      });
+
+    })(samePageLinks[i]);
+
+  }
+
+
+
+  // Cross-page anchor links (same origin, href contains "#" but does not start with "#")
+
+  var crossPageLinks = doc.querySelectorAll(
+
+    'main a[href*="#"]:not([href^="#"]):not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < crossPageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var href = link.getAttribute('href');
+
+
+
+      var pageUrl, id;
+
+      try {
+
+        var resolved = new URL(href, window.location.href);
+
+        if (resolved.origin !== window.location.origin) { return; }
+
+        pageUrl = resolved.origin + resolved.pathname;
+
+        id = resolved.hash.replace(/^#\/?/, '');
+
+      } catch (e) { return; }
+
+
+
+      if (!id) { return; }
+
+
+
+      // If the link points to the current page, look up the element directly
+
+      if (pageUrl === (window.location.origin + window.location.pathname)) {
+
+        var target = doc.getElementById(id);
+
+        if (!target) { return; }
+
+        window.tippy(link, {
+
+          allowHTML:         true,
+
+          maxWidth:          500,
+
+          delay:             100,
+
+          arrow:             false,
+
+          appendTo:          function (el) { return el.parentElement; },
+
+          interactive:       true,
+
+          interactiveBorder: 10,
+
+          theme:             'quarto',
+
+          placement:         'bottom-start',
+
+          content:           function () { return buildContent(id, target); }
+
+        });
+
+        return;
+
+      }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           'Loading\u2026',
+
+        onShow:            function (instance) {
+
+          if (instance._fetched) { return; }
+
+          instance._fetched = true;
+
+          getTargetFromPage(pageUrl, id, function (target) {
+
+            if (target) {
+
+              instance.setContent(buildContent(id, target));
+
+            } else {
+
+              instance.destroy();
+
+            }
+
+          });
+
+        }
+
+      });
+
+    })(crossPageLinks[i]);
+
+  }
+
+})();
+
+</script>
+
+<script>
+
+// Adds a copy-to-clipboard button to plain code blocks, .styled-code, and .scrollable-block elements.
+
+// .tuflow blocks already receive Quarto's built-in copy button via .sourceCode — those are excluded.
+
+(function () {
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    var selectors = ['pre:not(.sourceCode)', '.styled-code', '.scrollable-block'];
+
+
+
+    selectors.forEach(function (sel) {
+
+      document.querySelectorAll(sel).forEach(function (block) {
+
+        // Skip if already processed
+
+        if (block.parentNode && block.parentNode.classList.contains('copy-block-wrapper')) return;
+
+
+
+        // Wrap block so the button can be positioned outside the scroll area
+
+        var wrapper = document.createElement('div');
+
+        wrapper.className = 'copy-block-wrapper';
+
+        block.parentNode.insertBefore(wrapper, block);
+
+        wrapper.appendChild(block);
+
+
+
+        // Create button
+
+        var btn = document.createElement('button');
+
+        btn.className = 'copy-block-btn';
+
+        btn.title = 'Copy to Clipboard';
+
+        btn.setAttribute('aria-label', 'Copy to Clipboard');
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+
+
+        btn.addEventListener('click', function () {
+
+          var text = block.innerText;
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+
+            navigator.clipboard.writeText(text).then(function () {
+
+              showCopied(btn);
+
+            }).catch(function () {
+
+              fallbackCopy(text);
+
+              showCopied(btn);
+
+            });
+
+          } else {
+
+            fallbackCopy(text);
+
+            showCopied(btn);
+
+          }
+
+        });
+
+
+
+        wrapper.appendChild(btn);
+
+      });
+
+    });
+
+
+
+    function showCopied(btn) {
+
+      btn.innerHTML = '<i class="bi bi-clipboard-check"></i>';
+
+      btn.title = 'Copied!';
+
+      setTimeout(function () {
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+        btn.title = 'Copy to Clipboard';
+
+      }, 2000);
+
+    }
+
+
+
+    function fallbackCopy(text) {
+
+      var ta = document.createElement('textarea');
+
+      ta.value = text;
+
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+
+      document.body.appendChild(ta);
+
+      ta.focus();
+
+      ta.select();
+
+      try { document.execCommand('copy'); } catch (e) {}
+
+      document.body.removeChild(ta);
+
+    }
+
+  });
+
+}());
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./07-Boundaries-and-Initial-Conditions.html" class="pagination-link" aria-label="Boundaries and Initial Conditions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Boundaries and Initial Conditions</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./08-Linked-1D2D-Models.html" class="pagination-link" aria-label="Combining Domains and Solvers">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Domains and Solvers</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

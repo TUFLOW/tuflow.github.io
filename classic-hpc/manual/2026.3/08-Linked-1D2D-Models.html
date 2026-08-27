@@ -1,0 +1,2448 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; Combining Domains and Solvers – TUFLOW Classic/HPC User Manual 2026.3</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./09-Outputs.html" rel="next">
+<link href="./075-Advection-Dispersion.html" rel="prev">
+<link href="./manuals-shared/images/TUFLOW.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ea94015a310cf19a1d0a98706902972b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const tocNav = document.querySelector("nav[role='doc-toc']");
+
+    if (!tocNav) return;
+
+
+
+    const observer = new MutationObserver((mutations) => {
+
+      mutations.forEach((mutation) => {
+
+        if (mutation.attributeName === "class") {
+
+          const target = mutation.target;
+
+          if (target.classList.contains("active")) {
+
+            // Scroll the active item smoothly ('smooth') with the least amount of movement ('nearest')
+
+            target.scrollIntoView({
+
+              behavior: "smooth",
+
+              block: "nearest"
+
+            });
+
+          }
+
+        }
+
+      });
+
+    });
+
+
+
+    // Target all links inside the TOC
+
+    const tocLinks = tocNav.querySelectorAll("ul li a");
+
+    tocLinks.forEach((link) => {
+
+      observer.observe(link, { attributes: true });
+
+    });
+
+  });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+
+
+<script>
+
+window.addEventListener("load", function () {
+
+  document.querySelectorAll(".quarto-figure table.searchable").forEach(function(table){
+
+      new DataTable(table, {
+
+          paging: true,
+
+          pageLength: -1,
+
+          lengthMenu: [
+
+            [-1, 10, 20, 50],
+
+            ["All", 10, 20, 50]
+
+          ],
+
+          searching: true,
+
+          ordering: true,
+
+          order: [],
+
+          rowId: null
+
+      });
+
+  });
+
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/TUFLOW_logo.png" alt="" class="navbar-logo light-content">
+    <img src="./images/TUFLOW_logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TUFLOW Classic/HPC User Manual 2026.3</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://tuflow.com/"> 
+<span class="menu-text"><img src="manuals-shared/images/BMT_logo.png" style="height:1.5em"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="./TUFLOW-Classic-HPC-User-Manual-2026.3.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-Linked-1D2D-Models.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Domains and Solvers</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TUFLOW Classic/HPC User Manual</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Getting-Started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Hydraulic-Modelling-Fundamentals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hydraulic Modelling Fundamentals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ControlFiles-and-Inputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Control Files and Input Layers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-1D-Domains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">1D Network Domains - ESTRY</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./055-1D-SWMM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">1D Network Domains - EPA SWMM</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-2D-Domains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">2D Domains</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-Boundaries-and-Initial-Conditions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Boundaries and Initial Conditions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./075-Advection-Dispersion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Advection Dispersion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-Linked-1D2D-Models.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Domains and Solvers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-Outputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Outputs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-Hardware.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hardware and Operating System</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-RunningSimulations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Managing and Starting Simulations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-Checks-and-Logs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Checks and Log Files</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Viewing-and-PostProcessing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Viewing Outputs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-QualityControl-and-Troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Quality Control and Troubleshooting</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-Utilities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Utilities</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-Features-and-Changes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Default Changes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80-AppendicesA-TCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">TCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./81-AppendicesB-ECFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">ECF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./82-AppendicesC-TGCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">TGC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./83-AppendicesD-TBCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">TBC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./84-AppendicesE-TOCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">TOC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./85-AppendicesF-TRFCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">TRFC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./86-AppendicesG-TESFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">TESF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./87-AppendicesH-QCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">QCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./88-AppendicesI-TSCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">TSCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./89-AppendicesJ-ADCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">ADCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./90-AppendicesK-TEFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">TEF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./91-AppendicesL-SWMM-Geopackage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">L</span>&nbsp; <span class="chapter-title">SWMM GeoPackage Format</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-Linked-1D2D-Models-Intro-2" id="toc-sec-Linked-1D2D-Models-Intro-2" class="nav-link active" data-scroll-target="#sec-Linked-1D2D-Models-Intro-2"><span class="header-section-number">10.1</span> Introduction</a></li>
+  <li><a href="#sec-OneD2dLinking-2" id="toc-sec-OneD2dLinking-2" class="nav-link" data-scroll-target="#sec-OneD2dLinking-2"><span class="header-section-number">10.2</span> 1D and 2D Domain Linking Theory</a>
+  <ul>
+  <li><a href="#sec-HXBoundary-3" id="toc-sec-HXBoundary-3" class="nav-link" data-scroll-target="#sec-HXBoundary-3"><span class="header-section-number">10.2.1</span> HX 2D Head Boundary</a></li>
+  <li><a href="#sec-SXBoundary-3" id="toc-sec-SXBoundary-3" class="nav-link" data-scroll-target="#sec-SXBoundary-3"><span class="header-section-number">10.2.2</span> SX 2D Flow Boundaries</a>
+  <ul>
+  <li><a href="#sec-SXBoundarySW-4" id="toc-sec-SXBoundarySW-4" class="nav-link" data-scroll-target="#sec-SXBoundarySW-4"><span class="header-section-number">10.2.2.1</span> SX 2D Flow Boundary to Surface Water</a></li>
+  <li><a href="#sec-SXBoundaryGW-4" id="toc-sec-SXBoundaryGW-4" class="nav-link" data-scroll-target="#sec-SXBoundaryGW-4"><span class="header-section-number">10.2.2.2</span> SX 2D Flow Boundary to Groundwater</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-OneD2DLinking-Estry-2" id="toc-sec-OneD2DLinking-Estry-2" class="nav-link" data-scroll-target="#sec-OneD2DLinking-Estry-2"><span class="header-section-number">10.3</span> TUFLOW 1D (ESTRY) to TUFLOW 2D Linking</a>
+  <ul>
+  <li><a href="#sec-OneD2DESTRYChannel-3" id="toc-sec-OneD2DESTRYChannel-3" class="nav-link" data-scroll-target="#sec-OneD2DESTRYChannel-3"><span class="header-section-number">10.3.1</span> 1D Open Channel and 2D Domain Linking</a></li>
+  <li><a href="#sec-OneD2DESTRYCulverts-3" id="toc-sec-OneD2DESTRYCulverts-3" class="nav-link" data-scroll-target="#sec-OneD2DESTRYCulverts-3"><span class="header-section-number">10.3.2</span> 1D Structures Embedded within 2D Domains</a></li>
+  <li><a href="#sec-OneD2DESTRYPipeNetwork-3" id="toc-sec-OneD2DESTRYPipeNetwork-3" class="nav-link" data-scroll-target="#sec-OneD2DESTRYPipeNetwork-3"><span class="header-section-number">10.3.3</span> 1D Pipe Network Pits linked to 2D Domains</a></li>
+  <li><a href="#sec-VirtualPits-3" id="toc-sec-VirtualPits-3" class="nav-link" data-scroll-target="#sec-VirtualPits-3"><span class="header-section-number">10.3.4</span> Virtual Pits linked to 2D Domains</a></li>
+  <li><a href="#sec-GroundwaterLinked-3" id="toc-sec-GroundwaterLinked-3" class="nav-link" data-scroll-target="#sec-GroundwaterLinked-3"><span class="header-section-number">10.3.5</span> TUFLOW 1D (ESTRY) linked to Groundwater</a></li>
+  </ul></li>
+  <li><a href="#sec-OneD2DLinkingSWMM-2" id="toc-sec-OneD2DLinkingSWMM-2" class="nav-link" data-scroll-target="#sec-OneD2DLinkingSWMM-2"><span class="header-section-number">10.4</span> SWMM to TUFLOW Linking</a>
+  <ul>
+  <li><a href="#sec-OneD2DSWMMCulverts-5" id="toc-sec-OneD2DSWMMCulverts-5" class="nav-link" data-scroll-target="#sec-OneD2DSWMMCulverts-5"><span class="header-section-number">10.4.1</span> 1D Culvert Connections to 2D Domains</a></li>
+  <li><a href="#sec-OneD2DSWMMPipeNetwork-3" id="toc-sec-OneD2DSWMMPipeNetwork-3" class="nav-link" data-scroll-target="#sec-OneD2DSWMMPipeNetwork-3"><span class="header-section-number">10.4.2</span> 1D Pipe Network Connections to 2D Domains</a>
+  <ul>
+  <li><a href="#sec-SWMMPipeNetBackground-4" id="toc-sec-SWMMPipeNetBackground-4" class="nav-link" data-scroll-target="#sec-SWMMPipeNetBackground-4"><span class="header-section-number">10.4.2.1</span> Background</a></li>
+  <li><a href="#sec-SWMMPipeNetSetup-4" id="toc-sec-SWMMPipeNetSetup-4" class="nav-link" data-scroll-target="#sec-SWMMPipeNetSetup-4"><span class="header-section-number">10.4.2.2</span> Setup</a></li>
+  </ul></li>
+  <li><a href="#sec-OneD2DGWConnections-3" id="toc-sec-OneD2DGWConnections-3" class="nav-link" data-scroll-target="#sec-OneD2DGWConnections-3"><span class="header-section-number">10.4.3</span> Groundwater Connections to 2D Domains</a></li>
+  <li><a href="#sec-OneD2DLinkingSWMM1D-3" id="toc-sec-OneD2DLinkingSWMM1D-3" class="nav-link" data-scroll-target="#sec-OneD2DLinkingSWMM1D-3"><span class="header-section-number">10.4.4</span> SWMM to TUFLOW 1D (ESTRY) Linking</a></li>
+  </ul></li>
+  <li><a href="#sec-OneD2DLinkingFM-2" id="toc-sec-OneD2DLinkingFM-2" class="nav-link" data-scroll-target="#sec-OneD2DLinkingFM-2"><span class="header-section-number">10.5</span> Flood Modeller to TUFLOW Linking</a>
+  <ul>
+  <li><a href="#sec-oneD2DFMLinking2D-3" id="toc-sec-oneD2DFMLinking2D-3" class="nav-link" data-scroll-target="#sec-oneD2DFMLinking2D-3"><span class="header-section-number">10.5.1</span> Flood Modeller 1D to TUFLOW 2D Linking</a></li>
+  <li><a href="#sec-oneD2DFMLinking1D-3" id="toc-sec-oneD2DFMLinking1D-3" class="nav-link" data-scroll-target="#sec-oneD2DFMLinking1D-3"><span class="header-section-number">10.5.2</span> Flood Modeller 1D to TUFLOW 1D (ESTRY) Linking</a></li>
+  </ul></li>
+  <li><a href="#sec-oneD2D12D-2" id="toc-sec-oneD2D12D-2" class="nav-link" data-scroll-target="#sec-oneD2D12D-2"><span class="header-section-number">10.6</span> 12D-DDA to TUFLOW Linking</a></li>
+  <li><a href="#sec-TwoD2DLinking-2" id="toc-sec-TwoD2DLinking-2" class="nav-link" data-scroll-target="#sec-TwoD2DLinking-2"><span class="header-section-number">10.7</span> Multiple 2D Domains</a>
+  <ul>
+  <li><a href="#sec-TwoD2DLinkingQDT-3" id="toc-sec-TwoD2DLinkingQDT-3" class="nav-link" data-scroll-target="#sec-TwoD2DLinkingQDT-3"><span class="header-section-number">10.7.1</span> Classic’s M2D Feature versus HPC Quadtree</a></li>
+  <li><a href="#sec-TwoD2DLinkingM2D-3" id="toc-sec-TwoD2DLinkingM2D-3" class="nav-link" data-scroll-target="#sec-TwoD2DLinkingM2D-3"><span class="header-section-number">10.7.2</span> TUFLOW Classic’s Multiple 2D Domains</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-DomainLinking-1" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Domains and Solvers</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-Linked-1D2D-Models-Intro-2" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="sec-Linked-1D2D-Models-Intro-2"><span class="header-section-number">10.1</span> Introduction</h2>
+<p>This chapter discusses methods available for dynamically linking 1D and 2D domains, linking with external (third-party) 1D solvers, and linking 2D domains together using Classic’s Multiple 2D Domains feature. HPC’s Quadtree feature, whilst allowing variable 2D cell sizes, is essentially one 2D domain over which a full 2D solution is applied is discussed in <a href="06-2D-Domains.html#sec-Quadtree-3" class="quarto-xref"><span>Section 7.3.1</span></a>. A comparison between Classic’s M2D feature and HPC’s quadtree grid is presented in <a href="#sec-TwoD2DLinking-2" class="quarto-xref"><span>Section 10.7</span></a>.</p>
+<p>The range of functionalities discussed in the Chapter offer numerous benefits, including greater model design flexibility, greater computational efficiency and performance, and ability to integrate TUFLOW domains within supported third-party 1D solvers and models.</p>
+<p>1D-2D linked models utilise the individual benefits of 1D and 2D solution schemes. 1D schemes are typically used to represent culverts or sub-surface pipe networks, and sometimes rivers, where the flow is essentially one-directional. 2D schemes are suited to the representation of, for example, rivers and floodplains or estuarine and coastal waters, where the hydrodynamics can flow in multiple horizontal directions, which requires the ability to simulate flow in a two-dimensional plane.</p>
+<p>TUFLOW’s 2D solutions (Classic and HPC) may be dynamically linked to a variety of different 1D solutions, including TUFLOW 1D (ESTRY), EPA SWMM (herein referred to as SWMM in this chapter), Flood Modeller (formerly ISIS), 12D Dynamic Drainage (DDA), and XPSWMM from Autodesk (formerly XP-Software then Innovyze).</p>
+<p>Within the one model, 1D domains that are TUFLOW 1D (ESTRY) and other 1D domains that are an external 1D scheme can occur. This may be useful where different 1D solvers offer different capabilities. Further, linking of TUFLOW 1D (ESTRY) directly to either Flood Modeller or SWMM is also possible.</p>
+<p>The software environment for the 1D Solver / TUFLOW 2D combination varies:</p>
+<ul>
+<li>TUFLOW 1D (ESTRY) and SWMM are integrated within the TUFLOW executable. Model build tasks and result viewing associated with these linked 1D solvers is typically completed using traditional TUFLOW compatible GIS software.</li>
+<li>12D Dynamic Drainage is developed by 12D Solutions. They have developed a TUFLOW interface within their own <a href="https://www.12d.com/product/12d_model_tuflow.html">12D GUI</a> that offers GUI functionality for 1D and 2D modelling tasks. The interface provides users with the ability to build models and view results entirely within its GUI. Alternatively, existing TUFLOW files created in a GIS form can be imported and used in the 12D GUI.</li>
+<li>Flood Modeller, developed by Jacobs (formerly the ISIS software developed by Halcrow), is not built into the TUFLOW executable. Flood Modeller must be purchased from Jacobs, installed and configured, and to link with TUFLOW, the <a href="https://www.floodmodeller.com/tuflow">Flood Modeller TUFLOW Link</a> must also be purchased and installed. Flood Modeller accesses the TUFLOW solvers via the TUFLOW_LINK.dll that is part of the standard TUFLOW download. The Flood Modeller GUI is used for 1D model build tasks, and execution of the linked Flood Modeller 1D / TUFLOW model. The TUFLOW script (control) file and GIS environment is typically used for the TUFLOW 1D and 2D components.</li>
+<li>XPSWMM functions in a fully independent GUI with TUFLOW fully embedded and operated “behind-the-scenes”. As such, the model development and results viewing information in this manual is not applicable and reference should be made to the XPSWMM documentation as supplied with the software. However, when XPSWMM runs a simulation with TUFLOW linked, all the standard TUFLOW script files, GIS layers and result outputs are written to disk should the user with to access these in their native formats.</li>
+</ul>
+<p>Varying the 2D cell size within a single model enables use of smaller cell sizes (finer resolution) in areas where a more detailed assessment is required or a finer grid is required to accurately represent the hydraulics, with the larger cell sizes covering the remaining areas of the model. The ability to vary 2D cell sizes within the one model optimises the grid construct thereby reducing simulation times and the memory footprint compared to a model that adopts a fine resolution over the entire model domain.</p>
+<p>Both TUFLOW Classic and HPC offer the ability to vary 2D cell sizes using two different approaches: - TUFLOW Classic offers 2D-2D linking of different 2D domains via the Multiple 2D Domains (M2D) Module. 2D-2D linked Classic models allow for a single model to contain multiple 2D domains of different cell sizes and different orientations. The 2D-2D link is via hidden TUFLOW 1D nodes that essentially pass the water from one 2D domain to another using HX links. The solution across the link is not a full 2D solution, rather a linked 2D-1D-2D solution results that may not be as accurate as a full 2D solution. - TUFLOW HPC doesn’t support Classic’s 2D-2D linking, but supports varying 2D cell sizes using a full 2D solution across a quadtree grid (the Quadtree Module, which purchase/licence wise is shared with Classic’s M2D Module, is required). The quadtree grid requires all 2D cells are on the same orientation and they can only vary in size by a factor of two when transitioning from a smaller cell to a larger cell.</p>
+</section>
+<section id="sec-OneD2dLinking-2" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sec-OneD2dLinking-2"><span class="header-section-number">10.2</span> 1D and 2D Domain Linking Theory</h2>
+<p>TUFLOW 1D and 2D domains can be linked in a variety of ways. Common configurations, as shown in <a href="#fig-1D-2DLinkingConfigurations" class="quarto-xref">Figure&nbsp;<span>10.1</span></a>, include:</p>
+<ul>
+<li>1D culverts through 2D embankments.</li>
+<li>1D pipe networks underneath the 2D domain.</li>
+<li>Nesting of a 1D open channel (e.g.&nbsp;creek or river) through a 2D domain.</li>
+<li>Connection of a broader 1D network catchment model to a high resolution 2D domain.</li>
+</ul>
+<div id="fig-1D-2DLinkingConfigurations" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1D-2DLinkingConfigurations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/1D2DLinkingConfigurations.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1D-2DLinkingConfigurations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.1: 1D/2D Linking Configurations
+</figcaption>
+</figure>
+</div>
+<p>There are two types of 1D/2D linking options available:</p>
+<ol type="1">
+<li>Head (water level) boundaries to the 2D cells (HX); and</li>
+<li>Source boundaries to the 2D cells (SX).</li>
+</ol>
+<p>These are described in the sections below.</p>
+<section id="sec-HXBoundary-3" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="sec-HXBoundary-3"><span class="header-section-number">10.2.1</span> HX 2D Head Boundary</h3>
+<p>The HX terminology is derived from a <strong>H</strong>ead boundary being applied to the 2D cell using data from an e<strong>X</strong>ternal 1D scheme. This type of connection can be used to connect TUFLOW 2D with the 1D schemes of ESTRY (TUFLOW 1D), SWMM, Flood Modeller and XPSWMM. HX lines are typically used along riverbanks to define the 1D-2D exchange when 1D is used for in-channel representation, linked to the floodplain in 2D (commonly referred to as, 1D nested open channel modelling).</p>
+<p>For 1D nested open channel modelling, the HX cells are defined using HX lines, connected to 1D nodes (i.e.&nbsp;the start and end of 1D channel lines) via connection (CN) lines. HX and CN line type objects are defined in the 2d_bc format layer. The 2d_bc layer is often renamed with the prefix 2d_hx should the modeller choose to store the HX lines in their own layer(s). The CN lines are snapped to the 1D nodes and vertices along the HX line.</p>
+<p>The open channel area modelled by 1D must be deactivated from the 2D domain (2d_code: code = 0) otherwise the flow down the open channel will be duplicated in both the 1D and 2D domains. These model features are presented in <a href="#fig-HXSchematicPlanView" class="quarto-xref">Figure&nbsp;<span>10.2</span></a>.</p>
+<p>When TUFLOW carries out the hydraulic calculations, water level information at the 1D nodes is transferred to the HX line vertices that are connected to the 1D nodes via the CN lines. Along the HX lines, between the connected vertices, the water levels are linearly interpolated.</p>
+<p>A HX line must have a CN line connected to each of its ends, along with any connections from intermediate 1D nodes to HX line vertices. Not every HX vertex has to have a 1D node connected. However, should a 1D node not be connected, the water level from that 1D node will not contribute to setting the water level profile along the HX line and undesirable results may occur.</p>
+<p>If a single 1D node is connected to both ends of a HX line, the water levels in the 2D cells along the HX line will all be the same thereby producing a horizontal water level profile along the HX line. This approach is typically used for upstream boundaries into a 2D domain, and the line must be roughly digitised perpendicular to the flow (alternatively use a 2D QT boundary which automates this set up).</p>
+<div id="fig-HXSchematicPlanView" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-HXSchematicPlanView-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/1D2DHXWaterLevel_001.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-HXSchematicPlanView-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.2: HX Connection: Nested 1D Open Channel – Plan View
+</figcaption>
+</figure>
+</div>
+<p>Flow can either enter or leave HX cells. The volume of water entering or leaving the cells is added or subtracted from the connected 1D nodes to conserve mass. The HX link preserves momentum in the sense that the velocity field is assumed to be undisturbed across the link, however, the solution across the HX line is not a complete 2D solution as the velocity field on the inactive side of the HX line is assumed, not calculated. The 2D velocity direction is not influenced by the direction of the linked 1D channel.</p>
+<p>Because of the momentum preservation, the HX link approach produces a superior 1D-2D linking performance where complex flow behaviour occurs (e.g.&nbsp;river/floodplain interactions) than using a flow source approach such as applying a weir flow equation across the link. <a href="#fig-HXFlowPatterns" class="quarto-xref">Figure&nbsp;<span>10.3</span></a> shows an example of the preservation of momentum across HX lines (shown in light purple) as water flows across a meander where the main channel is represented in 1D.</p>
+<div id="fig-HXFlowPatterns" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-HXFlowPatterns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/1D-2D flow patterns at meanders.100dpi.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-HXFlowPatterns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.3: HX Connection: Example of Momentum Preservation across HX Lines
+</figcaption>
+</figure>
+</div>
+<p>The elevations of 1D-2D boundary cells determine when water can transfer between the 1D and 2D. Water level is calculated at the cell centres in the 2D engine (see <a href="06-2D-Domains.html#sec-Schematisation-3" class="quarto-xref"><span>Section 7.1.3</span></a>), once the water level in the 1D node exceeds the elevation in the HX cell, water can enter or leave the cell. As such, an accurate definition of the 2D HX cell centre elevations is important. If a levee aligns with the HX line, a 2d_zsh thick breakline is recommended along the levee to ensure that the 1D-2D boundary cell elevations are consistent with the levee or spill crest.</p>
+<p>In the four panels of <a href="#fig-HXSchematicSectionView" class="quarto-xref">Figure&nbsp;<span>10.4</span></a>, the 2D HX connection is shown in section view at four differing water level stages:</p>
+<ul>
+<li>Panel 1: In bank flow: the water level in the 1D section is below the 2D cell elevation and no flow is occurring across the 1D-2D connection.</li>
+<li>Panel 2: Spill into the floodplain: the water level in the 1D section is above the 2D cell elevation along the left bank (but not the right bank). In this case, water is spilling from the 1D channel into the 2D floodplain on the left bank.</li>
+<li>Panel 3: Flow from floodplain: the water level in the 1D is below the water levels on the 2D floodplains and water will drain from the 2D domain into the 1D channel, which typical occurs during a flood recession.</li>
+<li>Panel 4: Perched floodplain: the flow is still moving from the 2D into the 1D on the left bank, however, on the right bank, the water level in the floodplain is below the 2D HX cell elevation and no flow is occurring (the water is perched).</li>
+</ul>
+<div id="fig-HXSchematicSectionView" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-HXSchematicSectionView-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/1D2DHXWaterLevelSectionView.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-HXSchematicSectionView-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.4: HX Connection: Nested 1D Open Channel – Section View
+</figcaption>
+</figure>
+</div>
+<p>In addition to 1D-2D connections associated with nested 1D open channel / 2D floodplain situations, HX connections are also used to connect a 2D domain embedded within a broader 1D network representing the upstream and/or downstream river sections further afield. In <a href="#fig-HXExternalBoundaryConnection" class="quarto-xref">Figure&nbsp;<span>10.5</span></a>, HX lines are shown along the upstream inflow to the 2D Domain as purple lines, the CN lines are shown in green. The CN lines are snapped to the 1D node at the end of the 1D network and the two vertices at either end of the HX line.</p>
+<p>The water level at the 1D node is uniformly applied to the HX cells wherever the water level exceeds the cell ZC elevation. As the water level applied along the HX line will be horizontal the HX line must be digitised roughly perpendicular to the expected flow direction. Should the line not be perpendicular, circulatory flows maybe generated, so check that the flow patterns along HX lines appear to be reasonable.</p>
+<div id="fig-HXExternalBoundaryConnection" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-HXExternalBoundaryConnection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/1D2DHXExternalLink_001.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-HXExternalBoundaryConnection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.5: HX Connection: External 1D Network Boundary Connection
+</figcaption>
+</figure>
+</div>
+<p>Note that for all HX links, the cell centre elevation (ZC) at a HX cell must be above the 1D bed level (interpolated between connected 1D nodes) otherwise an artificial flow across the link will be produced. To enforce this, TUFLOW produces an error message during the model initialisation, and terminates the simulation, if the interpolated 1D node elevation exceeds the 2D HX cell centre elevation (ZC). The ERROR message(s) are geo-referenced to easily identify the HX cells that lie below the 1D bed profile.</p>
+</section>
+<section id="sec-SXBoundary-3" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="sec-SXBoundary-3"><span class="header-section-number">10.2.2</span> SX 2D Flow Boundaries</h3>
+<p>The SX terminology is derived from a <strong>S</strong>ource boundary being applied to the 2D cell using data from an e<strong>X</strong>ternal 1D scheme. This type of connection can be used to connect TUFLOW 2D with the 1D schemes of TUFLOW 1D (ESTRY), Flood Modeller, SWMM and XPSWMM. SX connections are typically used to transfer flow between 1D and 2D for 1D structures and at pits/drains/gully traps that capture water into the pipe network. Unique to SWMM, when using it as the 1D solver, an SX connection is only required at the downstream end of a 1D culvert (it uses a HX link at the upstream end due to limitations of the SWMM software). SX can be connected to the surface water (see <a href="#sec-SXBoundarySW-4" class="quarto-xref"><span>Section 10.2.2.1</span></a>) or to the groundwater (see <a href="#sec-SXBoundaryGW-4" class="quarto-xref"><span>Section 10.2.2.2</span></a>).</p>
+<p>At SX connections, the water level at the 1D node is reset every timestep as the average water level along the 2D SX cell(s). Conversely, the flow into or out of the 1D element feeds into the 2D SX cell(s) as a flow of water with the water level at the 2D cells computed as part of the 2D SWE solution. As the water level at the 1D node is set based on the water level in the SX cells, the storage in the 1D node is not used computationally in the 1D. Where there is an SX connection to 2D cell(s) from a 1D node, the average 1D node storage is distributed across the connected 2D SX cells.</p>
+<p>SX objects are digitised in the 2d_bc layer and have the type set to “SX”. They can either be a point (a single SX cell), line (multiple SX cells) or region object (multiple SX cells). When using the SX line and region objects, these are joined to the 1D nodes with a single CN type object, also in the 2d_bc layer, as shown in <a href="#fig-SXSchematicCrossDrainageStructure" class="quarto-xref">Figure&nbsp;<span>10.6</span></a>. The (2d_bc) SX point, line and region objects are shown in purple, the (2d_bc) CN lines are shown in green, and the cells selected for the SX 1D-2D connection are highlighted in white.</p>
+<ul>
+<li>When using an SX point, the point object needs to snap to the 1d network (1d_nwk) at the nodes (end of the culvert). A single 2D cell is selected for the 1D-2D SX connection.</li>
+<li>When using an SX line, a connection line snaps to the SX line and the 1d network (1d_nwk) node. Multiple 2D cells are selected for the 1D-2D SX connection. If the line does not select any 2D cells a single 2D cell is selected based on the line’s mid-point.</li>
+<li>When using an SX region, a connection line snaps to a vertex of the SX region and 1d network (1d_nwk) node. Multiple 2D cells are selected for the 1D-2D SX connection based on whether the 2D cell centre falls within the region. If the region does not select any 2D cells a single 2D cell is selected based on the region’s centroid.</li>
+</ul>
+<section id="sec-SXBoundarySW-4" class="level4" data-number="10.2.2.1">
+<h4 data-number="10.2.2.1" class="anchored" data-anchor-id="sec-SXBoundarySW-4"><span class="header-section-number">10.2.2.1</span> SX 2D Flow Boundary to Surface Water</h4>
+<p>The flow onto the SX cells is treated as a source flow, i.e.&nbsp;it can be positive or negative in magnitude but has no directional component. If there is more than one SX cell connected, the flow is, by default, proportioned via the depths in the 2D SX cells. The <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-SXFlowDistributionCutoffDepth">SX Flow Distribution Cutoff Depth</a></span> command can be used to control the depth of water below which an SX cell does not receive flows from the connected 1D element.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When connecting an SX connection for a 1D structure it is important to ensure that the width of connected SX cells at the structure invert (and higher levels for irregular shaped structures) is equal or more than the width of the 1D structure. This check should take into account whether any of the 2D SX cells are dry at the level being checked. If the width of water flow across the SX cells is less than the flow width of the 1D structure, the 2D SX cells become the constriction and instabilities or unrealistic flow patterns may result.</p>
+</div>
+</div>
+<div id="fig-SXSchematicCrossDrainageStructure" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-SXSchematicCrossDrainageStructure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/1D2DSXConfigurations_001.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-SXSchematicCrossDrainageStructure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.6: SX Connection Options
+</figcaption>
+</figure>
+</div>
+<p>The lowest 2D SX cell (based on the ZC, cell centre, elevation) must be below the 1D bed level (invert) otherwise mass can be artificially generated. TUFLOW produces an ERROR message during the model initialisation and a simulation will not run if a 1D node elevation falls below the lowest 2D ZC SX cell elevation.</p>
+<p>In addition to culverts through embankments, SX connections are used to connect 1D pipe network inlets (pits) to the ground surface, which is modelled in 2D. An example is presented in <a href="#fig-SXSchematicPipeNetworkPlan" class="quarto-xref">Figure&nbsp;<span>10.7</span></a> and <a href="#fig-SXSchematicPipeNetwork" class="quarto-xref">Figure&nbsp;<span>10.8</span></a>. The SX connections are used to transfer flow between the 1D pit/pipe network and the 2D domain. To make the workflow more efficient, pit SX connections can be simply defined using one the pit attributes in a 1d_nwk or 1d_pit layer, thereby removing the need to have a 2d_bc layer - see <a href="05-1D-Domains.html#sec-Pits-3" class="quarto-xref"><span>Section 5.10.2</span></a>.</p>
+<p>A model using the SX to surface water functionality is provided in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#1D_Structures">1D Structures Example Model Dataset</a> on the TUFLOW Wiki.</p>
+<div id="fig-SXSchematicPipeNetworkPlan" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-SXSchematicPipeNetworkPlan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/1D2DSXPipeNetwork_001.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-SXSchematicPipeNetworkPlan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.7: SX Connection: Pipe Network – Plan View
+</figcaption>
+</figure>
+</div>
+<div id="fig-SXSchematicPipeNetwork" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-SXSchematicPipeNetwork-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/image140.jpeg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-SXSchematicPipeNetwork-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.8: SX Connection: Pipe Network -Section View
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-SXBoundaryGW-4" class="level4" data-number="10.2.2.2">
+<h4 data-number="10.2.2.2" class="anchored" data-anchor-id="sec-SXBoundaryGW-4"><span class="header-section-number">10.2.2.2</span> SX 2D Flow Boundary to Groundwater</h4>
+<p>Groundwater connections to 1D elements are useful for representing modelling situations where water infiltrates into or is extracted from the soil other than the default connection to the 2D surface water. These situations can arise in green infrastructure systems, which may incorporate intentionally infiltrating water into the groundwater, draining water from the groundwater or both. For example, retention basins designed to enhance infiltration through natural or artificial soils and to slowly drain stored groundwater to reduce water levels ahead of future rainfall events. Water seepage into the groundwater can be modelled in 1D or 2D, but drains are modelled in 1D.</p>
+<p>To define a groundwater connected in a 1D network, a “SX” boundary is used in the 2d_bc GIS layer, with the “GW[1 - 9]” flag specifying the connection to a groundwater layer (see <a href="07-Boundaries-and-Initial-Conditions.html#tbl-conditionsattribute" class="quarto-xref">Table&nbsp;<span>8.6</span></a>). The connected groundwater layer number follows the “GW” flag. For example, “GW2” would be the flag for a connection with groundwater layer 2. The direction of flow and discharge are determined using the same principles as a SX connection to surface water (see <a href="#sec-SXBoundarySW-4" class="quarto-xref"><span>Section 10.2.2.1</span></a>), except that the 2D water level is replaced by the groundwater pressure level. As such, the 1D node is assigned a water level equivalent to the groundwater pressure level.</p>
+<p>In most cases, groundwater to SX connections have some connection mechanism that must be represented in the model to control how much flow is transferred. For example, the flow through slotted or perforated pipes commonly used in detention basins to drain water from the soil can often be approximated using the orifice equation (<a href="05-1D-Domains.html#eq-orifice-flow" class="quarto-xref">Equation&nbsp;<span>5.23</span></a>) but manufacturers may have other defined relationships for how much water is extracted for a given pressure level.</p>
+<p>The depth vs discharge relationship used to define these flows is based on the pressure head in the groundwater layer and the connection attributes (slotted pipe width or size and number of holes in perforated pipe and pipe lengths). The same relationship is used for ESTRY and SWMM but applied differently due to connectivity requirements for the engines:</p>
+<ul>
+<li>ESTRY: A separate inlet or pit is not required. Instead, a “Q” or “M” channel is typically used with the groundwater pressure level vs discharge relationship to represent the interchange between groundwater and 1D. See <a href="#sec-GroundwaterLinked-3" class="quarto-xref"><span>Section 10.3.5</span></a>.</li>
+<li>SWMM: An inlet is required at the 1D node (either a junction or a storage node). This inlet is typically a generic inlet (see <a href="91-AppendicesL-SWMM-Geopackage.html#tbl-swmm-input-inlets" class="quarto-xref">Table&nbsp;<span>L.17</span></a>) using a groundwater pressure level vs discharge relationship. See <a href="#sec-OneD2DGWConnections-3" class="quarto-xref"><span>Section 10.4.3</span></a>.</li>
+</ul>
+<p>Guidance for generating depth vs discharge curves is provided on the <a href="https://wiki.tuflow.com/Groundwater_Modelling_Advice#Groundwater_Linking_to_1D_.28ESTRY_or_SWMM.29">TUFLOW Wiki Groundwater Modelling Advice</a> page.</p>
+<div id="fig-SXtoGWSWMMESTRY" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-SXtoGWSWMMESTRY-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/SXtoGWESTRYSWMM.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-SXtoGWSWMMESTRY-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.9: SX 2D Flow Boundary to Groundwater: ESTRY and SWMM
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="sec-OneD2DLinking-Estry-2" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="sec-OneD2DLinking-Estry-2"><span class="header-section-number">10.3</span> TUFLOW 1D (ESTRY) to TUFLOW 2D Linking</h2>
+<p>Linked TUFLOW 1D and 2D domain models use 2D HX and 2D SX boundary types connected to 1D nodes (1d_nwk layer) using CN lines or points in the 2d_bc layer, as described in <a href="07-Boundaries-and-Initial-Conditions.html#sec-TwoDBoundaries-2" class="quarto-xref"><span>Section 8.4</span></a>. The recommended approach for HX and SX connections are summarised in the following sections.</p>
+<section id="sec-OneD2DESTRYChannel-3" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="sec-OneD2DESTRYChannel-3"><span class="header-section-number">10.3.1</span> 1D Open Channel and 2D Domain Linking</h3>
+<p>2D_bc HX boundaries are preferred for transitioning between 1D domains and 2D domains (shown in <a href="#fig-HXExternalBoundaryConnection" class="quarto-xref">Figure&nbsp;<span>10.5</span></a>) or when nesting a 1D open channel network within a 2D domain (shown in <a href="#fig-HXSchematicPlanView" class="quarto-xref">Figure&nbsp;<span>10.2</span></a>).</p>
+<p>An example of these HX connections is provided in <a href="https://wiki.tuflow.com/Tutorial_M11">TUFLOW Tutorial Module 11</a>. The <a href="https://wiki.tuflow.com/TUFLOW_1D2D_Boundary_Configuration_Guidance">TUFLOW Wiki 1D2D Boundary Configuration Guidance</a> also includes useful guidance on how to stabilise problematic 1D/2D TUFLOW HPC HX connections.</p>
+</section>
+<section id="sec-OneD2DESTRYCulverts-3" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="sec-OneD2DESTRYCulverts-3"><span class="header-section-number">10.3.2</span> 1D Structures Embedded within 2D Domains</h3>
+<p>2D_bc SX boundaries are preferred for inserting 1D culverts inside a 2D domain. For example, a 1D culvert underneath a road embankment, as shown in <a href="#fig-SXSchematicCrossDrainageStructure" class="quarto-xref">Figure&nbsp;<span>10.6</span></a>.</p>
+<p>An example of these SX connections is provided in <a href="https://wiki.tuflow.com/Tutorial_M03">TUFLOW Tutorial Module 3</a>. The <a href="https://wiki.tuflow.com/TUFLOW_1D2D_Boundary_Configuration_Guidance">TUFLOW Wiki 1D2D Boundary Configuration Guidance</a> also includes useful guidance how to stabilise problematic 1D/2D SX connections.</p>
+</section>
+<section id="sec-OneD2DESTRYPipeNetwork-3" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="sec-OneD2DESTRYPipeNetwork-3"><span class="header-section-number">10.3.3</span> 1D Pipe Network Pits linked to 2D Domains</h3>
+<p>Pits/Inlets within an urban drainage environment provide bi-directional connectivity between the urban surface represented by 2D domains and the 1D sub-surface pipe network. They use the SX type linking described in <a href="#sec-SXBoundarySW-4" class="quarto-xref"><span>Section 10.2.2.1</span></a>. To simplify the model setup process the SX connections are automatically created by setting the Conn_1D_2D attribute for the pit/inlet point object to “SX” in the 1d_pit or 1d_nwk layer. The type of pit is defined using the ‘Type’ attribute:</p>
+<ul>
+<li>“C” pits use zero length circular culverts to calculate the flow transferred between the 1D network and 2D domain.</li>
+<li>“R” pits use zero length box culverts to calculate the flow transferred between the 1D network and 2D domain.</li>
+<li>“W” pits use the weir equation to calculate the flow transferred between the 1D network and 2D domain.</li>
+<li>“Q” pits use a user-specified Depth-Discharge curve to transfer flow between the 2D domain and the 1D domain, based on the 2D water depth.</li>
+</ul>
+<p><a href="05-1D-Domains.html#sec-Pits-3" class="quarto-xref"><span>Section 5.10.2</span></a> contains information about the specification of pit parameters. A pipe network model example is provided in <a href="https://wiki.tuflow.com/Tutorial_Introduction">TUFLOW Tutorial Module 5</a>.</p>
+</section>
+<section id="sec-VirtualPits-3" class="level3" data-number="10.3.4">
+<h3 data-number="10.3.4" class="anchored" data-anchor-id="sec-VirtualPits-3"><span class="header-section-number">10.3.4</span> Virtual Pits linked to 2D Domains</h3>
+<p>Compared to the above-mentioned approach, virtual pits are an alternative way to model pits/inlets where the sub-surface pipe network is not being modelled. The flow entering a virtual pit can either be discharged back into the model further downstream or permanently extracted from the model. There are three main approaches to using virtual pits:</p>
+<ul>
+<li>Virtual Pit Inlets (Type ‘VPI’) only are used to extract flow from the model. One examples would be where there is no or insufficient data on the pipe network. Another example is where the pipe network flow discharges to a river (assuming the level in the river does not affect the flow into the pits) and no pit surcharging back onto the 2D domain occurs.</li>
+<li>VPIs are used in with Virtual Pipe Outlets (VPOs), which allow the flow into VPIs to be discharged back onto the model. VPIs can be allocated to specific VPOs via a common network ID. VPOs can have a limiting outlet flow. Once the VPO flow reaches the limit, the excess flow is surcharged back through VPIs, which can be prioritised as to which ones surcharge first. By default, the routing of flow between VPIs and VPOs on the same network is instantaneous (i.e.&nbsp;no lag). However from the 2023-03-AB build, it is possible to apply a lag or shift to the flows from the inlet to the outlet by using the 1d_pit Lag_Approach and Lag_Value attributes.</li>
+<li>Flows from VPIs can be connected to 1D channel nodes to drain flow from the 2D surface and reintroduce them to the 1D domain further downstream. This is a useful approach to modelling the major sub-surface drainage system as a pipe network and the minor system as VPIs feeding into the major system.</li>
+</ul>
+<p><a href="05-1D-Domains.html#sec-Virtual-Pipes-2" class="quarto-xref"><span>Section 5.11</span></a> contains more information about virtual pits. Models using these model configurations are provided in the <a href="https://wiki.tuflow.com/TUFLOW_Example_Models#1D_Pipe_Network_.2F_2D_Floodplain_Modelling">1D Pipe Network / 2D Floodplain Modelling Example Model Dataset</a> on the TUFLOW Wiki.</p>
+<p>As previously mentioned, pits, virtual pits and nodes can be automatically connected to 2D domains using the 1d_nwk Conn_1D_2D attribute (see <a href="05-1D-Domains.html#tbl-pitsattributedescriptions" class="quarto-xref">Table&nbsp;<span>5.26</span></a> and <a href="05-1D-Domains.html#tbl-pitsmodelnetwork" class="quarto-xref">Table&nbsp;<span>5.25</span></a>). If Conn_1D_2D is set to “SX”, TUFLOW automatically connects the upstream end of the pit channel or node to the 2D domain.</p>
+<ul>
+<li>For this automated 1D-2D SX connection to establish, it is a requirement that the 2D cell must be active (2d_code, Code = 1). If no active 2D cells are found from any 2D domain, a <a href="https://wiki.tuflow.com/TUFLOW_Message_2122">WARNING 2122</a> or <a href="https://wiki.tuflow.com/TUFLOW_Message_2123">2123</a> is issued.</li>
+<li>The command <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-PitDefault2DConnection">Pit Default 2D Connection</a></span> can be used to set the global default value for the 1d_nwk Conn_1D_2D attribute.</li>
+<li>By default, TUFLOW will connect the 1D pit/virtual pit/node to one or more 2D cells at pit connections. The number of 2D cells selected is a function of the flow width of the pit inlet (including the effects of the Number_of and Width_or_Dia 1d_nwk attributes), or the total flow width of the channels connected to the node. The total width of the 2D cells selected is always more than the pit inlet width or width of channels. For example, a width of 3.6 m on a 2 m grid selects two cells. The advantage of selecting more than one 2D cell is to provide enhanced stability at the 1D/2D connection when the 1D flow width exceeds the 2D cell size. The number of 2D connection cells is limited to 10 per pit inlet.</li>
+<li>The 1d_nwk Conn_No attribute can be used to change the number of 2D cells connected as follows:
+<ul>
+<li>A positive value adds that number of 2D cells to the automatic number. In the example above, if Conn_No is set to 1, three (2 + 1) 2D cells are connected. The upper limit is 10 connected cells.</li>
+<li>If Conn_No is negative, this ignores the automatic approach and fixes the number of 2D cells connected to the absolute value of Conn_No.&nbsp;For example, a value of -1 would only connect the pit or node to one (1) 2D cell irrespective of the width.</li>
+</ul></li>
+<li>If more than one 2D cell is being connected, there are two approaches available for how the 2D cells are selected.
+<ul>
+<li>For pits, the default is the G (on Grade) option that selects the 2nd, 3rd, etc… cells by traversing to the next highest 2D cell that neighbours the 2D cell(s) already selected (this includes diagonal cells, i.e.&nbsp;all 8 cells around a cell are considered). These cells are also automatically lowered to the same height as the first cell so that their ZC value is at or below the pit inlet.</li>
+<li>For nodes, the default is the S (Sag) option that selects the 2nd, 3rd, etc… cells by traversing to the next lowest 2D cell. The ZC values of these cells are not changed as they are already at or below the node invert.</li>
+</ul></li>
+<li>The above approaches can be changed using the G (Grade) and S (Sag) flags for the 1d_nwk Conn_1D_2D attribute. The G approach is that adopted by default for pits and S for nodes. To override the default approach, specify G or S as appropriate. For example, if the S approach is preferred for a pit that is draining a depression, specify an S flag for the Conn_1D_2D attribute (i.e.&nbsp;“SXS”). Note SX must come first before an optional flag is specified.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The conventional 1D-2D link approach using 2d_bc SX points, lines or regions can still be used to connect 1D channel ends. This gives the user complete control over the 2D cells selected and may still be preferred in situations where large 1D structures are being connected to 2D cells.</p>
+</div>
+</div>
+</section>
+<section id="sec-GroundwaterLinked-3" class="level3" data-number="10.3.5">
+<h3 data-number="10.3.5" class="anchored" data-anchor-id="sec-GroundwaterLinked-3"><span class="header-section-number">10.3.5</span> TUFLOW 1D (ESTRY) linked to Groundwater</h3>
+<p>ESTRY can connect directly with groundwater using SX connections as described in <a href="#sec-SXBoundaryGW-4" class="quarto-xref"><span>Section 10.2.2.2</span></a> (see <a href="07-Boundaries-and-Initial-Conditions.html#tbl-conditionsattribute" class="quarto-xref">Table&nbsp;<span>8.6</span></a>). Groundwater connections to 1D (ESTRY) often include perforated or slotted pipes to convey flow to or from the 1D network. These are typically modelled using a depth vs discharge relationship implemented in ESTRY as a “M” channel (see <a href="05-1D-Domains.html#sec-M-Channel-3" class="quarto-xref"><span>Section 5.8.1</span></a>) or a “Q” channel (see <a href="05-1D-Domains.html#sec-Q-Channels-3" class="quarto-xref"><span>Section 5.8.2</span></a>) directly downstream of the connecting node, as shown in <a href="#fig-SXtoGWESTRY" class="quarto-xref">Figure&nbsp;<span>10.10</span></a>. The depth vs discharge relationship is often based on the orifice equation (<a href="05-1D-Domains.html#eq-orifice-flow" class="quarto-xref">Equation&nbsp;<span>5.23</span></a>) where the coefficient will vary depending on the design of the groundwater to 1D connection.</p>
+<p>Guidance for generating depth vs discharge curves is provided on the <a href="https://wiki.tuflow.com/Groundwater_Modelling_Advice#Groundwater_Linking_to_1D_.28ESTRY_or_SWMM.29">TUFLOW Wiki Groundwater Modelling Advice</a> page.</p>
+<div id="fig-SXtoGWESTRY" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-SXtoGWESTRY-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/SXtoGW_ESTRY.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-SXtoGWESTRY-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.10: Groundwater Linking to 1D - ESTRY
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-OneD2DLinkingSWMM-2" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="sec-OneD2DLinkingSWMM-2"><span class="header-section-number">10.4</span> SWMM to TUFLOW Linking</h2>
+<p>New in the 2023-03-AD release, TUFLOW’s 1D linking and solver options have been expanded to support the EPA Storm Water Management Model (SWMM), see <a href="055-1D-SWMM.html" class="quarto-xref"><span>Chapter 6</span></a>. The SWMM engine (version 5) has been integrated into the TUFLOW executable as a 2D and 1D dynamically linked 1D solver. SWMM version 5 input (.inp) files can be directly input to TUFLOW.</p>
+<p>In TUFLOW-SWMM there are three categories of connections between SWMM 1D and TUFLOW:</p>
+<ul>
+<li>Direct Connections: These apply to inlets/outlets associate with culverts passing through an embankment (modelled in 2D), or also open outlets from a pipe network.</li>
+<li>Storm-Drain Inlets: These apply to surface pits/inlets for capturing overland flow into a pipe network. Geometry information associated with the storm-drain inlet is used to determine the discharge that should flow from the 2D domain into the 1D SWMM pipe network.</li>
+<li>SWMM 1D connection to TUFLOW 1D (ESTRY) that allows 1D domains to be a combination of ESTRY and SWMM.</li>
+</ul>
+<section id="sec-OneD2DSWMMCulverts-5" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="sec-OneD2DSWMMCulverts-5"><span class="header-section-number">10.4.1</span> 1D Culvert Connections to 2D Domains</h3>
+<p>This type of connection is used for cross-drainage such as culverts through an embankment. Due to limitations within SWMM, HX connections are used at the Nodes–Storage object (upstream side) and SX connections are applied at the Nodes–Outfalls object (downstream). This configuration is presented in <a href="#fig-1D2DSWMMCulvert" class="quarto-xref">Figure&nbsp;<span>10.11</span></a>.</p>
+<p>Where a Nodes–Storage point is connected to the 2D domain using an inlet or HX connection, TUFLOW will compute the discharge that should be transferred between the 1D and 2D domain. If the water level in the 2D domain is higher than the 1D (potentially ponded) water level, then flow will be transferred from the 2D domain to the 1D. The discharge rate will depend on the difference in water levels.</p>
+<p>A TUFLOW-SWMM culvert model is provided in the <a href="https://wiki.tuflow.com/TUFLOW_SWMM_Tutorial_M01">TUFLOW-SWMM Tutorial Module 1</a>.</p>
+<div id="fig-1D2DSWMMCulvert" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1D2DSWMMCulvert-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/1D2DSWMMCulvert.png" class="img-fluid figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1D2DSWMMCulvert-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.11: SWMM 1D Connection: Culvert
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-OneD2DSWMMPipeNetwork-3" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="sec-OneD2DSWMMPipeNetwork-3"><span class="header-section-number">10.4.2</span> 1D Pipe Network Connections to 2D Domains</h3>
+<p>Storm drain inlets, such as curb or grate inlets, are a special type of SX connection that links 2D domains to 1D pipe networks.</p>
+<section id="sec-SWMMPipeNetBackground-4" class="level4" data-number="10.4.2.1">
+<h4 data-number="10.4.2.1" class="anchored" data-anchor-id="sec-SWMMPipeNetBackground-4"><span class="header-section-number">10.4.2.1</span> Background</h4>
+<p>Storm drain inlets capture water, often along roadways, and convey it to the storm drain system. The U.S. Department of Transportation Federal Highway Administration’s Urban Drainage Design Manual <span class="citation" data-cites="FHWAUrbanDrainageManual2024">(<a href="99-References.html#ref-FHWAUrbanDrainageManual2024" role="doc-biblioref">Roger Kilgore and A. Tamim Atayee and George Herrmann, 2024</a>)</span> defines the equations used to calculate the inlet flow capture. These equations form the basis of the inlet computations used by SWMM and leveraged in TUFLOW-SWMM.</p>
+<p>TUFLOW-SWMM supports all inlet types in SWMM, including: grate, curb opening, combination (grate and curb), slotted drain, custom (curve based), and drop inlets (grate or curb). See <a href="91-AppendicesL-SWMM-Geopackage.html#tbl-swmm-input-inlets" class="quarto-xref">Table&nbsp;<span>L.17</span></a>.</p>
+<p>Inlets can be defined as on-sag, on-grade, or automatic via a SWMM Inlet Usage GIS layer (see <a href="#sec-SWMMPipeNetSetup-4" class="quarto-xref"><span>Section 10.4.2.2</span></a> and <a href="#tbl-swmminletusage" class="quarto-xref">Table&nbsp;<span>10.1</span></a>). On-sag inlets are assumed to be located at low points where the water pools and velocities are low. Under these conditions, the amount of flow captured is only dependent on the water depth and the inlet design. On-grade inlets are located where the water moves past the inlet, rather than pooling (i.e.&nbsp;not located at a depression). Depending on the design of the inlet, the street and curb geometry, the velocity of the water, and the approach flow rate, the inlet may not fully capture the flow along the street.</p>
+<p>The equations for on-grade inlets are more complex and incorporate the street cross-section information as well as the approach flow entering the connected 2D cells. Because the inlet discharge is dependent on the approach flow (upstream flow going down the street), the connected cells should cover the expected flow path, often requiring more than a single cell. Additional care is therefore recommended when using on-grade inlets to ensure that the street geometry and the entire flow path are identified correctly.</p>
+<p>SWMM allows inlets to be assigned a placement of “Automatic” and to be consistent, TUFLOW-SWMM also has this option. TUFLOW-SWMM will apply the higher of the on-grade or on-sag inlet discharge computations to automatic inlets. Automatic inlets may operate on-grade during some portions of a simulation and on-sag during other, depending on depths and velocities. The time-series output (see <a href="13-Viewing-and-PostProcessing.html#sec-view-tpc-3" class="quarto-xref"><span>Section 15.2.1</span></a>) can be used to identify inlets that are predominantly operating as inlet controlled, which should be reviewed more carefully for a complete and accurate setup.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The TUFLOW-SWMM automatic option is generally <strong>not recommended</strong>. Inlets assigned ‘Automatic’ in TUFLOW- as inlets that are on-grade may operate as on-sag and capture more flow than they would in reality. The automatic option tends to overpredict discharges into the storm drain network and therefore underpredict the surface flooding. Depending on the purpose of the modelling, this may be suitable. For example, if pipe sizing is the preferred goal, using the automatic approach may provide more conservative inflows and prevent under sizing of the pipes. <strong>Manually specifying the inlet placement as on-grade or on-sag is the optimal approach.</strong></p>
+</div>
+</div>
+</section>
+<section id="sec-SWMMPipeNetSetup-4" class="level4" data-number="10.4.2.2">
+<h4 data-number="10.4.2.2" class="anchored" data-anchor-id="sec-SWMMPipeNetSetup-4"><span class="header-section-number">10.4.2.2</span> Setup</h4>
+<p>SX type linking described in <a href="#sec-SXBoundarySW-4" class="quarto-xref"><span>Section 10.2.2.1</span></a> is recommended for pipe network storm-drain inlets. For a TUFLOW-SWMM model, storm-drain inlets can be defined in one of two ways, either:</p>
+<ol type="1">
+<li>Fully defined in a SWMM input (.inp) file format: In this form, all table items listed below (Streets, Conduits, Inlets, and Inlet Usage) are required. In addition, a “2d_bc” layer is required to provide the connectivity between the 1D inlets and the 2D domain.
+<ul>
+<li>Streets: SWMM uses the street cross-section information in this table to help compute storm drain inlet discharges, particularly for on-grade inlets.</li>
+<li>Conduits (Streets): The conduits table is used to define streets for overland runoff and the slope is used in the storm drain inlet discharges. This table is not used directly when running a TUFLOW-SWMM model because the overland flows are calculated within TUFLOW.</li>
+<li>Inlets: This table defines inlet configurations that describe how to determine inlet discharges. Inlets can be defined based on type and shape such as grates, curbs, and combination, or through curves that describe the relationship between depth and inlet discharge or approach flow and inlet discharge. The inlets table defines these parameters. The same inlet configuration can be used in multiple pit locations within the model.</li>
+<li>Inlet Usage: This table identifies the placement of inlets including the street conduit, inlet (configuration), the node receiving the flow, and local parameters including blockage, size of local gutter depressions, and specification of on-grade, on-sag placement, or automatic placement.</li>
+</ul></li>
+<li>Defined using a SWMM input (.inp) file with a “swmm_inlet_usage” GIS layer: In this form TUFLOW creates a GIS layer to assist in the 1D-2D specification. <strong>Due to reduced data requirements and model build workflow efficiency the combined SWMM input (.inp) file / “swmm_inlet_usage” GIS layer format is the recommended approach.</strong> Using this format:
+<ul>
+<li><a href="#tbl-swmminletusage" class="quarto-xref">Table&nbsp;<span>10.1</span></a> lists the attributes associated with the swmm_inlet_usage GIS layer.</li>
+<li>Automatic inlet connections between the 1D network and 2D domain can be implemented via the “Conn1D_2D” attribute field (instead of manual specification of SX connection cells within a “2d_bc” GIS layer).</li>
+<li>SWMM 5 “Inlet Usage” tables are not used, and Conduits (Streets) are not required. However, Streets and Inlet tables must be defined in the SWMM input (.inp) file.</li>
+<li>2d_bc SX lines may be used to manually define connections associated with on-grade inlets. This gives the user complete control over the 2D cells selected for the on-grade flow calculations.</li>
+<li>The conventional 1D-2D link approach using 2d_bc CN lines and SX lines can be used (instead of the automated methods) should greater control be required over the selected 2D cells for the 1D-2D on-grade inlet connections.</li>
+<li>The conventional 1D-2D link approach using 2d_bc HX lines and SX points, lines or regions is required to connect 1D channel ends where “direct” connection to the 2D is desired.</li>
+</ul></li>
+</ol>
+<p>An example model configuration is shown in <a href="#fig-1D2DSWMMPipeNetwork" class="quarto-xref">Figure&nbsp;<span>10.12</span></a>, and example TUFLOW-SWMM pipe network models are also provided in <a href="https://wiki.tuflow.com/TUFLOW_SWMM_Tutorial_Introduction">TUFLOW-SWMM Tutorial Modules 2, 3 and 4</a>.</p>
+<p>Whether inlet usage details are defined in SWMM or in a separate GIS layer, the inlet discharges are computed within TUFLOW using EPA SWMM 5.2 code before being passed to the SWMM engine for the 1D solution computations. This approach has been selected to leverage the 2D domain hydraulic calculations.</p>
+<p>If the pressure head in the 1D domain exceeds the 2D water level, the 1D domain will overflow (surcharge) into the 2D domain. The approach used to compute the surcharge discharge depends on the inlet setup and whether or not the SWMM node ponds.</p>
+<ol type="1">
+<li>If the node allows ponding (ponding &gt; 0) (recommended configuration):
+<ul>
+<li>The surcharge discharge is based on the depth vs flow curve for custom inlets or from the orifice equation for other inlet types, plus any additional discharge from the use of the <span class="tcmd"><a href="./88-AppendicesI-TSCFCommands.html#tscf-MaximumInletPondedDepth">Maximum Inlet Ponded Depth</a></span> command.</li>
+<li>The coefficient used for inlet surcharging can be specified with the <span class="tcmd"><a href="./88-AppendicesI-TSCFCommands.html#tscf-InletSurchargeOrificeCoefficient">Inlet Surcharge Orifice Coefficient</a></span> command.</li>
+<li>The discharge for custom curves is applied directly in reverse. For example, a 1D water level 0.3 feet above the 2D water level will produce the equal, though opposite, discharge as a 2D water level 0.3 feet above the 1D water level (or ground elevation).</li>
+</ul></li>
+<li>If the node does not allow ponding (ponding = 0):
+<ul>
+<li>Any volume that exceeds the maximum nodal water level (YMax) plus any surcharge depth (YSur) is reported as flooding by SWMM, which no longer tracks it. The water is passed directly from the SWMM engine to the TUFLOW 2D cells. Although possible, this approach is not recommended because it prevents the 1D network from utilising the full pressure head in its flow calculations.</li>
+</ul></li>
+</ol>
+<div id="fig-1D2DSWMMPipeNetwork" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1D2DSWMMPipeNetwork-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/1D2DSWMMPipeNetwork_001.png" class="img-fluid figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1D2DSWMMPipeNetwork-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.12: SWMM 1D Connection: Pipe Network
+</figcaption>
+</figure>
+</div>
+<div class="cell" data-execution_count="2">
+<div id="tbl-swmminletusage" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="2">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-swmminletusage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.1: SWMM Inlet Usage (swmm_iu) Attribute Descriptions
+</figcaption>
+<div aria-describedby="tbl-swmminletusage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div id="scambldwau" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#scambldwau table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#scambldwau thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#scambldwau p { margin: 0; padding: 0; }
+ #scambldwau .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #scambldwau .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #scambldwau .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #scambldwau .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #scambldwau .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #scambldwau .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #scambldwau .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #scambldwau .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #scambldwau .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #scambldwau .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #scambldwau .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #scambldwau .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #scambldwau .gt_spanner_row { border-bottom-style: hidden; }
+ #scambldwau .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #scambldwau .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #scambldwau .gt_from_md> :first-child { margin-top: 0; }
+ #scambldwau .gt_from_md> :last-child { margin-bottom: 0; }
+ #scambldwau .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #scambldwau .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #scambldwau .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #scambldwau .gt_row_group_first td { border-top-width: 2px; }
+ #scambldwau .gt_row_group_first th { border-top-width: 2px; }
+ #scambldwau .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #scambldwau .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #scambldwau .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #scambldwau .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #scambldwau .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #scambldwau .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #scambldwau .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #scambldwau .gt_left { text-align: left; }
+ #scambldwau .gt_center { text-align: center; }
+ #scambldwau .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #scambldwau .gt_font_normal { font-weight: normal; }
+ #scambldwau .gt_font_bold { font-weight: bold; }
+ #scambldwau .gt_font_italic { font-style: italic; }
+ #scambldwau .gt_super { font-size: 65%; }
+ #scambldwau .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #scambldwau .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 20%">
+<col style="width: 65%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="No." class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">No.</th>
+<th id="Default-GIS-Attribute-Name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Default GIS Attribute Name</th>
+<th id="Description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+<th id="Type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Type</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left"><p>1</p></td>
+<td class="gt_row gt_left"><p>Inlet</p></td>
+<td class="gt_row gt_left"><p>The name of the inlet defined in the SWMM inp file “INLETS” section</p></td>
+<td class="gt_row gt_left"><p>Char (100)</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>2</p></td>
+<td class="gt_row gt_left"><p>StreetXSEC</p></td>
+<td class="gt_row gt_left"><p>The name of the street cross-section that must be included in the SWMM SWMM inp file “Streets” section.</p></td>
+<td class="gt_row gt_left"><p>Char (100)</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>3</p></td>
+<td class="gt_row gt_left"><p>Elevation</p></td>
+<td class="gt_row gt_left"><p>The elevation of the inlet. If a value of -99999 is entered, the elevation will be based on the 2D cell’s elevation.</p></td>
+<td class="gt_row gt_left"><p>Float</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>4</p></td>
+<td class="gt_row gt_left"><p>SlopePct_Long</p></td>
+<td class="gt_row gt_left"><p>The longitudinal slope of the street near the inlet.</p></td>
+<td class="gt_row gt_left"><p>Float</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>5</p></td>
+<td class="gt_row gt_left"><p>Number</p></td>
+<td class="gt_row gt_left"><p>The number of inlets in series at the location (generally 1).</p></td>
+<td class="gt_row gt_left"><p>Integer</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>6</p></td>
+<td class="gt_row gt_left"><p>CloggedPct</p></td>
+<td class="gt_row gt_left"><p>The percentage that the inlet is blocked (defaults to 0.0).</p></td>
+<td class="gt_row gt_left"><p>Float</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>7</p></td>
+<td class="gt_row gt_left"><p>Qmax</p></td>
+<td class="gt_row gt_left"><p>The maximum discharge through the inlet (default is 0 which does not enforce a maximum).</p></td>
+<td class="gt_row gt_left"><p>Float</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>8</p></td>
+<td class="gt_row gt_left"><p>aLocal</p></td>
+<td class="gt_row gt_left"><p>The depth of a local depression at the inlet (default 0.0).</p></td>
+<td class="gt_row gt_left"><p>Float</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>9</p></td>
+<td class="gt_row gt_left"><p>wLocal</p></td>
+<td class="gt_row gt_left"><p>The width of a local depression at the inlet (default 0.0).</p></td>
+<td class="gt_row gt_left"><p>Float</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>10</p></td>
+<td class="gt_row gt_left"><p>Placement</p></td>
+<td class="gt_row gt_left"><p>Specifies whether the inlet should be treated as a sag or on-grade. Options are ON_GRADE, ON_SAG, or AUTOMATIC. AUTOMATIC (the default) will switch between ON_GRADE and ON_SAG depending upon the flow conditions at the inlet.</p></td>
+<td class="gt_row gt_left"><p>Char(10)</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left"><p>11</p></td>
+<td class="gt_row gt_left"><p>Conn1D_2D</p></td>
+<td class="gt_row gt_left"><p>Used to specify a “SX” connection and any additional flags such as “SXZ” or “SXG” that automatically creates a 2D SX cell and connection at the 2D cell within which the SWMM node occurs. This negates the need to create SX objects in a 2d_bc layer.</p>
+<p>Flags:</p>
+<ul>
+<li>“L” - sets the ZU and ZV elevations to be the same as the ZC value only if they are lower. This can improve instabilities where the ZU and ZV values are significantly lower in elevation and can cause a sudden increase in transfer of water to/from the cell when the cell wets.</li>
+<li>“Z” - Adjust the ZC elevation at each cell at/along/within the 2D SX object to below the 1D node bed elevation where ZC is higher. The ZC elevation is set to the Cell Wet/Dry Depth below the 1D node bed. An error occurs if the minimum ZC elevation plus the Cell Wet/Dry Depth at/along a SX object is not below the connected 1D node bed. Also see the SX ZC Check command that permits the user to define a maximum change in ZC elevation. It is not recommended to use the Z flag without first checking that the reason for the discrepancy in elevations between 1D and 2D domains is realistic.</li>
+</ul>
+<p>By default, if more than one 2D cell is automatically connected, nodes are assumed to be connected using the Sag (S) approach. To override the default approach, specify “SXG” for an on-grade connection.</p></td>
+<td class="gt_row gt_left"><p>Char (10)</p></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left"><p>12</p></td>
+<td class="gt_row gt_left"><p>Conn_Width</p></td>
+<td class="gt_row gt_left"><p>If “SX” is specified for Conn1D_2D, this field controls the number of 2D cells connected as follows. Note this approach is slightly different than is used by TUFLOW-ESTRY models.</p>
+<ul>
+<li>A positive value indicates the flow width that should be used to compute the number of 2D cells to connect to. TUFLOW will choose the nearest cells that are collectively as wide or wider than the specified flow width.</li>
+<li>If negative, the number of cells selected is the absolute value of the number specified. For example, a value of -1 would connect the inlet to a single 2D cell.</li>
+</ul></td>
+<td class="gt_row gt_left"><p>Float</p></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-OneD2DGWConnections-3" class="level3" data-number="10.4.3">
+<h3 data-number="10.4.3" class="anchored" data-anchor-id="sec-OneD2DGWConnections-3"><span class="header-section-number">10.4.3</span> Groundwater Connections to 2D Domains</h3>
+<p>A SWMM 1D model can connect to TUFLOW groundwater layers as described in <a href="#sec-SXBoundaryGW-4" class="quarto-xref"><span>Section 10.2.2.2</span></a>. For groundwater to 1D connections (1D draining groundwater), an inlet is required to represent the connectivity (see <a href="07-Boundaries-and-Initial-Conditions.html#tbl-conditionsattribute" class="quarto-xref">Table&nbsp;<span>8.6</span></a>), as shown in <a href="#fig-SXtoGWSWMM" class="quarto-xref">Figure&nbsp;<span>10.13</span></a>. This inlet is typically a generic inlet (see <a href="91-AppendicesL-SWMM-Geopackage.html#tbl-swmm-input-inlets" class="quarto-xref">Table&nbsp;<span>L.17</span></a>) which uses a depth vs discharge relationship to define the flow. If water is being pumped into the groundwater system (e.g.&nbsp;an intentional recharge situation), an inlet is not required.</p>
+<p>Guidance for generating depth vs discharge curves is provided on the <a href="https://wiki.tuflow.com/Groundwater_Modelling_Advice#Groundwater_Linking_to_1D_.28ESTRY_or_SWMM.29">TUFLOW Wiki Groundwater Modelling Advice</a> page.</p>
+<div id="fig-SXtoGWSWMM" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-SXtoGWSWMM-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/SXtoGW_SWMM.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-SXtoGWSWMM-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.13: Groundwater linking to 1D - SWMM
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-OneD2DLinkingSWMM1D-3" class="level3" data-number="10.4.4">
+<h3 data-number="10.4.4" class="anchored" data-anchor-id="sec-OneD2DLinkingSWMM1D-3"><span class="header-section-number">10.4.4</span> SWMM to TUFLOW 1D (ESTRY) Linking</h3>
+<p>SWMM can be linked to TUFLOW 1D (ESTRY) allowing the modeller to use the different solvers and their benefits across the 1D domains of a model. Also, note that full support for 1D open channel modelling using SWMM is not yet available, but can be readily modelled using TUFLOW 1D. A typical combined scenario would be 1D open channel modelling using TUFLOW 1D dynamically linked to a SWMM pipe network. Combined SWMM 1D-TUFLOW 1D configurations can be dynamically linked to TUFLOW 2D using the approaches outlined in the previous sections.</p>
+<p>SWMM and TUFLOW 1D nodes will be considered linked if:</p>
+<ol type="1">
+<li>A TUFLOW 1D node in a 1d_nwk layer, and a SWMM node layer are snapped to each other, and</li>
+<li>The TUFLOW 1D node has a 1d_nwk Conn_1D_2D attribute of either “X1DH” or “X1DQ”.
+<ul>
+<li>A “X1DH” link means a SWMM 1D water level is being applied at the TUFLOW 1D node (i.e.&nbsp;SWMM sends TUFLOW 1D a water level and TUFLOW 1D sends back a +/- flow to SWMM). This is applicable at SWMM Nodes–Junctions and Nodes–Storage locations.<br>
+</li>
+<li>A “X1DQ” link means a SWMM inflow/outflow is being applied at the TUFLOW 1D node (i.e.&nbsp;SWMM sends TUFLOW 1D a +/- flow and TUFLOW 1D sends back a water level). This is applicable at SWMM Nodes–Outfalls locations.</li>
+</ul></li>
+</ol>
+<p>Note:</p>
+<ul>
+<li>The upstream and downstream inverts for the TUFLOW 1D node linked to SWMM should be set to -99999 unless the node is also being used to set the inverts of channels snapped to it.</li>
+<li>SWMM cannot be connected to TUFLOW 1D and TUFLOW 2D from the same SWMM node. Only a single linkage is supported from a single SWMM node. This limitation is highlighted in the zoomed inset of <a href="#fig-1D1DSWMMTUFLOWConnection" class="quarto-xref">Figure&nbsp;<span>10.14</span></a>. In this example the SWMM Link–Conduit is only linked to TUFLOW 1D, it is not connected to TUFLOW 2D via CN and HX lines. The connection of TUFLOW 2D is associated with the TUFLOW 1D open channels, offset from SWMM by a single short TUFLOW 1D channel length.</li>
+</ul>
+<div id="fig-1D1DSWMMTUFLOWConnection" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1D1DSWMMTUFLOWConnection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/1D1DSWMMTUFLOWLink.png" class="img-fluid figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1D1DSWMMTUFLOWConnection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.14: SWMM 1D / TUFLOW 1D Connection
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-OneD2DLinkingFM-2" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="sec-OneD2DLinkingFM-2"><span class="header-section-number">10.5</span> Flood Modeller to TUFLOW Linking</h2>
+<p>TUFLOW 2D domains can be dynamically linked to Flood Modeller (previously known as ISIS). Flood Modeller can also link to TUFLOW 1D (previously known as ISIS-TUFLOW-PIPE or ISIS-ESTRY).</p>
+<p>Unlike TUFLOW 1D or SWMM, Flood Modeller is not included in the TUFLOW executable download. It must be installed and configured to support the linking to TUFLOW. The <a href="https://www.floodmodeller.com/tuflow">TUFLOW Link</a> must be purchased from Jacobs and an appropriate software version used. It is recommended that TUFLOW 2020-10-AD or later is used in conjunction with Flood Modeller Version 5 or later. <a href="#fig-FMTUFLOWVersionCompatability" class="quarto-xref">Figure&nbsp;<span>10.15</span></a> provides the compatibility between Flood Modeller and TUFLOW for versions prior to Flood Modeller 6 and TUFLOW 2020-10-AE. Post these releases, all TUFLOW Classic and TUFLOW HPC (including Quadtree) functionality is supported and compatible with Flood Modeller. Versions prior to Flood Modeller 4.5 will support TUFLOW Classic only. Regardless of the TUFLOW 2D solver (i.e.&nbsp;Classic or HPC), the linking mechanism is the same.</p>
+<div id="fig-FMTUFLOWVersionCompatability" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-FMTUFLOWVersionCompatability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/FM_TUFLOW_Version_Compatability.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-FMTUFLOWVersionCompatability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.15: Compatibility of Recent Flood Modeller and TUFLOW versions
+</figcaption>
+</figure>
+</div>
+<section id="sec-oneD2DFMLinking2D-3" class="level3" data-number="10.5.1">
+<h3 data-number="10.5.1" class="anchored" data-anchor-id="sec-oneD2DFMLinking2D-3"><span class="header-section-number">10.5.1</span> Flood Modeller 1D to TUFLOW 2D Linking</h3>
+<p>To link Flood Modeller’s 1D scheme to TUFLOW 2D, a TUFLOW 1d_x1d GIS layer defining the locations of the Flood Modeller 1D nodes is required. The 1d_x1d layer can either be created by the user or by the Flood Modeller interface.</p>
+<p>For linking 1D Flood Modeller to TUFLOW 2D, the TUFLOW 1d_x1d layer requires only one attribute, namely a string 12 characters long that contains the unique IDs of the Flood Modeller 1D nodes/sections. Any other attributes are presently ignored. Creation of this layer manually is possible through exporting a text or csv file containing the Node ID and XY coordinates of the nodes, provided the Flood Modeller co-ordinates are in the same projection as the TUFLOW model.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The IDs are case sensitive (because Flood Modeller IDs are case sensitive).</p>
+</div>
+</div>
+<p>In the .tcf file, use either the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISX1DNodes">Read GIS X1D Nodes</a></span> or <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISX1DNetwork">Read GIS X1D Network</a></span> command to read the 1d_x1d layer, as shown in the example below:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Read GIS X1D Network </span><span class="op">==</span> ..\model\gis\1d_x1d_FM_nodes.shp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The digitising of channels (lines) within a 1d_x1d GIS layer is optional and is only necessary if the model uses 1D Water Level Lines to display map outputs in the 1D domain (refer to <a href="09-Outputs.html#sec-OneDMap-3" class="quarto-xref"><span>Section 11.2.4</span></a> for further details). If GIS layer(s) are provided including channels, they are also read into the .tcf file using the command <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISX1DNetwork">Read GIS X1D Network</a></span>, and should be used with <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISX1DWLL">Read GIS X1D WLL</a></span>.</p>
+<p>The example below shows the use of these commands (with the nodes and channels in separate files):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Read GIS X1D Nodes </span><span class="op">==</span> ..\model\gis\1d_x1d_FM_nodes.shp</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">Read GIS X1D Network </span><span class="op">==</span> ..\model\gis\1d_x1d_FM_channels.shp</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">Read GIS X1D WLL </span><span class="op">==</span> ..\model\gis\1d_x1d_FM_wlls.shp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Note, legacy models may include reference to ISIS in the above commands. For example, “X1D” in <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISX1DNetwork">Read GIS X1D Network</a></span> can be substituted with “ISIS” (i.e.&nbsp;<span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISX1DNetwork">Read GIS ISIS Network</a></span>).</p>
+<p>Connections (CN) in the 2d_bc layer are snapped to the nodes in the 1d_x1d layer in the same manner as a TUFLOW 1D 1d_nwk layer.</p>
+<p>The following restrictions apply when connecting Flood Modeller nodes to TUFLOW 2D:</p>
+<ul>
+<li>HX lines should only be connected to Flood Modeller RIVER units. Flood Modeller INTERPOLATE and REPLICATE units are also permitted. This requires that the Flood Modeller unit between consecutive connections along a HX line is always a RIVER unit. If this is not the case, an “<a href="https://wiki.tuflow.com/TUFLOW_Message_2043">ERROR 2043</a> - 2D HX cell has been assigned to a non-RIVER unit” occurs. Where a non-RIVER unit occurs (e.g.&nbsp;at a structure), the HX line needs to be broken.</li>
+<li>Special Flood Modeller units may be required for some HX and SX connections (refer to the <a href="https://help.floodmodeller.com/docs/how-to-select-the-tuflow-link-type-to-use">Flood Modeller documentation</a>).</li>
+</ul>
+<p>It is not necessary for all Flood Modeller RIVER units between the upstream and downstream ends of the HX line to be connected. Nodes/Sections may be intentionally or accidentally omitted as with TUFLOW 1D nodes. Please note that this is not recommended because by missing or omitting nodes the 1D water level water surface gradient that is applied along the HX lines will not be correctly represented.</p>
+<p>TUFLOW checks whether the ZC elevation of a HX cell lies above the bed of the 1D nodes and that the ZC elevation of a SX cell lies below the 1D node bed, and if not, an error occurs (see <a href="#sec-HXBoundary-3" class="quarto-xref"><span>Section 10.2.1</span></a> and <a href="#sec-SXBoundary-3" class="quarto-xref"><span>Section 10.2.2</span></a>).</p>
+<p>Use the <a href="https://wiki.tuflow.com/Check_Files_1d_x1d_nodes">_x1d_nodes_check</a> file to cross-check the external 1D nodes/sections that were read by TUFLOW, and the associated information passed from the 1D scheme. Also use the <a href="https://wiki.tuflow.com/Check_Files_1d_to_2d_bc">_1d_to_2d_check</a> file to cross-check the correct HX and SX cells are connected to the correct channels (units). The HX cells in the <a href="https://wiki.tuflow.com/Check_Files_1d_to_2d_bc">_1d_to_2d_check</a> layer can be colour coded using the “Primary_no” attribute to identify the external 1D channel (unit) that the flow in/out across the HX cells is associated with. For Flood Modeller, by default HX cells are assigned to the upstream end of a river unit as a lateral flow as per Flood Modeller conventions.</p>
+<p>Note, the start and end simulation times and the timestep are controlled by Flood Modellers GUI input fields, and any <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-StartTime">Start Time</a></span>, <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-EndTime">End Time</a></span> and <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-Timestep">Timestep</a></span> commands are ignored in the .tcf file. It is best practice to remove (or comment out) these commands. Within the Flood Modeller GUI, the Flood Modeller 1D timestep can differ from the TUFLOW timestep. It is recommended that the Flood Modeller timestep be set as an integer divisor of the TUFLOW timestep.</p>
+<p>No TUFLOW 1D .ecf file is required, and the TUFLOW 1D <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ESTRYControlFile">ESTRY Control File</a></span> command should not be specified unless there are also TUFLOW 1D domain(s) in addition to the external scheme 1D domain(s). Flood Modeller nodes can be directly linked to TUFLOW 1D nodes allowing models to have a combination of Flood Modeller 1D and TUFLOW 1D (ESTRY) - refer to <a href="#sec-oneD2DFMLinking1D-3" class="quarto-xref"><span>Section 10.5.2</span></a>. An example model demonstrating both ‘SX’ and ‘HX’ type links between Flood Modeller and TUFLOW is available <a href="https://gitlab.com/tuflow-user-group/third-party-tools/other/flood-modeller-tuflow-linked-examples">here</a>.</p>
+<p>Note that Flood Modeller HX links may benefit from assigning a Form Loss Coefficient (typically 0.1 to 0.5 in value) to HX lines using the 2d_bc “a” attribute. For HX lines running along the riverbanks, especially those with high overtopping velocities, improved stability and representation of the energy losses associated with the water peeling off from the river to the floodplain or vice versa can be achieved.</p>
+<p>For model review purposes, the .tcf command <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-WriteX1DCheckFiles">Write X1D Check Files</a></span> writes out check_x1D_H_to_2D.csv and check_2D_Q_to_x1D.csv files. These contain the water levels and flows sent to the 2D to/from Flood Modeller.</p>
+<p>Example models demonstrating TUFLOW / Flood Modeller linking are available from the <a href="https://gitlab.com/tuflow-user-group/third-party-tools/other/flood-modeller-tuflow-linked-examples">TUFLOW Gitlab User Group</a>. Detailed documentation for the example models is available from the <a href="https://wiki.tuflow.com/TUFLOW_1D_Flood_Modeller_Connectivity">TUFLOW Wiki 1D Flood Modeller Connectivity</a>. A TUFLOW / Flood Modeller linked model is provided in <a href="https://wiki.tuflow.com/Flood_Modeller_Tutorial_Module01">TUFLOW / Flood Modeller Tutorial Module 1</a>.</p>
+</section>
+<section id="sec-oneD2DFMLinking1D-3" class="level3" data-number="10.5.2">
+<h3 data-number="10.5.2" class="anchored" data-anchor-id="sec-oneD2DFMLinking1D-3"><span class="header-section-number">10.5.2</span> Flood Modeller 1D to TUFLOW 1D (ESTRY) Linking</h3>
+<p>TUFLOW 1D (ESTRY) domains can be dynamically linked with Flood Modeller. The most common reason this is carried out is to utilise TUFLOW 1D’s powerful pipe network features (see <a href="05-1D-Domains.html#sec-Pipes-2" class="quarto-xref"><span>Section 5.10</span></a>).</p>
+<p>Flood Modeller and TUFLOW 1D (ESTRY) nodes will be considered linked if:</p>
+<ol type="1">
+<li>A TUFLOW 1D node in a 1d_nwk layer, and a Flood Modeller node in a <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISX1DNodes">Read GIS X1D Nodes</a></span> or <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISX1DNetwork">Read GIS X1D Network</a></span> layer are snapped.
+<ul>
+<li>Note, legacy models may include reference to ISIS in the command. For example, “X1D” in <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISX1DNodes">Read GIS X1D Nodes</a></span> can be substituted with “ISIS” (i.e.&nbsp;<span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISX1DNodes">Read GIS ISIS Nodes</a></span>).</li>
+</ul></li>
+<li>The TUFLOW 1D node connection method is defined using the TUFLOW 1D 1d_nwk Conn_1D_2D attribute. If the Conn_1D_2D field is blank, a “X1DH” type is assumed - this is the default approach. Alternatively, a value of “X1DH” or “X1DQ” can be manually specified.
+<ul>
+<li>A “X1DH” link means a Flood Modeller 1D water level is applied at the TUFLOW 1D node (i.e.&nbsp;Flood Modeller sends TUFLOW 1D a water level and TUFLOW 1D sends back a +/- flow to Flood Modeller).</li>
+<li>A “X1DQ” link means a Flood Modeller inflow/outflow is being applied at the TUFLOW 1D node (i.e.&nbsp;Flood Modeller sends TUFLOW 1D a +/- flow and TUFLOW 1D sends back a water level).</li>
+<li>If the end of the TUFLOW 1D channel and the snapped Flood Modeller / TUFLOW 1D nodes are not in the same location a TUFLOW 1D 1d_nwk connector “X” channel type can be used to connect the end of the linked TUFLOW 1D channel to the TUFLOW 1D node snapped to the Flood Modeller node.</li>
+<li>Note that the upstream and downstream inverts for the TUFLOW 1D node linked to Flood Modeller should be set to -99999 unless the node is also being used to set the inverts of channels snapped to it.</li>
+<li>As a general rule, a TUFLOW 1D X1DH (the default) would be used for most Flood Modeller TUFLOW 1D links. An X1DQ might be more appropriate where a Flood Modeller model stops and flows into a TUFLOW 1D model.</li>
+</ul></li>
+</ol>
+<p>Generally, a TUFLOW 1D timestep will be smaller than the Flood Modeller timestep. In these cases, the total volume is accumulated over all TUFLOW 1D timesteps within a Flood Modeller timestep, and applied to the Flood Modeller model as a discharge by dividing the volume by the Flood Modeller timestep.</p>
+<p>When running a TUFLOW 1D Flood Modeller linked model, the mass balance output _MB1D.csv file includes four new columns (which are not present if the 1D-1D linking is not used):</p>
+<ul>
+<li>X1DH V In: The volume of water in via a X1DH link.</li>
+<li>X1DH V Out: The volume of water out via a X1DH link.</li>
+<li>X1DQ V In: The volume of water in via a X1DQ link.</li>
+<li>X1DQ V Out: The volume of water out via a X1DQ link.</li>
+</ul>
+<p>Also, for model review purposes, the type or existence of a connection can be checked following a simulation by viewing the Conn_1D_2D attribute in the <a href="https://wiki.tuflow.com/Check_Files_1d_nwk_N">_nwk_N_check</a> layer. The _messages GIS layer also contains <a href="https://wiki.tuflow.com/TUFLOW_Message_1393">CHECK 1393</a> messages at each TUFLOW 1D node linked to a Flood Modeller node.</p>
+<p>Example models demonstrating TUFLOW Flood Modeller linking are available from the <a href="https://gitlab.com/tuflow-user-group/third-party-tools/other/flood-modeller-tuflow-linked-examples">TUFLOW Gitlab User Group</a>. Detailed documentation for the example models is available from the <a href="https://wiki.tuflow.com/TUFLOW_1D_Flood_Modeller_Connectivity">TUFLOW Wiki 1D Flood Modeller Connectivity</a>. A TUFLOW 1D Flood Modeller linked model is also provided in <a href="https://wiki.tuflow.com/Flood_Modeller_Tutorial_Module02">TUFLOW / Flood Modeller Tutorial Module 2</a>.</p>
+</section>
+</section>
+<section id="sec-oneD2D12D-2" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="sec-oneD2D12D-2"><span class="header-section-number">10.6</span> 12D-DDA to TUFLOW Linking</h2>
+<p>12D Dynamic Drainage Analysis (DDA) is developed by 12D Solutions based on the USA EPA-SWMM solver. 12D have developed a TUFLOW interface within their own <a href="https://www.12d.com/product/12d_model_tuflow.html">12D GUI</a> that offers GUI functionality for 1D and 2D modelling tasks. The interface provides users with the ability to build models and view result entirely within its GUI. Alternatively, existing TUFLOW files created in a GIS form can be imported and used in the 12D environment.</p>
+<p>A TUFLOW engine licence, either purchased directly from <a href="https://www.12d.com/sales/australia.html">12D Solutions</a> or from <a href="mailto:sales@tuflow.com">TUFLOW</a> is required to use TUFLOW with 12D-DDA. If purchased from TUFLOW, the 12D modules, such as the TCF Interface Module and 12D-DDA Drainage Integration (Linking) Module, will need to be purchased from 12D Solutions.</p>
+<p>For information detailing how to complete TUFLOW modelling using the 12D GUI, and linking TUFLOW 2D’s solvers with 12D-DDA, please contact <a href="https://www.12d.com/sales/australia.html">12D Solutions</a>.</p>
+</section>
+<section id="sec-TwoD2DLinking-2" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="sec-TwoD2DLinking-2"><span class="header-section-number">10.7</span> Multiple 2D Domains</h2>
+<p>The Multiple 2D Domain Module license provides access to TUFLOW HPC’s Quadtree and TUFLOW Classic’s Multiple 2D Domain (M2D) features. Both of these features allow the 2D cell resolution (cell sizes) to vary across the model. However, they are very different in their hydraulic solution and construct as described below.</p>
+<section id="sec-TwoD2DLinkingQDT-3" class="level3" data-number="10.7.1">
+<h3 data-number="10.7.1" class="anchored" data-anchor-id="sec-TwoD2DLinkingQDT-3"><span class="header-section-number">10.7.1</span> Classic’s M2D Feature versus HPC Quadtree</h3>
+<ul>
+<li>TUFLOW HPC only supports one 2D domain, however, the 2D cell size can be varied within the domain using the quadtree grid feature. In contrast, TUFLOW Classic’s M2D feature allows different 2D domains of different cell size/orientation to be linked together via hidden 1D nodes and HX lines.</li>
+<li>For a HPC quadtree grid, the numerical solution remains a full 2D solution without loss of accuracy, undesirable numerical artefacts or wave reflections when transitioning from one cell size to another. For Classic’s M2D feature, there is a loss of accuracy, particularly where the flow is complex/circulating and the assumptions associated with momentum and the linear water level profile associated with HX lines are influential.</li>
+<li>TUFLOW HPC Quadtree grids are set up by the modeller using a largely automated approach. Definition of 2D cell resolution regions is all that’s required. By comparison, TUFLOW Classic M2D requires manual definition of each 2D domain and the linkage between domains using 2D-2D links.</li>
+</ul>
+<p>Please contact <a href="mailto:sales@tuflow.com">sales@tuflow.com</a> if you wish to use these features, but do not have the M2D/Quadtree Module enabled on your licence.</p>
+<p>Due to the workflow efficient nature of its implementation, superior stability, numerical accuracy and preservation of inertia, TUFLOW HPC Quadtree has superseded TUFLOW Classic’s Multiple 2D Domain (M2D) feature as the recommended approach for models that require varied 2D cell sizes within a single model.</p>
+<p>For a complete description of the 2D TUFLOW HPC Quadtree solution and associated commands, please refer to <a href="06-2D-Domains.html#sec-Quadtree-3" class="quarto-xref"><span>Section 7.3.1</span></a>.</p>
+<p>An example TUFLOW HPC Quadtree model is available in <a href="https://wiki.tuflow.com/Tutorial_Introduction">TUFLOW Tutorial Module 7</a>. A video demonstration the implementation of this multiple 2D Domain feature is also available in the <a href="https://www.tuflow.com/library/videos/#howtoquadtree">TUFLOW Library</a>.</p>
+</section>
+<section id="sec-TwoD2DLinkingM2D-3" class="level3" data-number="10.7.2">
+<h3 data-number="10.7.2" class="anchored" data-anchor-id="sec-TwoD2DLinkingM2D-3"><span class="header-section-number">10.7.2</span> TUFLOW Classic’s Multiple 2D Domains</h3>
+<p>When using TUFLOW Classic with the M2D feature, any number of 2D domains of different cell size and orientation can be combined to form one model. The 2D domains can be linked via 1D domains or directly to each other. For example, a 1D domain of a river system may have several 2D domains embedded to represent several towns where a more detailed analysis is required. Alternatively, direct 2D to 2D linking can be achieved by using the 2d_bc 2D link type (see <a href="07-Boundaries-and-Initial-Conditions.html#sec-TwoDBoundaries-2" class="quarto-xref"><span>Section 8.4</span></a>). Examples of these model configurations are shown in <a href="#fig-MultipleDomainModellinkedvia1DDomain" class="quarto-xref">Figure&nbsp;<span>10.16</span></a> and <a href="#fig-MultipleDomainModellinkedvia2DLink" class="quarto-xref">Figure&nbsp;<span>10.17</span></a>.</p>
+<div id="fig-MultipleDomainModellinkedvia1DDomain" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-MultipleDomainModellinkedvia1DDomain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/image142.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-MultipleDomainModellinkedvia1DDomain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.16: Schematic of a Multiple Domain Model linked via a 1D Domain
+</figcaption>
+</figure>
+</div>
+<div id="fig-MultipleDomainModellinkedvia2DLink" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-MultipleDomainModellinkedvia2DLink-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/image143.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-MultipleDomainModellinkedvia2DLink-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.17: Schematic of a Multiple 2D Domain Model using the 2d_bc “2D” Link
+</figcaption>
+</figure>
+</div>
+<p>To specify more than one 2D domain use <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-Start2DDomain">Start 2D Domain</a></span> and <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-End2DDomain">End 2D Domain</a></span> in the .tcf file to start and end blocks of commands applicable for each 2D domain. The <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ESTRYControlFile">ESTRY Control File</a></span> and <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-BCDatabase">BC Database</a></span> commands are independent of the 2D domain block. As such they are typically not included within the 2D domain block.</p>
+<p>The mandatory .tcf commands that occur within a 2D domain block are:</p>
+<ul>
+<li><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-GeometryControlFile">Geometry Control File</a></span></li>
+<li><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-BCControlFile">BC Control File</a></span></li>
+<li><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-Timestep">Timestep</a></span></li>
+</ul>
+<p>Optional commands that can be used are:</p>
+<ul>
+<li><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-CellWetDryDepth">Cell Wet/Dry Depth</a></span></li>
+<li><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-InstabilityWaterLevel">Instability Water Level</a></span></li>
+<li><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISFC">Read GIS FC</a></span></li>
+<li><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISGLO">Read GIS GLO</a></span></li>
+<li><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISIWL">Read GIS IWL</a></span></li>
+<li><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadRowColIWL">Read RowCol IWL</a></span></li>
+<li><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISLP">Read GIS LP</a></span></li>
+<li><span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISPO">Read GIS PO</a></span></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Specifying one of the above commands outside a Start/End 2D Domain block does not apply that command to all 2D domains.</p>
+<p>For example, specifying <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-CellWetDryDepth">Cell Wet/Dry Depth</a></span> outside a lock will not set the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-CellWetDryDepth">Cell Wet/Dry Depth</a></span> value to all 2D domains, and causes ERROR 2107 to occur.</p>
+</div>
+</div>
+<p>An example of using 2D domain blocks is given below:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Start 2D Domain </span><span class="op">==</span> East_Domain</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Geometry Control File </span><span class="op">==</span> ..\model\east_domain.tgc</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Control File </span><span class="op">==</span> ..\model\east_domain.tbc</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Timestep </span><span class="op">==</span> 10</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>End 2D Domain</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">Start 2D Domain </span><span class="op">==</span> West_Domain</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Geometry Control File </span><span class="op">==</span> ..\model\west_domain.tgc</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">BC Control File </span><span class="op">==</span> ..\model\west_domain.tbc</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">Timestep </span><span class="op">==</span> 5</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>End 2D Domain</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">BC Database </span><span class="op">==</span> ..\bc_dbase\bcdbase_Q100_2hr_001.csv</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">ESTRY Control File </span><span class="op">==</span> ..\model\1D_domain.ecf</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="kw">Read Materials File </span><span class="op">==</span> ..\model\n_values.tmf</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="kw">Start Time </span><span class="op">==</span> 0</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="kw">End Time </span><span class="op">==</span> 12</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Multiple 2D domain models use the 2d_bc “2D” link type (see <a href="07-Boundaries-and-Initial-Conditions.html#tbl-twodboundary" class="quarto-xref">Table&nbsp;<span>8.5</span></a> and <a href="07-Boundaries-and-Initial-Conditions.html#tbl-conditionsattribute" class="quarto-xref">Table&nbsp;<span>8.6</span></a>) as the boundary cells that transfer flow between the neighbouring domains. The link type creates hidden 1D nodes at each vertex along the 2D link line and also at a regular interval, as defined by the “d” attribute (see <a href="07-Boundaries-and-Initial-Conditions.html#tbl-conditionsattribute" class="quarto-xref">Table&nbsp;<span>8.6</span></a>). The hidden 1D nodes act as storage that convey the water from one 2D domain to the other.</p>
+<p>The water levels along the 2d_bc 2D link line are linearly interpolated using the water levels in the hidden 1D nodes. If the water level profile in reality is not close to linear between vertices, strange flow patterns may occur which can lead to model instability or unrealistic results. As such, appropriate resolution of the hidden 1D nodes is an important feature of multiple 2D domain models.</p>
+<p>The .tcf command <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-Reveal1DNodes">Reveal 1D Nodes</a></span> can be used to view the hidden 1D nodes. The hidden nodes will be written to the nwk_N check layer, as shown in <a href="#fig-Multiple2DDomainModelLinkCheckFiles" class="quarto-xref">Figure&nbsp;<span>10.18</span></a> . For multiple domain models using the 2d_bc “2D” link, note that this GIS layer must be read into the .tbc files of <strong>both</strong> 2D domains. The 2D link can then be checked by viewing the <a href="https://wiki.tuflow.com/Check_Files_2d_to_2d_bc">_2d_to_2d_check</a> layer which displays the 2D cells used to link the two domains together. These features, and their check files are shown in <a href="#fig-Multiple2DDomainModelLinkCheckFiles" class="quarto-xref">Figure&nbsp;<span>10.18</span></a>.</p>
+<div id="fig-Multiple2DDomainModelLinkCheckFiles" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Multiple2DDomainModelLinkCheckFiles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/image144.png" class="img-fluid figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Multiple2DDomainModelLinkCheckFiles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.18: Multiple 2D Domain Model “2D” Link Check Files
+</figcaption>
+</figure>
+</div>
+<p>The following guidance is recommended when defining the location and orientation of the 2d_bc “2D” link.</p>
+<ul>
+<li>2D link lines will be most stable if digitised perpendicular to the dominant flow direction in high conveyance locations (e.g.&nbsp;rivers and creeks).</li>
+<li>Orientation of the 2D link lines is less critical in low conveyance regions, such as floodplain storage areas (i.e.&nbsp;perpendicular orientation is not a necessity). High resolution definition of the hidden 1D nodes may be required. If used, the automated hidden 1D nodes distance attribute “d” should not be set finer than three times the larger cell size.</li>
+</ul>
+<p>If the extents of the 2D domains overlap, it will be necessary to deactivate the overlapping cells in the other domain. Using the example above, the active area for the ‘West Domain’ will need to be deactivated in the .tgc file of the ‘East Domain’ and vice versa. The <span class="tcmd"><a href="./82-AppendicesC-TGCCommands.html#tgc-ReadGISCode">Read GIS Code Invert</a></span> command is useful for this process as it allows for the same GIS layer to be used to active/deactivate cells.</p>
+<p>A unique model <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-Timestep">Timestep</a></span> is recommended for each 2D domain. The timestep should be defined so that it conforms to the Courant stability criteria for each domain, as discussed in <a href="03-Hydraulic-Modelling-Fundamentals.html#sec-TUFLOWClassicTimestep-3" class="quarto-xref"><span>Section 3.4.3</span></a>. The timesteps of all 2D and 1D domains should be an integer multiple of one another.</p>
+<p>A TUFLOW Classic Multiple 2D Domain model is available in <a href="https://wiki.tuflow.com/Tutorial_Model_Archive">TUFLOW Tutorial Module 9 Archive</a>.</p>
+<p><img src="images/WQFooter.jpg" class="img-fluid" style="width:100.0%"></p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="1" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-FHWAUrbanDrainageManual2024" class="csl-entry" role="listitem">
+Roger Kilgore and A. Tamim Atayee and George Herrmann. (2024). <em>Urban Drainage Design Manual (4th Edition)</em> (pp. 311 pages). U.S. Department of Transportation Federal Highway Administration. <a href="https://www.fhwa.dot.gov/engineering/hydraulics/pubs/hif24006.pdf">https://www.fhwa.dot.gov/engineering/hydraulics/pubs/hif24006.pdf</a>
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+// Hover preview for plain anchor links -- mirrors native quarto-xref behaviour.
+
+// Supports same-page anchors and cross-chapter links on the same origin.
+
+// Placed via include-after-body so all DOM is parsed when this runs.
+
+(function () {
+
+  if (typeof window.tippy !== 'function') { return; }
+
+
+
+  var doc = window.document;
+
+  var pageCache = {};
+
+
+
+  function stripColumnClasses(el) {
+
+    el.classList.remove('page-full', 'page-columns');
+
+    for (var i = 0; i < el.children.length; i++) {
+
+      stripColumnClasses(el.children[i]);
+
+    }
+
+  }
+
+
+
+  function buildContent(id, target) {
+
+    var clone = target.cloneNode(true);
+
+    stripColumnClasses(clone);
+
+
+
+    var anchor = clone.querySelector('a.anchorjs-link');
+
+    if (anchor) { anchor.parentNode.removeChild(anchor); }
+
+
+
+    var isSectionEl = (clone.tagName === 'SECTION' || /^H[1-6]$/.test(clone.tagName || ''));
+
+    var isSectionId = (typeof id === 'string' && id.indexOf('sec-') === 0);
+
+
+
+    if (isSectionEl || isSectionId) {
+
+      var container = doc.createElement('div');
+
+      var kids = clone.children;
+
+      if (kids.length > 2) {
+
+        container.appendChild(kids[0].cloneNode(true));
+
+        for (var j = 1; j < kids.length; j++) {
+
+          if (kids[j].tagName === 'P' && (kids[j].textContent || '').trim() === '') { continue; }
+
+          container.appendChild(kids[j].cloneNode(true));
+
+          break;
+
+        }
+
+        if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(container); }
+
+        return container.innerHTML;
+
+      }
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.innerHTML;
+
+    }
+
+
+
+    if (clone.classList.contains('callout')) {
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.outerHTML;
+
+    }
+
+
+
+    if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+    return clone.innerHTML;
+
+  }
+
+
+
+  function getTargetFromPage(pageUrl, id, callback) {
+
+    if (pageCache[pageUrl]) {
+
+      callback(pageCache[pageUrl].getElementById(id));
+
+      return;
+
+    }
+
+    fetch(pageUrl)
+
+      .then(function (r) { return r.text(); })
+
+      .then(function (html) {
+
+        var parser = new DOMParser();
+
+        var parsedDoc = parser.parseFromString(html, 'text/html');
+
+        pageCache[pageUrl] = parsedDoc;
+
+        callback(parsedDoc.getElementById(id));
+
+      })
+
+      .catch(function () { callback(null); });
+
+  }
+
+
+
+  // Same-page anchor links (href starts with "#")
+
+  var samePageLinks = doc.querySelectorAll(
+
+    'main a[href^="#"]:not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < samePageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var hash   = link.getAttribute('href');
+
+      var id     = hash.replace(/^#\/?/, '');
+
+      var target = doc.getElementById(id);
+
+      if (!target) { return; }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           function () { return buildContent(id, target); }
+
+      });
+
+    })(samePageLinks[i]);
+
+  }
+
+
+
+  // Cross-page anchor links (same origin, href contains "#" but does not start with "#")
+
+  var crossPageLinks = doc.querySelectorAll(
+
+    'main a[href*="#"]:not([href^="#"]):not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < crossPageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var href = link.getAttribute('href');
+
+
+
+      var pageUrl, id;
+
+      try {
+
+        var resolved = new URL(href, window.location.href);
+
+        if (resolved.origin !== window.location.origin) { return; }
+
+        pageUrl = resolved.origin + resolved.pathname;
+
+        id = resolved.hash.replace(/^#\/?/, '');
+
+      } catch (e) { return; }
+
+
+
+      if (!id) { return; }
+
+
+
+      // If the link points to the current page, look up the element directly
+
+      if (pageUrl === (window.location.origin + window.location.pathname)) {
+
+        var target = doc.getElementById(id);
+
+        if (!target) { return; }
+
+        window.tippy(link, {
+
+          allowHTML:         true,
+
+          maxWidth:          500,
+
+          delay:             100,
+
+          arrow:             false,
+
+          appendTo:          function (el) { return el.parentElement; },
+
+          interactive:       true,
+
+          interactiveBorder: 10,
+
+          theme:             'quarto',
+
+          placement:         'bottom-start',
+
+          content:           function () { return buildContent(id, target); }
+
+        });
+
+        return;
+
+      }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           'Loading\u2026',
+
+        onShow:            function (instance) {
+
+          if (instance._fetched) { return; }
+
+          instance._fetched = true;
+
+          getTargetFromPage(pageUrl, id, function (target) {
+
+            if (target) {
+
+              instance.setContent(buildContent(id, target));
+
+            } else {
+
+              instance.destroy();
+
+            }
+
+          });
+
+        }
+
+      });
+
+    })(crossPageLinks[i]);
+
+  }
+
+})();
+
+</script>
+
+<script>
+
+// Adds a copy-to-clipboard button to plain code blocks, .styled-code, and .scrollable-block elements.
+
+// .tuflow blocks already receive Quarto's built-in copy button via .sourceCode — those are excluded.
+
+(function () {
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    var selectors = ['pre:not(.sourceCode)', '.styled-code', '.scrollable-block'];
+
+
+
+    selectors.forEach(function (sel) {
+
+      document.querySelectorAll(sel).forEach(function (block) {
+
+        // Skip if already processed
+
+        if (block.parentNode && block.parentNode.classList.contains('copy-block-wrapper')) return;
+
+
+
+        // Wrap block so the button can be positioned outside the scroll area
+
+        var wrapper = document.createElement('div');
+
+        wrapper.className = 'copy-block-wrapper';
+
+        block.parentNode.insertBefore(wrapper, block);
+
+        wrapper.appendChild(block);
+
+
+
+        // Create button
+
+        var btn = document.createElement('button');
+
+        btn.className = 'copy-block-btn';
+
+        btn.title = 'Copy to Clipboard';
+
+        btn.setAttribute('aria-label', 'Copy to Clipboard');
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+
+
+        btn.addEventListener('click', function () {
+
+          var text = block.innerText;
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+
+            navigator.clipboard.writeText(text).then(function () {
+
+              showCopied(btn);
+
+            }).catch(function () {
+
+              fallbackCopy(text);
+
+              showCopied(btn);
+
+            });
+
+          } else {
+
+            fallbackCopy(text);
+
+            showCopied(btn);
+
+          }
+
+        });
+
+
+
+        wrapper.appendChild(btn);
+
+      });
+
+    });
+
+
+
+    function showCopied(btn) {
+
+      btn.innerHTML = '<i class="bi bi-clipboard-check"></i>';
+
+      btn.title = 'Copied!';
+
+      setTimeout(function () {
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+        btn.title = 'Copy to Clipboard';
+
+      }, 2000);
+
+    }
+
+
+
+    function fallbackCopy(text) {
+
+      var ta = document.createElement('textarea');
+
+      ta.value = text;
+
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+
+      document.body.appendChild(ta);
+
+      ta.focus();
+
+      ta.select();
+
+      try { document.execCommand('copy'); } catch (e) {}
+
+      document.body.removeChild(ta);
+
+    }
+
+  });
+
+}());
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./075-Advection-Dispersion.html" class="pagination-link" aria-label="Advection Dispersion">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Advection Dispersion</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./09-Outputs.html" class="pagination-link" aria-label="Outputs">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Outputs</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

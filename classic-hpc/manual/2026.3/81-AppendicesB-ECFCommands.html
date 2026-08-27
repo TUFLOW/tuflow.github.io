@@ -1,0 +1,2850 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Appendix B — ECF Commands – TUFLOW Classic/HPC User Manual 2026.3</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./82-AppendicesC-TGCCommands.html" rel="next">
+<link href="./80-AppendicesA-TCFCommands.html" rel="prev">
+<link href="./manuals-shared/images/TUFLOW.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a05edeb22857246f78be566029559b2a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ea94015a310cf19a1d0a98706902972b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f81dba0ce6da1b510b6773a9417a2621.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const tocNav = document.querySelector("nav[role='doc-toc']");
+
+    if (!tocNav) return;
+
+
+
+    const observer = new MutationObserver((mutations) => {
+
+      mutations.forEach((mutation) => {
+
+        if (mutation.attributeName === "class") {
+
+          const target = mutation.target;
+
+          if (target.classList.contains("active")) {
+
+            // Scroll the active item smoothly ('smooth') with the least amount of movement ('nearest')
+
+            target.scrollIntoView({
+
+              behavior: "smooth",
+
+              block: "nearest"
+
+            });
+
+          }
+
+        }
+
+      });
+
+    });
+
+
+
+    // Target all links inside the TOC
+
+    const tocLinks = tocNav.querySelectorAll("ul li a");
+
+    tocLinks.forEach((link) => {
+
+      observer.observe(link, { attributes: true });
+
+    });
+
+  });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+
+
+<script>
+
+window.addEventListener("load", function () {
+
+  document.querySelectorAll(".quarto-figure table.searchable").forEach(function(table){
+
+      new DataTable(table, {
+
+          paging: true,
+
+          pageLength: -1,
+
+          lengthMenu: [
+
+            [-1, 10, 20, 50],
+
+            ["All", 10, 20, 50]
+
+          ],
+
+          searching: true,
+
+          ordering: true,
+
+          order: [],
+
+          rowId: null
+
+      });
+
+  });
+
+});
+
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/TUFLOW_logo.png" alt="" class="navbar-logo light-content">
+    <img src="./images/TUFLOW_logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TUFLOW Classic/HPC User Manual 2026.3</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://tuflow.com/"> 
+<span class="menu-text"><img src="manuals-shared/images/BMT_logo.png" style="height:1.5em"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="./TUFLOW-Classic-HPC-User-Manual-2026.3.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./80-AppendicesA-TCFCommands.html">Appendices</a></li><li class="breadcrumb-item"><a href="./81-AppendicesB-ECFCommands.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">ECF Commands</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TUFLOW Classic/HPC User Manual</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Getting-Started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Hydraulic-Modelling-Fundamentals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hydraulic Modelling Fundamentals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ControlFiles-and-Inputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Control Files and Input Layers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-1D-Domains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">1D Network Domains - ESTRY</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./055-1D-SWMM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">1D Network Domains - EPA SWMM</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-2D-Domains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">2D Domains</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-Boundaries-and-Initial-Conditions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Boundaries and Initial Conditions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./075-Advection-Dispersion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Advection Dispersion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-Linked-1D2D-Models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Domains and Solvers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-Outputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Outputs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-Hardware.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hardware and Operating System</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-RunningSimulations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Managing and Starting Simulations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-Checks-and-Logs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Checks and Log Files</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Viewing-and-PostProcessing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Viewing Outputs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-QualityControl-and-Troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Quality Control and Troubleshooting</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-Utilities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Utilities</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-Features-and-Changes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Default Changes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80-AppendicesA-TCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">TCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./81-AppendicesB-ECFCommands.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">ECF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./82-AppendicesC-TGCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">TGC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./83-AppendicesD-TBCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">TBC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./84-AppendicesE-TOCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">TOC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./85-AppendicesF-TRFCCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">TRFC Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./86-AppendicesG-TESFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">TESF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./87-AppendicesH-QCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">QCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./88-AppendicesI-TSCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">TSCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./89-AppendicesJ-ADCFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">ADCF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./90-AppendicesK-TEFCommands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">TEF Commands</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./91-AppendicesL-SWMM-Geopackage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">L</span>&nbsp; <span class="chapter-title">SWMM GeoPackage Format</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#ecf-commands" id="toc-ecf-commands" class="nav-link active" data-scroll-target="#ecf-commands"><span class="header-section-number">B.1</span> ECF Commands</a>
+  <ul>
+  <li><a href="#ecf-1DNodeInvertApproach" id="toc-ecf-1DNodeInvertApproach" class="nav-link" data-scroll-target="#ecf-1DNodeInvertApproach"><span class="tcmd">1D Node Invert Approach</span> <span class="teq">==</span> <span class="tblk">{Method A} | Method B</span></a></li>
+  <li><a href="#ecf-ADApproach" id="toc-ecf-ADApproach" class="nav-link" data-scroll-target="#ecf-ADApproach"><span class="tcmd">AD Approach</span> <span class="teq">==</span> <span class="tblk">METHOD A | {METHOD B}</span></a></li>
+  <li><a href="#ecf-ApplyAllInverts" id="toc-ecf-ApplyAllInverts" class="nav-link" data-scroll-target="#ecf-ApplyAllInverts"><span class="tcmd">Apply All Inverts</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></a></li>
+  <li><a href="#ecf-ArchBridgeMinimumBlockage" id="toc-ecf-ArchBridgeMinimumBlockage" class="nav-link" data-scroll-target="#ecf-ArchBridgeMinimumBlockage"><span class="tcmd">Arch Bridge Minimum Blockage (%)</span> <span class="teq">==</span> <span class="tblk">{5} | &lt;min_pblockage&gt;</span></a></li>
+  <li><a href="#ecf-BCDatabase" id="toc-ecf-BCDatabase" class="nav-link" data-scroll-target="#ecf-BCDatabase"><span class="tcmd">BC Database</span> <span class="teq">==</span> <span class="tblk">&lt;.csv_file&gt;</span></a></li>
+  <li><a href="#ecf-BCEventName" id="toc-ecf-BCEventName" class="nav-link" data-scroll-target="#ecf-BCEventName"><span class="tcmd">BC Event Name</span> <span class="teq">==</span> <span class="tblk">&lt;bc_event_name&gt;</span></a></li>
+  <li><a href="#ecf-BCEventSource" id="toc-ecf-BCEventSource" class="nav-link" data-scroll-target="#ecf-BCEventSource"><span class="tcmd">BC Event Source</span> <span class="teq">==</span> <span class="tblk">&lt;bc_event_text&gt; | &lt;bc_event_name&gt;</span></a></li>
+  <li><a href="#ecf-BCEventText" id="toc-ecf-BCEventText" class="nav-link" data-scroll-target="#ecf-BCEventText"><span class="tcmd">BC Event Text</span> <span class="teq">==</span> <span class="tblk">&lt;bc_event_text&gt;</span></a></li>
+  <li><a href="#ecf-BridgeFlow" id="toc-ecf-BridgeFlow" class="nav-link" data-scroll-target="#ecf-BridgeFlow"><span class="tcmd">Bridge Flow</span> <span class="teq">==</span> <span class="tblk">Method A | {Method B}</span></a></li>
+  <li><a href="#ecf-BridgeZeroCoefficients" id="toc-ecf-BridgeZeroCoefficients" class="nav-link" data-scroll-target="#ecf-BridgeZeroCoefficients"><span class="tcmd">Bridge Zero Coefficients</span> <span class="teq">==</span> <span class="tblk">{DEFAULT} | OFF | &lt;Cd&gt;, &lt;DLC&gt;, &lt;ELC&gt;, &lt;XLC&gt;</span></a></li>
+  <li><a href="#ecf-ConveyanceCalculation" id="toc-ecf-ConveyanceCalculation" class="nav-link" data-scroll-target="#ecf-ConveyanceCalculation"><span class="tcmd">Conveyance Calculation</span> <span class="teq">==</span> <span class="tblk">CHANGE IN RESISTANCE | {ALL&nbsp;PARALLEL}</span></a></li>
+  <li><a href="#ecf-CreateNodes" id="toc-ecf-CreateNodes" class="nav-link" data-scroll-target="#ecf-CreateNodes"><span class="tcmd">Create Nodes</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></a></li>
+  <li><a href="#ecf-CSVFormat" id="toc-ecf-CSVFormat" class="nav-link" data-scroll-target="#ecf-CSVFormat"><span class="tcmd">CSV Format</span> <span class="teq">==</span> <span class="tblk">HORIZONTAL | {VERTICAL}</span></a></li>
+  <li><a href="#ecf-CSVMaximumNumberColumns" id="toc-ecf-CSVMaximumNumberColumns" class="nav-link" data-scroll-target="#ecf-CSVMaximumNumberColumns"><span class="tcmd">CSV Maximum Number Columns</span> <span class="teq">==</span> <span class="tblk">&lt;max_col&gt;</span></a></li>
+  <li><a href="#ecf-CSVTime" id="toc-ecf-CSVTime" class="nav-link" data-scroll-target="#ecf-CSVTime"><span class="tcmd">CSV Time</span> <span class="teq">==</span> <span class="tblk">{DAYS} | HOURS | MINUTES | SECONDS</span></a></li>
+  <li><a href="#ecf-CulvertCriticalHD" id="toc-ecf-CulvertCriticalHD" class="nav-link" data-scroll-target="#ecf-CulvertCriticalHD"><span class="tcmd">Culvert Critical H/D</span> <span class="teq">==</span> <span class="tblk">{OFF} | &lt;critical_h/d&gt; | &lt;v1&gt; | &lt;v2&gt; | &lt;v3&gt;</span></a></li>
+  <li><a href="#ecf-CulvertFlow" id="toc-ecf-CulvertFlow" class="nav-link" data-scroll-target="#ecf-CulvertFlow"><span class="tcmd">Culvert Flow</span> <span class="teq">==</span> <span class="tblk">{Method E} | Method &lt;letter&gt;</span></a></li>
+  <li><a href="#ecf-CulvertZeroCoefficients" id="toc-ecf-CulvertZeroCoefficients" class="nav-link" data-scroll-target="#ecf-CulvertZeroCoefficients"><span class="tcmd">Culvert Zero Coefficients</span> <span class="teq">==</span> <span class="tblk">DEFAULT | {OFF} | v1, v2, v3, v4, v5</span></a></li>
+  <li><a href="#ecf-DepthDischargeDatabase" id="toc-ecf-DepthDischargeDatabase" class="nav-link" data-scroll-target="#ecf-DepthDischargeDatabase"><span class="tcmd">Depth Discharge Database</span> <span class="teq">==</span> <span class="tblk">&lt;depth_discharge_dbase.csv&gt;</span></a></li>
+  <li><a href="#ecf-DepthLimitFactor" id="toc-ecf-DepthLimitFactor" class="nav-link" data-scroll-target="#ecf-DepthLimitFactor"><span class="tcmd">Depth Limit Factor</span> <span class="teq">==</span> <span class="tblk">{10} | &lt;value&gt;</span></a></li>
+  <li><a href="#ecf-FlowArea" id="toc-ecf-FlowArea" class="nav-link" data-scroll-target="#ecf-FlowArea"><span class="tcmd">Flow Area</span> <span class="teq">==</span> <span class="tblk">{EFFECTIVE} | TOTAL</span></a></li>
+  <li><a href="#ecf-FlowCalculation" id="toc-ecf-FlowCalculation" class="nav-link" data-scroll-target="#ecf-FlowCalculation"><span class="tcmd">Flow Calculation</span> <span class="teq">==</span> <span class="tblk">Method A | {Method B}</span></a></li>
+  <li><a href="#ecf-FroudeCheck" id="toc-ecf-FroudeCheck" class="nav-link" data-scroll-target="#ecf-FroudeCheck"><span class="tcmd">Froude Check</span> <span class="teq">==</span> <span class="tblk">{1} | &lt;froude_no&gt;</span></a></li>
+  <li><a href="#ecf-FroudeDepthAdjustment" id="toc-ecf-FroudeDepthAdjustment" class="nav-link" data-scroll-target="#ecf-FroudeDepthAdjustment"><span class="tcmd">Froude Depth Adjustment</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></a></li>
+  <li><a href="#ecf-HeadRateCreepFactor" id="toc-ecf-HeadRateCreepFactor" class="nav-link" data-scroll-target="#ecf-HeadRateCreepFactor"><span class="tcmd">Head Rate Creep Factor</span> <span class="teq">==</span> <span class="tblk">&lt;value&gt; | {1.2}</span></a></li>
+  <li><a href="#ecf-HeadRateLimit" id="toc-ecf-HeadRateLimit" class="nav-link" data-scroll-target="#ecf-HeadRateLimit"><span class="tcmd">Head Rate Limit</span> <span class="teq">==</span> <span class="tblk">ON | {OFF} | &lt;hrl&gt;</span></a></li>
+  <li><a href="#ecf-HeadRateLimitMinimum" id="toc-ecf-HeadRateLimitMinimum" class="nav-link" data-scroll-target="#ecf-HeadRateLimitMinimum"><span class="tcmd">Head Rate Limit Minimum</span> <span class="teq">==</span> <span class="tblk">&lt;hrlmin&gt; | {0.001}</span></a></li>
+  <li><a href="#ecf-IfEvent" id="toc-ecf-IfEvent" class="nav-link" data-scroll-target="#ecf-IfEvent"><span class="tcmd">If Event</span> <span class="teq">==</span> <span class="tblk">&lt;e1&gt; | &lt;e2&gt; | &lt;e3&gt; | …</span></a></li>
+  <li><a href="#ecf-IfScenario" id="toc-ecf-IfScenario" class="nav-link" data-scroll-target="#ecf-IfScenario"><span class="tcmd">If Scenario</span> <span class="teq">==</span> <span class="tblk">&lt;s1&gt; | &lt;s2&gt; | &lt;s3&gt; | …</span></a></li>
+  <li><a href="#ecf-InterpolateCrossSections" id="toc-ecf-InterpolateCrossSections" class="nav-link" data-scroll-target="#ecf-InterpolateCrossSections"><span class="tcmd">Interpolate Cross-Sections</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></a></li>
+  <li><a href="#ecf-InterpolateCulvertInverts" id="toc-ecf-InterpolateCulvertInverts" class="nav-link" data-scroll-target="#ecf-InterpolateCulvertInverts"><span class="tcmd">Interpolate Culvert Inverts</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></a></li>
+  <li><a href="#ecf-MChannelApproach" id="toc-ecf-MChannelApproach" class="nav-link" data-scroll-target="#ecf-MChannelApproach"><span class="tcmd">M Channel Approach</span> <span class="teq">==</span> <span class="tblk">Method A | {Method B}</span></a></li>
+  <li><a href="#ecf-M11Network" id="toc-ecf-M11Network" class="nav-link" data-scroll-target="#ecf-M11Network"><span class="tcmd">M11 Network</span> <span class="teq">==</span> <span class="tblk">&lt;.nwk11_file&gt;</span></a></li>
+  <li><a href="#ecf-ManholeApproach" id="toc-ecf-ManholeApproach" class="nav-link" data-scroll-target="#ecf-ManholeApproach"><span class="tcmd">Manhole Approach</span> <span class="teq">==</span> <span class="tblk">METHOD A | METHOD B | {METHOD C}</span></a></li>
+  <li><a href="#ecf-ManholeDefaultCExitCoefficient" id="toc-ecf-ManholeDefaultCExitCoefficient" class="nav-link" data-scroll-target="#ecf-ManholeDefaultCExitCoefficient"><span class="tcmd">Manhole Default C Exit Coefficient</span> <span class="teq">==</span> <span class="tblk">&lt;K<span class="math inline">\(_{CE}\)</span>&gt; | {0.25}</span></a></li>
+  <li><a href="#ecf-ManholeDefaultLossApproach" id="toc-ecf-ManholeDefaultLossApproach" class="nav-link" data-scroll-target="#ecf-ManholeDefaultLossApproach"><span class="tcmd">Manhole Default Loss Approach</span> <span class="teq">==</span> <span class="tblk">NONE | {ENGELUND} | FIXED</span></a></li>
+  <li><a href="#ecf-ManholeDefaultRExitCoefficient" id="toc-ecf-ManholeDefaultRExitCoefficient" class="nav-link" data-scroll-target="#ecf-ManholeDefaultRExitCoefficient"><span class="tcmd">Manhole Default R Exit Coefficient</span> <span class="teq">==</span> <span class="tblk">&lt;K<span class="math inline">\(_{RE}\)</span>&gt; | {0.5}</span></a></li>
+  <li><a href="#ecf-ManholeDefaultSideClearance" id="toc-ecf-ManholeDefaultSideClearance" class="nav-link" data-scroll-target="#ecf-ManholeDefaultSideClearance"><span class="tcmd">Manhole Default Side Clearance</span> <span class="teq">==</span> <span class="tblk">&lt;value_m&gt; | {0.3}</span></a></li>
+  <li><a href="#ecf-ManholeDefaultType" id="toc-ecf-ManholeDefaultType" class="nav-link" data-scroll-target="#ecf-ManholeDefaultType"><span class="tcmd">Manhole Default Type</span> <span class="teq">==</span> <span class="tblk">C | J | R | CR | {CJR}</span></a></li>
+  <li><a href="#ecf-ManholeKMaximumBendDrop" id="toc-ecf-ManholeKMaximumBendDrop" class="nav-link" data-scroll-target="#ecf-ManholeKMaximumBendDrop"><span class="tcmd">Manhole K Maximum Bend/Drop</span> <span class="teq">==</span> <span class="tblk">&lt;max_K_bd&gt; | {4.0}</span></a></li>
+  <li><a href="#ecf-ManholeMinimumDimension" id="toc-ecf-ManholeMinimumDimension" class="nav-link" data-scroll-target="#ecf-ManholeMinimumDimension"><span class="tcmd">Manhole Minimum Dimension</span> <span class="teq">==</span> <span class="tblk">&lt;min_width_m&gt; | {1.05}</span></a></li>
+  <li><a href="#ecf-ManholesatAllCulvertJunctions" id="toc-ecf-ManholesatAllCulvertJunctions" class="nav-link" data-scroll-target="#ecf-ManholesatAllCulvertJunctions"><span class="tcmd">Manholes at All Culvert Junctions</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></a></li>
+  <li><a href="#ecf-MaximumOperationalControls" id="toc-ecf-MaximumOperationalControls" class="nav-link" data-scroll-target="#ecf-MaximumOperationalControls"><span class="tcmd">Maximum Operational Controls</span> <span class="teq">==</span> <span class="tblk">{1000} | &lt;number_of_operational_channels/control_definitions&gt;</span></a></li>
+  <li><a href="#ecf-MinimumChannelConveyanceLength" id="toc-ecf-MinimumChannelConveyanceLength" class="nav-link" data-scroll-target="#ecf-MinimumChannelConveyanceLength"><span class="tcmd">Minimum Channel Conveyance Length</span> <span class="teq">==</span> <span class="tblk">{0} | &lt;length_m&gt;</span></a></li>
+  <li><a href="#ecf-MinimumChannelStorageLength" id="toc-ecf-MinimumChannelStorageLength" class="nav-link" data-scroll-target="#ecf-MinimumChannelStorageLength"><span class="tcmd">Minimum Channel Storage Length</span> <span class="teq">==</span> <span class="tblk">{0} | &lt;length_m&gt;</span></a></li>
+  <li><a href="#ecf-MinimumNA" id="toc-ecf-MinimumNA" class="nav-link" data-scroll-target="#ecf-MinimumNA"><span class="tcmd">Minimum NA</span> <span class="teq">==</span> <span class="tblk">{1} | &lt;value&gt;</span></a></li>
+  <li><a href="#ecf-MinimumNAPit" id="toc-ecf-MinimumNAPit" class="nav-link" data-scroll-target="#ecf-MinimumNAPit"><span class="tcmd">Minimum NA Pit</span> <span class="teq">==</span> <span class="tblk">{1} | &lt;value&gt;</span></a></li>
+  <li><a href="#ecf-MomentumEquation" id="toc-ecf-MomentumEquation" class="nav-link" data-scroll-target="#ecf-MomentumEquation"><span class="tcmd">Momentum Equation</span> <span class="teq">==</span> <span class="tblk">PRE 2003-08-AD</span></a></li>
+  <li><a href="#ecf-OrderOutput" id="toc-ecf-OrderOutput" class="nav-link" data-scroll-target="#ecf-OrderOutput"><span class="tcmd">Order Output</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></a></li>
+  <li><a href="#ecf-OutputDataTypes" id="toc-ecf-OutputDataTypes" class="nav-link" data-scroll-target="#ecf-OutputDataTypes"><span class="tcmd">Output Data Types</span> <span class="teq">==</span> <span class="tblk">{H Q S V} | &lt;data_types&gt;</span></a></li>
+  <li><a href="#ecf-OutputFolder" id="toc-ecf-OutputFolder" class="nav-link" data-scroll-target="#ecf-OutputFolder"><span class="tcmd">Output Folder</span> <span class="teq">==</span> <span class="tblk">&lt;folder&gt;</span></a></li>
+  <li><a href="#ecf-OutputInterval" id="toc-ecf-OutputInterval" class="nav-link" data-scroll-target="#ecf-OutputInterval"><span class="tcmd">Output Interval</span> <span class="teq">==</span> <span class="tblk">&lt;time&gt;</span></a></li>
+  <li><a href="#ecf-OutputTimesSameas2D" id="toc-ecf-OutputTimesSameas2D" class="nav-link" data-scroll-target="#ecf-OutputTimesSameas2D"><span class="tcmd">Output Times Same as 2D</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></a></li>
+  <li><a href="#ecf-OverlappingSXHXBoundary" id="toc-ecf-OverlappingSXHXBoundary" class="nav-link" data-scroll-target="#ecf-OverlappingSXHXBoundary"><span class="tcmd">Overlapping SX HX Boundary</span> <span class="teq">==</span> <span class="tblk">CHECK | {ERROR}</span></a></li>
+  <li><a href="#ecf-PitChannelOffset" id="toc-ecf-PitChannelOffset" class="nav-link" data-scroll-target="#ecf-PitChannelOffset"><span class="tcmd">Pit Channel Offset</span> <span class="teq">==</span> <span class="tblk">&lt;length_m&gt;</span></a></li>
+  <li><a href="#ecf-PitDefault2DConnection" id="toc-ecf-PitDefault2DConnection" class="nav-link" data-scroll-target="#ecf-PitDefault2DConnection"><span class="tcmd">Pit Default 2D Connection</span> <span class="teq">==</span> <span class="tblk">{} | &lt;Conn_1D_2D&gt;</span></a></li>
+  <li><a href="#ecf-PitDefaultExtrapolateQCurve" id="toc-ecf-PitDefaultExtrapolateQCurve" class="nav-link" data-scroll-target="#ecf-PitDefaultExtrapolateQCurve"><span class="tcmd">Pit Default Extrapolate Q Curve</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></a></li>
+  <li><a href="#ecf-PitDefaultRoadCrossfall" id="toc-ecf-PitDefaultRoadCrossfall" class="nav-link" data-scroll-target="#ecf-PitDefaultRoadCrossfall"><span class="tcmd">Pit Default Road Crossfall</span> <span class="teq">==</span> <span class="tblk">&lt;slope&gt;</span></a></li>
+  <li><a href="#ecf-PitInletDatabase" id="toc-ecf-PitInletDatabase" class="nav-link" data-scroll-target="#ecf-PitInletDatabase"><span class="tcmd">Pit Inlet Database</span> <span class="teq">==</span> <span class="tblk">&lt;pit_inlet_dbase.csv&gt;</span></a></li>
+  <li><a href="#ecf-PitSearchDistance" id="toc-ecf-PitSearchDistance" class="nav-link" data-scroll-target="#ecf-PitSearchDistance"><span class="tcmd">Pit Search Distance</span> <span class="teq">==</span> <span class="tblk">{0.0} | &lt;psd_m&gt;</span></a></li>
+  <li><a href="#ecf-ReadFile" id="toc-ecf-ReadFile" class="nav-link" data-scroll-target="#ecf-ReadFile"><span class="tcmd">Read File</span> <span class="teq">==</span> <span class="tblk">&lt;file&gt;</span></a></li>
+  <li><a href="#ecf-ReadGISBC" id="toc-ecf-ReadGISBC" class="nav-link" data-scroll-target="#ecf-ReadGISBC"><span class="tcmd">Read GIS BC</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></a></li>
+  <li><a href="#ecf-ReadGISIWL" id="toc-ecf-ReadGISIWL" class="nav-link" data-scroll-target="#ecf-ReadGISIWL"><span class="tcmd">Read GIS IWL</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></a></li>
+  <li><a href="#ecf-ReadGISManhole" id="toc-ecf-ReadGISManhole" class="nav-link" data-scroll-target="#ecf-ReadGISManhole"><span class="tcmd">Read GIS Manhole</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></a></li>
+  <li><a href="#ecf-ReadGISNetwork" id="toc-ecf-ReadGISNetwork" class="nav-link" data-scroll-target="#ecf-ReadGISNetwork"><span class="tcmd">Read GIS Network</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></a></li>
+  <li><a href="#ecf-ReadGISNode" id="toc-ecf-ReadGISNode" class="nav-link" data-scroll-target="#ecf-ReadGISNode"><span class="tcmd">Read GIS Node</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></a></li>
+  <li><a href="#ecf-ReadGISPits" id="toc-ecf-ReadGISPits" class="nav-link" data-scroll-target="#ecf-ReadGISPits"><span class="tcmd">Read GIS Pits</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></a></li>
+  <li><a href="#ecf-ReadGISTableLinks" id="toc-ecf-ReadGISTableLinks" class="nav-link" data-scroll-target="#ecf-ReadGISTableLinks"><span class="tcmd">Read GIS Table Links</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></a></li>
+  <li><a href="#ecf-ReadGISWLL" id="toc-ecf-ReadGISWLL" class="nav-link" data-scroll-target="#ecf-ReadGISWLL"><span class="tcmd">Read GIS WLL</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></a></li>
+  <li><a href="#ecf-ReadGISWLLPoints" id="toc-ecf-ReadGISWLLPoints" class="nav-link" data-scroll-target="#ecf-ReadGISWLLPoints"><span class="tcmd">Read GIS WLL Points</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></a></li>
+  <li><a href="#ecf-ReadOperatingControlsFile" id="toc-ecf-ReadOperatingControlsFile" class="nav-link" data-scroll-target="#ecf-ReadOperatingControlsFile"><span class="tcmd">Read Operating Controls File</span> <span class="teq">==</span> <span class="tblk">&lt;.toc_filename&gt;</span></a></li>
+  <li><a href="#ecf-SChannelApproach" id="toc-ecf-SChannelApproach" class="nav-link" data-scroll-target="#ecf-SChannelApproach"><span class="tcmd">S Channel Approach</span> <span class="teq">==</span> <span class="tblk">PRE 2004-06-AA | METHOD A | {METHOD B}</span></a></li>
+  <li><a href="#ecf-SetIWL" id="toc-ecf-SetIWL" class="nav-link" data-scroll-target="#ecf-SetIWL"><span class="tcmd">Set IWL</span> <span class="teq">==</span> <span class="tblk">&lt;IWL&gt;</span></a></li>
+  <li><a href="#ecf-SpatialDatabase" id="toc-ecf-SpatialDatabase" class="nav-link" data-scroll-target="#ecf-SpatialDatabase"><span class="tcmd">Spatial Database</span> <span class="teq">==</span> <span class="tblk">OFF | TCF</span></a></li>
+  <li><a href="#ecf-StartOutput" id="toc-ecf-StartOutput" class="nav-link" data-scroll-target="#ecf-StartOutput"><span class="tcmd">Start Output</span> <span class="teq">==</span> <span class="tblk">&lt;time_in_hours&gt;</span></a></li>
+  <li><a href="#ecf-StorageAboveStructureObvert" id="toc-ecf-StorageAboveStructureObvert" class="nav-link" data-scroll-target="#ecf-StorageAboveStructureObvert"><span class="tcmd">Storage Above Structure Obvert</span> <span class="teq">==</span> <span class="tblk">CHANNEL WIDTH | &lt;value&gt; | {5}</span></a></li>
+  <li><a href="#ecf-StructureFlowLevels" id="toc-ecf-StructureFlowLevels" class="nav-link" data-scroll-target="#ecf-StructureFlowLevels"><span class="tcmd">Structure Flow Levels</span> <span class="teq">==</span> <span class="tblk">{ENERGY} | WATER | ENERGY UPSTREAM</span></a></li>
+  <li><a href="#ecf-StructureLosses" id="toc-ecf-StructureLosses" class="nav-link" data-scroll-target="#ecf-StructureLosses"><span class="tcmd">Structure Losses</span> <span class="teq">==</span> <span class="tblk">{ADJUST EXCEPT BG TABLE} | ADJUST | FIX</span></a></li>
+  <li><a href="#ecf-StructureLossesApproach" id="toc-ecf-StructureLossesApproach" class="nav-link" data-scroll-target="#ecf-StructureLossesApproach"><span class="tcmd">Structure Losses Approach</span> <span class="teq">==</span> <span class="tblk">METHOD A | {METHOD B}</span></a></li>
+  <li><a href="#ecf-StructureLossesSX" id="toc-ecf-StructureLossesSX" class="nav-link" data-scroll-target="#ecf-StructureLossesSX"><span class="tcmd">Structure Losses SX</span> <span class="teq">==</span> <span class="tblk">ADJUST | ADJUST SKEW | {FIX}</span></a></li>
+  <li><a href="#ecf-StructureRoutines" id="toc-ecf-StructureRoutines" class="nav-link" data-scroll-target="#ecf-StructureRoutines"><span class="tcmd">Structure Routines</span> <span class="teq">==</span> <span class="tblk">ORIGINAL | {2013}</span></a></li>
+  <li><a href="#ecf-TaperClosedNATable" id="toc-ecf-TaperClosedNATable" class="nav-link" data-scroll-target="#ecf-TaperClosedNATable"><span class="tcmd">Taper Closed NA Table</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></a></li>
+  <li><a href="#ecf-Timestep" id="toc-ecf-Timestep" class="nav-link" data-scroll-target="#ecf-Timestep"><span class="tcmd">Timestep</span> <span class="teq">==</span> <span class="tblk">&lt;timestep_in_seconds&gt;</span></a></li>
+  <li><a href="#ecf-TrimXZProfiles" id="toc-ecf-TrimXZProfiles" class="nav-link" data-scroll-target="#ecf-TrimXZProfiles"><span class="tcmd">Trim XZ Profiles</span> <span class="teq">==</span> <span class="tblk">ON | {OFF}</span></a></li>
+  <li><a href="#ecf-VelRateCreepFactor" id="toc-ecf-VelRateCreepFactor" class="nav-link" data-scroll-target="#ecf-VelRateCreepFactor"><span class="tcmd">Vel Rate Creep Factor</span> <span class="teq">==</span> <span class="tblk">&lt;value&gt; | {1.2}</span></a></li>
+  <li><a href="#ecf-VelRateLimit" id="toc-ecf-VelRateLimit" class="nav-link" data-scroll-target="#ecf-VelRateLimit"><span class="tcmd">Vel Rate Limit</span> <span class="teq">==</span> <span class="tblk">&lt;vrl&gt; | {0.2}</span></a></li>
+  <li><a href="#ecf-VelRateLimitMinimum" id="toc-ecf-VelRateLimitMinimum" class="nav-link" data-scroll-target="#ecf-VelRateLimitMinimum"><span class="tcmd">Vel Rate Limit Minimum</span> <span class="teq">==</span> <span class="tblk">&lt;vrlmin&gt; | {0.0001}</span></a></li>
+  <li><a href="#ecf-WeirApproach" id="toc-ecf-WeirApproach" class="nav-link" data-scroll-target="#ecf-WeirApproach"><span class="tcmd">Weir Approach</span> <span class="teq">==</span> <span class="tblk">{Method A} | Method B</span></a></li>
+  <li><a href="#ecf-WeirFlow" id="toc-ecf-WeirFlow" class="nav-link" data-scroll-target="#ecf-WeirFlow"><span class="tcmd">Weir Flow</span> <span class="teq">==</span> <span class="tblk">Method A | Method B | {Method C}</span></a></li>
+  <li><a href="#ecf-WLLApproach" id="toc-ecf-WLLApproach" class="nav-link" data-scroll-target="#ecf-WLLApproach"><span class="tcmd">WLL Approach</span> <span class="teq">==</span> <span class="tblk">Method A | {Method B}</span></a></li>
+  <li><a href="#ecf-WLLAutomatic" id="toc-ecf-WLLAutomatic" class="nav-link" data-scroll-target="#ecf-WLLAutomatic"><span class="tcmd">WLL Automatic</span> <span class="teq">==</span> <span class="tblk">CULVERTS | {OFF}</span></a></li>
+  <li><a href="#ecf-WLLNoWeirs" id="toc-ecf-WLLNoWeirs" class="nav-link" data-scroll-target="#ecf-WLLNoWeirs"><span class="tcmd">WLL No Weirs</span> <span class="teq">==</span> <span class="tblk">ON | {OFF}</span></a></li>
+  <li><a href="#ecf-WLLVerticalOffset" id="toc-ecf-WLLVerticalOffset" class="nav-link" data-scroll-target="#ecf-WLLVerticalOffset"><span class="tcmd">WLL Vertical Offset</span> <span class="teq">==</span> <span class="tblk">&lt;dZ&gt; | {10}</span></a></li>
+  <li><a href="#ecf-WLLpInterpolateBed" id="toc-ecf-WLLpInterpolateBed" class="nav-link" data-scroll-target="#ecf-WLLpInterpolateBed"><span class="tcmd">WLLp Interpolate Bed</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></a></li>
+  <li><a href="#ecf-WriteCheckFiles" id="toc-ecf-WriteCheckFiles" class="nav-link" data-scroll-target="#ecf-WriteCheckFiles"><span class="tcmd">Write Check Files [ Exclude | Include | None | ALL ]</span> <span class="teq">==</span> <span class="tblk">&lt;prefix_list_or_file_prefix&gt;</span></a></li>
+  <li><a href="#ecf-XSDatabase" id="toc-ecf-XSDatabase" class="nav-link" data-scroll-target="#ecf-XSDatabase"><span class="tcmd">XS Database</span> <span class="teq">==</span> <span class="tblk">&lt;file&gt;</span></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./80-AppendicesA-TCFCommands.html">Appendices</a></li><li class="breadcrumb-item"><a href="./81-AppendicesB-ECFCommands.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">ECF Commands</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-ECFCommands-1" class="quarto-section-identifier">Appendix B — ECF Commands</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The TUFLOW ESTRY Control File (.ecf) includes commands and data inputs to build the 1D ESTRY domain, it is read into the .tcf using the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ESTRYControlFile">ESTRY Control File</a></span> command. For more information on the .ecf, see <a href="04-ControlFiles-and-Inputs.html#sec-ECF-3" class="quarto-xref"><span>Section 4.1.6</span></a>. Building the 1D domain is discussed in <a href="05-1D-Domains.html" class="quarto-xref"><span>Chapter 5</span></a>. The available ECF commands are listed below. For an explanation of the command syntax, see <a href="overview.html#commands">Commands</a>.</p>
+<div id="69989168" class="cell" data-cache="false" data-execution_count="2">
+<section id="ecf-commands" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="ecf-commands"><span class="header-section-number">B.1</span> ECF Commands</h2>
+<section id="ecf-1DNodeInvertApproach" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-1DNodeInvertApproach"><span class="tcmd">1D Node Invert Approach</span> <span class="teq">==</span> <span class="tblk">{Method A} | Method B</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Controls whether 1d node inverts are considered when determining the bottom elevation of the NA table, where invert levels are specified for both channels and nodes (see <a href="05-1D-Domains.html#sec-node-invert-4" class="quarto-xref"><span>Section 5.12.2.3</span></a>).</p>
+<p>Method A (the default): the bottom elevation of the NA table is set to the lowest invert of the connected 1D channels. 1D node inverts are ignored.</p>
+<p>Method B (implemented in 2026.0.0 release): the 1D node invert is compared with the lowest invert of the connected 1D channels, and the lower of the two is adopted as the bottom elevation of the NA table.</p>
+</section>
+<section id="ecf-ADApproach" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ADApproach"><span class="tcmd">AD Approach</span> <span class="teq">==</span> <span class="tblk">METHOD A | {METHOD B}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Sets the modelling approach for the Advection Dispersion through 1D channels.</p>
+<p>Method A is the original approach that assumes the concentration of a constituent exiting an SX connection is the same as that at the entrance SX connection at the same timestep.</p>
+<p>Method B is the solves equation of motion for tracer constituents through 1D channel network.</p>
+</section>
+<section id="ecf-ApplyAllInverts" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ApplyAllInverts"><span class="tcmd">Apply All Inverts</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Legacy - Default value recommended.<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Legacy command - expand to find out more">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Legacy command - expand to find out more
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If set to ON, applies the upstream and downstream inverts specified in the 1d_nwk layer to all channels (i.e.&nbsp;also for B, Blank and W channels), except where a value of -99999 is specified. Introduced for Build 2005-05-AN and made the default in Build 2006-03-AB.</p>
+<p>Note: If upgrading a model used prior to Build 2006-03-AB, any inverts for B, Blank and W channels need to be set to –99999 to ensure the inverts remain unchanged. Otherwise, the inverts for these channels are likely to be set to zero, as this is the default value set by MapInfo for the invert attributes.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ecf-ArchBridgeMinimumBlockage" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ArchBridgeMinimumBlockage"><span class="tcmd">Arch Bridge Minimum Blockage (%)</span> <span class="teq">==</span> <span class="tblk">{5} | &lt;min_pblockage&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Sets the minimum blockage applied in the arch bridge flow calculation (see <a href="05-1D-Domains.html#sec-BArch-Min-Blc-4" class="quarto-xref"><span>Section 5.7.3.2</span></a>). The default value is 5 (%).</p>
+</section>
+<section id="ecf-BCDatabase" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-BCDatabase"><span class="tcmd">BC Database</span> <span class="teq">==</span> <span class="tblk">&lt;.csv_file&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Conditional - Optional if <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-BCDatabase">BC Database</a></span> is already specified in .tcf file<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Sets the active BC Database file, as described in <a href="07-Boundaries-and-Initial-Conditions.html#sec-bcdbase-2" class="quarto-xref"><span>Section 8.5</span></a>. The file is usually created using spreadsheet software such as Microsoft Excel.</p>
+<p>If the BC Database is specified in the TUFLOW .tcf file, it is set as the active database for both 2D and 1D models. However, the active database can be changed at any stage in the .tbc and .ecf files by repeating the command with the new database set as the &lt;.csv_file&gt;.</p>
+<p><strong>A BC Database must be specified before any of the other BC commands are used.</strong></p>
+</section>
+<section id="ecf-BCEventName" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-BCEventName"><span class="tcmd">BC Event Name</span> <span class="teq">==</span> <span class="tblk">&lt;bc_event_name&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Legacy - Use <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-BCEventSource">BC Event Source</a></span> instead.<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Legacy command - expand to find out more">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Legacy command - expand to find out more
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Sets the active BC name to be substituted where &lt;bc_event_text&gt; (see <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-BCEventText">BC Event Text</a></span>) occurs in the BC Database. See Section 7.5.2 of the <a href="https://downloads.tuflow.com/_archive/TUFLOW/Releases/2018-03/TUFLOW%20Manual.2018-03.pdf">2018 TUFLOW Manual</a> for details on this legacy feature.</p>
+<p>This command is normally specified in the .tcf file, and is only used in the .ecf file if the event boundaries vary by event within the model. For example, it may be set to “Q100” to read in the 100 year catchment inflows, then set as “H010” to read in the 10 year ocean levels for the downstream boundary. Note that, in this case, the locations of the catchment inflows and downstream boundaries would have to be placed in two separate GIS layers, with each layer read using <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-ReadGISBC">Read GIS BC</a></span> after the relevant <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-BCEventName">BC Event Name</a></span> command as shown below:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode tuflow code-with-copy"><code class="sourceCode tuflowblocks"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">BC Event Name </span><span class="op">==</span> H010</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">Read GIS BC </span><span class="op">==</span> gis\1d_bc_head_boundaries.shp </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">BC Event Name </span><span class="op">==</span> Q100</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">Read GIS BC </span><span class="op">==</span> gis\1d_bc_flow_boundaries.shp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ecf-BCEventSource" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-BCEventSource"><span class="tcmd">BC Event Source</span> <span class="teq">==</span> <span class="tblk">&lt;bc_event_text&gt; | &lt;bc_event_name&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>This command is normally specified in the .tcf file. It is only used in the .ecf file for 1D only models, if the event boundaries vary by event within the model or if the &lt;bc_event_text&gt; value needs to change prior to reading the 1D BCs. Also see <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-BCEventSource">BC Event Source</a></span> for the .tcf file if the model is 1D/2D.</p>
+<p><a href="https://wiki.tuflow.com/TUFLOW_Message_2313">ERROR 2313</a> occurs if &lt;bc_event_text&gt; is not unique for a simulation.</p>
+<p>Combines <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-BCEventName">BC Event Name</a></span> and <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-BCEventText">BC Event Text</a></span> into one command, and can occur up to 100 times to allow multiple events within the one simulation. Cannot be used in conjunction with <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-BCEventText">BC Event Text</a></span>.</p>
+</section>
+<section id="ecf-BCEventText" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-BCEventText"><span class="tcmd">BC Event Text</span> <span class="teq">==</span> <span class="tblk">&lt;bc_event_text&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Legacy - Use <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-BCEventSource">BC Event Source</a></span> instead.<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Legacy command - expand to find out more">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Legacy command - expand to find out more
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Sets the text in the BC Database that is to be substituted by the <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-BCEventName">BC Event Name</a></span> command value. See Section 7.5.2 of the <a href="https://downloads.tuflow.com/_archive/TUFLOW/Releases/2018-03/TUFLOW%20Manual.2018-03.pdf">2018 TUFLOW Manual</a> for details on this legacy feature.</p>
+<p>For 1D/2D models this command only needs to be specified in the .tcf file. It would only be used in the .ecf file for 1D only models or if for some reason the &lt;bc_event_text&gt; value needs to change prior to reading the 1D BCs. Also see <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-BCEventText">BC Event Text</a></span> for the .tcf file if the model is 1D/2D.</p>
+<p>The &lt;bc_event_text&gt; value can be changed at any stage by repeating this command in the .ecf file, although it is strongly recommended that the &lt;bc_event_text&gt; value is standardised across all models and the command is only specified once.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ecf-BridgeFlow" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-BridgeFlow"><span class="tcmd">Bridge Flow</span> <span class="teq">==</span> <span class="tblk">Method A | {Method B}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Controls the method for calculating bridge flows.</p>
+<p>Method A uses the original ESTRY bridge routine. Method B (the default), is based on Method A, but provides improved stability particularly when the bridge is flowing at shallow depths or is wetting and drying. Method B also does not force the loss coefficient to be a minimum of 1.5625 once the bridge obvert is surcharged (Method B uses the value as specified in the BG table).</p>
+<p>Refer to <a href="05-1D-Domains.html#sec-BridgeIntro-4" class="quarto-xref"><span>Section 5.7.2.1</span></a> for further information.</p>
+</section>
+<section id="ecf-BridgeZeroCoefficients" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-BridgeZeroCoefficients"><span class="tcmd">Bridge Zero Coefficients</span> <span class="teq">==</span> <span class="tblk">{DEFAULT} | OFF | &lt;Cd&gt;, &lt;DLC&gt;, &lt;ELC&gt;, &lt;XLC&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Changes the default BB bridge (<a href="05-1D-Domains.html#sec-BB-Bridge-4" class="quarto-xref"><span>Section 5.7.2.4</span></a>) channel coefficients applied to zero (0.0) attribute values in the 1d_nwk layer(s). This command is not used for B bridge channels.</p>
+<p>The four values and their associated 1d_nwk attributes are:</p>
+<ul>
+<li>Cd: Bridge deck pressure flow surcharge coefficient specified by the HConF_or_WC attribute (Default = 0.8).<br>
+</li>
+<li>DLC: Bridge deck energy loss coefficient when fully submerged and not under pressure flow. Specified by the WConF_or_WEx attribute (Default = 0.5).<br>
+</li>
+<li>ELC: Unadjusted entrance loss coefficient specified by the EntryC_or_WSa attribute (Default = 0.5). The entrance loss coefficient applied is adjusted every timestep according to the approach velocity, as discussed in <a href="05-1D-Domains.html#sec-BB-Bridge-4" class="quarto-xref"><span>Section 5.7.2.4</span></a>.<br>
+</li>
+<li>XLC: Unadjusted exit loss coefficient specified by the ExitC_or_WSb attribute (Default = 1.0). The exit loss coefficient applied is adjusted every timestep according to the departure velocity, as discussed in <a href="05-1D-Domains.html#sec-BB-Bridge-4" class="quarto-xref"><span>Section 5.7.2.4</span></a>.</li>
+</ul>
+<p>For example, <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-BridgeZeroCoefficients">Bridge Zero Coefficients</a></span> <span class="teq">==</span> <span class="tblk">0.75, 0.3, 0.5, 0.8</span> changes the default value for Cd, DLC, ELC and XLC used for any zero (0) attribute values in 1d_nwk layer(s).</p>
+<p>DEFAULT (which is the default setting) will set any zero values to the default values mentioned above.</p>
+<p>OFF will allow a zero value to be applied to the ELC and XLC loss coefficients. Cd and DLC cannot be non-zero, and if OFF is specified these will always have their default value above applied if the 1d_nwk attribute is zero.</p>
+</section>
+<section id="ecf-ConveyanceCalculation" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ConveyanceCalculation"><span class="tcmd">Conveyance Calculation</span> <span class="teq">==</span> <span class="tblk">CHANGE IN RESISTANCE | {ALL&nbsp;PARALLEL}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>If set to CHANGE IN RESISTANCE, the parallel channel analysis splits the cross-section into separate parallel channels based on wherever there is a change in resistance (due to different relative resistance, material type or Manning’s n values).</p>
+<p>If set to ALL PARALLEL (the default), a parallel channel is created for every X (distance across section) value. This approach does not cause conveyance reducing with height warnings.</p>
+<p>Refer to <a href="05-1D-Domains.html#sec-Parallel-Channel-3" class="quarto-xref"><span>Section 5.6.3</span></a>.</p>
+</section>
+<section id="ecf-CreateNodes" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-CreateNodes"><span class="tcmd">Create Nodes</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>If no node is found snapped to the end of a channel a new node is automatically created. The ID of the node is the first ten characters of the channel ID with a “.1” or “.2” extension. “.1” is used if the node is at the start of the channel and “.2” if at the end. If more than one channel is connected to the created node, the channel ID that occurs first alphanumerically is used.</p>
+<p>The automatic creation of nodes can be switched off using the OFF option.</p>
+<p>For further information see <a href="05-1D-Domains.html#sec-Auto-Node-3" class="quarto-xref"><span>Section 5.12.1</span></a>.</p>
+</section>
+<section id="ecf-CSVFormat" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-CSVFormat"><span class="tcmd">CSV Format</span> <span class="teq">==</span> <span class="tblk">HORIZONTAL | {VERTICAL}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>If set to HORIZONTAL, writes the 1D .csv output file (<a href="13-Viewing-and-PostProcessing.html#sec-view-1D-2" class="quarto-xref"><span>Section 15.2</span></a>) with the head/flow/velocity values for a node/channel in rows. The default is to write the values in columns.</p>
+</section>
+<section id="ecf-CSVMaximumNumberColumns" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-CSVMaximumNumberColumns"><span class="tcmd">CSV Maximum Number Columns</span> <span class="teq">==</span> <span class="tblk">&lt;max_col&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Legacy - Default value recommended.<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Legacy command - expand to find out more">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Legacy command - expand to find out more
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is a legacy command that applies to formats prior to the default .csv output for the 2016-03 release.</p>
+<p>Used to specify a maximum number of columns for 1D .csv output files. The default setting is limitless. Refer also to the .tcf command <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-CSVMaximumNumberColumns">CSV Maximum Number Columns</a></span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ecf-CSVTime" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-CSVTime"><span class="tcmd">CSV Time</span> <span class="teq">==</span> <span class="tblk">{DAYS} | HOURS | MINUTES | SECONDS</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Legacy - Use the .tcf <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-CSVTime">CSV Time</a></span> command instead.<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Legacy command - expand to find out more">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Legacy command - expand to find out more
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Specifies the time values of 1D .csv outputs. The default is DAYS but can be changed to HOURS, MINUTES or SECONDS.</p>
+<p>The .tcf command <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-CSVTime">CSV Time</a></span> can be specified to apply to both 1D and 2D .csv outputs.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ecf-CulvertCriticalHD" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-CulvertCriticalHD"><span class="tcmd">Culvert Critical H/D</span> <span class="teq">==</span> <span class="tblk">{OFF} | &lt;critical_h/d&gt; | &lt;v1&gt; | &lt;v2&gt; | &lt;v3&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Sets the H/D value to be used for determining whether outlet control Regimes E and F take preference over the inlet control Regimes B or L. H is the upstream head above the culvert sill and D is the culvert height. If H/D exceeds &lt;critical_h/d&gt; Regime E or F is used, otherwise the regime with the lower discharge (along with other tests) is used.</p>
+<p>The default is OFF (i.e.&nbsp;infinitely large H/D). Three options are additionally available:</p>
+<ul>
+<li>v1 = Critical H/D value at culvert inlets connected to at least one open channel.<br>
+</li>
+<li>v2 = Critical H/D value at culvert inlets connected to a pit channel (and not connected to any open channels).<br>
+</li>
+<li>v3 = Critical H/D value at culvert inlets at culvert only junctions (no open channels or pits).<br>
+</li>
+<li>Default values are 99999. (i.e.&nbsp;no critical H/D values applied). If only one value is specified, this is applied to all three. Specifying OFF applies 99999 to all three values.</li>
+</ul>
+</section>
+<section id="ecf-CulvertFlow" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-CulvertFlow"><span class="tcmd">Culvert Flow</span> <span class="teq">==</span> <span class="tblk">{Method E} | Method &lt;letter&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Controls the method for calculating culvert flows.</p>
+<p>Options include:</p>
+<ul>
+<li>Method A is the original ESTRY culvert routines.<br>
+</li>
+<li>Method B is an adaptation of Method A to include regimes K and L (see <a href="05-1D-Domains.html#fig-image19" class="quarto-xref">Figure&nbsp;<span>5.10</span></a>). Method B also offers improved stability, smoother transitions between flow regimes and corrects very occasional mass conservation errors under certain flow regimes.<br>
+</li>
+<li>Method C is a slight improvement on Method B for flow Regime C (see <a href="05-1D-Domains.html#fig-image19" class="quarto-xref">Figure&nbsp;<span>5.10</span></a>).<br>
+</li>
+<li>Method D includes further improvements on Method C and corrects a bug for Regime E.<br>
+</li>
+<li>Method E is the current default and incorporates minor improvements for transitioning between Regimes A and B, and between inlet and outlet controlled regimes, for circular culverts.<br>
+</li>
+<li>Method G (introduced in the 2023-03-AC release) includes an enhancement to adverse slope culvert flux calculation. Prior to 2023-03-AC, significant exit loss could be applied at the exit of an adverse slope culvert if the outlet node is dry or close to dry. This is caused by the misrepresentation exit flow area and exit velocity. Method G fixes this.</li>
+</ul>
+<p>Methods A, B, C and D are provided for backward compatibility only.</p>
+</section>
+<section id="ecf-CulvertZeroCoefficients" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-CulvertZeroCoefficients"><span class="tcmd">Culvert Zero Coefficients</span> <span class="teq">==</span> <span class="tblk">DEFAULT | {OFF} | v1, v2, v3, v4, v5</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Alias: Zero Culvert Coefficient</p>
+<p>Sets the default culvert coefficients if they are set to zero (0) in the 1d_nwk layer(s). The five affected attribute values are as per the following:</p>
+<ul>
+<li>v1 Circular culvert inlet controlled contraction coefficient (Width_Cont attribute).<br>
+</li>
+<li>v2 Rectangular and irregular culvert height contraction coefficient (Height_Cont attribute).<br>
+</li>
+<li>v3 Rectangular and irregular culvert width contraction coefficient (Width_Cont attribute).<br>
+</li>
+<li>v4 Culvert inlet loss coefficient (Entry_Loss attribute).<br>
+</li>
+<li>v5 Culvert outlet loss coefficient (Exit_Loss attribute).</li>
+</ul>
+<p>For example, <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-CulvertZeroCoefficients">Culvert Zero Coefficients</a></span> <span class="teq">==</span> <span class="tblk">1.0, 0.6, 0.9, 0.5, 1.0</span> sets any zero (0) and NULL coefficient values in 1d_nwk layers to the corresponding value from this command. Any non-zero and non-NULL values remain unchanged.</p>
+<p>DEFAULT sets zero coefficients to the default values of 1.0, 0.6, 0.9, 0.5 and 1.0.</p>
+<p>OFF (default) doesn’t apply this feature and if the 1d_nwk attributes are empty (See <a href="05-1D-Domains.html#tbl-crossattributedescriptions" class="quarto-xref">Table&nbsp;<span>5.4</span></a>):</p>
+<ul>
+<li>For a circular culvert 1,1,0,0 is used.</li>
+<li>For a rectangular culvert 0.6,0.9,0,0 is used.</li>
+</ul>
+</section>
+<section id="ecf-DepthDischargeDatabase" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-DepthDischargeDatabase"><span class="tcmd">Depth Discharge Database</span> <span class="teq">==</span> <span class="tblk">&lt;depth_discharge_dbase.csv&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Conditional - Required if any Q channels<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Specifies the depth discharge database file that references the depth-discharge curves for non-operated Q channels. Mandatory if the model has any Q channels. Performs the same function as <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-PitInletDatabase">Pit Inlet Database</a></span>. The same database file can be used for both Q channels, Q pits and pump channels.</p>
+</section>
+<section id="ecf-DepthLimitFactor" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-DepthLimitFactor"><span class="tcmd">Depth Limit Factor</span> <span class="teq">==</span> <span class="tblk">{10} | &lt;value&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Sets the depth limit for detecting instabilities. The default is set to 10, and the water level must exceed ten times the depth of the CS or NA table before an instability is triggered. See <a href="05-1D-Domains.html#sec-Obvert-3" class="quarto-xref"><span>Section 5.12.3</span></a>.</p>
+<p>Specifying a value greater than one extends the cross-section hydraulic properties and nodal storages above the highest elevation. For example, if a value of 2 is specified, this will allow water levels to reach twice the depth where depth is the difference between the highest and lowest elevations in the table.</p>
+<p>Cross-section hydraulic properties above the highest elevation are calculated based on the flow width remaining constant at the width of the highest elevation in the table. If the hydraulic properties are calculated from a cross-section profile, it uses the effective flow width as shown in the .eof file (it does not use the storage width) – this preserves the effect of any variation in relative roughness across the cross-section. All other hydraulic property sources use the storage width, and any relative roughness effects are ignored once the water level exceeds the highest elevation. Also note that the wetted perimeter remains constant above the highest elevation; i.e.&nbsp;it is not increased on the vertical as the flood level rises. Cross-section properties of bridge channels are not affected by this command.</p>
+<p>Nodal storage properties extend upwards by keeping the surface area constant above the highest elevation in the table.</p>
+</section>
+<section id="ecf-FlowArea" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-FlowArea"><span class="tcmd">Flow Area</span> <span class="teq">==</span> <span class="tblk">{EFFECTIVE} | TOTAL</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Sets the default method for calculating flow area at a channel cross-section when ESTRY calculates the hydraulic properties from a cross-section XZ profile table. The default is EFFECTIVE area, which means that the flow area is the sum of the areas divided by the relative resistance factor. TOTAL area ignores the relative resistance factor when calculating area, but uses it to set the wetted perimeter and hydraulic radius values. Either method gives the same channel conveyance. If the relative resistance across the profile is not specified or constant at a value of one, effective and total area are the same.</p>
+<p>The effective area method produces a velocity that applies to the main channel (where the relative resistance is set to one). The total area approach produces a velocity depth and width averaged, and typically underestimates the main channel velocity. The recommended approach is to use effective area.</p>
+<p>See <a href="05-1D-Domains.html#sec-Eff-vs-Total-3" class="quarto-xref"><span>Section 5.6.4</span></a> for a more detailed discussion.</p>
+</section>
+<section id="ecf-FlowCalculation" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-FlowCalculation"><span class="tcmd">Flow Calculation</span> <span class="teq">==</span> <span class="tblk">Method A | {Method B}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Method A is the original ESTRY channel flow routine.</p>
+<p>Method B corrects an anomaly that would sometimes incorrectly output 1D flow values where the channel flow regimes are oscillating every half timestep (for example, between super and sub-critical flow regimes). Where the channel is switching flow regimes between timesteps (nearly always the case), the correct flow is calculated. This fix also affects the flow in/out of 2D SX connections if the connected 1D channel is oscillating every half timestep. The fix does not change 1D water level and velocity results, unless they are influenced by changes due to any effects on SX flows.</p>
+<p>Use Method A only for backward compatibility.</p>
+</section>
+<section id="ecf-FroudeCheck" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-FroudeCheck"><span class="tcmd">Froude Check</span> <span class="teq">==</span> <span class="tblk">{1} | &lt;froude_no&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Sets the minimum Froude Number that upstream controlled friction flow may occur in “S” channels. Improved stability may occur in steeply flowing areas if &lt;froude_no&gt; is less than 1. &lt;froude_no&gt; cannot be below zero and would normally not exceed 1.</p>
+</section>
+<section id="ecf-FroudeDepthAdjustment" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-FroudeDepthAdjustment"><span class="tcmd">Froude Depth Adjustment</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Switches ON or OFF an additional upstream controlled friction flow check for S channels (a similar check is used for 2D domains – see <a href="06-2D-Domains.html#sec-CLA-US-Controlled-3" class="quarto-xref"><span>Section 7.4.2</span></a>).</p>
+<p>Only set to OFF for backward compatibility.</p>
+</section>
+<section id="ecf-HeadRateCreepFactor" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-HeadRateCreepFactor"><span class="tcmd">Head Rate Creep Factor</span> <span class="teq">==</span> <span class="tblk">&lt;value&gt; | {1.2}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D Only</p>
+</blockquote>
+<p>Specifies rate at which the <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-HeadRateLimit">Head Rate Limit</a></span> value changes.</p>
+</section>
+<section id="ecf-HeadRateLimit" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-HeadRateLimit"><span class="tcmd">Head Rate Limit</span> <span class="teq">==</span> <span class="tblk">ON | {OFF} | &lt;hrl&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D Only</p>
+</blockquote>
+<p>Specifies the head rate limit applied to nodes. This feature can be used to stabilise problematic 1D nodes, but should be used with caution and mass balance checks must be made to ensure there is no significant mass loss or gain. It is particularly useful where a node “bounces” temporarily and is prevented from becoming unstable. The maximum amount the water level can change in half a timestep is the &lt;hrl&gt; value after any adjustment by the <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-HeadRateCreepFactor">Head Rate Creep Factor</a></span>. The &lt;hrl&gt; is adjusted up and down depending on the stability of the node in a similar approach used for <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-VelRateLimit">Vel Rate Limit</a></span>. If the ON option is used, the &lt;hrl&gt; value is set to 0.1.</p>
+</section>
+<section id="ecf-HeadRateLimitMinimum" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-HeadRateLimitMinimum"><span class="tcmd">Head Rate Limit Minimum</span> <span class="teq">==</span> <span class="tblk">&lt;hrlmin&gt; | {0.001}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D Only</p>
+</blockquote>
+<p>Specifies the minimum head rate limit that can occur. See <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-HeadRateLimit">Head Rate Limit</a></span>.</p>
+</section>
+<section id="ecf-IfEvent" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-IfEvent"><span class="tcmd">If Event</span> <span class="teq">==</span> <span class="tblk">&lt;e1&gt; | &lt;e2&gt; | &lt;e3&gt; | …</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Controls which commands to process for different events (see Appendix <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-IfEvent">A</a></span>).</p>
+</section>
+<section id="ecf-IfScenario" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-IfScenario"><span class="tcmd">If Scenario</span> <span class="teq">==</span> <span class="tblk">&lt;s1&gt; | &lt;s2&gt; | &lt;s3&gt; | …</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Controls which commands to process for different scenarios (see Appendix <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-IfScenario">A</a></span>).</p>
+</section>
+<section id="ecf-InterpolateCrossSections" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-InterpolateCrossSections"><span class="tcmd">Interpolate Cross-Sections</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>If set to ON (the default), any channels that don’t have a cross-section have their cross-section properties interpolated using the nearest cross-sections attached to other channels. See <a href="05-1D-Domains.html#sec-Interpolate-XS-3" class="quarto-xref"><span>Section 5.6.7</span></a> for details on the process used. Set to OFF to disable this feature and force every channel to have a cross-section.</p>
+</section>
+<section id="ecf-InterpolateCulvertInverts" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-InterpolateCulvertInverts"><span class="tcmd">Interpolate Culvert Inverts</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>If set to ON (the default), any culverts that don’t have an invert (i.e.&nbsp;a -99999 value was assigned to the invert attribute(s) and there were no inverts assigned via any pits or nodes snapped to the culvert ends) have their invert(s) interpolated using the nearest assigned inverts of connected culverts/pipes. Set to OFF to disable this feature.</p>
+</section>
+<section id="ecf-MChannelApproach" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-MChannelApproach"><span class="tcmd">M Channel Approach</span> <span class="teq">==</span> <span class="tblk">Method A | {Method B}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D Only</p>
+</blockquote>
+<p>Sets the matrix interpolation approach for M channel data (<a href="05-1D-Domains.html#sec-M-Channel-3" class="quarto-xref"><span>Section 5.8.1</span></a>).</p>
+<p>Method A is the original interpolation approach which uses a 4 value interpolation routine that, especially along the 0 flow diagonal, might not interpolate as accurately as using a triangular (3 point) technique. The main issue with the 4 point routine is that a slightly positive or negative flow of the wrong sign may result when interpolating close to the zero flow diagonal.</p>
+<p>Method B uses an improved method. It uses a triangular interpolation with the long side of the triangle parallel to the zero flow diagonal, and does not experience the problems Method A has when interpolating close to the zero flow diagonal.</p>
+</section>
+<section id="ecf-M11Network" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-M11Network"><span class="tcmd">M11 Network</span> <span class="teq">==</span> <span class="tblk">&lt;.nwk11_file&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Legacy<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Legacy command - expand to find out more">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Legacy command - expand to find out more
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Sets the active MIKE 11 network file as &lt;.nwk11_file&gt;. The file is used to extract link, cross-section and other information using 1d_nwk attributes. Topo_ID must be set to “$Link”. For more details see the <a href="https://downloads.tuflow.com/_archive/TUFLOW/Releases/2018-03/TUFLOW%20Manual.2018-03.pdf">2018 TUFLOW Manual</a>. This command must be specified before the relevant <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-ReadGISNetwork">Read GIS Network</a></span> command. The command may be used at any point to change the active MIKE 11 network file.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ecf-ManholeApproach" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ManholeApproach"><span class="tcmd">Manhole Approach</span> <span class="teq">==</span> <span class="tblk">METHOD A | METHOD B | {METHOD C}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Sets the automatic manhole definition approach. See <a href="05-1D-Domains.html#sec-Auto-MH-4" class="quarto-xref"><span>Section 5.10.4.1</span></a>.</p>
+<p>Method A is the original approach which has been found to be too conservative (i.e.&nbsp;higher losses and higher flood levels) as indicated by users.</p>
+<p>Method B, incorporates a few bug fixes found in Method A.</p>
+<p>Method C (the default) incorporates further bug fixes affecting manholes using the Engelund approach for calculating losses.</p>
+<p>If using METHOD B, sensitivity testing the effects of METHOD C versus METHOD B should be carried out to check for any unacceptable differences.</p>
+</section>
+<section id="ecf-ManholeDefaultCExitCoefficient" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ManholeDefaultCExitCoefficient"><span class="tcmd">Manhole Default C Exit Coefficient</span> <span class="teq">==</span> <span class="tblk">&lt;K<span class="math inline">\(_{CE}\)</span>&gt; | {0.25}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>For C (circular) manholes, sets the default K coefficient for flow out of the manhole and into the out flowing culvert(s). The default value is 0.25. See <a href="05-1D-Domains.html#sec-Manholes-3" class="quarto-xref"><span>Section 5.10.4</span></a>.</p>
+</section>
+<section id="ecf-ManholeDefaultLossApproach" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ManholeDefaultLossApproach"><span class="tcmd">Manhole Default Loss Approach</span> <span class="teq">==</span> <span class="tblk">NONE | {ENGELUND} | FIXED</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Sets the default loss approach to be used at automatically generated manholes, and manholes where no loss approach is specified. The default is ENGELUND (see <a href="05-1D-Domains.html#sec-Manholes-3" class="quarto-xref"><span>Section 5.10.4</span></a> for a description on the different approaches).</p>
+</section>
+<section id="ecf-ManholeDefaultRExitCoefficient" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ManholeDefaultRExitCoefficient"><span class="tcmd">Manhole Default R Exit Coefficient</span> <span class="teq">==</span> <span class="tblk">&lt;K<span class="math inline">\(_{RE}\)</span>&gt; | {0.5}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>For R (rectangular) manholes, sets the default K coefficient for flow out of the manhole and into the out flowing culvert(s). The default value is 0.5. See <a href="05-1D-Domains.html#sec-Manholes-3" class="quarto-xref"><span>Section 5.10.4</span></a>.</p>
+</section>
+<section id="ecf-ManholeDefaultSideClearance" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ManholeDefaultSideClearance"><span class="tcmd">Manhole Default Side Clearance</span> <span class="teq">==</span> <span class="tblk">&lt;value_m&gt; | {0.3}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>For C (circular) manholes, sets the default side clearance in metres from the side of the largest culvert to the side of the manhole chamber (i.e.&nbsp;if the diameter of the chamber is not specified, the diameter is set to the width/diameter of the largest culvert plus twice the side clearance).</p>
+<p>For R (rectangular) manholes, sets the default side clearance from the side of the culvert(s) to the side of the manhole chamber. If the width of the chamber is not specified, the width is set to the greatest incoming or outgoing width, where the width is calculated as the sum of the incoming/outgoing culvert widths/diameters, plus twice the side clearance for the sides, plus twice the side clearance for the space between each incoming/outgoing culvert if more than one incoming or outgoing culvert exists.</p>
+<p>The default side clearance value can be overridden by specifying a negative width for a manhole in a 1d_mh layer. The side clearance applied will be the absolute value of the 1d_mh Width attribute, and the above approach will be used to determine the manhole width/diameter. See <a href="05-1D-Domains.html#sec-Manholes-3" class="quarto-xref"><span>Section 5.10.4</span></a>.</p>
+</section>
+<section id="ecf-ManholeDefaultType" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ManholeDefaultType"><span class="tcmd">Manhole Default Type</span> <span class="teq">==</span> <span class="tblk">C | J | R | CR | {CJR}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Sets the default type of manhole to be used at automatically generated manholes, and manholes where no type approach is specified.</p>
+<ul>
+<li>C is for circular manholes;<br>
+</li>
+<li>R for rectangular manholes;<br>
+</li>
+<li>J for junctions (i.e.&nbsp;no chamber); and<br>
+</li>
+<li>CR and CJR are for a combination of C, R and J depending on the size/configuration of the connecting culverts (see <a href="05-1D-Domains.html#sec-Manholes-3" class="quarto-xref"><span>Section 5.10.4</span></a> for further details). The default is CJR.</li>
+</ul>
+<p>CR assigns an R type if one or more of the below are true, otherwise a C type is assigned.</p>
+<ul>
+<li>The number of barrels of any culvert is greater than one.<br>
+</li>
+<li>There are any parallel culverts (i.e.&nbsp;two or more culverts with the same nodes and the culverts are digitised in the same direction).<br>
+</li>
+<li>The diameter of at least one circular culvert (C channel) exceeds 1.2m.<br>
+</li>
+<li>The width of at least one rectangular culvert (R channel) exceeds 0.45m.</li>
+</ul>
+<p>CJR uses the same logic as described above for CR, however, it will assign a J type instead of a C or R if all of the below are true. The J type in this case is to cover the situation where access is possible via the culverts, rather than via a manhole.</p>
+<ul>
+<li>The number of barrels of all connected culverts must be one, and there are no parallel culverts (i.e.&nbsp;two or more culverts with the same nodes and the culverts are digitised in the same direction).<br>
+</li>
+<li>There is only one inlet and one outlet culvert.<br>
+</li>
+<li>The diameter of at least one circular culvert exceeds 1.8m, or the width and height of at least one rectangular culvert exceeds 1.2m and 1.8m.</li>
+</ul>
+</section>
+<section id="ecf-ManholeKMaximumBendDrop" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ManholeKMaximumBendDrop"><span class="tcmd">Manhole K Maximum Bend/Drop</span> <span class="teq">==</span> <span class="tblk">&lt;max_K_bd&gt; | {4.0}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Sets the maximum K energy loss coefficient that can occur for the sum of the loss coefficients for bends and drops at a manhole when using the Engelund approach. See <a href="05-1D-Domains.html#sec-Engelund-4" class="quarto-xref"><span>Section 5.10.4.4</span></a>.</p>
+</section>
+<section id="ecf-ManholeMinimumDimension" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ManholeMinimumDimension"><span class="tcmd">Manhole Minimum Dimension</span> <span class="teq">==</span> <span class="tblk">&lt;min_width_m&gt; | {1.05}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Sets the minimum diameter for C manholes and minimum width and length for R manholes. The value is usually controlled by the minimum dimensions needed for access to manhole chambers, not by any hydraulic efficiency requirements. See <a href="05-1D-Domains.html#sec-Manholes-3" class="quarto-xref"><span>Section 5.10.4</span></a>.</p>
+</section>
+<section id="ecf-ManholesatAllCulvertJunctions" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ManholesatAllCulvertJunctions"><span class="tcmd">Manholes at All Culvert Junctions</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>If set to ON (the default), manholes are automatically created at all culvert junctions. See <a href="05-1D-Domains.html#sec-Manholes-3" class="quarto-xref"><span>Section 5.10.4</span></a> for more information.</p>
+</section>
+<section id="ecf-MaximumOperationalControls" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-MaximumOperationalControls"><span class="tcmd">Maximum Operational Controls</span> <span class="teq">==</span> <span class="tblk">{1000} | &lt;number_of_operational_channels/control_definitions&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Sets the maximum number of operational control channels (<a href="05-1D-Domains.html#sec-OperationalChannels-2" class="quarto-xref"><span>Section 5.9</span></a>).</p>
+</section>
+<section id="ecf-MinimumChannelConveyanceLength" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-MinimumChannelConveyanceLength"><span class="tcmd">Minimum Channel Conveyance Length</span> <span class="teq">==</span> <span class="tblk">{0} | &lt;length_m&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Automatically increases the conveyance (and storage) length to &lt;length_m&gt; if the channel’s length is less than &lt;length_m&gt;. The default setting is zero (i.e.&nbsp;no change to any channel’s length). Does not apply to pit channels.</p>
+</section>
+<section id="ecf-MinimumChannelStorageLength" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-MinimumChannelStorageLength"><span class="tcmd">Minimum Channel Storage Length</span> <span class="teq">==</span> <span class="tblk">{0} | &lt;length_m&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>If a channel’s length is less than &lt;length_m&gt;, then &lt;length_m&gt; is used for calculating any storage contributions from the channel widths. It does not affect the channels bed resistance, conveyance or slope. Can be useful to add additional storage for stability reasons to nodes at the ends of very short channels. If using this command, care must be taken not to excessively add additional storage causing results to be distorted. Generally, adding an appropriate amount of storage for stability reasons does not distort results, however, it is strongly recommended that sensitivity tests are carried out to cross-check the effect of any additional storage, and that any adverse effects are corrected.</p>
+</section>
+<section id="ecf-MinimumNA" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-MinimumNA"><span class="tcmd">Minimum NA</span> <span class="teq">==</span> <span class="tblk">{1} | &lt;value&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Sets the minimum surface area (m<span class="math inline">\(^{2}\)</span>) in all NA tables (except for the upstream (ground) nodes of pit channels). The default value is one (1m<span class="math inline">\(^{2}\)</span>). This command is useful for stabilising 1D nodes that have very small storages, particularly at shallow depths. If using this command, care must be taken not to excessively add additional storage causing results to be distorted. Generally, adding an appropriate amount of storage for stability reasons does not distort results, however, it is strongly recommended that sensitivity tests are carried out to cross-check the effect of any additional storage, and that any adverse effects are corrected.</p>
+<p>The percentage (%) option is provided which sets the minimum NA value for each node based on a percentage of the maximum nodal area value for the node.</p>
+</section>
+<section id="ecf-MinimumNAPit" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-MinimumNAPit"><span class="tcmd">Minimum NA Pit</span> <span class="teq">==</span> <span class="tblk">{1} | &lt;value&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Sets the minimum surface area (m<span class="math inline">\(^{2}\)</span>) of the upstream (ground) nodes of all pit channels. The default value is one (1m<span class="math inline">\(^{2}\)</span>). This command was introduced to differentiate upstream pit channel nodes from the <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-MinimumNA">Minimum NA</a></span> setting. If the pit channel is connected to a 2D domain, this storage has no influence on the hydraulic computations, and increasing the value has no stability benefits.</p>
+</section>
+<section id="ecf-MomentumEquation" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-MomentumEquation"><span class="tcmd">Momentum Equation</span> <span class="teq">==</span> <span class="tblk">PRE 2003-08-AD</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Legacy - Default value recommended.<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Legacy command - expand to find out more">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Legacy command - expand to find out more
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Sets treatment of the effective flow width above the top of a cross-section to the method used prior to Build 2003‑08‑AD to provide backward compatibility. After this build, the effective flow width at the top of a cross-section is stored and used to extend the effective flow area above the highest point in the cross-section. Prior to this build, the top storage width was used for the effective flow width for flows above the top of the cross-section. This may only affect results where relative resistance varies across a cross-section, and flow occurs above the top of the cross-section, and effective flow area is being used.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ecf-OrderOutput" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-OrderOutput"><span class="tcmd">Order Output</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Alphanumerically orders 1D output according to the node and channel IDs. The exception is the boundary condition data in the .eof file.</p>
+</section>
+<section id="ecf-OutputDataTypes" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-OutputDataTypes"><span class="tcmd">Output Data Types</span> <span class="teq">==</span> <span class="tblk">{H Q S V} | &lt;data_types&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Similar to the .tcf map output command <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-MapOutputDataTypes">Map Output Data Types</a></span>, this command controls which 1D data types to output, The options are:</p>
+<ul>
+<li><strong>A</strong> for flow area at channels (m<span class="math inline">\(^{2}\)</span>)</li>
+<li><strong>E</strong> for energy (m)</li>
+<li><strong>H</strong> for water level (m)</li>
+<li><strong>Q</strong> for flow at channels (m<span class="math inline">\(^{3}\)</span>/s)</li>
+<li><strong>Qi</strong> integral flow at channels (m<span class="math inline">\(^{3}\)</span>)</li>
+<li><strong>S</strong> for structure and grouped structure output (see <a href="09-Outputs.html#sec-Structure-3" class="quarto-xref"><span>Section 11.3.4</span></a>)<br>
+</li>
+<li><strong>V</strong> for velocity (m/s)</li>
+<li><strong>Vol</strong> volume at nodes (m<span class="math inline">\(^{3}\)</span>)</li>
+</ul>
+</section>
+<section id="ecf-OutputFolder" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-OutputFolder"><span class="tcmd">Output Folder</span> <span class="teq">==</span> <span class="tblk">&lt;folder&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Redirects all ESTRY (1D) output data to another folder. Typically used to write output to your local drive instead of filling up the network or to keep results separate to the input data. A URL path can be used (e.g.&nbsp;\bmtserv\Computer001\tuflow\results), which is useful for running simulations on other computers, but having the output directed to your local drive or other location (your drive will need to be shared).</p>
+<p>The default location for 1D output is that specified using <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-OutputFolder">Output Folder</a></span> in the .tcf file for 1D/2D models.</p>
+</section>
+<section id="ecf-OutputInterval" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-OutputInterval"><span class="tcmd">Output Interval</span> <span class="teq">==</span> <span class="tblk">&lt;time&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Legacy - Use the .tcf <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-TimeSeriesOutputInterval">Time Series Output Interval</a></span> command instead.<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Legacy command - expand to find out more">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Legacy command - expand to find out more
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The output interval for ESTRY output. The default units are hours; however, seconds may be used if the “(s)” option is specified. If the command is omitted, output is at every computational timestep.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ecf-OutputTimesSameas2D" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-OutputTimesSameas2D"><span class="tcmd">Output Times Same as 2D</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional - 2D/1D Only<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>For 1D/2D models, the times for 1D output are, by default, the same as that of the 2D domain(s) time series output (see <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-StartTimeSeriesOutput">Start Time Series Output</a></span> and <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-TimeSeriesOutputInterval">Time Series Output Interval</a></span>), unless no 2D time series output (2d_po layers) has been specified, in which case <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-StartOutput">Start Output</a></span> and <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-OutputInterval">Output Interval</a></span> are used. For backward compatibility or to use different times for 1D time series output, set to OFF.</p>
+<p>This change was made so that both 1D and 2D time series data could be output to the _TS. file, allowing graphing of 1D and 2D time series data within a GIS (see <a href="13-Viewing-and-PostProcessing.html#sec-TS-GIS-3" class="quarto-xref"><span>Section 15.2.4</span></a>).</p>
+<p>This command is ignored for 1D only (ESTRY) models.</p>
+</section>
+<section id="ecf-OverlappingSXHXBoundary" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-OverlappingSXHXBoundary"><span class="tcmd">Overlapping SX HX Boundary</span> <span class="teq">==</span> <span class="tblk">CHECK | {ERROR}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>From the 2025.0 release, by default, TUFLOW pre-processing stops simulations with <a href="https://wiki.tuflow.com/TUFLOW_Message_1462">ERROR 1462</a> if a 1D node is connected to both a SX and HX boundary. This ERROR message can be downgraded to CHECK, using the ‘CHECK’ option.</p>
+</section>
+<section id="ecf-PitChannelOffset" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-PitChannelOffset"><span class="tcmd">Pit Channel Offset</span> <span class="teq">==</span> <span class="tblk">&lt;length_m&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Sets the display, not computed, length in metres of pit channels in 1D output and the<a href="https://wiki.tuflow.com/Check_Files_1d_nwk_C">1d_nwk check files</a>. The channel is displayed on a north to south alignment. See <a href="05-1D-Domains.html#sec-Pits-3" class="quarto-xref"><span>Section 5.10.2</span></a>.</p>
+</section>
+<section id="ecf-PitDefault2DConnection" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-PitDefault2DConnection"><span class="tcmd">Pit Default 2D Connection</span> <span class="teq">==</span> <span class="tblk">{} | &lt;Conn_1D_2D&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Sets the default value for the 1d_nwk Conn_1D_2D attribute. For example, if set to SX, then if the 1d_nwk Conn_1D_2D attribute for a pit is empty, SX will be used, saving the user to specify SX at pits. To disconnect a pit NO can be used for the Conn_1D_2D attribute. It is also possible to have the L and Z options at the one pit (e.g.&nbsp;SXLZ). See <a href="05-1D-Domains.html#sec-Pits-3" class="quarto-xref"><span>Section 5.10.2</span></a>.</p>
+</section>
+<section id="ecf-PitDefaultExtrapolateQCurve" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-PitDefaultExtrapolateQCurve"><span class="tcmd">Pit Default Extrapolate Q Curve</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>TUFLOW automatically extrapolates Q and VPI pits depth discharge information beyond the last value in the depth-discharge curve using an orifice flow equation. To cap flow at the last value in a depth discharge curve (i.e.&nbsp;to not extrapolate), this command can be set to “<span class="tblk">OFF</span>”. See <a href="05-1D-Domains.html#sec-Pits-3" class="quarto-xref"><span>Section 5.10.2</span></a>.</p>
+</section>
+<section id="ecf-PitDefaultRoadCrossfall" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-PitDefaultRoadCrossfall"><span class="tcmd">Pit Default Road Crossfall</span> <span class="teq">==</span> <span class="tblk">&lt;slope&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Increases the depth at Q pits based on the height of an imaginary triangle of the road cross-section with a crossfall slope of &lt;slope&gt;. &lt;slope&gt; is Vertical/Horizontal as a fraction (not percentage).</p>
+<p>The imaginary triangle has the same area as the vertical flow area in the 2D cell the pit is connected to (i.e.&nbsp;the triangle’s area is the depth in the 2D cell times the width of the cell). Once the horizontal width of the triangle is greater than the width of the 2D cell, the formula changes to give an equivalent area based on a trapezoid consisting of the triangle plus a rectangle for the remaining area in excess of the triangle. See <a href="05-1D-Domains.html#sec-Xfall-4" class="quarto-xref"><span>Section 5.10.3.1</span></a>.</p>
+</section>
+<section id="ecf-PitInletDatabase" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-PitInletDatabase"><span class="tcmd">Pit Inlet Database</span> <span class="teq">==</span> <span class="tblk">&lt;pit_inlet_dbase.csv&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Conditional - Required if any Q pit channels<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Specifies the pit inlet database file that references the depth-discharge curves for Q pit channels. Mandatory if the model has any Q pit channels.</p>
+<p>Performs the same function as <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-DepthDischargeDatabase">Depth Discharge Database</a></span>. The same database file can be used for both Q channels and Q pits.</p>
+<p>See <a href="05-1D-Domains.html#sec-DD-Database-3" class="quarto-xref"><span>Section 5.10.3</span></a> for more information.</p>
+</section>
+<section id="ecf-PitSearchDistance" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-PitSearchDistance"><span class="tcmd">Pit Search Distance</span> <span class="teq">==</span> <span class="tblk">{0.0} | &lt;psd_m&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Set the distance (radius) in metres to search for the closest node to automatically connect pits into the 1D network where pits are not snapped to channel ends. Pits connected via this feature are displayed in the 1d_nwk_C_check layer as occurring from the location of the pit to the node, i.e.&nbsp;<span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-PitChannelOffset">Pit Channel Offset</a></span> is not used to display the pit channels created. The pits are also displayed in the 1d_nwk_N_check layer using a different colour to those pits that are snapped directly to a channel end.</p>
+<p>This command may be used several times in the .ecf file with the most recent occurrence applying at the time a pit is processed. A value of 0.0 (the default), disables the pit search feature. See <a href="05-1D-Domains.html#sec-Pits-3" class="quarto-xref"><span>Section 5.10.2</span></a>.</p>
+</section>
+<section id="ecf-ReadFile" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ReadFile"><span class="tcmd">Read File</span> <span class="teq">==</span> <span class="tblk">&lt;file&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Directs input to another file. When finished reading &lt;file&gt;, ESTRY returns to reading the .ecf file.</p>
+<p>This command is particularly useful for projects with a large number of simulations. Repetitive commands are grouped and placed in another text file. If one of these commands changes, the command only has to be edited once, rather than in every .ecf file.</p>
+<p>This command can be used to redirect file(s) up to a maximum of ten levels.</p>
+</section>
+<section id="ecf-ReadGISBC" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ReadGISBC"><span class="tcmd">Read GIS BC</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Required<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Reads the location and attributes of 1D model boundary conditions, as described in <a href="07-Boundaries-and-Initial-Conditions.html#sec-OneDBoundaries-2" class="quarto-xref"><span>Section 8.3</span></a>.</p>
+</section>
+<section id="ecf-ReadGISIWL" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ReadGISIWL"><span class="tcmd">Read GIS IWL</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Reads initial water level elevations at nodes from a 1d_iwl GIS layer. The 1d_iwl layer contains points snapped to nodes in the 1d_nwk layer(s). The first attribute of the layer must be the initial water level as a number (float or decimal). The layer can define any number of the nodes (it does not need to define all the nodes). The command can be used any number of times to access more than one 1d_iwl layer. The command can be used in the .tcf and .tef files as 1D Read GIS IWL.</p>
+<p>See <a href="07-Boundaries-and-Initial-Conditions.html#sec-IWL-1D-4" class="quarto-xref"><span>Section 8.8.1.1</span></a> for further information.</p>
+</section>
+<section id="ecf-ReadGISManhole" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ReadGISManhole"><span class="tcmd">Read GIS Manhole</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Conditional - Required for 1D &amp; 2D/1D<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Reads manhole locations and attributes from a GIS 1d_mh layer as described in <a href="05-1D-Domains.html#sec-OneD-mh-4" class="quarto-xref"><span>Section 5.10.4.2</span></a>. Any number of 1d_mh layers may be read by repeating this command. Manholes that occur in the same location will override each other with the last manhole processed prevailing. Manholes processed using this command will overwrite any automatically generated manholes. Automatically generated manholes may be individually disabled by digitising points and specifying “NO” for the Loss_Approach attribute – see <a href="05-1D-Domains.html#tbl-manhole" class="quarto-xref">Table&nbsp;<span>5.29</span></a>.</p>
+</section>
+<section id="ecf-ReadGISNetwork" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ReadGISNetwork"><span class="tcmd">Read GIS Network</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Conditional - Required for 1D &amp; 2D/1D<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Reads channel and node locations and attributes from a GIS 1d_nwk layer as described in <a href="05-1D-Domains.html#sec-OneD-nwk-2" class="quarto-xref"><span>Section 5.3</span></a> and <a href="05-1D-Domains.html#sec-Nodes-2" class="quarto-xref"><span>Section 5.12</span></a>. Any number of 1d_nwk layers may be read by repeating this command. If accessing external cross-section databases such as MIKE 11 .txt file, the <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-XSDatabase">XS Database</a></span> command must be specified before this command to set the active cross-section database.</p>
+</section>
+<section id="ecf-ReadGISNode" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ReadGISNode"><span class="tcmd">Read GIS Node</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Reads node locations and attributes from a GIS 1d_nd layer as described in <a href="05-1D-Domains.html#tbl-descriptionsnodes" class="quarto-xref">Table&nbsp;<span>5.32</span></a>. Any number of 1d_na layers may be read by repeating this command. This is an alternative option to the 1d_nwk <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-ReadGISNetwork">Read GIS Network</a></span> command, but applies to 1D nodes only.</p>
+</section>
+<section id="ecf-ReadGISPits" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ReadGISPits"><span class="tcmd">Read GIS Pits</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 2D/1D</p>
+</blockquote>
+<p>Reads virtual pipe locations and attributes from a GIS 1d_pit layer, as described in <a href="05-1D-Domains.html#sec-Virtual-Pipes-2" class="quarto-xref"><span>Section 5.11</span></a>. If using the virtual pipe functionality a <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-PitInletDatabase">Pit Inlet Database</a></span> is required.</p>
+</section>
+<section id="ecf-ReadGISTableLinks" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ReadGISTableLinks"><span class="tcmd">Read GIS Table Links</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Reads links to tabular input of cross-section profiles (1d_xs – see <a href="05-1D-Domains.html#sec-XS-2" class="quarto-xref"><span>Section 5.6</span></a>), nodal surface areas (1d_na – see <a href="05-1D-Domains.html#sec-NA-Table-4" class="quarto-xref"><span>Section 5.12.2.1</span></a>) or bridge loss coefficients (1d_bg – see <a href="05-1D-Domains.html#sec-Bridges-3" class="quarto-xref"><span>Section 5.7.2</span></a>). The first attribute is the filename (can include a file path) of the .csv or similar file containing the table. This attribute can be setup as a hotlink, allowing the file to be opened in spreadsheet software via a GIS program.</p>
+</section>
+<section id="ecf-ReadGISWLL" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ReadGISWLL"><span class="tcmd">Read GIS WLL</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 2D/1D</p>
+</blockquote>
+<p>Reads water level lines (WLL) and polygons for defining 1D map output, see <a href="09-Outputs.html#sec-OneDMap-3" class="quarto-xref"><span>Section 11.2.4</span></a> for further information.</p>
+</section>
+<section id="ecf-ReadGISWLLPoints" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ReadGISWLLPoints"><span class="tcmd">Read GIS WLL Points</span> <span class="teq">==</span> <span class="tblk">&lt;gis_layer&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 2D/1D</p>
+</blockquote>
+<p>For <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-WLLApproach">WLL Approach</a></span> Method B, reads elevation and material points generated from the WLLs. This allows more accurate velocity and flood hazard mapping. See <a href="09-Outputs.html#sec-WLLp-4" class="quarto-xref"><span>Section 11.2.4.2</span></a> for more information.</p>
+</section>
+<section id="ecf-ReadOperatingControlsFile" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-ReadOperatingControlsFile"><span class="tcmd">Read Operating Controls File</span> <span class="teq">==</span> <span class="tblk">&lt;.toc_filename&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D Only</p>
+</blockquote>
+<p>Directs input to the Operational Controls file (.toc) containing operating rules applied to hydraulic structures, pumps and other controllable devices. More than one .toc file can be created and accessed should there be a need to break the control definitions into several files (for example, all pump controls could be placed in one file and sluice gate controls in another).</p>
+<p>Refer to <a href="05-1D-Domains.html#sec-OperationalChannels-2" class="quarto-xref"><span>Section 5.9</span></a> for more information.</p>
+</section>
+<section id="ecf-SChannelApproach" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-SChannelApproach"><span class="tcmd">S Channel Approach</span> <span class="teq">==</span> <span class="tblk">PRE 2004-06-AA | METHOD A | {METHOD B}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Conditional - Required for 1D &amp; 2D/1D<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>PRE 2004-06-AA provides backward compatibility of S channel types for pre 2004-06-AA models.</p>
+<p>METHOD A improved the S channel algorithm after Build 2004-06-AA. The new approach utilises the approach used by G channels for handling situations when the downstream end of a channel is dry or free-overfalling.</p>
+<p>METHOD B (the default) was introduced for the 2010-10 release after rigorous testing on steep, fast flowing channels showed improved performance over METHOD A. METHOD B only applies the G channel approach in adverse flow conditions (i.e.&nbsp;when the water surface gradient is of opposite slope to the channel bed slope), whereas METHOD A tests for and may apply the G channel algorithm on any S channel, and was found in extreme situations to cause some minor choking of the flow down the channel.</p>
+</section>
+<section id="ecf-SetIWL" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-SetIWL"><span class="tcmd">Set IWL</span> <span class="teq">==</span> <span class="tblk">&lt;IWL&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Conditional - Required for 1D &amp; 2D/1D<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Sets the initial water level at all nodes to &lt;IWL&gt;. Initial water levels different to &lt;IWL&gt;, for example in a lake, can be set using the “<span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-ReadGISIWL">Read GIS IWL</a></span>” command.</p>
+</section>
+<section id="ecf-SpatialDatabase" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-SpatialDatabase"><span class="tcmd">Spatial Database</span> <span class="teq">==</span> <span class="tblk">OFF | TCF</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Optional when using the GeoPackage input format. Sets the database to use for subsequent inputs. For more information see <a href="04-ControlFiles-and-Inputs.html#sec-GPKG-3" class="quarto-xref"><span>Section 4.3.3</span></a>.</p>
+</section>
+<section id="ecf-StartOutput" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-StartOutput"><span class="tcmd">Start Output</span> <span class="teq">==</span> <span class="tblk">&lt;time_in_hours&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Legacy - Use the .tcf <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-TimeSeriesOutputInterval">Time Series Output Interval</a></span> command instead.<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Legacy command - expand to find out more">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Legacy command - expand to find out more
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The simulation time in hours when output commences. If the command is omitted, the simulation start time is used.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ecf-StorageAboveStructureObvert" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-StorageAboveStructureObvert"><span class="tcmd">Storage Above Structure Obvert</span> <span class="teq">==</span> <span class="tblk">CHANNEL WIDTH | &lt;value&gt; | {5}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Conditional - Required for 1D &amp; 2D/1D<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Defines how the surface area is to be contributed to the NA table above the obvert of B, C and R channels, it does not apply to manually defined NA tables. The default is to apply 5% of the maximum surface area.</p>
+<p>The CHANNEL WIDTH option uses the top width of B and R channels and the diameter for C channels (see <a href="05-1D-Domains.html#sec-Obvert-3" class="quarto-xref"><span>Section 5.12.3</span></a>). Older models that used CHANNEL WIDTH (the default prior to 2006-03-AB) and require it for stability, will most likely need to adopt a smaller 1D <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-Timestep">Timestep</a></span>. Alternatively, use of CHANNEL WIDTH is acceptable provided the additional storage that it adds to the model is relatively minor, or it can be demonstrated to not significantly influence results.</p>
+<p>If a value is specified, the channels width by half the channel length is applied (provided the UCS attribute is left blank or set to “Y” (yes) or “T” (true) between the invert and obvert, with &lt;value&gt; applied above the obvert. If the (%) option is specified (the default), the value applied above the obvert is the percentage of the structure’s maximum surface area. The default setting is to use 5% of the structure’s maximum surface area above the obvert. If the (%) option is not specified, the value is in m<span class="math inline">\(^{2}\)</span> and is applied as a constant above the obvert.</p>
+<p>For C channels, the correct flow width in the section is applied (rather than the diameter), and for C and R channels, the Number_of attribute in the 1d_nwk layer is also used. Use this option where the storage contributed by B, C and/or R channels is significant (e.g.&nbsp;pipe model).</p>
+<p>Note, the reason a storage value of zero is not automatically used above the obvert is that a node cannot have zero storage. A value of zero can be used provided storages at the nodes is contributed by other channels, or a pit storage is applied or commands such as <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-MinimumNA">Minimum NA</a></span> are used. If the only channels connected to a node are B, C and R channels, the NA table is extended vertically by 10m (32.8ft) above the highest obvert. Should water levels exceed this height, use <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-DepthLimitFactor">Depth Limit Factor</a></span> to extend the able further.</p>
+</section>
+<section id="ecf-StructureFlowLevels" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-StructureFlowLevels"><span class="tcmd">Structure Flow Levels</span> <span class="teq">==</span> <span class="tblk">{ENERGY} | WATER | ENERGY UPSTREAM</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D Only</p>
+</blockquote>
+<p>For calculating structure flows sets, defines whether to use energy or water surface levels as the global default in the flow calculations. The default is to use ENERGY (upstream and downstream). As of the 2023-03 Release “ENERGY UPSTREAM” can be used, which uses energy for the upstream and water level for the downstream. The global default can be overridden channel by channel using the “E”, “H”, or “EH” optional flag for the 1d_nwk Type attribute (see <a href="05-1D-Domains.html#tbl-linetypesoptionalflags" class="quarto-xref">Table&nbsp;<span>5.2</span></a>).</p>
+</section>
+<section id="ecf-StructureLosses" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-StructureLosses"><span class="tcmd">Structure Losses</span> <span class="teq">==</span> <span class="tblk">{ADJUST EXCEPT BG TABLE} | ADJUST | FIX</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Conditional - Required for 1D &amp; 2D/1D<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>If set to ADJUST, the entrance and exit losses of culverts and the bridge loss coefficients are adjusted according to the approach and departure velocities upstream and downstream of the structure.</p>
+<p>This setting can be overridden using an A (adjust) or F (fix) flag for B, C and R channels.</p>
+<p>If set to ADJUST EXCEPT BG TABLE (the default) only adjusts losses for culverts and automatically generated BG tables noting that in the latter it is only the deck loss component that is adjusted as the component specified via the 1d_nwk Form_Loss attribute is always treated as fixed. Any manually specified BG tables are not adjusted unless the “A” flag is used in the 1d_nwk Type attribute or “Structure Losses == ADJUST” is used without specifying “EXCEPT BG TABLE”.</p>
+<p>See <a href="05-1D-Domains.html#sec-LossAdjustment-3" class="quarto-xref"><span>Section 5.7.7</span></a> for details.</p>
+</section>
+<section id="ecf-StructureLossesApproach" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-StructureLossesApproach"><span class="tcmd">Structure Losses Approach</span> <span class="teq">==</span> <span class="tblk">METHOD A | {METHOD B}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D Only</p>
+</blockquote>
+<p>METHOD A is the original ESTRY routine.</p>
+<p>METHOD B (the default) is an enhancement over METHOD A. It is the same as METHOD A, except that if reverse flow occurs in the approach or departure primary channels (reverse flow is when flow is in the opposite direction to the channel’s digitised direction), the adjustment of entrance and exit losses is based on the flow direction, not the digitised direction.</p>
+</section>
+<section id="ecf-StructureLossesSX" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-StructureLossesSX"><span class="tcmd">Structure Losses SX</span> <span class="teq">==</span> <span class="tblk">ADJUST | ADJUST SKEW | {FIX}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p>Extends the adjustment of contraction and expansion losses for 1D culverts and bridges to automatically adjust at 1D/2D SX connections.</p>
+<ul>
+<li><p>The “FIX” option is the default and is the approach taken in prior builds, i.e.&nbsp;no adjustment of the losses.<br>
+</p></li>
+<li><p>The “ADJUST” (beta function) option takes the depth averaged velocities at SX cells and applies them as the approaching/departure velocities to adjust the entrance/exit loss coefficients of a 1D structure in the same manner as for a 1D/1D connection (see <a href="05-1D-Domains.html#sec-LossAdjustment-3" class="quarto-xref"><span>Section 5.7.7</span></a>).</p></li>
+<li><p>The “ADJUST SKEW” (beta function) option also considers the skew angle of the 2D velocity relative to the 1D structure entrance/exit. By default, the geographical angle of a 1D structure entrance/exit is automatically calculated from the 1d_nwk GIS layer to calculate the normal velocity:</p>
+<p><span class="math inline">\(V_{\text{approach}} = u \times \cos(\text{skew angle}) + v \times \sin(\text{skew angle})\)</span></p>
+<p>The skew angle can be also specified manually using the “B” attribute in a 2d_bc SX layer with the following rules:</p>
+<ul>
+<li>If B = 0.01° ~ 360°, B defines the geometric angle of 1D structure entrance/exit.</li>
+<li>If B = -0.01° ~ -90°, B defines the absolute skew angle, i.e.: <span class="math inline">\(V_{\text{approach}} = \sqrt{u^2 + v^2} \times \cos(\text{skew angle})\)</span><br>
+</li>
+<li>B attribute is normally left as zero, and in such case, the automatically calculated geometric angle of the connected 1D GIS network is used.</li>
+<li>To manually define a 0° angle, “B = 0.01°” can be specified where “0.01°” is rounded down to a geometric angle of 0°, while “B = -0.01°” is rounded up to an absolute angle of 0°. The “Zero Skew Angle” command can be used to make the cut-off value smaller than 0.01, in order to apply an even smaller user specified angle.</li>
+</ul></li>
+</ul>
+</section>
+<section id="ecf-StructureRoutines" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-StructureRoutines"><span class="tcmd">Structure Routines</span> <span class="teq">==</span> <span class="tblk">ORIGINAL | {2013}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Legacy - Default value recommended.<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D Only</p>
+</blockquote>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Legacy command - expand to find out more">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Legacy command - expand to find out more
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>ORIGINAL only allows structures available prior to Build 2013-12-AA to be available to force users to limit their use of structures in a legacy model.</p>
+<p>2013 allows the use of the original structures, plus the many new structures introduced for Build 2013-12-AA. This includes access to operational structures and any other new structures added since Build 2013-12-AA.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ecf-TaperClosedNATable" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-TaperClosedNATable"><span class="tcmd">Taper Closed NA Table</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D Only</p>
+</blockquote>
+<p>Reduces the second last surface area value gradually over 3 additional levels for nodes connected to only closed channels such as bridges and culverts. Also, for B and R channels, starts to reduce storage a 20% of the structures total depth below the obvert, to prevent a sudden change in surface area. This command is still to be further tested, but may offer additional stability in urban models with many closed structures.</p>
+</section>
+<section id="ecf-Timestep" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-Timestep"><span class="tcmd">Timestep</span> <span class="teq">==</span> <span class="tblk">&lt;timestep_in_seconds&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Conditional - Required for 1D only<br>
+<strong>Solver:</strong> Classic and HPC</p>
+</blockquote>
+<p><u>1D/2D TUFLOW Classic or 1D Only ESTRY Simulations</u></p>
+<p>Specifies the fixed computational timestep of the simulation in seconds. Value must be greater than zero. Timesteps that divide equally into one minute or one hour are recommended. For example, 0.5, 1, 2, 3, 5, 6, 7.5, 10, 12, 15, 20, 30, 45, 60, etc. seconds.</p>
+<p>A 1D timestep different to the timesteps of the 2D domains may be specified for 1D/2D models, however the 1D timestep must not be greater than the smallest timestep of the 2D domains.</p>
+<p>If the 1D timestep is not equally divisible into the smallest 2D timestep, the 1D timestep is reduced automatically so that it is equally divisible. If this command is not specified in the .ecf file, the smallest 2D timestep is used. See <a href="03-Hydraulic-Modelling-Fundamentals.html#sec-OneDDomainsTimestep-3" class="quarto-xref"><span>Section 3.4.2</span></a> for details.</p>
+<p><u>1D/2D TUFLOW HPC Simulations</u></p>
+<p>The 1D timestep for a HPC 1D/2D linked model represents the maximum limiting timestep the 1D solver can use. ESTRY uses an adaptive/varying timestep solution when used with the HPC solver. Both 1D and 2D solutions are always synchronising at the 2D target timestep, or a multiple of the 2D target timestep if the 1D timestep is sufficiently greater for the 2D to perform more than one step. If the 1D limiting timestep is less than half the 2D target timestep, the 1D proceeds in two or more steps eventually synchronising with the 2D timestep. Where there is not a one to one synchronisation of the 1D and 2D timesteps, a usually negligible mass error may occur and can be checked by reviewing the CME% values shown on the Console Window, the .tlf file or the _MB.csv file in the same manner as Classic . See <a href="03-Hydraulic-Modelling-Fundamentals.html#sec-OneDDomainsTimestep-3" class="quarto-xref"><span>Section 3.4.2</span></a> for details.</p>
+</section>
+<section id="ecf-TrimXZProfiles" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-TrimXZProfiles"><span class="tcmd">Trim XZ Profiles</span> <span class="teq">==</span> <span class="tblk">ON | {OFF}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Trims the XZ profile extracted from Flood Modeller .dat files so that the treatment at the ends of the cross-section profile is similar to that used by Flood Modeller. If set to OFF the whole XZ profile is stored with the sections of the profile before and after the left and right markers disabled. However, the active end of the cross-section profile will extend to midway between the first/last disabled point and the last/first active point at either end of the profile. If set to ON, the points before and after the left and right markers are not stored, and the cross-section extent is not extended to midway to the first/last points nearest the left and right markers.</p>
+<p><strong>To have similar compatibility with Flood Modeller, this command should be set to ON.</strong></p>
+</section>
+<section id="ecf-VelRateCreepFactor" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-VelRateCreepFactor"><span class="tcmd">Vel Rate Creep Factor</span> <span class="teq">==</span> <span class="tblk">&lt;value&gt; | {1.2}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D Only</p>
+</blockquote>
+<p>Specifies rate at which the <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-VelRateLimit">Vel Rate Limit</a></span> value changes. This value is rarely changed from its default value of 1.2. See <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-VelRateLimit">Vel Rate Limit</a></span> for further discussion.</p>
+</section>
+<section id="ecf-VelRateLimit" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-VelRateLimit"><span class="tcmd">Vel Rate Limit</span> <span class="teq">==</span> <span class="tblk">&lt;vrl&gt; | {0.2}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D Only</p>
+</blockquote>
+<p>Specifies the velocity rate limit applied to non-inertial channels (structures). This value is rarely changed from its default value of 0.2. During a computation this value is adjusted downwards if a structure becomes unstable and upwards if stable using the <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-VelRateCreepFactor">Vel Rate Creep Factor</a></span> value. An “L” is shown in the second space after velocity and flow time output in the .eof file, and also in the_TSF output, indicating if the velocity rate limit algorithm was applied. If a structure frequently has the velocity rate limit applied to it, checks should be made on structure configuration and on the results at the structure. For example, check the flow through the structure based on the upstream and downstream water levels is similar to that using desktop calculations or other software.</p>
+</section>
+<section id="ecf-VelRateLimitMinimum" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-VelRateLimitMinimum"><span class="tcmd">Vel Rate Limit Minimum</span> <span class="teq">==</span> <span class="tblk">&lt;vrlmin&gt; | {0.0001}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D Only</p>
+</blockquote>
+<p>Specifies the minimum velocity rate limit that can occur. See <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-VelRateLimit">Vel Rate Limit</a></span>.</p>
+</section>
+<section id="ecf-WeirApproach" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-WeirApproach"><span class="tcmd">Weir Approach</span> <span class="teq">==</span> <span class="tblk">{Method A} | Method B</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D Only</p>
+</blockquote>
+<p>This command specifies the approach taken to calculate submerged flow for ‘W’ type weirs (refer to <a href="05-1D-Domains.html#sec-W-Weir-4" class="quarto-xref"><span>Section 5.7.4.2</span></a>). For all other weir types, the approaches used are discussed in <a href="05-1D-Domains.html#sec-Adv-Weir-4" class="quarto-xref"><span>Section 5.7.4.3</span></a>.</p>
+<p>Method A (the default) utilises the Bradley submergence approach which after further analysis is the preferred approach.</p>
+<p>Method B was initially introduced to provide better stability for weirs embedded within 2D domains. In some situations, this approach was found to not converge very well and caused large head drops.</p>
+</section>
+<section id="ecf-WeirFlow" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-WeirFlow"><span class="tcmd">Weir Flow</span> <span class="teq">==</span> <span class="tblk">Method A | Method B | {Method C}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Method A is the original ESTRY routine and only applies to W weirs.</p>
+<p>Method B is not recommended – only applies to W weirs.</p>
+<p>Method C (the default and introduced for the 2016-03 release), applies Method A for the original W weirs, provides some minor improvement to WW weirs, and otherwise has no influence for all other weir types introduced for the 2013-12 release.</p>
+<p>Note that for the 2016-03 release there is a general improvement to all new weirs introduced for the 2013-12 release when the weirs became drowned out. Previously it was possible for an instability (usually associated with a large head drop) and/or presence of NaNs in the results. The new approach does not experience this issue and is significantly more stable. There is no backward compatibility switch for this change.</p>
+</section>
+<section id="ecf-WLLApproach" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-WLLApproach"><span class="tcmd">WLL Approach</span> <span class="teq">==</span> <span class="tblk">Method A | {Method B}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 2D/1D</p>
+</blockquote>
+<p>If set to Method A uses the simpler approach for incorporating 1D output into SMS and GIS map output. Method B (the default) allows the use of elevation points and material values to more accurately map and animate 1D results. See <a href="09-Outputs.html#sec-OneDMap-3" class="quarto-xref"><span>Section 11.2.4</span></a> for details on Method B and the <a href="https://downloads.tuflow.com/_archive/TUFLOW/Manuals/TUFLOW%20Manual.2010-10-AB.pdf">TUFLOW 2010 Manual</a> on Method A (noting that Method A is no longer supported).</p>
+</section>
+<section id="ecf-WLLAutomatic" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-WLLAutomatic"><span class="tcmd">WLL Automatic</span> <span class="teq">==</span> <span class="tblk">CULVERTS | {OFF}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 2D/1D</p>
+</blockquote>
+<p>If set to CULVERTS, automatically generates 1D WLLs along culverts (C, R and I channels). The WLL will have the same width as the culvert width, and can save a lot of digitising for large pipe models! WLLs are placed a short distance from each end of the culvert channel, and also at each vertices along the channel line.</p>
+<p>See <a href="09-Outputs.html#sec-OneDMap-3" class="quarto-xref"><span>Section 11.2.4</span></a> for more details.</p>
+</section>
+<section id="ecf-WLLNoWeirs" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-WLLNoWeirs"><span class="tcmd">WLL No Weirs</span> <span class="teq">==</span> <span class="tblk">ON | {OFF}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 2D/1D</p>
+</blockquote>
+<p>If set to ON, TUFLOW will not assign any WLLs to 1D weir channels. This is useful where weir channels modelling flow over a bridge or culvert (especially those using the BW, CW or RW channel type) is in parallel to a B, C or R channel. In this instance, it is not known whether the B, C or R channel, or the W channel will be selected for assigning results to WLLs. To guarantee that the B, C or R channel is selected use this command with the ON option.</p>
+<p>See <a href="09-Outputs.html#sec-OneDMap-3" class="quarto-xref"><span>Section 11.2.4</span></a> for more details.</p>
+</section>
+<section id="ecf-WLLVerticalOffset" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-WLLVerticalOffset"><span class="tcmd">WLL Vertical Offset</span> <span class="teq">==</span> <span class="tblk">&lt;dZ&gt; | {10}</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 2D/1D</p>
+</blockquote>
+<p>Sets the vertical adjustment of WLL elevations in the mesh .2dm file. The value of 10 generally means that the 1D WLL output sits above the 2D cell output and is more visible (which presents data in order of increasing height). However, in 3D the 1D appears perched on top of the 2D. To show the WLL mesh at its correct height for 3D displays specify a dZ value of 0.0.</p>
+<p>This command only affects the .2dm file, so can be applied to a temporary .tcf file used solely to generate an alternative .2dm file (i.e.&nbsp;there is no need to carry out the hydraulic calculations).</p>
+<p>See <a href="09-Outputs.html#sec-OneDMap-3" class="quarto-xref"><span>Section 11.2.4</span></a> for more details.</p>
+</section>
+<section id="ecf-WLLpInterpolateBed" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-WLLpInterpolateBed"><span class="tcmd">WLLp Interpolate Bed</span> <span class="teq">==</span> <span class="tblk">{ON} | OFF</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 2D/1D</p>
+</blockquote>
+<p>If set to ON (the default), sets the centre WLL point to the channel bed based on the processed data (rather than use any value from a WLLp layer). This forces the bed profiles in longitudinal profile plots using the ‑lp switch in the TUFLOW_to_GIS utility (see <a href="15-Utilities.html" class="quarto-xref"><span>Chapter 17</span></a>) to be based on that modelled, rather than that a DTM using WLLp values (which may sometimes occur above the water surface!). Also helps to show where the WLLp elevations are inconsistent with the channel bed when viewing in SMS or using TUFLOW_to_GIS.</p>
+<p>Doesn’t apply to culverts and bridges which use this approach regardless, and only applies to <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-WLLApproach">WLL Approach</a></span> <span class="teq">==</span> <span class="tblk">Method B</span>.</p>
+<p>See <a href="09-Outputs.html#sec-OneDMap-3" class="quarto-xref"><span>Section 11.2.4</span></a> for more details.</p>
+</section>
+<section id="ecf-WriteCheckFiles" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-WriteCheckFiles"><span class="tcmd">Write Check Files [ Exclude | Include | None | ALL ]</span> <span class="teq">==</span> <span class="tblk">&lt;prefix_list_or_file_prefix&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Creates GIS check files and text .csv files for quality control checking of model input data. A list of check files written are described in <a href="12-Checks-and-Logs.html#sec-CheckLayers-2" class="quarto-xref"><span>Section 14.6</span></a>. Refer to the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-WriteCheckFiles">Write Check Files</a></span> command in the .tcf file for an explanation of the various options and for examples.</p>
+<p>Specifying the <span class="tcmd"><a href="./80-AppendicesA-TCFCommands.html#tcf-WriteCheckFiles">Write Check Files</a></span> command in the .tcf file will automatically also write the 1D check files for 1D/2D linked models. There is no need to specify <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-WriteCheckFiles">Write Check Files</a></span> in the .ecf file unless a different folder path for the files is desired.</p>
+</section>
+<section id="ecf-XSDatabase" class="level3 command unnumbered">
+<h3 class="command unnumbered anchored" data-anchor-id="ecf-XSDatabase"><span class="tcmd">XS Database</span> <span class="teq">==</span> <span class="tblk">&lt;file&gt;</span></h3>
+<blockquote class="blockquote">
+<p><strong>Status:</strong> Optional<br>
+<strong>Solver:</strong> Classic and HPC - 1D &amp; 2D/1D</p>
+</blockquote>
+<p>Sets the active cross-section database as &lt;file&gt;. The extension of the file determines its format as follows:</p>
+<ul>
+<li>.dat: indicates a Flood Modeller data file containing XZ cross-section profiles – also see <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-TrimXZProfiles">Trim XZ Profiles</a></span>.<br>
+</li>
+<li>.txt (legacy feature): indicates a MIKE 11 .txt processed data import/export file. The file must contain processed cross-section data; any raw data is ignored.<br>
+</li>
+<li>.pro (legacy feature): indicates a Flood Modeller processed cross-section data file.</li>
+</ul>
+<p>The assignment of cross-sections is carried out using 1d_nwk attributes as discussed in <a href="05-1D-Domains.html#sec-XS-2" class="quarto-xref"><span>Section 5.6</span></a>.</p>
+<p>This command must be specified before a <span class="tcmd"><a href="./81-AppendicesB-ECFCommands.html#ecf-ReadGISNetwork">Read GIS Network</a></span> command. The command may be used at any point to change the active cross-section database.</p>
+</section>
+</section>
+</div>
+<p><img src="images/WQFooter.jpg" class="img-fluid" style="width:100.0%"></p>
+
+
+
+</main> <!-- /main -->
+<script>
+
+// Hover preview for plain anchor links -- mirrors native quarto-xref behaviour.
+
+// Supports same-page anchors and cross-chapter links on the same origin.
+
+// Placed via include-after-body so all DOM is parsed when this runs.
+
+(function () {
+
+  if (typeof window.tippy !== 'function') { return; }
+
+
+
+  var doc = window.document;
+
+  var pageCache = {};
+
+
+
+  function stripColumnClasses(el) {
+
+    el.classList.remove('page-full', 'page-columns');
+
+    for (var i = 0; i < el.children.length; i++) {
+
+      stripColumnClasses(el.children[i]);
+
+    }
+
+  }
+
+
+
+  function buildContent(id, target) {
+
+    var clone = target.cloneNode(true);
+
+    stripColumnClasses(clone);
+
+
+
+    var anchor = clone.querySelector('a.anchorjs-link');
+
+    if (anchor) { anchor.parentNode.removeChild(anchor); }
+
+
+
+    var isSectionEl = (clone.tagName === 'SECTION' || /^H[1-6]$/.test(clone.tagName || ''));
+
+    var isSectionId = (typeof id === 'string' && id.indexOf('sec-') === 0);
+
+
+
+    if (isSectionEl || isSectionId) {
+
+      var container = doc.createElement('div');
+
+      var kids = clone.children;
+
+      if (kids.length > 2) {
+
+        container.appendChild(kids[0].cloneNode(true));
+
+        for (var j = 1; j < kids.length; j++) {
+
+          if (kids[j].tagName === 'P' && (kids[j].textContent || '').trim() === '') { continue; }
+
+          container.appendChild(kids[j].cloneNode(true));
+
+          break;
+
+        }
+
+        if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(container); }
+
+        return container.innerHTML;
+
+      }
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.innerHTML;
+
+    }
+
+
+
+    if (clone.classList.contains('callout')) {
+
+      if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+      return clone.outerHTML;
+
+    }
+
+
+
+    if (window.Quarto && window.Quarto.typesetMath) { window.Quarto.typesetMath(clone); }
+
+    return clone.innerHTML;
+
+  }
+
+
+
+  function getTargetFromPage(pageUrl, id, callback) {
+
+    if (pageCache[pageUrl]) {
+
+      callback(pageCache[pageUrl].getElementById(id));
+
+      return;
+
+    }
+
+    fetch(pageUrl)
+
+      .then(function (r) { return r.text(); })
+
+      .then(function (html) {
+
+        var parser = new DOMParser();
+
+        var parsedDoc = parser.parseFromString(html, 'text/html');
+
+        pageCache[pageUrl] = parsedDoc;
+
+        callback(parsedDoc.getElementById(id));
+
+      })
+
+      .catch(function () { callback(null); });
+
+  }
+
+
+
+  // Same-page anchor links (href starts with "#")
+
+  var samePageLinks = doc.querySelectorAll(
+
+    'main a[href^="#"]:not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < samePageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var hash   = link.getAttribute('href');
+
+      var id     = hash.replace(/^#\/?/, '');
+
+      var target = doc.getElementById(id);
+
+      if (!target) { return; }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           function () { return buildContent(id, target); }
+
+      });
+
+    })(samePageLinks[i]);
+
+  }
+
+
+
+  // Cross-page anchor links (same origin, href contains "#" but does not start with "#")
+
+  var crossPageLinks = doc.querySelectorAll(
+
+    'main a[href*="#"]:not([href^="#"]):not(.quarto-xref):not(.nav-link):not(.anchorjs-link):not([role="doc-noteref"])'
+
+  );
+
+
+
+  for (var i = 0; i < crossPageLinks.length; i++) {
+
+    (function (link) {
+
+      if (link._tippy) { return; }
+
+      var href = link.getAttribute('href');
+
+
+
+      var pageUrl, id;
+
+      try {
+
+        var resolved = new URL(href, window.location.href);
+
+        if (resolved.origin !== window.location.origin) { return; }
+
+        pageUrl = resolved.origin + resolved.pathname;
+
+        id = resolved.hash.replace(/^#\/?/, '');
+
+      } catch (e) { return; }
+
+
+
+      if (!id) { return; }
+
+
+
+      // If the link points to the current page, look up the element directly
+
+      if (pageUrl === (window.location.origin + window.location.pathname)) {
+
+        var target = doc.getElementById(id);
+
+        if (!target) { return; }
+
+        window.tippy(link, {
+
+          allowHTML:         true,
+
+          maxWidth:          500,
+
+          delay:             100,
+
+          arrow:             false,
+
+          appendTo:          function (el) { return el.parentElement; },
+
+          interactive:       true,
+
+          interactiveBorder: 10,
+
+          theme:             'quarto',
+
+          placement:         'bottom-start',
+
+          content:           function () { return buildContent(id, target); }
+
+        });
+
+        return;
+
+      }
+
+
+
+      window.tippy(link, {
+
+        allowHTML:         true,
+
+        maxWidth:          500,
+
+        delay:             100,
+
+        arrow:             false,
+
+        appendTo:          function (el) { return el.parentElement; },
+
+        interactive:       true,
+
+        interactiveBorder: 10,
+
+        theme:             'quarto',
+
+        placement:         'bottom-start',
+
+        content:           'Loading\u2026',
+
+        onShow:            function (instance) {
+
+          if (instance._fetched) { return; }
+
+          instance._fetched = true;
+
+          getTargetFromPage(pageUrl, id, function (target) {
+
+            if (target) {
+
+              instance.setContent(buildContent(id, target));
+
+            } else {
+
+              instance.destroy();
+
+            }
+
+          });
+
+        }
+
+      });
+
+    })(crossPageLinks[i]);
+
+  }
+
+})();
+
+</script>
+
+<script>
+
+// Adds a copy-to-clipboard button to plain code blocks, .styled-code, and .scrollable-block elements.
+
+// .tuflow blocks already receive Quarto's built-in copy button via .sourceCode — those are excluded.
+
+(function () {
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    var selectors = ['pre:not(.sourceCode)', '.styled-code', '.scrollable-block'];
+
+
+
+    selectors.forEach(function (sel) {
+
+      document.querySelectorAll(sel).forEach(function (block) {
+
+        // Skip if already processed
+
+        if (block.parentNode && block.parentNode.classList.contains('copy-block-wrapper')) return;
+
+
+
+        // Wrap block so the button can be positioned outside the scroll area
+
+        var wrapper = document.createElement('div');
+
+        wrapper.className = 'copy-block-wrapper';
+
+        block.parentNode.insertBefore(wrapper, block);
+
+        wrapper.appendChild(block);
+
+
+
+        // Create button
+
+        var btn = document.createElement('button');
+
+        btn.className = 'copy-block-btn';
+
+        btn.title = 'Copy to Clipboard';
+
+        btn.setAttribute('aria-label', 'Copy to Clipboard');
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+
+
+        btn.addEventListener('click', function () {
+
+          var text = block.innerText;
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+
+            navigator.clipboard.writeText(text).then(function () {
+
+              showCopied(btn);
+
+            }).catch(function () {
+
+              fallbackCopy(text);
+
+              showCopied(btn);
+
+            });
+
+          } else {
+
+            fallbackCopy(text);
+
+            showCopied(btn);
+
+          }
+
+        });
+
+
+
+        wrapper.appendChild(btn);
+
+      });
+
+    });
+
+
+
+    function showCopied(btn) {
+
+      btn.innerHTML = '<i class="bi bi-clipboard-check"></i>';
+
+      btn.title = 'Copied!';
+
+      setTimeout(function () {
+
+        btn.innerHTML = '<i class="bi bi-clipboard"></i>';
+
+        btn.title = 'Copy to Clipboard';
+
+      }, 2000);
+
+    }
+
+
+
+    function fallbackCopy(text) {
+
+      var ta = document.createElement('textarea');
+
+      ta.value = text;
+
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+
+      document.body.appendChild(ta);
+
+      ta.focus();
+
+      ta.select();
+
+      try { document.execCommand('copy'); } catch (e) {}
+
+      document.body.removeChild(ta);
+
+    }
+
+  });
+
+}());
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./80-AppendicesA-TCFCommands.html" class="pagination-link" aria-label="TCF Commands">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">TCF Commands</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./82-AppendicesC-TGCCommands.html" class="pagination-link" aria-label="TGC Commands">
+        <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">TGC Commands</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
