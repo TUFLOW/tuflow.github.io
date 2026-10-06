@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css?v=572af1d6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=0a1fe526" />
@@ -2160,11 +2160,11 @@ in a similar way to the previous example (<a class="reference internal" href="..
 <p>In this example, we will look at how to view the material file using <code class="docutils literal notranslate"><span class="pre">EG00_001.tcf</span></code> from the
 <a class="reference external" href="https://wiki.tuflow.com/TUFLOW_Example_Models">TUFLOW Example Model Dataset</a>.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCF</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG00_001.tcf&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG00_001.tcf'</span><span class="p">)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">mat_file</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mat</span><span class="o">.</span><span class="n">df</span><span class="p">)</span>
-<span class="go">             Manning&#39;s n  Rainfall Losses  Land Use Hazard ID</span>
+<span class="go">             Manning's n  Rainfall Losses  Land Use Hazard ID</span>
 <span class="go">Material ID</span>
 <span class="go">1                  0.060              NaN                 NaN</span>
 <span class="go">2                  0.022              NaN                 NaN</span>
@@ -2185,17 +2185,17 @@ can be accessed via the <a class="reference internal" href="../../api/pytuflow.M
 </pre></div>
 </div>
 <p>In this case, the method isn’t doing anything special, as the same result could be achieved by using the DataFrame:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Manning&#39;s n&quot;</span><span class="p">]</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"Manning's n"</span><span class="p">]</span>
 <span class="go">np.float64(0.06)</span>
 </pre></div>
 </div>
 <p>However, the <a class="reference internal" href="../../api/pytuflow.MatDatabase.value/" title="pytuflow.MatDatabase.value"><code class="xref py py-meth docutils literal notranslate"><span class="pre">MatDatabase.value()</span></code></a> method becomes useful in more complex cases,
 such as when the given material is using a depth-varying manning’s <cite>n</cite> value. Consider the following example using
 <code class="docutils literal notranslate"><span class="pre">EG07_012.tcf</span></code> from the TUFLOW example models:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG07_012.tcf&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG07_012.tcf'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">mat_file</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mat</span><span class="o">.</span><span class="n">df</span><span class="p">)</span>
-<span class="go">           Manning&#39;s n Rainfall Losses  Landuse Hazard ID  Description</span>
+<span class="go">           Manning's n Rainfall Losses  Landuse Hazard ID  Description</span>
 <span class="go">ID</span>
 <span class="go">1    0.03,0.1,0.1,0.06             0,0                NaN          NaN</span>
 <span class="go">2                 0.02             0,0                NaN          NaN</span>
@@ -2209,7 +2209,7 @@ such as when the given material is using a depth-varying manning’s <cite>n</ci
 this value is extracted using the <a class="reference internal" href="../../api/pytuflow.MatDatabase.value/" title="pytuflow.MatDatabase.value"><code class="xref py py-meth docutils literal notranslate"><span class="pre">MatDatabase.value()</span></code></a> method, it will return a
 this in a more readable format within a DataFrame:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">   Depth  Manning&#39;s n</span>
+<span class="go">   Depth  Manning's n</span>
 <span class="go">0   0.03         0.10</span>
 <span class="go">1   0.10         0.06</span>
 </pre></div>
@@ -2222,22 +2222,22 @@ return the values in a DataFrame format.</p>
 <h2>Viewing the Soil File<a class="headerlink" href="#viewing-the-soil-file" title="Link to this heading">#</a></h2>
 <p>The soil file is very similar to the material file. Let’s have a look at <code class="docutils literal notranslate"><span class="pre">EG05_006.tcf</span></code> from the TUFLOW
 example models:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG05_006.tcf&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG05_006.tcf'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">soil</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">soils_file</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">soil</span><span class="o">.</span><span class="n">df</span><span class="p">)</span>
 <span class="go">        Method           Column 1 Column 2</span>
 <span class="go">Soil ID</span>
-<span class="go">1           GA             &quot;CLAY&quot;</span>
-<span class="go">2           GA       &quot;SILTY CLAY&quot;</span>
-<span class="go">3           GA       &quot;SANDY CLAY&quot;</span>
-<span class="go">4           GA        &quot;CLAY LOAM&quot;</span>
-<span class="go">5           GA  &quot;SILTY CLAY LOAM&quot;</span>
-<span class="go">6           GA  &quot;SANDY CLAY LOAM&quot;</span>
-<span class="go">7           GA        &quot;SILT LOAM&quot;</span>
-<span class="go">8           GA             &quot;LOAM&quot;</span>
-<span class="go">9           GA       &quot;SANDY LOAM&quot;</span>
-<span class="go">10          GA       &quot;LOAMY SAND&quot;</span>
-<span class="go">11          GA             &quot;SAND&quot;</span>
+<span class="go">1           GA             "CLAY"</span>
+<span class="go">2           GA       "SILTY CLAY"</span>
+<span class="go">3           GA       "SANDY CLAY"</span>
+<span class="go">4           GA        "CLAY LOAM"</span>
+<span class="go">5           GA  "SILTY CLAY LOAM"</span>
+<span class="go">6           GA  "SANDY CLAY LOAM"</span>
+<span class="go">7           GA        "SILT LOAM"</span>
+<span class="go">8           GA             "LOAM"</span>
+<span class="go">9           GA       "SANDY LOAM"</span>
+<span class="go">10          GA       "LOAMY SAND"</span>
+<span class="go">11          GA             "SAND"</span>
 <span class="go">12        NONE                NaN      NaN</span>
 </pre></div>
 </div>
@@ -2250,22 +2250,22 @@ method expects the first column to be the name of the USDA soil type, or it can 
 initial loss value. Because of this, the DataFrame uses generic column names, such as “Column 1” and “Column 2”.</p>
 <p>The value method comes in handy here, as it will return the values with named keys based on the method used.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">soil</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">CaseInsDictOrdered([(&#39;method&#39;, &#39;GA&#39;),</span>
-<span class="go">                (&#39;USDA Soil Type&#39;, &#39;CLAY&#39;),</span>
-<span class="go">                (&#39;Initial Moisture&#39;, None),</span>
-<span class="go">                (&#39;Max Ponding Depth&#39;, None),</span>
-<span class="go">                (&#39;Horizontal Conductivity&#39;, None),</span>
-<span class="go">                (&#39;Residual Water Content&#39;, None),</span>
-<span class="go">                (&#39;Saturated Water Content&#39;, None),</span>
-<span class="go">                (&#39;alpha&#39;, None),</span>
-<span class="go">                (&#39;n&#39;, None),</span>
-<span class="go">                (&#39;L&#39;, None)])</span>
+<span class="go">CaseInsDictOrdered([('method', 'GA'),</span>
+<span class="go">                ('USDA Soil Type', 'CLAY'),</span>
+<span class="go">                ('Initial Moisture', None),</span>
+<span class="go">                ('Max Ponding Depth', None),</span>
+<span class="go">                ('Horizontal Conductivity', None),</span>
+<span class="go">                ('Residual Water Content', None),</span>
+<span class="go">                ('Saturated Water Content', None),</span>
+<span class="go">                ('alpha', None),</span>
+<span class="go">                ('n', None),</span>
+<span class="go">                ('L', None)])</span>
 </pre></div>
 </div>
 <p>The returned value is an ordered dictionary that also uses case-insensitive keys, so you can access the values
 using named parameters, such as <code class="docutils literal notranslate"><span class="pre">&quot;Horizontal</span> <span class="pre">Conductivity&quot;</span></code>, rather than the generic “Column 1” or “Column 2”.</p>
 <p>We can look at <code class="docutils literal notranslate"><span class="pre">EG05_011.tcf</span></code> to see an example of a more complex soil file:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG05_011.tcf&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG05_011.tcf'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">soil</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">soils_file</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">soil</span><span class="o">.</span><span class="n">df</span><span class="p">)</span>
 <span class="go">        Method  Column 1  Column 2  Column 3  Column 4  Column 5</span>
@@ -2284,18 +2284,18 @@ using named parameters, such as <code class="docutils literal notranslate"><span
 <span class="go">12        NONE       NaN       NaN       NaN       NaN       NaN</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">soil</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-<span class="go">CaseInsDictOrdered([(&#39;method&#39;, &#39;GA&#39;),</span>
-<span class="go">                (&#39;Suction&#39;, 316.3),</span>
-<span class="go">                (&#39;Hydraulic Conductivity&#39;, 0.3),</span>
-<span class="go">                (&#39;Porosity&#39;, 0.385),</span>
-<span class="go">                (&#39;Initial Moisture&#39;, 0.2),</span>
-<span class="go">                (&#39;Max Ponding Depth&#39;, 0.2),</span>
-<span class="go">                (&#39;Horizontal Conductivity&#39;, None),</span>
-<span class="go">                (&#39;Residual Water Content&#39;, None),</span>
-<span class="go">                (&#39;Saturated Water Content&#39;, None),</span>
-<span class="go">                (&#39;alpha&#39;, None),</span>
-<span class="go">                (&#39;n&#39;, None),</span>
-<span class="go">                (&#39;L&#39;, None)])</span>
+<span class="go">CaseInsDictOrdered([('method', 'GA'),</span>
+<span class="go">                ('Suction', 316.3),</span>
+<span class="go">                ('Hydraulic Conductivity', 0.3),</span>
+<span class="go">                ('Porosity', 0.385),</span>
+<span class="go">                ('Initial Moisture', 0.2),</span>
+<span class="go">                ('Max Ponding Depth', 0.2),</span>
+<span class="go">                ('Horizontal Conductivity', None),</span>
+<span class="go">                ('Residual Water Content', None),</span>
+<span class="go">                ('Saturated Water Content', None),</span>
+<span class="go">                ('alpha', None),</span>
+<span class="go">                ('n', None),</span>
+<span class="go">                ('L', None)])</span>
 </pre></div>
 </div>
 <p>This example is still relatively simple, in that all the soils use the same method. However, you can imagine a situation
@@ -2305,12 +2305,12 @@ the <a class="reference internal" href="../../api/pytuflow.SoilDatabase.value/" 
 specific keys based on the method used. So, for example, the user can check if the key “USDA Soil Type” exists:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">soil_1</span> <span class="o">=</span> <span class="n">soil</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">soil_1</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;GA&#39;</span> <span class="ow">and</span> <span class="s1">&#39;USDA Soil Type&#39;</span> <span class="ow">in</span> <span class="n">soil_1</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This soil uses the GA method with a USDA Soil Type.&quot;</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">elif</span> <span class="n">soil_1</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;GA&#39;</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This soil type uses the GA method with custom parameters.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">soil_1</span><span class="p">[</span><span class="s1">'method'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'GA'</span> <span class="ow">and</span> <span class="s1">'USDA Soil Type'</span> <span class="ow">in</span> <span class="n">soil_1</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">"This soil uses the GA method with a USDA Soil Type."</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">elif</span> <span class="n">soil_1</span><span class="p">[</span><span class="s1">'method'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'GA'</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">"This soil type uses the GA method with custom parameters."</span><span class="p">)</span>
 <span class="gp">... </span><span class="k">else</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This soil type does not use the GA method.&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">"This soil type does not use the GA method."</span><span class="p">)</span>
 <span class="go">This soil type uses the GA method with custom parameters.</span>
 </pre></div>
 </div>

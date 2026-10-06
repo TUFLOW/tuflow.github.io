@@ -2189,35 +2189,35 @@ for multiple events.</p></li>
 <p>Load results without any reference to the DAT or GXY files - this will not support section plotting and won’t
 contain spatial information:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">FMTS</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">FMTS</span><span class="p">(</span><span class="s1">&#39;path/to/result.zzn&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">FMTS</span><span class="p">(</span><span class="s1">'path/to/result.zzn'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Load results with a DAT file so that connectivity information is available for section plotting:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">FMTS</span><span class="p">(</span><span class="s1">&#39;path/to/result.zzn&#39;</span><span class="p">,</span> <span class="n">dat</span><span class="o">=</span><span class="s1">&#39;path/to/result.dat&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">FMTS</span><span class="p">(</span><span class="s1">'path/to/result.zzn'</span><span class="p">,</span> <span class="n">dat</span><span class="o">=</span><span class="s1">'path/to/result.dat'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Load results with a GXY so spatial information is available - a GXY can also be used for connectivity
 without a DAT file, however less contextual information is contained in the GXY and channel directions around
 JUNCTION nodes can be ambiguous. The DAT file is recommended, and is required for plotting <code class="code docutils literal notranslate"><span class="pre">pipes</span></code>
 in the section plot:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">FMTS</span><span class="p">(</span><span class="s1">&#39;path/to/result.zzn&#39;</span><span class="p">,</span> <span class="n">dat</span><span class="o">=</span><span class="s1">&#39;path/to/result.dat&#39;</span><span class="p">,</span> <span class="n">gxy</span><span class="o">=</span><span class="s1">&#39;path/to/result.gxy&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">FMTS</span><span class="p">(</span><span class="s1">'path/to/result.zzn'</span><span class="p">,</span> <span class="n">dat</span><span class="o">=</span><span class="s1">'path/to/result.dat'</span><span class="p">,</span> <span class="n">gxy</span><span class="o">=</span><span class="s1">'path/to/result.gxy'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Return all node IDs - Only nodes that contain results will be return by default and will be returned with just
 the node name. To return all nodes with unique IDs (<code class="code docutils literal notranslate"><span class="pre">TYPE_SUBTYPE_NAME</span></code>), use the <code class="code docutils literal notranslate"><span class="pre">filter_by</span></code> parameter:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="o">.</span><span class="n">ids</span><span class="p">()</span>
-<span class="go">[&#39;FC01.36&#39;, &#39;FC01.35&#39;, &#39;FC01.351cu&#39;,... &#39;FC02&#39;, &#39;ds2_S&#39;, &#39;FC01&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="o">.</span><span class="n">ids</span><span class="p">(</span><span class="s1">&#39;node&#39;</span><span class="p">)</span>
-<span class="go">[&#39;QTBDY__FC01&#39;, &#39;JUNCTION_OPEN_FC01&#39;, &#39;RIVER_SECTION_FC01.40&#39;,... &#39;JUNCTION_OPEN_ds2&#39;, &#39;SPILL__ds2_S&#39;]</span>
+<span class="go">['FC01.36', 'FC01.35', 'FC01.351cu',... 'FC02', 'ds2_S', 'FC01']</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="o">.</span><span class="n">ids</span><span class="p">(</span><span class="s1">'node'</span><span class="p">)</span>
+<span class="go">['QTBDY__FC01', 'JUNCTION_OPEN_FC01', 'RIVER_SECTION_FC01.40',... 'JUNCTION_OPEN_ds2', 'SPILL__ds2_S']</span>
 </pre></div>
 </div>
 <p>Return available result types:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="o">.</span><span class="n">data_types</span><span class="p">()</span>
-<span class="go">[&#39;flow&#39;, &#39;water level&#39;, &#39;froude&#39;, &#39;velocity&#39;, &#39;mode&#39;, &#39;state&#39;]</span>
+<span class="go">['flow', 'water level', 'froude', 'velocity', 'mode', 'state']</span>
 </pre></div>
 </div>
 <p>Return the <code class="code docutils literal notranslate"><span class="pre">water</span> <span class="pre">level</span></code> time series for <code class="code docutils literal notranslate"><span class="pre">FC04368</span></code>:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="o">.</span><span class="n">time_series</span><span class="p">(</span><span class="s1">&#39;FC01.35&#39;</span><span class="p">,</span> <span class="s1">&#39;stage&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="o">.</span><span class="n">time_series</span><span class="p">(</span><span class="s1">'FC01.35'</span><span class="p">,</span> <span class="s1">'stage'</span><span class="p">)</span>
 <span class="go">time      node/stage/FC01.35</span>
 <span class="go">0.000000           44.803001</span>
 <span class="go">0.083333           45.329525</span>
@@ -2233,7 +2233,7 @@ the node name. To return all nodes with unique IDs (<code class="code docutils l
 </pre></div>
 </div>
 <p>Return the maximum <code class="code docutils literal notranslate"><span class="pre">water</span> <span class="pre">level</span></code> along a section between <code class="code docutils literal notranslate"><span class="pre">FC01.31</span></code> and <code class="code docutils literal notranslate"><span class="pre">FC01.25</span></code>:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="o">.</span><span class="n">section</span><span class="p">([</span><span class="s1">&#39;FC01.31&#39;</span><span class="p">,</span> <span class="s1">&#39;FC01.25&#39;</span><span class="p">],</span> <span class="s1">&#39;max stage&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="o">.</span><span class="n">section</span><span class="p">([</span><span class="s1">'FC01.31'</span><span class="p">,</span> <span class="s1">'FC01.25'</span><span class="p">],</span> <span class="s1">'max stage'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="go">    branch_id channel      node   offset   max stage</span>
 <span class="go">0           0      36   FC01.31    0.000   43.308998</span>
 <span class="go">7           0      36   FC01.30   30.758   43.060001</span>

@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css?v=572af1d6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=0a1fe526" />
@@ -2165,7 +2165,7 @@ does not use an event file and does not require any event arguments to run. The 
 point to the model will be via the <a class="reference internal" href="../../api/pytuflow.TCF/" title="pytuflow.TCF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TCF</span></code></a> class, which is used to load the TUFLOW model.
 The model used in this example is <code class="docutils literal notranslate"><span class="pre">EG00_001.tcf</span></code> from the TUFLOW example models.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCF</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG00_001.tcf&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG00_001.tcf'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We can get the bc_dbase instance from the TCF using the <a class="reference internal" href="../../api/pytuflow.TCF.bc_dbase/" title="pytuflow.TCF.bc_dbase"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TCF.bc_dbase()</span></code></a> method.</p>
@@ -2183,7 +2183,7 @@ The model used in this example is <code class="docutils literal notranslate"><sp
 <p>This model contains a single inflow (<code class="docutils literal notranslate"><span class="pre">QT</span></code>) boundary called <code class="docutils literal notranslate"><span class="pre">&quot;FC01&quot;</span></code>. To view the time-series data for this
 boundary, we can use the <a class="reference internal" href="../../api/pytuflow.BCDatabase.value/" title="pytuflow.BCDatabase.value"><code class="xref py py-meth docutils literal notranslate"><span class="pre">BCDatabase.value()</span></code></a> method, which returns a
 pandas DataFrame with the time-series data for the boundary:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fc01</span> <span class="o">=</span> <span class="n">bc_dbase</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">&#39;FC01&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fc01</span> <span class="o">=</span> <span class="n">bc_dbase</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">'FC01'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fc01</span><span class="p">)</span>
 <span class="go">    inflow_time_hr  inflow_FC01</span>
 <span class="go">0            0.000         0.00</span>
@@ -2209,7 +2209,7 @@ uses <code class="docutils literal notranslate"><span class="pre">EG16_~e1~_~e2~
 <p>First, let’s load the TCF file, then get the bc_dbase instance and print the DataFrame to see
 what boundaries are defined in the model:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCF</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG16_~e1~_~e2~_005.tcf&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG16_~e1~_~e2~_005.tcf'</span><span class="p">)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bc_dbase</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">bc_dbase</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bc_dbase</span><span class="o">.</span><span class="n">df</span><span class="p">)</span>
@@ -2221,7 +2221,7 @@ what boundaries are defined in the model:</p>
 <p>This database is very similar to the previous, simple example, but it is using <code class="docutils literal notranslate"><span class="pre">_event1_</span></code> and <code class="docutils literal notranslate"><span class="pre">_event2_</span></code> in the
 source file name, which are variables that will be replaced with the event names when the model is run.</p>
 <p>What happens if we try and get the time-series data for <code class="docutils literal notranslate"><span class="pre">&quot;FC01&quot;</span></code>?</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fc01</span> <span class="o">=</span> <span class="n">bc_dbase</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">&#39;FC01&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fc01</span> <span class="o">=</span> <span class="n">bc_dbase</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">'FC01'</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="w">    </span><span class="o">...</span>
 <span class="gr">ValueError</span>: <span class="n">Database requires a context to resolve value.</span>
@@ -2232,18 +2232,18 @@ So the error message is telling us that it was unable to resolve the value becau
 <p>If you need to, you can check the available events in the model by using the <a class="reference internal" href="../../api/pytuflow.TCF.event_database/" title="pytuflow.TCF.event_database"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TCF.event_database()</span></code></a> method:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">event_db</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">event_database</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">event_db</span><span class="p">)</span>
-<span class="go">{&#39;Q100&#39;: {&#39;_event1_&#39;: &#39;100yr&#39;},</span>
-<span class="go"> &#39;QPMF&#39;: {&#39;_event1_&#39;: &#39;PMFyr&#39;},</span>
-<span class="go"> &#39;2hr&#39;: {&#39;_event2_&#39;: &#39;2hr&#39;},</span>
-<span class="go"> &#39;4hr&#39;: {&#39;_event2_&#39;: &#39;4hr&#39;}}</span>
+<span class="go">{'Q100': {'_event1_': '100yr'},</span>
+<span class="go"> 'QPMF': {'_event1_': 'PMFyr'},</span>
+<span class="go"> '2hr': {'_event2_': '2hr'},</span>
+<span class="go"> '4hr': {'_event2_': '4hr'}}</span>
 </pre></div>
 </div>
 <p>The event database is effectively just a dictionary. The keys are the event names, and the values are the
 event variables and their corresponding values.</p>
 <p>So to get the time-series data for <code class="docutils literal notranslate"><span class="pre">&quot;FC01&quot;</span></code>, we can use the <a class="reference internal" href="../../api/pytuflow.TCF.context/" title="pytuflow.TCF.context"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TCF.context()</span></code></a>
 method and pass in event arguments so that the database can resolve the values:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bc_dbase</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s1">&#39;-e1 Q100 -e2 2hr&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">bc_dbase</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fc01</span> <span class="o">=</span> <span class="n">bc_dbase</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">&#39;FC01&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bc_dbase</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s1">'-e1 Q100 -e2 2hr'</span><span class="p">)</span><span class="o">.</span><span class="n">bc_dbase</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fc01</span> <span class="o">=</span> <span class="n">bc_dbase</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">'FC01'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fc01</span><span class="p">)</span>
 <span class="go">    inflow_time_hr  inflow_FC01</span>
 <span class="go">0            0.000         0.00</span>
@@ -2260,8 +2260,8 @@ method and pass in event arguments so that the database can resolve the values:<
 </div>
 <p>Another way to do the same thing is to use the <a class="reference internal" href="../../api/pytuflow.BCDatabase.context/" title="pytuflow.BCDatabase.context"><code class="xref py py-meth docutils literal notranslate"><span class="pre">BCDatabase.context()</span></code></a> method.
 Consider the following example using <code class="docutils literal notranslate"><span class="pre">EG16_~s1~_~s2~_~e1~_~e2~_006.tcf</span></code> which also includes scenarios:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG16_~s1~_~s2~_~e1~_~e2~_006.tcf&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bc_dbase</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s1">&#39;-e1 Q100 -e2 2hr&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">bc_dbase</span><span class="p">()</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG16_~s1~_~s2~_~e1~_~e2~_006.tcf'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bc_dbase</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s1">'-e1 Q100 -e2 2hr'</span><span class="p">)</span><span class="o">.</span><span class="n">bc_dbase</span><span class="p">()</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="w">    </span><span class="o">...</span>
 <span class="gr">ValueError</span>: <span class="n">Pause command encountered: Not Valid Cell Size - See TCF</span>
@@ -2271,7 +2271,7 @@ Consider the following example using <code class="docutils literal notranslate">
 aren’t passing any scenario arguments to the run context. So, in this case, it might be easier just to pass
 in the event arguments to the <a class="reference internal" href="../../api/pytuflow.BCDatabase.context/" title="pytuflow.BCDatabase.context"><code class="xref py py-meth docutils literal notranslate"><span class="pre">BCDatabase.context()</span></code></a> method without worrying
 about scenarios, since in this case the scenarios are not relevant to the boundary data:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fc01</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">bc_dbase</span><span class="p">()</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s1">&#39;-e1 Q100 -e2 2hr&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">&#39;FC01&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fc01</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">bc_dbase</span><span class="p">()</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s1">'-e1 Q100 -e2 2hr'</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">'FC01'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fc01</span><span class="p">)</span>
 <span class="go">    inflow_time_hr  inflow_FC01</span>
 <span class="go">0            0.000         0.00</span>
@@ -2298,11 +2298,11 @@ not necessarily slow, it will be slower than resolving only the boundary databas
 a constant downstream water level boundary with the name <code class="docutils literal notranslate"><span class="pre">&quot;dns_bndry&quot;</span></code> and a has value of <code class="docutils literal notranslate"><span class="pre">0.5m</span></code>. We will add this
 to the previous model we were working with, <code class="docutils literal notranslate"><span class="pre">EG16_~e1~_~e2~_005.tcf</span></code>:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG16_~e1~_~e2~_005.tcf&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG16_~e1~_~e2~_005.tcf'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bc_dbase</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">bc_dbase</span><span class="p">()</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">val_col_name</span> <span class="o">=</span> <span class="n">bc_dbase</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dns_bndry</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">val_col_name</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;dns_bndry&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dns_bndry</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">val_col_name</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'dns_bndry'</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bc_dbase</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">bc_dbase</span><span class="o">.</span><span class="n">df</span><span class="p">,</span> <span class="n">dns_bndry</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bc_dbase</span><span class="o">.</span><span class="n">df</span><span class="p">)</span>
@@ -2318,16 +2318,16 @@ We then create a new DataFrame with the new boundary data, and concatenate it wi
 <a class="reference internal" href="../../api/pytuflow.TCF.write/" title="pytuflow.TCF.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TCF.write()</span></code></a> method, it will write the modified BCDatabase to disk.
 We can test this by writing the modified files to disk using the <a class="reference internal" href="../../api/pytuflow.TCF.write/" title="pytuflow.TCF.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TCF.write()</span></code></a> method. We will
 save the updated model as <code class="docutils literal notranslate"><span class="pre">005a</span></code>:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">inc</span><span class="o">=</span><span class="s1">&#39;005a&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">inc</span><span class="o">=</span><span class="s1">'005a'</span><span class="p">)</span>
 <span class="go">&lt;TuflowControlFile&gt; EG16_~e1~_~e2~_005a.tcf</span>
 </pre></div>
 </div>
 <p>We can check the new file to confirm that the <code class="docutils literal notranslate"><span class="pre">bc_dbase_EG15_005.csv</span></code> file name has been incremented to <code class="docutils literal notranslate"><span class="pre">bc_dbase_EG15_005a.csv</span></code>:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;BC Database&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'BC Database'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="go">&lt;DatabaseInput&gt; BC Database == ..\bc_dbase\bc_dbase_EG16_005a.csv</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">bc_dbase</span><span class="p">()</span><span class="o">.</span><span class="n">fpath</span>
-<span class="go">WindowsPath(&#39;../bc_dbase/bc_dbase_EG16_005a.csv&#39;)</span>
+<span class="go">WindowsPath('../bc_dbase/bc_dbase_EG16_005a.csv')</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">bc_dbase</span><span class="p">()</span><span class="o">.</span><span class="n">fpath</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
 <span class="go">True</span>

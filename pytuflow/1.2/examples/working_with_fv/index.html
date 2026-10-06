@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css?v=572af1d6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=0a1fe526" />
@@ -2158,7 +2158,7 @@
 <p>Working with TUFLOW FV control files is very similar to TUFLOW Classic/HPC control files. The main entry point to loading an existing model is via the <a class="reference internal" href="../../api/pytuflow.FVC/" title="pytuflow.FVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">FVC</span></code></a> class, or individual control files can be loaded via the <a class="reference internal" href="../../api/pytuflow.FVWQ/" title="pytuflow.FVWQ"><code class="xref py py-class docutils literal notranslate"><span class="pre">FVWQ</span></code></a>, <a class="reference internal" href="../../api/pytuflow.FVSed/" title="pytuflow.FVSed"><code class="xref py py-class docutils literal notranslate"><span class="pre">FVSed</span></code></a>, and <a class="reference internal" href="../../api/pytuflow.FVPTM/" title="pytuflow.FVPTM"><code class="xref py py-class docutils literal notranslate"><span class="pre">FVPTM</span></code></a> classes.</p>
 <p>Example, loading a TUFLOW FV model:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">FVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fvc</span> <span class="o">=</span> <span class="n">FVC</span><span class="p">(</span><span class="s1">&#39;runs/FLD000_2D_001.fvc&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fvc</span> <span class="o">=</span> <span class="n">FVC</span><span class="p">(</span><span class="s1">'runs/FLD000_2D_001.fvc'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>There are a few TUFLOW FV specifics that apply to the TUFLOW FV control files (listed in the previous paragraph) that are destailed below with examples. Example models/datasets can be found on the <a class="reference external" href="https://fvwiki.tuflow.com">TUFLOW FV Wiki</a>.</p>
@@ -2170,8 +2170,8 @@
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">FVC</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fvc</span> <span class="o">=</span> <span class="n">FVC</span><span class="p">(</span><span class="s1">&#39;runs/FLD000_2D_001.fvc&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bc_inps</span> <span class="o">=</span> <span class="n">fvc</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="n">lhs</span><span class="o">=</span><span class="s1">&#39;^BC$&#39;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">regex_flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fvc</span> <span class="o">=</span> <span class="n">FVC</span><span class="p">(</span><span class="s1">'runs/FLD000_2D_001.fvc'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bc_inps</span> <span class="o">=</span> <span class="n">fvc</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="n">lhs</span><span class="o">=</span><span class="s1">'^BC$'</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">regex_flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">bc</span> <span class="ow">in</span> <span class="n">bc_inps</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">bc</span><span class="p">)</span>
 <span class="go">BC == Q, Upstream, ..\bc_dbase\M01_001.csv</span>
@@ -2188,9 +2188,9 @@
 </pre></div>
 </div>
 <p>New blocks can easily be added by adding the header command (e.g. <code class="docutils literal notranslate"><span class="pre">BC</span> <span class="pre">==</span> <span class="pre">...</span></code>).  Commands can then be added to the block by getting the <a class="reference internal" href="../../api/pytuflow.BCBlockControlInput.block_control/" title="pytuflow.BCBlockControlInput.block_control"><code class="xref py py-meth docutils literal notranslate"><span class="pre">block_control()</span></code></a> and adding commands as with normal control files. There is no need to close the block (e.g. <code class="docutils literal notranslate"><span class="pre">End</span> <span class="pre">BC</span></code>), as this will be automatically done by PyTUFLOW when it writes the control file to disk, or preview the control file. In this example the new BC block has been appended at the bottom of the fvc).</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">new_inp</span> <span class="o">=</span> <span class="n">fvc</span><span class="o">.</span><span class="n">append_input</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;BC == QC, FC01, ..\bc_dbase\M01_001.csv&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">new_inp</span> <span class="o">=</span> <span class="n">fvc</span><span class="o">.</span><span class="n">append_input</span><span class="p">(</span><span class="sa">r</span><span class="s1">'BC == QC, FC01, ..\bc_dbase\M01_001.csv'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">new_block</span> <span class="o">=</span> <span class="n">new_inp</span><span class="o">.</span><span class="n">block_control</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">new_block</span><span class="o">.</span><span class="n">append_input</span><span class="p">(</span><span class="s1">&#39;BC Header == Time_hr,FC01&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_block</span><span class="o">.</span><span class="n">append_input</span><span class="p">(</span><span class="s1">'BC Header == Time_hr,FC01'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fvc</span><span class="o">.</span><span class="n">preview</span><span class="p">()</span>
 <span class="go">! TUFLOW FV Floodplain Example Model</span>
 <span class="go">! Base 2D Flood Model</span>
@@ -2294,7 +2294,7 @@
 <li><p>Relative paths in TUFLOW Classic read files are relative to the calling control file.</p></li>
 </ul>
 <p>As an example, all the include files in the FVC can be found using <a class="reference internal" href="../../api/pytuflow.FVC.find_input/" title="pytuflow.FVC.find_input"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_input()</span></code></a> and the include file(s) are loaded into the input’s <a class="reference internal" href="../../api/pytuflow.ControlFileInput.cf/" title="pytuflow.ControlFileInput.cf"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cf</span></code></a> attribute (this how all inputs link to their respective control files). This attribute is a list as it is possible to use variables in the file name which could be expanded to more than one valid control file.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">include_files</span> <span class="o">=</span> <span class="n">fvc</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;include&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">include_files</span> <span class="o">=</span> <span class="n">fvc</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'include'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">include_files</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
 <span class="go">Include == Materials_Manning_001.fvc</span>
@@ -2339,12 +2339,12 @@
 <p>The simplest way to create a new include file is to instantiate an empty version of the relevant class, populate it with commands, and separately add the include command into the FVC (or whichever control file will reference the include file).</p>
 <p>As an example, we will add a new include file containing new output commands which will be referenced in the FVC control file. The first step is to create the include file, set the file path, and set the parent.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">new_output_fvc</span> <span class="o">=</span> <span class="n">FVC</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">new_output_fvc</span><span class="o">.</span><span class="n">fpath</span> <span class="o">=</span> <span class="s1">&#39;runs/new_outputs.fvc&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_output_fvc</span><span class="o">.</span><span class="n">fpath</span> <span class="o">=</span> <span class="s1">'runs/new_outputs.fvc'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">new_output_fvc</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">fvc</span>
 </pre></div>
 </div>
 <p>We will populate the new output file with a flux output block. This is just a demonstration and this isn’t a complete setup for this output type.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">new_output_fvc</span><span class="o">.</span><span class="n">append_input</span><span class="p">(</span><span class="s1">&#39;Output == Flux&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">new_output_fvc</span><span class="o">.</span><span class="n">append_input</span><span class="p">(</span><span class="s1">'Output == Flux'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Finally, we will add the include file into the FVC control file and then append the new include control file into the <a class="reference internal" href="../../api/pytuflow.ControlFileInput.cf/" title="pytuflow.ControlFileInput.cf"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cf</span></code></a> list. Adding the already instantiated include file to the <code class="docutils literal notranslate"><span class="pre">cf</span></code> list is important, otherwise a new file will automatically be created when it writes to disk rather than use the include file we have already created.</p>
@@ -2352,7 +2352,7 @@
 <p class="admonition-title">Note</p>
 <p>Adding the “Include” command like this, pointing to a file that does not exist, will cause an error to be logged stating that the file does not exist. We can ignore this error in this instance since it isn’t supposed to exist yet. It will be written to disk the next time we call the <code class="docutils literal notranslate"><span class="pre">write</span></code> method.</p>
 </div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">fvc</span><span class="o">.</span><span class="n">append_input</span><span class="p">(</span><span class="s1">&#39;Include == new_outputs.fvc&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">fvc</span><span class="o">.</span><span class="n">append_input</span><span class="p">(</span><span class="s1">'Include == new_outputs.fvc'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span><span class="o">.</span><span class="n">cf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_output_fvc</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2382,7 +2382,7 @@
 </pre></div>
 </div>
 <p>Boundary values can be extracted by using the <a class="reference internal" href="../../api/pytuflow.BCDatabase.value/" title="pytuflow.BCDatabase.value"><code class="xref py py-meth docutils literal notranslate"><span class="pre">value()</span></code></a> method:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bc_dbase</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">&#39;Upstream&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bc_dbase</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">'Upstream'</span><span class="p">)</span>
 <span class="go">          FC01</span>
 <span class="go">Time_hr</span>
 <span class="go">0.00      0.00</span>
@@ -2405,7 +2405,7 @@
 <p>To run an TUFLOW FV model, the first thing to do is to install TUFLOW FV via the <code class="docutils literal notranslate"><span class="pre">.deb</span></code>, <code class="docutils literal notranslate"><span class="pre">.rpm</span></code>, or <code class="docutils literal notranslate"><span class="pre">.msi</span></code> installers. PyTUFLOW will automatically find TUFLOW FV binaries installed this way.</p>
 <p>Alternatively, binaries or directories containing one or more portable TUFLOW FV versions can be manually registered. For example, registering a directory such as <code class="docutils literal notranslate"><span class="pre">C:\TUFLOWFV\releases</span></code> where portable versions are unpacked:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">tuflowfv_binaries</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tuflowfv_binaries</span><span class="o">.</span><span class="n">register_tuflowfv_binary_folder</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;C:\TUFLOWFV\releases&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tuflowfv_binaries</span><span class="o">.</span><span class="n">register_tuflowfv_binary_folder</span><span class="p">(</span><span class="sa">r</span><span class="s1">'C:\TUFLOWFV\releases'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>It’s possible to check the available TUFLOW FV versions from installed versions and registered directories:</p>
@@ -2416,18 +2416,18 @@
 </div>
 <p>Running a TUFLOW FV model is done by using a run context (to resolve scenarios and events) and using the <a class="reference internal" href="../../api/pytuflow.FVCRunState.run/" title="pytuflow.FVCRunState.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> method.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">FVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fvc</span> <span class="o">=</span> <span class="n">FVC</span><span class="p">(</span><span class="s1">&#39;runs/FLD000_2D_001.fvc&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">proc</span> <span class="o">=</span> <span class="n">fvc</span><span class="o">.</span><span class="n">context</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;2026.0.1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fvc</span> <span class="o">=</span> <span class="n">FVC</span><span class="p">(</span><span class="s1">'runs/FLD000_2D_001.fvc'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">proc</span> <span class="o">=</span> <span class="n">fvc</span><span class="o">.</span><span class="n">context</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">'2026.0.1'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>It’s possible to pass <code class="docutils literal notranslate"><span class="pre">subprocess.Popen</span></code> keyword arguments into the <a class="reference internal" href="../../api/pytuflow.FVCRunState.run/" title="pytuflow.FVCRunState.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> method.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">proc</span> <span class="o">=</span> <span class="n">fvc</span><span class="o">.</span><span class="n">context</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;2026.0.1&#39;</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">proc</span> <span class="o">=</span> <span class="n">fvc</span><span class="o">.</span><span class="n">context</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">'2026.0.1'</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">out</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The <a class="reference internal" href="../../api/pytuflow.FVC/" title="pytuflow.FVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">FVC</span></code></a> class also has a convenience method for running the model with the test flag using the <a class="reference internal" href="../../api/pytuflow.FVCRunState.test/" title="pytuflow.FVCRunState.test"><code class="xref py py-meth docutils literal notranslate"><span class="pre">test()</span></code></a> method.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">out</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">fvc</span><span class="o">.</span><span class="n">context</span><span class="p">()</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s1">&#39;2026.0.1&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">out</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">fvc</span><span class="o">.</span><span class="n">context</span><span class="p">()</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s1">'2026.0.1'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">err</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="go">WARNING: CONN_2D column not found in csv file. Assigning a value of             NaN</span>

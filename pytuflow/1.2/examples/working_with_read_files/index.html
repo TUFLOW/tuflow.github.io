@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css?v=572af1d6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=0a1fe526" />
@@ -2193,10 +2193,10 @@ any existing model.</p>
 <p>The first step is to load <code class="docutils literal notranslate"><span class="pre">EG00_001.tcf</span></code> and save it with a new name that includes a scenario slot for our
 new scenario group.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCF</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG00_001.tcf&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG00_001.tcf'</span><span class="p">)</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">fpath</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">fpath</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="s1">&#39;EG00_~s1~_001a.tcf&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;inplace&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">fpath</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">fpath</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="s1">'EG00_~s1~_001a.tcf'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'inplace'</span><span class="p">)</span>
 <span class="go">&lt;TuflowControlFile&gt; EG00_~s1~_001a.tcf</span>
 </pre></div>
 </div>
@@ -2214,9 +2214,9 @@ close to the top with the other general model settings. The DEM resolution is 0.
 a cell size of 0.5m and then increase up to 10m. In fact, we will stack the new commands from the bottom, so in terms
 of the code insertion order, we will start with 10m and go down (this is just easier as we can use the same
 reference input).</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ref_inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;sgs sample target distance&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ref_inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'sgs sample target distance'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">cell_size</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]:</span>
-<span class="gp">... </span>    <span class="n">cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Set Variable CELL_SIZE == </span><span class="si">{</span><span class="n">cell_size</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="gp">... </span>    <span class="n">cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'Set Variable CELL_SIZE == </span><span class="si">{</span><span class="n">cell_size</span><span class="si">}</span><span class="s1">'</span>
 <span class="gp">... </span>    <span class="n">tcf</span><span class="o">.</span><span class="n">insert_input</span><span class="p">(</span><span class="n">ref_inp</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">after</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2225,14 +2225,14 @@ To get the “IF” / “Else If” behaviour, we need to make sure to also use 
 This is explained in more detail in the <a class="reference internal" href="../working_with_scenarios/"><span class="std std-ref">Working with Scenarios and Events</span></a> example.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">Scope</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prev_scope</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;Set Variable CELL_SIZE&#39;</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">scope</span> <span class="o">=</span> <span class="n">Scope</span><span class="p">(</span><span class="s1">&#39;Scenario&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">inp</span><span class="o">.</span><span class="n">value</span><span class="si">:</span><span class="s1">04.1f</span><span class="si">}</span><span class="s1">m&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'Set Variable CELL_SIZE'</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">scope</span> <span class="o">=</span> <span class="n">Scope</span><span class="p">(</span><span class="s1">'Scenario'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">inp</span><span class="o">.</span><span class="n">value</span><span class="si">:</span><span class="s1">04.1f</span><span class="si">}</span><span class="s1">m'</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="n">inp</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">as_neg</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">prev_scope</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">scope</span><span class="p">]</span>
 <span class="gp">... </span>    <span class="n">prev_scope</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">scope</span>
 </pre></div>
 </div>
 <p>Finally, we need to set the value of the <code class="docutils literal notranslate"><span class="pre">Cell</span> <span class="pre">Size</span> <span class="pre">==</span></code> command to be the new variable we created.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;cell size&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span> <span class="o">=</span> <span class="s1">&#39;&lt;&lt;CELL_SIZE&gt;&gt;&#39;</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'cell size'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span> <span class="o">=</span> <span class="s1">'&lt;&lt;CELL_SIZE&gt;&gt;'</span>
 </pre></div>
 </div>
 </section>
@@ -2241,11 +2241,11 @@ This is explained in more detail in the <a class="reference internal" href="../w
 <p>The final steps are to move the new inputs into a read file and then write the model to disk.
 We will call the read file <code class="docutils literal notranslate"><span class="pre">cell_size_logic.trd</span></code> and place it in the <code class="docutils literal notranslate"><span class="pre">model</span></code> directory. This code could have been
 placed in the loop in the previous step, but for clarity, we will do it in a separate step.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trd_path</span> <span class="o">=</span>  <span class="n">tcf</span><span class="o">.</span><span class="n">fpath</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s1">&#39;..&#39;</span> <span class="o">/</span> <span class="s1">&#39;model&#39;</span> <span class="o">/</span> <span class="s1">&#39;cell_size_logic.trd&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;set variable cell_size&#39;</span><span class="p">):</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trd_path</span> <span class="o">=</span>  <span class="n">tcf</span><span class="o">.</span><span class="n">fpath</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s1">'..'</span> <span class="o">/</span> <span class="s1">'model'</span> <span class="o">/</span> <span class="s1">'cell_size_logic.trd'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'set variable cell_size'</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">inp</span><span class="o">.</span><span class="n">trd</span> <span class="o">=</span> <span class="n">trd_path</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;inplace&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'inplace'</span><span class="p">)</span>
 <span class="go">&lt;TuflowControlFile&gt; EG00_~s1~_001a.tcf</span>
 </pre></div>
 </div>
@@ -2259,9 +2259,9 @@ the read file.</p>
 license. You can just run the 10m and 5m if you want to run this example without a license (or you don’t want
 to wait for the smaller cell sizes to run).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">cell_size</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]:</span>
-<span class="gp">... </span>    <span class="n">scen_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">cell_size</span><span class="si">:</span><span class="s1">04.1f</span><span class="si">}</span><span class="s1">m&#39;</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Runnning scenario:&#39;</span><span class="p">,</span> <span class="n">scen_name</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="n">proc</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;-s1 </span><span class="si">{</span><span class="n">scen_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;2025.1.2&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">scen_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">cell_size</span><span class="si">:</span><span class="s1">04.1f</span><span class="si">}</span><span class="s1">m'</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'Runnning scenario:'</span><span class="p">,</span> <span class="n">scen_name</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">proc</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="sa">f</span><span class="s1">'-s1 </span><span class="si">{</span><span class="n">scen_name</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">'2025.1.2'</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="n">proc</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
 </pre></div>
 </div>

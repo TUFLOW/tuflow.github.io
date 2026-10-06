@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css?v=572af1d6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=0a1fe526" />
@@ -2161,12 +2161,12 @@ uses <code class="docutils literal notranslate"><span class="pre">EG00_001.tcf</
 <h2>Loading a TUFLOW Control File (TCF)<a class="headerlink" href="#loading-a-tuflow-control-file-tcf" title="Link to this heading">#</a></h2>
 <p>Loading an existing TUFLOW model can be done very simply using the <a class="reference internal" href="../../api/pytuflow.TCF/" title="pytuflow.TCF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TCF</span></code></a> class.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCF</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG00_001.tcf&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG00_001.tcf'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Navigating the TCF can best be done using <a class="reference internal" href="../../api/pytuflow.TCF.find_input/" title="pytuflow.TCF.find_input"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TCF.find_input()</span></code></a>. This method will return a list of inputs
 that match the given filter. For example, finding all SGS related commands:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;sgs&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'sgs'</span><span class="p">)</span>
 <span class="go">[&lt;SettingInput&gt; SGS == ON, &lt;SettingInput&gt; SGS Sample Target Distance == 0.5]</span>
 </pre></div>
 </div>
@@ -2177,7 +2177,7 @@ also some convenience methods that will return the other control file instances 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tbc</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">tbc</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bc_dbase</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">bc_dbase</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">materials</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">mat_file</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tgc</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;2d_mat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tgc</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'2d_mat'</span><span class="p">)</span>
 <span class="go">[&lt;GisInput&gt; Read GIS Mat == gis\2d_mat_EG00_001_R.shp]</span>
 </pre></div>
 </div>
@@ -2187,11 +2187,11 @@ also some convenience methods that will return the other control file instances 
 <p>Let’s update the map output format command to include the <code class="docutils literal notranslate"><span class="pre">NC</span></code> format, as this will be useful later for querying
 the results in Python. The first step is to find the relevant command, and then we can update it by setting the
 right-hand side (RHS) of the command to include <code class="docutils literal notranslate"><span class="pre">&quot;NC&quot;</span></code>.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;map output format&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'map output format'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
 <span class="go">Map Output Format == XMDF TIF</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span><span class="o">.</span><span class="n">rhs</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">inp</span><span class="o">.</span><span class="n">rhs</span><span class="si">}</span><span class="s1"> NC&#39;</span> <span class="c1"># Append NC to the existing RHS</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span><span class="o">.</span><span class="n">rhs</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">inp</span><span class="o">.</span><span class="n">rhs</span><span class="si">}</span><span class="s1"> NC'</span> <span class="c1"># Append NC to the existing RHS</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
 <span class="go">Map Output Format == XMDF TIF NC</span>
 </pre></div>
@@ -2210,7 +2210,7 @@ print a preview of the control file to the console:</p>
 
 <span class="go">! SOLUTION SCHEME</span>
 <span class="go">Solution Scheme == HPC                                                              ! Heavily Parallelised Compute, uses adaptive timestepping</span>
-<span class="go">Hardware == GPU                                                                             ! Comment out if GPU card is not available or replace with &quot;Hardware == CPU&quot;</span>
+<span class="go">Hardware == GPU                                                                             ! Comment out if GPU card is not available or replace with "Hardware == CPU"</span>
 <span class="go">SGS == ON                                                                                   ! Switches on Sub-Grid Sampling</span>
 <span class="go">SGS Sample Target Distance == 0.5                                   ! Sets SGS Sample Target Distance to 0.5m</span>
 
@@ -2243,7 +2243,7 @@ before we can run the updated model. We can overwrite the existing
 TCF file if the <code class="docutils literal notranslate"><span class="pre">inc</span></code> parameter is set to <code class="docutils literal notranslate"><span class="pre">&quot;inplace&quot;</span></code>, however in this case, we will save the modified model
 to a new file. Since “EG00_002.tcf” is already present in the example models, we will instead save our changes as
 “EG00_001a.tcf”.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">inc</span><span class="o">=</span><span class="s1">&#39;001a&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">inc</span><span class="o">=</span><span class="s1">'001a'</span><span class="p">)</span>
 <span class="go">&lt;TuflowControlFile&gt; EG00_001a.tcf</span>
 </pre></div>
 </div>
@@ -2267,14 +2267,14 @@ that folder:</p>
 </pre></div>
 </div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">register_tuflow_binary_folder</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">register_tuflow_binary_folder</span><span class="p">(</span><span class="s1">&#39;/path/to/tuflow/binaries&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">register_tuflow_binary_folder</span><span class="p">(</span><span class="s1">'/path/to/tuflow/binaries'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now we can run the model using the <a class="reference internal" href="../../api/pytuflow.TCF.context/" title="pytuflow.TCF.context"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TCF.context()</span></code></a> method and the TUFLOW version name.
 The context method is used to pass in what event and scenario combination we want to run.
 An empty context is still required even if there are no events or scenarios to run.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf_run</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">context</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">proc</span> <span class="o">=</span> <span class="n">tcf_run</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;2025.1.2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">proc</span> <span class="o">=</span> <span class="n">tcf_run</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">'2025.1.2'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">proc</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span> <span class="c1"># Wait for the model to finish running</span>
 </pre></div>
 </div>
@@ -2283,24 +2283,24 @@ An empty context is still required even if there are no events or scenarios to r
 <h2>Interrogating the Results<a class="headerlink" href="#interrogating-the-results" title="Link to this heading">#</a></h2>
 <p>With the <code class="docutils literal notranslate"><span class="pre">tcf_run</span></code> instance, we can also get the output folder and output name. With this, we can access the results:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">XMDF</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">xmdf_path</span> <span class="o">=</span> <span class="n">tcf_run</span><span class="o">.</span><span class="n">output_folder_2d</span><span class="p">()</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">tcf_run</span><span class="o">.</span><span class="n">output_name</span><span class="p">()</span><span class="si">}</span><span class="s1">.xmdf&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xmdf_path</span> <span class="o">=</span> <span class="n">tcf_run</span><span class="o">.</span><span class="n">output_folder_2d</span><span class="p">()</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">tcf_run</span><span class="o">.</span><span class="n">output_name</span><span class="p">()</span><span class="si">}</span><span class="s1">.xmdf'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">xmdf</span> <span class="o">=</span> <span class="n">XMDF</span><span class="p">(</span><span class="n">xmdf_path</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We can extract metadata about the results, such as the result data types and time steps. Metadata can be queried in XMDF files without loading the mesh geometry, which makes it very quick to access. The mesh geometry is only loaded when required, such as when extracting spatial results.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xmdf</span><span class="o">.</span><span class="n">data_types</span><span class="p">()</span>
-<span class="go">[&#39;bed level&#39;,</span>
-<span class="go"> &#39;max depth&#39;,</span>
-<span class="go"> &#39;max vector velocity&#39;,</span>
-<span class="go"> &#39;max velocity&#39;,</span>
-<span class="go"> &#39;max water level&#39;,</span>
-<span class="go"> &#39;max z0&#39;,</span>
-<span class="go"> &#39;depth&#39;,</span>
-<span class="go"> &#39;vector velocity&#39;,</span>
-<span class="go"> &#39;velocity&#39;,</span>
-<span class="go"> &#39;water level&#39;,</span>
-<span class="go"> &#39;z0&#39;,</span>
-<span class="go"> &#39;tmax water level&#39;]</span>
+<span class="go">['bed level',</span>
+<span class="go"> 'max depth',</span>
+<span class="go"> 'max vector velocity',</span>
+<span class="go"> 'max velocity',</span>
+<span class="go"> 'max water level',</span>
+<span class="go"> 'max z0',</span>
+<span class="go"> 'depth',</span>
+<span class="go"> 'vector velocity',</span>
+<span class="go"> 'velocity',</span>
+<span class="go"> 'water level',</span>
+<span class="go"> 'z0',</span>
+<span class="go"> 'tmax water level']</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">xmdf</span><span class="o">.</span><span class="n">times</span><span class="p">()</span>
 <span class="go">[0.0,</span>
@@ -2317,8 +2317,8 @@ An empty context is still required even if there are no events or scenarios to r
 </pre></div>
 </div>
 <p>Time-series can be extracted from point locations using a coordinate tuple(s) or a GIS point file.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">point_shp</span> <span class="o">=</span> <span class="s1">&#39;path/to/2d_po_EG02_010_P.shp&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">xmdf</span><span class="o">.</span><span class="n">time_series</span><span class="p">(</span><span class="n">point_shp</span><span class="p">,</span> <span class="s1">&#39;water level&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">point_shp</span> <span class="o">=</span> <span class="s1">'path/to/2d_po_EG02_010_P.shp'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">xmdf</span><span class="o">.</span><span class="n">time_series</span><span class="p">(</span><span class="n">point_shp</span><span class="p">,</span> <span class="s1">'water level'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
 <span class="go">time      PO_01/water level  PO_02/water level</span>
 <span class="go">0.000000                NaN          36.500000</span>
@@ -2339,19 +2339,19 @@ An empty context is still required even if there are no events or scenarios to r
 <p>We added the <code class="docutils literal notranslate"><span class="pre">NC</span></code> map output format to the TCF, so that we also query the results in Python using the
 <a class="reference internal" href="../../api/pytuflow.NCGrid/" title="pytuflow.NCGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">NCGrid</span></code></a> class.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">NCGrid</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ncgrid_path</span> <span class="o">=</span> <span class="n">tcf_run</span><span class="o">.</span><span class="n">output_folder_2d</span><span class="p">()</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">tcf_run</span><span class="o">.</span><span class="n">output_name</span><span class="p">()</span><span class="si">}</span><span class="s1">.nc&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ncgrid_path</span> <span class="o">=</span> <span class="n">tcf_run</span><span class="o">.</span><span class="n">output_folder_2d</span><span class="p">()</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">tcf_run</span><span class="o">.</span><span class="n">output_name</span><span class="p">()</span><span class="si">}</span><span class="s1">.nc'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ncgrid</span> <span class="o">=</span> <span class="n">NCGrid</span><span class="p">(</span><span class="n">ncgrid_path</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nc_grid</span><span class="o">.</span><span class="n">data_types</span><span class="p">()</span>
-<span class="go">[&#39;water level&#39;,</span>
-<span class="go"> &#39;depth&#39;,</span>
-<span class="go"> &#39;velocity&#39;,</span>
-<span class="go"> &#39;z0&#39;,</span>
-<span class="go"> &#39;max water level&#39;,</span>
-<span class="go"> &#39;max depth&#39;,</span>
-<span class="go"> &#39;max velocity&#39;,</span>
-<span class="go"> &#39;max z0&#39;,</span>
-<span class="go"> &#39;tmax water level&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">ncgrid</span><span class="o">.</span><span class="n">time_series</span><span class="p">(</span><span class="n">shp</span><span class="p">,</span> <span class="s1">&#39;velocity&#39;</span><span class="p">)</span>
+<span class="go">['water level',</span>
+<span class="go"> 'depth',</span>
+<span class="go"> 'velocity',</span>
+<span class="go"> 'z0',</span>
+<span class="go"> 'max water level',</span>
+<span class="go"> 'max depth',</span>
+<span class="go"> 'max velocity',</span>
+<span class="go"> 'max z0',</span>
+<span class="go"> 'tmax water level']</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">ncgrid</span><span class="o">.</span><span class="n">time_series</span><span class="p">(</span><span class="n">shp</span><span class="p">,</span> <span class="s1">'velocity'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
 <span class="go">          pnt1/velocity  pnt2/velocity</span>
 <span class="go">time</span>

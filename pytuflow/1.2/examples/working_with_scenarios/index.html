@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css?v=572af1d6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=0a1fe526" />
@@ -2170,7 +2170,7 @@ describe the context in which the input sits within the model. For example, a co
 if a particular scenario is active.</p>
 <p>As an example, we can load the model <code class="docutils literal notranslate"><span class="pre">EG16_~s1~_~s2~_002.tcf</span></code>, which has two scenario groups.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCF</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG16_~s1~_~s2~_002.tcf&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG16_~s1~_~s2~_002.tcf'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In this model, the command:</p>
@@ -2178,13 +2178,13 @@ if a particular scenario is active.</p>
 <p>is always active, and the <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">shape</span></code> command:</p>
 <p><code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">GIS</span> <span class="pre">Z</span> <span class="pre">Shape</span> <span class="pre">==</span> <span class="pre">gis\2d_zsh_EG07_006_R.shp</span></code></p>
 <p>is only active if the scenario <code class="docutils literal notranslate"><span class="pre">&quot;D01&quot;</span></code>  is active. So we can find those commands and check their scopes:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;Read GRID Zpts&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'Read GRID Zpts'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
 <span class="go">Read GRID Zpts == grid\DEM_SI_Unit_01.tif</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">scope</span><span class="p">)</span>
 <span class="go">[&lt;GlobalScope&gt;]</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;2d_zsh_EG07_006_R.shp&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'2d_zsh_EG07_006_R.shp'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
 <span class="go">Read GIS Z Shape == gis\2d_zsh_EG07_006_R.shp</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">scope</span><span class="p">)</span>
@@ -2204,9 +2204,9 @@ the scope of a given input. The below example uses <code class="docutils literal
 <a class="reference external" href="https://wiki.tuflow.com/TUFLOW_Example_Models">TUFLOW Example Model Dataset</a>. In the below example, we will
 put the hardware command inside a scenario called <code class="docutils literal notranslate"><span class="pre">&quot;GPU&quot;</span></code>.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">Scope</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG00_001.tcf&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gpu_inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;hardware&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gpu_inp</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="p">[</span><span class="n">Scope</span><span class="p">(</span><span class="s1">&#39;Scenario&#39;</span><span class="p">,</span> <span class="s1">&#39;GPU&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG00_001.tcf'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpu_inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'hardware'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpu_inp</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="p">[</span><span class="n">Scope</span><span class="p">(</span><span class="s1">'Scenario'</span><span class="p">,</span> <span class="s1">'GPU'</span><span class="p">)]</span>
 </pre></div>
 </div>
 <p>Note, that the input scope must be set to a list of scope objects, which is required as inputs can have multiple scopes.</p>
@@ -2224,7 +2224,7 @@ put the hardware command inside a scenario called <code class="docutils literal 
 <span class="go">! SOLUTION SCHEME</span>
 <span class="go">Solution Scheme == HPC                                                              ! Heavily Parallelised Compute, uses adaptive timestepping</span>
 <span class="go">If Scenario == GPU</span>
-<span class="go">    Hardware == GPU                                                                         ! Comment out if GPU card is not available or replace with &quot;Hardware == CPU&quot;</span>
+<span class="go">    Hardware == GPU                                                                         ! Comment out if GPU card is not available or replace with "Hardware == CPU"</span>
 <span class="go">End If</span>
 <span class="go">SGS == ON                                                                                   ! Switches on Sub-Grid Sampling</span>
 <span class="go">SGS Sample Target Distance == 0.5                                   ! Sets SGS Sample Target Distance to 0.5m</span>
@@ -2264,16 +2264,16 @@ include a scenario slot <code class="docutils literal notranslate"><span class="
 the <a class="reference internal" href="../../api/pytuflow.TCF.write/" title="pytuflow.TCF.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TCF.write()</span></code></a> method to modify the TCF file name. Unfortunately, the <code class="docutils literal notranslate"><span class="pre">inc</span></code> parameter
 does not support complex renaming, and is designed only as a convenience method for incrementing the version number of the
 model. So we will instead rename the TCF file path manually, then write the TCF in-place.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">fpath</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">fpath</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="s1">&#39;EG00_~s1~_001.tcf&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">inc</span><span class="o">=</span><span class="s1">&#39;inplace&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">fpath</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">fpath</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="s1">'EG00_~s1~_001.tcf'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">inc</span><span class="o">=</span><span class="s1">'inplace'</span><span class="p">)</span>
 <span class="go">&lt;TuflowControlFile&gt; EG00_~s1~_001.tcf</span>
 </pre></div>
 </div>
 <p>Once the TCF file has been written to disk, we can run the model with the <code class="docutils literal notranslate"><span class="pre">&quot;GPU&quot;</span></code> scenario active. First of all, make
 sure you have registered the TUFLOW binary folder as described in the previous example (<a class="reference internal" href="../tcf_load_and_run/#setting-up-tuflow-binary-folder"><span class="std std-ref">Running the TUFLOW Model</span></a>).
 Then we can tell pytuflow which scenario to run by passing the scenario name as a parameter to the run context method:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf_run</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s1">&#39;-s1 GPU&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">proc</span> <span class="o">=</span> <span class="n">tcf_run</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;2025.1.2&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf_run</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s1">'-s1 GPU'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">proc</span> <span class="o">=</span> <span class="n">tcf_run</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">'2025.1.2'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">proc</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>  <span class="c1"># Wait for the model to finish running</span>
 </pre></div>
 </div>
@@ -2302,11 +2302,11 @@ has this method, and it will return a run state object that is specific to a giv
 the same methods will be available for both the build state and run state instances. An example of this is the
 <a class="reference internal" href="../../api/pytuflow.TCF.find_input/" title="pytuflow.TCF.find_input"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_input()</span></code></a> method. You can call this method to find all <code class="docutils literal notranslate"><span class="pre">2d_zsh</span></code> inputs in the
 model</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;2d_zsh&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'2d_zsh'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Or, if you want to check what inputs are active in a given scenario, you can first create a run context:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s1">&#39;-s DEV01&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;2d_zsh&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s1">'-s DEV01'</span><span class="p">)</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'2d_zsh'</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -2315,11 +2315,11 @@ model</p>
 <p>More complex flow control commands can be added by adding “Else If” and “Else” blocks to the model. Following
 on with the above model, we can add an explicit scenario for using <code class="docutils literal notranslate"><span class="pre">&quot;CPU&quot;</span></code> hardware, and a “Pause” command
 that will catch situations where neither the <code class="docutils literal notranslate"><span class="pre">&quot;GPU&quot;</span></code> nor <code class="docutils literal notranslate"><span class="pre">&quot;CPU&quot;</span></code> scenarios are active:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cpu_inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">insert_input</span><span class="p">(</span><span class="n">gpu_inp</span><span class="p">,</span> <span class="s1">&#39;Hardware == CPU&#39;</span><span class="p">,</span> <span class="n">after</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cpu_inp</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="p">[</span><span class="n">Scope</span><span class="p">(</span><span class="s1">&#39;Scenario&#39;</span><span class="p">,</span> <span class="s1">&#39;!GPU&#39;</span><span class="p">),</span> <span class="n">Scope</span><span class="p">(</span><span class="s1">&#39;Scenario&#39;</span><span class="p">,</span> <span class="s1">&#39;CPU&#39;</span><span class="p">)]</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cpu_inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">insert_input</span><span class="p">(</span><span class="n">gpu_inp</span><span class="p">,</span> <span class="s1">'Hardware == CPU'</span><span class="p">,</span> <span class="n">after</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cpu_inp</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="p">[</span><span class="n">Scope</span><span class="p">(</span><span class="s1">'Scenario'</span><span class="p">,</span> <span class="s1">'!GPU'</span><span class="p">),</span> <span class="n">Scope</span><span class="p">(</span><span class="s1">'Scenario'</span><span class="p">,</span> <span class="s1">'CPU'</span><span class="p">)]</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pause_inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">insert_input</span><span class="p">(</span><span class="n">cpu_inp</span><span class="p">,</span> <span class="s1">&#39;Pause == No hardware scenario specified&#39;</span><span class="p">,</span> <span class="n">after</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pause_inp</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="p">[</span><span class="n">Scope</span><span class="p">(</span><span class="s1">&#39;Scenario&#39;</span><span class="p">,</span> <span class="s1">&#39;!GPU&#39;</span><span class="p">),</span> <span class="n">Scope</span><span class="p">(</span><span class="s1">&#39;Scenario&#39;</span><span class="p">,</span> <span class="s1">&#39;!CPU&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pause_inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">insert_input</span><span class="p">(</span><span class="n">cpu_inp</span><span class="p">,</span> <span class="s1">'Pause == No hardware scenario specified'</span><span class="p">,</span> <span class="n">after</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pause_inp</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="p">[</span><span class="n">Scope</span><span class="p">(</span><span class="s1">'Scenario'</span><span class="p">,</span> <span class="s1">'!GPU'</span><span class="p">),</span> <span class="n">Scope</span><span class="p">(</span><span class="s1">'Scenario'</span><span class="p">,</span> <span class="s1">'!CPU'</span><span class="p">)]</span>
 </pre></div>
 </div>
 <p>In the above example, we:</p>
@@ -2349,7 +2349,7 @@ Note, the order of the scope in the list is also important.</p>
 <span class="go">! SOLUTION SCHEME</span>
 <span class="go">Solution Scheme == HPC                                                              ! Heavily Parallelised Compute, uses adaptive timestepping</span>
 <span class="go">If Scenario == GPU</span>
-<span class="go">    Hardware == GPU                                                                         ! Comment out if GPU card is not available or replace with &quot;Hardware == CPU&quot;</span>
+<span class="go">    Hardware == GPU                                                                         ! Comment out if GPU card is not available or replace with "Hardware == CPU"</span>
 <span class="go">Else If Scenario == CPU</span>
 <span class="go">    Hardware == CPU</span>
 <span class="go">Else</span>
@@ -2383,8 +2383,8 @@ Note, the order of the scope in the list is also important.</p>
 </div>
 <p>It’s also possible to create a scope variable and to call the <a class="reference internal" href="../../api/pytuflow.Scope.as_neg/" title="pytuflow.Scope.as_neg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Scope.as_neg()</span></code></a> method to
 accomplish the same thing:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gpu_scope</span> <span class="o">=</span> <span class="n">Scope</span><span class="p">(</span><span class="s1">&#39;Scenario&#39;</span><span class="p">,</span> <span class="s1">&#39;GPU&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cpu_scope</span> <span class="o">=</span> <span class="n">Scope</span><span class="p">(</span><span class="s1">&#39;Scenario&#39;</span><span class="p">,</span> <span class="s1">&#39;CPU&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gpu_scope</span> <span class="o">=</span> <span class="n">Scope</span><span class="p">(</span><span class="s1">'Scenario'</span><span class="p">,</span> <span class="s1">'GPU'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cpu_scope</span> <span class="o">=</span> <span class="n">Scope</span><span class="p">(</span><span class="s1">'Scenario'</span><span class="p">,</span> <span class="s1">'CPU'</span><span class="p">)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gpu_scenario</span> <span class="o">=</span> <span class="p">[</span><span class="n">gpu_scope</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cpu_scenario</span> <span class="o">=</span> <span class="p">[</span><span class="n">gpu_scope</span><span class="o">.</span><span class="n">as_neg</span><span class="p">(),</span> <span class="n">cpu_scope</span><span class="p">]</span>

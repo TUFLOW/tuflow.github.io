@@ -2218,7 +2218,7 @@ the default values listed in the json files. The user is free to modify the defa
 </div>
 <p>(Re-)Initialise the template files:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow.project</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemplateManager</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">TemplateManager</span><span class="p">(</span><span class="n">engine_type</span><span class="o">=</span><span class="s1">&#39;hpc&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">TemplateManager</span><span class="p">(</span><span class="n">engine_type</span><span class="o">=</span><span class="s1">'hpc'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span><span class="o">.</span><span class="n">init_cache</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2228,16 +2228,16 @@ the default values listed in the json files. The user is free to modify the defa
 </div>
 <p>Initialise an HPC project with SGS and event features. This example uses the TUFLOW tutorial model CRS.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">project</span> <span class="o">=</span> <span class="n">HPCProject</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Tutorial_Model&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">output_dir</span><span class="o">=</span><span class="s1">&#39;models/TUFLOW&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">features</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sgs&#39;</span><span class="p">,</span> <span class="s1">&#39;events&#39;</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="n">crs</span><span class="o">=</span><span class="s1">&#39;EPSG:32760&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">name</span><span class="o">=</span><span class="s1">'Tutorial_Model'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">output_dir</span><span class="o">=</span><span class="s1">'models/TUFLOW'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">features</span><span class="o">=</span><span class="p">[</span><span class="s1">'sgs'</span><span class="p">,</span> <span class="s1">'events'</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">crs</span><span class="o">=</span><span class="s1">'EPSG:32760'</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">create_empties</span><span class="o">=</span><span class="kc">True</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">project</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span> <span class="c1"># list any errors - empy list is good</span>
 <span class="go">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">project</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
-<span class="go">PosixPath(&#39;models/TUFLOW&#39;)</span>
+<span class="go">PosixPath('models/TUFLOW')</span>
 </pre></div>
 </div>
 <p>Taking the same example as above, and initialising it via the CLI:</p>
@@ -2245,32 +2245,32 @@ the default values listed in the json files. The user is free to modify the defa
 <span class="w">    </span>--engine<span class="w"> </span>hpc<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--name<span class="w"> </span>Tutorial_Model<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--output-dir<span class="w"> </span>models/TUFLOW<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--crs<span class="w"> </span><span class="s2">&quot;EPSG:32760&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--crs<span class="w"> </span><span class="s2">"EPSG:32760"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--features<span class="w"> </span>sgs<span class="w"> </span>events
 </pre></div>
 </div>
 <p>Initialise an HPC project using GPKG and customise the map outputs.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">project</span> <span class="o">=</span> <span class="n">HPCProject</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Tutorial_Model&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">output_dir</span><span class="o">=</span><span class="s1">&#39;models/TUFLOW&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">crs</span><span class="o">=</span><span class="s1">&#39;EPSG:32760&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">name</span><span class="o">=</span><span class="s1">'Tutorial_Model'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">output_dir</span><span class="o">=</span><span class="s1">'models/TUFLOW'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">crs</span><span class="o">=</span><span class="s1">'EPSG:32760'</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">create_empties</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">gis_format</span><span class="o">=</span><span class="s1">&#39;GPKG&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">gis_format</span><span class="o">=</span><span class="s1">'GPKG'</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">output_formats</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;XMDF&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="gp">... </span>            <span class="s2">&quot;data_types&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="s2">&quot;ZAEM1&quot;</span><span class="p">],</span>
-<span class="gp">... </span>            <span class="s2">&quot;interval&quot;</span><span class="p">:</span> <span class="mi">3600</span>
+<span class="gp">... </span>        <span class="s2">"XMDF"</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">"data_types"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"h"</span><span class="p">,</span> <span class="s2">"v"</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">,</span> <span class="s2">"q"</span><span class="p">,</span> <span class="s2">"ZAEM1"</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="s2">"interval"</span><span class="p">:</span> <span class="mi">3600</span>
 <span class="gp">... </span>        <span class="p">},</span>
-<span class="gp">... </span>        <span class="s2">&quot;TIF&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="gp">... </span>            <span class="s2">&quot;data_types&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;ZAEM1&quot;</span><span class="p">],</span>
-<span class="gp">... </span>            <span class="s2">&quot;interval&quot;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="gp">... </span>        <span class="s2">"TIF"</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">"data_types"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"h"</span><span class="p">,</span> <span class="s2">"v"</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">,</span> <span class="s2">"ZAEM1"</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="s2">"interval"</span><span class="p">:</span> <span class="mi">0</span>
 <span class="gp">... </span>        <span class="p">}</span>
 <span class="gp">... </span>    <span class="p">}</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">project</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span> <span class="c1"># list any errors - empy list is good</span>
 <span class="go">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">project</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
-<span class="go">PosixPath(&#39;models/TUFLOW&#39;)</span>
+<span class="go">PosixPath('models/TUFLOW')</span>
 </pre></div>
 </div>
 <p>Initialising the same example via the CLI.</p>
@@ -2278,14 +2278,14 @@ the default values listed in the json files. The user is free to modify the defa
 <span class="w">    </span>--engine<span class="w"> </span>hpc<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--name<span class="w"> </span>Tutorial_Model<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--output-dir<span class="w"> </span>models/TUFLOW<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--crs<span class="w"> </span><span class="s2">&quot;EPSG:32760&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--crs<span class="w"> </span><span class="s2">"EPSG:32760"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--gis-format<span class="w"> </span>GPKG<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--output-format<span class="w"> </span><span class="s1">&#39;{&quot;XMDF&quot;: {&quot;data_types&quot;: &quot;h v d q ZAEM1&quot;, &quot;interval&quot;: 3600}, \</span>
-<span class="s1">        &quot;TIF&quot;: {&quot;data_types&quot;: &quot;h v d ZAEM1&quot;, &quot;interval&quot;: 0}}&#39;</span>
+<span class="w">    </span>--output-format<span class="w"> </span><span class="s1">'{"XMDF": {"data_types": "h v d q ZAEM1", "interval": 3600}, \</span>
+<span class="s1">        "TIF": {"data_types": "h v d ZAEM1", "interval": 0}}'</span>
 </pre></div>
 </div>
 <p>Insert Quadtree into an existing model:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HPCProject</span><span class="o">.</span><span class="n">insert_feature_into</span><span class="p">(</span><span class="s1">&#39;quadtree&#39;</span><span class="p">,</span> <span class="s1">&#39;models/TUFLOW/runs/Tutorial_Model_001.tcf&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HPCProject</span><span class="o">.</span><span class="n">insert_feature_into</span><span class="p">(</span><span class="s1">'quadtree'</span><span class="p">,</span> <span class="s1">'models/TUFLOW/runs/Tutorial_Model_001.tcf'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Insert PO int an existing model using the CLI:</p>

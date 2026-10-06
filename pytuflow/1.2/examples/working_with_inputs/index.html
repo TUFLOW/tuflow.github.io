@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css?v=572af1d6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=0a1fe526" />
@@ -2171,8 +2171,8 @@ explicitly covered. This page aims to go into a bit more detail about how inputs
 <p>Each input has a <code class="xref py py-attr docutils literal notranslate"><span class="pre">files</span></code> attribute that is a list of all the files that are associated
 with the input.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCF</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG00_001.tcf&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;Read GRID Zpts&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG00_001.tcf'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'Read GRID Zpts'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">inp</span><span class="o">.</span><span class="n">files</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="go">TUFLOW\runs\..\model\grid\DEM_SI_Unit_01.tif</span>
@@ -2194,7 +2194,7 @@ the case for a <code class="docutils literal notranslate"><span class="pre">1d_n
 <h4>TuflowPath<a class="headerlink" href="#tuflowpath" title="Link to this heading">#</a></h4>
 <p>Most files are stored as <code class="docutils literal notranslate"><span class="pre">Path</span></code> objects, however GIS files are stored as <code class="docutils literal notranslate"><span class="pre">TuflowPath</span></code> objects. The <code class="docutils literal notranslate"><span class="pre">TuflowPath</span></code> class is a subclass
 of Path that has some additional functionality to handle GPKG file paths (e.g. <code class="docutils literal notranslate"><span class="pre">gis\database.gpkg</span> <span class="pre">&gt;&gt;</span> <span class="pre">layer_name</span></code>).</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;2d_bc&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'2d_bc'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">file</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">file</span>
@@ -2214,8 +2214,8 @@ for GPKGs, as the layer name is not necessarily the same as the GPKG file name.<
 <p>TuflowPath objects also extend the <code class="xref py py-meth docutils literal notranslate"><span class="pre">glob()</span></code> method to allow for globbing of layers in GPKG files.
 The below example uses a GPKG created from <code class="docutils literal notranslate"><span class="pre">EG07_002.tcf</span></code> using the convert TUFLOW model GIS format tool in QGIS.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TuflowPath</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gpkg</span> <span class="o">=</span> <span class="n">TuflowPath</span><span class="p">(</span><span class="s1">&#39;/path/to/EG07_002.gpkg&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">gpkg</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;&gt;&gt; 2d_zsh*&#39;</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpkg</span> <span class="o">=</span> <span class="n">TuflowPath</span><span class="p">(</span><span class="s1">'/path/to/EG07_002.gpkg'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">gpkg</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">'&gt;&gt; 2d_zsh*'</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 <span class="go">..\model\gis\EG07_002.gpkg &gt;&gt; 2d_zsh_EG07_002_L</span>
 <span class="go">..\model\gis\EG07_002.gpkg &gt;&gt; 2d_zsh_EG07_002_P</span>
@@ -2227,12 +2227,12 @@ pattern <code class="docutils literal notranslate"><span class="pre">2d_zsh*</sp
 <p>TuflowPath also has a couple of useful methods for extracting information from the GIS layer. The first example
 extracts the GIS attributes from the layer without requiring GDAL to be installed.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCF</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG00_001.tcf&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gis_2d_bc</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;2d_bc&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG00_001.tcf'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gis_2d_bc</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'2d_bc'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">gis_2d_bc</span><span class="o">.</span><span class="n">gis_attributes</span><span class="p">():</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
-<span class="go">OrderedDict({&#39;Type&#39;: &#39;QT&#39;, &#39;Flags&#39;: &#39;&#39;, &#39;Name&#39;: &#39;FC01&#39;, &#39;f&#39;: None, &#39;d&#39;: None, &#39;td&#39;: None, &#39;a&#39;: None, &#39;b&#39;: None})</span>
-<span class="go">OrderedDict({&#39;Type&#39;: &#39;HQ&#39;, &#39;Flags&#39;: &#39;&#39;, &#39;Name&#39;: &#39;&#39;, &#39;f&#39;: None, &#39;d&#39;: None, &#39;td&#39;: None, &#39;a&#39;: None, &#39;b&#39;: 0.01})</span>
+<span class="go">OrderedDict({'Type': 'QT', 'Flags': '', 'Name': 'FC01', 'f': None, 'd': None, 'td': None, 'a': None, 'b': None})</span>
+<span class="go">OrderedDict({'Type': 'HQ', 'Flags': '', 'Name': '', 'f': None, 'd': None, 'td': None, 'a': None, 'b': 0.01})</span>
 </pre></div>
 </div>
 <p>The second example requires GDAL to be installed, and is a convenience method for opening the GIS layer
@@ -2241,9 +2241,9 @@ with GDAL within a context manager.</p>
 <span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="n">gis</span><span class="o">.</span><span class="n">driver</span><span class="p">)</span>
 <span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="n">gis</span><span class="o">.</span><span class="n">ds</span><span class="p">)</span>
 <span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="n">gis</span><span class="o">.</span><span class="n">lyr</span><span class="p">)</span>
-<span class="go">&lt;osgeo.ogr.Driver; proxy of &lt;Swig Object of type &#39;OGRDriverShadow *&#39; at 0x0000024A5FF8A520&gt; &gt;</span>
-<span class="go">&lt;osgeo.ogr.DataSource; proxy of &lt;Swig Object of type &#39;OGRDataSourceShadow *&#39; at 0x000001E7CEC19A10&gt; &gt;</span>
-<span class="go">&lt;osgeo.ogr.Layer; proxy of &lt;Swig Object of type &#39;OGRLayerShadow *&#39; at 0x000001E7CC8A0990&gt; &gt;</span>
+<span class="go">&lt;osgeo.ogr.Driver; proxy of &lt;Swig Object of type 'OGRDriverShadow *' at 0x0000024A5FF8A520&gt; &gt;</span>
+<span class="go">&lt;osgeo.ogr.DataSource; proxy of &lt;Swig Object of type 'OGRDataSourceShadow *' at 0x000001E7CEC19A10&gt; &gt;</span>
+<span class="go">&lt;osgeo.ogr.Layer; proxy of &lt;Swig Object of type 'OGRLayerShadow *' at 0x000001E7CC8A0990&gt; &gt;</span>
 </pre></div>
 </div>
 </section>
@@ -2254,9 +2254,9 @@ with GDAL within a context manager.</p>
 any missing files. This attribute can be useful when used with the <a class="reference internal" href="../../api/pytuflow.TCF.find_input/" title="pytuflow.TCF.find_input"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_input()</span></code></a>
 method to filter inputs that have missing files.</p>
 <p>First, let’s modify the code input to remove the <code class="docutils literal notranslate"><span class="pre">_R</span></code> suffix, this causes the file path to be incorrect.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG00_001.tcf&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;2d_code&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span><span class="o">.</span><span class="n">rhs</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_R&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG00_001.tcf'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'2d_code'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span><span class="o">.</span><span class="n">rhs</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'_R'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
 <span class="go">Read GIS Code == gis\2d_code_EG00_001.shp</span>
 </pre></div>
@@ -2264,15 +2264,15 @@ method to filter inputs that have missing files.</p>
 <p>Then we can use the <code class="docutils literal notranslate"><span class="pre">attrs</span></code> parameter of the <a class="reference internal" href="../../api/pytuflow.TCF.find_input/" title="pytuflow.TCF.find_input"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_input()</span></code></a> method to filter inputs that have missing files.
 The <code class="docutils literal notranslate"><span class="pre">attrs</span></code> parameter tells the filter to check the <code class="xref py py-attr docutils literal notranslate"><span class="pre">has_missing_files</span></code> attribute of each input.
 If the attribute evaluates to <code class="docutils literal notranslate"><span class="pre">True</span></code>, then the input will be returned.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="s1">&#39;has_missing_files&#39;</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Input has missing files: </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="s1">'has_missing_files'</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Input has missing files: </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 <span class="go">Read GIS Code == gis\2d_code_EG00_001.shp</span>
 </pre></div>
 </div>
 <p>More than one attribute can be passed into the <code class="docutils literal notranslate"><span class="pre">attrs</span></code> parameter.
 For example, if you wanted to return only missing files from GIS inputs:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">const</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;has_missing_files&#39;</span><span class="p">,),</span> <span class="p">(</span><span class="s1">&#39;TUFLOW_TYPE&#39;</span><span class="p">,</span> <span class="n">const</span><span class="o">.</span><span class="n">INPUT</span><span class="o">.</span><span class="n">GIS</span><span class="p">)]):</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">[(</span><span class="s1">'has_missing_files'</span><span class="p">,),</span> <span class="p">(</span><span class="s1">'TUFLOW_TYPE'</span><span class="p">,</span> <span class="n">const</span><span class="o">.</span><span class="n">INPUT</span><span class="o">.</span><span class="n">GIS</span><span class="p">)]):</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
 <span class="go">Read GIS Code == gis\2d_code_EG00_001.shp</span>
 </pre></div>
@@ -2290,14 +2290,14 @@ The <code class="xref py py-attr docutils literal notranslate"><span class="pre"
 <code class="xref py py-attr docutils literal notranslate"><span class="pre">rhs</span></code> attribute in an appropriate data type. For example, the returned value will
 be an integer if the command is setting the code value (<code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">Code</span> <span class="pre">==</span> <span class="pre">0</span></code>), or a float if the command is setting
 the model cell size (<code class="docutils literal notranslate"><span class="pre">Cell</span> <span class="pre">Size</span> <span class="pre">==</span> <span class="pre">2.5</span></code>), or a Path object if the command is referencing a file.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG00_001.tcf&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;set code&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG00_001.tcf'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'set code'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span><span class="o">.</span><span class="n">lhs</span>
-<span class="go">&#39;Set Code&#39;</span>
+<span class="go">'Set Code'</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span><span class="o">.</span><span class="n">rhs</span>
-<span class="go">&#39;0&#39;</span>
+<span class="go">'0'</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span><span class="o">.</span><span class="n">value</span>
 <span class="go">0</span>
@@ -2305,13 +2305,13 @@ the model cell size (<code class="docutils literal notranslate"><span class="pre
 </div>
 <p>The <code class="xref py py-attr docutils literal notranslate"><span class="pre">lhs</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">rhs</span></code> attributes can be edited by the user,
 however the <code class="xref py py-attr docutils literal notranslate"><span class="pre">value</span></code> attribute is read-only.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;cell size&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'cell size'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mf">2.5</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="w">  </span><span class="c">...</span>
-<span class="gr">AttributeError</span>: <span class="n">The &quot;value&quot; attribute is read-only, use &quot;rhs&quot; to set the value of the input.</span>
+<span class="gr">AttributeError</span>: <span class="n">The "value" attribute is read-only, use "rhs" to set the value of the input.</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span><span class="o">.</span><span class="n">rhs</span> <span class="o">=</span> <span class="s1">&#39;2.5&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span><span class="o">.</span><span class="n">rhs</span> <span class="o">=</span> <span class="s1">'2.5'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span><span class="o">.</span><span class="n">value</span>
 <span class="go">2.5</span>
 </pre></div>
@@ -2320,8 +2320,8 @@ however the <code class="xref py py-attr docutils literal notranslate"><span cla
 a <code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">GIS</span></code> command must stay as a <code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">GIS</span></code> command, and cannot change to a <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">Code</span></code> command. The purpose
 of editing the <code class="xref py py-attr docutils literal notranslate"><span class="pre">lhs</span></code> attribute is to allow easy insertion/editing of additional keywords in the
 given command.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># assume input is loaded as &quot;Time Output Cutoff Depth == 0.1&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span><span class="o">.</span><span class="n">lhs</span> <span class="o">=</span> <span class="s1">&#39;Time Output Cutoff Hazard&#39;</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># assume input is loaded as "Time Output Cutoff Depth == 0.1"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inp</span><span class="o">.</span><span class="n">lhs</span> <span class="o">=</span> <span class="s1">'Time Output Cutoff Hazard'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
 <span class="go">Time Output Cutoff Hazard == 0.1</span>
 </pre></div>
@@ -2332,17 +2332,17 @@ hazard instead of depth.</p>
 of the command is set to a variable, and the variable has a global scope (i.e. is not scenario or event dependent),
 then the <code class="xref py py-attr docutils literal notranslate"><span class="pre">value</span></code> attribute will return the resolved value of the variable.</p>
 <p>To show this, let’s first insert a new variable into the TCF after the <code class="docutils literal notranslate"><span class="pre">sgs</span> <span class="pre">sample</span> <span class="pre">target</span> <span class="pre">distance</span></code> input.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">&#39;path/to/EG00_001.tcf&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ref_inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;sgs sample target distance&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">insert_input</span><span class="p">(</span><span class="n">ref_inp</span><span class="p">,</span> <span class="s1">&#39;Set Variable CELL_SIZE == 2.5&#39;</span><span class="p">,</span> <span class="n">after</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span> <span class="o">=</span> <span class="n">TCF</span><span class="p">(</span><span class="s1">'path/to/EG00_001.tcf'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ref_inp</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'sgs sample target distance'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tcf</span><span class="o">.</span><span class="n">insert_input</span><span class="p">(</span><span class="n">ref_inp</span><span class="p">,</span> <span class="s1">'Set Variable CELL_SIZE == 2.5'</span><span class="p">,</span> <span class="n">after</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Then, let’s change the <code class="docutils literal notranslate"><span class="pre">rhs</span></code> of the <code class="docutils literal notranslate"><span class="pre">Cell</span> <span class="pre">Size</span></code> command to reference the variable we just created.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cell_size</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">&#39;cell size&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cell_size</span> <span class="o">=</span> <span class="n">tcf</span><span class="o">.</span><span class="n">find_input</span><span class="p">(</span><span class="s1">'cell size'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">cell_size</span><span class="p">)</span>
-<span class="go">&#39;Cell Size == 5.0&#39;</span>
+<span class="go">'Cell Size == 5.0'</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cell_size</span><span class="o">.</span><span class="n">rhs</span> <span class="o">=</span> <span class="s1">&#39;&lt;&lt;CELL_SIZE&gt;&gt;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cell_size</span><span class="o">.</span><span class="n">rhs</span> <span class="o">=</span> <span class="s1">'&lt;&lt;CELL_SIZE&gt;&gt;'</span>
 </pre></div>
 </div>
 <p>Finally, we can check the <code class="xref py py-attr docutils literal notranslate"><span class="pre">value</span></code> attribute to see the resolved value of the variable.</p>

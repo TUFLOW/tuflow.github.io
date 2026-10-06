@@ -2185,8 +2185,8 @@ a spatial location for the line and the created points.</p></li>
 <p>Loading a result and extracting the maximum profile:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">LP2D</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lp</span> <span class="o">=</span> <span class="n">LP2D</span><span class="p">(</span><span class="s1">&#39;/path/to/model_LP_NAME_H.csv&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">lp</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="s1">&#39;model_LP_NAME&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;bed level&#39;</span><span class="p">,</span> <span class="s1">&#39;max h&#39;</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># time can be a dummy value for static results</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lp</span> <span class="o">=</span> <span class="n">LP2D</span><span class="p">(</span><span class="s1">'/path/to/model_LP_NAME_H.csv'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">lp</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="s1">'model_LP_NAME'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'bed level'</span><span class="p">,</span> <span class="s1">'max h'</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># time can be a dummy value for static results</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
 <span class="go">   offset  branch_id     node_string  bed level   max h</span>
 <span class="go">0    2.07          0  EG02_012_LP_01     44.277  49.863</span>
@@ -2198,7 +2198,7 @@ a spatial location for the line and the created points.</p></li>
 <span class="go">6   39.52          0  EG02_012_LP_01     43.837  47.095</span>
 <span class="go">7   45.77          0  EG02_012_LP_01     43.866  47.073</span>
 <span class="go">8   52.02          0  EG02_012_LP_01     43.770  47.041</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;bed level&#39;</span><span class="p">,</span> <span class="s1">&#39;max h&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s1">'bed level'</span><span class="p">,</span> <span class="s1">'max h'</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -2209,7 +2209,7 @@ that will dynamically update the water level based on the time.</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Slider</span>
 
 <span class="c1"># Result location - update accordingly</span>
-<span class="n">RESULT</span> <span class="o">=</span> <span class="s1">&#39;/path/to/model_LP_NAME_H.csv&#39;</span>
+<span class="n">RESULT</span> <span class="o">=</span> <span class="s1">'/path/to/model_LP_NAME_H.csv'</span>
 
 <span class="c1"># initialise subplots</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -2217,34 +2217,34 @@ that will dynamically update the water level based on the time.</p>
 <span class="c1"># initialise the LP2D class and initialise</span>
 <span class="c1"># the section dataframe for the first time step</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">pytuflow</span><span class="o">.</span><span class="n">LP2D</span><span class="p">(</span><span class="n">RESULT</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;bed level&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;max h&#39;</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">[</span><span class="s1">'bed level'</span><span class="p">,</span> <span class="s1">'h'</span><span class="p">,</span> <span class="s1">'max h'</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># generate plot lines</span>
 <span class="n">z_line</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">],</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;bed level&#39;</span><span class="p">],</span>
-    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;bed level&#39;</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">'offset'</span><span class="p">],</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">'bed level'</span><span class="p">],</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">'bed level'</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span>
 <span class="p">)</span>
 <span class="n">h_line</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">],</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;h&#39;</span><span class="p">],</span>
-    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">'offset'</span><span class="p">],</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">'h'</span><span class="p">],</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">'h'</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">'blue'</span>
 <span class="p">)</span>
 <span class="n">max_h_line</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">],</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;max h&#39;</span><span class="p">],</span>
-    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;max h&#39;</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
-    <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">'offset'</span><span class="p">],</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">'max h'</span><span class="p">],</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">'max h'</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">,</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s1">'dashed'</span>
 <span class="p">)</span>
 
 <span class="c1"># plot house-keeping</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Distance&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Elevation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Distance'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Elevation'</span><span class="p">)</span>
 
 <span class="c1"># adjust the main plot to make room for the sliders</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
@@ -2253,7 +2253,7 @@ that will dynamically update the water level based on the time.</p>
 <span class="n">time_ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
 <span class="n">time_slider</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span>
     <span class="n">ax</span><span class="o">=</span><span class="n">time_ax</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">'Time'</span><span class="p">,</span>
     <span class="n">valmin</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">times</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
     <span class="n">valmax</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">times</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
     <span class="n">valstep</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">times</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">res</span><span class="o">.</span><span class="n">times</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
@@ -2262,8 +2262,8 @@ that will dynamically update the water level based on the time.</p>
 
 <span class="c1"># callback that updates and extracts water level data</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">time_updated</span><span class="p">(</span><span class="n">time_val</span><span class="p">):</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="n">time_val</span><span class="p">)</span>
-    <span class="n">h_line</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;h&#39;</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">'h'</span><span class="p">,</span> <span class="n">time_val</span><span class="p">)</span>
+    <span class="n">h_line</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'h'</span><span class="p">])</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw_idle</span><span class="p">()</span>
 
 <span class="c1"># register the update function</span>

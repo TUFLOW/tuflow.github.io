@@ -2195,12 +2195,12 @@ uses Python libraries for geometry handling.</p></li>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pytuflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">NCMesh</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nc</span> <span class="o">=</span> <span class="n">NCMesh</span><span class="p">(</span><span class="s1">&#39;./path/to/nc&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nc</span> <span class="o">=</span> <span class="n">NCMesh</span><span class="p">(</span><span class="s1">'./path/to/nc'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Get all the data types available in the NetCDF file:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nc</span><span class="o">.</span><span class="n">data_types</span><span class="p">()</span>
-<span class="go">[&#39;bed level&#39;, &#39;velocity&#39;, &#39;water level&#39;, &#39;salinity&#39;, &#39;temperature&#39;]</span>
+<span class="go">['bed level', 'velocity', 'water level', 'salinity', 'temperature']</span>
 </pre></div>
 </div>
 <p>Get all the times available in the NetCDF file:</p>
@@ -2209,7 +2209,7 @@ uses Python libraries for geometry handling.</p></li>
 </pre></div>
 </div>
 <p>Get the water level time-series data for a given point defined in a shapefile:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nc</span><span class="o">.</span><span class="n">time_series</span><span class="p">(</span><span class="s1">&#39;path/to/shapefile.shp&#39;</span><span class="p">,</span> <span class="s1">&#39;water level&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nc</span><span class="o">.</span><span class="n">time_series</span><span class="p">(</span><span class="s1">'path/to/shapefile.shp'</span><span class="p">,</span> <span class="s1">'water level'</span><span class="p">)</span>
 <span class="go">    time  pnt1/water level</span>
 <span class="go">0.000000               NaN</span>
 <span class="go">0.083333               NaN</span>
@@ -2230,7 +2230,7 @@ uses Python libraries for geometry handling.</p></li>
 </pre></div>
 </div>
 <p>Get the depth-averaged velocity time-series using the Sigma method:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nc</span><span class="o">.</span><span class="n">time_series</span><span class="p">(</span><span class="s1">&#39;path/to/shapefile.shp&#39;</span><span class="p">,</span> <span class="s1">&#39;velocity&#39;</span><span class="p">,</span> <span class="n">averaging_method</span><span class="o">=</span><span class="s1">&#39;sigma&amp;0.1&amp;0.9&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nc</span><span class="o">.</span><span class="n">time_series</span><span class="p">(</span><span class="s1">'path/to/shapefile.shp'</span><span class="p">,</span> <span class="s1">'velocity'</span><span class="p">,</span> <span class="n">averaging_method</span><span class="o">=</span><span class="s1">'sigma&amp;0.1&amp;0.9'</span><span class="p">)</span>
 <span class="go">time      pnt1/velocity</span>
 <span class="go">0.000000       0.353553</span>
 <span class="go">0.016667       0.353553</span>
@@ -2241,7 +2241,7 @@ uses Python libraries for geometry handling.</p></li>
 </pre></div>
 </div>
 <p>Get water level section data using a shapefile:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nc</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="s1">&#39;path/to/shapefile.shp&#39;</span><span class="p">,</span> <span class="s1">&#39;water level&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nc</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="s1">'path/to/shapefile.shp'</span><span class="p">,</span> <span class="s1">'water level'</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
 <span class="go">      line1</span>
 <span class="go">     offset water level</span>
 <span class="go">0  0.000000         0.1</span>
@@ -2253,7 +2253,7 @@ uses Python libraries for geometry handling.</p></li>
 </pre></div>
 </div>
 <p>Get a velocity curtain plot using a shapefile:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nc</span><span class="o">.</span><span class="n">curtain</span><span class="p">(</span><span class="s1">&#39;path/to/shapefile.shp&#39;</span><span class="p">,</span> <span class="s1">&#39;velocity&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nc</span><span class="o">.</span><span class="n">curtain</span><span class="p">(</span><span class="s1">'path/to/shapefile.shp'</span><span class="p">,</span> <span class="s1">'velocity'</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
 <span class="go">       line1</span>
 <span class="go">           x    y  velocity</span>
 <span class="go">0   0.000000  0.0  0.282843</span>
@@ -2283,7 +2283,7 @@ uses Python libraries for geometry handling.</p></li>
 </pre></div>
 </div>
 <p>Get a velocity (vertical) profile plot using a point shapefile:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nc</span><span class="o">.</span><span class="n">profile</span><span class="p">(</span><span class="s1">&#39;path/to/shapefile.shp&#39;</span><span class="p">,</span> <span class="s1">&#39;velocity&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nc</span><span class="o">.</span><span class="n">profile</span><span class="p">(</span><span class="s1">'path/to/shapefile.shp'</span><span class="p">,</span> <span class="s1">'velocity'</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
 <span class="go">       pnt1</span>
 <span class="go">  elevation  velocity</span>
 <span class="go">0       0.0  0.282843</span>
