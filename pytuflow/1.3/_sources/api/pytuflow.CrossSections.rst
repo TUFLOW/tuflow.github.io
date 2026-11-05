@@ -1,0 +1,49 @@
+﻿pytuflow.CrossSections
+======================
+
+.. currentmodule:: pytuflow
+
+.. autoclass:: CrossSections
+   :exclude-members: __init__
+   :show-inheritance:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      ~CrossSections.curtain
+      ~CrossSections.data_types
+      ~CrossSections.ids
+      ~CrossSections.profile
+      ~CrossSections.section
+      ~CrossSections.time_series
+      ~CrossSections.times
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ~CrossSections.ATTRIBUTE_TYPES
+      ~CrossSections.DOMAIN_TYPES
+      ~CrossSections.GEOMETRY_TYPES
+      ~CrossSections.ID_COLUMNS
+      ~CrossSections.fpath
+      ~CrossSections.cross_sections
+      ~CrossSections.objs
+      ~CrossSections.cross_section_count
+      ~CrossSections.name
+      ~CrossSections.has_reference_time
+      ~CrossSections.reference_time
+   
+   
