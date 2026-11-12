@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css?v=572af1d6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=0a1fe526" />
@@ -2226,11 +2226,6 @@
                   
   <section id="pytuflow-arr">
 <span id="id1"></span><h1>pytuflow-arr<a class="headerlink" href="#pytuflow-arr" title="Link to this heading">#</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This tool is labelled experimental. Outputs should be checked carefully. The CLI is not considered final
-and can change in future versions without provision for backward compatibility.</p>
-</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">pytuflow-arr</span></code> tool converts <a class="reference external" href="http://arr.ga.gov.au/home">Australian Rainfall and Runoff</a> rainfall and loss data from the <a class="reference external" href="https://data.arr-software.org/about">ARR Data Hub</a> into TUFLOW model input files (<code class="docutils literal notranslate"><span class="pre">Event_File.tef</span></code>, <code class="docutils literal notranslate"><span class="pre">bc_dbase.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">rf_inflow/*.csv</span></code>,
 <code class="docutils literal notranslate"><span class="pre">soils.tsoilf</span></code> / <code class="docutils literal notranslate"><span class="pre">*.trd</span></code>).</p>
 <p>This tool is a clean rewrite of the <code class="docutils literal notranslate"><span class="pre">ARR</span> <span class="pre">to</span> <span class="pre">TUFLOW</span></code> script from the QGIS TUFLOW plugin for the <strong>2026 v1</strong> ARR Data Hub major update. Consequently, it does not support legacy versions of the data hub. It provides many options for backward compatibility, however not every legacy option is supported and many of the defaults are new for the 2026 v1 ARR Data Hub update.</p>
@@ -2529,8 +2524,8 @@ generally recommended to keep it as it is good practice to keep the boundary for
 <span class="linenos">16</span><span class="w">  </span><span class="nt">"climate_change"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="linenos">17</span><span class="w">    </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="linenos">18</span><span class="w">    </span><span class="nt">"scenarios"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="linenos">19</span><span class="w">      </span><span class="p">{</span><span class="nt">"baseline_year"</span><span class="p">:</span><span class="w"> </span><span class="mi">2050</span><span class="p">,</span><span class="w"> </span><span class="nt">"ssp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SSP2"</span><span class="p">},</span>
-<span class="linenos">20</span><span class="w">      </span><span class="p">{</span><span class="nt">"baseline_year"</span><span class="p">:</span><span class="w"> </span><span class="mi">2090</span><span class="p">,</span><span class="w"> </span><span class="nt">"ssp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SSP2"</span><span class="p">}</span>
+<span class="linenos">19</span><span class="w">      </span><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2050"</span><span class="p">,</span><span class="w"> </span><span class="nt">"baseline_year"</span><span class="p">:</span><span class="w"> </span><span class="mi">2050</span><span class="p">,</span><span class="w"> </span><span class="nt">"ssp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SSP2"</span><span class="p">},</span>
+<span class="linenos">20</span><span class="w">      </span><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2090"</span><span class="p">,</span><span class="w"> </span><span class="nt">"baseline_year"</span><span class="p">:</span><span class="w"> </span><span class="mi">2090</span><span class="p">,</span><span class="w"> </span><span class="nt">"ssp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SSP2"</span><span class="p">}</span>
 <span class="linenos">21</span><span class="w">    </span><span class="p">]</span>
 <span class="linenos">22</span><span class="w">  </span><span class="p">},</span>
 <span class="linenos">23</span><span class="w">  </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2945,12 +2940,17 @@ being silently ignored, to catch typos early.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>baseline_year</p></td>
+<tr class="row-even"><td><p>name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Optional parameter that allows the user to supply a name for the scenario to be used in the output naming.</p></td>
+</tr>
+<tr class="row-odd"><td><p>baseline_year</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>Allowed values: <code class="docutils literal notranslate"><span class="pre">2030</span></code> - <code class="docutils literal notranslate"><span class="pre">2100</span></code> (10-year increments)</p></td>
 </tr>
-<tr class="row-odd"><td><p>ssp</p></td>
+<tr class="row-even"><td><p>ssp</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>Allowed values: <code class="docutils literal notranslate"><span class="pre">SSP1</span></code>, <code class="docutils literal notranslate"><span class="pre">SSP2</span></code>, <code class="docutils literal notranslate"><span class="pre">SSP3</span></code>, <code class="docutils literal notranslate"><span class="pre">SSP5</span></code></p></td>
