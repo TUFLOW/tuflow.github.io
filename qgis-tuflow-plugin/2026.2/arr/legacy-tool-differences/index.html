@@ -1016,50 +1016,36 @@
 <path d="m 22.099069,16.140248 c 0.05535,-0.0253 0.112542,-0.02866 0.212587,-0.028 0.04284,0.004 0.03771,0.03465 0.03598,0.05003 -0.05415,0.02107 -0.106568,0.02679 -0.198138,0.03781 -0.03915,0.0053 -0.04857,-0.0379 -0.05042,-0.05985 z" fill="#648ace" id="path23" opacity="1" stroke="none" style="stroke-width:0.116455"></path>
 </svg>
 </span> <strong>ARR to TUFLOW (legacy)</strong> tool.</p>
-<p>For an example on how to use the outputs in a TUFLOW model setup, please refer to the following 
-TUFLOW Wiki page: <a href="https://wiki.tuflow.com/QGIS_ARR_to_TUFLOW_Example#TUFLOW_Setup">wiki.tuflow.com/QGIS_ARR_to_TUFLOW_Example</a></p>
+<p>For an example on how to use the outputs in a TUFLOW model setup, please refer to the following TUFLOW Wiki page: <a href="https://wiki.tuflow.com/QGIS_ARR_to_TUFLOW_Example#TUFLOW_Setup">wiki.tuflow.com/QGIS_ARR_to_TUFLOW_Example</a></p>
 </div>
 <ul>
-<li>Defaults have changed where appropriate for the <strong>2026 v1</strong> update. For example, the "current" 2030 baseline rainfall year is the default. 
-  Other regional/jurisdication specifics such as using the new NSW storm losses (as opposed the the probability neutral losses) is now also the default.</li>
+<li>Defaults have changed where appropriate for the <strong>2026 v1</strong> update. For example, the "current" 2030 baseline rainfall year is the default. Other regional/jurisdication specifics such as using the new NSW storm losses (as opposed to the probability neutral losses) is now also the default.</li>
 <li>
-<p>The Data Hub API now supports uploading catchment files. Previously, this was not possible and the catchment centroid was used.
+<p>The ARR Data Hub API now supports uploading catchment files. Previously, this was not possible and the catchment centroid was used.
   Now the catchment will be uploaded directly if a GIS layer is provided.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>It is the users responsibility to supply a valid catchment polygon. There could be circumstances where the 
-polygon is rejected by the Data Hub e.g. if there are too many vertices or the catchment is
-not in Australia.</p>
+<p>It is the users responsibility to supply a valid catchment polygon. There could be circumstances where the polygon is rejected by the ARR Data Hub e.g. if there are too many vertices or the catchment is not in Australia.</p>
 </div>
 </li>
 <li>
-<p>The tool does not scrape the BOM website and relies on rainfall depths provided by the Data Hub. 
-  Currently, frequent rainfall depths are not provided and as such, frequent events are not yet supported.</p>
+<p>The tool does not scrape the BOM website and relies on rainfall depths provided by the ARR Data Hub. Currently, frequent rainfall depths are not provided and as such, frequent events are not yet supported.</p>
 </li>
 <li>
-<p>Preburst rainfall extrapolation is done by a new method of holding the closest preburst ratio constant. Previous methods of 
-  extrapolating prebursts &lt; 60 minutes are still supported for legacy reasons, however the new method is the default.
-  <br/><br/>
-  Similarly, preburst depths for events outside the AEP range are extrapolated using the new method of holding the
-  closest preburst ratio constant. The legacy tool did not extrapolate for these events and the initial losses were set to zero.
-  There is no option to go back to this method.</p>
+<p>Preburst rainfall extrapolation is done by a new method of holding the closest preburst ratio constant. Previous methods of extrapolating prebursts &lt; 60 minutes are still supported for legacy reasons, however the new method is the default.</p>
+<p>Similarly, preburst depths for events outside the AEP range are extrapolated using the new method of holding the closest preburst ratio constant. The legacy tool did not extrapolate for these events and the initial losses were set to zero. There is no option to go back to this method.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Preburst depths now go down to 30 minutes, therefore extrapolation only applies for 
-durations &lt; 30 minutes (not 60 minutes like the legacy Data Hub)</p>
+<p>Preburst depths now go down to 30 minutes, therefore extrapolation only applies for durations &lt; 30 minutes (not 60 minutes like the legacy Data Hub).</p>
 </div>
 </li>
 <li>
 <p>The climate change options to configure ΔT or modify the baseline temperature have been removed.</p>
 </li>
-<li>By default, the tool will now automatically switch to using a complete storm if the preburst rainfall
-  depth is greater than the storm initial loss (only for those specific events), however this can also be turned off.</li>
+<li>By default, the tool will now automatically switch to using a complete storm if the preburst rainfall depth is greater than the storm initial loss (only for those specific events), however this can also be turned off.</li>
 <li>The <strong>Use event independent continuing loss</strong> option has been removed as some regions use AEP specific losses.</li>
-<li>The <strong>data</strong> folder has been renamed <strong>working_data</strong> and the outputs have been changed. Among other changes, plots are no longer 
-  included and the tool uses the <code>json</code> response format when downloading data (the legacy tool used the <code>txt</code> format).
-  The <code>json</code> format is more code friendly to parse (unfortunately less human readable than the text format).</li>
-<li>The tool no longer writes out a log file. The configuration is saved as <code>generaged_input_&lt;site_name&gt;.json</code> and messages are
-  logged to a dedicated log widget in the dock window.</li>
+<li>The <strong>data</strong> folder has been renamed <strong>working_data</strong> and the outputs have been changed. Among other changes, plots are no longer included and the tool uses the <code>json</code> response format when downloading data (the legacy tool used the <code>txt</code> format). The <code>json</code> format is more code friendly to parse (unfortunately less human readable than the text format).</li>
+<li>The tool no longer writes out a log file. The configuration is saved as <code>generated_input_&lt;site_name&gt;.json</code> and messages are logged directly to a dedicated log widget in the ARR to TUFLOW tool window.</li>
 </ul>
 </article>
 </div>

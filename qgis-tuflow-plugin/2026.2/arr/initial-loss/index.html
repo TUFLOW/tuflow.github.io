@@ -1150,24 +1150,24 @@
 <article class="md-content__inner md-typeset">
 <h1 id="initial-loss"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.</span> Initial Loss<a class="headerlink" href="#initial-loss" title="Permanent link">¶</a></h1>
 <h2 id="burst-initial-loss-method"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.1</span> Burst Initial Loss Method<a class="headerlink" href="#burst-initial-loss-method" title="Permanent link">¶</a></h2>
-<p>This option sets which initial loss table is retrieved from the Data Hub for design burst events:</p>
+<p>This option sets which initial loss table is retrieved from the ARR Data Hub for design burst events:</p>
 <ul>
 <li>
-<p><strong>Recommended (default)</strong>: use the Data Hub's standard/recommended storm initial loss table and calculate the burst loss:</p>
+<p><strong>Recommended (default)</strong>: use the ARR Data Hub's standard/recommended storm initial loss table and calculate the burst loss:</p>
 <div class="arithmatex">\[
 IL_{burst} = IL_{storm} - PB_{depth}
 \]</div>
-<p>For the majority of catchments, the data hub provides a single "Storm Initial Loss" value. Catchments in NSW may retrieve an AEP independent loss table.</p>
+<p>For the majority of catchments, the ARR Data Hub provides a single "Storm Initial Loss" value. Catchments in NSW may retrieve an AEP independent loss table.</p>
 </li>
 <li>
-<p><strong>Probability neutral (legacy) (if available)</strong>: use the Data Hub's "probability neutral" initial loss table, where available (typically only available for NSW catchments).</p>
+<p><strong>Probability neutral (legacy) (if available)</strong>: use the ARR Data Hub's "probability neutral" initial loss table, where available (typically only available for NSW catchments).</p>
 </li>
 </ul>
 <figure>
 <img alt="" src="../assets/images/initial_loss_burst_il_method.png">
 </img></figure>
 <h2 id="short-duration-extrapolation-method"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2</span> Short Duration Extrapolation Method<a class="headerlink" href="#short-duration-extrapolation-method" title="Permanent link">¶</a></h2>
-<p>Sets how the burst initial loss is extrapolated for durations shorter than those directly provided by the Data Hub (&lt; 30 minutes). The available methods are:</p>
+<p>This option sets how the burst initial loss is extrapolated for durations shorter than those directly provided by the ARR Data Hub (&lt; 30 minutes). The available methods are:</p>
 <ul>
 <li><strong>Interpolate to zero</strong>: the losses are interpolated using the assumption that at the zero minute 
     duration, the initial loss is zero.</li>
@@ -1207,7 +1207,7 @@ IL_{burst} = IL_{storm} - PB_{depth}
 </span> <strong>ARR to TUFLOW (legacy)</strong> tool.</li>
 <li><strong>Constant pre-burst ratio (default)</strong>: the preburst ratio is held constant from the nearest table row/column edge.</li>
 <li><strong>Rahman et al. 2002</strong>: an equation from a study conducted by Rahman et al 2002 is used.</li>
-<li><strong>Hill et al. 1996/1998 (requires MAR)</strong>: an equationfrom a study conducted by Hill et al 1996:1998 is used. This requires the user to set the <strong>Mean anuual rainfall (MAR) (mm)</strong> input.</li>
+<li><strong>Hill et al. 1996/1998 (requires MAR)</strong>: an equation from a study conducted by Hill et al 1996:1998 is used. This requires the user to set the <strong>Mean annual rainfall (MAR) (mm)</strong> input.</li>
 <li><strong>Static value (requires static loss)</strong>: the loss value is defined by a user input and will be used for all the extrapolated values. The method requires the user to set the <strong>static_loss</strong> value.</li>
 </ul>
 <h2 id="tuflow-loss-method"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3</span> TUFLOW Loss Method<a class="headerlink" href="#tuflow-loss-method" title="Permanent link">¶</a></h2>
@@ -1231,7 +1231,7 @@ into the <code>materials.csv</code>.</p>
 <p><strong>Initial loss (mm)</strong>: overrides the <strong>Storm Initial Loss</strong> with a single user-specified value.</p>
 </li>
 <li>
-<p><strong>Continuing loss (mm/hr)</strong>: overrides the continuing loss for with a single user-specified value.</p>
+<p><strong>Continuing loss (mm/hr)</strong>: overrides the continuing loss with a single user-specified value.</p>
 </li>
 </ul>
 <h2 id="outputs"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.5</span> Outputs<a class="headerlink" href="#outputs" title="Permanent link">¶</a></h2>
@@ -1247,14 +1247,9 @@ into the <code>materials.csv</code>.</p>
 if a complete storm is triggered (burst initial loss is no longer used).</p>
 <h2 id="other-notes-assumptions"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.7</span> Other Notes / Assumptions<a class="headerlink" href="#other-notes-assumptions" title="Permanent link">¶</a></h2>
 <ul>
-<li>For missing internal values, the burst initial loss is calculated by interpolating the rainfall and preburst ratios separately and
-    calculating the preburst depth (rather than interpolating the preburst depths directly). Rainfall depths are not always required to
-    be interpolated since there is more event information provided, but if it is interpolated it is done so using linear interpolation
-    in log-log space. Preburst ratios uses linear interpolation in log-linear space (duration and AEP use log space, the preburst value uses
-    linear space).</li>
-<li>For missing external values, the values are extrapolated by holding the preburst ratio from the nearest column/row edge constant.
-    The exception is for short duration extrapolation, which uses the <strong>Short Duration Extrapolation Method</strong> setting.</li>
-<li>For complete storms, the <strong>Storm Initial Loss</strong> value is always used (either from the data hub or the user specified value).</li>
+<li>For missing internal values, the burst initial loss is calculated by interpolating the rainfall and preburst ratios separately and calculating the preburst depth (rather than interpolating the preburst depths directly). Rainfall depths are not always required to be interpolated since there is more event information provided, but if it is interpolated it is done so using linear interpolation in log-log space. Preburst ratios use linear interpolation in log-linear space (duration and AEP use log space, the preburst value uses linear space).</li>
+<li>For missing external values, the values are extrapolated by holding the preburst ratio from the nearest column/row edge constant. The exception is for short duration extrapolation, which uses the <strong><a href="#short-duration-extrapolation-method">6.2 Short Duration Extrapolation Method</a></strong> setting.</li>
+<li>For complete storms, the <strong>Storm Initial Loss</strong> value is always used (either from the ARR Data Hub or the user specified value).</li>
 </ul>
 </article>
 </div>

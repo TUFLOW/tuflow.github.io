@@ -1123,11 +1123,11 @@
     <span class="arithmatex">\(IL_{burst} = IL_{storm} - PB_{depth}\)</span></li>
 </ul>
 <p>The "recommended" option will use the recommended preburst percentile(s) from the ARR Data Hub if they are provided, otherwise it will fallback to using the 50<sup>th</sup> percentile. </p>
-<p>For example, catchments in NSW may receive a recommended preburst table from the Data Hub (which mixes 50<sup>th</sup> and 75<sup>th</sup> percentiles). However, many regions won't
+<p>For example, catchments in NSW may receive a recommended preburst table from the ARR Data Hub (which mixes 50<sup>th</sup> and 75<sup>th</sup> percentiles). However, many regions won't
 receive a recommended preburst table, and the 50<sup>th</sup> percentile will be used.</p>
 <div class="admonition warning annotate">
 <p class="admonition-title">The "recommended" preburst will not always be the jurisdiction recommended prebursts</p>
-<p>When the Data Hub does not provide a "recommended" preburst table, the tool falls back to the 50<sup>th</sup> percentile.</p>
+<p>When the ARR Data Hub does not provide a "recommended" preburst table, the tool falls back to the 50<sup>th</sup> percentile.</p>
 <p>The fallback is <strong><em>always</em></strong> the 50<sup>th</sup> percentile and is not guaranteed to be the recommended percentile for any given jurisdiction. The 50<sup>th</sup> percentile is a reasonable fallback for most regions, however it is up to the user to choose an appropriate value for the given jurisdiction.</p>
 </div>
 <h2 id="complete-storms"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.2</span> Complete Storms<a class="headerlink" href="#complete-storms" title="Permanent link">¶</a></h2>
@@ -1146,12 +1146,12 @@ receive a recommended preburst table, and the 50<sup>th</sup> percentile will be
 <ul>
 <li>
 <p><strong>Recommended</strong>:</p>
-<p>The "recommended" method will use the provided preburst temporal pattern if one is provided by the Data Hub. If the Data Hub does not provide preburst temporal patterns, then the recommended method will fallback to the <strong>Temporal Pattern Method</strong> (see below).</p>
+<p>The "recommended" method will use the provided preburst temporal pattern if one is provided by the ARR Data Hub. If the ARR Data Hub does not provide preburst temporal patterns, then the recommended method will fallback to the <strong>Temporal Pattern Method</strong> (see below).</p>
 <div class="admonition warning annotate">
 <p class="admonition-title">The "recommended" method may not always be appropriate</p>
-<p>If the Data Hub does not provide preburst temporal patterns, the fallback method is to the use the <strong>Temporal Pattern Method</strong>.</p>
+<p>If the ARR Data Hub does not provide preburst temporal patterns, the fallback method is to the use the <strong>Temporal Pattern Method</strong>.</p>
 <p>The ARR guideline does not make any specific recommendations on how to formulate preburst temporal patterns, as such the chosen fallback method in the tool is not something that is explicitly recommended in the guideline.</p>
-<p>It is up to the user to determine what an appropriate method is for their location, particularly if the Data Hub does not provide preburst temporal pattern data.</p>
+<p>It is up to the user to determine what an appropriate method is for their location, particularly if the ARR Data Hub does not provide preburst temporal pattern data.</p>
 </div>
 </li>
 <li>
@@ -1160,10 +1160,10 @@ receive a recommended preburst table, and the 50<sup>th</sup> percentile will be
 section for more information on how to set the preburst duration.</p>
 </li>
 <li>
-<p><strong>Temporal pattern</strong>:</p>
-<p>The "Temporal pattern" method uses a point temporal pattern from the burst temporal pattern data downloaded from the Data Hub. The rarity band of the preburst temporal pattern will match the burst event rarity.</p>
+<p><strong>Temporal Pattern</strong>:</p>
+<p>The "Temporal Pattern" method uses a point temporal pattern from the burst temporal pattern data downloaded from the ARR Data Hub. The rarity band of the preburst temporal pattern will match the burst event rarity.</p>
 <ul>
-<li><strong>Temporal pattern</strong>: The user can select which temporal pattern number to use for the preburst. Selecting "Design burst" will use the same temporal number as the design burst temporal pattern.</li>
+<li><strong>Temporal Pattern</strong>: The user can select which temporal pattern number to use for the preburst. Selecting "Design burst" will use the same temporal number as the design burst temporal pattern.</li>
 </ul>
 <p>See the <a href="#preburst-duration">5.2.2 Preburst Duration</a> section below for more information on how to set the preburst duration.</p>
 </li>
@@ -1175,7 +1175,7 @@ section for more information on how to set the preburst duration.</p>
 <h3 id="preburst-duration"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.2.2</span> Preburst Duration<a class="headerlink" href="#preburst-duration" title="Permanent link">¶</a></h3>
 <p>If the <strong>Preburst temporal pattern method</strong> is set to either the "Constant" or "Temporal Pattern" method, the preburst duration is determined by either:</p>
 <ul>
-<li>Setting the <strong>Preburst duration (hrs)</strong> - this will be applied to all events, regardless of the burst duration</li>
+<li>Setting the <strong>Preburst duration (hrs)</strong> - this will be applied to all events, regardless of the burst duration.</li>
 <li>
 <p>Using <strong>Proportional duration</strong> - this sets the preburst duration to be proportional to the burst duration.</p>
 <p>A <strong>maximum preburst duration</strong> is also in effect and can be changed by the user. This prevents long events (&gt; 72 hrs) from blowing out due to long preburst durations.</p>
@@ -1185,8 +1185,8 @@ section for more information on how to set the preburst duration.</p>
 <h3 id="other-notes-assumptions"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.2.3</span> Other Notes / Assumptions<a class="headerlink" href="#other-notes-assumptions" title="Permanent link">¶</a></h3>
 <h4 id="negligible-preburst-assumption"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.2.3.1</span> Negligible Preburst Assumption<a class="headerlink" href="#negligible-preburst-assumption" title="Permanent link">¶</a></h4>
 <p>If the resulting preburst depth turns out to be less than 1% of the point design burst depth (implied preburst ratio &lt; 0.01), the preburst period is dropped entirely and the event falls back to a standard burst-only event.</p>
-<h4 id="requested-durations-between-a-use-pb-tp-cell-and-a-fixed-value-cell"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.2.3.2</span> Requested Durations between a "Use PB TP" Cell and a Fixed-value Cell<a class="headerlink" href="#requested-durations-between-a-use-pb-tp-cell-and-a-fixed-value-cell" title="Permanent link">¶</a></h4>
-<p>If a requested duration falls between two rows of the burst initial loss table where one is numeric and the other is the "Use PB TP" placeholder (only applicable when the preburst temporal patterns are provided by the Data Hub), a straight linear interpolation between them wouldn't make sense (a placeholder isn't a loss value). </p>
+<h4 id="requested-durations-fall-between-a-use-pb-tp-cell-and-a-fixed-value-cell"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.2.3.2</span> Requested Durations Fall Between a "Use PB TP" Cell and a Fixed-value Cell<a class="headerlink" href="#requested-durations-fall-between-a-use-pb-tp-cell-and-a-fixed-value-cell" title="Permanent link">¶</a></h4>
+<p>If a requested duration falls between two rows of the burst initial loss table where one is numeric and the other is the "Use PB TP" placeholder (only applicable when the preburst temporal patterns are provided by the ARR Data Hub), a straight linear interpolation between them wouldn't make sense (a placeholder isn't a loss value). </p>
 <p>Instead, the tool calculates the burst initial loss, using (interpolated) preburst depths and storm initial loss. If the result is positive, it's used directly (no complete storm needed); if it is negative, the cell is treated as "Use PB TP", automatically triggering complete storm assembly for that specific AEP/duration. A duration bracketed by two "Use PB TP" cells is likewise treated as "Use PB TP" (no numeric neighbour exists to derive anything from).</p>
 </article>
 </div>
